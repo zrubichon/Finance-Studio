@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import LessonPlayer from "@/components/lesson-player";
 import { getLessonBySlug } from "@/lib/lesson-content";
@@ -12,9 +13,12 @@ export async function generateMetadata({ params }: LessonPageProps): Promise<Met
   const lesson = getLessonBySlug(slug);
   if (!lesson) return { title: "FinanceStudio · Finance University" };
 
+  const cookieStore = await cookies();
+  const isFrench = cookieStore.get("finance-studio-language")?.value === "FR";
+
   return {
-    title: `${lesson.title.en} · FinanceStudio`,
-    description: lesson.subtitle.en,
+    title: `${isFrench ? lesson.title.fr : lesson.title.en} · FinanceStudio`,
+    description: isFrench ? lesson.subtitle.fr : lesson.subtitle.en,
   };
 }
 
