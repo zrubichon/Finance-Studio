@@ -5,9 +5,12 @@ export default function MarketsPage() {
   return (
     <SectionLayout
       activeSlug="markets"
-      eyebrow="GLOBAL MARKETS"
-      title="See the move. Understand the mechanism."
-      description="A global cross-asset dashboard designed to teach the relationship between equities, rates, FX, commodities, volatility and credit. Live values will only appear once an authorized provider is connected."
+      eyebrow={{ en: "GLOBAL MARKETS", fr: "MARCHÉS MONDIAUX / GLOBAL MARKETS" }}
+      title={{ en: "See the market. Understand the mechanism.", fr: "Voir le marché. Comprendre le mécanisme." }}
+      description={{
+        en: "Track equities, rates, FX, commodities, volatility and credit with a teaching layer that explains why each move matters.",
+        fr: "Suis les actions / equities, les taux / rates, les devises / FX, les matières premières / commodities, la volatilité / volatility et le crédit / credit avec une couche pédagogique qui explique pourquoi chaque mouvement compte.",
+      }}
     >
       <MarketsWorkspace />
     </SectionLayout>
