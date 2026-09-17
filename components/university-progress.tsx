@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { curriculumYears, moduleSlug } from "@/lib/curriculum";
+import { recordDailyActivity } from "@/lib/record-activity";
 
 type ProgressStatus = "not_started" | "in_progress" | "completed";
 
@@ -95,6 +96,7 @@ export default function UniversityProgress() {
     if (error) {
       setMessage("Progress was not saved. Please try again.");
     } else {
+      await recordDailyActivity(userId);
       setProgress((current) => ({
         ...current,
         [slug]: { lesson_slug: slug, status, progress_percent: nextPercent },
