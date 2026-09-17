@@ -1,0 +1,503 @@
+html[data-theme="girl"] {
+  --bg:#f8f0ec;
+  --surface:#fffaf7;
+  --surface-2:#f4e7e1;
+  --ink:#3c2329;
+  --muted:#80636a;
+  --line:rgba(80,41,51,.12);
+  --accent:#852f47;
+  --accent-2:#edd3da;
+  --accent-ink:#fff8fa;
+  --shadow:0 16px 40px rgba(110,45,65,.08);
+}
+
+html[data-theme="terminal"] {
+  --bg:#0d1110;
+  --surface:#121816;
+  --surface-2:#17201d;
+  --ink:#ebf6ef;
+  --muted:#91a49a;
+  --line:rgba(221,242,230,.12);
+  --accent:#81e6b5;
+  --accent-2:#173d2f;
+  --accent-ink:#07150f;
+  --shadow:0 16px 40px rgba(0,0,0,.22);
+}
+
+.career-intro-grid,
+.investing-hero-grid,
+.professor-demo-panel {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.career-principle-card,
+.paper-portfolio-card,
+.risk-rules-card,
+.career-group,
+.career-recruiting-panel,
+.thesis-panel,
+.attribution-panel,
+.professor-review-strip,
+.professor-demo-question,
+.professor-response-card,
+.misconception-panel,
+.dictionary-toolbar,
+.knowledge-map-panel,
+.next-best-panel,
+.theme-control-panel,
+.theme-preview-panel {
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--surface);
+  box-shadow:var(--shadow);
+}
+
+.career-principle-card,
+.paper-portfolio-card,
+.risk-rules-card,
+.professor-demo-question,
+.professor-response-card {
+  padding:22px;
+}
+
+.career-principle-card h2,
+.paper-portfolio-card h2,
+.risk-rules-card h2,
+.career-recruiting-panel h2,
+.thesis-panel h2,
+.attribution-panel h2,
+.professor-review-strip h2,
+.professor-demo-question h2,
+.misconception-panel h2,
+.knowledge-map-panel h2,
+.next-best-panel h2,
+.theme-preview-panel h2 {
+  margin:8px 0 10px;
+  font:500 24px/1.12 Georgia,"Times New Roman",serif;
+  letter-spacing:-.025em;
+}
+
+.career-principle-card p,
+.paper-portfolio-card p,
+.risk-rules-card p,
+.career-recruiting-panel p,
+.attribution-panel > div > p,
+.professor-review-strip p,
+.professor-demo-question p,
+.misconception-panel p,
+.next-best-panel p,
+.theme-preview-copy p {
+  margin:0;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.65;
+}
+
+.career-group,
+.thesis-panel,
+.attribution-panel,
+.knowledge-map-panel {
+  padding:24px;
+}
+
+.role-grid,
+.knowledge-domain-grid {
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+
+.role-card,
+.knowledge-domain-card {
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:color-mix(in srgb,var(--surface-2) 50%,transparent);
+}
+
+.role-card h3,
+.knowledge-domain-card h3 {
+  margin:0 0 8px;
+  font:500 19px/1.15 Georgia,"Times New Roman",serif;
+}
+
+.role-card p,
+.knowledge-domain-card p {
+  margin:0 0 16px;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.55;
+}
+
+.skill-chip-row,
+.related-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.skill-chip-row span,
+.related-row span {
+  padding:6px 8px;
+  border-radius:999px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  color:var(--muted);
+  font-size:8px;
+  font-weight:750;
+}
+
+.career-recruiting-panel,
+.attribution-panel,
+.professor-review-strip,
+.next-best-panel,
+.theme-preview-panel {
+  padding:24px;
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:24px;
+  align-items:start;
+}
+
+.numbered-checklist {
+  display:grid;
+  gap:7px;
+}
+
+.numbered-checklist > div,
+.thesis-question {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--surface-2);
+}
+
+.numbered-checklist span,
+.thesis-question span {
+  color:var(--accent);
+  font-size:8px;
+  font-weight:900;
+}
+
+.numbered-checklist strong,
+.thesis-question strong {
+  font-size:9px;
+  line-height:1.4;
+}
+
+.portfolio-state-row {
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.portfolio-state-row > div {
+  padding:11px;
+  border-radius:12px;
+  background:var(--surface-2);
+  border:1px solid var(--line);
+}
+
+.portfolio-state-row span,
+.portfolio-state-row strong {
+  display:block;
+}
+
+.portfolio-state-row span { color:var(--muted); font-size:8px; }
+.portfolio-state-row strong { margin-top:4px; font-size:9px; }
+
+.thesis-question-grid {
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+
+.attribution-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+
+.attribution-grid article,
+.teaching-action-grid article {
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:var(--surface-2);
+}
+
+.attribution-grid article > span,
+.teaching-action-grid article > span {
+  color:var(--accent);
+  font-size:8px;
+  font-weight:900;
+}
+
+.attribution-grid h3,
+.teaching-action-grid h3 {
+  margin:11px 0 6px;
+  font-size:11px;
+}
+
+.attribution-grid p,
+.teaching-action-grid p {
+  margin:0;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.5;
+}
+
+.professor-control-panel { grid-template-columns:1fr 1fr; }
+
+.professor-response-card {
+  background:var(--ink);
+  color:var(--surface);
+}
+
+.professor-response-card .mini-label { color:var(--accent-2); }
+.professor-response-card h3 { margin:12px 0; font:500 23px/1.18 Georgia,"Times New Roman",serif; }
+.professor-response-card > p { color:color-mix(in srgb,var(--surface) 72%,transparent); font-size:10px; line-height:1.65; }
+
+.professor-example {
+  margin-top:18px;
+  padding:13px;
+  border-radius:12px;
+  background:color-mix(in srgb,var(--surface) 9%,transparent);
+  border:1px solid color-mix(in srgb,var(--surface) 14%,transparent);
+}
+
+.professor-example strong { font-size:9px; }
+.professor-example p { margin:5px 0 0; color:color-mix(in srgb,var(--surface) 75%,transparent); font-size:9px; line-height:1.55; }
+
+.teaching-action-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+}
+
+.misconception-panel { padding:24px; }
+
+.misconception-flow {
+  margin-top:18px;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.misconception-flow span {
+  padding:8px 10px;
+  border:1px solid var(--line);
+  background:var(--surface-2);
+  border-radius:10px;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:800;
+}
+
+.misconception-flow b { color:var(--muted); font-size:9px; }
+
+.dictionary-toolbar {
+  padding:18px;
+  display:grid;
+  grid-template-columns:1.4fr .6fr;
+  gap:18px;
+  align-items:end;
+}
+
+.dictionary-toolbar input {
+  width:100%;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--surface-2);
+  color:var(--ink);
+  outline:none;
+  font-size:10px;
+}
+
+.dictionary-toolbar input:focus { border-color:var(--accent); }
+
+.dictionary-result-meta {
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:center;
+}
+
+.dictionary-result-meta p {
+  margin:0;
+  max-width:720px;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.5;
+  text-align:right;
+}
+
+.dictionary-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+
+.dictionary-card {
+  min-height:230px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+}
+
+.dictionary-card h2 { margin:9px 0 12px; font:500 23px Georgia,"Times New Roman",serif; }
+.dictionary-card p { min-height:88px; margin:0 0 16px; color:var(--muted); font-size:10px; line-height:1.6; }
+
+.empty-state {
+  padding:30px;
+  text-align:center;
+  border:1px dashed var(--line);
+  border-radius:16px;
+  color:var(--muted);
+}
+
+.empty-state strong { color:var(--ink); font-size:11px; }
+.empty-state p { font-size:9px; }
+
+.progress-metric-grid {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+
+.progress-metric-card {
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+}
+
+.progress-metric-card > strong {
+  display:block;
+  margin:10px 0 4px;
+  font:500 30px Georgia,"Times New Roman",serif;
+}
+
+.progress-metric-card p { margin:0; color:var(--muted); font-size:8px; line-height:1.45; }
+
+.knowledge-domain-head {
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.knowledge-domain-head span,
+.knowledge-domain-head strong { font-size:8px; }
+.knowledge-domain-head span { color:var(--accent); font-weight:900; }
+.knowledge-domain-head strong { color:var(--muted); }
+
+.empty-progress-bar {
+  height:5px;
+  border-radius:99px;
+  background:var(--surface);
+  overflow:hidden;
+}
+
+.empty-progress-bar span { display:block; width:0; height:100%; background:var(--accent); }
+
+.theme-preset-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+
+.theme-preset-card {
+  text-align:left;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--surface);
+  color:var(--ink);
+  box-shadow:var(--shadow);
+}
+
+.theme-preset-card.active { outline:2px solid var(--accent); outline-offset:2px; }
+.theme-preset-card h2 { margin:8px 0; font:500 22px Georgia,"Times New Roman",serif; }
+.theme-preset-card p { margin:0; color:var(--muted); font-size:9px; line-height:1.55; }
+
+.theme-swatch-row { display:flex; gap:6px; margin-bottom:28px; }
+.theme-swatch-row span { width:28px; height:28px; border-radius:9px; border:1px solid rgba(0,0,0,.08); }
+
+.theme-control-panel {
+  padding:20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  align-items:end;
+}
+
+.accent-control > div { display:flex; align-items:center; gap:10px; }
+.accent-control input { width:46px; height:34px; padding:2px; border:1px solid var(--line); border-radius:9px; background:var(--surface); }
+.accent-control strong { font-size:9px; }
+
+.theme-preview-dashboard {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+}
+
+.preview-mini-card {
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:calc(var(--radius) * .65);
+  background:var(--surface-2);
+}
+
+.preview-mini-card span { color:var(--accent); font-size:7px; font-weight:900; }
+.preview-mini-card strong { display:block; margin:10px 0 5px; font-size:9px; }
+.preview-mini-card p { margin:0; color:var(--muted); font-size:8px; line-height:1.4; }
+
+@media (max-width:1100px) {
+  .dictionary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .progress-metric-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .theme-preview-dashboard { grid-template-columns:1fr; }
+}
+
+@media (max-width:760px) {
+  .career-intro-grid,
+  .investing-hero-grid,
+  .professor-demo-panel,
+  .role-grid,
+  .career-recruiting-panel,
+  .attribution-panel,
+  .professor-review-strip,
+  .dictionary-toolbar,
+  .knowledge-domain-grid,
+  .next-best-panel,
+  .theme-control-panel,
+  .theme-preview-panel,
+  .theme-preset-grid {
+    grid-template-columns:1fr;
+  }
+
+  .thesis-question-grid,
+  .attribution-grid,
+  .teaching-action-grid,
+  .dictionary-grid,
+  .progress-metric-grid {
+    grid-template-columns:1fr;
+  }
+
+  .portfolio-state-row { grid-template-columns:1fr; }
+  .dictionary-result-meta { align-items:flex-start; flex-direction:column; }
+  .dictionary-result-meta p { text-align:left; }
+}
