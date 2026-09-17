@@ -210,25 +210,12 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
       last_opened_at: isoNow,
       completed_at: passed ? isoNow : null,
       updated_at: isoNow,
-    }, { onConflict: "user_id,lesson.slug" });
-
-    if (progressError) {
-      // Retry with the correct conflict target if the provider rejects the malformed target above.
-      await supabase.from("course_progress").upsert({
-        user_id: userId,
-        lesson_slug: lesson.slug,
-        status: progressStatus,
-        progress_percent: progressPercent,
-        last_opened_at: isoNow,
-        completed_at: passed ? isoNow : null,
-        updated_at: isoNow,
-      }, { onConflict: "user_id,lesson_slug" });
-    }
+    }, { onConflict: "user_id,lesson_slug" });
 
     await recordDailyActivity(userId);
     setSavedProgress({ status: progressStatus, progress_percent: progressPercent });
 
-    if (attemptError || masteryError) {
+    if (attemptError || masteryError || progressError) {
       setStatusMessage(text(
         "Your score is visible, but part of the learning record could not be synchronized.",
         "Ton score est visible, mais une partie de la progression n’a pas pu être synchronisée.",
@@ -296,6 +283,26 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
           {lesson.objectives.map((objective, index) => (
             <div key={objective.en}><span>{String(index + 1).padStart(2, "0")}</span><p>{loc(objective)}</p></div>
           ))}
+        </div>
+      </section>
+
+      <section className="financial-system-map" aria-label={text("Financial system map", "Carte du système financier")}>
+        <div className="system-map-node">
+          <span>01</span>
+          <strong>{text("Savers & investors", "Épargnants & investisseurs")}</strong>
+          <small>{text("Households · funds · institutions", "Ménages · fonds · institutions")}</small>
+        </div>
+        <b>→</b>
+        <div className="system-map-bridge">
+          <div><strong>{text("Banks", "Banques")}</strong><small>{text("Loans / intermediation", "Prêts / intermédiation")}</small></div>
+          <span>{text("OR", "OU")}</span>
+          <div><strong>{text("Capital markets", "Marchés de capitaux")}</strong><small>{text("Stocks · bonds · funds", "Actions · obligations · fonds")}</small></div>
+        </div>
+        <b>→</b>
+        <div className="system-map-node">
+          <span>02</span>
+          <strong>{text("Users of capital", "Utilisateurs du capital")}</strong>
+          <small>{text("Companies · governments · households", "Entreprises · États · ménages")}</small>
         </div>
       </section>
 
