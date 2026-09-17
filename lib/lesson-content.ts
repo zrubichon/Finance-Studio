@@ -11,6 +11,19 @@ export type VocabularyItem = {
   definition: LocalizedText;
 };
 
+export type LessonFormula = {
+  label: LocalizedText;
+  expression: string;
+  explanation: LocalizedText;
+  workedExample?: LocalizedText;
+};
+
+export type LessonComparison = {
+  title: LocalizedText;
+  headers: LocalizedText[];
+  rows: { cells: LocalizedText[] }[];
+};
+
 export type LessonSection = {
   id: string;
   title: LocalizedText;
@@ -18,6 +31,8 @@ export type LessonSection = {
   coreFacts: LocalizedText[];
   explanation: Record<TeachingMode, LocalizedText>;
   example?: LocalizedText;
+  formula?: LessonFormula;
+  comparison?: LessonComparison;
   marketConnection?: LocalizedText;
   vocabulary?: VocabularyItem[];
 };
@@ -40,6 +55,10 @@ export type FinanceLesson = {
   duration: LocalizedText;
   prerequisites: LocalizedText[];
   objectives: LocalizedText[];
+  overviewFlow?: {
+    title: LocalizedText;
+    steps: { title: LocalizedText; detail: LocalizedText }[];
+  };
   sections: LessonSection[];
   quiz: QuizQuestion[];
   interviewPrompt: {
@@ -88,6 +107,23 @@ export const financialSystemLesson: FinanceLesson = {
       fr: "Décrire ce qui se passe entre l’exécution d’une transaction / trade execution et son règlement-livraison / settlement.",
     },
   ],
+  overviewFlow: {
+    title: { en: "How capital moves through the financial system", fr: "Comment le capital circule dans le système financier" },
+    steps: [
+      {
+        title: { en: "Savers & investors", fr: "Épargnants & investisseurs" },
+        detail: { en: "Households · funds · institutions", fr: "Ménages · fonds · institutions" },
+      },
+      {
+        title: { en: "Banks & capital markets", fr: "Banques & marchés de capitaux" },
+        detail: { en: "Loans · stocks · bonds · funds", fr: "Prêts · actions · obligations · fonds" },
+      },
+      {
+        title: { en: "Users of capital", fr: "Utilisateurs du capital" },
+        detail: { en: "Companies · governments · households", fr: "Entreprises · États · ménages" },
+      },
+    ],
+  },
   sections: [
     {
       id: "purpose",
@@ -507,7 +543,928 @@ export const financialSystemLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson];
+
+export const stocksBondsFundsLesson: FinanceLesson = {
+  slug: "year-1-stocks-bonds-etfs-funds",
+  year: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations" },
+  domain: { en: "Markets & Instruments", fr: "Marchés & instruments / Markets & Instruments" },
+  title: {
+    en: "Stocks, Bonds, ETFs & Funds",
+    fr: "Actions / Stocks, obligations / Bonds, ETF & fonds / Funds",
+  },
+  subtitle: {
+    en: "Learn what investors actually own, where returns come from, how stocks and bonds differ, how funds package exposures, and how prices connect to cash flows, risk and interest rates.",
+    fr: "Comprendre ce que l’investisseur possède réellement, d’où vient le rendement / return, comment actions et obligations diffèrent, comment les fonds regroupent les expositions et comment les prix se relient aux flux de trésorerie, au risque et aux taux d’intérêt.",
+  },
+  duration: { en: "70–90 min", fr: "70–90 min" },
+  prerequisites: [
+    {
+      en: "Financial System & Market Structure",
+      fr: "Système financier & structure de marché / Financial System & Market Structure",
+    },
+    {
+      en: "Basic percentages and simple present-value intuition",
+      fr: "Pourcentages de base et intuition simple de valeur actuelle / present value",
+    },
+  ],
+  objectives: [
+    {
+      en: "Explain the economic and legal difference between equity ownership and debt claims.",
+      fr: "Expliquer la différence économique et juridique entre propriété en actions / equity ownership et créance obligataire / debt claim.",
+    },
+    {
+      en: "Calculate market capitalization, simple stock total return, dividend yield and bond coupon cash flows.",
+      fr: "Calculer capitalisation boursière / market capitalization, rendement total simple d’une action / stock total return, rendement du dividende / dividend yield et flux de coupon obligataire.",
+    },
+    {
+      en: "Explain why fixed-rate bond prices generally move inversely to market yields.",
+      fr: "Expliquer pourquoi le prix d’une obligation à taux fixe évolue généralement en sens inverse des rendements de marché / market yields.",
+    },
+    {
+      en: "Distinguish ETFs, mutual funds, index funds and actively managed funds.",
+      fr: "Distinguer ETF, fonds communs / mutual funds, fonds indiciels / index funds et fonds actifs / actively managed funds.",
+    },
+    {
+      en: "Compare stocks, bonds and diversified funds by claim, return source, risk, liquidity and role in a portfolio.",
+      fr: "Comparer actions, obligations et fonds diversifiés selon le type de créance / claim, la source de rendement, le risque, la liquidité et le rôle en portefeuille.",
+    },
+    {
+      en: "Recognize common beginner errors such as confusing stock price with company size or coupon with bond yield.",
+      fr: "Reconnaître les erreurs fréquentes comme confondre prix d’une action et taille de l’entreprise, ou coupon et rendement obligataire / bond yield.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "From your cash to an economic exposure",
+      fr: "De ton cash à une exposition économique / economic exposure",
+    },
+    steps: [
+      {
+        title: { en: "Investor capital", fr: "Capital de l’investisseur" },
+        detail: { en: "Cash available to deploy", fr: "Cash disponible à investir" },
+      },
+      {
+        title: { en: "Instrument", fr: "Instrument financier" },
+        detail: { en: "Stock · bond · ETF · fund", fr: "Action · obligation · ETF · fonds" },
+      },
+      {
+        title: { en: "Underlying claim", fr: "Créance / claim sous-jacente" },
+        detail: { en: "Ownership · lending · pooled exposure", fr: "Propriété · prêt · exposition mutualisée" },
+      },
+      {
+        title: { en: "Return & risk", fr: "Rendement & risque" },
+        detail: { en: "Income · price change · default · market risk", fr: "Revenu · variation de prix · défaut · risque de marché" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "equity-vs-debt",
+      kicker: { en: "01 · THE FIRST DISTINCTION", fr: "01 · LA PREMIÈRE DISTINCTION" },
+      title: {
+        en: "Equity means ownership. Debt means lending.",
+        fr: "Equity = propriété. Debt = prêt.",
+      },
+      coreFacts: [
+        {
+          en: "A common stock represents a residual ownership interest in a company; a bond is a contractual debt claim on an issuer.",
+          fr: "Une action ordinaire / common stock représente une participation résiduelle dans une entreprise ; une obligation / bond est une créance contractuelle / debt claim sur un émetteur.",
+        },
+        {
+          en: "Bondholders are promised contractual payments subject to the issuer's ability to pay; common shareholders are not promised a fixed return.",
+          fr: "Les obligataires / bondholders reçoivent des paiements contractuellement prévus sous réserve de la capacité de l’émetteur à payer ; les actionnaires ordinaires n’ont pas de rendement fixe garanti.",
+        },
+        {
+          en: "In a liquidation, creditors generally rank ahead of common equity holders; common equity is the residual claim.",
+          fr: "En liquidation, les créanciers sont généralement prioritaires sur les actionnaires ordinaires ; l’equity est la créance résiduelle / residual claim.",
+        },
+        {
+          en: "Higher priority does not mean risk-free: bondholders still face interest-rate, credit, liquidity and sometimes call or reinvestment risk.",
+          fr: "Une priorité plus élevée ne signifie pas absence de risque : les obligataires restent exposés au risque de taux, de crédit, de liquidité et parfois de remboursement anticipé / call ou de réinvestissement.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Buying a stock is like owning a tiny slice of a business. If the business becomes much more valuable, your slice can become more valuable too, but you are last in line after creditors if the company fails. Buying a bond is different: you are lending money under a contract that specifies when interest and principal should be paid.",
+          fr: "Acheter une action, c’est posséder une petite part d’une entreprise. Si l’entreprise devient beaucoup plus précieuse, ta part peut prendre de la valeur, mais en cas de faillite tu arrives derrière les créanciers. Acheter une obligation est différent : tu prêtes de l’argent selon un contrat qui précise quand intérêts et principal doivent être payés.",
+        },
+        Intermediate: {
+          en: "Equity absorbs business outcomes after contractual claims are met, which creates asymmetric upside but also residual downside. Debt has a more defined cash-flow schedule and higher priority, so valuation focuses heavily on discount rates, default probability, recovery and contractual features.",
+          fr: "L’equity absorbe les résultats de l’entreprise après paiement des créances contractuelles, ce qui crée un potentiel de hausse asymétrique mais aussi un risque résiduel. La dette possède des flux plus définis et une priorité supérieure ; sa valorisation dépend donc fortement des taux d’actualisation, de la probabilité de défaut, du taux de recouvrement / recovery et des clauses contractuelles.",
+        },
+        Professional: {
+          en: "Capital structure allocates enterprise risk across claims with different seniority, duration, optionality and control rights. Common equity is a perpetual residual claim; debt is senior contractual capital whose spread and recovery profile depend on leverage, asset coverage, covenant package, maturity and structural subordination.",
+          fr: "La structure du capital / capital structure répartit le risque de l’entreprise entre des créances ayant différentes séniorités, durations, optionalités et droits de contrôle. L’action ordinaire est une créance résiduelle perpétuelle ; la dette est un capital contractuel prioritaire dont le spread et le profil de recovery dépendent du levier, de la couverture par les actifs, des covenants, de la maturité et de la subordination structurelle.",
+        },
+      },
+      comparison: {
+        title: { en: "Equity vs debt at a glance", fr: "Equity vs dette / debt en un coup d’œil" },
+        headers: [
+          { en: "Feature", fr: "Caractéristique" },
+          { en: "Common stock", fr: "Action ordinaire / Common stock" },
+          { en: "Bond", fr: "Obligation / Bond" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Economic claim", fr: "Type de créance / claim" },
+            { en: "Ownership / residual claim", fr: "Propriété / créance résiduelle" },
+            { en: "Contractual debt claim", fr: "Créance contractuelle de dette" },
+          ]},
+          { cells: [
+            { en: "Cash flows", fr: "Flux de trésorerie / cash flows" },
+            { en: "Dividends are discretionary for common equity", fr: "Dividendes discrétionnaires pour l’action ordinaire" },
+            { en: "Coupons and principal defined by contract", fr: "Coupons et principal définis par contrat" },
+          ]},
+          { cells: [
+            { en: "Liquidation priority", fr: "Priorité en liquidation" },
+            { en: "Usually last", fr: "Généralement en dernier" },
+            { en: "Ahead of common equity", fr: "Avant l’action ordinaire" },
+          ]},
+          { cells: [
+            { en: "Upside", fr: "Potentiel de hausse / upside" },
+            { en: "Not contractually capped", fr: "Pas contractuellement plafonné" },
+            { en: "Usually more limited by promised cash flows", fr: "Généralement plus limité par les flux promis" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Residual claim",
+          fr: "créance résiduelle",
+          definition: {
+            en: "A claim on what remains after higher-priority obligations are satisfied.",
+            fr: "Droit sur ce qui reste après paiement des obligations prioritaires.",
+          },
+        },
+        {
+          en: "Seniority",
+          fr: "séniorité / seniority",
+          definition: {
+            en: "The order in which claims are paid when a borrower is restructured or liquidated.",
+            fr: "Ordre de priorité des créances lors d’une restructuration ou liquidation.",
+          },
+        },
+      ],
+    },
+    {
+      id: "stocks",
+      kicker: { en: "02 · HOW A STOCK WORKS", fr: "02 · COMMENT FONCTIONNE UNE ACTION" },
+      title: {
+        en: "Shares, market capitalization, dividends and voting rights",
+        fr: "Actions / shares, capitalisation boursière, dividendes et droits de vote",
+      },
+      coreFacts: [
+        {
+          en: "A company's share price alone does not tell you how large or valuable the whole company is.",
+          fr: "Le prix d’une action à lui seul ne dit pas quelle est la taille ou la valeur totale de l’entreprise.",
+        },
+        {
+          en: "Market capitalization equals share price multiplied by shares outstanding.",
+          fr: "La capitalisation boursière / market capitalization correspond au prix par action multiplié par le nombre d’actions en circulation / shares outstanding.",
+        },
+        {
+          en: "Stock splits change the number of shares and price per share mechanically, but do not by themselves create enterprise value.",
+          fr: "Un fractionnement d’actions / stock split modifie mécaniquement le nombre d’actions et le prix par action, mais ne crée pas en lui-même de valeur d’entreprise.",
+        },
+        {
+          en: "Common shares may carry voting rights and may receive dividends, but dividends are generally not contractual obligations like bond coupons.",
+          fr: "Les actions ordinaires peuvent donner des droits de vote et recevoir des dividendes, mais les dividendes ne sont généralement pas des obligations contractuelles comme les coupons obligataires.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company has 200 million shares and each trades at $50, investors collectively value its equity at $10 billion. A $500 stock is not automatically 'more expensive' than a $50 stock because the number of shares can be completely different.",
+          fr: "Si une entreprise possède 200 millions d’actions et que chaque action vaut 50 $, la valeur boursière totale de ses capitaux propres est de 10 milliards de dollars. Une action à 500 $ n’est pas automatiquement « plus chère » qu’une action à 50 $, car le nombre d’actions peut être totalement différent.",
+        },
+        Intermediate: {
+          en: "Market capitalization measures the market value of common equity, not the value of the entire operating business. Enterprise value adjusts equity value for net debt and certain other claims. Share count can also change through issuance, employee compensation and buybacks.",
+          fr: "La capitalisation boursière mesure la valeur de marché des capitaux propres ordinaires, pas la valeur totale de l’activité. La valeur d’entreprise / enterprise value ajuste l’equity value notamment pour la dette nette et certaines autres créances. Le nombre d’actions peut évoluer via émissions, rémunération en actions et rachats / buybacks.",
+        },
+        Professional: {
+          en: "Equity analysis distinguishes basic and diluted share count, free float, insider ownership, treasury shares and potential dilution. Market cap is a snapshot of equity value; valuation work usually links equity value to enterprise value, operating forecasts, capital structure and per-share claims.",
+          fr: "L’analyse equity distingue nombre d’actions de base et dilué / diluted, flottant / free float, détention des insiders, treasury shares et dilution potentielle. La market cap est une photographie de l’equity value ; la valorisation relie généralement equity value, enterprise value, prévisions opérationnelles, structure du capital et droits par action.",
+        },
+      },
+      formula: {
+        label: { en: "Market capitalization", fr: "Capitalisation boursière / Market capitalization" },
+        expression: "Market Cap = Share Price × Shares Outstanding",
+        explanation: {
+          en: "Use the current equity price and the number of common shares outstanding.",
+          fr: "Utilise le prix de marché actuel de l’action et le nombre d’actions ordinaires en circulation.",
+        },
+        workedExample: {
+          en: "$50 × 200 million shares = $10 billion market capitalization.",
+          fr: "50 $ × 200 millions d’actions = 10 milliards de dollars de capitalisation boursière.",
+        },
+      },
+      marketConnection: {
+        en: "Index weights, valuation multiples and corporate actions often depend on market capitalization, free float or enterprise value rather than the absolute share price.",
+        fr: "Les pondérations d’indices, multiples de valorisation et opérations sur capital dépendent souvent de la market cap, du free float ou de l’enterprise value plutôt que du prix absolu de l’action.",
+      },
+      vocabulary: [
+        {
+          en: "Shares outstanding",
+          fr: "actions en circulation / shares outstanding",
+          definition: {
+            en: "Common shares currently issued and held by investors, excluding treasury shares under common conventions.",
+            fr: "Actions ordinaires émises et détenues par les investisseurs, hors treasury shares selon les conventions usuelles.",
+          },
+        },
+        {
+          en: "Buyback",
+          fr: "rachat d’actions / buyback",
+          definition: {
+            en: "A company repurchasing its own shares.",
+            fr: "Opération par laquelle une entreprise rachète ses propres actions.",
+          },
+        },
+      ],
+    },
+    {
+      id: "stock-returns",
+      kicker: { en: "03 · WHERE STOCK RETURNS COME FROM", fr: "03 · D’OÙ VIENT LE RENDEMENT D’UNE ACTION" },
+      title: {
+        en: "Price change, dividends and expectations",
+        fr: "Variation de prix, dividendes et anticipations",
+      },
+      coreFacts: [
+        {
+          en: "A stock investor's holding-period return combines price appreciation or depreciation with cash distributions such as dividends.",
+          fr: "Le rendement de détention / holding-period return d’une action combine variation du prix et distributions en cash comme les dividendes.",
+        },
+        {
+          en: "Stock prices respond to expected future cash flows and the return investors require for bearing risk, not only to current earnings.",
+          fr: "Les prix des actions réagissent aux flux futurs anticipés et au rendement exigé par les investisseurs pour supporter le risque, pas uniquement aux bénéfices actuels.",
+        },
+        {
+          en: "A company can report strong earnings and still see its stock fall if expectations had been even higher.",
+          fr: "Une entreprise peut publier d’excellents résultats et voir son action baisser si les attentes du marché étaient encore plus élevées.",
+        },
+        {
+          en: "Dividends are one use of corporate cash; reinvestment and buybacks can also affect shareholder value.",
+          fr: "Les dividendes sont une utilisation du cash de l’entreprise ; le réinvestissement et les rachats d’actions peuvent également influencer la valeur pour l’actionnaire.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you buy at $40, later sell at $44 and receive a $1 dividend, you made $5 on a $40 starting investment: a 12.5% simple holding-period return. The key idea is that return is not just the change in the screen price.",
+          fr: "Si tu achètes à 40 $, revends à 44 $ et reçois 1 $ de dividende, tu as gagné 5 $ sur un investissement initial de 40 $, soit 12,5 % de rendement simple. L’idée essentielle : le rendement ne correspond pas uniquement à la variation du prix affiché.",
+        },
+        Intermediate: {
+          en: "Equity returns reflect revisions to expected earnings and cash flows, changes in valuation multiples and distributions to shareholders. A higher discount rate can compress the present value investors assign to distant cash flows even if operational forecasts are unchanged.",
+          fr: "Les rendements actions reflètent les révisions des bénéfices et cash flows attendus, les variations de multiples de valorisation et les distributions aux actionnaires. Une hausse du taux d’actualisation / discount rate peut réduire la valeur actuelle attribuée aux cash flows lointains même si les prévisions opérationnelles ne changent pas.",
+        },
+        Professional: {
+          en: "Observed equity returns can be decomposed conceptually into fundamental growth, income, multiple expansion or compression and changes in expectations. Cross-sectional performance often reflects factor exposures such as size, value, quality, momentum and duration-like sensitivity to real yields.",
+          fr: "Les rendements actions peuvent être décomposés conceptuellement en croissance fondamentale, revenu, expansion/compression des multiples et révisions d’anticipations. La performance relative reflète souvent des expositions factorielles telles que size, value, quality, momentum et sensibilité de type duration aux taux réels / real yields.",
+        },
+      },
+      formula: {
+        label: { en: "Simple stock total return", fr: "Rendement total simple d’une action / Stock total return" },
+        expression: "Return = (Ending Price − Starting Price + Dividends) ÷ Starting Price",
+        explanation: {
+          en: "This is a simple holding-period return before taxes, fees and reinvestment effects.",
+          fr: "Il s’agit d’un rendement simple sur période, avant fiscalité, frais et effets de réinvestissement.",
+        },
+        workedExample: {
+          en: "($44 − $40 + $1) ÷ $40 = 12.5%.",
+          fr: "(44 $ − 40 $ + 1 $) ÷ 40 $ = 12,5 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Dividend yield",
+          fr: "rendement du dividende / dividend yield",
+          definition: {
+            en: "Annual dividends per share divided by the share price, using the chosen dividend convention.",
+            fr: "Dividendes annuels par action divisés par le prix de l’action, selon la convention de dividende utilisée.",
+          },
+        },
+        {
+          en: "Multiple compression",
+          fr: "compression des multiples / multiple compression",
+          definition: {
+            en: "A decline in the valuation multiple investors are willing to pay.",
+            fr: "Baisse du multiple de valorisation que les investisseurs acceptent de payer.",
+          },
+        },
+      ],
+    },
+    {
+      id: "bond-anatomy",
+      kicker: { en: "04 · HOW A BOND WORKS", fr: "04 · COMMENT FONCTIONNE UNE OBLIGATION" },
+      title: {
+        en: "Face value, coupon, maturity and repayment",
+        fr: "Valeur nominale / face value, coupon, maturité et remboursement",
+      },
+      coreFacts: [
+        {
+          en: "A bond normally specifies a face or par value, coupon terms, maturity date and legal priority.",
+          fr: "Une obligation précise généralement une valeur nominale / face or par value, les modalités du coupon, une date de maturité et une priorité juridique.",
+        },
+        {
+          en: "Coupon rate is applied to face value, not to the bond's current market price.",
+          fr: "Le taux de coupon / coupon rate s’applique à la valeur nominale, pas au prix de marché actuel de l’obligation.",
+        },
+        {
+          en: "At maturity, a plain-vanilla bond typically repays principal if the issuer has not defaulted and no special feature changes the outcome.",
+          fr: "À maturité, une obligation standard rembourse généralement le principal si l’émetteur n’a pas fait défaut et qu’aucune clause particulière ne modifie le résultat.",
+        },
+        {
+          en: "Coupon, current yield and yield to maturity are related but different concepts.",
+          fr: "Coupon, rendement courant / current yield et rendement à maturité / yield to maturity sont des concepts liés mais différents.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A $1,000 bond with a 6% annual coupon pays $60 of coupon interest per year, regardless of whether the bond currently trades at $950 or $1,050. If coupons are paid semiannually, that $60 is typically split into two $30 payments.",
+          fr: "Une obligation de 1 000 $ avec un coupon annuel de 6 % verse 60 $ d’intérêt par an, que son prix de marché soit 950 $ ou 1 050 $. Si les coupons sont semestriels, les 60 $ sont généralement divisés en deux paiements de 30 $.",
+        },
+        Intermediate: {
+          en: "A bond packages contractual cash flows whose value depends on the appropriate discount rate. Credit quality, benchmark rates, spread, maturity, seniority, embedded options and liquidity all influence the market price and yield investors demand.",
+          fr: "Une obligation regroupe des flux contractuels dont la valeur dépend du taux d’actualisation approprié. Qualité de crédit, taux de référence, spread, maturité, séniorité, options intégrées et liquidité influencent le prix et le rendement exigé par les investisseurs.",
+        },
+        Professional: {
+          en: "Bond cash flows are valued against a term structure plus compensation for credit, liquidity, optionality and technical factors. Coupon determines contractual cash flow; yield is an endogenous market return measure implied by price and assumptions. Spread analysis separates benchmark rate risk from issuer and security-specific compensation.",
+          fr: "Les flux obligataires sont valorisés par rapport à une structure par terme / term structure, à laquelle s’ajoutent compensations pour crédit, liquidité, optionalité et facteurs techniques. Le coupon détermine le cash flow contractuel ; le yield est une mesure de rendement de marché impliquée par le prix et certaines hypothèses. L’analyse de spread sépare le risque de taux de référence de la rémunération propre à l’émetteur et au titre.",
+        },
+      },
+      formula: {
+        label: { en: "Annual coupon cash flow", fr: "Flux annuel de coupon / Annual coupon cash flow" },
+        expression: "Annual Coupon = Face Value × Coupon Rate",
+        explanation: {
+          en: "Coupon frequency changes the timing of payments, not the stated annual coupon amount.",
+          fr: "La fréquence de coupon modifie le calendrier des paiements, pas le montant annuel indiqué.",
+        },
+        workedExample: {
+          en: "$1,000 face value × 6% = $60 annual coupon.",
+          fr: "1 000 $ de nominal × 6 % = 60 $ de coupon annuel.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Par value",
+          fr: "valeur nominale / par value",
+          definition: {
+            en: "Contractual principal amount used to determine repayment and usually coupon calculations.",
+            fr: "Montant principal contractuel utilisé pour le remboursement et généralement pour calculer le coupon.",
+          },
+        },
+        {
+          en: "Maturity",
+          fr: "maturité / maturity",
+          definition: {
+            en: "The date on which principal is scheduled to be repaid for a standard bond.",
+            fr: "Date prévue de remboursement du principal pour une obligation standard.",
+          },
+        },
+      ],
+    },
+    {
+      id: "bond-price-yield",
+      kicker: { en: "05 · PRICE AND YIELD", fr: "05 · PRIX ET RENDEMENT" },
+      title: {
+        en: "Why bond prices and yields move in opposite directions",
+        fr: "Pourquoi prix obligataires et rendements / yields évoluent en sens inverse",
+      },
+      coreFacts: [
+        {
+          en: "For a plain fixed-rate bond, higher required market yields generally imply a lower present value and therefore a lower price.",
+          fr: "Pour une obligation simple à taux fixe, une hausse du rendement exigé par le marché implique généralement une valeur actuelle plus faible et donc un prix plus bas.",
+        },
+        {
+          en: "The inverse relationship is mathematical: existing fixed cash flows become less attractive when new opportunities offer higher yields.",
+          fr: "La relation inverse est mathématique : des cash flows fixes existants deviennent moins attractifs lorsque de nouvelles opportunités offrent des rendements plus élevés.",
+        },
+        {
+          en: "Longer maturity and lower coupon generally increase sensitivity to changes in yields, all else equal.",
+          fr: "Une maturité plus longue et un coupon plus faible augmentent généralement la sensibilité aux variations de yield, toutes choses égales par ailleurs.",
+        },
+        {
+          en: "Yield to maturity is not a guaranteed realized return; it depends on holding, payment and reinvestment assumptions.",
+          fr: "Le yield to maturity n’est pas un rendement réalisé garanti ; il dépend d’hypothèses de détention, de paiement et de réinvestissement.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Imagine your bond pays $50 next year plus $1,000 back. If investors now demand 6% on comparable risk, they will not pay $1,000 today for cash flows worth only $1,050 next year. Discounting $1,050 by 6% gives about $990.57, so the bond trades below par.",
+          fr: "Imagine que ton obligation verse 50 $ l’an prochain plus le remboursement de 1 000 $. Si les investisseurs exigent maintenant 6 % sur un risque comparable, ils ne paieront pas 1 000 $ aujourd’hui pour recevoir seulement 1 050 $ dans un an. Actualiser 1 050 $ à 6 % donne environ 990,57 $ : l’obligation cote donc sous le pair / below par.",
+        },
+        Intermediate: {
+          en: "Bond price equals the present value of promised cash flows discounted at a market-required yield appropriate to timing and risk. A shift in that yield changes every discounted cash flow, creating the inverse price-yield relationship. Duration later formalizes first-order sensitivity.",
+          fr: "Le prix obligataire correspond à la valeur actuelle des flux promis, actualisés à un yield de marché adapté au timing et au risque. Une variation de ce yield modifie la valeur actualisée de chaque flux, créant la relation inverse prix-yield. La duration formalise ensuite cette sensibilité de premier ordre.",
+        },
+        Professional: {
+          en: "Price-yield convexity means the relationship is inverse but nonlinear. Parallel rate shifts are only one scenario: curve shape, spread, optionality and liquidity can move simultaneously. For credit bonds, total yield changes can reflect both benchmark rates and spread repricing.",
+          fr: "La convexité de la relation prix-yield signifie que la relation est inverse mais non linéaire. Un déplacement parallèle des taux n’est qu’un scénario : forme de courbe, spread, optionalité et liquidité peuvent évoluer simultanément. Pour le crédit, la variation du yield total peut venir à la fois du taux de référence et du repricing du spread.",
+        },
+      },
+      formula: {
+        label: { en: "Basic bond present value", fr: "Valeur actuelle simple d’une obligation / Bond present value" },
+        expression: "Price = Σ [Couponₜ ÷ (1 + y)ᵗ] + Face Value ÷ (1 + y)ⁿ",
+        explanation: {
+          en: "This simplified formula assumes one discount yield per period and no embedded option. Real fixed-income analytics can use full spot curves, spreads and day-count conventions.",
+          fr: "Cette formule simplifiée suppose un seul taux d’actualisation par période et aucune option intégrée. L’analyse obligataire réelle peut utiliser une courbe spot complète, des spreads et des conventions de calcul de jours.",
+        },
+        workedExample: {
+          en: "One-year bond: ($50 coupon + $1,000 principal) ÷ 1.06 = about $990.57.",
+          fr: "Obligation à un an : (50 $ de coupon + 1 000 $ de principal) ÷ 1,06 ≈ 990,57 $.",
+        },
+      },
+      marketConnection: {
+        en: "When government yields jump, fixed-rate bond prices can fall immediately. Credit bonds may move even more if credit spreads widen at the same time.",
+        fr: "Lorsque les rendements souverains montent fortement, les prix des obligations à taux fixe peuvent baisser immédiatement. Les obligations de crédit peuvent bouger davantage si les spreads de crédit s’élargissent en même temps.",
+      },
+      vocabulary: [
+        {
+          en: "Yield to maturity",
+          fr: "rendement à maturité / yield to maturity",
+          definition: {
+            en: "The single discount rate that equates a bond's price with the present value of its scheduled cash flows under standard assumptions.",
+            fr: "Taux d’actualisation unique qui égalise le prix d’une obligation avec la valeur actuelle de ses flux prévus selon des hypothèses standard.",
+          },
+        },
+        {
+          en: "Discount bond",
+          fr: "obligation sous le pair / discount bond",
+          definition: {
+            en: "A bond trading below its face or par value.",
+            fr: "Obligation négociée sous sa valeur nominale / par.",
+          },
+        },
+      ],
+    },
+    {
+      id: "funds-etfs",
+      kicker: { en: "06 · POOLED INVESTING", fr: "06 · INVESTISSEMENT COLLECTIF" },
+      title: {
+        en: "ETFs, mutual funds, index funds and active funds",
+        fr: "ETF, fonds communs / mutual funds, fonds indiciels et fonds actifs",
+      },
+      coreFacts: [
+        {
+          en: "A fund pools investor capital to hold a portfolio of underlying assets according to a mandate.",
+          fr: "Un fonds mutualise le capital des investisseurs pour détenir un portefeuille d’actifs sous-jacents selon un mandat.",
+        },
+        {
+          en: "An ETF is a fund whose shares generally trade intraday on an exchange; a traditional open-end mutual fund is commonly transacted at a calculated NAV under its dealing rules.",
+          fr: "Un ETF est un fonds dont les parts se négocient généralement en séance sur une bourse ; un fonds commun ouvert traditionnel / open-end mutual fund est généralement souscrit ou racheté à une NAV calculée selon ses règles de dealing.",
+        },
+        {
+          en: "Passive funds seek to track an index or rule set; active funds allow managers to deviate from a benchmark or choose securities based on a strategy.",
+          fr: "Les fonds passifs cherchent à répliquer un indice ou un ensemble de règles ; les fonds actifs permettent au gérant de s’écarter d’un benchmark ou de sélectionner les titres selon une stratégie.",
+        },
+        {
+          en: "An ETF is not automatically diversified, low-risk or passive: those properties depend on the underlying portfolio and mandate.",
+          fr: "Un ETF n’est pas automatiquement diversifié, peu risqué ou passif : tout dépend du portefeuille sous-jacent et du mandat.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Instead of buying 100 separate stocks yourself, you can buy one fund that holds many securities. An ETF packages that portfolio into exchange-traded shares. You still own the ETF share, while the fund owns the underlying basket under its legal structure.",
+          fr: "Au lieu d’acheter toi-même 100 actions différentes, tu peux acheter une part d’un fonds qui détient de nombreux titres. Un ETF transforme ce portefeuille en parts négociées en bourse. Tu possèdes la part de l’ETF tandis que le fonds détient le panier sous-jacent selon sa structure juridique.",
+        },
+        Intermediate: {
+          en: "ETFs combine pooled portfolio exposure with secondary-market trading. Authorized participants and creation-redemption mechanisms help connect ETF share supply with underlying asset value. Tracking difference reflects fees, implementation, taxes, cash drag and other frictions.",
+          fr: "Les ETF combinent exposition mutualisée et négociation sur marché secondaire. Les participants autorisés / authorized participants et le mécanisme de création-rachat / creation-redemption contribuent à relier l’offre de parts à la valeur des actifs sous-jacents. Le tracking difference reflète frais, implémentation, fiscalité, cash drag et autres frictions.",
+        },
+        Professional: {
+          en: "ETF analysis separates primary creation-redemption liquidity from secondary exchange liquidity and underlying basket liquidity. Spreads, premiums/discounts, index rebalances, securities lending, tax structure and replication method can all affect realized investor outcomes.",
+          fr: "L’analyse ETF distingue liquidité primaire de creation-redemption, liquidité secondaire en bourse et liquidité du panier sous-jacent. Spreads, primes/décotes, rebalancements d’indice, securities lending, structure fiscale et méthode de réplication peuvent tous influencer le résultat réellement obtenu par l’investisseur.",
+        },
+      },
+      formula: {
+        label: { en: "Simple annual expense estimate", fr: "Estimation simple des frais annuels / Expense estimate" },
+        expression: "Approx. Annual Fund Fee = Investment Value × Expense Ratio",
+        explanation: {
+          en: "The actual expense ratio is generally reflected through fund NAV over time rather than billed as a separate flat invoice to the investor.",
+          fr: "En pratique, l’expense ratio est généralement reflété progressivement dans la NAV du fonds plutôt que facturé comme une facture séparée forfaitaire.",
+        },
+        workedExample: {
+          en: "$20,000 × 0.20% = about $40 per year before changes in portfolio value and other costs.",
+          fr: "20 000 $ × 0,20 % ≈ 40 $ par an avant variation de valeur du portefeuille et autres coûts.",
+        },
+      },
+      marketConnection: {
+        en: "During stressed markets, an ETF's quoted spread and premium or discount can change as underlying liquidity deteriorates. The ETF price can also provide price discovery when some underlying instruments trade less frequently.",
+        fr: "En période de stress, le spread coté d’un ETF et sa prime/décote peuvent évoluer lorsque la liquidité des actifs sous-jacents se détériore. Le prix de l’ETF peut aussi contribuer au price discovery lorsque certains actifs sous-jacents se négocient moins fréquemment.",
+      },
+      vocabulary: [
+        {
+          en: "NAV",
+          fr: "valeur liquidative / net asset value (NAV)",
+          definition: {
+            en: "The fund's net asset value, generally assets minus liabilities divided by fund shares under the applicable methodology.",
+            fr: "Valeur nette du fonds, généralement actifs moins passifs divisés par le nombre de parts selon la méthodologie applicable.",
+          },
+        },
+        {
+          en: "Expense ratio",
+          fr: "ratio de frais / expense ratio",
+          definition: {
+            en: "Annual operating expenses expressed as a percentage of fund assets under the stated convention.",
+            fr: "Frais d’exploitation annuels exprimés en pourcentage des actifs du fonds selon la convention indiquée.",
+          },
+        },
+        {
+          en: "Tracking difference",
+          fr: "écart de suivi / tracking difference",
+          definition: {
+            en: "The difference between a fund's realized return and the return of the benchmark it aims to track.",
+            fr: "Écart entre le rendement réalisé par le fonds et celui du benchmark qu’il cherche à suivre.",
+          },
+        },
+      ],
+    },
+    {
+      id: "diversification",
+      kicker: { en: "07 · DIVERSIFICATION", fr: "07 · DIVERSIFICATION" },
+      title: {
+        en: "What diversification can — and cannot — do",
+        fr: "Ce que la diversification peut — et ne peut pas — faire",
+      },
+      coreFacts: [
+        {
+          en: "Diversification can reduce exposure to security-specific or idiosyncratic risk when holdings are not perfectly correlated.",
+          fr: "La diversification peut réduire le risque spécifique / idiosyncratic risk lorsque les positions ne sont pas parfaitement corrélées.",
+        },
+        {
+          en: "Diversification does not eliminate systematic market risk shared by many assets.",
+          fr: "La diversification n’élimine pas le risque systématique / systematic market risk partagé par de nombreux actifs.",
+        },
+        {
+          en: "Owning many securities does not guarantee meaningful diversification if they share the same sector, factor, geography or macro sensitivity.",
+          fr: "Détenir de nombreux titres ne garantit pas une vraie diversification s’ils partagent le même secteur, facteur, zone géographique ou sensibilité macro.",
+        },
+        {
+          en: "A broad ETF can diversify security-specific risk efficiently, while a narrow thematic or leveraged ETF can remain highly concentrated.",
+          fr: "Un ETF large peut diversifier efficacement le risque spécifique, alors qu’un ETF thématique étroit ou à levier peut rester très concentré.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If all your money is in one company, one bad event can damage your whole portfolio. If you spread money across many unrelated companies, one company matters less. But if the whole market falls because interest rates or economic expectations change, many holdings can still fall together.",
+          fr: "Si tout ton argent est placé dans une seule entreprise, un seul mauvais événement peut toucher tout ton portefeuille. Si tu répartis l’investissement entre de nombreuses entreprises différentes, une entreprise compte moins. Mais si tout le marché baisse à cause des taux ou de l’économie, de nombreuses positions peuvent quand même baisser ensemble.",
+        },
+        Intermediate: {
+          en: "Portfolio risk depends not only on each asset's volatility but also on correlations between assets. Diversification works best when return drivers differ. Concentrated factor or macro exposures can remain hidden inside a portfolio that looks diversified by security count.",
+          fr: "Le risque de portefeuille dépend non seulement de la volatilité de chaque actif mais aussi des corrélations entre actifs. La diversification fonctionne mieux lorsque les moteurs de rendement diffèrent. Des expositions concentrées à un facteur ou au macro peuvent rester cachées dans un portefeuille qui semble diversifié par le nombre de titres.",
+        },
+        Professional: {
+          en: "Diversification is a covariance problem, not a ticker-count problem. Marginal contribution to risk, factor decomposition, regime-dependent correlation and liquidity commonality matter more than the raw number of positions. Correlations can also rise during stress.",
+          fr: "La diversification est un problème de covariance, pas de nombre de tickers. Contribution marginale au risque, décomposition factorielle, corrélations dépendantes du régime et liquidité commune importent davantage que le nombre brut de positions. Les corrélations peuvent aussi augmenter en période de stress.",
+        },
+      },
+      marketConnection: {
+        en: "A portfolio diversified across company names can still be concentrated in long-duration growth, one currency, one country or one rate regime.",
+        fr: "Un portefeuille diversifié par noms d’entreprises peut rester très concentré sur la croissance longue duration, une devise, un pays ou un régime de taux.",
+      },
+      vocabulary: [
+        {
+          en: "Idiosyncratic risk",
+          fr: "risque spécifique / idiosyncratic risk",
+          definition: {
+            en: "Risk specific to an individual company or security rather than the broader market.",
+            fr: "Risque propre à une entreprise ou un titre plutôt qu’au marché dans son ensemble.",
+          },
+        },
+        {
+          en: "Systematic risk",
+          fr: "risque systématique / systematic risk",
+          definition: {
+            en: "Risk driven by broad market factors that diversification across similar risky assets cannot fully eliminate.",
+            fr: "Risque provenant de facteurs de marché larges qu’une diversification entre actifs risqués similaires ne peut pas éliminer complètement.",
+          },
+        },
+      ],
+    },
+    {
+      id: "compare-instruments",
+      kicker: { en: "08 · CHOOSING THE CLAIM", fr: "08 · CHOISIR LE TYPE D’EXPOSITION" },
+      title: {
+        en: "Comparing stocks, bonds and funds in a portfolio",
+        fr: "Comparer actions, obligations et fonds dans un portefeuille",
+      },
+      coreFacts: [
+        {
+          en: "Instrument choice should begin with the economic exposure and claim you want, not with whether the ticker looks familiar.",
+          fr: "Le choix d’un instrument doit commencer par l’exposition économique et le type de créance recherchés, pas par la familiarité d’un ticker.",
+        },
+        {
+          en: "Stocks typically provide direct equity exposure; bonds provide contractual debt exposure; funds package one or many underlying exposures.",
+          fr: "Les actions fournissent généralement une exposition directe à l’equity ; les obligations une exposition contractuelle à la dette ; les fonds regroupent une ou plusieurs expositions sous-jacentes.",
+        },
+        {
+          en: "Liquidity, fees, taxes, currency, duration, credit, concentration and structure can all change the practical risk of an instrument.",
+          fr: "Liquidité, frais, fiscalité, devise, duration, crédit, concentration et structure peuvent tous modifier le risque pratique d’un instrument.",
+        },
+        {
+          en: "There is no universally superior instrument; suitability depends on objective, horizon, risk capacity and the rest of the portfolio.",
+          fr: "Il n’existe pas d’instrument universellement supérieur ; l’adéquation dépend de l’objectif, de l’horizon, de la capacité de risque et du reste du portefeuille.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A stock is a direct bet on an owner's share of a company. A bond is a loan to an issuer. A fund is a wrapper that may contain many stocks, bonds or other assets. The right question is not 'Which one is best?' but 'What exposure, cash flows and risks does this instrument give me?'",
+          fr: "Une action est une participation directe dans une entreprise. Une obligation est un prêt à un émetteur. Un fonds est une enveloppe qui peut contenir de nombreuses actions, obligations ou autres actifs. La bonne question n’est pas « lequel est le meilleur ? », mais « quelle exposition, quels cash flows et quels risques cet instrument me donne-t-il ? »",
+        },
+        Intermediate: {
+          en: "Instrument selection maps portfolio objectives to return drivers. Equity increases exposure to business growth and valuation risk; bonds can add contractual income and rate/credit exposure; diversified funds can efficiently package beta or active strategy, with fees and structure becoming part of the return equation.",
+          fr: "La sélection d’instruments relie les objectifs du portefeuille aux moteurs de rendement. L’equity augmente l’exposition à la croissance des entreprises et au risque de valorisation ; les obligations ajoutent revenu contractuel et risque taux/crédit ; les fonds diversifiés peuvent fournir efficacement du beta ou une stratégie active, avec frais et structure intégrés dans l’équation de rendement.",
+        },
+        Professional: {
+          en: "Portfolio construction treats securities as bundles of factor, liquidity, cash-flow and optionality exposures. A nominally diversified vehicle may embed duration, convexity, credit beta, equity beta, currency or leverage. Security selection should therefore be exposure-aware and implementation-aware.",
+          fr: "La construction de portefeuille traite les titres comme des ensembles d’expositions factorielles, de liquidité, de cash flows et d’optionalité. Un véhicule apparemment diversifié peut embarquer duration, convexité, beta crédit, beta equity, devise ou levier. La sélection doit donc intégrer les expositions et la qualité d’implémentation.",
+        },
+      },
+      comparison: {
+        title: { en: "Instrument comparison", fr: "Comparaison des instruments" },
+        headers: [
+          { en: "Dimension", fr: "Dimension" },
+          { en: "Stock", fr: "Action / Stock" },
+          { en: "Bond", fr: "Obligation / Bond" },
+          { en: "ETF / fund", fr: "ETF / fonds" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Underlying claim", fr: "Créance sous-jacente" },
+            { en: "Direct equity ownership", fr: "Propriété equity directe" },
+            { en: "Debt claim", fr: "Créance de dette" },
+            { en: "Claim on pooled portfolio structure", fr: "Part dans une structure de portefeuille mutualisé" },
+          ]},
+          { cells: [
+            { en: "Main return sources", fr: "Principales sources de rendement" },
+            { en: "Price change + dividends", fr: "Variation de prix + dividendes" },
+            { en: "Coupon + price change + principal repayment", fr: "Coupon + variation de prix + remboursement du principal" },
+            { en: "Returns of holdings minus fees/frictions", fr: "Rendement des actifs détenus moins frais/frictions" },
+          ]},
+          { cells: [
+            { en: "Key risks", fr: "Risques clés" },
+            { en: "Business + valuation + market", fr: "Entreprise + valorisation + marché" },
+            { en: "Rates + credit + liquidity", fr: "Taux + crédit + liquidité" },
+            { en: "Depends on holdings + structure + tracking", fr: "Dépend des actifs + structure + tracking" },
+          ]},
+          { cells: [
+            { en: "Diversification", fr: "Diversification" },
+            { en: "Single company unless portfolio built", fr: "Une entreprise sauf portefeuille construit" },
+            { en: "Single issuer unless portfolio built", fr: "Un émetteur sauf portefeuille construit" },
+            { en: "Can be broad or highly concentrated", fr: "Peut être large ou très concentré" },
+          ]},
+        ],
+      },
+    },
+    {
+      id: "capital-structure",
+      kicker: { en: "09 · PUTTING IT TOGETHER", fr: "09 · RELIER TOUT ENSEMBLE" },
+      title: {
+        en: "Capital structure, default and the investor's place in the stack",
+        fr: "Structure du capital, défaut et place de l’investisseur dans la hiérarchie",
+      },
+      coreFacts: [
+        {
+          en: "Companies can finance themselves with combinations of debt, preferred securities and common equity.",
+          fr: "Les entreprises peuvent se financer par combinaison de dette, titres préférentiels / preferred securities et actions ordinaires.",
+        },
+        {
+          en: "More debt can increase financial leverage: equity holders may benefit more when enterprise outcomes are strong but can also absorb greater downside volatility.",
+          fr: "Davantage de dette peut accroître le levier financier / financial leverage : les actionnaires peuvent davantage bénéficier de bons résultats mais aussi subir une volatilité baissière plus forte.",
+        },
+        {
+          en: "Credit analysis asks whether contractual debt payments can be met; equity analysis focuses on the residual value after all claims and reinvestment needs.",
+          fr: "L’analyse crédit demande si les paiements contractuels de dette peuvent être honorés ; l’analyse equity se concentre sur la valeur résiduelle après toutes les créances et besoins de réinvestissement.",
+        },
+        {
+          en: "Funds do not remove the economics of the underlying assets: a bond ETF still contains bond risk and an equity ETF still contains equity risk.",
+          fr: "Les fonds ne suppriment pas l’économie des actifs sous-jacents : un ETF obligataire contient toujours du risque obligataire et un ETF actions toujours du risque equity.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Picture the company as a stack. Cash generated by the business must first support operating needs and contractual obligations. Creditors have claims defined by contracts. Common shareholders own what is left. This is why the same company can be a very different investment depending on whether you own its stock or its bond.",
+          fr: "Imagine l’entreprise comme une pile / capital stack. Le cash généré doit d’abord soutenir l’activité et les obligations contractuelles. Les créanciers ont des droits définis par contrat. Les actionnaires ordinaires possèdent ce qui reste. C’est pourquoi la même entreprise peut représenter un investissement très différent selon que tu détiens son action ou son obligation.",
+        },
+        Intermediate: {
+          en: "Capital structure changes how enterprise value is distributed across securities. Debt service creates fixed claims, while equity captures residual outcomes. Leverage therefore magnifies the sensitivity of equity value to changes in enterprise value, especially when debt is large relative to the business.",
+          fr: "La structure du capital modifie la répartition de l’enterprise value entre titres. Le service de la dette crée des créances fixes, tandis que l’equity capte le résultat résiduel. Le levier amplifie donc la sensibilité de l’equity value aux variations de l’enterprise value, surtout lorsque la dette est élevée par rapport à la taille de l’activité.",
+        },
+        Professional: {
+          en: "Security analysis is claim-specific. Structural and contractual subordination, secured versus unsecured status, maturity walls, covenant protection, refinancing access and recovery value shape credit. Equity behaves like a residual leveraged claim on enterprise value, with dilution and capital allocation affecting per-share outcomes.",
+          fr: "L’analyse doit être spécifique à la créance. Subordination structurelle et contractuelle, dette garantie/non garantie, mur de maturité / maturity wall, protection des covenants, accès au refinancement et valeur de recovery façonnent le crédit. L’equity agit comme une créance résiduelle à effet de levier sur l’enterprise value, avec dilution et allocation du capital influençant la valeur par action.",
+        },
+      },
+      marketConnection: {
+        en: "The same macro shock can affect securities differently: higher rates may pressure long-duration equities, lower fixed-rate bond prices and raise refinancing costs for leveraged issuers at the same time.",
+        fr: "Un même choc macro peut toucher les titres différemment : une hausse des taux peut peser sur les actions longue duration, faire baisser le prix des obligations à taux fixe et augmenter le coût de refinancement des émetteurs endettés.",
+      },
+      vocabulary: [
+        {
+          en: "Capital structure",
+          fr: "structure du capital / capital structure",
+          definition: {
+            en: "The mix and priority of financing claims used by a company.",
+            fr: "Composition et priorité des sources de financement utilisées par une entreprise.",
+          },
+        },
+        {
+          en: "Recovery",
+          fr: "taux de recouvrement / recovery",
+          definition: {
+            en: "Value creditors recover after a default or restructuring, expressed under the chosen convention.",
+            fr: "Valeur récupérée par les créanciers après défaut ou restructuration selon la convention choisie.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "equity-vs-debt",
+      question: {
+        en: "Which statement best distinguishes a common stock from a bond?",
+        fr: "Quelle proposition distingue le mieux une action ordinaire d’une obligation ?",
+      },
+      options: [
+        { id: "a", label: { en: "A stock is a residual ownership claim; a bond is contractual debt", fr: "Une action est une créance résiduelle de propriété ; une obligation est une dette contractuelle" } },
+        { id: "b", label: { en: "A stock guarantees a coupon; a bond guarantees dividends", fr: "Une action garantit un coupon ; une obligation garantit des dividendes" } },
+        { id: "c", label: { en: "They are legally identical claims", fr: "Ce sont juridiquement les mêmes créances" } },
+        { id: "d", label: { en: "Bondholders are always paid after common shareholders", fr: "Les obligataires sont toujours payés après les actionnaires ordinaires" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Common equity is a residual ownership interest, while a bond represents contractual debt with defined terms and generally higher priority.",
+        fr: "L’action ordinaire est une participation résiduelle ; l’obligation est une dette contractuelle aux modalités définies et généralement prioritaire.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "market-cap",
+      question: {
+        en: "A company has 400 million shares outstanding at $25 per share. What is its market capitalization?",
+        fr: "Une entreprise possède 400 millions d’actions en circulation à 25 $ par action. Quelle est sa capitalisation boursière ?",
+      },
+      options: [
+        { id: "a", label: { en: "$1 billion", fr: "1 milliard $" } },
+        { id: "b", label: { en: "$10 billion", fr: "10 milliards $" } },
+        { id: "c", label: { en: "$100 billion", fr: "100 milliards $" } },
+        { id: "d", label: { en: "$425 million", fr: "425 millions $" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "$25 × 400 million = $10 billion.",
+        fr: "25 $ × 400 millions = 10 milliards $.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "stock-total-return",
+      question: {
+        en: "You buy a stock at $40, sell at $44 and receive a $1 dividend. What is the simple total return?",
+        fr: "Tu achètes une action à 40 $, la revends à 44 $ et reçois 1 $ de dividende. Quel est le rendement total simple ?",
+      },
+      options: [
+        { id: "a", label: { en: "10.0%", fr: "10,0 %" } },
+        { id: "b", label: { en: "11.0%", fr: "11,0 %" } },
+        { id: "c", label: { en: "12.5%", fr: "12,5 %" } },
+        { id: "d", label: { en: "15.0%", fr: "15,0 %" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "($44 − $40 + $1) ÷ $40 = 12.5%.",
+        fr: "(44 − 40 + 1) ÷ 40 = 12,5 %.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "bond-coupon",
+      question: {
+        en: "A $1,000 face-value bond has a 6% annual coupon. How much annual coupon interest does it pay?",
+        fr: "Une obligation de nominal 1 000 $ a un coupon annuel de 6 %. Quel montant de coupon annuel verse-t-elle ?",
+      },
+      options: [
+        { id: "a", label: { en: "$6", fr: "6 $" } },
+        { id: "b", label: { en: "$30", fr: "30 $" } },
+        { id: "c", label: { en: "$60", fr: "60 $" } },
+        { id: "d", label: { en: "$600", fr: "600 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "$1,000 × 6% = $60 annual coupon.",
+        fr: "1 000 $ × 6 % = 60 $ de coupon annuel.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "bond-price-yield",
+      question: {
+        en: "All else equal, what generally happens to the price of an existing fixed-rate bond when the market-required yield rises?",
+        fr: "Toutes choses égales par ailleurs, que devient généralement le prix d’une obligation à taux fixe existante lorsque le rendement exigé par le marché augmente ?",
+      },
+      options: [
+        { id: "a", label: { en: "It rises", fr: "Il augmente" } },
+        { id: "b", label: { en: "It falls", fr: "Il baisse" } },
+        { id: "c", label: { en: "It must stay exactly at par", fr: "Il doit rester exactement au pair" } },
+        { id: "d", label: { en: "The coupon rate changes automatically", fr: "Le taux de coupon change automatiquement" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Existing fixed cash flows become less valuable when the discount yield investors require rises, so price generally falls.",
+        fr: "Les cash flows fixes existants valent moins lorsque le yield d’actualisation exigé augmente ; le prix baisse donc généralement.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "etf-structure",
+      question: {
+        en: "Which statement about ETFs is correct?",
+        fr: "Quelle proposition concernant les ETF est correcte ?",
+      },
+      options: [
+        { id: "a", label: { en: "Every ETF is passive and broadly diversified", fr: "Tous les ETF sont passifs et largement diversifiés" } },
+        { id: "b", label: { en: "An ETF is a fund wrapper whose risk depends on its underlying exposures and structure", fr: "Un ETF est une enveloppe de fonds dont le risque dépend des expositions sous-jacentes et de sa structure" } },
+        { id: "c", label: { en: "ETF shares cannot trade during the day", fr: "Les parts d’ETF ne peuvent pas se négocier en séance" } },
+        { id: "d", label: { en: "An ETF cannot hold bonds", fr: "Un ETF ne peut pas détenir d’obligations" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "ETF is a vehicle type, not a guarantee of diversification, passivity or low risk.",
+        fr: "ETF désigne un type de véhicule, pas une garantie de diversification, de gestion passive ou de faible risque.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "diversification",
+      question: {
+        en: "What can diversification reduce most directly?",
+        fr: "Quel risque la diversification peut-elle réduire le plus directement ?",
+      },
+      options: [
+        { id: "a", label: { en: "All market risk", fr: "Tout le risque de marché" } },
+        { id: "b", label: { en: "Security-specific idiosyncratic risk", fr: "Le risque spécifique / idiosyncratic d’un titre" } },
+        { id: "c", label: { en: "Every possible loss", fr: "Toute perte possible" } },
+        { id: "d", label: { en: "Inflation permanently", fr: "L’inflation de manière permanente" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Holding imperfectly correlated securities can reduce security-specific risk, but broad systematic risk remains.",
+        fr: "Détenir des titres imparfaitement corrélés peut réduire le risque spécifique, mais le risque systématique global demeure.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "fund-expense-ratio",
+      question: {
+        en: "A fund has a 0.20% expense ratio and you invest $20,000. What is the simple approximate annual expense before portfolio-value changes?",
+        fr: "Un fonds a un expense ratio de 0,20 % et tu investis 20 000 $. Quelle est l’estimation simple des frais annuels avant variation de valeur du portefeuille ?",
+      },
+      options: [
+        { id: "a", label: { en: "$4", fr: "4 $" } },
+        { id: "b", label: { en: "$20", fr: "20 $" } },
+        { id: "c", label: { en: "$40", fr: "40 $" } },
+        { id: "d", label: { en: "$400", fr: "400 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "$20,000 × 0.20% = about $40.",
+        fr: "20 000 $ × 0,20 % ≈ 40 $.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Compare a stock, a bond and an ETF. Then explain how a rise in interest rates could affect each.",
+      fr: "Compare une action / stock, une obligation / bond et un ETF. Puis explique comment une hausse des taux d’intérêt peut affecter chacun.",
+    },
+    framework: [
+      {
+        en: "Define the claims: equity ownership, contractual debt, pooled fund exposure.",
+        fr: "Définir les créances : propriété equity, dette contractuelle, exposition mutualisée via fonds.",
+      },
+      {
+        en: "Explain return sources: price/dividends for stocks, coupon/price/principal for bonds, underlying portfolio return minus costs for funds.",
+        fr: "Expliquer les sources de rendement : prix/dividendes pour l’action, coupon/prix/principal pour l’obligation, rendement du portefeuille sous-jacent moins les coûts pour le fonds.",
+      },
+      {
+        en: "State that higher yields generally lower prices of existing fixed-rate bonds, all else equal.",
+        fr: "Indiquer qu’une hausse des yields réduit généralement le prix des obligations à taux fixe existantes, toutes choses égales par ailleurs.",
+      },
+      {
+        en: "For stocks, avoid a mechanical claim: higher rates can raise discount rates and financing costs, but the effect depends on earnings, growth expectations and sector.",
+        fr: "Pour les actions, éviter une réponse mécanique : des taux plus élevés peuvent augmenter discount rates et coûts de financement, mais l’effet dépend des bénéfices, anticipations de croissance et du secteur.",
+      },
+      {
+        en: "For an ETF, trace through to what it actually owns: bond ETF, equity ETF or mixed portfolio.",
+        fr: "Pour un ETF, revenir aux actifs réellement détenus : ETF obligataire, ETF actions ou portefeuille mixte.",
+      },
+    ],
+    sample: {
+      en: "A stock is a residual ownership claim on a company; a bond is contractual debt; an ETF is a pooled vehicle whose risk comes from its underlying holdings and structure. A stock investor earns from price changes and possibly dividends, while a bond investor receives contractual coupons and principal subject to credit risk. If market yields rise, an existing fixed-rate bond generally falls in price. Stocks may also face pressure because discount rates and financing costs can rise, but the response is not automatic because earnings expectations and sector sensitivity matter. For an ETF, I would first identify the underlying assets: a bond ETF should reflect bond-rate exposure, while an equity ETF should reflect the characteristics of its stock portfolio.",
+      fr: "Une action / stock est une créance résiduelle de propriété sur une entreprise ; une obligation / bond est une dette contractuelle ; un ETF est un véhicule mutualisé dont le risque provient des actifs sous-jacents et de sa structure. L’investisseur en actions gagne via la variation du prix et éventuellement les dividendes, tandis que l’investisseur obligataire reçoit coupons et principal sous réserve du risque de crédit. Si les yields de marché montent, le prix d’une obligation à taux fixe existante baisse généralement. Les actions peuvent aussi subir une pression car les taux d’actualisation et coûts de financement augmentent, mais l’effet n’est pas automatique : attentes de bénéfices et sensibilité sectorielle comptent. Pour un ETF, je regarde d’abord ce qu’il détient réellement : un ETF obligataire reflète une exposition aux taux et au crédit, tandis qu’un ETF actions reflète les caractéristiques du portefeuille d’actions.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
