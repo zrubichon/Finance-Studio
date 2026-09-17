@@ -7,6 +7,7 @@ import "./product.css";
 import "./phase-two.css";
 import "./auth.css";
 import "./phase-three.css";
+import "./course.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
