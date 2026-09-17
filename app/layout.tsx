@@ -4,6 +4,7 @@ import "./globals.css";
 import "./product.css";
 import "./phase-two.css";
 import "./auth.css";
+import "./phase-three.css";
 
 export const metadata: Metadata = {
   title: "FinanceStudio — Learn the market, understand the why",
