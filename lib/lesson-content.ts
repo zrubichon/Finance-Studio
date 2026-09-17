@@ -2376,7 +2376,881 @@ export const moneyBankingCentralBanksLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson];
+
+export const timeValueOfMoneyLesson: FinanceLesson = {
+  slug: "year-1-time-value-of-money",
+  year: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations" },
+  domain: {
+    en: "Corporate Finance & Valuation",
+    fr: "Finance d’entreprise & valorisation / Corporate Finance & Valuation",
+  },
+  title: {
+    en: "Time Value of Money",
+    fr: "Valeur temps de l’argent / Time Value of Money",
+  },
+  subtitle: {
+    en: "Learn why a dollar today is worth more than a dollar later, how compounding and discounting work, and how present value, annuities, perpetuities and NPV become the mathematical foundation of valuation.",
+    fr: "Comprendre pourquoi un dollar aujourd’hui vaut davantage qu’un dollar reçu plus tard, comment fonctionnent capitalisation / compounding et actualisation / discounting, et comment valeur actuelle / present value, annuités, perpétuités et NPV deviennent la base mathématique de la valorisation.",
+  },
+  duration: { en: "80–100 min", fr: "80–100 min" },
+  prerequisites: [
+    {
+      en: "Basic percentages and exponent rules",
+      fr: "Pourcentages de base et règles simples sur les puissances",
+    },
+    {
+      en: "Stocks, Bonds, ETFs & Funds",
+      fr: "Actions / Stocks, obligations / Bonds, ETF & fonds / Funds",
+    },
+  ],
+  objectives: [
+    {
+      en: "Explain economically why timing changes the value of cash.",
+      fr: "Expliquer économiquement pourquoi le timing modifie la valeur du cash.",
+    },
+    {
+      en: "Calculate future value and present value for single cash flows.",
+      fr: "Calculer valeur future / future value et valeur actuelle / present value pour un flux unique.",
+    },
+    {
+      en: "Distinguish simple interest from compound interest and compare compounding frequencies.",
+      fr: "Distinguer intérêt simple / simple interest et intérêt composé / compound interest et comparer différentes fréquences de capitalisation.",
+    },
+    {
+      en: "Value ordinary annuities, annuities due and simple perpetuities.",
+      fr: "Valoriser annuités ordinaires / ordinary annuities, annuités à terme à échoir / annuities due et perpétuités simples / perpetuities.",
+    },
+    {
+      en: "Calculate and interpret net present value.",
+      fr: "Calculer et interpréter la valeur actuelle nette / net present value (NPV).",
+    },
+    {
+      en: "Connect discount rates to opportunity cost, inflation and risk.",
+      fr: "Relier taux d’actualisation / discount rate au coût d’opportunité, à l’inflation et au risque.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "The valuation chain",
+      fr: "La chaîne de valorisation / valuation",
+    },
+    steps: [
+      {
+        title: { en: "Cash flow", fr: "Flux de trésorerie / Cash flow" },
+        detail: { en: "Amount + timing", fr: "Montant + timing" },
+      },
+      {
+        title: { en: "Discount rate", fr: "Taux d’actualisation / Discount rate" },
+        detail: { en: "Time + opportunity cost + risk", fr: "Temps + coût d’opportunité + risque" },
+      },
+      {
+        title: { en: "Present value", fr: "Valeur actuelle / Present value" },
+        detail: { en: "Comparable value today", fr: "Valeur comparable aujourd’hui" },
+      },
+      {
+        title: { en: "Decision", fr: "Décision" },
+        detail: { en: "Price · invest · reject · compare", fr: "Prix · investir · rejeter · comparer" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "why-time-matters",
+      kicker: { en: "01 · WHY TIME CHANGES VALUE", fr: "01 · POURQUOI LE TEMPS CHANGE LA VALEUR" },
+      title: {
+        en: "A dollar today and a dollar tomorrow are not economically identical",
+        fr: "Un dollar aujourd’hui et un dollar demain ne sont pas économiquement identiques",
+      },
+      coreFacts: [
+        {
+          en: "Cash received today can be invested, consumed or used to avoid borrowing, so it has an opportunity value.",
+          fr: "Du cash reçu aujourd’hui peut être investi, consommé ou utilisé pour éviter un emprunt ; il possède donc une valeur d’opportunité.",
+        },
+        {
+          en: "Inflation can reduce future purchasing power, while uncertainty and credit risk can make future cash flows less certain.",
+          fr: "L’inflation peut réduire le pouvoir d’achat futur, tandis que l’incertitude et le risque de crédit peuvent rendre les flux futurs moins certains.",
+        },
+        {
+          en: "Finance therefore compares cash flows at different dates by moving them to a common point in time.",
+          fr: "La finance compare donc des flux reçus à différentes dates en les ramenant à un même point dans le temps.",
+        },
+        {
+          en: "Compounding moves value forward through time; discounting moves value backward to the present.",
+          fr: "La capitalisation / compounding déplace une valeur vers le futur ; l’actualisation / discounting la ramène vers aujourd’hui.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If I offer you $1,000 today or $1,000 in one year, the money today is generally more useful because you can invest it immediately. At 5%, $1,000 today could become $1,050 in one year. So receiving only $1,000 next year means giving up that potential return.",
+          fr: "Si je te propose 1 000 $ aujourd’hui ou 1 000 $ dans un an, l’argent aujourd’hui est généralement plus utile car tu peux l’investir immédiatement. À 5 %, 1 000 $ aujourd’hui pourraient devenir 1 050 $ dans un an. Recevoir seulement 1 000 $ l’an prochain signifie donc renoncer à ce rendement potentiel.",
+        },
+        Intermediate: {
+          en: "Time value reflects opportunity cost, inflation, liquidity preference and risk. Discounting converts future cash flows into economically comparable present values by applying a rate that represents the return required for waiting and bearing uncertainty.",
+          fr: "La valeur temps reflète coût d’opportunité, inflation, préférence pour la liquidité et risque. L’actualisation convertit les flux futurs en valeurs actuelles comparables en appliquant un taux représentant le rendement exigé pour attendre et supporter l’incertitude.",
+        },
+        Professional: {
+          en: "TVM is the pricing bridge between dated cash flows. The discount factor embeds the relevant opportunity-cost curve and, depending on the application, compensation for inflation, credit, liquidity and systematic risk. Modern valuation is fundamentally a problem of mapping state-contingent future cash flows into present prices.",
+          fr: "La TVM est le pont de valorisation entre flux datés. Le facteur d’actualisation incorpore la courbe de coût d’opportunité pertinente et, selon l’application, une rémunération pour inflation, crédit, liquidité et risque systématique. La valorisation moderne consiste fondamentalement à convertir des cash flows futurs dépendant des états du monde en prix présents.",
+        },
+      },
+      comparison: {
+        title: { en: "Compounding vs discounting", fr: "Capitalisation vs actualisation" },
+        headers: [
+          { en: "Process", fr: "Processus" },
+          { en: "Direction", fr: "Direction" },
+          { en: "Question answered", fr: "Question posée" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Compounding", fr: "Capitalisation / compounding" },
+            { en: "Present → future", fr: "Présent → futur" },
+            { en: "What will today's money become?", fr: "Que deviendra l’argent d’aujourd’hui ?" },
+          ]},
+          { cells: [
+            { en: "Discounting", fr: "Actualisation / discounting" },
+            { en: "Future → present", fr: "Futur → présent" },
+            { en: "What is future money worth today?", fr: "Que vaut aujourd’hui l’argent futur ?" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Opportunity cost",
+          fr: "coût d’opportunité / opportunity cost",
+          definition: {
+            en: "The value of the best alternative use or return forgone.",
+            fr: "Valeur de la meilleure alternative à laquelle on renonce.",
+          },
+        },
+        {
+          en: "Discount factor",
+          fr: "facteur d’actualisation / discount factor",
+          definition: {
+            en: "The multiplier used to convert a future cash flow into present value.",
+            fr: "Coefficient utilisé pour convertir un flux futur en valeur actuelle.",
+          },
+        },
+      ],
+    },
+    {
+      id: "future-value",
+      kicker: { en: "02 · FUTURE VALUE", fr: "02 · VALEUR FUTURE" },
+      title: {
+        en: "Compounding turns today's capital into a future amount",
+        fr: "La capitalisation transforme le capital d’aujourd’hui en montant futur",
+      },
+      coreFacts: [
+        {
+          en: "Future value depends on starting capital, return per period and number of compounding periods.",
+          fr: "La valeur future dépend du capital initial, du rendement par période et du nombre de périodes de capitalisation.",
+        },
+        {
+          en: "Compound interest earns returns on prior accumulated returns as well as on original principal.",
+          fr: "L’intérêt composé / compound interest génère des rendements sur les gains déjà accumulés en plus du principal initial.",
+        },
+        {
+          en: "The effect of compounding becomes more powerful as the rate or time horizon increases.",
+          fr: "L’effet de capitalisation devient plus puissant lorsque le taux ou l’horizon augmente.",
+        },
+        {
+          en: "The periodic rate and number of periods must use consistent units.",
+          fr: "Le taux périodique et le nombre de périodes doivent utiliser des unités cohérentes.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Invest $1,000 at 8% for three years. After year one you have $1,080. In year two, you earn 8% on $1,080, not just on the original $1,000. After three years you have about $1,259.71.",
+          fr: "Investis 1 000 $ à 8 % pendant trois ans. Après un an, tu as 1 080 $. La deuxième année, tu gagnes 8 % sur 1 080 $, pas seulement sur les 1 000 $ initiaux. Après trois ans, tu obtiens environ 1 259,71 $.",
+        },
+        Intermediate: {
+          en: "Exponential compounding means the growth factor is multiplied repeatedly. This makes horizon a nonlinear driver of ending wealth. The same formula applies to many settings, including investment growth, accumulated interest and reinvested returns.",
+          fr: "La capitalisation exponentielle signifie que le facteur de croissance est multiplié à chaque période. L’horizon devient donc un moteur non linéaire de la valeur finale. La même formule s’applique à la croissance d’un investissement, aux intérêts accumulés ou aux rendements réinvestis.",
+        },
+        Professional: {
+          en: "Compounding is path-independent only under the assumed fixed periodic rate. With variable realized returns, terminal wealth is the product of period-by-period gross returns, which is why arithmetic average return and geometric compound return are not interchangeable.",
+          fr: "La capitalisation n’est indépendante du chemin que sous l’hypothèse d’un taux périodique fixe. Avec des rendements variables, la richesse finale est le produit des rendements bruts période par période, d’où la différence entre moyenne arithmétique et rendement composé géométrique.",
+        },
+      },
+      formula: {
+        label: { en: "Future value of one cash flow", fr: "Valeur future d’un flux unique / Future value" },
+        expression: "FV = PV × (1 + r)ⁿ",
+        explanation: {
+          en: "PV is today's amount, r is the return per period and n is the number of periods.",
+          fr: "PV est le montant aujourd’hui, r le rendement par période et n le nombre de périodes.",
+        },
+        workedExample: {
+          en: "$1,000 × (1.08)³ = $1,259.71.",
+          fr: "1 000 $ × (1,08)³ = 1 259,71 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Compounding",
+          fr: "capitalisation / compounding",
+          definition: {
+            en: "Earning returns on principal and previously accumulated returns.",
+            fr: "Génération de rendement sur le principal et les rendements déjà accumulés.",
+          },
+        },
+        {
+          en: "Growth factor",
+          fr: "facteur de croissance / growth factor",
+          definition: {
+            en: "The multiplicative factor, such as 1 + r, applied across periods.",
+            fr: "Facteur multiplicatif, comme 1 + r, appliqué au fil des périodes.",
+          },
+        },
+      ],
+    },
+    {
+      id: "present-value",
+      kicker: { en: "03 · PRESENT VALUE", fr: "03 · VALEUR ACTUELLE" },
+      title: {
+        en: "Discounting asks what future cash is worth today",
+        fr: "L’actualisation demande ce qu’un cash futur vaut aujourd’hui",
+      },
+      coreFacts: [
+        {
+          en: "Present value is the amount today that is economically equivalent to a future cash flow at a chosen discount rate.",
+          fr: "La valeur actuelle / present value est le montant aujourd’hui économiquement équivalent à un flux futur pour un taux d’actualisation donné.",
+        },
+        {
+          en: "A higher discount rate lowers present value, all else equal.",
+          fr: "Un taux d’actualisation plus élevé réduit la valeur actuelle, toutes choses égales par ailleurs.",
+        },
+        {
+          en: "A cash flow received further in the future has a lower present value when the discount rate is positive.",
+          fr: "Un flux reçu plus loin dans le futur possède une valeur actuelle plus faible lorsque le taux d’actualisation est positif.",
+        },
+        {
+          en: "Discounting and compounding are inverse operations.",
+          fr: "Actualisation et capitalisation sont des opérations inverses.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you will receive $1,210 in two years and a comparable return is 10% per year, that future amount is worth $1,000 today because $1,000 compounded at 10% for two years becomes $1,210.",
+          fr: "Si tu dois recevoir 1 210 $ dans deux ans et qu’un rendement comparable est de 10 % par an, ce montant futur vaut 1 000 $ aujourd’hui car 1 000 $ capitalisés à 10 % pendant deux ans deviennent 1 210 $.",
+        },
+        Intermediate: {
+          en: "Present value is the core language of valuation because it lets us compare cash flows occurring at different dates. Discounting each future cash flow separately is essential when timing differs.",
+          fr: "La present value est le langage fondamental de la valorisation car elle permet de comparer des flux reçus à des dates différentes. Chaque cash flow futur doit être actualisé séparément lorsque le timing diffère.",
+        },
+        Professional: {
+          en: "PV is determined by the term structure of discount factors appropriate to the cash flow's timing and risk. A single flat discount rate is a simplifying assumption; professional fixed-income and derivative valuation often uses maturity-specific curves and state-dependent pricing.",
+          fr: "La PV dépend de la structure par terme des facteurs d’actualisation adaptée au timing et au risque du cash flow. Utiliser un taux plat unique est une simplification ; la valorisation professionnelle en fixed income et dérivés utilise souvent des courbes spécifiques aux maturités et des prix dépendant des états du monde.",
+        },
+      },
+      formula: {
+        label: { en: "Present value of one future cash flow", fr: "Valeur actuelle d’un flux futur / Present value" },
+        expression: "PV = FV ÷ (1 + r)ⁿ",
+        explanation: {
+          en: "The denominator is the cumulative discounting factor across n periods.",
+          fr: "Le dénominateur est le facteur d’actualisation cumulé sur n périodes.",
+        },
+        workedExample: {
+          en: "$1,210 ÷ (1.10)² = $1,000.",
+          fr: "1 210 $ ÷ (1,10)² = 1 000 $.",
+        },
+      },
+      marketConnection: {
+        en: "When market discount rates rise, present values fall. This logic sits behind the sensitivity of bond prices and long-duration equity valuations to interest rates.",
+        fr: "Lorsque les taux d’actualisation de marché augmentent, les present values diminuent. Cette logique explique la sensibilité des prix obligataires et des valorisations d’actions longue duration aux taux d’intérêt.",
+      },
+    },
+    {
+      id: "frequency-ear",
+      kicker: { en: "04 · COMPOUNDING FREQUENCY", fr: "04 · FRÉQUENCE DE CAPITALISATION" },
+      title: {
+        en: "Nominal rate and effective annual rate are not always the same",
+        fr: "Taux nominal et taux annuel effectif ne sont pas toujours identiques",
+      },
+      coreFacts: [
+        {
+          en: "If interest compounds more than once per year, the effective annual rate can exceed the quoted nominal annual rate.",
+          fr: "Si les intérêts sont capitalisés plusieurs fois par an, le taux annuel effectif / effective annual rate peut dépasser le taux nominal annuel annoncé.",
+        },
+        {
+          en: "The periodic rate must be matched to the number of compounding periods.",
+          fr: "Le taux périodique doit être cohérent avec le nombre de périodes de capitalisation.",
+        },
+        {
+          en: "APR-style nominal quotations and effective annual yields answer different questions and should not be compared blindly.",
+          fr: "Les cotations nominales de type APR et les taux annuels effectifs répondent à des questions différentes et ne doivent pas être comparés sans ajustement.",
+        },
+        {
+          en: "Continuous compounding is a mathematical limiting case and is useful in some areas of finance, but many real contracts use discrete conventions.",
+          fr: "La capitalisation continue / continuous compounding est un cas limite mathématique utile dans certains domaines, mais de nombreux contrats utilisent des conventions discrètes.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A quoted 12% annual rate compounded monthly means 1% per month. Because each month's interest can itself earn interest, the effective annual return is about 12.68%, not exactly 12%.",
+          fr: "Un taux annuel annoncé de 12 % capitalisé mensuellement signifie 1 % par mois. Comme les intérêts de chaque mois peuvent eux-mêmes produire des intérêts, le rendement annuel effectif est d’environ 12,68 %, et non exactement 12 %.",
+        },
+        Intermediate: {
+          en: "Effective annual rate standardizes returns across compounding conventions. This is essential when comparing loans, deposits or investments quoted with different frequencies.",
+          fr: "Le taux annuel effectif standardise les rendements entre différentes conventions de capitalisation. C’est essentiel pour comparer prêts, dépôts ou investissements annoncés avec des fréquences différentes.",
+        },
+        Professional: {
+          en: "Rate convention is part of the instrument definition. Money-market, bond, swap and derivative products can use different day-count, compounding and quoting conventions, so professional comparison requires normalization rather than headline-rate comparison.",
+          fr: "La convention de taux fait partie de la définition de l’instrument. Produits monétaires, obligataires, swaps et dérivés peuvent utiliser différentes conventions de day count, capitalisation et cotation ; une comparaison professionnelle nécessite donc une normalisation.",
+        },
+      },
+      formula: {
+        label: { en: "Effective annual rate", fr: "Taux annuel effectif / Effective annual rate" },
+        expression: "EAR = (1 + Nominal Rate ÷ m)ᵐ − 1",
+        explanation: {
+          en: "m is the number of compounding periods per year.",
+          fr: "m est le nombre de périodes de capitalisation par an.",
+        },
+        workedExample: {
+          en: "12% nominal compounded monthly: (1 + 0.12/12)¹² − 1 ≈ 12.68%.",
+          fr: "12 % nominal capitalisé mensuellement : (1 + 0,12/12)¹² − 1 ≈ 12,68 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Effective annual rate",
+          fr: "taux annuel effectif / effective annual rate",
+          definition: {
+            en: "The one-year rate that includes the effect of within-year compounding.",
+            fr: "Taux sur un an intégrant l’effet de la capitalisation intra-annuelle.",
+          },
+        },
+        {
+          en: "Nominal rate",
+          fr: "taux nominal / nominal rate",
+          definition: {
+            en: "A stated annualized rate before adjusting for the effect of compounding frequency.",
+            fr: "Taux annualisé annoncé avant prise en compte de l’effet de la fréquence de capitalisation.",
+          },
+        },
+      ],
+    },
+    {
+      id: "annuities",
+      kicker: { en: "05 · ANNUITIES", fr: "05 · ANNUITÉS" },
+      title: {
+        en: "A stream of equal payments has a compact valuation formula",
+        fr: "Une série de paiements égaux possède une formule de valorisation compacte",
+      },
+      coreFacts: [
+        {
+          en: "An ordinary annuity pays equal cash flows at the end of each period.",
+          fr: "Une annuité ordinaire / ordinary annuity verse des flux égaux à la fin de chaque période.",
+        },
+        {
+          en: "An annuity due pays at the beginning of each period, so its value is higher than an otherwise identical ordinary annuity when rates are positive.",
+          fr: "Une annuité à terme à échoir / annuity due paie au début de chaque période ; sa valeur est donc supérieure à une annuité ordinaire identique lorsque les taux sont positifs.",
+        },
+        {
+          en: "The annuity formula is a shortcut for discounting each equal cash flow separately.",
+          fr: "La formule d’annuité est un raccourci pour actualiser séparément chaque flux égal.",
+        },
+        {
+          en: "Payment timing must be identified correctly before using a formula.",
+          fr: "Le timing des paiements doit être identifié correctement avant d’utiliser une formule.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Imagine receiving $100 at the end of each year for three years. You cannot simply say the stream is worth $300 today because the second and third payments arrive later. At a 5% discount rate, the present value is about $272.32.",
+          fr: "Imagine recevoir 100 $ à la fin de chaque année pendant trois ans. Tu ne peux pas dire que la série vaut 300 $ aujourd’hui car les deuxième et troisième paiements arrivent plus tard. Avec un taux d’actualisation de 5 %, la valeur actuelle est d’environ 272,32 $.",
+        },
+        Intermediate: {
+          en: "Annuity factors compress a geometric series of discount factors. Ordinary-annuity PV is useful for level payment streams, while an annuity due is simply shifted one period earlier and therefore multiplied by 1 + r.",
+          fr: "Les facteurs d’annuité condensent une série géométrique de facteurs d’actualisation. La PV d’une ordinary annuity s’applique aux paiements constants, tandis qu’une annuity due est simplement décalée d’une période plus tôt et donc multipliée par 1 + r.",
+        },
+        Professional: {
+          en: "Annuity formulas are special cases of discounted cash-flow algebra. Real contracts may include irregular dates, amortization, reset rates, prepayment or indexation, at which point explicit cash-flow modeling replaces the closed-form shortcut.",
+          fr: "Les formules d’annuité sont des cas particuliers de l’algèbre DCF. Les contrats réels peuvent inclure dates irrégulières, amortissement, taux révisables, remboursement anticipé ou indexation ; dans ce cas, une modélisation explicite des cash flows remplace la formule fermée.",
+        },
+      },
+      formula: {
+        label: { en: "Present value of an ordinary annuity", fr: "Valeur actuelle d’une annuité ordinaire / Ordinary annuity PV" },
+        expression: "PV = C × [1 − (1 + r)⁻ⁿ] ÷ r",
+        explanation: {
+          en: "C is the equal end-of-period payment, r the periodic discount rate and n the number of payments.",
+          fr: "C est le paiement égal de fin de période, r le taux d’actualisation périodique et n le nombre de paiements.",
+        },
+        workedExample: {
+          en: "$100 for 3 years at 5%: $100 × [1 − 1.05⁻³] / 0.05 ≈ $272.32.",
+          fr: "100 $ pendant 3 ans à 5 % : 100 × [1 − 1,05⁻³] / 0,05 ≈ 272,32 $.",
+        },
+      },
+      comparison: {
+        title: { en: "Ordinary annuity vs annuity due", fr: "Ordinary annuity vs annuity due" },
+        headers: [
+          { en: "Type", fr: "Type" },
+          { en: "Payment timing", fr: "Timing du paiement" },
+          { en: "Relative PV if r > 0", fr: "PV relative si r > 0" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Ordinary annuity", fr: "Annuité ordinaire / ordinary annuity" },
+            { en: "End of each period", fr: "Fin de chaque période" },
+            { en: "Lower", fr: "Plus faible" },
+          ]},
+          { cells: [
+            { en: "Annuity due", fr: "Annuité à échoir / annuity due" },
+            { en: "Beginning of each period", fr: "Début de chaque période" },
+            { en: "Higher", fr: "Plus élevée" },
+          ]},
+        ],
+      },
+    },
+    {
+      id: "perpetuities",
+      kicker: { en: "06 · PERPETUITIES", fr: "06 · PERPÉTUITÉS" },
+      title: {
+        en: "A perpetual stream can still have a finite present value",
+        fr: "Une série de paiements infinie peut avoir une valeur actuelle finie",
+      },
+      coreFacts: [
+        {
+          en: "A simple perpetuity pays the same cash flow forever, beginning one period from now.",
+          fr: "Une perpétuité simple / perpetuity verse le même cash flow pour toujours, à partir d’une période dans le futur.",
+        },
+        {
+          en: "Its present value is finite when the discount rate is positive.",
+          fr: "Sa valeur actuelle est finie lorsque le taux d’actualisation est positif.",
+        },
+        {
+          en: "A growing perpetuity assumes cash flow grows at a constant rate forever and requires discount rate greater than growth rate for the standard formula.",
+          fr: "Une perpétuité croissante / growing perpetuity suppose une croissance constante du cash flow à l’infini et nécessite un taux d’actualisation supérieur au taux de croissance pour la formule standard.",
+        },
+        {
+          en: "Perpetuity formulas are powerful but extremely sensitive to discount-rate and growth assumptions.",
+          fr: "Les formules de perpétuité sont puissantes mais extrêmement sensibles aux hypothèses de taux d’actualisation et de croissance.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If an asset pays $50 every year forever and the appropriate discount rate is 5%, its value is $1,000. Why? Because 5% of $1,000 is $50, so the annual cash flow matches the required return on that capital.",
+          fr: "Si un actif verse 50 $ chaque année pour toujours et que le taux d’actualisation approprié est 5 %, sa valeur est 1 000 $. Pourquoi ? Parce que 5 % de 1 000 $ = 50 $, donc le flux annuel correspond au rendement exigé sur ce capital.",
+        },
+        Intermediate: {
+          en: "The perpetuity formula is the infinite-horizon limit of an annuity. Growing perpetuity extends the logic by allowing cash flow to grow at a stable rate, a concept that later becomes important in terminal-value methods.",
+          fr: "La formule de perpétuité est la limite à horizon infini d’une annuité. La growing perpetuity étend la logique en autorisant une croissance stable du cash flow, concept qui deviendra important pour la terminal value.",
+        },
+        Professional: {
+          en: "Perpetuity valuation is structurally fragile when r and g are close because the denominator becomes small. Terminal values based on Gordon growth therefore require economically sustainable long-run growth and a discount rate consistent with the risk and currency of the cash flows.",
+          fr: "La valorisation par perpétuité devient structurellement fragile lorsque r et g sont proches car le dénominateur devient faible. Les terminal values utilisant Gordon growth exigent donc une croissance long terme économiquement soutenable et un discount rate cohérent avec le risque et la devise des cash flows.",
+        },
+      },
+      formula: {
+        label: { en: "Simple perpetuity", fr: "Perpétuité simple / Simple perpetuity" },
+        expression: "PV = C ÷ r",
+        explanation: {
+          en: "C is the constant cash flow beginning one period from now.",
+          fr: "C est le cash flow constant commençant dans une période.",
+        },
+        workedExample: {
+          en: "$50 / 5% = $1,000.",
+          fr: "50 $ / 5 % = 1 000 $.",
+        },
+      },
+      marketConnection: {
+        en: "Perpetuity logic appears later in dividend-discount models, terminal value and real-estate capitalization methods.",
+        fr: "La logique de perpétuité réapparaît ensuite dans les dividend-discount models, terminal value et méthodes de capitalisation immobilière.",
+      },
+      vocabulary: [
+        {
+          en: "Terminal value",
+          fr: "valeur terminale / terminal value",
+          definition: {
+            en: "An estimate of the value of cash flows beyond an explicit forecast period.",
+            fr: "Estimation de la valeur des cash flows au-delà de la période de prévision explicite.",
+          },
+        },
+        {
+          en: "Gordon growth",
+          fr: "croissance de Gordon / Gordon growth",
+          definition: {
+            en: "A constant-growth perpetuity framework often written as next-period cash flow divided by r minus g.",
+            fr: "Cadre de perpétuité à croissance constante souvent écrit cash flow de la période suivante divisé par r moins g.",
+          },
+        },
+      ],
+    },
+    {
+      id: "npv",
+      kicker: { en: "07 · NET PRESENT VALUE", fr: "07 · VALEUR ACTUELLE NETTE" },
+      title: {
+        en: "NPV turns a sequence of future cash flows into an investment decision",
+        fr: "La NPV transforme une série de cash flows futurs en décision d’investissement",
+      },
+      coreFacts: [
+        {
+          en: "NPV equals the present value of future cash inflows and outflows, including the initial investment.",
+          fr: "La NPV correspond à la valeur actuelle de tous les flux futurs entrants et sortants, y compris l’investissement initial.",
+        },
+        {
+          en: "A positive NPV means the project's discounted value exceeds its cost under the chosen assumptions and discount rate.",
+          fr: "Une NPV positive signifie que la valeur actualisée du projet dépasse son coût selon les hypothèses et le discount rate choisis.",
+        },
+        {
+          en: "NPV is expressed in currency units, not as a percentage return.",
+          fr: "La NPV s’exprime en unité monétaire, pas en pourcentage de rendement.",
+        },
+        {
+          en: "An NPV result is only as reliable as the projected cash flows and discount rate.",
+          fr: "Une NPV n’est fiable que dans la mesure où les projections de cash flows et le taux d’actualisation le sont.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose a project costs $1,000 today and pays $600 in year one and $600 in year two. At a 10% discount rate, those future payments are worth about $1,041.32 today. Subtract the $1,000 cost and NPV is about +$41.32.",
+          fr: "Supposons qu’un projet coûte 1 000 $ aujourd’hui et rapporte 600 $ dans un an puis 600 $ dans deux ans. Avec un taux d’actualisation de 10 %, ces paiements valent environ 1 041,32 $ aujourd’hui. En retirant le coût de 1 000 $, la NPV vaut environ +41,32 $.",
+        },
+        Intermediate: {
+          en: "NPV directly measures value creation relative to the required return embedded in the discount rate. For independent projects under consistent assumptions, positive NPV indicates value above the opportunity cost of capital.",
+          fr: "La NPV mesure directement la création de valeur par rapport au rendement exigé intégré dans le discount rate. Pour des projets indépendants sous hypothèses cohérentes, une NPV positive indique une valeur supérieure au coût d’opportunité du capital.",
+        },
+        Professional: {
+          en: "NPV is the canonical DCF decision rule, but implementation requires consistency across nominal versus real cash flows, currency, leverage treatment, taxes, timing conventions and risk adjustment. Scenario analysis and sensitivity analysis are essential because point-estimate NPV can conceal model fragility.",
+          fr: "La NPV est la règle canonique de décision DCF, mais son application exige de la cohérence entre cash flows nominaux/réels, devise, traitement du levier, fiscalité, conventions de timing et ajustement du risque. Scenario analysis et sensitivity analysis sont essentiels car une NPV ponctuelle peut masquer la fragilité du modèle.",
+        },
+      },
+      formula: {
+        label: { en: "Net present value", fr: "Valeur actuelle nette / Net present value" },
+        expression: "NPV = Σ [CFₜ ÷ (1 + r)ᵗ]",
+        explanation: {
+          en: "Include the initial investment as a time-zero cash flow, typically negative.",
+          fr: "Inclure l’investissement initial comme cash flow à t = 0, généralement négatif.",
+        },
+        workedExample: {
+          en: "−$1,000 + $600/1.10 + $600/1.10² ≈ +$41.32.",
+          fr: "−1 000 $ + 600/1,10 + 600/1,10² ≈ +41,32 $.",
+        },
+      },
+      marketConnection: {
+        en: "DCF equity valuation, capital budgeting, bond pricing and many real-asset decisions are all variations on the same present-value logic.",
+        fr: "Valorisation DCF d’actions, capital budgeting, prix obligataires et de nombreuses décisions sur actifs réels utilisent tous des variantes de cette même logique de present value.",
+      },
+    },
+    {
+      id: "discount-rate",
+      kicker: { en: "08 · CHOOSING THE DISCOUNT RATE", fr: "08 · CHOISIR LE TAUX D’ACTUALISATION" },
+      title: {
+        en: "The rate must match the cash flow",
+        fr: "Le taux doit être cohérent avec le cash flow",
+      },
+      coreFacts: [
+        {
+          en: "The discount rate represents the opportunity cost and risk appropriate to the cash flow being valued.",
+          fr: "Le taux d’actualisation représente le coût d’opportunité et le risque appropriés au cash flow valorisé.",
+        },
+        {
+          en: "Nominal cash flows should generally be paired with nominal discount rates, while real cash flows require real-rate consistency.",
+          fr: "Les cash flows nominaux doivent généralement être associés à des taux nominaux, tandis que les cash flows réels nécessitent des taux réels cohérents.",
+        },
+        {
+          en: "Riskier cash flows generally require a higher expected return, but risk adjustment should be conceptually consistent rather than arbitrary.",
+          fr: "Des cash flows plus risqués exigent généralement un rendement attendu plus élevé, mais l’ajustement du risque doit rester conceptuellement cohérent et non arbitraire.",
+        },
+        {
+          en: "The currency of the discount rate should match the currency of the cash flows.",
+          fr: "La devise du discount rate doit correspondre à la devise des cash flows.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Do not discount every cash flow at the same random rate. A nearly certain government payment and a risky startup cash flow do not have the same risk. The discount rate is how the valuation reflects the return you would demand for waiting and taking that risk.",
+          fr: "Il ne faut pas actualiser tous les cash flows avec un taux choisi au hasard. Un paiement presque certain d’un État et un cash flow risqué de startup n’ont pas le même risque. Le discount rate reflète le rendement que tu exigerais pour attendre et supporter ce risque.",
+        },
+        Intermediate: {
+          en: "Discount-rate selection combines a time-value benchmark with compensation for relevant risk. In corporate finance this eventually leads to concepts such as cost of equity, cost of debt and WACC.",
+          fr: "Le choix du discount rate combine une référence de valeur temps avec une compensation pour le risque pertinent. En corporate finance, cela conduit ensuite aux concepts de cost of equity, cost of debt et WACC.",
+        },
+        Professional: {
+          en: "The discount rate must be claim-consistent, currency-consistent and risk-consistent. Enterprise free cash flow is commonly paired with a WACC framework, while equity cash flow is paired with cost of equity. In asset pricing, some risks are better handled through state-contingent cash flows or discount factors rather than ad hoc additive premiums.",
+          fr: "Le discount rate doit être cohérent avec la créance, la devise et le risque. Le free cash flow to firm est souvent associé au WACC, tandis que le cash flow equity est associé au cost of equity. En asset pricing, certains risques sont mieux traités via cash flows dépendants des états ou facteurs d’actualisation plutôt que via des primes arbitraires ajoutées au taux.",
+        },
+      },
+      comparison: {
+        title: { en: "Consistency rules", fr: "Règles de cohérence" },
+        headers: [
+          { en: "Cash-flow feature", fr: "Caractéristique du cash flow" },
+          { en: "Discount-rate match", fr: "Taux cohérent" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Nominal cash flow", fr: "Cash flow nominal" },
+            { en: "Nominal discount rate", fr: "Taux nominal / nominal rate" },
+          ]},
+          { cells: [
+            { en: "Real cash flow", fr: "Cash flow réel" },
+            { en: "Real discount rate", fr: "Taux réel / real rate" },
+          ]},
+          { cells: [
+            { en: "USD cash flow", fr: "Cash flow en USD" },
+            { en: "USD-consistent rate", fr: "Taux cohérent USD" },
+          ]},
+          { cells: [
+            { en: "Riskier claim", fr: "Créance plus risquée" },
+            { en: "Risk-consistent required return", fr: "Rendement exigé cohérent avec le risque" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Required return",
+          fr: "rendement exigé / required return",
+          definition: {
+            en: "The return investors require to hold an exposure given its alternatives and risk.",
+            fr: "Rendement exigé par les investisseurs compte tenu des alternatives et du risque.",
+          },
+        },
+        {
+          en: "WACC",
+          fr: "coût moyen pondéré du capital / weighted average cost of capital",
+          definition: {
+            en: "A corporate-finance discount-rate framework combining after-tax debt and equity financing costs by capital weights.",
+            fr: "Cadre de discount rate combinant coûts après impôt de la dette et de l’equity selon leurs poids dans le financement.",
+          },
+        },
+      ],
+    },
+    {
+      id: "timeline-errors",
+      kicker: { en: "09 · MODELING DISCIPLINE", fr: "09 · DISCIPLINE DE MODÉLISATION" },
+      title: {
+        en: "Most TVM errors come from timing, units or inconsistent assumptions",
+        fr: "La plupart des erreurs TVM viennent du timing, des unités ou d’hypothèses incohérentes",
+      },
+      coreFacts: [
+        {
+          en: "Drawing a timeline before calculating prevents many timing errors.",
+          fr: "Dessiner une timeline avant le calcul évite de nombreuses erreurs de timing.",
+        },
+        {
+          en: "Annual, monthly and quarterly rates cannot be mixed without conversion.",
+          fr: "Taux annuels, mensuels et trimestriels ne peuvent pas être mélangés sans conversion.",
+        },
+        {
+          en: "Time zero cash flows are not discounted because they occur today.",
+          fr: "Les cash flows à t = 0 ne sont pas actualisés car ils ont lieu aujourd’hui.",
+        },
+        {
+          en: "A formula is only a shortcut for a cash-flow pattern; when the pattern changes, explicit cash-flow modeling is safer.",
+          fr: "Une formule n’est qu’un raccourci correspondant à une structure de cash flows ; lorsque cette structure change, modéliser explicitement chaque flux est plus sûr.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Before touching the calculator, write: t=0 today, t=1 one year from now, t=2 two years from now. Place each cash flow on the timeline. Then ask whether you are moving money forward or backward in time. This simple habit prevents a huge number of mistakes.",
+          fr: "Avant de toucher à la calculatrice, écris : t=0 aujourd’hui, t=1 dans un an, t=2 dans deux ans. Place chaque cash flow sur la timeline. Ensuite demande-toi si tu déplaces la valeur vers le futur ou vers le présent. Cette habitude évite énormément d’erreurs.",
+        },
+        Intermediate: {
+          en: "Model discipline requires consistent rate periodicity, sign convention and cash-flow timing. When payments are irregular, abandon memorized annuity shortcuts and discount the actual dated cash flows.",
+          fr: "La discipline de modèle exige cohérence de périodicité du taux, convention de signe et timing des cash flows. Lorsque les paiements sont irréguliers, il vaut mieux abandonner les raccourcis d’annuité et actualiser les flux réellement datés.",
+        },
+        Professional: {
+          en: "Professional valuation errors often come less from algebra than from convention mismatch: mid-year versus year-end timing, stub periods, day-count, nominal/real inconsistency, currency mismatch, double-counting risk or terminal-value assumptions. Model governance begins with a transparent timeline and clearly defined conventions.",
+          fr: "Les erreurs professionnelles de valorisation proviennent souvent moins de l’algèbre que d’incohérences de conventions : mid-year vs year-end, stub periods, day count, nominal/réel, devises, double comptage du risque ou hypothèses de terminal value. La gouvernance d’un modèle commence par une timeline transparente et des conventions clairement définies.",
+        },
+      },
+      example: {
+        en: "If a cash flow arrives in 18 months and your quoted rate is annual, you must define how the rate convention handles the 1.5-year period rather than pretending the payment arrives at year 1 or year 2.",
+        fr: "Si un cash flow arrive dans 18 mois et que ton taux est annualisé, tu dois définir comment la convention de taux traite cette période de 1,5 an plutôt que prétendre que le paiement arrive à t=1 ou t=2.",
+      },
+      marketConnection: {
+        en: "This modeling discipline becomes critical in bond accrued interest, DCF stub periods, swap cash flows, mortgages and project finance.",
+        fr: "Cette discipline devient essentielle pour accrued interest obligataire, stub periods DCF, cash flows de swaps, crédits immobiliers et project finance.",
+      },
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "tvm-intuition",
+      question: {
+        en: "Why is $1,000 today generally worth more than $1,000 received one year from now?",
+        fr: "Pourquoi 1 000 $ aujourd’hui valent-ils généralement plus que 1 000 $ reçus dans un an ?",
+      },
+      options: [
+        { id: "a", label: { en: "Because today's cash can be used or invested immediately", fr: "Parce que le cash aujourd’hui peut être utilisé ou investi immédiatement" } },
+        { id: "b", label: { en: "Because future cash is always worthless", fr: "Parce que le cash futur ne vaut jamais rien" } },
+        { id: "c", label: { en: "Because inflation is always exactly 10%", fr: "Parce que l’inflation est toujours exactement 10 %" } },
+        { id: "d", label: { en: "There is no difference", fr: "Il n’existe aucune différence" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Immediate cash has opportunity value and avoids waiting; inflation and risk can add further reasons.",
+        fr: "Le cash immédiat possède une valeur d’opportunité et évite l’attente ; inflation et risque peuvent renforcer cette différence.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "future-value",
+      question: {
+        en: "What is the future value of $1,000 invested for 2 years at 10% annually?",
+        fr: "Quelle est la valeur future de 1 000 $ investis pendant 2 ans à 10 % par an ?",
+      },
+      options: [
+        { id: "a", label: { en: "$1,100", fr: "1 100 $" } },
+        { id: "b", label: { en: "$1,200", fr: "1 200 $" } },
+        { id: "c", label: { en: "$1,210", fr: "1 210 $" } },
+        { id: "d", label: { en: "$1,220", fr: "1 220 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "$1,000 × 1.10² = $1,210.",
+        fr: "1 000 $ × 1,10² = 1 210 $.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "present-value",
+      question: {
+        en: "What is the present value of $1,210 received in 2 years at a 10% discount rate?",
+        fr: "Quelle est la valeur actuelle de 1 210 $ reçus dans 2 ans avec un taux d’actualisation de 10 % ?",
+      },
+      options: [
+        { id: "a", label: { en: "$1,000", fr: "1 000 $" } },
+        { id: "b", label: { en: "$1,100", fr: "1 100 $" } },
+        { id: "c", label: { en: "$1,210", fr: "1 210 $" } },
+        { id: "d", label: { en: "$990", fr: "990 $" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "$1,210 ÷ 1.10² = $1,000.",
+        fr: "1 210 $ ÷ 1,10² = 1 000 $.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "compounding-frequency",
+      question: {
+        en: "A 12% nominal annual rate compounded monthly has an effective annual rate that is:",
+        fr: "Un taux nominal annuel de 12 % capitalisé mensuellement possède un taux annuel effectif :",
+      },
+      options: [
+        { id: "a", label: { en: "Exactly 1%", fr: "Exactement 1 %" } },
+        { id: "b", label: { en: "Exactly 12%", fr: "Exactement 12 %" } },
+        { id: "c", label: { en: "About 12.68%", fr: "Environ 12,68 %" } },
+        { id: "d", label: { en: "About 24%", fr: "Environ 24 %" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "(1 + 0.12/12)¹² − 1 ≈ 12.68%.",
+        fr: "(1 + 0,12/12)¹² − 1 ≈ 12,68 %.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "annuity-timing",
+      question: {
+        en: "What is the defining timing difference between an ordinary annuity and an annuity due?",
+        fr: "Quelle est la différence de timing entre ordinary annuity et annuity due ?",
+      },
+      options: [
+        { id: "a", label: { en: "Ordinary annuity pays at period end; annuity due pays at period beginning", fr: "Ordinary annuity paie en fin de période ; annuity due en début de période" } },
+        { id: "b", label: { en: "There is no timing difference", fr: "Il n’existe aucune différence de timing" } },
+        { id: "c", label: { en: "Annuity due has random payments", fr: "L’annuity due possède des paiements aléatoires" } },
+        { id: "d", label: { en: "Ordinary annuity never ends", fr: "L’ordinary annuity ne se termine jamais" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Payment timing is the distinction: end-of-period versus beginning-of-period.",
+        fr: "La distinction vient du timing : fin de période contre début de période.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "perpetuity",
+      question: {
+        en: "What is the present value of a $50 annual perpetuity at a 5% discount rate?",
+        fr: "Quelle est la valeur actuelle d’une perpétuité annuelle de 50 $ avec un taux d’actualisation de 5 % ?",
+      },
+      options: [
+        { id: "a", label: { en: "$250", fr: "250 $" } },
+        { id: "b", label: { en: "$500", fr: "500 $" } },
+        { id: "c", label: { en: "$1,000", fr: "1 000 $" } },
+        { id: "d", label: { en: "$2,500", fr: "2 500 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "$50 ÷ 0.05 = $1,000.",
+        fr: "50 $ ÷ 0,05 = 1 000 $.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "npv",
+      question: {
+        en: "A project costs $1,000 today and has a present value of future inflows of $1,080. What is its NPV?",
+        fr: "Un projet coûte 1 000 $ aujourd’hui et la valeur actuelle de ses flux futurs entrants vaut 1 080 $. Quelle est sa NPV ?",
+      },
+      options: [
+        { id: "a", label: { en: "−$80", fr: "−80 $" } },
+        { id: "b", label: { en: "$0", fr: "0 $" } },
+        { id: "c", label: { en: "+$80", fr: "+80 $" } },
+        { id: "d", label: { en: "+$1,080", fr: "+1 080 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "$1,080 − $1,000 = +$80 NPV.",
+        fr: "1 080 $ − 1 000 $ = +80 $ de NPV.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "discount-rate-consistency",
+      question: {
+        en: "Which pairing is conceptually consistent?",
+        fr: "Quelle association est conceptuellement cohérente ?",
+      },
+      options: [
+        { id: "a", label: { en: "Real cash flows with an unrelated nominal discount rate", fr: "Cash flows réels avec un taux nominal sans rapport" } },
+        { id: "b", label: { en: "USD cash flows with a risk- and currency-consistent USD discount rate", fr: "Cash flows USD avec un discount rate USD cohérent avec la devise et le risque" } },
+        { id: "c", label: { en: "Any cash flow with any convenient rate", fr: "N’importe quel cash flow avec n’importe quel taux pratique" } },
+        { id: "d", label: { en: "Time-zero cash flows discounted for ten years", fr: "Cash flows à t=0 actualisés pendant dix ans" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Discount rates should match the cash flow's currency, timing, nominal/real convention and risk.",
+        fr: "Le discount rate doit être cohérent avec devise, timing, convention nominal/réel et risque du cash flow.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Why is $100 today worth more than $100 in one year, and how would you value $100 received one year from now?",
+      fr: "Pourquoi 100 $ aujourd’hui valent-ils plus que 100 $ dans un an, et comment valoriserais-tu 100 $ reçus dans un an ?",
+    },
+    framework: [
+      {
+        en: "Start with opportunity cost: money today can be invested immediately.",
+        fr: "Commencer par le coût d’opportunité : l’argent aujourd’hui peut être investi immédiatement.",
+      },
+      {
+        en: "Mention inflation and uncertainty as additional economic reasons when relevant.",
+        fr: "Mentionner inflation et incertitude comme raisons économiques supplémentaires lorsque pertinentes.",
+      },
+      {
+        en: "State the present-value formula: PV = FV / (1 + r) for one period.",
+        fr: "Donner la formule de present value : PV = FV / (1 + r) pour une période.",
+      },
+      {
+        en: "Explain that r must be an appropriate opportunity-cost and risk-adjusted discount rate.",
+        fr: "Expliquer que r doit être un discount rate approprié au coût d’opportunité et au risque.",
+      },
+      {
+        en: "Use a number: at 5%, $100 in one year is worth about $95.24 today.",
+        fr: "Utiliser un nombre : à 5 %, 100 $ dans un an valent environ 95,24 $ aujourd’hui.",
+      },
+    ],
+    sample: {
+      en: "One hundred dollars today is generally worth more than one hundred dollars in a year because today's money can be invested immediately, and future purchasing power and payment are uncertain. To value $100 received in one year, I would discount it at an appropriate required return. At a 5% discount rate, present value is $100 divided by 1.05, or about $95.24. The broader principle is that valuation compares cash flows at different dates by bringing them to a common point in time.",
+      fr: "Cent dollars aujourd’hui valent généralement plus que cent dollars dans un an car l’argent disponible aujourd’hui peut être investi immédiatement, tandis que le pouvoir d’achat futur et le paiement futur comportent de l’incertitude. Pour valoriser 100 $ reçus dans un an, je les actualise avec un rendement exigé approprié. Avec un discount rate de 5 %, la valeur actuelle vaut 100 / 1,05, soit environ 95,24 $. Le principe général est que la valorisation compare des cash flows reçus à différentes dates en les ramenant à un même point dans le temps.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
