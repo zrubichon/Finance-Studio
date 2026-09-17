@@ -76,7 +76,9 @@ export default function UniversityProgress() {
   }, [text]);
 
   const completed = useMemo(
-    () => Object.values(progress).filter((item) => item.status === "completed").length,
+    () => Object.entries(progress).filter(
+      ([slug, item]) => item.status === "completed" && hasLessonContent(slug),
+    ).length,
     [progress],
   );
   const total = curriculumYears.reduce((sum, year) => sum + year.modules.length, 0);
