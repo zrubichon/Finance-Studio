@@ -35,7 +35,7 @@ const languageCopy: Record<Language, { greeting: string; subtitle: string; daily
     subtitle: "Learn the market, understand the why, and train for finance interviews — from zero to professional depth.",
     daily: "Today's learning brief",
     market: "Market map",
-    learn: "Continue learning",
+    learn: "Start learning",
     interview: "Interview drill",
     professor: "Ask AI Professor",
   },
@@ -44,7 +44,7 @@ const languageCopy: Record<Language, { greeting: string; subtitle: string; daily
     subtitle: "Comprends les marchés, apprends le pourquoi et prépare tes entretiens — de zéro jusqu’au niveau professionnel.",
     daily: "Brief d’apprentissage du jour",
     market: "Carte des marchés / market map",
-    learn: "Continuer à apprendre / continue learning",
+    learn: "Commencer à apprendre / start learning",
     interview: "Entraînement entretien / interview drill",
     professor: "Demander au professeur IA / Ask AI Professor",
   },
@@ -110,10 +110,10 @@ export default function FinanceStudioHome() {
             </Link>
           ))}
         </nav>
-        <div className="sidebar-bottom">
-          <div className="progress-ring" aria-label="12 percent of foundation curriculum completed"><span>12%</span></div>
-          <div><strong>Foundation track</strong><p>8 concepts mastered</p></div>
-        </div>
+        <Link className="sidebar-bottom" href="/account">
+          <div className="progress-ring" aria-label="Progress starts at zero until lessons are completed"><span>0%</span></div>
+          <div><strong>Track your progress</strong><p>Sign in to sync learning</p></div>
+        </Link>
       </aside>
 
       <section className="main-canvas">
@@ -129,7 +129,7 @@ export default function FinanceStudioHome() {
                 <button className={language === item ? "selected" : ""} onClick={() => setLanguage(item)} key={item}>{item}</button>
               ))}
             </div>
-            <button className="profile-chip" type="button"><span>ZR</span><b>Student</b></button>
+            <Link className="profile-chip" href="/account"><span>◎</span><b>Account</b></Link>
           </div>
         </header>
 
@@ -166,7 +166,7 @@ export default function FinanceStudioHome() {
               <div><small>Discount rate</small><strong>↑</strong></div><span>→</span>
               <div><small>Valuation pressure</small><strong>↑</strong></div>
             </div>
-            <div className="card-actions"><Link href="/university">Open full lesson <span>→</span></Link><button type="button">Save concept</button></div>
+            <div className="card-actions"><Link href="/university">Open full lesson <span>→</span></Link><Link href="/login">Sign in to save</Link></div>
           </article>
 
           <article className="card span-5 interview-card">
@@ -186,7 +186,7 @@ export default function FinanceStudioHome() {
               {marketGroups.map((group) => (
                 <div className="market-group" key={group.name}>
                   <h3>{group.name}</h3>
-                  {group.items.map((item) => <div className="market-row" key={item}><span>{item}</span><em>Live feed</em></div>)}
+                  {group.items.map((item) => <div className="market-row" key={item}><span>{item}</span><em>Provider pending</em></div>)}
                 </div>
               ))}
             </div>
@@ -194,12 +194,12 @@ export default function FinanceStudioHome() {
           </article>
 
           <article className="card span-4 learning-card">
-            <div className="card-head"><div><span className="eyebrow">{copy.learn.toUpperCase()}</span><h2>Year 1 · Foundations</h2></div><span className="pill">12%</span></div>
-            <div className="course-progress"><span style={{ width: "12%" }} /></div>
+            <div className="card-head"><div><span className="eyebrow">{copy.learn.toUpperCase()}</span><h2>Year 1 · Foundations</h2></div><span className="pill">Start</span></div>
+            <div className="course-progress"><span style={{ width: "0%" }} /></div>
             <div className="lesson-list">
-              <div><span className="check">✓</span><p><strong>What is a financial market?</strong><small>Completed</small></p></div>
-              <div><span className="lesson-index">09</span><p><strong>Time value of money</strong><small>Next · 18 min</small></p></div>
-              <div><span className="lesson-index">10</span><p><strong>Risk vs return</strong><small>Locked prerequisite</small></p></div>
+              <div><span className="lesson-index">01</span><p><strong>What is a financial market?</strong><small>Start here · 12 min</small></p></div>
+              <div><span className="lesson-index">02</span><p><strong>Stocks, bonds, ETFs & funds</strong><small>Next foundation</small></p></div>
+              <div><span className="lesson-index">03</span><p><strong>Time value of money</strong><small>Core quantitative concept</small></p></div>
             </div>
             <Link href="/university">View curriculum →</Link>
           </article>
