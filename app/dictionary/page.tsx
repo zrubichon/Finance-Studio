@@ -5,9 +5,12 @@ export default function DictionaryPage() {
   return (
     <SectionLayout
       activeSlug="dictionary"
-      eyebrow="FINANCE DICTIONARY · FR ↔ EN"
-      title="Learn the concept and the vocabulary at the same time."
-      description="Search technical finance terms in English or French, switch explanation depth and connect each definition to related concepts. The first working glossary is already searchable and will expand alongside the curriculum."
+      eyebrow={{ en: "FINANCE DICTIONARY", fr: "DICTIONNAIRE DE FINANCE" }}
+      title={{ en: "Build bilingual professional vocabulary.", fr: "Construis un vocabulaire professionnel bilingue." }}
+      description={{
+        en: "Definitions connect French and English terms, formulas, examples, related concepts, interview use and real market context.",
+        fr: "Chaque définition relie le terme français au terme anglais, aux formules, exemples, concepts associés, à son usage en entretien et à son contexte réel de marché.",
+      }}
     >
       <DictionaryExplorer />
     </SectionLayout>
