@@ -3,6 +3,7 @@ import ThemeBootstrap from "@/components/theme-bootstrap";
 import "./globals.css";
 import "./product.css";
 import "./phase-two.css";
+import "./auth.css";
 
 export const metadata: Metadata = {
   title: "FinanceStudio — Learn the market, understand the why",
