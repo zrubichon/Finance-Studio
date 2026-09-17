@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 export type Language = "EN" | "FR";
 
@@ -14,25 +15,65 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
+function storeLanguage(language: Language) {
+  window.localStorage.setItem("finance-studio-language", language);
+  document.cookie = `finance-studio-language=${language}; path=/; max-age=31536000; samesite=lax`;
+  document.documentElement.lang = language === "FR" ? "fr" : "en";
+}
+
 export default function LanguageProvider({ children, initialLanguage = "EN" }: { children: ReactNode; initialLanguage?: Language }) {
   const router = useRouter();
   const [language, setLanguageState] = useState<Language>(initialLanguage);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("finance-studio-language") as Language | null;
-    if (saved === "EN" || saved === "FR") {
-      setLanguageState(saved);
-      document.documentElement.lang = saved === "FR" ? "fr" : "en";
-      document.cookie = `finance-studio-language=${saved}; path=/; max-age=31536000; samesite=lax`;
+    let active = true;
+
+    async function hydrateLanguage() {
+      const saved = window.localStorage.getItem("finance-studio-language") as Language | null;
+      if (saved === "EN" || saved === "FR") {
+        if (!active) return;
+        setLanguageState(saved);
+        storeLanguage(saved);
+        if (saved !== initialLanguage) router.refresh();
+        return;
+      }
+
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user || !active) return;
+        const { data } = await supabase.from("profiles").select("preferred_language").eq("user_id", user.id).maybeSingle();
+        const accountLanguage: Language = data?.preferred_language === "fr" ? "FR" : "EN";
+        if (!active) return;
+        setLanguageState(accountLanguage);
+        storeLanguage(accountLanguage);
+        if (accountLanguage !== initialLanguage) router.refresh();
+      } catch {
+        // Keep the server-provided language if account hydration is unavailable.
+      }
     }
-  }, []);
+
+    void hydrateLanguage();
+    return () => { active = false; };
+  }, [initialLanguage, router]);
 
   const setLanguage = useCallback((next: Language) => {
     setLanguageState(next);
-    window.localStorage.setItem("finance-studio-language", next);
-    document.cookie = `finance-studio-language=${next}; path=/; max-age=31536000; samesite=lax`;
-    document.documentElement.lang = next === "FR" ? "fr" : "en";
+    storeLanguage(next);
     window.dispatchEvent(new CustomEvent("finance-studio-language-change", { detail: next }));
+
+    void (async () => {
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          await supabase.from("profiles").update({ preferred_language: next.toLowerCase(), updated_at: new Date().toISOString() }).eq("user_id", user.id);
+        }
+      } catch {
+        // Browser and cookie persistence still work if account sync is temporarily unavailable.
+      }
+    })();
+
     router.refresh();
   }, [router]);
 
