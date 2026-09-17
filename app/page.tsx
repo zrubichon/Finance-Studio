@@ -1,5 +1,5 @@
-import FinanceStudioHome from "@/components/finance-studio-home";
+import FinanceStudioHomeV2 from "@/components/finance-studio-home-v2";
 
 export default function Home() {
-  return <FinanceStudioHome />;
+  return <FinanceStudioHomeV2 />;
 }
