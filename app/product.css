@@ -62,7 +62,10 @@
 .market-overview-panel,
 .interview-question-panel,
 .answer-framework-panel,
-.learning-loop-panel {
+.learning-loop-panel,
+.news-blueprint-panel,
+.coverage-panel,
+.source-panel {
   border: 1px solid var(--line);
   border-radius: 20px;
   background: var(--surface);
@@ -109,7 +112,9 @@
 }
 
 .market-overview-panel,
-.answer-framework-panel {
+.answer-framework-panel,
+.news-blueprint-panel,
+.source-panel {
   padding: 24px;
 }
 
@@ -122,7 +127,9 @@
 
 .panel-heading h2,
 .learning-loop-panel h2,
-.interview-question-panel h2 {
+.interview-question-panel h2,
+.coverage-panel h2,
+.source-panel h2 {
   margin: 7px 0 0;
   font: 500 26px/1.12 Georgia, "Times New Roman", serif;
   letter-spacing: -.025em;
@@ -383,12 +390,108 @@
   line-height: 1.45;
 }
 
+.news-analysis-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.news-analysis-step {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface-2) 45%, transparent);
+}
+
+.news-analysis-step > span,
+.source-layer-grid article > span {
+  color: var(--accent);
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.news-analysis-step strong {
+  font-size: 10px;
+}
+
+.news-analysis-step p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.news-two-column {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 14px;
+}
+
+.coverage-panel {
+  padding: 22px;
+}
+
+.coverage-chips {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.coverage-chips span {
+  padding: 7px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.source-panel {
+  display: grid;
+  grid-template-columns: .8fr 1.7fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.source-layer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.source-layer-grid article {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--surface-2);
+}
+
+.source-layer-grid strong {
+  display: block;
+  margin-top: 12px;
+  font-size: 10px;
+}
+
+.source-layer-grid p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
 @media (max-width: 1100px) {
   .product-section-main { padding-right: 36px; }
   .market-universe-grid,
   .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .analysis-grid,
   .mode-principle-grid { grid-template-columns: 1fr; }
+  .source-panel { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 760px) {
@@ -397,10 +500,13 @@
   .product-section-hero h1 { font-size: 39px; }
   .control-panel,
   .learning-loop-panel,
-  .interview-two-column { grid-template-columns: 1fr; }
+  .interview-two-column,
+  .news-two-column { grid-template-columns: 1fr; }
   .market-universe-grid,
   .module-grid,
-  .framework-steps-grid { grid-template-columns: 1fr; }
+  .framework-steps-grid,
+  .news-analysis-grid,
+  .source-layer-grid { grid-template-columns: 1fr; }
   .panel-heading { flex-direction: column; }
   .learning-loop-steps { justify-content: flex-start; }
   .curriculum-year-head { grid-template-columns: 48px 1fr; }
