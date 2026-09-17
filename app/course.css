@@ -814,3 +814,203 @@
     width: 100%;
   }
 }
+
+
+.lesson-overview-flow {
+  width: min(1180px, 100%);
+  margin: 16px auto 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.lesson-flow-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: baseline;
+  margin-bottom: 13px;
+}
+
+.lesson-flow-heading > strong {
+  font-size: 10px;
+}
+
+.lesson-flow-steps {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.lesson-flow-segment {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lesson-flow-segment article {
+  min-width: 0;
+  flex: 1;
+  height: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--surface-2);
+}
+
+.lesson-flow-segment article > span {
+  display: block;
+  color: var(--accent);
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.lesson-flow-segment article > strong,
+.lesson-flow-segment article > small {
+  display: block;
+}
+
+.lesson-flow-segment article > strong {
+  margin: 10px 0 5px;
+  font-size: 10px;
+}
+
+.lesson-flow-segment article > small {
+  color: var(--muted);
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+.lesson-flow-segment > b {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.lesson-formula,
+.lesson-comparison {
+  margin-top: 14px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--surface-2);
+}
+
+.lesson-formula-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.lesson-formula-head > strong {
+  font-size: 10px;
+}
+
+.lesson-formula > code {
+  display: block;
+  margin: 14px 0 10px;
+  padding: 15px;
+  overflow-x: auto;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font: 700 12px/1.55 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  white-space: pre-wrap;
+}
+
+.lesson-formula > p,
+.lesson-formula-example p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.lesson-formula-example {
+  margin-top: 12px;
+  padding: 12px 13px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+}
+
+.lesson-formula-example > span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--accent);
+  font-size: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.lesson-comparison > h3 {
+  margin: 8px 0 13px;
+  font: 500 20px/1.15 Georgia, "Times New Roman", serif;
+}
+
+.lesson-comparison-scroll {
+  overflow-x: auto;
+}
+
+.lesson-comparison table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.lesson-comparison th,
+.lesson-comparison td {
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  vertical-align: top;
+  text-align: left;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.lesson-comparison th {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  font-weight: 900;
+}
+
+.lesson-comparison td {
+  color: var(--muted);
+}
+
+.lesson-comparison td:first-child {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .lesson-flow-steps {
+    flex-direction: column;
+  }
+
+  .lesson-flow-segment {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lesson-flow-segment > b {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .lesson-flow-heading,
+  .lesson-formula-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
