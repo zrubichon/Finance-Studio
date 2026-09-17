@@ -171,6 +171,18 @@
   color: var(--muted, #788078);
 }
 
+.section-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.section-top-row .segmented {
+  flex: 0 0 auto;
+}
+
 @media (max-width: 760px) {
   .learning-account-strip,
   .answer-practice-actions,
@@ -195,5 +207,10 @@
 
   .module-status-button {
     margin-left: auto;
+  }
+
+  .section-top-row {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
