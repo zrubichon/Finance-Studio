@@ -1,0 +1,199 @@
+.learning-account-strip,
+.answer-practice-panel,
+.thesis-form-panel,
+.saved-theses-panel {
+  border: 1px solid var(--border, rgba(31, 90, 69, 0.16));
+  border-radius: var(--radius, 22px);
+  background: var(--card, rgba(255, 255, 255, 0.76));
+  padding: 24px;
+}
+
+.learning-account-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.learning-account-strip h2,
+.answer-practice-panel h2,
+.thesis-form-panel h2,
+.saved-theses-panel h2 {
+  margin: 6px 0 8px;
+}
+
+.learning-account-strip p {
+  margin: 0;
+  color: var(--muted, #667269);
+}
+
+.inline-status {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--accent, #1f5a45);
+}
+
+.module-item {
+  gap: 12px;
+  align-items: center;
+}
+
+.module-item-copy {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.module-item-copy small {
+  color: var(--muted, #778079);
+  font-size: 0.72rem;
+}
+
+.module-item-completed {
+  border-color: color-mix(in srgb, var(--accent, #1f5a45) 42%, transparent);
+}
+
+.module-status-button {
+  border: 1px solid var(--border, rgba(31, 90, 69, 0.2));
+  background: transparent;
+  color: var(--text, #172019);
+  border-radius: 999px;
+  padding: 7px 11px;
+  font: inherit;
+  font-size: 0.76rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.module-status-button:hover:not(:disabled) {
+  border-color: var(--accent, #1f5a45);
+  color: var(--accent, #1f5a45);
+}
+
+.module-status-button.completed {
+  background: color-mix(in srgb, var(--accent, #1f5a45) 10%, transparent);
+  color: var(--accent, #1f5a45);
+  cursor: default;
+}
+
+.attempt-counter {
+  min-width: 110px;
+  text-align: right;
+}
+
+.attempt-counter strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.6rem;
+}
+
+.answer-practice-panel textarea,
+.thesis-form input,
+.thesis-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border, rgba(31, 90, 69, 0.18));
+  border-radius: 14px;
+  background: var(--surface, rgba(255, 255, 255, 0.6));
+  color: var(--text, #172019);
+  padding: 13px 14px;
+  font: inherit;
+  resize: vertical;
+  outline: none;
+}
+
+.answer-practice-panel textarea:focus,
+.thesis-form input:focus,
+.thesis-form textarea:focus {
+  border-color: var(--accent, #1f5a45);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent, #1f5a45) 12%, transparent);
+}
+
+.answer-practice-actions,
+.thesis-submit-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.thesis-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.thesis-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 0.84rem;
+  font-weight: 650;
+}
+
+.span-2-field {
+  grid-column: 1 / -1;
+}
+
+.saved-theses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.saved-theses-grid article {
+  border: 1px solid var(--border, rgba(31, 90, 69, 0.14));
+  border-radius: 16px;
+  padding: 16px;
+  background: color-mix(in srgb, var(--card, #fff) 88%, transparent);
+}
+
+.saved-theses-grid article > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.saved-theses-grid article span,
+.saved-theses-grid article small {
+  color: var(--muted, #788078);
+  font-size: 0.75rem;
+}
+
+.saved-theses-grid article p {
+  margin: 10px 0;
+  line-height: 1.5;
+}
+
+.knowledge-domain-card small {
+  color: var(--muted, #788078);
+}
+
+@media (max-width: 760px) {
+  .learning-account-strip,
+  .answer-practice-actions,
+  .thesis-submit-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .thesis-form,
+  .saved-theses-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .span-2-field {
+    grid-column: auto;
+  }
+
+  .module-item {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .module-status-button {
+    margin-left: auto;
+  }
+}
