@@ -5,9 +5,12 @@ export default function ProfessorPage() {
   return (
     <SectionLayout
       activeSlug="professor"
-      eyebrow="AI PROFESSOR"
-      title="A finance tutor that changes the explanation, not the knowledge."
-      description="FinanceStudio's professor is designed to diagnose misunderstandings, switch teaching styles, use formulas or examples and then verify mastery with a follow-up question. The interface below is real; the live model connection comes in the backend phase."
+      eyebrow={{ en: "AI PROFESSOR", fr: "PROFESSEUR IA" }}
+      title={{ en: "A finance tutor that adapts to how you learn.", fr: "Un professeur de finance qui s’adapte à ta façon d’apprendre." }}
+      description={{
+        en: "Ask for a simpler explanation, numerical proof, visual intuition, interview framing or professional vocabulary from any lesson.",
+        fr: "Demande une explication plus simple, une démonstration chiffrée / numerical proof, une intuition visuelle, une formulation entretien / interview framing ou du vocabulaire professionnel à partir de n’importe quel cours.",
+      }}
     >
       <ProfessorLab />
     </SectionLayout>
