@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import SectionLayout from "@/components/section-layout";
 import { createClient } from "@/lib/supabase/server";
 import { allCurriculumModules, domainDescriptions, domainDescriptionsFr, domainLabelsFr, type CurriculumDomain } from "@/lib/curriculum";
+import { hasLessonContent } from "@/lib/lesson-content";
 
 function calculateStreak(dates: string[]) {
   if (!dates.length) return 0;
@@ -46,7 +47,11 @@ export default async function ProgressPage() {
     streak = calculateStreak((activityResult.data ?? []).map((row) => row.activity_date));
   }
 
-  const completedSlugs = new Set(progressRows.filter((row) => row.status === "completed").map((row) => row.lesson_slug));
+  const completedSlugs = new Set(
+    progressRows
+      .filter((row) => row.status === "completed" && hasLessonContent(row.lesson_slug))
+      .map((row) => row.lesson_slug),
+  );
   const completedLessons = completedSlugs.size;
   const domainNames = Object.keys(domainDescriptions) as CurriculumDomain[];
   const domainStats = domainNames.map((domain) => {
@@ -56,7 +61,8 @@ export default async function ProgressPage() {
     return { name: isFrench ? domainLabelsFr[domain] : domain, detail: isFrench ? domainDescriptionsFr[domain] : domainDescriptions[domain], complete, total: domainModules.length, percent };
   });
 
-  const nextModule = modules.find((module) => !completedSlugs.has(module.slug)) ?? modules[0];
+  const nextModule = modules.find((module) => hasLessonContent(module.slug) && !completedSlugs.has(module.slug));
+  const firstPlannedModule = modules.find((module) => !hasLessonContent(module.slug));
   const metrics = [
     { label: t("Lessons completed", "Cours terminés"), value: String(completedLessons), note: t(`${modules.length} modules in the full curriculum`, `${modules.length} modules dans le programme complet`) },
     { label: t("Concepts mastered", "Concepts maîtrisés"), value: String(conceptsMastered), note: t("Mastery requires a score of 70 or above", "La maîtrise / mastery nécessite un score de 70 ou plus") },
@@ -81,7 +87,32 @@ export default async function ProgressPage() {
           <div className="knowledge-domain-grid">{domainStats.map((domain, index) => <article className="knowledge-domain-card" key={domain.name}><div className="knowledge-domain-head"><span>{String(index + 1).padStart(2, "0")}</span><strong>{domain.percent}%</strong></div><h3>{domain.name}</h3><p>{domain.detail}</p><div className="empty-progress-bar"><span style={{ width: `${domain.percent}%` }} /></div><small>{isFrench ? `${domain.complete} / ${domain.total} modules terminés` : `${domain.complete} / ${domain.total} modules completed`}</small></article>)}</div>
         </section>
 
-        <section className="next-best-panel"><div><span className="mini-label">{t("NEXT BEST LESSON", "PROCHAIN MEILLEUR COURS")}</span><h2>{isFrench ? `${nextModule.year.replace("Year", "Année")} · ${nextModule.titleFr}` : `${nextModule.year} · ${nextModule.title}`}</h2></div><p>{t("This recommendation currently follows curriculum prerequisites. Later it will also include weak concepts, spaced repetition timing and the user’s selected career track.", "Cette recommandation suit actuellement les prérequis du programme. Plus tard, elle intégrera aussi les concepts faibles, le calendrier de répétition espacée / spaced repetition et le métier cible sélectionné.")}</p><Link href="/university">{t("Open Finance University", "Ouvrir l’Université de Finance")} →</Link></section>
+        <section className="next-best-panel">
+          <div>
+            <span className="mini-label">{t("NEXT BEST LESSON", "PROCHAIN MEILLEUR COURS")}</span>
+            <h2>
+              {nextModule
+                ? (isFrench ? `${nextModule.year.replace("Year", "Année")} · ${nextModule.titleFr}` : `${nextModule.year} · ${nextModule.title}`)
+                : t(
+                    `Next course in build · ${firstPlannedModule?.title ?? "Year 1 curriculum"}`,
+                    `Prochain cours en construction · ${firstPlannedModule?.titleFr ?? "Programme Année 1"}`,
+                  )}
+            </h2>
+          </div>
+          <p>{nextModule
+            ? t(
+                "This recommendation follows real available course content and curriculum prerequisites.",
+                "Cette recommandation suit les vrais cours disponibles et les prérequis du programme.",
+              )
+            : t(
+                "You have completed every full lesson currently published. New Year 1 lessons are being added next.",
+                "Tu as terminé tous les cours complets actuellement publiés. Les prochains cours de l’Année 1 arrivent ensuite.",
+              )}
+          </p>
+          <Link href={nextModule ? `/university/${nextModule.slug}` : "/university"}>
+            {nextModule ? t("Open lesson", "Ouvrir le cours") : t("Open Finance University", "Ouvrir l’Université de Finance")} →
+          </Link>
+        </section>
       </div>
     </SectionLayout>
   );
