@@ -5,9 +5,12 @@ export default function ThemesPage() {
   return (
     <SectionLayout
       activeSlug="themes"
-      eyebrow="THEME STUDIO"
-      title="Make the workspace feel personal without making finance harder to read."
-      description="Choose a professional preset, adjust card roundness and set a custom accent. These preferences now persist in the browser across FinanceStudio sections and will later sync to the user account."
+      eyebrow={{ en: "THEME STUDIO", fr: "STUDIO DE THÈMES" }}
+      title={{ en: "Make FinanceStudio feel like your workspace.", fr: "Fais de FinanceStudio ton propre espace de travail." }}
+      description={{
+        en: "Customize color, density, dashboard modules and visual tone while preserving professional readability.",
+        fr: "Personnalise les couleurs, la densité, les modules du tableau de bord et le style visuel tout en conservant une lisibilité professionnelle.",
+      }}
     >
       <ThemeStudio />
     </SectionLayout>
