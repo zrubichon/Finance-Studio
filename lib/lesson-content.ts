@@ -1464,7 +1464,919 @@ export const stocksBondsFundsLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson];
+
+export const moneyBankingCentralBanksLesson: FinanceLesson = {
+  slug: "year-1-money-banking-central-banks",
+  year: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations" },
+  domain: { en: "Macro & Economics", fr: "Macro & économie / Macro & Economics" },
+  title: {
+    en: "Money, Banking & Central Banks",
+    fr: "Monnaie, banques & banques centrales / Money, Banking & Central Banks",
+  },
+  subtitle: {
+    en: "Understand what money is, how commercial banks create deposits through lending, why reserves matter, how central banks influence financial conditions, and how policy moves transmit into bonds, equities, credit, FX and the real economy.",
+    fr: "Comprendre ce qu’est la monnaie, comment les banques commerciales créent des dépôts en accordant des crédits, pourquoi les réserves bancaires sont importantes, comment les banques centrales influencent les conditions financières et comment leurs décisions se transmettent aux obligations, actions, au crédit, au FX et à l’économie réelle.",
+  },
+  duration: { en: "75–95 min", fr: "75–95 min" },
+  prerequisites: [
+    {
+      en: "Financial System & Market Structure",
+      fr: "Système financier & structure de marché / Financial System & Market Structure",
+    },
+    {
+      en: "Stocks, Bonds, ETFs & Funds",
+      fr: "Actions / Stocks, obligations / Bonds, ETF & fonds / Funds",
+    },
+  ],
+  objectives: [
+    {
+      en: "Distinguish cash, bank deposits, central-bank reserves and broader measures of money.",
+      fr: "Distinguer espèces / cash, dépôts bancaires / bank deposits, réserves de banque centrale / central-bank reserves et agrégats monétaires plus larges.",
+    },
+    {
+      en: "Explain how bank lending can create deposits without relying on the simplistic idea that banks merely lend out existing deposits one-for-one.",
+      fr: "Expliquer comment le crédit bancaire peut créer des dépôts sans utiliser l’idée trop simpliste selon laquelle les banques prêteraient uniquement les dépôts existants un pour un.",
+    },
+    {
+      en: "Read a basic commercial-bank balance sheet and identify capital, liquidity and funding constraints.",
+      fr: "Lire un bilan bancaire simple et identifier les contraintes de capital, de liquidité et de financement / funding.",
+    },
+    {
+      en: "Explain how a policy rate affects short-term market rates and then broader financial conditions.",
+      fr: "Expliquer comment un taux directeur / policy rate influence les taux de marché à court terme puis les conditions financières plus larges.",
+    },
+    {
+      en: "Connect inflation, nominal rates and real rates.",
+      fr: "Relier inflation, taux nominaux / nominal rates et taux réels / real rates.",
+    },
+    {
+      en: "Describe why monetary-policy changes can affect government bonds, credit, equities, banks and currencies differently.",
+      fr: "Décrire pourquoi les changements de politique monétaire peuvent affecter différemment obligations souveraines, crédit, actions, banques et devises.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "How monetary policy reaches markets and the economy",
+      fr: "Comment la politique monétaire se transmet aux marchés et à l’économie",
+    },
+    steps: [
+      {
+        title: { en: "Central bank", fr: "Banque centrale" },
+        detail: { en: "Policy rate · reserves · balance sheet", fr: "Taux directeur · réserves · bilan" },
+      },
+      {
+        title: { en: "Money markets & banks", fr: "Marchés monétaires & banques" },
+        detail: { en: "Funding · lending · deposit rates", fr: "Funding · crédit · taux de dépôt" },
+      },
+      {
+        title: { en: "Financial conditions", fr: "Conditions financières" },
+        detail: { en: "Bond yields · credit · FX · equity valuations", fr: "Yields obligataires · crédit · FX · valorisations actions" },
+      },
+      {
+        title: { en: "Real economy", fr: "Économie réelle" },
+        detail: { en: "Consumption · investment · hiring · inflation", fr: "Consommation · investissement · emploi · inflation" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "what-is-money",
+      kicker: { en: "01 · WHAT MONEY REALLY IS", fr: "01 · CE QU’EST VRAIMENT LA MONNAIE" },
+      title: {
+        en: "Cash, deposits, reserves and the functions of money",
+        fr: "Espèces, dépôts, réserves et fonctions de la monnaie",
+      },
+      coreFacts: [
+        {
+          en: "Money is commonly described by three functions: medium of exchange, unit of account and store of value.",
+          fr: "La monnaie est généralement décrite par trois fonctions : moyen d’échange / medium of exchange, unité de compte / unit of account et réserve de valeur / store of value.",
+        },
+        {
+          en: "Physical currency and commercial-bank deposits are both used by households and firms as money, but they are different liabilities issued by different institutions.",
+          fr: "Les espèces et les dépôts bancaires commerciaux sont tous deux utilisés comme monnaie par ménages et entreprises, mais ce sont des passifs différents émis par des institutions différentes.",
+        },
+        {
+          en: "Central-bank reserves are generally held by eligible financial institutions at the central bank; households do not normally use reserves directly for everyday payments.",
+          fr: "Les réserves de banque centrale / central-bank reserves sont généralement détenues par des institutions financières éligibles auprès de la banque centrale ; les ménages ne les utilisent normalement pas directement pour leurs paiements quotidiens.",
+        },
+        {
+          en: "Monetary aggregates classify different forms of money according to liquidity and institutional definitions; definitions can differ by jurisdiction.",
+          fr: "Les agrégats monétaires classent différentes formes de monnaie selon leur liquidité et les définitions institutionnelles ; ces définitions peuvent varier selon les juridictions.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "The dollars in your checking account feel like cash, but technically they are a claim on your bank. The bank owes you that deposit. Separately, the bank may hold reserves at the central bank. Those reserves are part of the payment plumbing between banks, while your deposit is the money you use in daily life.",
+          fr: "Les dollars sur ton compte courant ressemblent à du cash, mais techniquement ce sont une créance sur ta banque : la banque te doit ce dépôt. De son côté, la banque peut détenir des réserves auprès de la banque centrale. Ces réserves servent à la plomberie des paiements entre banques, alors que ton dépôt est la monnaie que tu utilises au quotidien.",
+        },
+        Intermediate: {
+          en: "The monetary system is layered. Central-bank money includes currency and reserve balances. Commercial-bank money consists largely of deposits created on bank balance sheets. Convertibility between these layers, supported by payment systems, regulation and confidence, allows users to treat deposits as money.",
+          fr: "Le système monétaire est organisé en couches. La monnaie de banque centrale comprend billets et réserves. La monnaie bancaire commerciale est constituée en grande partie de dépôts créés dans les bilans bancaires. La convertibilité entre ces couches, soutenue par les systèmes de paiement, la réglementation et la confiance, permet aux utilisateurs de traiter les dépôts comme de la monnaie.",
+        },
+        Professional: {
+          en: "Money is best understood as a hierarchy of liquid liabilities distinguished by issuer, convertibility, settlement finality and credit risk. Central-bank liabilities sit at the core of interbank settlement, while deposit money is a private-sector liability whose par convertibility depends on bank solvency, liquidity arrangements, deposit protection frameworks and central-bank backstops.",
+          fr: "La monnaie peut être comprise comme une hiérarchie de passifs liquides distingués par l’émetteur, la convertibilité, la finalité du règlement / settlement finality et le risque de crédit. Les passifs de banque centrale se situent au cœur du règlement interbancaire, tandis que les dépôts sont des passifs privés dont la convertibilité à par dépend de la solvabilité bancaire, de la liquidité, des mécanismes de protection des dépôts et des dispositifs de banque centrale.",
+        },
+      },
+      comparison: {
+        title: { en: "Different forms of money", fr: "Différentes formes de monnaie" },
+        headers: [
+          { en: "Form", fr: "Forme" },
+          { en: "Issuer", fr: "Émetteur" },
+          { en: "Typical holder", fr: "Détenteur habituel" },
+          { en: "Main use", fr: "Utilisation principale" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Currency", fr: "Espèces / currency" },
+            { en: "Central bank", fr: "Banque centrale" },
+            { en: "Public", fr: "Public" },
+            { en: "Payments / store of value", fr: "Paiements / réserve de valeur" },
+          ]},
+          { cells: [
+            { en: "Bank deposit", fr: "Dépôt bancaire / bank deposit" },
+            { en: "Commercial bank", fr: "Banque commerciale" },
+            { en: "Households & firms", fr: "Ménages & entreprises" },
+            { en: "Payments / saving", fr: "Paiements / épargne" },
+          ]},
+          { cells: [
+            { en: "Reserve balance", fr: "Réserve / reserve balance" },
+            { en: "Central bank", fr: "Banque centrale" },
+            { en: "Eligible financial institutions", fr: "Institutions financières éligibles" },
+            { en: "Interbank settlement / liquidity", fr: "Règlement interbancaire / liquidité" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Unit of account",
+          fr: "unité de compte / unit of account",
+          definition: {
+            en: "The standard in which prices, contracts and accounting values are expressed.",
+            fr: "Unité standard dans laquelle sont exprimés prix, contrats et valeurs comptables.",
+          },
+        },
+        {
+          en: "Monetary aggregate",
+          fr: "agrégat monétaire / monetary aggregate",
+          definition: {
+            en: "A statistical measure grouping selected forms of money according to an official definition.",
+            fr: "Mesure statistique regroupant certaines formes de monnaie selon une définition officielle.",
+          },
+        },
+      ],
+    },
+    {
+      id: "bank-balance-sheet",
+      kicker: { en: "02 · BANK BALANCE SHEETS", fr: "02 · BILAN D’UNE BANQUE" },
+      title: {
+        en: "Loans are assets. Deposits are liabilities.",
+        fr: "Les prêts sont des actifs. Les dépôts sont des passifs.",
+      },
+      coreFacts: [
+        {
+          en: "For a commercial bank, customer loans are assets because borrowers owe the bank money.",
+          fr: "Pour une banque commerciale, les prêts aux clients sont des actifs car les emprunteurs doivent de l’argent à la banque.",
+        },
+        {
+          en: "Customer deposits are liabilities because the bank owes those balances to depositors.",
+          fr: "Les dépôts des clients sont des passifs car la banque doit ces soldes aux déposants.",
+        },
+        {
+          en: "Bank equity or capital absorbs losses before depositors and senior creditors under the applicable capital structure and legal framework.",
+          fr: "Les capitaux propres / bank capital absorbent les pertes avant déposants et créanciers seniors selon la structure du capital et le cadre juridique applicable.",
+        },
+        {
+          en: "A bank can be solvent but illiquid, or liquid but economically weak; solvency and liquidity are related but different.",
+          fr: "Une banque peut être solvable mais illiquide, ou liquide mais économiquement fragile ; solvabilité et liquidité sont liées mais différentes.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a bank lends you $100,000 for a mortgage, that loan is valuable to the bank because you owe it future payments. On the other side, if you keep $10,000 in your checking account, the bank owes you $10,000, so your deposit is one of its liabilities.",
+          fr: "Si une banque te prête 100 000 $ pour un crédit immobilier, ce prêt est un actif pour la banque car tu lui dois des paiements futurs. À l’inverse, si tu conserves 10 000 $ sur ton compte courant, la banque te doit 10 000 $ : ton dépôt est donc l’un de ses passifs.",
+        },
+        Intermediate: {
+          en: "Bank balance sheets transform funding into earning assets. Profitability depends on asset yields, funding costs, credit losses, operating expenses and capital intensity. Liquidity management ensures the bank can meet withdrawals, payments, collateral calls and maturing obligations.",
+          fr: "Le bilan bancaire transforme le financement / funding en actifs rémunérateurs. La rentabilité dépend du rendement des actifs, du coût du funding, des pertes de crédit, des charges opérationnelles et de l’intensité en capital. La gestion de liquidité permet de faire face aux retraits, paiements, appels de collatéral et échéances.",
+        },
+        Professional: {
+          en: "Banking is balance-sheet intermediation constrained by capital, liquidity, funding stability, collateral availability, asset quality and regulation. Net interest income reflects repricing mismatches across assets and liabilities, while economic value can be exposed to duration gaps, deposit beta, credit migration and wholesale funding conditions.",
+          fr: "La banque est une activité d’intermédiation de bilan contrainte par le capital, la liquidité, la stabilité du funding, la disponibilité du collatéral, la qualité des actifs et la réglementation. Le revenu net d’intérêt / net interest income reflète les écarts de repricing entre actifs et passifs, tandis que la valeur économique peut être exposée au gap de duration, au deposit beta, à la migration du crédit et aux conditions de funding wholesale.",
+        },
+      },
+      formula: {
+        label: { en: "Basic balance-sheet identity", fr: "Identité de bilan / Balance-sheet identity" },
+        expression: "Assets = Liabilities + Equity",
+        explanation: {
+          en: "Every bank balance sheet must balance. A loss reduces asset value and, before other adjustments, reduces equity.",
+          fr: "Tout bilan bancaire doit s’équilibrer. Une perte réduit la valeur des actifs et, avant autres ajustements, réduit les capitaux propres.",
+        },
+        workedExample: {
+          en: "If assets are $120 and liabilities are $110, equity is $10. A $6 loss on assets reduces equity to about $4 if nothing else changes.",
+          fr: "Si les actifs valent 120 et les passifs 110, les capitaux propres valent 10. Une perte de 6 sur les actifs réduit les capitaux propres à environ 4 si rien d’autre ne change.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Solvency",
+          fr: "solvabilité / solvency",
+          definition: {
+            en: "The ability of an institution to absorb losses and maintain positive economic or regulatory capital under the relevant framework.",
+            fr: "Capacité d’une institution à absorber les pertes et maintenir un capital économique ou réglementaire suffisant selon le cadre applicable.",
+          },
+        },
+        {
+          en: "Liquidity",
+          fr: "liquidité / liquidity",
+          definition: {
+            en: "The ability to meet cash and settlement obligations when they fall due.",
+            fr: "Capacité à honorer les obligations de cash et de règlement à leur échéance.",
+          },
+        },
+      ],
+    },
+    {
+      id: "deposit-creation",
+      kicker: { en: "03 · HOW BANK LENDING CREATES DEPOSITS", fr: "03 · COMMENT LE CRÉDIT CRÉE DES DÉPÔTS" },
+      title: {
+        en: "Banks do not simply pass existing deposits from one customer to another",
+        fr: "Les banques ne se contentent pas de redistribuer des dépôts déjà existants",
+      },
+      coreFacts: [
+        {
+          en: "When a bank grants a new loan and credits the borrower's account, it can create a new bank asset and a new deposit liability simultaneously.",
+          fr: "Lorsqu’une banque accorde un nouveau prêt et crédite le compte de l’emprunteur, elle peut créer simultanément un nouvel actif bancaire et un nouveau dépôt au passif.",
+        },
+        {
+          en: "This does not mean banks can create unlimited money: capital, liquidity, funding, credit risk, regulation, profitability and loan demand constrain lending.",
+          fr: "Cela ne signifie pas que les banques peuvent créer de la monnaie sans limite : capital, liquidité, funding, risque de crédit, réglementation, rentabilité et demande de crédit limitent les prêts.",
+        },
+        {
+          en: "If the borrower spends the deposit and funds move to another bank, reserve or wholesale-funding needs can shift between banks.",
+          fr: "Si l’emprunteur dépense le dépôt et que les fonds partent vers une autre banque, les besoins en réserves ou en financement wholesale peuvent se déplacer entre banques.",
+        },
+        {
+          en: "The textbook money-multiplier story can be useful as a simplified historical model but should not be treated as a literal mechanical description of modern bank lending.",
+          fr: "Le modèle scolaire du multiplicateur monétaire / money multiplier peut être utile comme simplification historique, mais ne doit pas être traité comme une description mécanique exacte du crédit bancaire moderne.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose Bank A approves a $5,000 loan. It can record a $5,000 loan asset and credit the borrower's deposit account by $5,000. The borrower now has a new deposit to spend, while also owing the bank $5,000. The bank did not need to take exactly $5,000 from another customer's checking account first.",
+          fr: "Supposons que la Banque A accorde un prêt de 5 000 $. Elle peut enregistrer un actif « prêt » de 5 000 $ et créditer le compte du client de 5 000 $. Le client dispose alors d’un nouveau dépôt à dépenser tout en devant 5 000 $ à la banque. La banque n’a pas eu besoin de retirer exactement 5 000 $ du compte d’un autre client au préalable.",
+        },
+        Intermediate: {
+          en: "Credit creation expands both sides of the banking system's balance sheet. The subsequent use of deposits determines interbank settlement flows. Banks therefore manage lending jointly with capital planning, liquidity buffers, deposit strategy, secured and unsecured funding and central-bank facilities.",
+          fr: "La création de crédit augmente simultanément les deux côtés du bilan bancaire. L’utilisation ultérieure des dépôts détermine les flux de règlement interbancaire. Les banques gèrent donc le crédit avec leur planification du capital, les buffers de liquidité, la stratégie de dépôts, le funding garanti/non garanti et les facilités de banque centrale.",
+        },
+        Professional: {
+          en: "Endogenous money creation is balance-sheet constrained rather than reserve-multiplier constrained in a simple mechanical sense. Marginal lending depends on expected risk-adjusted return on capital, funding transfer prices, liquidity metrics, borrower demand, underwriting standards, collateral, supervisory constraints and the policy-rate environment.",
+          fr: "La création monétaire endogène est contrainte par le bilan plutôt que par un multiplicateur de réserves mécanique. Le crédit marginal dépend du rendement ajusté du risque sur capital, des funding transfer prices, métriques de liquidité, demande des emprunteurs, standards de crédit, collatéral, contraintes prudentielles et environnement de taux directeurs.",
+        },
+      },
+      example: {
+        en: "At origination: +$5,000 loan asset and +$5,000 customer deposit liability. If the customer later pays someone at another bank, Bank A may need to transfer reserves or obtain funding to settle the payment.",
+        fr: "À l’octroi : +5 000 $ d’actif de prêt et +5 000 $ de dépôt client au passif. Si le client paie ensuite quelqu’un dans une autre banque, la Banque A peut devoir transférer des réserves ou obtenir du funding pour régler le paiement.",
+      },
+      marketConnection: {
+        en: "Tighter bank lending standards can slow credit creation even if central-bank reserves are abundant, which is why loan surveys and bank funding conditions matter to macro investors.",
+        fr: "Des standards de crédit plus stricts peuvent ralentir la création de crédit même si les réserves bancaires sont abondantes ; c’est pourquoi les enquêtes de crédit et les conditions de funding bancaire intéressent les investisseurs macro.",
+      },
+      vocabulary: [
+        {
+          en: "Credit creation",
+          fr: "création de crédit / credit creation",
+          definition: {
+            en: "The expansion of credit claims, often accompanied by creation of bank deposits when commercial banks lend.",
+            fr: "Expansion des créances de crédit, souvent accompagnée de création de dépôts lorsque les banques commerciales prêtent.",
+          },
+        },
+        {
+          en: "Funding",
+          fr: "financement bancaire / funding",
+          definition: {
+            en: "The liabilities and capital sources used to finance a bank's assets.",
+            fr: "Passifs et sources de capital utilisés pour financer les actifs d’une banque.",
+          },
+        },
+      ],
+    },
+    {
+      id: "reserves-settlement",
+      kicker: { en: "04 · RESERVES & PAYMENT PLUMBING", fr: "04 · RÉSERVES & PLOMBERIE DES PAIEMENTS" },
+      title: {
+        en: "Why reserves matter even though households do not spend them",
+        fr: "Pourquoi les réserves comptent même si les ménages ne les dépensent pas",
+      },
+      coreFacts: [
+        {
+          en: "Banks use central-bank money to settle many obligations with each other.",
+          fr: "Les banques utilisent la monnaie de banque centrale pour régler de nombreuses obligations entre elles.",
+        },
+        {
+          en: "Reserve balances can support settlement, liquidity management and implementation of monetary policy.",
+          fr: "Les réserves peuvent soutenir le règlement / settlement, la gestion de liquidité et la mise en œuvre de la politique monétaire.",
+        },
+        {
+          en: "The quantity of reserves and the framework used to remunerate or supply them influence short-term money-market conditions.",
+          fr: "La quantité de réserves et le cadre utilisé pour les rémunérer ou les fournir influencent les conditions du marché monétaire à court terme.",
+        },
+        {
+          en: "A payment from Bank A to Bank B can shift reserves between banks even when total reserves in the banking system are unchanged.",
+          fr: "Un paiement de la Banque A vers la Banque B peut déplacer les réserves entre banques même si le total des réserves du système bancaire reste inchangé.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you pay someone who uses another bank, your bank reduces your deposit and the receiving bank increases the recipient's deposit. Behind the scenes, the two banks may settle the payment using reserve balances at the central bank.",
+          fr: "Si tu paies quelqu’un qui utilise une autre banque, ta banque réduit ton dépôt et la banque du bénéficiaire augmente le sien. En coulisses, les deux banques peuvent régler le paiement à l’aide de leurs réserves auprès de la banque centrale.",
+        },
+        Intermediate: {
+          en: "Reserves are settlement assets and a source of system liquidity. Central banks can operate with different frameworks, including scarce-reserve or ample-reserve systems. The operational design influences how policy rates are transmitted into overnight money markets.",
+          fr: "Les réserves sont des actifs de règlement et une source de liquidité du système. Les banques centrales peuvent utiliser différents cadres, avec réserves rares ou abondantes. Le design opérationnel influence la manière dont les taux directeurs se transmettent au marché monétaire overnight.",
+        },
+        Professional: {
+          en: "The reserve regime determines the marginal value of central-bank balances and shapes the money-market corridor or floor. Standing facilities, reserve remuneration, repo operations, collateral policy and reserve demand interact to keep overnight rates near the intended policy stance.",
+          fr: "Le régime de réserves détermine la valeur marginale des balances de banque centrale et façonne le corridor ou floor du marché monétaire. Facilités permanentes, rémunération des réserves, opérations repo, politique de collatéral et demande de réserves interagissent pour maintenir les taux overnight proches de l’orientation monétaire visée.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Interbank settlement",
+          fr: "règlement interbancaire / interbank settlement",
+          definition: {
+            en: "The process through which financial institutions discharge obligations to each other.",
+            fr: "Processus par lequel les institutions financières règlent leurs obligations mutuelles.",
+          },
+        },
+        {
+          en: "Standing facility",
+          fr: "facilité permanente / standing facility",
+          definition: {
+            en: "A central-bank facility available to eligible counterparties under predefined terms.",
+            fr: "Facilité de banque centrale accessible à des contreparties éligibles selon des conditions prédéfinies.",
+          },
+        },
+      ],
+    },
+    {
+      id: "central-bank-mandate-tools",
+      kicker: { en: "05 · CENTRAL BANK TOOLKIT", fr: "05 · BOÎTE À OUTILS DES BANQUES CENTRALES" },
+      title: {
+        en: "Policy rates, balance sheets and communication",
+        fr: "Taux directeurs, bilan et communication",
+      },
+      coreFacts: [
+        {
+          en: "Central banks influence monetary and financial conditions through policy rates and operational frameworks; many also use balance-sheet tools and communication.",
+          fr: "Les banques centrales influencent les conditions monétaires et financières via les taux directeurs et leur cadre opérationnel ; beaucoup utilisent également leur bilan et leur communication.",
+        },
+        {
+          en: "A policy-rate change most directly affects very short-term rates; longer-term yields also depend on expectations of future policy, inflation, growth, risk premia and supply-demand conditions.",
+          fr: "Une variation du taux directeur affecte le plus directement les taux très courts ; les yields plus longs dépendent aussi des anticipations de politique future, de l’inflation, de la croissance, des primes de risque et de l’offre/demande.",
+        },
+        {
+          en: "Central-bank asset purchases can alter the composition and quantity of assets held by the private sector and can affect term premia and market functioning; the effects are not identical to a simple rate cut.",
+          fr: "Les achats d’actifs par une banque centrale peuvent modifier la composition et la quantité d’actifs détenus par le secteur privé et influencer les primes de terme / term premia et le fonctionnement de marché ; leurs effets ne sont pas identiques à une simple baisse de taux.",
+        },
+        {
+          en: "Forward guidance attempts to influence expectations about future policy, but market participants may interpret guidance differently as data evolve.",
+          fr: "La forward guidance cherche à influencer les anticipations de politique future, mais les marchés peuvent l’interpréter différemment lorsque les données évoluent.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A central bank does not directly set every mortgage rate, bond yield or stock price. It sets or steers important short-term monetary conditions. Banks and markets then reprice borrowing costs, savings rates, bond yields and asset values based partly on that signal and on expectations about what comes next.",
+          fr: "Une banque centrale ne fixe pas directement chaque taux immobilier, yield obligataire ou prix d’action. Elle fixe ou pilote surtout certaines conditions monétaires à court terme. Les banques et les marchés ajustent ensuite coûts d’emprunt, taux d’épargne, yields obligataires et valorisations en fonction de ce signal et des anticipations sur la suite.",
+        },
+        Intermediate: {
+          en: "Policy operates through a reaction function and an implementation framework. The central bank changes the expected path of short rates, while communication and balance-sheet tools can influence term premia, liquidity and risk-taking. The macro effect depends on pass-through to households, firms and financial markets.",
+          fr: "La politique monétaire fonctionne via une fonction de réaction / reaction function et un cadre opérationnel. La banque centrale modifie la trajectoire anticipée des taux courts, tandis que communication et outils de bilan peuvent influencer primes de terme, liquidité et prise de risque. L’effet macro dépend du pass-through vers ménages, entreprises et marchés.",
+        },
+        Professional: {
+          en: "Monetary policy is priced through the expected policy path plus term premia, with asset-purchase programs, liquidity facilities, collateral frameworks and communication changing the distribution of duration, liquidity and risk in private portfolios. Market pricing reflects both the policy decision and the information content investors infer from it.",
+          fr: "La politique monétaire est valorisée via la trajectoire attendue des taux directeurs plus les primes de terme, tandis que programmes d’achats d’actifs, facilités de liquidité, cadres de collatéral et communication modifient la distribution de duration, liquidité et risque dans les portefeuilles privés. Les prix de marché reflètent à la fois la décision et l’information que les investisseurs pensent en déduire.",
+        },
+      },
+      comparison: {
+        title: { en: "Main monetary-policy tools", fr: "Principaux outils de politique monétaire" },
+        headers: [
+          { en: "Tool", fr: "Outil" },
+          { en: "Primary channel", fr: "Canal principal" },
+          { en: "What markets watch", fr: "Ce que les marchés observent" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Policy rate", fr: "Taux directeur / policy rate" },
+            { en: "Short-term financing conditions", fr: "Conditions de financement court terme" },
+            { en: "Current rate + expected future path", fr: "Taux actuel + trajectoire future anticipée" },
+          ]},
+          { cells: [
+            { en: "Asset purchases / runoff", fr: "Achats d’actifs / réduction du bilan" },
+            { en: "Duration, liquidity, term premium", fr: "Duration, liquidité, term premium" },
+            { en: "Pace, composition, reinvestment", fr: "Rythme, composition, réinvestissement" },
+          ]},
+          { cells: [
+            { en: "Forward guidance", fr: "Forward guidance" },
+            { en: "Expectations", fr: "Anticipations" },
+            { en: "Conditions, language, credibility", fr: "Conditions, langage, crédibilité" },
+          ]},
+          { cells: [
+            { en: "Liquidity facilities", fr: "Facilités de liquidité" },
+            { en: "Funding & market functioning", fr: "Funding & fonctionnement de marché" },
+            { en: "Access, collateral, pricing", fr: "Accès, collatéral, tarification" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Policy rate",
+          fr: "taux directeur / policy rate",
+          definition: {
+            en: "A rate used by a central bank to signal or implement its monetary-policy stance.",
+            fr: "Taux utilisé par une banque centrale pour signaler ou mettre en œuvre son orientation monétaire.",
+          },
+        },
+        {
+          en: "Forward guidance",
+          fr: "indications prospectives / forward guidance",
+          definition: {
+            en: "Communication intended to shape expectations about future policy.",
+            fr: "Communication destinée à influencer les anticipations concernant la politique future.",
+          },
+        },
+      ],
+    },
+    {
+      id: "transmission",
+      kicker: { en: "06 · THE TRANSMISSION MECHANISM", fr: "06 · LE MÉCANISME DE TRANSMISSION" },
+      title: {
+        en: "From a policy-rate move to households, firms and markets",
+        fr: "Du taux directeur aux ménages, entreprises et marchés",
+      },
+      coreFacts: [
+        {
+          en: "Monetary-policy transmission is a chain, not an instant one-step effect.",
+          fr: "La transmission monétaire est une chaîne de mécanismes, pas un effet instantané en une seule étape.",
+        },
+        {
+          en: "Key channels include market rates, bank lending conditions, asset prices, exchange rates, expectations and confidence.",
+          fr: "Les principaux canaux incluent taux de marché, conditions de crédit bancaire, prix d’actifs, taux de change, anticipations et confiance.",
+        },
+        {
+          en: "The strength and speed of transmission vary by financial structure, borrower mix, mortgage conventions, bank health, market expectations and the economic cycle.",
+          fr: "La force et la vitesse de transmission varient selon la structure financière, le type d’emprunteurs, les conventions de crédit immobilier, la santé des banques, les attentes du marché et le cycle économique.",
+        },
+        {
+          en: "Markets often move before an official decision because investors price expected future policy.",
+          fr: "Les marchés bougent souvent avant la décision officielle car les investisseurs valorisent la politique monétaire future anticipée.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If markets expect higher policy rates, short-term borrowing costs may rise. Banks can raise loan rates. Some households borrow less and some companies delay projects. Bond yields and stock valuations can also change. These reactions can slow demand, which may eventually affect inflation.",
+          fr: "Si les marchés anticipent des taux directeurs plus élevés, les coûts d’emprunt court terme peuvent augmenter. Les banques peuvent relever leurs taux de crédit. Certains ménages empruntent moins et certaines entreprises reportent leurs projets. Les yields obligataires et valorisations actions peuvent aussi évoluer. Ces réactions peuvent ralentir la demande puis, avec le temps, influencer l’inflation.",
+        },
+        Intermediate: {
+          en: "Transmission combines direct repricing and behavioral responses. Floating-rate borrowers may feel the effect quickly, while fixed-rate borrowers may only face higher costs when refinancing. Asset-price and FX channels can respond almost immediately, while investment, hiring and inflation respond with longer and uncertain lags.",
+          fr: "La transmission combine repricing direct et réponses comportementales. Les emprunteurs à taux variable peuvent ressentir rapidement l’effet, tandis que ceux à taux fixe le ressentent surtout au refinancement. Les canaux prix d’actifs et FX peuvent réagir presque immédiatement, alors qu’investissement, emploi et inflation réagissent avec des délais plus longs et incertains.",
+        },
+        Professional: {
+          en: "Transmission is heterogeneous and state-dependent. Pass-through varies across the OIS curve, sovereign yields, swap rates, bank funding curves, deposit betas, mortgage resets, corporate spreads and FX. Financial conditions can ease despite a restrictive policy-rate setting if risk premia compress or long-end yields decline.",
+          fr: "La transmission est hétérogène et dépend du régime. Le pass-through varie entre courbe OIS, yields souverains, swaps, courbes de funding bancaire, deposit betas, resets immobiliers, spreads corporate et FX. Les conditions financières peuvent s’assouplir malgré un taux directeur restrictif si les primes de risque se compressent ou si les taux longs baissent.",
+        },
+      },
+      marketConnection: {
+        en: "This is why traders distinguish the policy decision itself from the market's prior expectation and from the change in the expected future path.",
+        fr: "C’est pourquoi les traders distinguent la décision elle-même, ce que le marché avait déjà anticipé et la modification de la trajectoire future attendue.",
+      },
+      vocabulary: [
+        {
+          en: "Pass-through",
+          fr: "transmission / pass-through",
+          definition: {
+            en: "The degree to which a change in one rate or cost is transmitted into other rates, prices or behavior.",
+            fr: "Degré auquel une variation de taux ou de coût se transmet à d’autres taux, prix ou comportements.",
+          },
+        },
+        {
+          en: "Financial conditions",
+          fr: "conditions financières / financial conditions",
+          definition: {
+            en: "The combined ease or tightness of financing reflected in rates, spreads, asset prices, FX and credit availability.",
+            fr: "Ensemble des conditions de financement reflétées par taux, spreads, prix d’actifs, FX et disponibilité du crédit.",
+          },
+        },
+      ],
+    },
+    {
+      id: "inflation-real-rates",
+      kicker: { en: "07 · INFLATION & REAL RATES", fr: "07 · INFLATION & TAUX RÉELS" },
+      title: {
+        en: "Nominal returns are not the same as purchasing-power returns",
+        fr: "Rendement nominal ≠ rendement en pouvoir d’achat",
+      },
+      coreFacts: [
+        {
+          en: "Inflation measures the rate of change in a defined price index; different indices cover different baskets and methodologies.",
+          fr: "L’inflation mesure le taux de variation d’un indice de prix défini ; différents indices utilisent différents paniers et méthodologies.",
+        },
+        {
+          en: "A nominal interest rate is quoted in money terms; a real rate adjusts for inflation.",
+          fr: "Un taux nominal / nominal rate est exprimé en monnaie ; un taux réel / real rate ajuste pour l’inflation.",
+        },
+        {
+          en: "For moderate rates, real rate is often approximated as nominal rate minus inflation, though the exact Fisher relation is multiplicative.",
+          fr: "Pour des taux modérés, le taux réel est souvent approximé par taux nominal moins inflation, même si la relation exacte de Fisher est multiplicative.",
+        },
+        {
+          en: "Markets care about expected inflation as well as realized inflation because asset prices discount future cash flows.",
+          fr: "Les marchés s’intéressent à l’inflation attendue autant qu’à l’inflation réalisée car les prix d’actifs actualisent des flux futurs.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If your savings account pays 4% but prices rise 3%, your purchasing power has increased by only about 1% before taxes. A positive nominal return can therefore still be weak in real terms.",
+          fr: "Si ton compte d’épargne rapporte 4 % mais que les prix augmentent de 3 %, ton pouvoir d’achat n’a augmenté que d’environ 1 % avant fiscalité. Un rendement nominal positif peut donc rester faible en termes réels.",
+        },
+        Intermediate: {
+          en: "Expected real rates influence saving, borrowing and valuation. Higher real discount rates reduce the present value of distant cash flows, which can pressure long-duration assets. Inflation surprises can also change expectations for the policy path and risk premia.",
+          fr: "Les taux réels anticipés influencent épargne, emprunt et valorisation. Des taux réels plus élevés réduisent la valeur actuelle des cash flows lointains, ce qui peut peser sur les actifs longue duration. Les surprises d’inflation peuvent également modifier les anticipations de politique monétaire et les primes de risque.",
+        },
+        Professional: {
+          en: "Macro pricing separates nominal yields into expected real-rate components, expected inflation and risk premia. Inflation-linked bonds can help infer market pricing of inflation compensation, but breakevens also embed liquidity and inflation-risk premia and are not pure forecasts.",
+          fr: "La valorisation macro décompose les yields nominaux en composante de taux réel anticipé, inflation attendue et primes de risque. Les obligations indexées sur l’inflation peuvent aider à observer la compensation d’inflation pricée par le marché, mais les breakevens incluent aussi primes de liquidité et de risque d’inflation : ce ne sont pas des prévisions pures.",
+        },
+      },
+      formula: {
+        label: { en: "Approximate real interest rate", fr: "Taux d’intérêt réel approximatif / Approximate real rate" },
+        expression: "Real Rate ≈ Nominal Rate − Inflation",
+        explanation: {
+          en: "Useful for intuition at moderate rates. Exact Fisher relation: (1 + nominal) = (1 + real) × (1 + inflation).",
+          fr: "Approximation utile pour l’intuition lorsque les taux restent modérés. Relation exacte de Fisher : (1 + nominal) = (1 + réel) × (1 + inflation).",
+        },
+        workedExample: {
+          en: "Nominal rate 4% − inflation 3% ≈ 1% real rate.",
+          fr: "Taux nominal 4 % − inflation 3 % ≈ taux réel 1 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Real rate",
+          fr: "taux réel / real rate",
+          definition: {
+            en: "An interest rate adjusted for inflation or expected inflation depending on context.",
+            fr: "Taux d’intérêt ajusté de l’inflation ou de l’inflation attendue selon le contexte.",
+          },
+        },
+        {
+          en: "Inflation breakeven",
+          fr: "point mort d’inflation / inflation breakeven",
+          definition: {
+            en: "A market-based inflation compensation measure derived from nominal and inflation-linked bonds, subject to risk and liquidity premia.",
+            fr: "Mesure de compensation d’inflation dérivée des obligations nominales et indexées, avec primes de risque et de liquidité.",
+          },
+        },
+      ],
+    },
+    {
+      id: "yield-curve-expectations",
+      kicker: { en: "08 · THE YIELD CURVE", fr: "08 · LA COURBE DES TAUX" },
+      title: {
+        en: "Why the whole curve matters more than one policy rate",
+        fr: "Pourquoi toute la courbe des taux / yield curve compte davantage qu’un seul taux directeur",
+      },
+      coreFacts: [
+        {
+          en: "A yield curve compares yields across maturities for a defined class of instruments.",
+          fr: "Une courbe des taux / yield curve compare les rendements de différentes maturités pour une catégorie d’instruments définie.",
+        },
+        {
+          en: "Short maturities are strongly influenced by near-term policy expectations; longer maturities reflect expected future rates, inflation, growth, supply-demand and term premia.",
+          fr: "Les maturités courtes sont fortement influencées par les anticipations de politique proche ; les maturités longues reflètent taux futurs attendus, inflation, croissance, offre/demande et primes de terme.",
+        },
+        {
+          en: "A curve can steepen or flatten through changes at the front end, long end or both.",
+          fr: "Une courbe peut se pentifier / steepen ou s’aplatir / flatten via des mouvements du front end, du long end ou des deux.",
+        },
+        {
+          en: "An inverted curve is an observed pricing configuration, not a mechanical guarantee of any specific future economic outcome.",
+          fr: "Une courbe inversée / inverted curve est une configuration de prix observée, pas une garantie mécanique d’un résultat économique futur précis.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Imagine the 2-year government yield is 4% and the 10-year yield is 3.5%. The curve is inverted between those points. That tells you something about market pricing across time, but it does not by itself explain exactly why or guarantee what the economy will do next.",
+          fr: "Imagine que le yield souverain 2 ans soit 4 % et le 10 ans 3,5 %. La courbe est inversée entre ces points. Cela donne une information sur la manière dont le marché price le temps, mais cela n’explique pas à lui seul exactement pourquoi ni ne garantit ce que fera l’économie ensuite.",
+        },
+        Intermediate: {
+          en: "Curve shape embeds the expected path of short rates plus term premia. A bull steepener, bear steepener, bull flattener or bear flattener describes combinations of level and slope moves. These moves matter to bank margins, duration trades, mortgages and valuation.",
+          fr: "La forme de courbe intègre la trajectoire anticipée des taux courts plus les primes de terme. Bull steepener, bear steepener, bull flattener et bear flattener décrivent différentes combinaisons de mouvement du niveau et de la pente. Ces mouvements affectent marges bancaires, trades de duration, crédits immobiliers et valorisations.",
+        },
+        Professional: {
+          en: "Curve analysis decomposes spot, forward and par structures and separates expected policy from term premium. Relative-value investors monitor key-rate duration, curve spreads such as 2s10s or 5s30s, swap spreads and cross-market differentials rather than treating the yield curve as a single number.",
+          fr: "L’analyse de courbe distingue structures spot, forward et par et sépare politique attendue et term premium. Les investisseurs relative value suivent key-rate duration, spreads de courbe comme 2s10s ou 5s30s, swap spreads et écarts entre marchés plutôt que de traiter la yield curve comme un seul nombre.",
+        },
+      },
+      formula: {
+        label: { en: "Simple 2s10s curve spread", fr: "Spread de courbe 2s10s simple" },
+        expression: "2s10s Spread = 10Y Yield − 2Y Yield",
+        explanation: {
+          en: "Positive means the 10-year yield is above the 2-year yield; negative means this segment is inverted.",
+          fr: "Un résultat positif signifie que le 10 ans est au-dessus du 2 ans ; un résultat négatif signifie que ce segment de courbe est inversé.",
+        },
+        workedExample: {
+          en: "3.50% − 4.00% = −0.50%, or −50 basis points.",
+          fr: "3,50 % − 4,00 % = −0,50 %, soit −50 points de base / basis points.",
+        },
+      },
+      marketConnection: {
+        en: "A central-bank meeting can move the front end sharply while the long end moves in the opposite direction if investors revise growth, inflation or term-premium expectations.",
+        fr: "Une réunion de banque centrale peut faire fortement bouger le front end tandis que le long end évolue dans le sens opposé si les investisseurs révisent leurs attentes de croissance, inflation ou term premium.",
+      },
+      vocabulary: [
+        {
+          en: "Yield curve",
+          fr: "courbe des taux / yield curve",
+          definition: {
+            en: "A representation of yields across maturities for comparable instruments.",
+            fr: "Représentation des rendements selon les maturités pour des instruments comparables.",
+          },
+        },
+        {
+          en: "Term premium",
+          fr: "prime de terme / term premium",
+          definition: {
+            en: "Compensation investors may require for holding longer-duration exposure beyond expected future short rates.",
+            fr: "Compensation que les investisseurs peuvent exiger pour détenir une exposition plus longue au-delà des taux courts futurs attendus.",
+          },
+        },
+      ],
+    },
+    {
+      id: "cross-asset",
+      kicker: { en: "09 · CROSS-ASSET TRANSMISSION", fr: "09 · TRANSMISSION MULTI-ACTIFS" },
+      title: {
+        en: "How monetary shocks can move bonds, credit, equities, banks and FX",
+        fr: "Comment un choc monétaire peut déplacer obligations, crédit, actions, banques et FX",
+      },
+      coreFacts: [
+        {
+          en: "There is no universal one-direction rule for all assets after a central-bank decision because market reaction depends on what was already priced and why policy changed.",
+          fr: "Il n’existe pas de règle universelle donnant une direction certaine à tous les actifs après une décision de banque centrale : la réaction dépend de ce qui était déjà pricé et de la raison du changement de politique.",
+        },
+        {
+          en: "A more restrictive rate path can raise short-term yields, tighten credit conditions and increase discount rates, but growth and inflation expectations may change simultaneously.",
+          fr: "Une trajectoire de taux plus restrictive peut relever les taux courts, durcir le crédit et augmenter les discount rates, tandis que les attentes de croissance et d’inflation peuvent évoluer simultanément.",
+        },
+        {
+          en: "Currencies react to relative monetary policy, relative growth, risk sentiment, capital flows and positioning rather than one domestic rate in isolation.",
+          fr: "Les devises réagissent à la politique monétaire relative, à la croissance relative, au sentiment de risque, aux flux de capitaux et au positionnement plutôt qu’à un seul taux domestique isolé.",
+        },
+        {
+          en: "Bank equities can benefit from some rate environments through margins but suffer if funding costs, deposit competition, credit losses or duration losses dominate.",
+          fr: "Les actions bancaires peuvent bénéficier de certains environnements de taux via les marges mais souffrir si coûts de funding, concurrence sur les dépôts, pertes de crédit ou pertes de duration dominent.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose a central bank unexpectedly sounds more restrictive. Short-term bond yields might rise. Some growth stocks might fall because future cash flows are discounted at higher rates. A currency might strengthen if markets expect relatively higher rates, but it could also weaken if investors think the policy will damage growth badly. Context matters.",
+          fr: "Supposons qu’une banque centrale paraisse soudainement plus restrictive que prévu. Les yields courts peuvent monter. Certaines actions de croissance peuvent baisser car les cash flows futurs sont actualisés à des taux plus élevés. Une devise peut se renforcer si le marché anticipe des taux relativement plus élevés, mais elle peut aussi faiblir si les investisseurs pensent que la politique dégradera fortement la croissance. Le contexte compte.",
+        },
+        Intermediate: {
+          en: "Cross-asset reaction is an expectations problem. Rates markets reprice the policy path, credit prices refinancing and default risk, equities reprice earnings and discount rates, banks reprice margins and asset quality, and FX reprices relative policy and capital-flow incentives.",
+          fr: "La réaction multi-actifs est un problème d’anticipations. Les marchés de taux repricent la trajectoire monétaire, le crédit repricе le refinancement et le risque de défaut, les actions repricent bénéfices et discount rates, les banques repricent marges et qualité des actifs, et le FX repricе politique relative et incitations de flux de capitaux.",
+        },
+        Professional: {
+          en: "The cleanest framework is surprise decomposition: policy-rate surprise, path surprise and information shock. Asset reaction then depends on duration, leverage, convexity, credit beta, earnings sensitivity, relative-rate differentials, positioning and liquidity. The same nominal hike can therefore produce very different cross-asset outcomes across regimes.",
+          fr: "Le cadre le plus propre consiste à décomposer la surprise : surprise de taux directeur, surprise de trajectoire / path surprise et choc d’information. La réaction dépend ensuite de duration, levier, convexité, beta crédit, sensibilité des bénéfices, différentiels de taux relatifs, positionnement et liquidité. Une même hausse nominale de taux peut donc produire des résultats multi-actifs très différents selon les régimes.",
+        },
+      },
+      comparison: {
+        title: {
+          en: "First-pass cross-asset framework",
+          fr: "Cadre multi-actifs de premier niveau",
+        },
+        headers: [
+          { en: "Asset", fr: "Actif" },
+          { en: "Key monetary channel", fr: "Canal monétaire clé" },
+          { en: "Important caveat", fr: "Nuance importante" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Government bonds", fr: "Obligations souveraines" },
+            { en: "Expected policy + inflation + term premium", fr: "Politique attendue + inflation + term premium" },
+            { en: "Different maturities can move differently", fr: "Les maturités peuvent bouger différemment" },
+          ]},
+          { cells: [
+            { en: "Credit", fr: "Crédit" },
+            { en: "Risk-free rates + spread + refinancing", fr: "Taux sans risque + spread + refinancement" },
+            { en: "Spread can offset rate move", fr: "Le spread peut compenser le mouvement de taux" },
+          ]},
+          { cells: [
+            { en: "Equities", fr: "Actions / equities" },
+            { en: "Discount rate + earnings + risk appetite", fr: "Discount rate + bénéfices + appétit pour le risque" },
+            { en: "Sector and duration sensitivity differ", fr: "Sensibilités sectorielles et duration différentes" },
+          ]},
+          { cells: [
+            { en: "FX", fr: "Devises / FX" },
+            { en: "Relative rates + relative growth + flows", fr: "Taux relatifs + croissance relative + flux" },
+            { en: "Relative, not absolute, pricing matters", fr: "Le relatif compte plus que l’absolu" },
+          ]},
+        ],
+      },
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "forms-of-money",
+      question: {
+        en: "Which statement correctly distinguishes a bank deposit from a central-bank reserve balance?",
+        fr: "Quelle proposition distingue correctement un dépôt bancaire d’une réserve de banque centrale ?",
+      },
+      options: [
+        { id: "a", label: { en: "They are always the exact same liability", fr: "Ce sont toujours exactement le même passif" } },
+        { id: "b", label: { en: "A deposit is generally a commercial-bank liability; reserves are central-bank liabilities held by eligible institutions", fr: "Un dépôt est généralement un passif de banque commerciale ; les réserves sont des passifs de banque centrale détenus par des institutions éligibles" } },
+        { id: "c", label: { en: "Households normally settle coffee purchases directly with reserve balances", fr: "Les ménages règlent normalement leur café directement en réserves de banque centrale" } },
+        { id: "d", label: { en: "Deposits can never be used for payments", fr: "Les dépôts ne peuvent jamais être utilisés pour les paiements" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Commercial-bank deposits and central-bank reserves are different liabilities issued by different institutions and used in different layers of the payment system.",
+        fr: "Dépôts de banques commerciales et réserves de banque centrale sont des passifs différents, émis par des institutions différentes et utilisés à différents niveaux du système de paiement.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "bank-balance-sheet",
+      question: {
+        en: "On a commercial bank's balance sheet, a customer loan is usually what?",
+        fr: "Dans le bilan d’une banque commerciale, un prêt accordé à un client est généralement quoi ?",
+      },
+      options: [
+        { id: "a", label: { en: "An asset", fr: "Un actif" } },
+        { id: "b", label: { en: "A customer-deposit liability", fr: "Un passif de dépôt client" } },
+        { id: "c", label: { en: "Equity", fr: "Des capitaux propres" } },
+        { id: "d", label: { en: "A tax expense", fr: "Une charge fiscale" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "The borrower owes future payments to the bank, so the loan is a bank asset.",
+        fr: "L’emprunteur doit des paiements futurs à la banque : le prêt est donc un actif bancaire.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "deposit-creation",
+      question: {
+        en: "When a bank originates a new loan and credits the borrower's deposit account, what can happen initially?",
+        fr: "Lorsqu’une banque accorde un nouveau prêt et crédite le compte de dépôt de l’emprunteur, que peut-il se passer initialement ?",
+      },
+      options: [
+        { id: "a", label: { en: "A loan asset and deposit liability are created together", fr: "Un actif de prêt et un passif de dépôt sont créés ensemble" } },
+        { id: "b", label: { en: "The bank must physically print banknotes first", fr: "La banque doit d’abord imprimer physiquement des billets" } },
+        { id: "c", label: { en: "Bank capital automatically doubles", fr: "Le capital bancaire double automatiquement" } },
+        { id: "d", label: { en: "No balance-sheet entry occurs", fr: "Aucune écriture de bilan n’a lieu" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Loan origination can expand both sides of the bank's balance sheet: the loan is an asset and the new deposit is a liability.",
+        fr: "L’octroi du prêt peut augmenter les deux côtés du bilan : le prêt est un actif et le nouveau dépôt un passif.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "real-rate",
+      question: {
+        en: "A nominal rate is 5% and inflation is 3%. What is the approximate real rate?",
+        fr: "Un taux nominal vaut 5 % et l’inflation 3 %. Quel est le taux réel approximatif ?",
+      },
+      options: [
+        { id: "a", label: { en: "8%", fr: "8 %" } },
+        { id: "b", label: { en: "5%", fr: "5 %" } },
+        { id: "c", label: { en: "3%", fr: "3 %" } },
+        { id: "d", label: { en: "2%", fr: "2 %" } },
+      ],
+      correctOption: "d",
+      explanation: {
+        en: "Using the approximation: 5% − 3% = 2%.",
+        fr: "Avec l’approximation : 5 % − 3 % = 2 %.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "policy-transmission",
+      question: {
+        en: "Which statement about monetary-policy transmission is most accurate?",
+        fr: "Quelle proposition sur la transmission de politique monétaire est la plus juste ?",
+      },
+      options: [
+        { id: "a", label: { en: "A policy-rate move instantly changes every borrowing rate by exactly the same amount", fr: "Une variation du taux directeur modifie instantanément tous les taux d’emprunt exactement du même montant" } },
+        { id: "b", label: { en: "Transmission works through several channels and can vary in speed and strength", fr: "La transmission passe par plusieurs canaux et peut varier en vitesse et en intensité" } },
+        { id: "c", label: { en: "Financial markets cannot move before the official decision", fr: "Les marchés ne peuvent pas bouger avant la décision officielle" } },
+        { id: "d", label: { en: "Only banks are affected by monetary policy", fr: "Seules les banques sont affectées par la politique monétaire" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Transmission operates through rates, lending, asset prices, FX, expectations and confidence, with different lags and pass-through.",
+        fr: "La transmission passe par taux, crédit, prix d’actifs, FX, anticipations et confiance, avec différents délais et degrés de pass-through.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "yield-curve",
+      question: {
+        en: "If the 10-year yield is 3.5% and the 2-year yield is 4.0%, what is the 2s10s spread using 10Y minus 2Y?",
+        fr: "Si le yield 10 ans est 3,5 % et le 2 ans 4,0 %, quel est le spread 2s10s calculé comme 10Y moins 2Y ?",
+      },
+      options: [
+        { id: "a", label: { en: "+50 bp", fr: "+50 pb" } },
+        { id: "b", label: { en: "0 bp", fr: "0 pb" } },
+        { id: "c", label: { en: "−50 bp", fr: "−50 pb" } },
+        { id: "d", label: { en: "−350 bp", fr: "−350 pb" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "3.5% − 4.0% = −0.5%, equal to −50 basis points.",
+        fr: "3,5 % − 4,0 % = −0,5 %, soit −50 points de base.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "central-bank-tools",
+      question: {
+        en: "Which is a common channel through which central-bank communication can affect markets?",
+        fr: "Quel est un canal courant par lequel la communication d’une banque centrale peut affecter les marchés ?",
+      },
+      options: [
+        { id: "a", label: { en: "Changing expectations about future policy", fr: "Modifier les anticipations concernant la politique future" } },
+        { id: "b", label: { en: "Guaranteeing every stock price", fr: "Garantir le prix de chaque action" } },
+        { id: "c", label: { en: "Eliminating all credit risk", fr: "Éliminer tout risque de crédit" } },
+        { id: "d", label: { en: "Fixing all long-term yields permanently", fr: "Fixer définitivement tous les yields longs" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Forward guidance and communication can change the market's expected path of policy, which can reprice rates and other assets.",
+        fr: "La forward guidance et la communication peuvent modifier la trajectoire de politique attendue par le marché, ce qui peut repricer les taux et d’autres actifs.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "cross-asset-policy",
+      question: {
+        en: "Why can the same rate hike produce different market reactions on different days?",
+        fr: "Pourquoi une même hausse de taux peut-elle produire des réactions de marché différentes selon les jours ?",
+      },
+      options: [
+        { id: "a", label: { en: "Because markets react to surprises, expectations, information and positioning, not only the headline rate", fr: "Parce que les marchés réagissent aux surprises, anticipations, informations et positionnements, pas seulement au taux annoncé" } },
+        { id: "b", label: { en: "Because bond mathematics changes every day", fr: "Parce que les mathématiques obligataires changent chaque jour" } },
+        { id: "c", label: { en: "Because central banks directly choose every asset price", fr: "Parce que les banques centrales choisissent directement chaque prix d’actif" } },
+        { id: "d", label: { en: "There is no relationship between rates and markets", fr: "Il n’existe aucun lien entre taux et marchés" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Markets price the difference between what happened and what was expected, plus the information embedded in the decision and changes in the future path.",
+        fr: "Les marchés pricent l’écart entre ce qui s’est produit et ce qui était attendu, l’information contenue dans la décision et les changements de trajectoire future.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Walk me through what happens across markets if a central bank becomes more hawkish than expected.",
+      fr: "Explique-moi ce qui peut se passer sur les marchés si une banque centrale devient plus restrictive / hawkish que prévu.",
+    },
+    framework: [
+      {
+        en: "Start with expectations: the key is more hawkish than what was already priced.",
+        fr: "Commencer par les anticipations : l’important est d’être plus hawkish que ce qui était déjà pricé.",
+      },
+      {
+        en: "Rates: front-end yields may rise as the expected policy path reprices; the long end depends on inflation, growth and term-premium expectations.",
+        fr: "Taux : les yields courts peuvent monter avec le repricing de la trajectoire monétaire ; le long end dépend des anticipations d’inflation, croissance et term premium.",
+      },
+      {
+        en: "Credit: higher risk-free yields and tighter financing can pressure borrowers, but spread reaction depends on growth and risk sentiment.",
+        fr: "Crédit : taux sans risque plus élevés et financement plus strict peuvent peser sur les emprunteurs, mais le spread dépend aussi de la croissance et du sentiment de risque.",
+      },
+      {
+        en: "Equities: higher discount rates can pressure valuations, especially long-duration exposures, while earnings expectations can change at the same time.",
+        fr: "Actions : des discount rates plus élevés peuvent peser sur les valorisations, surtout les expositions longue duration, tandis que les anticipations de bénéfices peuvent aussi évoluer.",
+      },
+      {
+        en: "FX: think relative policy, relative growth and positioning rather than assuming the currency must always strengthen.",
+        fr: "FX : raisonner en politique relative, croissance relative et positionnement plutôt que supposer que la devise doit toujours se renforcer.",
+      },
+    ],
+    sample: {
+      en: "If the central bank is more hawkish than expected, I would first look at how the expected policy path changes rather than just the headline decision. Front-end yields would often reprice higher, while the long end could rise or fall depending on whether investors focus more on inflation persistence or weaker future growth. Credit can face tighter refinancing conditions, and equities can see valuation pressure through higher discount rates, particularly in long-duration sectors. For FX, I would compare the revised rate path with other countries and also consider growth and positioning. The important point is that market reaction depends on the surprise relative to expectations, not simply on whether rates went up.",
+      fr: "Si la banque centrale est plus hawkish que prévu, je regarde d’abord comment la trajectoire anticipée des taux évolue plutôt que seulement la décision headline. Les yields du front end peuvent généralement être repricés à la hausse, tandis que le long end peut monter ou baisser selon que les investisseurs se concentrent davantage sur la persistance de l’inflation ou sur une croissance future plus faible. Le crédit peut subir des conditions de refinancement plus strictes et les actions une pression de valorisation via des discount rates plus élevés, particulièrement dans les secteurs longue duration. Pour le FX, je compare la nouvelle trajectoire de taux avec celle des autres pays et j’intègre aussi croissance et positionnement. Le point essentiel est que la réaction dépend de la surprise par rapport aux attentes, pas simplement du fait que les taux aient augmenté.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
