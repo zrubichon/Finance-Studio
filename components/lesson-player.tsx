@@ -286,25 +286,26 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
         </div>
       </section>
 
-      <section className="financial-system-map" aria-label={text("Financial system map", "Carte du système financier")}>
-        <div className="system-map-node">
-          <span>01</span>
-          <strong>{text("Savers & investors", "Épargnants & investisseurs")}</strong>
-          <small>{text("Households · funds · institutions", "Ménages · fonds · institutions")}</small>
-        </div>
-        <b>→</b>
-        <div className="system-map-bridge">
-          <div><strong>{text("Banks", "Banques")}</strong><small>{text("Loans / intermediation", "Prêts / intermédiation")}</small></div>
-          <span>{text("OR", "OU")}</span>
-          <div><strong>{text("Capital markets", "Marchés de capitaux")}</strong><small>{text("Stocks · bonds · funds", "Actions · obligations · fonds")}</small></div>
-        </div>
-        <b>→</b>
-        <div className="system-map-node">
-          <span>02</span>
-          <strong>{text("Users of capital", "Utilisateurs du capital")}</strong>
-          <small>{text("Companies · governments · households", "Entreprises · États · ménages")}</small>
-        </div>
-      </section>
+      {lesson.overviewFlow && (
+        <section className="lesson-overview-flow" aria-label={loc(lesson.overviewFlow.title)}>
+          <div className="lesson-flow-heading">
+            <span className="mini-label">{text("CONCEPT MAP", "CARTE CONCEPTUELLE")}</span>
+            <strong>{loc(lesson.overviewFlow.title)}</strong>
+          </div>
+          <div className="lesson-flow-steps">
+            {lesson.overviewFlow.steps.map((step, index) => (
+              <div className="lesson-flow-segment" key={step.title.en}>
+                <article>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{loc(step.title)}</strong>
+                  <small>{loc(step.detail)}</small>
+                </article>
+                {index < lesson.overviewFlow!.steps.length - 1 && <b aria-hidden="true">→</b>}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div className="lesson-layout">
         <aside className="lesson-toc">
@@ -348,6 +349,50 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
                   </div>
                   <p>{loc(section.explanation[mode])}</p>
                 </div>
+
+                {section.formula && (
+                  <div className="lesson-formula">
+                    <div className="lesson-formula-head">
+                      <span className="mini-label">{text("FORMULA", "FORMULE")}</span>
+                      <strong>{loc(section.formula.label)}</strong>
+                    </div>
+                    <code>{section.formula.expression}</code>
+                    <p>{loc(section.formula.explanation)}</p>
+                    {section.formula.workedExample && (
+                      <div className="lesson-formula-example">
+                        <span>{text("Worked example", "Exemple chiffré")}</span>
+                        <p>{loc(section.formula.workedExample)}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {section.comparison && (
+                  <div className="lesson-comparison">
+                    <span className="mini-label">{text("COMPARISON", "COMPARAISON")}</span>
+                    <h3>{loc(section.comparison.title)}</h3>
+                    <div className="lesson-comparison-scroll">
+                      <table>
+                        <thead>
+                          <tr>
+                            {section.comparison.headers.map((header) => (
+                              <th key={header.en}>{loc(header)}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {section.comparison.rows.map((row, rowIndex) => (
+                            <tr key={rowIndex}>
+                              {row.cells.map((cell, cellIndex) => (
+                                <td key={cellIndex}>{loc(cell)}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
 
                 {section.example && (
                   <div className="lesson-example">
