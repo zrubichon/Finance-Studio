@@ -3250,7 +3250,893 @@ export const timeValueOfMoneyLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson];
+
+export const riskReturnDiversificationLesson: FinanceLesson = {
+  slug: "year-1-risk-return-diversification",
+  year: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations" },
+  domain: { en: "Portfolio & Risk", fr: "Portefeuille & risque / Portfolio & Risk" },
+  title: {
+    en: "Risk, Return & Diversification",
+    fr: "Risque, rendement & diversification / Risk, Return & Diversification",
+  },
+  subtitle: {
+    en: "Learn how finance measures return and uncertainty, why correlation matters as much as volatility, how portfolio risk differs from single-asset risk, and why diversification reduces some risks but never eliminates all uncertainty.",
+    fr: "Comprendre comment la finance mesure rendement et incertitude, pourquoi la corrélation / correlation compte autant que la volatilité, comment le risque d’un portefeuille diffère du risque d’un actif isolé et pourquoi la diversification réduit certains risques sans jamais supprimer toute incertitude.",
+  },
+  duration: { en: "85–105 min", fr: "85–105 min" },
+  prerequisites: [
+    {
+      en: "Time Value of Money",
+      fr: "Valeur temps de l’argent / Time Value of Money",
+    },
+    {
+      en: "Basic percentages and square roots",
+      fr: "Pourcentages de base et racines carrées",
+    },
+  ],
+  objectives: [
+    {
+      en: "Calculate holding-period return, expected return and weighted portfolio return.",
+      fr: "Calculer rendement de période / holding-period return, rendement attendu / expected return et rendement pondéré d’un portefeuille.",
+    },
+    {
+      en: "Explain variance and standard deviation as measures of dispersion rather than guaranteed future loss.",
+      fr: "Expliquer variance et écart-type / standard deviation comme mesures de dispersion et non comme pertes futures garanties.",
+    },
+    {
+      en: "Calculate and interpret covariance and correlation.",
+      fr: "Calculer et interpréter covariance et corrélation / correlation.",
+    },
+    {
+      en: "Use the two-asset portfolio variance formula and explain the diversification effect.",
+      fr: "Utiliser la formule de variance d’un portefeuille à deux actifs et expliquer l’effet de diversification.",
+    },
+    {
+      en: "Distinguish systematic risk from idiosyncratic risk.",
+      fr: "Distinguer risque systématique / systematic risk et risque spécifique / idiosyncratic risk.",
+    },
+    {
+      en: "Interpret the Sharpe ratio and recognize its limitations.",
+      fr: "Interpréter le ratio de Sharpe / Sharpe ratio et reconnaître ses limites.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "From individual returns to portfolio risk",
+      fr: "Du rendement individuel au risque du portefeuille",
+    },
+    steps: [
+      {
+        title: { en: "Returns", fr: "Rendements / Returns" },
+        detail: { en: "Price change · income · expected return", fr: "Variation de prix · revenu · rendement attendu" },
+      },
+      {
+        title: { en: "Single-asset risk", fr: "Risque d’un actif" },
+        detail: { en: "Variance · volatility · downside", fr: "Variance · volatilité · downside" },
+      },
+      {
+        title: { en: "Co-movement", fr: "Co-mouvement" },
+        detail: { en: "Covariance · correlation", fr: "Covariance · corrélation" },
+      },
+      {
+        title: { en: "Portfolio outcome", fr: "Résultat portefeuille" },
+        detail: { en: "Weights · diversification · risk-adjusted return", fr: "Poids · diversification · rendement ajusté du risque" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "risk-return-intuition",
+      kicker: { en: "01 · RETURN IS NOT FREE", fr: "01 · LE RENDEMENT N’EST PAS GRATUIT" },
+      title: {
+        en: "Return is compensation for deploying capital; risk is uncertainty around outcomes",
+        fr: "Le rendement rémunère le capital engagé ; le risque représente l’incertitude sur les résultats",
+      },
+      coreFacts: [
+        {
+          en: "Return measures the economic gain or loss on invested capital over a defined period.",
+          fr: "Le rendement / return mesure le gain ou la perte économique sur un capital investi pendant une période définie.",
+        },
+        {
+          en: "Risk is multidimensional: volatility, drawdown, credit loss, liquidity, concentration and tail outcomes capture different forms of uncertainty.",
+          fr: "Le risque est multidimensionnel : volatilité, drawdown, perte de crédit, liquidité, concentration et événements extrêmes / tail outcomes décrivent différentes formes d’incertitude.",
+        },
+        {
+          en: "Higher expected return is not a guarantee of higher realized return.",
+          fr: "Un rendement attendu / expected return plus élevé ne garantit pas un rendement réalisé plus élevé.",
+        },
+        {
+          en: "A useful portfolio decision compares expected reward with the nature, size and timing of the risks required to earn it.",
+          fr: "Une bonne décision de portefeuille compare le rendement attendu avec la nature, la taille et le timing des risques nécessaires pour l’obtenir.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If one investment might earn 8% but can move sharply up or down, while another pays a more stable 3%, the first does not automatically 'beat' the second. You need to understand how uncertain the 8% is, how much loss you could tolerate and how the investment behaves with the rest of your portfolio.",
+          fr: "Si un investissement peut rapporter 8 % mais varier fortement à la hausse comme à la baisse, alors qu’un autre rapporte un 3 % plus stable, le premier ne « bat » pas automatiquement le second. Il faut comprendre l’incertitude autour des 8 %, la perte que tu peux supporter et le comportement de l’investissement avec le reste du portefeuille.",
+        },
+        Intermediate: {
+          en: "Expected return summarizes the central tendency of possible outcomes, while risk describes the distribution around that expectation. Variance and volatility are common statistical measures, but economically meaningful risk also includes asymmetry, tail loss, liquidity and horizon mismatch.",
+          fr: "Le rendement attendu résume la tendance centrale des résultats possibles, tandis que le risque décrit leur distribution autour de cette attente. Variance et volatilité sont des mesures statistiques courantes, mais le risque économique comprend aussi asymétrie, pertes extrêmes / tail losses, liquidité et inadéquation d’horizon.",
+        },
+        Professional: {
+          en: "Risk should be defined relative to an objective and liability structure, not treated as a single universal number. Volatility is a convenient second-moment statistic, but institutional risk frameworks combine factor exposures, drawdown, liquidity, stress loss, tail metrics, leverage and path dependency.",
+          fr: "Le risque doit être défini relativement à un objectif et une structure de passifs, pas comme un nombre universel unique. La volatilité est une statistique pratique de second moment, mais les cadres institutionnels combinent expositions factorielles, drawdown, liquidité, pertes de stress, tail metrics, levier et dépendance au chemin.",
+        },
+      },
+      comparison: {
+        title: { en: "Different meanings of risk", fr: "Différentes dimensions du risque" },
+        headers: [
+          { en: "Risk measure", fr: "Mesure de risque" },
+          { en: "What it captures", fr: "Ce qu’elle mesure" },
+          { en: "What it can miss", fr: "Ce qu’elle peut manquer" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Volatility", fr: "Volatilité / volatility" },
+            { en: "Dispersion of returns", fr: "Dispersion des rendements" },
+            { en: "Direction and tail shape", fr: "Direction et forme des tails" },
+          ]},
+          { cells: [
+            { en: "Drawdown", fr: "Drawdown / perte depuis un sommet" },
+            { en: "Peak-to-trough loss", fr: "Perte entre sommet et point bas" },
+            { en: "Probability before the event", fr: "Probabilité avant l’événement" },
+          ]},
+          { cells: [
+            { en: "Credit risk", fr: "Risque de crédit / credit risk" },
+            { en: "Failure to meet contractual payments", fr: "Défaut sur paiements contractuels" },
+            { en: "Market volatility alone", fr: "La volatilité de marché seule" },
+          ]},
+          { cells: [
+            { en: "Liquidity risk", fr: "Risque de liquidité / liquidity risk" },
+            { en: "Cost or difficulty of exiting", fr: "Coût ou difficulté de sortie" },
+            { en: "Fundamental value alone", fr: "Valeur fondamentale seule" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Realized return",
+          fr: "rendement réalisé / realized return",
+          definition: {
+            en: "The return actually experienced over a completed period.",
+            fr: "Rendement effectivement obtenu sur une période terminée.",
+          },
+        },
+        {
+          en: "Expected return",
+          fr: "rendement attendu / expected return",
+          definition: {
+            en: "A probability-weighted or model-based expectation of future return.",
+            fr: "Espérance de rendement futur fondée sur des probabilités ou un modèle.",
+          },
+        },
+      ],
+    },
+    {
+      id: "return-calculation",
+      kicker: { en: "02 · MEASURING RETURN", fr: "02 · MESURER LE RENDEMENT" },
+      title: {
+        en: "Price change and income both contribute to total return",
+        fr: "Variation de prix et revenu contribuent tous deux au rendement total",
+      },
+      coreFacts: [
+        {
+          en: "Holding-period return combines price change with cash income received during the period.",
+          fr: "Le rendement de période / holding-period return combine variation du prix et revenu cash reçu pendant la période.",
+        },
+        {
+          en: "Returns should be measured over clearly defined horizons and with consistent treatment of distributions, fees and reinvestment.",
+          fr: "Les rendements doivent être mesurés sur des horizons clairement définis avec un traitement cohérent des distributions, frais et réinvestissements.",
+        },
+        {
+          en: "Arithmetic returns are convenient for one-period averages, while multi-period wealth compounds geometrically.",
+          fr: "Les rendements arithmétiques sont pratiques pour les moyennes sur une période, tandis que la richesse multi-périodes se capitalise géométriquement.",
+        },
+        {
+          en: "A loss of 50% requires a gain of 100% to return to the starting value.",
+          fr: "Une perte de 50 % nécessite ensuite un gain de 100 % pour revenir à la valeur de départ.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Buy at $100, receive $3 of income and finish at $108. Your gain is $11: $8 of price appreciation plus $3 of income. Divide $11 by the original $100 and your total return is 11%.",
+          fr: "Tu achètes à 100 $, reçois 3 $ de revenu et termines à 108 $. Ton gain total est 11 $ : 8 $ de hausse du prix plus 3 $ de revenu. En divisant 11 par les 100 $ initiaux, le rendement total est 11 %.",
+        },
+        Intermediate: {
+          en: "Holding-period return is a wealth-relative measure. Across multiple periods, cumulative wealth is obtained by multiplying gross returns, not by simply adding percentage returns. This is why volatility can create a gap between arithmetic average return and compound growth.",
+          fr: "Le holding-period return mesure l’évolution relative de la richesse. Sur plusieurs périodes, la richesse cumulée s’obtient en multipliant les rendements bruts, pas en additionnant simplement les pourcentages. C’est pourquoi la volatilité peut créer un écart entre moyenne arithmétique et croissance composée.",
+        },
+        Professional: {
+          en: "Performance measurement requires a convention for income, fees, taxes, cash flows and benchmark timing. Time-weighted return isolates investment performance from external cash flows, while money-weighted return reflects the investor's actual timing and is linked to IRR concepts.",
+          fr: "La mesure de performance exige une convention pour revenu, frais, fiscalité, flux externes et timing du benchmark. Le time-weighted return isole la performance d’investissement des flux externes, tandis que le money-weighted return reflète le timing réel de l’investisseur et se rapproche des concepts d’IRR.",
+        },
+      },
+      formula: {
+        label: { en: "Holding-period total return", fr: "Rendement total de période / Holding-period return" },
+        expression: "Return = (Ending Value − Starting Value + Income) ÷ Starting Value",
+        explanation: {
+          en: "Income can include dividends, coupons or other distributions, depending on the asset.",
+          fr: "Le revenu peut inclure dividendes, coupons ou autres distributions selon l’actif.",
+        },
+        workedExample: {
+          en: "($108 − $100 + $3) ÷ $100 = 11%.",
+          fr: "(108 $ − 100 $ + 3 $) ÷ 100 $ = 11 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Gross return",
+          fr: "rendement brut / gross return",
+          definition: {
+            en: "One plus the simple return, often used for compounding across periods.",
+            fr: "Un plus le rendement simple, souvent utilisé pour capitaliser plusieurs périodes.",
+          },
+        },
+        {
+          en: "Drawdown",
+          fr: "drawdown / perte depuis un sommet",
+          definition: {
+            en: "The decline from a prior peak to a subsequent trough before recovery.",
+            fr: "Baisse depuis un sommet antérieur jusqu’à un point bas avant récupération.",
+          },
+        },
+      ],
+    },
+    {
+      id: "expected-return",
+      kicker: { en: "03 · EXPECTED RETURN", fr: "03 · RENDEMENT ATTENDU" },
+      title: {
+        en: "Expected return is a probability-weighted average, not a promise",
+        fr: "Le rendement attendu est une moyenne pondérée par les probabilités, pas une promesse",
+      },
+      coreFacts: [
+        {
+          en: "Expected return weights each possible outcome by its probability.",
+          fr: "Le rendement attendu / expected return pondère chaque résultat possible par sa probabilité.",
+        },
+        {
+          en: "The expected return can be an outcome that never actually occurs.",
+          fr: "Le rendement attendu peut être une valeur qui ne se réalise jamais exactement.",
+        },
+        {
+          en: "Probabilities must sum to 100% in a complete discrete-state model.",
+          fr: "Les probabilités doivent totaliser 100 % dans un modèle discret complet.",
+        },
+        {
+          en: "Expected return depends on the quality of the assumptions; changing probabilities or scenarios changes the estimate.",
+          fr: "Le rendement attendu dépend de la qualité des hypothèses ; changer probabilités ou scénarios modifie l’estimation.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose an investment has a 60% chance of earning 15% and a 40% chance of losing 5%. Its expected return is 0.60×15% + 0.40×(−5%) = 7%. That does not mean you will earn exactly 7%; the actual outcome in this simple model is either +15% or −5%.",
+          fr: "Supposons qu’un investissement ait 60 % de chances de gagner 15 % et 40 % de chances de perdre 5 %. Son rendement attendu vaut 0,60×15 % + 0,40×(−5 %) = 7 %. Cela ne signifie pas que tu gagneras exactement 7 % ; dans ce modèle simple, le résultat réel est soit +15 %, soit −5 %.",
+        },
+        Intermediate: {
+          en: "Expected value compresses a return distribution into its first moment. It is useful for portfolio construction, but two assets with the same expected return can have radically different dispersion, skewness and tail risk.",
+          fr: "L’espérance compresse une distribution de rendement en son premier moment. Elle est utile pour la construction de portefeuille, mais deux actifs ayant le même expected return peuvent avoir dispersion, asymétrie et tail risk très différents.",
+        },
+        Professional: {
+          en: "Expected return can be estimated from equilibrium models, factor premia, scenario analysis, valuation-implied returns or forecasts. The estimate is inherently uncertain, so robust portfolio construction treats expected returns as noisy inputs rather than precise truths.",
+          fr: "Le rendement attendu peut être estimé via modèles d’équilibre, primes factorielles, scénarios, rendements implicites de valorisation ou prévisions. Cette estimation est intrinsèquement incertaine ; une construction robuste considère donc les expected returns comme des inputs bruités plutôt que des vérités précises.",
+        },
+      },
+      formula: {
+        label: { en: "Expected return", fr: "Rendement attendu / Expected return" },
+        expression: "E[R] = Σ pᵢ × Rᵢ",
+        explanation: {
+          en: "pᵢ is the probability of outcome i and Rᵢ is the return in that outcome.",
+          fr: "pᵢ est la probabilité du scénario i et Rᵢ le rendement dans ce scénario.",
+        },
+        workedExample: {
+          en: "0.60×15% + 0.40×(−5%) = 7%.",
+          fr: "0,60×15 % + 0,40×(−5 %) = 7 %.",
+        },
+      },
+    },
+    {
+      id: "variance-volatility",
+      kicker: { en: "04 · VARIANCE & VOLATILITY", fr: "04 · VARIANCE & VOLATILITÉ" },
+      title: {
+        en: "Volatility measures dispersion around an average outcome",
+        fr: "La volatilité mesure la dispersion autour d’un résultat moyen",
+      },
+      coreFacts: [
+        {
+          en: "Variance is the expected squared deviation from the mean; standard deviation is the square root of variance.",
+          fr: "La variance est l’espérance de l’écart au carré par rapport à la moyenne ; l’écart-type / standard deviation est la racine carrée de la variance.",
+        },
+        {
+          en: "Standard deviation is expressed in the same return units as the underlying data, making it easier to interpret than variance.",
+          fr: "L’écart-type s’exprime dans les mêmes unités de rendement que les données, ce qui le rend plus facile à interpréter que la variance.",
+        },
+        {
+          en: "Volatility treats upside and downside deviations symmetrically.",
+          fr: "La volatilité traite symétriquement les écarts positifs et négatifs.",
+        },
+        {
+          en: "Historical volatility is backward-looking and may not represent future risk, especially when regimes change.",
+          fr: "La volatilité historique est rétrospective et peut mal représenter le risque futur, surtout lors d’un changement de régime.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Return A that stays near 7% every period is more stable than Return B that swings between large gains and losses even if both average 7%. Standard deviation gives a number for how widely results tend to spread around the average.",
+          fr: "Un rendement A qui reste proche de 7 % à chaque période est plus stable qu’un rendement B qui alterne fortes hausses et fortes baisses même si les deux ont une moyenne de 7 %. L’écart-type donne un nombre décrivant l’ampleur habituelle de la dispersion autour de la moyenne.",
+        },
+        Intermediate: {
+          en: "Variance squares deviations so positive and negative differences do not cancel. Standard deviation then converts the result back into return units. Under a normal-distribution approximation, volatility also connects to probability ranges, though real returns often exhibit skewness and fat tails.",
+          fr: "La variance met les écarts au carré afin que différences positives et négatives ne s’annulent pas. L’écart-type reconvertit ensuite le résultat en unités de rendement. Sous approximation normale, la volatilité peut être reliée à des intervalles de probabilité, mais les rendements réels présentent souvent asymétrie et queues épaisses / fat tails.",
+        },
+        Professional: {
+          en: "Volatility is a conditional and horizon-dependent statistic. Annualization usually scales standard deviation by the square root of time only under assumptions such as independent, identically distributed increments. Clustering, autocorrelation, stochastic volatility and jumps can invalidate naive scaling.",
+          fr: "La volatilité dépend du régime et de l’horizon. L’annualisation par racine carrée du temps suppose notamment des variations indépendantes et identiquement distribuées. Clustering de volatilité, autocorrélation, volatilité stochastique et jumps peuvent rendre ce scaling naïf incorrect.",
+        },
+      },
+      formula: {
+        label: { en: "State-based variance and volatility", fr: "Variance et volatilité par scénarios" },
+        expression: "Variance = Σ pᵢ(Rᵢ − E[R])²   ·   σ = √Variance",
+        explanation: {
+          en: "Using decimal returns avoids unit confusion. Standard deviation σ is the square root of variance.",
+          fr: "Utiliser les rendements en décimales évite les confusions d’unités. L’écart-type σ est la racine carrée de la variance.",
+        },
+        workedExample: {
+          en: "For 60% chance of +15% and 40% chance of −5%, E[R]=7%. Variance = 0.60×0.08² + 0.40×(−0.12)² = 0.0096, so σ ≈ 9.80%.",
+          fr: "Avec 60 % de chances de +15 % et 40 % de chances de −5 %, E[R]=7 %. Variance = 0,60×0,08² + 0,40×(−0,12)² = 0,0096, donc σ ≈ 9,80 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Variance",
+          fr: "variance",
+          definition: {
+            en: "The average squared dispersion of outcomes around their mean under the chosen probability or sample convention.",
+            fr: "Dispersion moyenne au carré des résultats autour de leur moyenne selon la convention de probabilité ou d’échantillon utilisée.",
+          },
+        },
+        {
+          en: "Standard deviation",
+          fr: "écart-type / standard deviation",
+          definition: {
+            en: "The square root of variance, commonly interpreted as volatility for returns.",
+            fr: "Racine carrée de la variance, couramment interprétée comme volatilité pour des rendements.",
+          },
+        },
+      ],
+    },
+    {
+      id: "covariance-correlation",
+      kicker: { en: "05 · CO-MOVEMENT", fr: "05 · CO-MOUVEMENT" },
+      title: {
+        en: "Diversification depends on how assets move together",
+        fr: "La diversification dépend de la manière dont les actifs évoluent ensemble",
+      },
+      coreFacts: [
+        {
+          en: "Covariance measures whether two returns tend to move in the same or opposite directions, but its scale depends on the units and volatilities.",
+          fr: "La covariance mesure si deux rendements ont tendance à évoluer dans le même sens ou en sens opposé, mais son échelle dépend des unités et volatilités.",
+        },
+        {
+          en: "Correlation standardizes covariance to a range from −1 to +1.",
+          fr: "La corrélation / correlation standardise la covariance sur une plage de −1 à +1.",
+        },
+        {
+          en: "Correlation of +1 means perfect linear co-movement, −1 perfect opposite linear movement and 0 no linear correlation.",
+          fr: "Une corrélation de +1 signifie co-mouvement linéaire parfait, −1 mouvement linéaire opposé parfait et 0 absence de corrélation linéaire.",
+        },
+        {
+          en: "Zero correlation does not mean independence, and historical correlation can change materially in stress.",
+          fr: "Une corrélation nulle ne signifie pas indépendance, et les corrélations historiques peuvent fortement changer en période de stress.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If two investments always rise and fall together, owning both may not reduce risk very much. If their movements are less synchronized, weakness in one can sometimes be offset by strength or stability in the other. Correlation measures that relationship.",
+          fr: "Si deux investissements montent et baissent toujours ensemble, détenir les deux peut réduire assez peu le risque. Si leurs mouvements sont moins synchronisés, la faiblesse de l’un peut parfois être compensée par la force ou la stabilité de l’autre. La corrélation mesure cette relation.",
+        },
+        Intermediate: {
+          en: "Covariance enters portfolio variance directly, while correlation provides a scale-free interpretation. Correlation is especially useful for comparing relationships across pairs with different volatility levels.",
+          fr: "La covariance entre directement dans la variance de portefeuille, tandis que la corrélation fournit une interprétation indépendante de l’échelle. Elle est particulièrement utile pour comparer des paires présentant des niveaux de volatilité différents.",
+        },
+        Professional: {
+          en: "Correlation is regime-dependent, estimator-sensitive and nonlinear relationships can be invisible to Pearson correlation. Portfolio construction often supplements static correlation matrices with factor models, shrinkage, stress correlation and scenario analysis.",
+          fr: "La corrélation dépend du régime, de l’estimateur et peut manquer des relations non linéaires. La construction professionnelle complète donc souvent les matrices statiques par modèles factoriels, shrinkage, stress correlations et analyses de scénarios.",
+        },
+      },
+      formula: {
+        label: { en: "Correlation", fr: "Corrélation / Correlation" },
+        expression: "ρ₍A,B₎ = Cov(A,B) ÷ (σA × σB)",
+        explanation: {
+          en: "Correlation divides covariance by the product of the two standard deviations.",
+          fr: "La corrélation divise la covariance par le produit des deux écarts-types.",
+        },
+        workedExample: {
+          en: "If Cov(A,B)=0.006, σA=20% and σB=15%, correlation = 0.006 ÷ (0.20×0.15) = 0.20.",
+          fr: "Si Cov(A,B)=0,006, σA=20 % et σB=15 %, la corrélation = 0,006 ÷ (0,20×0,15) = 0,20.",
+        },
+      },
+      marketConnection: {
+        en: "Cross-asset correlations often change when inflation, liquidity or risk sentiment becomes the dominant market driver, reducing the protection investors expected from historical relationships.",
+        fr: "Les corrélations multi-actifs changent souvent lorsque inflation, liquidité ou sentiment de risque deviennent les moteurs dominants du marché, réduisant la protection attendue à partir des relations historiques.",
+      },
+      vocabulary: [
+        {
+          en: "Covariance",
+          fr: "covariance",
+          definition: {
+            en: "A measure of joint variation between two variables.",
+            fr: "Mesure de variation conjointe entre deux variables.",
+          },
+        },
+        {
+          en: "Correlation",
+          fr: "corrélation / correlation",
+          definition: {
+            en: "A standardized measure of linear co-movement ranging from −1 to +1.",
+            fr: "Mesure standardisée du co-mouvement linéaire comprise entre −1 et +1.",
+          },
+        },
+      ],
+    },
+    {
+      id: "portfolio-return",
+      kicker: { en: "06 · PORTFOLIO RETURN", fr: "06 · RENDEMENT DU PORTEFEUILLE" },
+      title: {
+        en: "Portfolio expected return is the weighted average of asset expected returns",
+        fr: "Le rendement attendu du portefeuille est la moyenne pondérée des rendements attendus",
+      },
+      coreFacts: [
+        {
+          en: "Portfolio weights represent the share of portfolio value allocated to each asset under the chosen convention.",
+          fr: "Les poids de portefeuille / portfolio weights représentent la part de valeur allouée à chaque actif selon la convention choisie.",
+        },
+        {
+          en: "For a fully invested long-only portfolio, weights commonly sum to 100%.",
+          fr: "Pour un portefeuille long-only entièrement investi, les poids totalisent généralement 100 %.",
+        },
+        {
+          en: "Expected portfolio return is linear in weights, unlike portfolio volatility.",
+          fr: "Le rendement attendu du portefeuille est linéaire par rapport aux poids, contrairement à la volatilité du portefeuille.",
+        },
+        {
+          en: "Leverage, short positions and cash can cause weights to behave differently from the simple long-only case.",
+          fr: "Le levier, les positions short et le cash peuvent rendre les poids différents du cas long-only simple.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If 60% of your portfolio is in an asset expected to return 8% and 40% is in an asset expected to return 3%, expected portfolio return is 0.60×8% + 0.40×3% = 6%.",
+          fr: "Si 60 % du portefeuille sont investis dans un actif au rendement attendu de 8 % et 40 % dans un actif à 3 %, le rendement attendu du portefeuille vaut 0,60×8 % + 0,40×3 % = 6 %.",
+        },
+        Intermediate: {
+          en: "Portfolio expected return is a weighted average because each dollar contributes proportionally to expected payoff. Risk does not aggregate the same way because cross-products between assets introduce covariance.",
+          fr: "Le rendement attendu du portefeuille est une moyenne pondérée car chaque dollar contribue proportionnellement au payoff attendu. Le risque ne s’additionne pas de la même manière car les termes croisés entre actifs introduisent la covariance.",
+        },
+        Professional: {
+          en: "Expected portfolio return is w'μ in vector notation. In optimization, this linear expected-return term is combined with a quadratic covariance term, constraints, transaction costs and estimation uncertainty.",
+          fr: "Le rendement attendu du portefeuille s’écrit w'μ en notation vectorielle. En optimisation, ce terme linéaire est combiné à un terme quadratique de covariance, des contraintes, coûts de transaction et incertitudes d’estimation.",
+        },
+      },
+      formula: {
+        label: { en: "Expected portfolio return", fr: "Rendement attendu du portefeuille" },
+        expression: "E[Rₚ] = Σ wᵢ × E[Rᵢ]",
+        explanation: {
+          en: "wᵢ is the portfolio weight of asset i.",
+          fr: "wᵢ représente le poids de l’actif i dans le portefeuille.",
+        },
+        workedExample: {
+          en: "60%×8% + 40%×3% = 6.0%.",
+          fr: "60 %×8 % + 40 %×3 % = 6,0 %.",
+        },
+      },
+    },
+    {
+      id: "portfolio-variance",
+      kicker: { en: "07 · DIVERSIFICATION MATHEMATICS", fr: "07 · MATHÉMATIQUES DE LA DIVERSIFICATION" },
+      title: {
+        en: "Portfolio risk depends on weights, volatilities and correlation",
+        fr: "Le risque du portefeuille dépend des poids, volatilités et corrélations",
+      },
+      coreFacts: [
+        {
+          en: "Portfolio volatility is not generally the weighted average of individual volatilities.",
+          fr: "La volatilité du portefeuille n’est généralement pas la moyenne pondérée des volatilités individuelles.",
+        },
+        {
+          en: "The covariance term captures the diversification benefit or penalty from co-movement.",
+          fr: "Le terme de covariance capture le bénéfice ou la pénalité de diversification liée au co-mouvement.",
+        },
+        {
+          en: "With correlation below +1, combining risky assets can produce portfolio volatility below the weighted average of their individual volatilities.",
+          fr: "Avec une corrélation inférieure à +1, combiner des actifs risqués peut produire une volatilité de portefeuille inférieure à la moyenne pondérée des volatilités individuelles.",
+        },
+        {
+          en: "Lower correlation improves diversification, but negative or low historical correlation is not guaranteed to persist.",
+          fr: "Une corrélation plus faible améliore la diversification, mais une corrélation historique faible ou négative n’est pas garantie dans le futur.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Take two assets with equal 50% weights. Asset A has 20% volatility and Asset B 10%. If correlation is zero, portfolio volatility is about 11.18%, not 15%. The reason is that their movements do not perfectly reinforce each other.",
+          fr: "Prenons deux actifs pondérés chacun à 50 %. L’actif A a 20 % de volatilité et B 10 %. Si leur corrélation est nulle, la volatilité du portefeuille est d’environ 11,18 %, et non 15 %. Leurs mouvements ne se renforcent pas parfaitement.",
+        },
+        Intermediate: {
+          en: "The two-asset formula has three pieces: each asset's own variance contribution plus a covariance interaction term. As correlation falls, the interaction term falls and portfolio variance declines, all else equal.",
+          fr: "La formule à deux actifs possède trois parties : contribution de variance de chaque actif plus terme d’interaction de covariance. Lorsque la corrélation baisse, ce terme baisse et la variance de portefeuille diminue, toutes choses égales par ailleurs.",
+        },
+        Professional: {
+          en: "Portfolio variance generalizes to w'Σw. Diversification depends on the covariance matrix, not security count. Estimation error in Σ, unstable correlations and hidden common factors can materially change ex-ante versus realized portfolio risk.",
+          fr: "La variance de portefeuille se généralise en w'Σw. La diversification dépend de la matrice de covariance, pas du nombre de titres. Erreurs d’estimation de Σ, corrélations instables et facteurs communs cachés peuvent fortement séparer risque ex ante et risque réalisé.",
+        },
+      },
+      formula: {
+        label: { en: "Two-asset portfolio variance", fr: "Variance d’un portefeuille à deux actifs" },
+        expression: "σₚ² = wA²σA² + wB²σB² + 2wAwBσAσBρAB",
+        explanation: {
+          en: "The last term is the interaction created by co-movement.",
+          fr: "Le dernier terme représente l’interaction créée par le co-mouvement.",
+        },
+        workedExample: {
+          en: "wA=wB=50%, σA=20%, σB=10%, ρ=0 → variance = 0.25×0.20² + 0.25×0.10² = 0.0125, so σₚ ≈ 11.18%.",
+          fr: "wA=wB=50 %, σA=20 %, σB=10 %, ρ=0 → variance = 0,25×0,20² + 0,25×0,10² = 0,0125, donc σₚ ≈ 11,18 %.",
+        },
+      },
+      comparison: {
+        title: { en: "Effect of correlation", fr: "Effet de la corrélation" },
+        headers: [
+          { en: "Correlation", fr: "Corrélation" },
+          { en: "Diversification effect", fr: "Effet de diversification" },
+          { en: "Interpretation", fr: "Interprétation" },
+        ],
+        rows: [
+          { cells: [
+            { en: "+1", fr: "+1" },
+            { en: "No volatility benefit beyond weighting", fr: "Pas de bénéfice de volatilité au-delà des poids" },
+            { en: "Perfect same-direction linear movement", fr: "Mouvement linéaire parfait dans le même sens" },
+          ]},
+          { cells: [
+            { en: "0", fr: "0" },
+            { en: "Meaningful diversification", fr: "Diversification significative" },
+            { en: "No linear correlation", fr: "Pas de corrélation linéaire" },
+          ]},
+          { cells: [
+            { en: "−1", fr: "−1" },
+            { en: "Potential complete hedge at specific weights", fr: "Couverture potentiellement complète pour certains poids" },
+            { en: "Perfect opposite linear movement", fr: "Mouvement linéaire parfaitement opposé" },
+          ]},
+        ],
+      },
+    },
+    {
+      id: "systematic-idiosyncratic",
+      kicker: { en: "08 · WHAT DIVERSIFICATION CAN REMOVE", fr: "08 · CE QUE LA DIVERSIFICATION PEUT RÉDUIRE" },
+      title: {
+        en: "Idiosyncratic risk can be diversified; systematic risk remains",
+        fr: "Le risque spécifique peut être diversifié ; le risque systématique demeure",
+      },
+      coreFacts: [
+        {
+          en: "Idiosyncratic risk is linked to company- or security-specific events.",
+          fr: "Le risque spécifique / idiosyncratic risk provient d’événements propres à une entreprise ou un titre.",
+        },
+        {
+          en: "Systematic risk comes from broad drivers that affect many assets simultaneously.",
+          fr: "Le risque systématique / systematic risk provient de moteurs larges affectant de nombreux actifs simultanément.",
+        },
+        {
+          en: "Holding more securities can reduce idiosyncratic concentration if the exposures are genuinely different.",
+          fr: "Détenir davantage de titres peut réduire la concentration spécifique si les expositions sont réellement différentes.",
+        },
+        {
+          en: "Diversification cannot eliminate broad market, macro or common-factor shocks from a risky portfolio.",
+          fr: "La diversification ne peut pas éliminer les chocs de marché, macro ou factoriels communs d’un portefeuille risqué.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If one company loses a major customer, that is mostly company-specific risk. Owning many unrelated companies can reduce the impact. But if a global recession hurts almost every company, simply owning more stocks may not remove that broad market risk.",
+          fr: "Si une entreprise perd un client majeur, il s’agit surtout d’un risque spécifique. Détenir de nombreuses entreprises différentes peut réduire son impact. Mais si une récession mondiale touche presque toutes les entreprises, simplement posséder davantage d’actions ne supprime pas ce risque de marché global.",
+        },
+        Intermediate: {
+          en: "Portfolio theory separates diversifiable residual risk from common-factor risk. As the number of independent positions grows, security-specific variance can decline, but exposures to market, rates, growth, inflation, currency or other common factors remain.",
+          fr: "La théorie de portefeuille sépare risque résiduel diversifiable et risque de facteurs communs. Lorsque le nombre de positions indépendantes augmente, la variance spécifique peut baisser, mais les expositions au marché, aux taux, à la croissance, à l’inflation, aux devises ou autres facteurs communs restent présentes.",
+        },
+        Professional: {
+          en: "The relevant distinction is factor decomposition rather than a simplistic stock-count rule. Residual variance can be diversified, while priced systematic exposures persist. Hidden concentration can remain through common beta, duration, credit, liquidity or volatility factors even in portfolios with hundreds of names.",
+          fr: "La distinction pertinente vient de la décomposition factorielle plutôt que d’une règle simple sur le nombre d’actions. La variance résiduelle peut être diversifiée tandis que les expositions systématiques rémunérées persistent. Une concentration cachée peut subsister via beta commun, duration, crédit, liquidité ou volatilité même dans des portefeuilles comptant des centaines de lignes.",
+        },
+      },
+      marketConnection: {
+        en: "A portfolio of many technology stocks can have low single-name concentration but still carry large common exposure to growth expectations, real yields and equity-market beta.",
+        fr: "Un portefeuille contenant de nombreuses valeurs technologiques peut avoir une faible concentration par nom tout en conservant une forte exposition commune aux anticipations de croissance, aux taux réels et au beta actions.",
+      },
+      vocabulary: [
+        {
+          en: "Idiosyncratic risk",
+          fr: "risque spécifique / idiosyncratic risk",
+          definition: {
+            en: "Risk unique to a security, issuer or narrow exposure.",
+            fr: "Risque propre à un titre, émetteur ou exposition étroite.",
+          },
+        },
+        {
+          en: "Systematic risk",
+          fr: "risque systématique / systematic risk",
+          definition: {
+            en: "Risk associated with broad common factors affecting many assets.",
+            fr: "Risque associé à des facteurs larges communs affectant de nombreux actifs.",
+          },
+        },
+      ],
+    },
+    {
+      id: "sharpe-limits",
+      kicker: { en: "09 · RISK-ADJUSTED PERFORMANCE", fr: "09 · PERFORMANCE AJUSTÉE DU RISQUE" },
+      title: {
+        en: "The Sharpe ratio compares excess return with volatility",
+        fr: "Le ratio de Sharpe compare rendement excédentaire et volatilité",
+      },
+      coreFacts: [
+        {
+          en: "The Sharpe ratio divides excess return over a risk-free reference by volatility.",
+          fr: "Le ratio de Sharpe / Sharpe ratio divise le rendement excédentaire au-dessus d’une référence sans risque par la volatilité.",
+        },
+        {
+          en: "A higher Sharpe ratio indicates more excess return per unit of measured volatility under the chosen period and assumptions.",
+          fr: "Un Sharpe ratio plus élevé indique davantage de rendement excédentaire par unité de volatilité mesurée selon la période et les hypothèses choisies.",
+        },
+        {
+          en: "Sharpe ratios are sensitive to estimation window, return frequency, leverage, smoothing and non-normal return distributions.",
+          fr: "Les Sharpe ratios sont sensibles à la fenêtre d’estimation, fréquence des rendements, levier, lissage / smoothing et distributions non normales.",
+        },
+        {
+          en: "A Sharpe ratio should not be used alone to judge liquidity risk, drawdown severity, tail loss or investment suitability.",
+          fr: "Un Sharpe ratio ne doit pas être utilisé seul pour juger risque de liquidité, sévérité des drawdowns, pertes extrêmes ou adéquation d’un investissement.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a portfolio earns 9%, the risk-free rate is 3% and portfolio volatility is 12%, the excess return is 6%. Divide 6% by 12% and the Sharpe ratio is 0.50. It tells you how much excess return was earned relative to measured volatility.",
+          fr: "Si un portefeuille rapporte 9 %, que le taux sans risque vaut 3 % et que la volatilité est 12 %, le rendement excédentaire vaut 6 %. En divisant 6 % par 12 %, le Sharpe ratio vaut 0,50. Il mesure le rendement excédentaire obtenu relativement à la volatilité observée.",
+        },
+        Intermediate: {
+          en: "Sharpe is useful for comparing portfolios with similar measurement conventions, but it compresses the whole return distribution into mean excess return and standard deviation. Two strategies can share the same Sharpe while having very different drawdowns or tail risk.",
+          fr: "Le Sharpe est utile pour comparer des portefeuilles mesurés de manière cohérente, mais il compresse toute la distribution en rendement excédentaire moyen et écart-type. Deux stratégies peuvent avoir le même Sharpe tout en présentant des drawdowns ou tail risks très différents.",
+        },
+        Professional: {
+          en: "Sharpe is a mean-variance efficiency statistic, not a complete risk metric. Serial correlation, illiquid marks and option-like payoffs can inflate reported Sharpe. Professional performance attribution supplements it with drawdown, downside deviation, beta, factor exposure, stress tests and liquidity-adjusted analysis.",
+          fr: "Le Sharpe est une statistique d’efficacité moyenne-variance, pas une mesure complète du risque. Autocorrélation, valorisations d’actifs illiquides et payoffs optionnels peuvent gonfler le Sharpe publié. L’analyse professionnelle le complète avec drawdown, downside deviation, beta, facteurs, stress tests et analyse ajustée de la liquidité.",
+        },
+      },
+      formula: {
+        label: { en: "Sharpe ratio", fr: "Ratio de Sharpe / Sharpe ratio" },
+        expression: "Sharpe = (Rₚ − Rf) ÷ σₚ",
+        explanation: {
+          en: "Use consistent horizons for portfolio return, risk-free rate and volatility.",
+          fr: "Utiliser des horizons cohérents pour rendement du portefeuille, taux sans risque et volatilité.",
+        },
+        workedExample: {
+          en: "(9% − 3%) ÷ 12% = 0.50.",
+          fr: "(9 % − 3 %) ÷ 12 % = 0,50.",
+        },
+      },
+      comparison: {
+        title: { en: "What Sharpe sees and misses", fr: "Ce que le Sharpe voit et ne voit pas" },
+        headers: [
+          { en: "Captures", fr: "Capture" },
+          { en: "Does not fully capture", fr: "Ne capture pas complètement" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Average excess return", fr: "Rendement excédentaire moyen" },
+            { en: "Tail shape and crash severity", fr: "Forme des tails et sévérité d’un crash" },
+          ]},
+          { cells: [
+            { en: "Return volatility", fr: "Volatilité des rendements" },
+            { en: "Liquidity and funding risk", fr: "Risque de liquidité et de funding" },
+          ]},
+          { cells: [
+            { en: "Simple risk-adjusted comparison", fr: "Comparaison simple ajustée du risque" },
+            { en: "Investor-specific objectives and liabilities", fr: "Objectifs et passifs propres à l’investisseur" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "Strategies with apparently stable returns can show attractive historical Sharpe ratios while hiding liquidity, leverage or short-volatility exposure that becomes visible only during stress.",
+        fr: "Des stratégies aux rendements apparemment stables peuvent afficher des Sharpe ratios historiques attractifs tout en cachant risques de liquidité, levier ou short volatility qui n’apparaissent qu’en période de stress.",
+      },
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "holding-period-return",
+      question: {
+        en: "You buy an asset at $100, receive $3 of income and finish at $108. What is the total holding-period return?",
+        fr: "Tu achètes un actif à 100 $, reçois 3 $ de revenu et termines à 108 $. Quel est le rendement total de période ?",
+      },
+      options: [
+        { id: "a", label: { en: "8%", fr: "8 %" } },
+        { id: "b", label: { en: "10%", fr: "10 %" } },
+        { id: "c", label: { en: "11%", fr: "11 %" } },
+        { id: "d", label: { en: "13%", fr: "13 %" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "($108 − $100 + $3) ÷ $100 = 11%.",
+        fr: "(108 − 100 + 3) ÷ 100 = 11 %.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "expected-return",
+      question: {
+        en: "An investment has a 60% chance of +15% and a 40% chance of −5%. What is expected return?",
+        fr: "Un investissement a 60 % de chances de +15 % et 40 % de chances de −5 %. Quel est son rendement attendu ?",
+      },
+      options: [
+        { id: "a", label: { en: "5%", fr: "5 %" } },
+        { id: "b", label: { en: "7%", fr: "7 %" } },
+        { id: "c", label: { en: "9%", fr: "9 %" } },
+        { id: "d", label: { en: "10%", fr: "10 %" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "0.60×15% + 0.40×(−5%) = 7%.",
+        fr: "0,60×15 % + 0,40×(−5 %) = 7 %.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "volatility",
+      question: {
+        en: "What does standard deviation of returns primarily measure?",
+        fr: "Que mesure principalement l’écart-type des rendements ?",
+      },
+      options: [
+        { id: "a", label: { en: "Guaranteed future loss", fr: "La perte future garantie" } },
+        { id: "b", label: { en: "Dispersion of returns around their mean", fr: "La dispersion des rendements autour de leur moyenne" } },
+        { id: "c", label: { en: "Only downside returns", fr: "Uniquement les rendements négatifs" } },
+        { id: "d", label: { en: "The number of securities held", fr: "Le nombre de titres détenus" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Standard deviation measures dispersion. It is not a guaranteed loss estimate and it treats upside and downside deviations symmetrically.",
+        fr: "L’écart-type mesure la dispersion. Ce n’est pas une perte future garantie et il traite symétriquement écarts positifs et négatifs.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "correlation",
+      question: {
+        en: "If covariance is 0.006, σA=20% and σB=15%, what is correlation?",
+        fr: "Si la covariance vaut 0,006, σA=20 % et σB=15 %, quelle est la corrélation ?",
+      },
+      options: [
+        { id: "a", label: { en: "0.10", fr: "0,10" } },
+        { id: "b", label: { en: "0.20", fr: "0,20" } },
+        { id: "c", label: { en: "0.40", fr: "0,40" } },
+        { id: "d", label: { en: "1.00", fr: "1,00" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "0.006 ÷ (0.20×0.15) = 0.20.",
+        fr: "0,006 ÷ (0,20×0,15) = 0,20.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "portfolio-return",
+      question: {
+        en: "A portfolio has 60% in an asset expected to return 8% and 40% in an asset expected to return 3%. Expected portfolio return is:",
+        fr: "Un portefeuille contient 60 % d’un actif au rendement attendu de 8 % et 40 % d’un actif à 3 %. Le rendement attendu du portefeuille vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "4.0%", fr: "4,0 %" } },
+        { id: "b", label: { en: "5.0%", fr: "5,0 %" } },
+        { id: "c", label: { en: "6.0%", fr: "6,0 %" } },
+        { id: "d", label: { en: "11.0%", fr: "11,0 %" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "0.60×8% + 0.40×3% = 6%.",
+        fr: "0,60×8 % + 0,40×3 % = 6 %.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "diversification-correlation",
+      question: {
+        en: "All else equal, which correlation provides the strongest diversification benefit between two risky assets?",
+        fr: "Toutes choses égales par ailleurs, quelle corrélation fournit le plus fort bénéfice de diversification entre deux actifs risqués ?",
+      },
+      options: [
+        { id: "a", label: { en: "+1.0", fr: "+1,0" } },
+        { id: "b", label: { en: "+0.8", fr: "+0,8" } },
+        { id: "c", label: { en: "0.0", fr: "0,0" } },
+        { id: "d", label: { en: "−1.0", fr: "−1,0" } },
+      ],
+      correctOption: "d",
+      explanation: {
+        en: "Lower correlation improves diversification; perfect negative correlation can theoretically eliminate volatility at specific weights.",
+        fr: "Une corrélation plus faible améliore la diversification ; une corrélation parfaitement négative peut théoriquement éliminer la volatilité pour certains poids.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "systematic-idiosyncratic",
+      question: {
+        en: "Which risk is most directly reduced by holding many genuinely different securities?",
+        fr: "Quel risque est le plus directement réduit en détenant de nombreux titres réellement différents ?",
+      },
+      options: [
+        { id: "a", label: { en: "Idiosyncratic risk", fr: "Risque spécifique / idiosyncratic risk" } },
+        { id: "b", label: { en: "All systematic market risk", fr: "Tout le risque systématique de marché" } },
+        { id: "c", label: { en: "Inflation risk permanently", fr: "Le risque d’inflation de manière permanente" } },
+        { id: "d", label: { en: "Every possible drawdown", fr: "Tout drawdown possible" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Diversification can reduce security-specific residual risk, while common systematic exposures remain.",
+        fr: "La diversification peut réduire le risque résiduel spécifique, tandis que les expositions systématiques communes demeurent.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "sharpe-ratio",
+      question: {
+        en: "A portfolio returns 9%, the risk-free rate is 3% and volatility is 12%. What is its Sharpe ratio?",
+        fr: "Un portefeuille rapporte 9 %, le taux sans risque vaut 3 % et la volatilité 12 %. Quel est son Sharpe ratio ?",
+      },
+      options: [
+        { id: "a", label: { en: "0.25", fr: "0,25" } },
+        { id: "b", label: { en: "0.50", fr: "0,50" } },
+        { id: "c", label: { en: "0.75", fr: "0,75" } },
+        { id: "d", label: { en: "1.50", fr: "1,50" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "(9% − 3%) ÷ 12% = 0.50.",
+        fr: "(9 % − 3 %) ÷ 12 % = 0,50.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Why can combining two risky assets reduce portfolio risk, and what role does correlation play?",
+      fr: "Pourquoi combiner deux actifs risqués peut-il réduire le risque du portefeuille, et quel rôle joue la corrélation ?",
+    },
+    framework: [
+      {
+        en: "State that portfolio return is weighted, but portfolio risk also depends on co-movement.",
+        fr: "Expliquer que le rendement du portefeuille est pondéré, mais que son risque dépend aussi du co-mouvement.",
+      },
+      {
+        en: "Define correlation as standardized linear co-movement from −1 to +1.",
+        fr: "Définir la corrélation comme mesure standardisée du co-mouvement linéaire de −1 à +1.",
+      },
+      {
+        en: "Explain that correlation below +1 creates diversification because assets do not reinforce each other perfectly.",
+        fr: "Expliquer qu’une corrélation inférieure à +1 crée de la diversification car les actifs ne se renforcent pas parfaitement.",
+      },
+      {
+        en: "Distinguish idiosyncratic risk, which can be diversified, from systematic risk, which remains.",
+        fr: "Distinguer risque spécifique, diversifiable, et risque systématique, qui demeure.",
+      },
+      {
+        en: "Add the caveat that correlations can rise in stress and historical estimates are not guarantees.",
+        fr: "Ajouter que les corrélations peuvent augmenter en période de stress et que les estimations historiques ne sont pas garanties.",
+      },
+    ],
+    sample: {
+      en: "Two risky assets can produce a portfolio with lower volatility than the weighted average of their standalone volatilities because portfolio variance depends not only on each asset's volatility but also on covariance. Correlation standardizes that co-movement. If correlation is below +1, the assets do not move perfectly together, so some fluctuations offset each other and portfolio variance falls. This mainly helps diversify idiosyncratic risk; broad systematic exposures can remain. I would also be careful not to assume historical correlation is stable, because correlations often change during stressed markets.",
+      fr: "Deux actifs risqués peuvent produire un portefeuille moins volatil que la moyenne pondérée de leurs volatilités individuelles car la variance du portefeuille dépend non seulement de la volatilité de chaque actif mais aussi de leur covariance. La corrélation standardise ce co-mouvement. Lorsqu’elle est inférieure à +1, les actifs ne bougent pas parfaitement ensemble ; certaines fluctuations se compensent donc et la variance du portefeuille diminue. Cela aide surtout à diversifier le risque spécifique, tandis que les expositions systématiques larges peuvent subsister. Il faut aussi éviter de supposer que la corrélation historique est stable, car elle peut changer fortement en période de stress.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
