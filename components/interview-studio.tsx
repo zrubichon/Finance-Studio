@@ -1,6 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 type Track = "Investment Banking" | "Sales & Trading" | "Asset Management" | "Wealth Management" | "Private Equity" | "Equity Research";
 
@@ -45,9 +47,59 @@ const questions: Record<Track, { question: string; tests: string; framework: str
   },
 };
 
+function questionKey(track: Track) {
+  return track.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
 export default function InterviewStudio() {
   const [track, setTrack] = useState<Track>("Investment Banking");
+  const [answer, setAnswer] = useState("");
+  const [userId, setUserId] = useState<string | null>(null);
+  const [attemptCount, setAttemptCount] = useState(0);
+  const [saving, setSaving] = useState(false);
+  const [status, setStatus] = useState("");
   const active = useMemo(() => questions[track], [track]);
+
+  useEffect(() => {
+    let mounted = true;
+    async function loadUser() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!mounted || !user) return;
+      setUserId(user.id);
+      const { count } = await supabase.from("interview_attempts").select("id", { count: "exact", head: true }).eq("user_id", user.id);
+      if (mounted) setAttemptCount(count ?? 0);
+    }
+    loadUser();
+    return () => { mounted = false; };
+  }, []);
+
+  useEffect(() => {
+    setAnswer("");
+    setStatus("");
+  }, [track]);
+
+  async function saveAttempt() {
+    if (!userId || !answer.trim()) return;
+    setSaving(true);
+    setStatus("");
+    const supabase = createClient();
+    const { error } = await supabase.from("interview_attempts").insert({
+      user_id: userId,
+      track,
+      question_key: questionKey(track),
+      answer_text: answer.trim(),
+      evaluation: { status: "submitted_unscored", version: 1 },
+    });
+
+    if (error) {
+      setStatus("Your answer could not be saved. Please try again.");
+    } else {
+      setAttemptCount((count) => count + 1);
+      setStatus("Practice attempt saved to your account.");
+    }
+    setSaving(false);
+  }
 
   return (
     <div className="workspace-stack">
@@ -59,6 +111,10 @@ export default function InterviewStudio() {
               <button className={track === item ? "chip active" : "chip"} onClick={() => setTrack(item)} key={item} type="button">{item}</button>
             ))}
           </div>
+        </div>
+        <div className="attempt-counter">
+          <span className="control-label">SAVED ATTEMPTS</span>
+          <strong>{attemptCount}</strong>
         </div>
       </section>
 
@@ -80,13 +136,39 @@ export default function InterviewStudio() {
         </div>
       </section>
 
+      <section className="answer-practice-panel">
+        <div className="panel-heading">
+          <div>
+            <span className="mini-label">YOUR ANSWER</span>
+            <h2>Practice before reading a perfect script.</h2>
+          </div>
+          <span className="connection-badge">{userId ? "Account sync on" : "Sign in to save"}</span>
+        </div>
+        <textarea
+          value={answer}
+          onChange={(event) => setAnswer(event.target.value)}
+          placeholder="Write your answer here as if you were speaking to the interviewer…"
+          rows={8}
+        />
+        <div className="answer-practice-actions">
+          {userId ? (
+            <button className="full-button" type="button" disabled={!answer.trim() || saving} onClick={saveAttempt}>
+              {saving ? "Saving…" : "Save practice attempt"}
+            </button>
+          ) : (
+            <Link className="full-button" href="/login">Sign in to save attempts →</Link>
+          )}
+          {status && <span className="inline-status" role="status">{status}</span>}
+        </div>
+      </section>
+
       <section className="answer-framework-panel">
         <div className="panel-heading">
           <div>
             <span className="mini-label">IDEAL ANSWER STRUCTURE</span>
             <h2>Build reasoning before memorizing wording</h2>
           </div>
-          <span className="connection-badge">AI scoring layer planned</span>
+          <span className="connection-badge">AI scoring comes after the persistence layer</span>
         </div>
         <div className="framework-steps-grid">
           {active.framework.map((step, index) => (
