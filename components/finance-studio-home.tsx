@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { navItems } from "@/lib/content";
 
 type Level = "Beginner" | "Intermediate" | "Professional";
@@ -61,6 +61,7 @@ export default function FinanceStudioHome() {
   const [language, setLanguage] = useState<Language>("EN");
   const [level, setLevel] = useState<Level>("Beginner");
   const [theme, setTheme] = useState<Theme>("classic");
+  const [today, setToday] = useState("");
   const copy = languageCopy[language];
   const lesson = levelCopy[level];
 
@@ -83,10 +84,15 @@ export default function FinanceStudioHome() {
     window.localStorage.setItem("finance-studio-level", level);
   }, [level]);
 
-  const today = useMemo(
-    () => new Intl.DateTimeFormat(language === "FR" ? "fr-FR" : "en-US", { weekday: "long", month: "long", day: "numeric" }).format(new Date()),
-    [language]
-  );
+  useEffect(() => {
+    setToday(
+      new Intl.DateTimeFormat(language === "FR" ? "fr-FR" : "en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+      }).format(new Date())
+    );
+  }, [language]);
 
   return (
     <main className={`app-shell theme-${theme}`}>
