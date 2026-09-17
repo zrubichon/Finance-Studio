@@ -8,10 +8,17 @@ import "./phase-two.css";
 import "./auth.css";
 import "./phase-three.css";
 
-export const metadata: Metadata = {
-  title: "FinanceStudio — Learn finance deeply",
-  description: "A bilingual finance learning, market intelligence and interview-preparation platform.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const isFrench = cookieStore.get("finance-studio-language")?.value === "FR";
+
+  return {
+    title: isFrench ? "FinanceStudio — Apprendre la finance en profondeur" : "FinanceStudio — Learn finance deeply",
+    description: isFrench
+      ? "Une plateforme bilingue d’apprentissage de la finance, d’intelligence de marché et de préparation aux entretiens / interviews."
+      : "A bilingual finance learning, market intelligence and interview-preparation platform.",
+  };
+}
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const cookieStore = await cookies();
