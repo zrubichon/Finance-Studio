@@ -28799,7 +28799,485 @@ export const advancedFixedIncomeLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson];
+
+export const advancedDerivativesLesson: FinanceLesson = {
+  slug: "year-3-advanced-derivatives",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Advanced Derivatives", fr: "Produits dérivés avancés / Advanced Derivatives" },
+  title: { en: "Advanced Derivatives", fr: "Produits dérivés avancés / Advanced Derivatives" },
+  subtitle: {
+    en: "Move from basic option definitions to professional derivatives analysis: volatility surfaces, delta hedging, gamma and vega risk, forward pricing, swaps, option structures, exotic payoffs and derivatives-based risk management.",
+    fr: "Passer des bases des options à une analyse professionnelle des dérivés : volatility surfaces, delta hedging, risques gamma et vega, pricing des forwards, swaps, structures optionnelles, payoffs exotiques et gestion du risque par dérivés.",
+  },
+  duration: { en: "170–210 min", fr: "170–210 min" },
+  prerequisites: [
+    { en: "Derivatives Foundations", fr: "Derivatives Foundations" },
+    { en: "Options & Greeks", fr: "Options & Greeks" },
+    { en: "Risk Management", fr: "Risk Management" },
+    { en: "Advanced Fixed Income", fr: "Advanced Fixed Income" },
+    { en: "FX & International Finance", fr: "FX & International Finance" },
+  ],
+  objectives: [
+    { en: "Explain forward and futures pricing through no-arbitrage relationships.", fr: "Expliquer le pricing des forwards et futures via les relations de non-arbitrage." },
+    { en: "Use delta, gamma, theta and vega to understand nonlinear option risk.", fr: "Utiliser delta, gamma, theta et vega pour comprendre le risque non linéaire des options." },
+    { en: "Interpret implied-volatility smiles, skews and term structures.", fr: "Interpréter smiles, skews et term structures de volatilité implicite." },
+    { en: "Understand dynamic hedging and the mechanics of delta-neutral portfolios.", fr: "Comprendre le dynamic hedging et les portefeuilles delta-neutral." },
+    { en: "Analyze common option strategies and their payoff trade-offs.", fr: "Analyser les stratégies optionnelles courantes et leurs compromis de payoff." },
+    { en: "Understand interest-rate, FX and equity swaps at a professional level.", fr: "Comprendre les swaps de taux, FX et equity à un niveau professionnel." },
+    { en: "Identify model, liquidity, basis and counterparty risks in derivative positions.", fr: "Identifier model risk, liquidity risk, basis risk et counterparty risk dans les positions dérivées." },
+  ],
+  overviewFlow: {
+    title: { en: "From no-arbitrage pricing to derivatives risk management", fr: "Du pricing par non-arbitrage à la gestion du risque dérivé" },
+    steps: [
+      { title: { en: "Price", fr: "Pricer" }, detail: { en: "Forwards · futures · swaps", fr: "Forwards · futures · swaps" } },
+      { title: { en: "Measure", fr: "Mesurer" }, detail: { en: "Delta · gamma · vega · theta", fr: "Delta · gamma · vega · theta" } },
+      { title: { en: "Structure", fr: "Structurer" }, detail: { en: "Spreads · collars · volatility trades", fr: "Spreads · collars · volatility trades" } },
+      { title: { en: "Hedge", fr: "Hedger" }, detail: { en: "Dynamic hedging · basis · counterparty risk", fr: "Dynamic hedging · basis · counterparty risk" } },
+    ],
+  },
+  sections: [
+    {
+      id: "forward-pricing",
+      kicker: { en: "01 · FORWARD & FUTURES PRICING", fr: "01 · PRICING DES FORWARDS & FUTURES" },
+      title: { en: "Forward prices come from carry and no-arbitrage, not opinion", fr: "Les prix forward viennent du carry et du non-arbitrage, pas d’une opinion" },
+      coreFacts: [
+        { en: "For a non-income-paying asset, forward value is linked to spot price compounded at the financing rate.", fr: "Pour un actif sans revenu, la valeur forward est liée au spot capitalisé au taux de financement." },
+        { en: "Dividends, storage costs and convenience yield alter the cost-of-carry relationship.", fr: "Dividendes, coûts de stockage et convenience yield modifient la relation de cost of carry." },
+        { en: "A forward has zero value at inception when the delivery price is set fairly.", fr: "Un forward a une valeur nulle à l’origine lorsque le delivery price est correctement fixé." },
+        { en: "Futures and forwards can differ because futures are settled daily and therefore create different cash-flow timing.", fr: "Futures et forwards peuvent différer car les futures sont settled quotidiennement et créent donc un timing de cash flow différent." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A forward price is the future price that makes buying now and carrying the asset equivalent to agreeing today to buy it later. If the two choices were mispriced, traders could create an arbitrage.",
+          fr: "Un prix forward est le prix futur qui rend équivalents acheter aujourd’hui et porter l’actif, ou convenir aujourd’hui de l’acheter plus tard. Si les deux choix étaient mal pricés, un arbitrage serait possible.",
+        },
+        Intermediate: {
+          en: "For an asset with no income, the theoretical forward price grows with the risk-free financing rate. For equities, expected dividends reduce the forward price because the forward buyer does not receive dividends before delivery.",
+          fr: "Pour un actif sans revenu, le prix forward théorique augmente avec le taux de financement risk-free. Pour les actions, les dividendes attendus réduisent le prix forward car l’acheteur du forward ne reçoit pas les dividendes avant livraison.",
+        },
+        Professional: {
+          en: "In real markets, funding curves, collateral terms, borrow availability, repo rates, dividend uncertainty and balance-sheet costs all influence observed forward pricing. Apparent arbitrage must be tested against executable financing conditions.",
+          fr: "En pratique, funding curves, collateral terms, disponibilité du borrow, repo rates, incertitude sur dividendes et coûts de bilan influencent le pricing forward observé. Un arbitrage apparent doit être testé avec des conditions de financement réellement exécutables.",
+        },
+      },
+      formula: {
+        label: { en: "Simple equity forward", fr: "Forward equity simplifié" },
+        expression: "F₀,T ≈ (S₀ − PV(Dividends)) × (1 + r)^T",
+        explanation: { en: "The fair forward price reflects spot, financing cost and income received before maturity.", fr: "Le prix forward juste reflète spot, coût de financement et revenus reçus avant maturité." },
+      },
+      vocabulary: [
+        { en: "Cost of carry", fr: "cost of carry", definition: { en: "Net financing and holding cost embedded in forward pricing.", fr: "Coût net de financement et de détention intégré au pricing forward." } },
+        { en: "Convenience yield", fr: "convenience yield", definition: { en: "Non-cash benefit from physically holding a commodity rather than owning a future claim.", fr: "Bénéfice non cash lié à la détention physique d’une matière première plutôt qu’à une créance future." } },
+        { en: "Basis", fr: "basis", definition: { en: "Difference between spot and futures or related derivative prices.", fr: "Différence entre prix spot et futures ou prix de dérivés liés." } },
+      ],
+    },
+    {
+      id: "advanced-greeks",
+      kicker: { en: "02 · ADVANCED GREEKS", fr: "02 · GREEKS AVANCÉS" },
+      title: { en: "Delta is only the first layer of option risk", fr: "Le delta n’est que la première couche du risque optionnel" },
+      coreFacts: [
+        { en: "Delta measures first-order sensitivity to the underlying price.", fr: "Le delta mesure la sensibilité de premier ordre au prix du sous-jacent." },
+        { en: "Gamma measures how delta itself changes when the underlying moves.", fr: "Le gamma mesure comment le delta change lorsque le sous-jacent bouge." },
+        { en: "Vega measures sensitivity to implied volatility.", fr: "Le vega mesure la sensibilité à la volatilité implicite." },
+        { en: "Theta measures the effect of time decay, but its sign and economic meaning depend on the position.", fr: "Le theta mesure l’effet du temps, mais son signe et sa signification économique dépendent de la position." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Delta tells you how much an option price may move for a small move in the stock. Gamma tells you how quickly that delta changes. Vega tells you how much the option reacts if expected volatility changes.",
+          fr: "Le delta indique combien le prix d’une option peut bouger pour un petit mouvement de l’action. Le gamma montre à quelle vitesse ce delta change. Le vega mesure la réaction à une variation de volatilité attendue.",
+        },
+        Intermediate: {
+          en: "Long options are generally long gamma and long vega. This means their delta becomes more favorable after large moves, but the investor pays time decay through theta.",
+          fr: "Les options longues sont généralement long gamma et long vega. Leur delta devient donc plus favorable après de grands mouvements, mais l’investisseur paie le time decay via theta.",
+        },
+        Professional: {
+          en: "Risk management often decomposes a derivatives book into delta, gamma, vega by strike and expiry, theta, volga and vanna. Aggregate Greeks can hide concentration in specific expiries or parts of the volatility surface.",
+          fr: "La gestion du risque décompose souvent un book dérivé en delta, gamma, vega par strike et maturité, theta, volga et vanna. Des Greeks agrégés peuvent cacher des concentrations sur certaines expiries ou zones de la volatility surface.",
+        },
+      },
+      vocabulary: [
+        { en: "Gamma", fr: "gamma", definition: { en: "Rate of change of delta with respect to the underlying price.", fr: "Taux de variation du delta par rapport au prix du sous-jacent." } },
+        { en: "Vanna", fr: "vanna", definition: { en: "Sensitivity linking delta and implied-volatility changes.", fr: "Sensibilité reliant variation du delta et variation de volatilité implicite." } },
+        { en: "Volga", fr: "volga", definition: { en: "Sensitivity of vega to changes in implied volatility.", fr: "Sensibilité du vega aux variations de volatilité implicite." } },
+      ],
+    },
+    {
+      id: "volatility-surface",
+      kicker: { en: "03 · VOLATILITY SURFACE", fr: "03 · VOLATILITY SURFACE" },
+      title: { en: "The market does not price one volatility — it prices a surface", fr: "Le marché ne price pas une seule volatilité — il price une surface" },
+      coreFacts: [
+        { en: "Implied volatility varies by strike and maturity.", fr: "La volatilité implicite varie selon strike et maturité." },
+        { en: "Equity index markets often display downside skew, with lower-strike puts trading at higher implied volatility.", fr: "Les marchés d’indices actions montrent souvent un downside skew, avec des puts de strike plus bas à volatilité implicite plus élevée." },
+        { en: "Term structure compares implied volatility across expiries.", fr: "La term structure compare la volatilité implicite entre expiries." },
+        { en: "Event risk can create local distortions around earnings, central-bank meetings or macro releases.", fr: "Le risque événementiel peut créer des distorsions locales autour des earnings, réunions de banques centrales ou publications macro." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Two options on the same stock can have different implied volatilities if they have different strikes or expiration dates. That pattern forms a volatility surface.",
+          fr: "Deux options sur la même action peuvent avoir des volatilités implicites différentes si leurs strikes ou maturités diffèrent. Cet ensemble forme une volatility surface.",
+        },
+        Intermediate: {
+          en: "Skew reflects supply, demand and risk asymmetry. Investors often pay more for downside protection, which can make out-of-the-money puts trade at higher implied volatility than calls.",
+          fr: "Le skew reflète offre, demande et asymétrie du risque. Les investisseurs paient souvent davantage pour la protection downside, ce qui peut faire trader les puts out-of-the-money à une volatilité implicite supérieure aux calls.",
+        },
+        Professional: {
+          en: "Surface analysis requires separating level, skew and curvature moves across maturities. Traders monitor sticky-strike versus sticky-delta behavior, event vol, forward vol and arbitrage consistency between neighboring strikes and expiries.",
+          fr: "L’analyse de surface exige de séparer mouvements de niveau, skew et curvature entre maturités. Les traders surveillent sticky-strike versus sticky-delta, event vol, forward vol et cohérence sans arbitrage entre strikes et expiries voisins.",
+        },
+      },
+      vocabulary: [
+        { en: "Volatility skew", fr: "volatility skew", definition: { en: "Variation in implied volatility across option strikes.", fr: "Variation de volatilité implicite selon les strikes." } },
+        { en: "Volatility term structure", fr: "volatility term structure", definition: { en: "Pattern of implied volatility across option maturities.", fr: "Profil de volatilité implicite selon les maturités." } },
+        { en: "Forward volatility", fr: "forward volatility", definition: { en: "Implied volatility for a future interval inferred from different option expiries.", fr: "Volatilité implicite pour une période future déduite de différentes expiries." } },
+      ],
+    },
+    {
+      id: "dynamic-hedging",
+      kicker: { en: "04 · DYNAMIC HEDGING", fr: "04 · DYNAMIC HEDGING" },
+      title: { en: "Delta-neutral does not mean risk-neutral", fr: "Delta-neutral ne signifie pas sans risque" },
+      coreFacts: [
+        { en: "A delta hedge offsets first-order exposure to small moves in the underlying.", fr: "Un delta hedge compense l’exposition de premier ordre aux petits mouvements du sous-jacent." },
+        { en: "Gamma causes delta to change, which requires hedge rebalancing over time.", fr: "Le gamma fait évoluer le delta, ce qui exige de rééquilibrer le hedge dans le temps." },
+        { en: "A long-gamma trader tends to buy low and sell high when rebalancing after underlying moves.", fr: "Un trader long gamma tend à acheter bas et vendre haut lors du rebalancing après les mouvements du sous-jacent." },
+        { en: "Realized volatility, transaction costs and hedge frequency determine whether dynamic hedging economics are favorable.", fr: "Volatilité réalisée, coûts de transaction et fréquence de hedge déterminent si l’économie du dynamic hedging est favorable." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If an option has a delta of 0.50, a trader can offset part of the stock exposure by shorting roughly half a share per option unit. But as the stock moves, delta changes and the hedge must be updated.",
+          fr: "Si une option a un delta de 0,50, un trader peut compenser une partie de l’exposition en shortant environ une demi-action par unité d’option. Mais lorsque l’action bouge, le delta change et le hedge doit être mis à jour.",
+        },
+        Intermediate: {
+          en: "Long gamma creates favorable rebalancing mechanics but usually comes with negative theta. The trade therefore depends on whether realized volatility is sufficiently high relative to the implied volatility paid.",
+          fr: "Être long gamma crée une mécanique de rebalancing favorable mais s’accompagne généralement d’un theta négatif. Le trade dépend donc de savoir si la volatilité réalisée est assez élevée relativement à l’implied volatility payée.",
+        },
+        Professional: {
+          en: "Dynamic hedging is path-dependent. Discrete rebalancing, jumps, transaction costs, liquidity gaps and volatility-of-volatility all create hedging error relative to continuous-time models.",
+          fr: "Le dynamic hedging dépend du chemin suivi. Rebalancing discret, jumps, coûts de transaction, gaps de liquidité et volatility-of-volatility créent tous un hedging error par rapport aux modèles en temps continu.",
+        },
+      },
+      formula: {
+        label: { en: "Delta-neutral hedge", fr: "Hedge delta-neutral" },
+        expression: "Underlying Hedge ≈ − Option Position × Delta",
+        explanation: { en: "The hedge neutralizes first-order underlying exposure only at the current delta.", fr: "Le hedge neutralise seulement l’exposition de premier ordre au niveau de delta actuel." },
+      },
+      vocabulary: [
+        { en: "Delta-neutral", fr: "delta-neutral", definition: { en: "Position with approximately zero first-order exposure to the underlying price.", fr: "Position avec une exposition de premier ordre approximativement nulle au prix du sous-jacent." } },
+        { en: "Hedging error", fr: "hedging error", definition: { en: "Difference between model-implied hedge performance and realized hedge outcome.", fr: "Différence entre la performance de hedge implicite du modèle et le résultat réellement obtenu." } },
+      ],
+    },
+    {
+      id: "option-strategies",
+      kicker: { en: "05 · OPTION STRUCTURES", fr: "05 · STRUCTURES OPTIONNELLES" },
+      title: { en: "Option structures reshape payoff, premium and risk", fr: "Les structures optionnelles transforment payoff, prime et risque" },
+      coreFacts: [
+        { en: "Vertical spreads trade upside or downside exposure while limiting both profit and loss.", fr: "Les vertical spreads prennent une exposition upside ou downside tout en limitant profit et perte." },
+        { en: "Straddles and strangles express views on volatility rather than only direction.", fr: "Straddles et strangles expriment des vues sur la volatilité plutôt que seulement sur la direction." },
+        { en: "Collars can hedge downside while financing part of the put premium by selling upside.", fr: "Les collars peuvent hedger le downside en finançant une partie de la prime du put via la vente d’upside." },
+        { en: "Risk reversals compare put and call pricing and are commonly used in FX and equity volatility markets.", fr: "Les risk reversals comparent pricing des puts et calls et sont couramment utilisés en FX et equity volatility." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Combining options lets investors change the shape of the payoff. For example, a call spread costs less than a single call because some upside is sold away.",
+          fr: "Combiner des options permet de modifier la forme du payoff. Par exemple, un call spread coûte moins cher qu’un call seul car une partie de l’upside est revendue.",
+        },
+        Intermediate: {
+          en: "Each structure trades among premium, probability, convexity and maximum payoff. The right structure depends on whether the investor’s view concerns direction, range, volatility or tail protection.",
+          fr: "Chaque structure arbitre entre prime, probabilité, convexity et payoff maximum. La bonne structure dépend de si la vue porte sur direction, range, volatilité ou protection de tail.",
+        },
+        Professional: {
+          en: "Professional structuring compares strike selection, skew, liquidity and scenario P&L. A low-premium trade is not necessarily cheap if it sells valuable convexity or embeds unfavorable skew.",
+          fr: "Le structuring professionnel compare choix de strikes, skew, liquidité et scenario P&L. Un trade à faible prime n’est pas forcément bon marché s’il vend une convexity précieuse ou intègre un skew défavorable.",
+        },
+      },
+      comparison: {
+        title: { en: "Common option structures", fr: "Structures optionnelles courantes" },
+        headers: [{ en: "Structure", fr: "Structure" }, { en: "Typical view", fr: "Vue typique" }, { en: "Key trade-off", fr: "Compromis clé" }],
+        rows: [
+          { cells: [{ en: "Call spread", fr: "Call spread" }, { en: "Moderate upside", fr: "Upside modéré" }, { en: "Lower premium, capped upside", fr: "Prime plus faible, upside plafonné" }] },
+          { cells: [{ en: "Put spread", fr: "Put spread" }, { en: "Moderate downside", fr: "Downside modéré" }, { en: "Cheaper hedge, limited protection", fr: "Hedge moins cher, protection limitée" }] },
+          { cells: [{ en: "Straddle", fr: "Straddle" }, { en: "Large move either direction", fr: "Fort mouvement dans les deux sens" }, { en: "High premium / theta cost", fr: "Prime élevée / coût theta" }] },
+          { cells: [{ en: "Collar", fr: "Collar" }, { en: "Downside protection with reduced upside", fr: "Protection downside avec upside réduit" }, { en: "Cheaper hedge, capped gains", fr: "Hedge moins cher, gains plafonnés" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Straddle", fr: "straddle", definition: { en: "Long call and long put at the same strike and expiry.", fr: "Long call et long put avec même strike et même expiry." } },
+        { en: "Risk reversal", fr: "risk reversal", definition: { en: "Combination of a call and put at different strikes used to express directional or skew views.", fr: "Combinaison d’un call et d’un put à strikes différents utilisée pour exprimer une vue directionnelle ou de skew." } },
+        { en: "Collar", fr: "collar", definition: { en: "Protective put combined with a short call to reduce hedging cost.", fr: "Protective put combiné à un short call pour réduire le coût du hedge." } },
+      ],
+    },
+    {
+      id: "interest-rate-swaps",
+      kicker: { en: "06 · INTEREST-RATE SWAPS", fr: "06 · INTEREST-RATE SWAPS" },
+      title: { en: "A swap exchanges cash-flow profiles without exchanging principal", fr: "Un swap échange des profils de cash flow sans échanger le principal" },
+      coreFacts: [
+        { en: "A plain-vanilla interest-rate swap exchanges fixed-rate and floating-rate cash flows on a notional amount.", fr: "Un plain-vanilla interest-rate swap échange des cash flows fixed et floating sur un notionnel." },
+        { en: "At inception, the fixed swap rate is set so the present value of fixed and floating legs are equal.", fr: "À l’origine, le fixed swap rate est fixé pour que la valeur actuelle des jambes fixed et floating soit égale." },
+        { en: "Receiving fixed gains value when market swap rates fall, all else equal.", fr: "Recevoir du fixed gagne de la valeur lorsque les swap rates baissent, toutes choses égales par ailleurs." },
+        { en: "Swaps can transform financing exposure without refinancing the underlying debt instrument.", fr: "Les swaps peuvent transformer l’exposition de financement sans refinancer l’instrument de dette sous-jacent." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company with floating-rate debt can use a swap to pay fixed and receive floating, effectively converting much of its exposure into fixed-rate financing.",
+          fr: "Une entreprise avec une dette floating peut utiliser un swap pour payer fixed et recevoir floating, transformant ainsi une grande partie de son exposition en financement à taux fixe.",
+        },
+        Intermediate: {
+          en: "Swap valuation changes when the market fixed rate moves relative to the contractual fixed rate. The difference in present values determines whether the position is an asset or liability.",
+          fr: "La valorisation d’un swap change lorsque le fixed rate de marché évolue par rapport au fixed rate contractuel. La différence de valeurs actuelles détermine si la position est un actif ou un passif.",
+        },
+        Professional: {
+          en: "Modern swap valuation depends on discounting and projection curves, collateral agreements, clearing and counterparty credit adjustments. The simple single-curve framework is useful conceptually but incomplete operationally.",
+          fr: "La valorisation moderne des swaps dépend des courbes de discounting et projection, collateral agreements, clearing et ajustements de counterparty credit. Le cadre simple à une seule courbe est utile conceptuellement mais incomplet en pratique.",
+        },
+      },
+      vocabulary: [
+        { en: "Pay fixed", fr: "pay fixed", definition: { en: "Swap position paying a fixed rate and receiving a floating rate.", fr: "Position swap payant un taux fixed et recevant un taux floating." } },
+        { en: "Receive fixed", fr: "receive fixed", definition: { en: "Swap position receiving fixed and paying floating.", fr: "Position swap recevant fixed et payant floating." } },
+        { en: "Notional", fr: "notional", definition: { en: "Reference amount used to calculate derivative cash flows.", fr: "Montant de référence utilisé pour calculer les cash flows d’un dérivé." } },
+      ],
+    },
+    {
+      id: "fx-and-cross-currency-swaps",
+      kicker: { en: "07 · FX & CROSS-CURRENCY DERIVATIVES", fr: "07 · DÉRIVÉS FX & CROSS-CURRENCY" },
+      title: { en: "Currency derivatives separate FX risk from the underlying commercial exposure", fr: "Les dérivés de change séparent le risque FX de l’exposition commerciale sous-jacente" },
+      coreFacts: [
+        { en: "FX forwards lock an exchange rate for a future currency exchange.", fr: "Les FX forwards verrouillent un taux de change pour un échange futur de devises." },
+        { en: "Forward FX pricing is linked to the interest-rate differential between the two currencies.", fr: "Le pricing forward FX est lié au différentiel de taux d’intérêt entre les deux devises." },
+        { en: "Cross-currency swaps exchange interest and sometimes principal cash flows in different currencies.", fr: "Les cross-currency swaps échangent des intérêts et parfois des flux de principal dans différentes devises." },
+        { en: "Cross-currency basis reflects deviations from simple covered-interest-parity relationships.", fr: "Le cross-currency basis reflète les écarts par rapport aux relations simples de covered interest parity." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A US company expecting euros in six months can use an FX forward to lock the future dollar value of those euros and reduce exchange-rate uncertainty.",
+          fr: "Une entreprise américaine qui doit recevoir des euros dans six mois peut utiliser un FX forward pour verrouiller leur valeur future en dollars et réduire l’incertitude de change.",
+        },
+        Intermediate: {
+          en: "The forward exchange rate is not simply the market’s forecast of the future spot rate. It is largely determined by the relative financing rates of the two currencies under covered interest parity.",
+          fr: "Le taux de change forward n’est pas simplement la prévision du marché sur le futur spot. Il est largement déterminé par les taux de financement relatifs des deux devises via la covered interest parity.",
+        },
+        Professional: {
+          en: "Cross-currency swaps allow institutions to transform both currency and rate exposure. Pricing depends on local curves, collateral currency, basis spreads and funding conditions across markets.",
+          fr: "Les cross-currency swaps permettent aux institutions de transformer à la fois exposition de devise et de taux. Le pricing dépend des courbes locales, de la devise du collateral, des basis spreads et conditions de funding entre marchés.",
+        },
+      },
+      vocabulary: [
+        { en: "Covered interest parity", fr: "covered interest parity", definition: { en: "No-arbitrage relationship linking spot FX, forward FX and interest rates in two currencies.", fr: "Relation de non-arbitrage reliant spot FX, forward FX et taux d’intérêt de deux devises." } },
+        { en: "Cross-currency basis", fr: "cross-currency basis", definition: { en: "Spread adjustment observed in cross-currency funding markets.", fr: "Ajustement de spread observé sur les marchés de financement cross-currency." } },
+      ],
+    },
+    {
+      id: "exotic-options",
+      kicker: { en: "08 · EXOTIC OPTIONS", fr: "08 · OPTIONS EXOTIQUES" },
+      title: { en: "Path dependency changes both valuation and risk management", fr: "La path dependency modifie à la fois valorisation et gestion du risque" },
+      coreFacts: [
+        { en: "Barrier options activate or disappear when the underlying reaches a specified level.", fr: "Les barrier options s’activent ou disparaissent lorsque le sous-jacent atteint un niveau défini." },
+        { en: "Asian options depend on an average underlying price rather than a single terminal price.", fr: "Les Asian options dépendent d’un prix moyen du sous-jacent plutôt que d’un seul prix terminal." },
+        { en: "Digital options pay a discontinuous fixed amount if a condition is satisfied.", fr: "Les digital options paient un montant fixe discontinu si une condition est remplie." },
+        { en: "Exotic-option Greeks can change sharply near barriers, observation dates or discontinuities.", fr: "Les Greeks des options exotiques peuvent changer fortement près des barrières, dates d’observation ou discontinuités." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A vanilla option depends mainly on where the asset finishes. Some exotic options also depend on the path the asset took to get there.",
+          fr: "Une option vanilla dépend surtout du niveau final de l’actif. Certaines options exotiques dépendent aussi du chemin suivi pour y arriver.",
+        },
+        Intermediate: {
+          en: "Barrier options can be cheaper than vanilla options because the protection or upside can disappear when a barrier is touched. That lower premium comes with additional path risk.",
+          fr: "Les barrier options peuvent coûter moins cher que les vanilla options car la protection ou l’upside peut disparaître lorsqu’une barrière est touchée. Cette prime plus faible vient avec un risque de chemin supplémentaire.",
+        },
+        Professional: {
+          en: "Exotics can have discontinuous or highly nonlinear hedging requirements. Model choice, local volatility, stochastic volatility, correlation and gap risk can matter as much as the headline payoff.",
+          fr: "Les exotiques peuvent avoir des besoins de hedge discontinus ou très non linéaires. Choix du modèle, local volatility, stochastic volatility, corrélation et gap risk peuvent compter autant que le payoff headline.",
+        },
+      },
+      vocabulary: [
+        { en: "Barrier option", fr: "barrier option", definition: { en: "Option whose existence or payoff depends on whether a barrier is reached.", fr: "Option dont l’existence ou le payoff dépend du franchissement d’une barrière." } },
+        { en: "Asian option", fr: "Asian option", definition: { en: "Option whose payoff depends on an average underlying price.", fr: "Option dont le payoff dépend d’un prix moyen du sous-jacent." } },
+        { en: "Digital option", fr: "digital option", definition: { en: "Option paying a fixed amount if a specified condition is met.", fr: "Option payant un montant fixe si une condition spécifiée est remplie." } },
+      ],
+    },
+    {
+      id: "derivatives-risk-management",
+      kicker: { en: "09 · RISK MANAGEMENT", fr: "09 · RISK MANAGEMENT" },
+      title: { en: "Derivative risk is multidimensional: market, model, liquidity and counterparty risk interact", fr: "Le risque dérivé est multidimensionnel : marché, modèle, liquidité et contrepartie interagissent" },
+      coreFacts: [
+        { en: "Mark-to-market gains can still create liquidity stress if collateral must be posted elsewhere in the portfolio.", fr: "Des gains mark-to-market peuvent coexister avec un stress de liquidité si du collateral doit être posté ailleurs dans le portefeuille." },
+        { en: "Counterparty credit exposure depends on current replacement value and potential future exposure.", fr: "L’exposition de contrepartie dépend de la replacement value actuelle et de la potential future exposure." },
+        { en: "Netting and collateral reduce but do not eliminate counterparty risk.", fr: "Netting et collateral réduisent mais n’éliminent pas le counterparty risk." },
+        { en: "Model risk becomes material when products are nonlinear, illiquid or dependent on unobservable parameters.", fr: "Le model risk devient important lorsque les produits sont non linéaires, illiquides ou dépendants de paramètres non observables." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Derivatives can hedge one risk while creating another. A position may reduce stock-price risk but introduce volatility, liquidity or counterparty exposure.",
+          fr: "Les dérivés peuvent hedger un risque tout en en créant un autre. Une position peut réduire le risque de prix d’une action mais introduire exposition de volatilité, liquidité ou contrepartie.",
+        },
+        Intermediate: {
+          en: "Risk management should combine Greeks with stress tests, liquidity assumptions, collateral needs and counterparty limits. A position that appears small on delta can still contain large gamma or vega exposure.",
+          fr: "Le risk management doit combiner Greeks, stress tests, hypothèses de liquidité, besoins en collateral et limites de contrepartie. Une position faible en delta peut contenir un fort risque gamma ou vega.",
+        },
+        Professional: {
+          en: "Professional desks monitor P&L explain, Greeks by bucket, stress scenarios, concentration, wrong-way risk, collateral calls and model reserves. Risk limits should reflect both normal-market sensitivities and discontinuous tail behavior.",
+          fr: "Les desks professionnels surveillent P&L explain, Greeks par bucket, scénarios de stress, concentration, wrong-way risk, collateral calls et model reserves. Les limites doivent refléter à la fois les sensibilités en marché normal et les comportements discontinus de tail.",
+        },
+      },
+      vocabulary: [
+        { en: "Potential future exposure", fr: "potential future exposure", definition: { en: "Estimate of how large counterparty exposure could become in the future.", fr: "Estimation du niveau futur potentiel d’exposition à une contrepartie." } },
+        { en: "Wrong-way risk", fr: "wrong-way risk", definition: { en: "Situation in which counterparty credit quality worsens as the derivative exposure to that counterparty increases.", fr: "Situation où la qualité de crédit de la contrepartie se détériore en même temps que l’exposition au dérivé augmente." } },
+        { en: "Model reserve", fr: "model reserve", definition: { en: "Valuation adjustment recognizing uncertainty in model assumptions or inputs.", fr: "Ajustement de valorisation reflétant l’incertitude liée aux hypothèses ou inputs du modèle." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "forward-pricing",
+      question: { en: "What primarily determines a theoretical forward price?", fr: "Qu’est-ce qui détermine principalement un prix forward théorique ?" },
+      options: [
+        { id: "a", label: { en: "Spot price and cost of carry", fr: "Spot price et cost of carry" } },
+        { id: "b", label: { en: "Only analyst opinion", fr: "Uniquement l’opinion d’un analyste" } },
+        { id: "c", label: { en: "Only historical volatility", fr: "Uniquement la volatilité historique" } },
+        { id: "d", label: { en: "Only dividend yield", fr: "Uniquement le dividend yield" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "No-arbitrage links the forward price to spot and the net financing or holding cost.", fr: "Le non-arbitrage relie le prix forward au spot et au coût net de financement ou de détention." },
+    },
+    {
+      id: "q2",
+      conceptKey: "gamma",
+      question: { en: "What does gamma measure?", fr: "Que mesure le gamma ?" },
+      options: [
+        { id: "a", label: { en: "How delta changes as the underlying moves", fr: "Comment le delta change lorsque le sous-jacent bouge" } },
+        { id: "b", label: { en: "Only time decay", fr: "Uniquement le time decay" } },
+        { id: "c", label: { en: "Only interest-rate sensitivity", fr: "Uniquement la sensibilité aux taux" } },
+        { id: "d", label: { en: "Only credit spread risk", fr: "Uniquement le risque de credit spread" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Gamma is the rate of change of delta with respect to the underlying price.", fr: "Le gamma est le taux de variation du delta par rapport au prix du sous-jacent." },
+    },
+    {
+      id: "q3",
+      conceptKey: "vega",
+      question: { en: "What does vega measure?", fr: "Que mesure le vega ?" },
+      options: [
+        { id: "a", label: { en: "Sensitivity to implied volatility", fr: "Sensibilité à la volatilité implicite" } },
+        { id: "b", label: { en: "Sensitivity to accounting revenue", fr: "Sensibilité au revenue comptable" } },
+        { id: "c", label: { en: "Recovery rate", fr: "Recovery rate" } },
+        { id: "d", label: { en: "Inventory turnover", fr: "Inventory turnover" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Vega estimates how option value changes when implied volatility changes.", fr: "Le vega estime comment la valeur de l’option change lorsque la volatilité implicite varie." },
+    },
+    {
+      id: "q4",
+      conceptKey: "skew",
+      question: { en: "What is volatility skew?", fr: "Qu’est-ce que le volatility skew ?" },
+      options: [
+        { id: "a", label: { en: "Variation in implied volatility across strikes", fr: "Variation de volatilité implicite selon les strikes" } },
+        { id: "b", label: { en: "Difference between EBITDA and EBIT", fr: "Différence entre EBITDA et EBIT" } },
+        { id: "c", label: { en: "Difference between two coupons only", fr: "Différence entre deux coupons seulement" } },
+        { id: "d", label: { en: "A bank capital ratio", fr: "Un capital ratio bancaire" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Options with different strikes often trade at different implied volatilities.", fr: "Des options de strikes différents tradent souvent à des volatilités implicites différentes." },
+    },
+    {
+      id: "q5",
+      conceptKey: "delta-hedging",
+      question: { en: "Why must a delta hedge be rebalanced?", fr: "Pourquoi faut-il rééquilibrer un delta hedge ?" },
+      options: [
+        { id: "a", label: { en: "Because delta changes as price, time and volatility change", fr: "Parce que le delta change avec le prix, le temps et la volatilité" } },
+        { id: "b", label: { en: "Because delta is always exactly one", fr: "Parce que le delta vaut toujours exactement un" } },
+        { id: "c", label: { en: "Because options have no gamma", fr: "Parce que les options n’ont pas de gamma" } },
+        { id: "d", label: { en: "Because forwards never move", fr: "Parce que les forwards ne bougent jamais" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Delta is dynamic, so a previously neutral hedge becomes directional as market conditions change.", fr: "Le delta est dynamique, donc un hedge initialement neutre devient directionnel lorsque les conditions de marché évoluent." },
+    },
+    {
+      id: "q6",
+      conceptKey: "straddle",
+      question: { en: "What view does a long straddle primarily express?", fr: "Quelle vue exprime principalement un long straddle ?" },
+      options: [
+        { id: "a", label: { en: "Expectation of a large move in either direction", fr: "Anticipation d’un fort mouvement dans n’importe quelle direction" } },
+        { id: "b", label: { en: "No volatility at all", fr: "Aucune volatilité" } },
+        { id: "c", label: { en: "Only higher dividends", fr: "Uniquement des dividendes plus élevés" } },
+        { id: "d", label: { en: "Only lower credit spreads", fr: "Uniquement des credit spreads plus faibles" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A long call plus long put at the same strike benefits from sufficiently large movement up or down.", fr: "Un long call plus long put au même strike bénéficie d’un mouvement suffisamment important à la hausse ou à la baisse." },
+    },
+    {
+      id: "q7",
+      conceptKey: "swap",
+      question: { en: "In a plain-vanilla interest-rate swap, what is exchanged?", fr: "Dans un plain-vanilla interest-rate swap, qu’est-ce qui est échangé ?" },
+      options: [
+        { id: "a", label: { en: "Fixed-rate and floating-rate cash flows", fr: "Cash flows fixed et floating" } },
+        { id: "b", label: { en: "Company ownership", fr: "La propriété de l’entreprise" } },
+        { id: "c", label: { en: "Inventory", fr: "Inventory" } },
+        { id: "d", label: { en: "Only bond principal physically", fr: "Uniquement le principal obligataire physiquement" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A standard swap exchanges fixed and floating interest cash flows on a notional amount.", fr: "Un swap standard échange des cash flows d’intérêts fixed et floating sur un notionnel." },
+    },
+    {
+      id: "q8",
+      conceptKey: "covered-interest-parity",
+      question: { en: "What links spot FX, forward FX and interest rates across two currencies?", fr: "Qu’est-ce qui relie spot FX, forward FX et taux d’intérêt entre deux devises ?" },
+      options: [
+        { id: "a", label: { en: "Covered interest parity", fr: "Covered interest parity" } },
+        { id: "b", label: { en: "Dividend discount model", fr: "Dividend discount model" } },
+        { id: "c", label: { en: "Inventory accounting", fr: "Inventory accounting" } },
+        { id: "d", label: { en: "Credit recovery waterfall", fr: "Credit recovery waterfall" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Covered interest parity is the no-arbitrage relationship connecting those three quantities.", fr: "La covered interest parity est la relation de non-arbitrage reliant ces trois éléments." },
+    },
+    {
+      id: "q9",
+      conceptKey: "barrier",
+      question: { en: "What makes a barrier option path-dependent?", fr: "Pourquoi une barrier option est-elle path-dependent ?" },
+      options: [
+        { id: "a", label: { en: "Its payoff depends on whether a level was reached before expiry", fr: "Son payoff dépend du fait qu’un niveau ait été atteint avant l’expiry" } },
+        { id: "b", label: { en: "Only the final price matters", fr: "Seul le prix final compte" } },
+        { id: "c", label: { en: "It has no strike", fr: "Elle n’a pas de strike" } },
+        { id: "d", label: { en: "It cannot expire", fr: "Elle ne peut pas expirer" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The route taken by the underlying matters because touching the barrier can activate or terminate the option.", fr: "Le chemin suivi par le sous-jacent compte car toucher la barrière peut activer ou supprimer l’option." },
+    },
+    {
+      id: "q10",
+      conceptKey: "derivatives-risk",
+      question: { en: "Why is delta alone insufficient for derivatives risk management?", fr: "Pourquoi le delta seul est-il insuffisant pour gérer le risque dérivé ?" },
+      options: [
+        { id: "a", label: { en: "Because gamma, vega, liquidity, model and counterparty risks can remain large", fr: "Parce que gamma, vega, liquidité, model risk et counterparty risk peuvent rester importants" } },
+        { id: "b", label: { en: "Because delta never changes", fr: "Parce que le delta ne change jamais" } },
+        { id: "c", label: { en: "Because every derivative is linear", fr: "Parce que tous les dérivés sont linéaires" } },
+        { id: "d", label: { en: "Because options have no volatility exposure", fr: "Parce que les options n’ont pas d’exposition à la volatilité" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A delta-neutral book can still carry significant nonlinear and non-market risks.", fr: "Un book delta-neutral peut encore porter d’importants risques non linéaires et non-market." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "You buy an at-the-money straddle and delta-hedge it dynamically. What determines whether the trade makes money?",
+      fr: "Tu achètes un straddle at-the-money et tu le delta-hedges dynamiquement. Qu’est-ce qui détermine si le trade gagne de l’argent ?",
+    },
+    framework: [
+      { en: "Identify that the position is initially long gamma, long vega and typically negative theta.", fr: "Identifier que la position est initialement long gamma, long vega et généralement negative theta." },
+      { en: "Compare the implied volatility paid with the realized volatility generated by the underlying path.", fr: "Comparer la volatilité implicite payée avec la volatilité réalisée générée par le chemin du sous-jacent." },
+      { en: "Explain how delta rebalancing can monetize realized movement for a long-gamma position.", fr: "Expliquer comment le rebalancing du delta peut monétiser les mouvements réalisés pour une position long gamma." },
+      { en: "Account for theta decay, transaction costs, bid-ask spreads and hedge frequency.", fr: "Intégrer theta decay, transaction costs, bid-ask spreads et fréquence de hedge." },
+      { en: "Consider changes in implied volatility because the mark-to-market value is also vega-sensitive.", fr: "Considérer les variations de volatilité implicite car la valeur mark-to-market est aussi sensible au vega." },
+      { en: "Mention gap risk and the fact that discrete hedging is not identical to continuous model hedging.", fr: "Mentionner le gap risk et le fait que le hedging discret n’est pas identique au hedging continu du modèle." },
+    ],
+    sample: {
+      en: "A long at-the-money straddle starts long gamma and long vega but usually pays negative theta. If I delta-hedge dynamically, the long-gamma position tends to buy underlying after declines and sell after rallies, so sufficiently large realized moves can generate positive rebalancing P&L. The key comparison is therefore realized volatility versus the implied volatility I paid, but that is not the whole story. I also need to include theta decay, bid-ask spreads, transaction costs and the frequency of hedge rebalancing. The position is also sensitive to changes in implied volatility through vega, so the mark-to-market can improve or deteriorate even before expiry. Finally, jumps and discrete hedging create gap risk, so actual P&L can differ materially from the idealized continuous-hedging result.",
+      fr: "Un long straddle at-the-money est initialement long gamma et long vega mais paie généralement du theta négatif. Si je le delta-hedge dynamiquement, la position long gamma tend à acheter le sous-jacent après les baisses et à vendre après les hausses, donc des mouvements réalisés suffisamment importants peuvent générer un P&L positif de rebalancing. La comparaison clé est donc la volatilité réalisée versus la volatilité implicite payée, mais ce n’est pas tout. Je dois aussi intégrer theta decay, bid-ask spreads, coûts de transaction et fréquence de rebalancing. La position est également sensible aux variations de volatilité implicite via le vega, donc son mark-to-market peut s’améliorer ou se dégrader avant l’expiry. Enfin, les jumps et le hedging discret créent du gap risk, donc le P&L réel peut différer fortement du résultat théorique avec hedge continu.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
