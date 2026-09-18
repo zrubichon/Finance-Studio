@@ -13798,7 +13798,970 @@ export const equityValuationLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson];
+
+export const dcfRelativeValuationLesson: FinanceLesson = {
+  slug: "year-2-dcf-relative-valuation",
+  year: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  domain: {
+    en: "Corporate Finance & Valuation",
+    fr: "Finance d’entreprise & valorisation / Corporate Finance & Valuation",
+  },
+  title: {
+    en: "DCF & Relative Valuation",
+    fr: "DCF / Discounted Cash Flow & valorisation relative / Relative Valuation",
+  },
+  subtitle: {
+    en: "Build a complete valuation bridge from operating forecasts to free cash flow, WACC, terminal value, enterprise value, equity value and price per share — then triangulate the result with trading comparables and precedent transactions.",
+    fr: "Construire une valorisation complète depuis les forecasts opérationnels jusqu’au free cash flow, WACC, terminal value, enterprise value, equity value et prix par action — puis trianguler le résultat avec trading comparables et precedent transactions.",
+  },
+  duration: { en: "120–150 min", fr: "120–150 min" },
+  prerequisites: [
+    { en: "Equity Valuation", fr: "Valorisation des actions / Equity Valuation" },
+    { en: "Corporate Finance", fr: "Finance d’entreprise / Corporate Finance" },
+  ],
+  objectives: [
+    {
+      en: "Build a DCF from operating assumptions through free cash flow and present value.",
+      fr: "Construire un DCF depuis les hypothèses opérationnelles jusqu’au free cash flow et à sa valeur actuelle.",
+    },
+    {
+      en: "Calculate FCFF and distinguish it from FCFE.",
+      fr: "Calculer le FCFF et le distinguer du FCFE.",
+    },
+    {
+      en: "Apply WACC consistently to enterprise cash flows.",
+      fr: "Appliquer le WACC de manière cohérente aux cash flows d’entreprise.",
+    },
+    {
+      en: "Calculate terminal value using perpetual growth and exit-multiple methods.",
+      fr: "Calculer la terminal value avec la méthode de croissance perpétuelle et l’exit multiple.",
+    },
+    {
+      en: "Bridge enterprise value to equity value and diluted value per share.",
+      fr: "Passer de l’enterprise value à l’equity value puis à la diluted value per share.",
+    },
+    {
+      en: "Use trading comparables, precedent transactions and sensitivity ranges to triangulate valuation.",
+      fr: "Utiliser trading comparables, precedent transactions et sensitivity ranges pour trianguler la valorisation.",
+    },
+  ],
+  overviewFlow: {
+    title: { en: "The valuation build", fr: "La construction de la valorisation" },
+    steps: [
+      {
+        title: { en: "Forecast", fr: "Forecast" },
+        detail: { en: "Revenue · margins · reinvestment", fr: "Revenue · marges · réinvestissement" },
+      },
+      {
+        title: { en: "Cash flow", fr: "Cash flow" },
+        detail: { en: "FCFF · discounting · terminal value", fr: "FCFF · actualisation · terminal value" },
+      },
+      {
+        title: { en: "Bridge", fr: "Bridge" },
+        detail: { en: "Enterprise value → equity value", fr: "Enterprise value → equity value" },
+      },
+      {
+        title: { en: "Triangulate", fr: "Trianguler" },
+        detail: { en: "Comps · precedents · sensitivities", fr: "Comps · precedents · sensitivities" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "dcf-architecture",
+      kicker: { en: "01 · DCF ARCHITECTURE", fr: "01 · ARCHITECTURE DU DCF" },
+      title: {
+        en: "Match the cash flow with the correct discount rate and value level",
+        fr: "Associer le bon cash flow au bon discount rate et au bon niveau de valeur",
+      },
+      coreFacts: [
+        {
+          en: "FCFF is cash flow available to all providers of capital before discretionary debt payments and is discounted at WACC to enterprise value.",
+          fr: "Le FCFF est le cash flow disponible pour l’ensemble des apporteurs de capitaux avant remboursements discrétionnaires de dette ; il est actualisé au WACC pour obtenir l’enterprise value.",
+        },
+        {
+          en: "FCFE is cash flow available to common equity holders after financing effects and is discounted at the cost of equity to equity value.",
+          fr: "Le FCFE est le cash flow disponible pour les common equity holders après effets de financement ; il est actualisé au cost of equity pour obtenir l’equity value.",
+        },
+        {
+          en: "Enterprise value and equity value are different claim levels and should not be mixed within one DCF.",
+          fr: "Enterprise value et equity value correspondent à des niveaux de créance différents et ne doivent pas être mélangés dans un même DCF.",
+        },
+        {
+          en: "The most common corporate DCF framework forecasts FCFF, discounts it at WACC and then bridges enterprise value to equity value.",
+          fr: "Le framework corporate DCF le plus courant forecast le FCFF, l’actualise au WACC puis bridge l’enterprise value vers l’equity value.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Think of FCFF as cash generated by the operations before deciding how debt and equity divide the value. Discounting FCFF therefore gives the value of the whole operating business. Only after that do you subtract debt-like claims and add non-operating assets to reach shareholder value.",
+          fr: "Pense au FCFF comme au cash généré par les opérations avant de décider comment debt et equity se partagent la valeur. Actualiser le FCFF donne donc la valeur de l’ensemble du business opérationnel. Ensuite seulement, on retire les créances de type dette et on ajoute les actifs non opérationnels pour atteindre la valeur revenant aux actionnaires.",
+        },
+        Intermediate: {
+          en: "The core matching rule is consistency: FCFF ↔ WACC ↔ enterprise value; FCFE ↔ cost of equity ↔ equity value. Mixing FCFF with cost of equity or FCFE with WACC misprices the financing claim.",
+          fr: "La règle centrale est la cohérence : FCFF ↔ WACC ↔ enterprise value ; FCFE ↔ cost of equity ↔ equity value. Mélanger FCFF avec cost of equity ou FCFE avec WACC produit une valorisation incohérente.",
+        },
+        Professional: {
+          en: "Valuation architecture should reflect the security being valued. FCFF is usually cleaner when leverage is expected to change because financing effects are handled through the discount rate and EV-to-equity bridge rather than embedded directly in cash flow.",
+          fr: "L’architecture de valorisation doit refléter le security analysé. Le FCFF est souvent plus propre lorsque le leverage doit changer, car les effets de financement sont traités via le discount rate et le bridge EV-to-equity plutôt qu’intégrés directement au cash flow.",
+        },
+      },
+      comparison: {
+        title: { en: "Cash-flow matching", fr: "Matching des cash flows" },
+        headers: [
+          { en: "Cash flow", fr: "Cash flow" },
+          { en: "Discount rate", fr: "Discount rate" },
+          { en: "Value obtained", fr: "Valeur obtenue" },
+        ],
+        rows: [
+          { cells: [
+            { en: "FCFF", fr: "FCFF" },
+            { en: "WACC", fr: "WACC" },
+            { en: "Enterprise value", fr: "Enterprise value" },
+          ]},
+          { cells: [
+            { en: "FCFE", fr: "FCFE" },
+            { en: "Cost of equity", fr: "Cost of equity" },
+            { en: "Equity value", fr: "Equity value" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "FCFF",
+          fr: "free cash flow to firm / FCFF",
+          definition: {
+            en: "Cash flow available to debt and equity capital providers before discretionary financing flows.",
+            fr: "Cash flow disponible pour les apporteurs de debt et equity avant flux de financement discrétionnaires.",
+          },
+        },
+        {
+          en: "FCFE",
+          fr: "free cash flow to equity / FCFE",
+          definition: {
+            en: "Cash flow available to common equity after debt financing effects under a stated definition.",
+            fr: "Cash flow disponible pour common equity après effets du financement par dette selon une définition donnée.",
+          },
+        },
+      ],
+    },
+    {
+      id: "operating-forecast",
+      kicker: { en: "02 · OPERATING FORECAST", fr: "02 · FORECAST OPÉRATIONNEL" },
+      title: {
+        en: "A DCF is only as good as the operating assumptions underneath it",
+        fr: "Un DCF n’est pas meilleur que les hypothèses opérationnelles qui le soutiennent",
+      },
+      coreFacts: [
+        {
+          en: "The explicit forecast usually models revenue, margins, taxes, capital expenditure, depreciation and working capital.",
+          fr: "Le forecast explicite modélise généralement revenue, marges, impôts, capex, depreciation et working capital.",
+        },
+        {
+          en: "Revenue forecasts should connect to economic drivers such as price, volume, customers, units, market share or capacity.",
+          fr: "Les forecasts de revenue doivent être reliés à des drivers économiques comme price, volume, clients, unités, market share ou capacité.",
+        },
+        {
+          en: "Margins should converge toward economically defensible levels rather than arbitrary percentages.",
+          fr: "Les marges doivent converger vers des niveaux économiquement défendables plutôt que vers des pourcentages arbitraires.",
+        },
+        {
+          en: "Forecast assumptions should reconcile with historical trends, industry structure and reinvestment requirements.",
+          fr: "Les hypothèses de forecast doivent être cohérentes avec tendances historiques, structure sectorielle et besoins de réinvestissement.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A weak DCF says revenue grows 10% every year because that number 'looks reasonable'. A stronger DCF explains the growth: perhaps customer count grows 6% and revenue per customer grows 4%, producing roughly 10% total growth before interaction effects.",
+          fr: "Un DCF faible dit que revenue augmente de 10 % par an parce que ce chiffre « semble raisonnable ». Un meilleur DCF explique la croissance : par exemple customers +6 % et revenue par customer +4 %, soit environ 10 % de croissance totale avant effets croisés.",
+        },
+        Intermediate: {
+          en: "Forecast drivers should be internally consistent. Faster revenue growth may require higher capex and working capital; stronger margins may require assumptions about pricing, mix, scale or cost efficiency.",
+          fr: "Les drivers du forecast doivent être cohérents entre eux. Une croissance plus rapide peut exiger davantage de capex et working capital ; des marges supérieures nécessitent des hypothèses sur pricing, mix, scale ou efficacité des coûts.",
+        },
+        Professional: {
+          en: "A robust model separates near-term estimates from long-run normalization. Years one and two may follow backlog, guidance and consensus, while later years should transition toward sustainable market-share, margin and return-on-capital assumptions.",
+          fr: "Un modèle robuste sépare estimations court terme et normalisation long terme. Les années 1 et 2 peuvent suivre backlog, guidance et consensus, tandis que les années suivantes doivent converger vers des hypothèses soutenables de market share, marge et return on capital.",
+        },
+      },
+      formula: {
+        label: { en: "Driver-based revenue growth", fr: "Croissance du revenue basée sur drivers" },
+        expression: "Revenue = Volume × Price",
+        explanation: {
+          en: "The exact driver tree varies by business, but forecasts should connect to operating economics.",
+          fr: "Le driver tree exact varie selon le business, mais les forecasts doivent être reliés aux economics opérationnels.",
+        },
+        workedExample: {
+          en: "1,000 units × $50 = $50,000 revenue. If volume rises to 1,050 and price to $52, revenue becomes $54,600.",
+          fr: "1 000 unités × 50 $ = 50 000 $ de revenue. Si volume monte à 1 050 et price à 52 $, revenue devient 54 600 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Explicit forecast period",
+          fr: "période de forecast explicite / explicit forecast period",
+          definition: {
+            en: "Years modeled individually before the terminal-value assumption begins.",
+            fr: "Années modélisées individuellement avant le début de l’hypothèse de terminal value.",
+          },
+        },
+        {
+          en: "Normalization",
+          fr: "normalisation / normalization",
+          definition: {
+            en: "Transition from temporary conditions toward sustainable long-run economics.",
+            fr: "Transition depuis des conditions temporaires vers des economics soutenables à long terme.",
+          },
+        },
+      ],
+    },
+    {
+      id: "fcff-build",
+      kicker: { en: "03 · BUILDING FCFF", fr: "03 · CONSTRUCTION DU FCFF" },
+      title: {
+        en: "Convert operating profit into cash available to all capital providers",
+        fr: "Transformer le profit opérationnel en cash disponible pour tous les apporteurs de capitaux",
+      },
+      coreFacts: [
+        {
+          en: "FCFF starts from after-tax operating profit rather than net income in the standard enterprise DCF.",
+          fr: "Le FCFF part du profit opérationnel après impôt plutôt que du net income dans un enterprise DCF standard.",
+        },
+        {
+          en: "Non-cash depreciation and amortization are added back after reducing taxable operating profit.",
+          fr: "Depreciation et amortization non cash sont réajoutées après avoir réduit le profit opérationnel taxable.",
+        },
+        {
+          en: "Capital expenditures and increases in operating working capital consume cash.",
+          fr: "Le capex et les hausses de working capital opérationnel consomment du cash.",
+        },
+        {
+          en: "Financing flows such as interest and debt repayment are excluded from standard FCFF because financing is reflected through WACC and the bridge.",
+          fr: "Les flux de financement comme intérêts et remboursement de debt sont exclus du FCFF standard car le financement est reflété via le WACC et le bridge.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose EBIT is 100, tax rate 25%, D&A 20, capex 30 and working capital increases by 10. NOPAT is 75. Add back 20 of non-cash D&A, subtract 30 capex and 10 working capital investment: FCFF is 55.",
+          fr: "Supposons EBIT 100, taux d’impôt 25 %, D&A 20, capex 30 et working capital +10. Le NOPAT vaut 75. On réajoute 20 de D&A non cash, puis on retire 30 de capex et 10 d’investissement en working capital : FCFF = 55.",
+        },
+        Intermediate: {
+          en: "FCFF should capture sustainable reinvestment. Underestimating capex or working capital can make a high-growth company look artificially cash generative.",
+          fr: "Le FCFF doit refléter le réinvestissement soutenable. Sous-estimer capex ou working capital peut faire paraître artificiellement cash-generative une entreprise en forte croissance.",
+        },
+        Professional: {
+          en: "Modelers distinguish maintenance from growth capex when useful, normalize acquisition effects and test whether reinvestment implied by the forecast is consistent with expected growth and incremental returns on capital.",
+          fr: "Les modelers distinguent maintenance capex et growth capex lorsque pertinent, normalisent les effets d’acquisition et testent si le réinvestissement implicite du forecast est cohérent avec croissance et incremental returns on capital attendus.",
+        },
+      },
+      formula: {
+        label: { en: "Free cash flow to firm", fr: "Free Cash Flow to Firm / FCFF" },
+        expression: "FCFF = EBIT × (1−T) + D&A − Capex − ΔOperating NWC",
+        explanation: {
+          en: "This standard simplified formula converts after-tax operating profit into enterprise free cash flow.",
+          fr: "Cette formule standard simplifiée transforme le profit opérationnel après impôt en free cash flow d’entreprise.",
+        },
+        workedExample: {
+          en: "100×(1−25%) + 20 − 30 − 10 = 55.",
+          fr: "100×(1−25 %) + 20 − 30 − 10 = 55.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Maintenance capex",
+          fr: "capex de maintenance / maintenance capex",
+          definition: {
+            en: "Capital expenditure required to maintain existing operating capacity.",
+            fr: "Dépense d’investissement nécessaire au maintien de la capacité opérationnelle existante.",
+          },
+        },
+        {
+          en: "Growth capex",
+          fr: "capex de croissance / growth capex",
+          definition: {
+            en: "Capital expenditure intended to expand capacity or future earnings power.",
+            fr: "Dépense d’investissement visant à augmenter capacité ou earnings futurs.",
+          },
+        },
+      ],
+    },
+    {
+      id: "discounting-wacc",
+      kicker: { en: "04 · WACC & PRESENT VALUE", fr: "04 · WACC & VALEUR ACTUELLE" },
+      title: {
+        en: "Discount each forecast cash flow back to today",
+        fr: "Actualiser chaque cash flow forecasté jusqu’à aujourd’hui",
+      },
+      coreFacts: [
+        {
+          en: "FCFF is discounted at WACC because enterprise value belongs to both debt and equity capital providers.",
+          fr: "Le FCFF est actualisé au WACC car l’enterprise value appartient aux apporteurs de debt et equity.",
+        },
+        {
+          en: "Cash flows farther in the future receive smaller present-value weights at a positive discount rate.",
+          fr: "Les cash flows plus lointains reçoivent un poids de valeur actuelle plus faible avec un discount rate positif.",
+        },
+        {
+          en: "WACC should reflect market-value financing weights and the operating risk of the cash flows being discounted.",
+          fr: "Le WACC doit refléter les poids de financement en market value et le risque opérationnel des cash flows actualisés.",
+        },
+        {
+          en: "Mid-year convention can be used when cash flows are generated throughout the year rather than entirely at year-end.",
+          fr: "La mid-year convention peut être utilisée lorsque les cash flows sont générés tout au long de l’année plutôt qu’exclusivement en fin d’année.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company will generate FCFF of 60 in one year and WACC is 10%, that cash flow is worth about 54.55 today. A year-two cash flow is discounted twice because you wait longer to receive it.",
+          fr: "Si une entreprise doit générer un FCFF de 60 dans un an avec un WACC de 10 %, ce cash flow vaut environ 54,55 aujourd’hui. Un cash flow d’année 2 est actualisé deux fois car il faut attendre plus longtemps.",
+        },
+        Intermediate: {
+          en: "The present value of the explicit forecast is the sum of each year's discounted FCFF. A common modeling mistake is to discount all forecast years by the same factor.",
+          fr: "La valeur actuelle du forecast explicite est la somme de chaque FCFF annuel actualisé. Une erreur fréquente consiste à actualiser toutes les années avec le même facteur.",
+        },
+        Professional: {
+          en: "Discounting conventions must match timing assumptions. Stub periods, fiscal-year ends, mid-year convention and transaction dates can materially change a precise investment-banking model even when the underlying economics are unchanged.",
+          fr: "Les conventions d’actualisation doivent correspondre au timing. Stub periods, fins d’exercice, mid-year convention et transaction dates peuvent modifier matériellement un modèle d’investment banking précis même si les economics sous-jacents ne changent pas.",
+        },
+      },
+      formula: {
+        label: { en: "Present value of FCFF", fr: "Valeur actuelle du FCFF" },
+        expression: "PV(FCFFₜ) = FCFFₜ ÷ (1 + WACC)ᵗ",
+        explanation: {
+          en: "Each forecast-year cash flow is discounted for its own time period.",
+          fr: "Chaque cash flow forecasté est actualisé selon sa propre période.",
+        },
+        workedExample: {
+          en: "FCFF 60 at year 1 and WACC 10% → PV≈54.55.",
+          fr: "FCFF 60 en année 1 et WACC 10 % → PV≈54,55.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Mid-year convention",
+          fr: "convention de milieu d’année / mid-year convention",
+          definition: {
+            en: "DCF convention approximating cash flows as occurring through the year rather than only at year-end.",
+            fr: "Convention DCF approximant les cash flows comme générés tout au long de l’année plutôt qu’en fin d’année uniquement.",
+          },
+        },
+        {
+          en: "Discount factor",
+          fr: "facteur d’actualisation / discount factor",
+          definition: {
+            en: "Multiplier converting a future cash flow into present value.",
+            fr: "Multiplicateur transformant un cash flow futur en valeur actuelle.",
+          },
+        },
+      ],
+    },
+    {
+      id: "terminal-value",
+      kicker: { en: "05 · TERMINAL VALUE", fr: "05 · TERMINAL VALUE" },
+      title: {
+        en: "Most businesses outlive the explicit forecast — terminal value captures the rest",
+        fr: "La plupart des entreprises dépassent le forecast explicite — la terminal value capture le reste",
+      },
+      coreFacts: [
+        {
+          en: "Terminal value captures the value of cash flows beyond the explicit forecast period.",
+          fr: "La terminal value capture la valeur des cash flows au-delà de la période de forecast explicite.",
+        },
+        {
+          en: "The perpetual-growth method applies a stable growth rate to next-period normalized FCFF.",
+          fr: "La méthode de croissance perpétuelle applique un taux de croissance stable au FCFF normalisé de la période suivante.",
+        },
+        {
+          en: "The exit-multiple method applies a market multiple to a terminal financial metric such as EBITDA or EBIT.",
+          fr: "La méthode d’exit multiple applique un multiple de marché à une métrique terminale comme EBITDA ou EBIT.",
+        },
+        {
+          en: "Terminal value often represents a large share of DCF enterprise value, so assumptions require explicit sensitivity analysis.",
+          fr: "La terminal value représente souvent une grande part de l’enterprise value du DCF ; ses hypothèses nécessitent donc une sensitivity analysis explicite.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If year-four normalized FCFF is 84, WACC is 10% and perpetual growth is 3%, terminal value at the end of year three is 84/(10%−3%) = 1,200. That value must still be discounted back to today.",
+          fr: "Si le FCFF normalisé d’année 4 vaut 84, WACC 10 % et croissance perpétuelle 3 %, la terminal value à la fin de l’année 3 vaut 84/(10 %−3 %) = 1 200. Cette valeur doit encore être actualisée jusqu’à aujourd’hui.",
+        },
+        Intermediate: {
+          en: "Perpetual growth should reflect long-run sustainable economics. Exit multiples should be justified by growth, margins, returns and risk rather than selected only because they produce a desired valuation.",
+          fr: "La croissance perpétuelle doit refléter des economics long terme soutenables. Les exit multiples doivent être justifiés par croissance, marges, returns et risk plutôt que sélectionnés parce qu’ils produisent la valorisation souhaitée.",
+        },
+        Professional: {
+          en: "The two terminal methods should cross-check each other. A Gordon terminal value implies an exit multiple, and an exit-multiple terminal value implies a long-run economic view. Large inconsistencies often reveal unrealistic terminal assumptions.",
+          fr: "Les deux méthodes terminales doivent se cross-check. Une Gordon terminal value implique un exit multiple, et un exit multiple implique une vue économique long terme. De fortes incohérences révèlent souvent des hypothèses terminales irréalistes.",
+        },
+      },
+      formula: {
+        label: { en: "Perpetual-growth terminal value", fr: "Terminal value en croissance perpétuelle" },
+        expression: "TVₙ = FCFFₙ₊₁ ÷ (WACC − g)",
+        explanation: {
+          en: "WACC must exceed g in the standard perpetual-growth formulation.",
+          fr: "Le WACC doit être supérieur à g dans la formulation standard de croissance perpétuelle.",
+        },
+        workedExample: {
+          en: "FCFF₄=84, WACC=10%, g=3% → TV₃=84/(0.10−0.03)=1,200.",
+          fr: "FCFF₄=84, WACC=10 %, g=3 % → TV₃=84/(0,10−0,03)=1 200.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Exit multiple",
+          fr: "multiple de sortie / exit multiple",
+          definition: {
+            en: "Valuation multiple applied to a terminal-period metric to estimate terminal value.",
+            fr: "Multiple appliqué à une métrique de période terminale pour estimer la terminal value.",
+          },
+        },
+        {
+          en: "Terminal year",
+          fr: "année terminale / terminal year",
+          definition: {
+            en: "Last explicit or normalized forecast period used to establish terminal economics.",
+            fr: "Dernière période explicite ou normalisée utilisée pour établir les economics terminales.",
+          },
+        },
+      ],
+    },
+    {
+      id: "ev-equity-bridge",
+      kicker: { en: "06 · EV TO EQUITY VALUE", fr: "06 · BRIDGE EV → EQUITY VALUE" },
+      title: {
+        en: "Enterprise value is not yet the value per share",
+        fr: "L’enterprise value n’est pas encore la valeur par action",
+      },
+      coreFacts: [
+        {
+          en: "Enterprise value must be adjusted for net debt and other non-common-equity claims or non-operating assets to reach equity value.",
+          fr: "L’enterprise value doit être ajustée de net debt et autres créances non-common-equity ou actifs non opérationnels pour atteindre l’equity value.",
+        },
+        {
+          en: "A simplified bridge subtracts net debt; real transaction models may also adjust for preferred stock, minority interest, pensions, leases and other items.",
+          fr: "Un bridge simplifié soustrait la net debt ; les modèles de transaction réels peuvent aussi ajuster preferred stock, minority interest, pensions, leases et autres éléments.",
+        },
+        {
+          en: "Equity value per share should use diluted shares outstanding when dilutive securities are economically relevant.",
+          fr: "L’equity value par action doit utiliser diluted shares outstanding lorsque des securities dilutives sont économiquement pertinentes.",
+        },
+        {
+          en: "The treasury-stock method is commonly used to estimate option dilution when appropriate.",
+          fr: "La treasury-stock method est couramment utilisée pour estimer la dilution des options lorsque pertinente.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose your DCF produces enterprise value of 1,074 and the company has 200 of net debt. Simplified equity value is 874. If diluted shares outstanding are 50, implied value per share is about 17.48.",
+          fr: "Supposons que le DCF produise une enterprise value de 1 074 et que l’entreprise ait 200 de net debt. L’equity value simplifiée vaut 874. Avec 50 diluted shares outstanding, la valeur implicite par action est environ 17,48.",
+        },
+        Intermediate: {
+          en: "Net debt is debt minus eligible cash in the simplified bridge, but not every cash balance is necessarily excess or distributable. Analysts should distinguish operating cash needs from truly non-operating cash.",
+          fr: "La net debt correspond à debt moins cash éligible dans le bridge simplifié, mais tout le cash n’est pas forcément excess ou distribuable. Les analystes doivent distinguer besoins de cash opérationnel et véritable cash non opérationnel.",
+        },
+        Professional: {
+          en: "The EV-to-equity bridge is often where technical valuation mistakes occur. Pension deficits, non-controlling interests, associates, convertible securities and option proceeds require claim-specific treatment rather than blanket subtraction.",
+          fr: "Le bridge EV-to-equity est souvent une source d’erreurs techniques. Pension deficits, non-controlling interests, associates, convertibles et proceeds d’options nécessitent un traitement spécifique à chaque créance plutôt qu’une simple soustraction générale.",
+        },
+      },
+      formula: {
+        label: { en: "Simplified EV-to-equity bridge", fr: "Bridge EV-to-equity simplifié" },
+        expression: "Equity Value ≈ Enterprise Value − Net Debt   ·   Value per Share = Equity Value ÷ Diluted Shares",
+        explanation: {
+          en: "A full bridge may require additional debt-like and non-operating adjustments.",
+          fr: "Un bridge complet peut nécessiter des ajustements supplémentaires debt-like et non opérationnels.",
+        },
+        workedExample: {
+          en: "EV 1,074.08 − net debt 200 = equity value 874.08; ÷ 50 diluted shares ≈ 17.48 per share.",
+          fr: "EV 1 074,08 − net debt 200 = equity value 874,08 ; ÷ 50 diluted shares ≈ 17,48 par action.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Diluted shares",
+          fr: "actions diluées / diluted shares",
+          definition: {
+            en: "Share count reflecting selected dilutive securities under an appropriate method.",
+            fr: "Nombre d’actions reflétant certains instruments dilutifs selon une méthode appropriée.",
+          },
+        },
+        {
+          en: "Treasury-stock method",
+          fr: "méthode des actions propres / treasury-stock method",
+          definition: {
+            en: "Method for estimating incremental share dilution from in-the-money options and similar instruments.",
+            fr: "Méthode estimant la dilution incrémentale provenant d’options in-the-money et instruments similaires.",
+          },
+        },
+      ],
+    },
+    {
+      id: "sensitivity-scenarios",
+      kicker: { en: "07 · SENSITIVITY & SCENARIOS", fr: "07 · SENSITIVITY & SCÉNARIOS" },
+      title: {
+        en: "A DCF should produce a range, not false precision",
+        fr: "Un DCF doit produire une fourchette, pas une fausse précision",
+      },
+      coreFacts: [
+        {
+          en: "DCF value is especially sensitive to WACC and terminal-growth or exit-multiple assumptions.",
+          fr: "La valeur d’un DCF est particulièrement sensible au WACC et aux hypothèses de terminal growth ou exit multiple.",
+        },
+        {
+          en: "A sensitivity table changes selected valuation assumptions mechanically while a scenario changes a coherent operating case.",
+          fr: "Une sensitivity table modifie mécaniquement certaines hypothèses de valorisation tandis qu’un scénario modifie un ensemble opérationnel cohérent.",
+        },
+        {
+          en: "Base, upside and downside cases should use economically linked assumptions.",
+          fr: "Les cas base, upside et downside doivent utiliser des hypothèses économiquement liées.",
+        },
+        {
+          en: "The valuation range should communicate uncertainty rather than hide it behind decimals.",
+          fr: "La valuation range doit communiquer l’incertitude plutôt que la masquer derrière des décimales.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If your value per share is $17.48 only when WACC is exactly 10% and growth exactly 3%, that number is not a fact. A sensitivity table might show values under WACC from 9% to 11% and growth from 2% to 4%.",
+          fr: "Si ta valeur par action vaut 17,48 $ uniquement avec WACC exactement 10 % et croissance exactement 3 %, ce chiffre n’est pas un fait. Une sensitivity table peut montrer les valeurs avec WACC de 9 % à 11 % et growth de 2 % à 4 %.",
+        },
+        Intermediate: {
+          en: "Scenario cases should change operating drivers as well as valuation inputs when justified. A downside case might use slower revenue growth, lower margins and a higher WACC rather than changing only one cell.",
+          fr: "Les scénarios doivent modifier drivers opérationnels et inputs de valorisation lorsque justifié. Un downside case peut utiliser croissance plus lente, marges plus faibles et WACC supérieur plutôt que changer une seule cellule.",
+        },
+        Professional: {
+          en: "Sensitivity analysis reveals model convexity and key-value drivers. When most equity value depends on a narrow terminal assumption, the analyst should explicitly communicate that model risk and seek alternative valuation anchors.",
+          fr: "La sensitivity analysis révèle la convexité du modèle et les key value drivers. Lorsque la majorité de l’equity value dépend d’une hypothèse terminale étroite, l’analyste doit communiquer explicitement ce model risk et chercher d’autres anchors de valorisation.",
+        },
+      },
+      comparison: {
+        title: { en: "Sensitivity vs scenario analysis", fr: "Sensitivity vs scenario analysis" },
+        headers: [
+          { en: "Method", fr: "Méthode" },
+          { en: "What changes?", fr: "Qu’est-ce qui change ?" },
+          { en: "Best use", fr: "Meilleur usage" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Sensitivity", fr: "Sensitivity" },
+            { en: "One or two selected inputs", fr: "Un ou deux inputs sélectionnés" },
+            { en: "Measure valuation dependence", fr: "Mesurer la dépendance de valorisation" },
+          ]},
+          { cells: [
+            { en: "Scenario", fr: "Scénario" },
+            { en: "Coherent operating assumptions", fr: "Hypothèses opérationnelles cohérentes" },
+            { en: "Model alternative business paths", fr: "Modéliser différents chemins du business" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Valuation sensitivity",
+          fr: "sensibilité de valorisation / valuation sensitivity",
+          definition: {
+            en: "Change in estimated value caused by changes in key assumptions.",
+            fr: "Variation de la valeur estimée causée par des changements d’hypothèses clés.",
+          },
+        },
+        {
+          en: "Model risk",
+          fr: "risque de modèle / model risk",
+          definition: {
+            en: "Risk that valuation or decision errors arise from model assumptions, structure or implementation.",
+            fr: "Risque d’erreur de valorisation ou de décision provenant des hypothèses, de la structure ou de l’implémentation du modèle.",
+          },
+        },
+      ],
+    },
+    {
+      id: "trading-comparables",
+      kicker: { en: "08 · TRADING COMPARABLES", fr: "08 · TRADING COMPARABLES" },
+      title: {
+        en: "Comparable-company analysis values a business relative to how similar companies trade",
+        fr: "L’analyse de sociétés comparables valorise un business relativement à la manière dont des entreprises similaires se négocient",
+      },
+      coreFacts: [
+        {
+          en: "Trading comparables use market valuation multiples of publicly traded peer companies.",
+          fr: "Les trading comparables utilisent les multiples de valorisation de marché de sociétés cotées comparables.",
+        },
+        {
+          en: "Peer selection should reflect business model, geography, growth, margins, size, cyclicality and capital intensity.",
+          fr: "La sélection des peers doit refléter business model, géographie, croissance, marges, taille, cyclicité et intensité capitalistique.",
+        },
+        {
+          en: "Multiples should use consistent numerator, denominator, period and accounting definitions.",
+          fr: "Les multiples doivent utiliser numérateur, dénominateur, période et définitions comptables cohérents.",
+        },
+        {
+          en: "Median and quartile ranges are often more robust than relying on one peer.",
+          fr: "Médiane et quartile ranges sont souvent plus robustes que de dépendre d’un seul peer.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If comparable companies trade around 8× EV/EBITDA and your company has normalized EBITDA of 125, applying 8× implies enterprise value of 1,000. Then you still need the EV-to-equity bridge.",
+          fr: "Si les sociétés comparables cotent autour de 8× EV/EBITDA et que l’entreprise analysée possède un EBITDA normalisé de 125, appliquer 8× implique une enterprise value de 1 000. Il faut ensuite faire le bridge EV-to-equity.",
+        },
+        Intermediate: {
+          en: "A peer at 12× is not necessarily 'more expensive' than one at 8×. The multiple difference may reflect superior growth, margins, ROIC, balance sheet or lower risk.",
+          fr: "Un peer à 12× n’est pas nécessairement « plus cher » qu’un peer à 8×. La différence peut refléter meilleure croissance, marges, ROIC, bilan ou risque inférieur.",
+        },
+        Professional: {
+          en: "Good comps analysis explains the premium or discount. Analysts often regress or at least qualitatively map multiples against growth and profitability rather than simply applying the peer median without adjustment.",
+          fr: "Une bonne comps analysis explique la prime ou discount. Les analystes relient souvent quantitativement ou qualitativement les multiples à croissance et rentabilité plutôt que d’appliquer mécaniquement la médiane des peers.",
+        },
+      },
+      formula: {
+        label: { en: "Implied EV from a trading multiple", fr: "EV implicite depuis un trading multiple" },
+        expression: "Implied Enterprise Value = Selected EV/EBITDA × Company EBITDA",
+        explanation: {
+          en: "The selected multiple should be justified by peer economics and the relevant forecast period.",
+          fr: "Le multiple sélectionné doit être justifié par les economics des peers et la période de forecast pertinente.",
+        },
+        workedExample: {
+          en: "8.0× × EBITDA 125 = implied EV 1,000.",
+          fr: "8,0× × EBITDA 125 = EV implicite 1 000.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Trading comparables",
+          fr: "sociétés comparables cotées / trading comparables",
+          definition: {
+            en: "Public companies used as relative valuation references.",
+            fr: "Sociétés cotées utilisées comme références de valorisation relative.",
+          },
+        },
+        {
+          en: "Peer premium / discount",
+          fr: "prime / décote par rapport aux pairs",
+          definition: {
+            en: "Difference between a company's valuation multiple and a selected peer reference.",
+            fr: "Différence entre le multiple d’une entreprise et une référence de peer group.",
+          },
+        },
+      ],
+    },
+    {
+      id: "precedents-football-field",
+      kicker: { en: "09 · PRECEDENTS & FOOTBALL FIELD", fr: "09 · PRECEDENTS & FOOTBALL FIELD" },
+      title: {
+        en: "Triangulate several methods instead of worshipping one output",
+        fr: "Trianguler plusieurs méthodes plutôt que traiter un seul output comme vérité absolue",
+      },
+      coreFacts: [
+        {
+          en: "Precedent transactions use valuation multiples paid in completed or announced comparable transactions.",
+          fr: "Les precedent transactions utilisent les multiples payés dans des transactions comparables annoncées ou réalisées.",
+        },
+        {
+          en: "Precedent multiples can include control premiums, expected synergies and transaction-specific market conditions.",
+          fr: "Les precedent multiples peuvent inclure control premiums, synergies attendues et conditions de marché spécifiques à la transaction.",
+        },
+        {
+          en: "A football field displays valuation ranges from multiple methodologies on one chart or table.",
+          fr: "Une football field présente sur un même graphique ou tableau les valuation ranges provenant de plusieurs méthodes.",
+        },
+        {
+          en: "Different methods answer different questions, so dispersion between ranges should be analyzed rather than automatically averaged.",
+          fr: "Les différentes méthodes répondent à différentes questions ; la dispersion entre ranges doit être analysée plutôt qu’automatiquement moyennée.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A DCF may imply $15–$19 per share, trading comps $14–$18 and precedents $17–$22. A football field puts these ranges side by side so you can see where they overlap and where they disagree.",
+          fr: "Un DCF peut indiquer 15–19 $ par action, les trading comps 14–18 $ et les precedents 17–22 $. Une football field place ces ranges côte à côte pour montrer où elles se chevauchent et où elles divergent.",
+        },
+        Intermediate: {
+          en: "Precedent transactions are not simply 'better comps'. Buyers may pay for control, cost synergies or strategic scarcity, so transaction multiples can be above unaffected public-trading multiples.",
+          fr: "Les precedent transactions ne sont pas simplement de « meilleurs comps ». Les acheteurs peuvent payer pour control, cost synergies ou strategic scarcity ; les transaction multiples peuvent donc dépasser les multiples de trading publics non affectés.",
+        },
+        Professional: {
+          en: "Triangulation requires judgment. DCF may deserve more weight for a unique high-quality asset; trading comps may anchor a mature sector; precedents may matter in an M&A context. The valuation conclusion should explain why each method receives its weight.",
+          fr: "La triangulation exige du jugement. Le DCF peut mériter davantage de poids pour un actif unique de grande qualité ; les trading comps peuvent mieux ancrer un secteur mature ; les precedents peuvent compter davantage dans un contexte M&A. La conclusion doit expliquer le poids donné à chaque méthode.",
+        },
+      },
+      comparison: {
+        title: { en: "Valuation-method comparison", fr: "Comparaison des méthodes de valorisation" },
+        headers: [
+          { en: "Method", fr: "Méthode" },
+          { en: "Anchor", fr: "Anchor" },
+          { en: "Main limitation", fr: "Limite principale" },
+        ],
+        rows: [
+          { cells: [
+            { en: "DCF", fr: "DCF" },
+            { en: "Intrinsic cash flows", fr: "Cash flows intrinsèques" },
+            { en: "Forecast and terminal sensitivity", fr: "Sensibilité au forecast et terminal" },
+          ]},
+          { cells: [
+            { en: "Trading comps", fr: "Trading comps" },
+            { en: "Current public-market pricing", fr: "Pricing actuel du marché public" },
+            { en: "Peer comparability", fr: "Comparabilité des peers" },
+          ]},
+          { cells: [
+            { en: "Precedent transactions", fr: "Precedent transactions" },
+            { en: "Prices paid in M&A", fr: "Prix payés en M&A" },
+            { en: "Control, synergies and cycle", fr: "Control, synergies et cycle" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "Investment-banking valuation books commonly present several methods together because transaction decisions depend on both intrinsic economics and current market evidence.",
+        fr: "Les valuation books en investment banking présentent couramment plusieurs méthodes ensemble car les décisions de transaction dépendent à la fois des economics intrinsèques et des données de marché actuelles.",
+      },
+      vocabulary: [
+        {
+          en: "Precedent transaction",
+          fr: "transaction comparable historique / precedent transaction",
+          definition: {
+            en: "Past or announced transaction used as a relative valuation reference.",
+            fr: "Transaction passée ou annoncée utilisée comme référence de valorisation relative.",
+          },
+        },
+        {
+          en: "Football field",
+          fr: "football field valuation",
+          definition: {
+            en: "Presentation comparing valuation ranges from multiple methodologies.",
+            fr: "Présentation comparant les ranges de valorisation issues de plusieurs méthodologies.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "fcff-wacc-match",
+      question: {
+        en: "Which valuation matching is correct?",
+        fr: "Quel matching de valorisation est correct ?",
+      },
+      options: [
+        { id: "a", label: { en: "FCFF discounted at WACC → enterprise value", fr: "FCFF actualisé au WACC → enterprise value" } },
+        { id: "b", label: { en: "FCFF discounted at cost of equity → equity value", fr: "FCFF actualisé au cost of equity → equity value" } },
+        { id: "c", label: { en: "FCFE discounted at WACC → enterprise value", fr: "FCFE actualisé au WACC → enterprise value" } },
+        { id: "d", label: { en: "Net income discounted at coupon rate → enterprise value", fr: "Net income actualisé au coupon rate → enterprise value" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "FCFF is an enterprise cash flow and is conventionally discounted at WACC to enterprise value.",
+        fr: "Le FCFF est un enterprise cash flow et est conventionnellement actualisé au WACC pour obtenir l’enterprise value.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "fcff-calculation",
+      question: {
+        en: "EBIT=100, tax rate=25%, D&A=20, capex=30 and increase in operating NWC=10. FCFF equals:",
+        fr: "EBIT=100, taux d’impôt=25 %, D&A=20, capex=30 et hausse d’operating NWC=10. Le FCFF vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "35", fr: "35" } },
+        { id: "b", label: { en: "55", fr: "55" } },
+        { id: "c", label: { en: "75", fr: "75" } },
+        { id: "d", label: { en: "95", fr: "95" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "100×0.75 +20−30−10 = 55.",
+        fr: "100×0,75 +20−30−10 = 55.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "discounting",
+      question: {
+        en: "FCFF of 60 arrives in one year and WACC is 10%. Present value is approximately:",
+        fr: "Un FCFF de 60 arrive dans un an et le WACC vaut 10 %. Sa valeur actuelle est environ :",
+      },
+      options: [
+        { id: "a", label: { en: "54.55", fr: "54,55" } },
+        { id: "b", label: { en: "60.00", fr: "60,00" } },
+        { id: "c", label: { en: "66.00", fr: "66,00" } },
+        { id: "d", label: { en: "600.00", fr: "600,00" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "60/1.10≈54.55.",
+        fr: "60/1,10≈54,55.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "terminal-value",
+      question: {
+        en: "FCFF next year is 84, WACC is 10% and perpetual growth is 3%. Terminal value is:",
+        fr: "Le FCFF de l’année suivante vaut 84, WACC 10 % et croissance perpétuelle 3 %. La terminal value vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "840", fr: "840" } },
+        { id: "b", label: { en: "1,000", fr: "1 000" } },
+        { id: "c", label: { en: "1,200", fr: "1 200" } },
+        { id: "d", label: { en: "2,800", fr: "2 800" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "84/(0.10−0.03)=1,200.",
+        fr: "84/(0,10−0,03)=1 200.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "ev-equity-bridge",
+      question: {
+        en: "Enterprise value is 1,000 and net debt is 200. Simplified equity value is:",
+        fr: "L’enterprise value vaut 1 000 et la net debt 200. L’equity value simplifiée vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "200", fr: "200" } },
+        { id: "b", label: { en: "800", fr: "800" } },
+        { id: "c", label: { en: "1,000", fr: "1 000" } },
+        { id: "d", label: { en: "1,200", fr: "1 200" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "1,000−200=800.",
+        fr: "1 000−200=800.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "value-per-share",
+      question: {
+        en: "Equity value is 800 and diluted shares are 50. Implied value per share is:",
+        fr: "L’equity value vaut 800 et les diluted shares 50. La valeur implicite par action vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "8", fr: "8" } },
+        { id: "b", label: { en: "16", fr: "16" } },
+        { id: "c", label: { en: "40", fr: "40" } },
+        { id: "d", label: { en: "50", fr: "50" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "800/50=16.",
+        fr: "800/50=16.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "trading-comps",
+      question: {
+        en: "Selected EV/EBITDA is 8× and company EBITDA is 125. Implied enterprise value is:",
+        fr: "Le multiple EV/EBITDA sélectionné vaut 8× et l’EBITDA de l’entreprise 125. L’enterprise value implicite vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "125", fr: "125" } },
+        { id: "b", label: { en: "800", fr: "800" } },
+        { id: "c", label: { en: "1,000", fr: "1 000" } },
+        { id: "d", label: { en: "1,250", fr: "1 250" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "8×125=1,000.",
+        fr: "8×125=1 000.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "peer-selection",
+      question: {
+        en: "Which is the strongest reason to include a company in a trading-comps peer group?",
+        fr: "Quelle est la meilleure raison d’inclure une entreprise dans un peer group de trading comps ?",
+      },
+      options: [
+        { id: "a", label: { en: "Similar business model, growth, margins and risk", fr: "Business model, croissance, marges et risque similaires" } },
+        { id: "b", label: { en: "Its ticker begins with the same letter", fr: "Son ticker commence par la même lettre" } },
+        { id: "c", label: { en: "Its share price is numerically similar", fr: "Son prix par action est numériquement similaire" } },
+        { id: "d", label: { en: "It has the highest multiple", fr: "Elle possède le multiple le plus élevé" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Economic comparability matters more than ticker or nominal share price.",
+        fr: "La comparabilité économique compte davantage que ticker ou prix nominal de l’action.",
+      },
+    },
+    {
+      id: "q9",
+      conceptKey: "precedents",
+      question: {
+        en: "Why can precedent-transaction multiples exceed public trading multiples?",
+        fr: "Pourquoi les multiples de precedent transactions peuvent-ils dépasser les trading multiples publics ?",
+      },
+      options: [
+        { id: "a", label: { en: "They can include control premiums and expected synergies", fr: "Ils peuvent inclure control premiums et synergies attendues" } },
+        { id: "b", label: { en: "Transactions never involve control", fr: "Les transactions n’impliquent jamais le contrôle" } },
+        { id: "c", label: { en: "Public-market prices are always wrong", fr: "Les prix de marché publics sont toujours faux" } },
+        { id: "d", label: { en: "Precedents do not use valuation multiples", fr: "Les precedents n’utilisent pas de multiples" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "M&A prices can reflect control, synergies and strategic scarcity beyond unaffected public-market pricing.",
+        fr: "Les prix M&A peuvent refléter control, synergies et strategic scarcity au-delà du pricing public non affecté.",
+      },
+    },
+    {
+      id: "q10",
+      conceptKey: "football-field",
+      question: {
+        en: "What is the main purpose of a football-field valuation?",
+        fr: "Quel est l’objectif principal d’une football-field valuation ?",
+      },
+      options: [
+        { id: "a", label: { en: "Compare valuation ranges from several methods", fr: "Comparer les valuation ranges de plusieurs méthodes" } },
+        { id: "b", label: { en: "Force every method to give the same number", fr: "Forcer toutes les méthodes à donner le même chiffre" } },
+        { id: "c", label: { en: "Replace financial analysis with a chart", fr: "Remplacer l’analyse financière par un graphique" } },
+        { id: "d", label: { en: "Eliminate valuation uncertainty", fr: "Éliminer l’incertitude de valorisation" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "The football field visualizes the ranges and dispersion of multiple valuation approaches.",
+        fr: "La football field visualise les ranges et la dispersion de plusieurs approches de valorisation.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Walk me through a DCF from revenue forecast to implied share price.",
+      fr: "Walk me through un DCF depuis le forecast de revenue jusqu’au prix implicite par action.",
+    },
+    framework: [
+      {
+        en: "Forecast revenue and operating margins to derive EBIT over an explicit period.",
+        fr: "Forecast revenue et marges opérationnelles pour obtenir EBIT sur une période explicite.",
+      },
+      {
+        en: "Calculate NOPAT, add back D&A, subtract capex and changes in operating working capital to derive FCFF.",
+        fr: "Calculer NOPAT, réajouter D&A, soustraire capex et variations d’operating working capital pour obtenir FCFF.",
+      },
+      {
+        en: "Estimate WACC and discount each forecast FCFF to present value.",
+        fr: "Estimer le WACC et actualiser chaque FCFF forecasté en valeur actuelle.",
+      },
+      {
+        en: "Calculate terminal value using perpetual growth or an exit multiple and discount it back.",
+        fr: "Calculer la terminal value via croissance perpétuelle ou exit multiple puis l’actualiser.",
+      },
+      {
+        en: "Add the present values to get enterprise value, bridge to equity value, then divide by diluted shares.",
+        fr: "Additionner les valeurs actuelles pour obtenir enterprise value, faire le bridge vers equity value, puis diviser par diluted shares.",
+      },
+      {
+        en: "Finish with sensitivity analysis and cross-check the result against trading comps and precedents.",
+        fr: "Terminer avec sensitivity analysis et cross-check du résultat avec trading comps et precedents.",
+      },
+    ],
+    sample: {
+      en: "I would first forecast the company's revenue and operating margins over an explicit period to derive EBIT. I would tax EBIT to get NOPAT, add back non-cash D&A, subtract capex and subtract increases in operating working capital to calculate FCFF. Because FCFF belongs to both debt and equity capital providers, I would discount each year's FCFF at WACC. Next I would calculate terminal value, usually using either the perpetual-growth method or an exit multiple, and discount that terminal value back to today. Adding the present value of the explicit cash flows and terminal value gives enterprise value. I would then subtract net debt and make any other debt-like or non-operating adjustments to reach equity value, then divide by diluted shares outstanding to get implied value per share. Finally, I would run WACC and terminal-value sensitivities and cross-check the result with trading comparables and precedent transactions.",
+      fr: "Je commencerais par forecaster le revenue et les marges opérationnelles sur une période explicite afin d’obtenir EBIT. J’appliquerais les impôts à EBIT pour obtenir NOPAT, réajouterais D&A non cash, soustrairais capex et les hausses d’operating working capital pour calculer le FCFF. Comme le FCFF appartient à la fois aux apporteurs de debt et equity, j’actualiserais chaque FCFF annuel au WACC. Ensuite je calculerais la terminal value, généralement avec la méthode de croissance perpétuelle ou un exit multiple, puis je l’actualiserais jusqu’à aujourd’hui. La somme de la valeur actuelle des cash flows explicites et de la terminal value donne l’enterprise value. Je soustrairais ensuite la net debt et effectuerais les autres ajustements debt-like ou non opérationnels pour obtenir l’equity value, puis je diviserais par diluted shares outstanding afin d’obtenir la valeur implicite par action. Enfin, je ferais des sensitivities sur WACC et terminal value et je cross-checkerais le résultat avec trading comparables et precedent transactions.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
