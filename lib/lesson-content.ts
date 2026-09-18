@@ -28320,7 +28320,486 @@ export const realCompanyCaseStudiesLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson];
+
+export const advancedFixedIncomeLesson: FinanceLesson = {
+  slug: "year-3-advanced-fixed-income",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Advanced Fixed Income", fr: "Fixed Income avancé / Advanced Fixed Income" },
+  title: { en: "Advanced Fixed Income", fr: "Fixed Income avancé / Advanced Fixed Income" },
+  subtitle: {
+    en: "Move from basic bond math to professional fixed-income analysis: curve construction, forward rates, key-rate risk, spread measures, credit curves, optionality, securitized products, inflation markets and portfolio positioning.",
+    fr: "Passer des bases obligataires à une analyse professionnelle du fixed income : construction de courbes, forward rates, key-rate risk, spread measures, credit curves, optionalité, produits titrisés, inflation et positionnement de portefeuille.",
+  },
+  duration: { en: "165–205 min", fr: "165–205 min" },
+  prerequisites: [
+    { en: "Fixed Income & Yield Curves", fr: "Fixed Income & Yield Curves" },
+    { en: "Duration & Convexity", fr: "Duration & Convexity" },
+    { en: "Credit Analysis", fr: "Credit Analysis" },
+    { en: "Risk Management", fr: "Risk Management" },
+    { en: "Leveraged Finance", fr: "Leveraged Finance" },
+  ],
+  objectives: [
+    { en: "Build and interpret spot, par and forward curves.", fr: "Construire et interpréter les courbes spot, par et forward." },
+    { en: "Measure interest-rate exposure with DV01, modified duration and key-rate duration.", fr: "Mesurer l’exposition aux taux avec DV01, modified duration et key-rate duration." },
+    { en: "Distinguish nominal spread, Z-spread, asset-swap spread and option-adjusted spread.", fr: "Distinguer nominal spread, Z-spread, asset-swap spread et option-adjusted spread." },
+    { en: "Understand how default probability and recovery affect credit pricing.", fr: "Comprendre comment probabilité de défaut et recovery affectent le pricing crédit." },
+    { en: "Analyze callable bonds and mortgage-backed securities through embedded optionality.", fr: "Analyser callable bonds et mortgage-backed securities via leur optionalité intégrée." },
+    { en: "Interpret inflation-linked bonds and breakeven inflation.", fr: "Interpréter les obligations indexées sur l’inflation et le breakeven inflation." },
+    { en: "Construct fixed-income portfolio trades using curve, spread and relative-value views.", fr: "Construire des trades fixed income à partir de vues de courbe, spread et relative value." },
+  ],
+  overviewFlow: {
+    title: { en: "From yield curve to portfolio trade", fr: "De la courbe de taux au trade de portefeuille" },
+    steps: [
+      { title: { en: "Curve", fr: "Courbe" }, detail: { en: "Spot · par · forwards", fr: "Spot · par · forwards" } },
+      { title: { en: "Risk", fr: "Risque" }, detail: { en: "Duration · DV01 · key rates", fr: "Duration · DV01 · key rates" } },
+      { title: { en: "Spread", fr: "Spread" }, detail: { en: "Z-spread · OAS · credit curve", fr: "Z-spread · OAS · credit curve" } },
+      { title: { en: "Position", fr: "Positionner" }, detail: { en: "Curve · credit · inflation · optionality", fr: "Courbe · crédit · inflation · optionalité" } },
+    ],
+  },
+  sections: [
+    {
+      id: "curve-construction",
+      kicker: { en: "01 · CURVE CONSTRUCTION", fr: "01 · CONSTRUCTION DE COURBE" },
+      title: { en: "Par yields are quoted by the market, but spot rates price the cash flows", fr: "Les par yields sont cotés par le marché, mais les spot rates pricent les cash flows" },
+      coreFacts: [
+        { en: "A par curve shows coupon rates that make bonds trade at par for each maturity.", fr: "Une par curve montre les coupons qui font trader les obligations au pair pour chaque maturité." },
+        { en: "A spot curve contains zero-coupon discount rates for individual future cash flows.", fr: "Une spot curve contient les taux zéro-coupon utilisés pour actualiser chaque cash flow futur." },
+        { en: "Bootstrapping extracts spot rates sequentially from observable market instruments.", fr: "Le bootstrapping extrait les spot rates séquentiellement à partir d’instruments observables." },
+        { en: "Forward rates are implied by today’s term structure rather than direct forecasts of future policy.", fr: "Les forward rates sont implicites dans la term structure actuelle plutôt que des prévisions directes de politique future." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A coupon bond pays cash on several dates, so one single yield hides the fact that each payment happens at a different maturity. Spot rates let us discount each cash flow at the rate appropriate for its date.",
+          fr: "Une obligation à coupon paie du cash à plusieurs dates, donc un seul yield cache le fait que chaque paiement arrive à une maturité différente. Les spot rates permettent d’actualiser chaque cash flow avec le taux correspondant à sa date.",
+        },
+        Intermediate: {
+          en: "Bootstrapping starts with the shortest instrument, solves its discount factor, then uses that known discount factor to isolate the next maturity. Repeating the process creates a zero-coupon curve.",
+          fr: "Le bootstrapping commence par l’instrument le plus court, résout son discount factor, puis utilise ce facteur connu pour isoler la maturité suivante. Répéter le processus construit une courbe zéro-coupon.",
+        },
+        Professional: {
+          en: "In practice, curve construction depends on instrument choice, interpolation, day-count conventions, collateralization and market liquidity. Different discounting curves can be required for different cash-flow structures and collateral agreements.",
+          fr: "En pratique, la construction de courbe dépend du choix des instruments, de l’interpolation, des conventions de calcul, de la collateralization et de la liquidité. Différentes discounting curves peuvent être nécessaires selon les cash flows et collateral agreements.",
+        },
+      },
+      formula: {
+        label: { en: "Forward rate from spot rates", fr: "Forward rate à partir des spot rates" },
+        expression: "(1 + z₂)² = (1 + z₁) × (1 + f₁,₂)",
+        explanation: { en: "The one-year forward rate beginning in one year is implied by the one- and two-year spot rates.", fr: "Le forward rate d’un an commençant dans un an est implicite dans les spot rates un an et deux ans." },
+      },
+      vocabulary: [
+        { en: "Spot rate", fr: "spot rate", definition: { en: "Zero-coupon rate for a single maturity.", fr: "Taux zéro-coupon correspondant à une maturité unique." } },
+        { en: "Bootstrapping", fr: "bootstrapping", definition: { en: "Sequential process used to derive zero-coupon discount factors from market instruments.", fr: "Processus séquentiel utilisé pour dériver les discount factors zéro-coupon à partir d’instruments de marché." } },
+        { en: "Forward rate", fr: "forward rate", definition: { en: "Future borrowing or investment rate implied by today’s term structure.", fr: "Taux futur d’emprunt ou d’investissement implicite dans la structure actuelle des taux." } },
+      ],
+    },
+    {
+      id: "curve-shape-and-forwards",
+      kicker: { en: "02 · CURVE SHAPE & FORWARDS", fr: "02 · FORME DE COURBE & FORWARDS" },
+      title: { en: "A yield curve can move by level, slope and curvature", fr: "Une yield curve peut bouger par niveau, pente et courbure" },
+      coreFacts: [
+        { en: "A parallel shift changes yields by roughly the same amount across maturities.", fr: "Un parallel shift déplace les yields d’un montant proche sur toutes les maturités." },
+        { en: "Steepening and flattening describe changes in the difference between long and short yields.", fr: "Steepening et flattening décrivent l’évolution de l’écart entre yields longs et courts." },
+        { en: "A butterfly move changes intermediate maturities relative to short and long maturities.", fr: "Un butterfly move modifie les maturités intermédiaires relativement aux maturités courtes et longues." },
+        { en: "Forward curves embed market pricing, term premia and technical factors, so they should not be read as pure forecasts.", fr: "Les forward curves intègrent pricing de marché, term premia et facteurs techniques, donc elles ne doivent pas être lues comme des prévisions pures." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "The curve does not always move up or down as one line. Short rates can rise while long rates barely move, or the middle of the curve can move more than either end.",
+          fr: "La courbe ne bouge pas toujours comme une seule ligne vers le haut ou le bas. Les taux courts peuvent monter tandis que les taux longs bougent peu, ou le milieu de la courbe peut bouger davantage que les extrémités.",
+        },
+        Intermediate: {
+          en: "A steepener benefits when the long-short yield difference increases; a flattener benefits when that difference decreases. The trade must be duration-balanced if the goal is to isolate curve shape rather than outright rate direction.",
+          fr: "Un steepener bénéficie lorsque l’écart long-court augmente ; un flattener lorsque cet écart diminue. Le trade doit être duration-balanced si l’objectif est d’isoler la forme de courbe plutôt que la direction générale des taux.",
+        },
+        Professional: {
+          en: "Curve trades should be framed with key-rate exposures, carry and roll, financing cost and scenario analysis. A trade can be directionally correct on the curve but still lose money because of adverse carry or a poor hedge ratio.",
+          fr: "Les curve trades doivent être pensés avec key-rate exposures, carry and roll, coût de financement et scenario analysis. Un trade peut avoir raison sur la forme de courbe mais perdre de l’argent à cause d’un carry défavorable ou d’un mauvais hedge ratio.",
+        },
+      },
+      vocabulary: [
+        { en: "Steepener", fr: "steepener", definition: { en: "Position benefiting from a larger yield difference between long and short maturities.", fr: "Position bénéficiant d’un écart plus grand entre yields longs et courts." } },
+        { en: "Flattener", fr: "flattener", definition: { en: "Position benefiting from a smaller long-short yield difference.", fr: "Position bénéficiant d’un écart long-court plus faible." } },
+        { en: "Butterfly", fr: "butterfly", definition: { en: "Relative-value trade comparing an intermediate maturity with shorter and longer maturities.", fr: "Trade de relative value comparant une maturité intermédiaire avec des maturités plus courtes et plus longues." } },
+      ],
+    },
+    {
+      id: "advanced-duration",
+      kicker: { en: "03 · ADVANCED DURATION", fr: "03 · DURATION AVANCÉE" },
+      title: { en: "Portfolio rate risk is better described by where duration sits, not only how much duration exists", fr: "Le risque de taux d’un portefeuille dépend d’où se situe la duration, pas seulement de sa quantité" },
+      coreFacts: [
+        { en: "Modified duration estimates percentage price sensitivity to a small parallel yield change.", fr: "La modified duration estime la sensibilité en pourcentage du prix à une petite variation parallèle de yield." },
+        { en: "DV01 converts duration into approximate dollar price change for a one-basis-point move.", fr: "Le DV01 transforme la duration en variation approximative en dollars pour un mouvement d’un basis point." },
+        { en: "Key-rate duration measures sensitivity to movements at specific curve maturities.", fr: "La key-rate duration mesure la sensibilité aux mouvements sur des maturités spécifiques de la courbe." },
+        { en: "Convexity improves the approximation when yield moves are larger or the bond has meaningful curvature.", fr: "La convexity améliore l’approximation lorsque les mouvements de yield sont plus importants ou que l’obligation présente une courbure significative." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Two portfolios can have the same total duration but react differently if one is concentrated in five-year bonds and the other in two- and ten-year bonds.",
+          fr: "Deux portefeuilles peuvent avoir la même duration totale mais réagir différemment si l’un est concentré sur cinq ans et l’autre sur deux et dix ans.",
+        },
+        Intermediate: {
+          en: "Use DV01 to compare dollar rate risk across positions. Use key-rate duration to understand which maturity points drive that risk and to build more precise hedges.",
+          fr: "Utilise le DV01 pour comparer le risque de taux en dollars entre positions. Utilise la key-rate duration pour comprendre quelles maturités portent ce risque et construire des hedges plus précis.",
+        },
+        Professional: {
+          en: "Risk systems often decompose fixed-income portfolios into key-rate or bucketed sensitivities, spread DV01 and convexity. This reveals basis risk that a single portfolio duration can hide.",
+          fr: "Les systèmes de risque décomposent souvent les portefeuilles fixed income en key-rate sensitivities, spread DV01 et convexity. Cela révèle du basis risk qu’une duration globale peut cacher.",
+        },
+      },
+      formula: {
+        label: { en: "DV01 approximation", fr: "Approximation du DV01" },
+        expression: "DV01 ≈ Modified Duration × Price × 0.0001",
+        explanation: { en: "DV01 estimates the price change for a one-basis-point parallel yield move.", fr: "Le DV01 estime la variation de prix pour un mouvement parallèle de yield d’un basis point." },
+      },
+      vocabulary: [
+        { en: "DV01", fr: "DV01", definition: { en: "Approximate dollar value change for a one-basis-point yield move.", fr: "Variation approximative de valeur en dollars pour un mouvement de yield d’un basis point." } },
+        { en: "Key-rate duration", fr: "key-rate duration", definition: { en: "Sensitivity to a yield move at a specific maturity point.", fr: "Sensibilité à un mouvement de yield sur une maturité précise." } },
+        { en: "Basis risk", fr: "basis risk", definition: { en: "Risk that a hedge and the exposure being hedged do not move identically.", fr: "Risque qu’un hedge et l’exposition couverte n’évoluent pas exactement de la même manière." } },
+      ],
+    },
+    {
+      id: "spread-measures",
+      kicker: { en: "04 · SPREAD MEASURES", fr: "04 · MESURES DE SPREAD" },
+      title: { en: "The right spread depends on what risk you are trying to isolate", fr: "Le bon spread dépend du risque que tu cherches à isoler" },
+      coreFacts: [
+        { en: "Nominal spread compares a bond yield with a reference government yield of similar maturity.", fr: "Le nominal spread compare le yield d’une obligation avec un yield gouvernemental de maturité similaire." },
+        { en: "Z-spread is the constant spread added to each spot rate that reproduces the bond’s market price.", fr: "Le Z-spread est le spread constant ajouté à chaque spot rate qui reproduit le prix de marché de l’obligation." },
+        { en: "Option-adjusted spread removes the estimated value of embedded options from the spread measure.", fr: "L’option-adjusted spread retire la valeur estimée des options intégrées de la mesure de spread." },
+        { en: "Spread changes can drive returns independently of risk-free rate moves.", fr: "Les variations de spread peuvent déterminer les returns indépendamment des mouvements de taux risk-free." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a corporate bond yields more than a government bond, part of the difference compensates investors for credit, liquidity and other risks. Spread measures try to quantify that difference more precisely.",
+          fr: "Si une obligation corporate offre un yield supérieur à une obligation gouvernementale, une partie de l’écart rémunère le risque crédit, la liquidité et d’autres risques. Les spread measures cherchent à mesurer cet écart plus précisément.",
+        },
+        Intermediate: {
+          en: "Z-spread uses the whole spot curve instead of comparing only one maturity. For bonds with embedded options, OAS is usually more informative because it attempts to remove the option component.",
+          fr: "Le Z-spread utilise toute la spot curve au lieu de comparer une seule maturité. Pour les obligations avec options intégrées, l’OAS est généralement plus informatif car il cherche à retirer la composante optionnelle.",
+        },
+        Professional: {
+          en: "Spread measures are model-dependent. OAS depends on the interest-rate volatility and prepayment or exercise model used, so relative-value conclusions should consider model risk as well as observed spread.",
+          fr: "Les spread measures dépendent du modèle. L’OAS dépend de la volatilité des taux et du modèle de prepayment ou d’exercice utilisé, donc les conclusions de relative value doivent intégrer le model risk en plus du spread observé.",
+        },
+      },
+      vocabulary: [
+        { en: "Z-spread", fr: "Z-spread", definition: { en: "Constant spread over the spot curve that matches the bond’s market price.", fr: "Spread constant au-dessus de la spot curve qui reproduit le prix de marché de l’obligation." } },
+        { en: "OAS", fr: "OAS", definition: { en: "Option-adjusted spread after estimating the value of embedded optionality.", fr: "Spread ajusté des options après estimation de la valeur de l’optionalité intégrée." } },
+        { en: "Spread DV01", fr: "spread DV01", definition: { en: "Approximate price sensitivity to a one-basis-point move in credit spread.", fr: "Sensibilité approximative du prix à un mouvement d’un basis point du credit spread." } },
+      ],
+    },
+    {
+      id: "credit-curves",
+      kicker: { en: "05 · CREDIT CURVES & DEFAULT", fr: "05 · CREDIT CURVES & DEFAULT" },
+      title: { en: "Credit pricing reflects both the probability of default and the severity of loss", fr: "Le pricing crédit reflète à la fois la probabilité de défaut et la sévérité de la perte" },
+      coreFacts: [
+        { en: "Credit spreads generally compensate for expected loss, risk premium, liquidity and technical factors.", fr: "Les credit spreads compensent généralement expected loss, risk premium, liquidité et facteurs techniques." },
+        { en: "Expected loss is linked to probability of default and loss given default.", fr: "L’expected loss est lié à la probabilité de défaut et à la loss given default." },
+        { en: "Credit curves can be upward sloping, flat or inverted depending on market perception of near-term versus long-term risk.", fr: "Les credit curves peuvent être ascendantes, plates ou inversées selon la perception du risque court versus long terme." },
+        { en: "Bond spread and CDS spread can diverge because of funding, liquidity, deliverability and market technicals.", fr: "Bond spread et CDS spread peuvent diverger à cause du funding, de la liquidité, de la deliverability et des facteurs techniques de marché." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A risky bond pays more because investors need compensation for the chance of not being repaid in full. The size of the potential loss matters as much as the chance of default.",
+          fr: "Une obligation risquée paie davantage car les investisseurs demandent une compensation pour le risque de ne pas être remboursés intégralement. La taille de la perte potentielle compte autant que la probabilité de défaut.",
+        },
+        Intermediate: {
+          en: "A simple credit framework separates default probability from recovery. Higher default probability or lower expected recovery should increase required spread, all else equal.",
+          fr: "Un cadre simple sépare probabilité de défaut et recovery. Une probabilité de défaut plus élevée ou une recovery attendue plus faible doit augmenter le spread exigé, toutes choses égales par ailleurs.",
+        },
+        Professional: {
+          en: "Market spreads contain more than actuarial expected loss. Investors also demand compensation for uncertainty, liquidity, jump-to-default risk and balance-sheet usage, so spread should not be interpreted as a pure default probability.",
+          fr: "Les spreads de marché contiennent plus que l’expected loss actuarielle. Les investisseurs exigent aussi une compensation pour incertitude, liquidité, jump-to-default risk et utilisation du bilan, donc le spread ne doit pas être interprété comme une pure probabilité de défaut.",
+        },
+      },
+      formula: {
+        label: { en: "Simplified expected credit loss", fr: "Expected credit loss simplifiée" },
+        expression: "Expected Loss ≈ PD × LGD",
+        explanation: { en: "LGD equals one minus the expected recovery rate.", fr: "LGD est égale à un moins la recovery rate attendue." },
+      },
+      vocabulary: [
+        { en: "PD", fr: "PD", definition: { en: "Probability of default over a specified horizon.", fr: "Probabilité de défaut sur un horizon donné." } },
+        { en: "LGD", fr: "LGD", definition: { en: "Loss given default; percentage of exposure not recovered after default.", fr: "Loss given default ; pourcentage de l’exposition non récupéré après défaut." } },
+        { en: "CDS", fr: "CDS", definition: { en: "Credit default swap providing contractual protection against defined credit events.", fr: "Credit default swap fournissant une protection contractuelle contre certains credit events." } },
+      ],
+    },
+    {
+      id: "embedded-options",
+      kicker: { en: "06 · EMBEDDED OPTIONALITY", fr: "06 · OPTIONALITÉ INTÉGRÉE" },
+      title: { en: "When the issuer or borrower owns an option, the bond’s behavior becomes nonlinear", fr: "Lorsque l’émetteur ou l’emprunteur possède une option, le comportement de l’obligation devient non linéaire" },
+      coreFacts: [
+        { en: "Callable bonds give the issuer the right to redeem debt early under specified terms.", fr: "Les callable bonds donnent à l’émetteur le droit de rembourser la dette plus tôt selon certaines conditions." },
+        { en: "When yields fall, call probability can rise and limit bond price appreciation.", fr: "Lorsque les yields baissent, la probabilité de call peut augmenter et limiter la hausse du prix de l’obligation." },
+        { en: "Mortgage borrowers effectively hold a prepayment option because they can refinance when rates decline.", fr: "Les emprunteurs hypothécaires détiennent effectivement une option de prepayment car ils peuvent refinancer lorsque les taux baissent." },
+        { en: "Negative convexity can appear when duration shortens as rates fall and extends as rates rise.", fr: "Une convexity négative peut apparaître lorsque la duration raccourcit avec la baisse des taux et s’allonge avec leur hausse." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A normal bond usually rises when yields fall. But if the issuer can call the bond, a large price rise may be capped because investors expect the issuer to repay early.",
+          fr: "Une obligation classique monte généralement lorsque les yields baissent. Mais si l’émetteur peut la call, une forte hausse du prix peut être limitée car les investisseurs anticipent un remboursement anticipé.",
+        },
+        Intermediate: {
+          en: "For mortgage-backed securities, falling rates can accelerate refinancing and principal return, while rising rates can slow prepayments and extend duration. This creates extension and contraction risk.",
+          fr: "Pour les mortgage-backed securities, la baisse des taux peut accélérer refinancement et remboursement du principal, tandis que la hausse des taux peut ralentir les prepayments et allonger la duration. Cela crée extension et contraction risk.",
+        },
+        Professional: {
+          en: "OAS models separate spread compensation from option value by simulating interest-rate paths and expected exercise behavior. Results depend heavily on volatility and behavioral assumptions.",
+          fr: "Les modèles OAS séparent la compensation de spread de la valeur de l’option en simulant des trajectoires de taux et des comportements d’exercice attendus. Les résultats dépendent fortement de la volatilité et des hypothèses comportementales.",
+        },
+      },
+      vocabulary: [
+        { en: "Negative convexity", fr: "negative convexity", definition: { en: "Price-yield behavior in which upside is limited and duration can extend when rates rise.", fr: "Comportement prix-yield où l’upside est limité et la duration peut s’allonger lorsque les taux montent." } },
+        { en: "Prepayment risk", fr: "prepayment risk", definition: { en: "Risk that borrowers repay principal earlier than expected.", fr: "Risque que les emprunteurs remboursent le principal plus tôt que prévu." } },
+        { en: "Extension risk", fr: "extension risk", definition: { en: "Risk that expected principal repayment is delayed as rates rise.", fr: "Risque que le remboursement attendu du principal soit retardé lorsque les taux montent." } },
+      ],
+    },
+    {
+      id: "securitized-products",
+      kicker: { en: "07 · SECURITIZED PRODUCTS", fr: "07 · PRODUITS TITRISÉS" },
+      title: { en: "Securitization transforms pools of cash flows into securities with different priorities", fr: "La titrisation transforme des pools de cash flows en titres avec différentes priorités" },
+      coreFacts: [
+        { en: "Asset-backed securities pool contractual cash flows such as mortgages, auto loans or credit-card receivables.", fr: "Les asset-backed securities regroupent des cash flows contractuels comme mortgages, auto loans ou créances de cartes de crédit." },
+        { en: "Tranching redistributes credit and prepayment risk across securities with different seniority.", fr: "Le tranching redistribue risque crédit et prepayment entre titres de différentes séniorités." },
+        { en: "Credit enhancement can include subordination, excess spread, overcollateralization or reserve accounts.", fr: "Le credit enhancement peut inclure subordination, excess spread, overcollateralization ou reserve accounts." },
+        { en: "Collateral performance, structural protections and payment waterfalls matter as much as headline yield.", fr: "La performance du collateral, les protections structurelles et payment waterfalls comptent autant que le headline yield." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Instead of lending to one borrower, a securitized product collects many loans into a pool. Investors then buy securities backed by the cash flows from that pool.",
+          fr: "Au lieu de prêter à un seul emprunteur, un produit titrisé regroupe de nombreux prêts dans un pool. Les investisseurs achètent ensuite des titres adossés aux cash flows de ce pool.",
+        },
+        Intermediate: {
+          en: "Senior tranches receive cash first and usually absorb losses later than junior tranches. This priority structure creates different risk-return profiles from the same collateral pool.",
+          fr: "Les tranches senior reçoivent le cash en premier et absorbent généralement les pertes plus tard que les tranches junior. Cette structure de priorité crée différents profils risque-return à partir du même collateral pool.",
+        },
+        Professional: {
+          en: "Securitized analysis combines collateral modeling with legal structure. Analysts stress default timing, recovery, prepayments and trigger mechanics to understand how cash-flow waterfalls redistribute risk across tranches.",
+          fr: "L’analyse des produits titrisés combine modélisation du collateral et structure juridique. Les analystes stressent timing des défauts, recovery, prepayments et trigger mechanics pour comprendre comment les cash-flow waterfalls redistribuent le risque entre tranches.",
+        },
+      },
+      vocabulary: [
+        { en: "Tranche", fr: "tranche", definition: { en: "Layer of a securitization with a specified priority and risk profile.", fr: "Couche d’une titrisation avec une priorité et un profil de risque spécifiques." } },
+        { en: "Credit enhancement", fr: "credit enhancement", definition: { en: "Structural protection designed to reduce expected credit loss for selected securities.", fr: "Protection structurelle destinée à réduire l’expected credit loss de certains titres." } },
+        { en: "Waterfall", fr: "waterfall", definition: { en: "Contractual order in which cash flows and losses are allocated.", fr: "Ordre contractuel selon lequel cash flows et pertes sont alloués." } },
+      ],
+    },
+    {
+      id: "inflation-linked-bonds",
+      kicker: { en: "08 · INFLATION-LINKED BONDS", fr: "08 · OBLIGATIONS INDEXÉES SUR L’INFLATION" },
+      title: { en: "Nominal yields mix real rates and inflation compensation", fr: "Les yields nominaux mélangent taux réels et compensation d’inflation" },
+      coreFacts: [
+        { en: "Inflation-linked bonds adjust principal or coupon economics with an inflation index.", fr: "Les inflation-linked bonds ajustent le principal ou l’économie du coupon avec un indice d’inflation." },
+        { en: "Real yield represents the yield after stripping out explicit inflation indexation.", fr: "Le real yield représente le yield après retrait de l’indexation explicite à l’inflation." },
+        { en: "Breakeven inflation is approximately the nominal yield minus the real yield at a similar maturity.", fr: "Le breakeven inflation est approximativement le yield nominal moins le real yield à maturité similaire." },
+        { en: "Breakevens reflect inflation expectations plus risk premia, liquidity and market technicals.", fr: "Les breakevens reflètent attentes d’inflation plus risk premia, liquidité et facteurs techniques." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a nominal bond yields 4% and an inflation-linked bond yields 1.5% in real terms, the rough breakeven is 2.5%. Inflation above that tends to favor the inflation-linked bond before other differences.",
+          fr: "Si une obligation nominale offre 4 % et une obligation indexée offre 1,5 % en réel, le breakeven approximatif est 2,5 %. Une inflation supérieure tend à favoriser l’obligation indexée avant autres différences.",
+        },
+        Intermediate: {
+          en: "Breakeven trades compare nominal and real bonds while trying to isolate inflation pricing. Carry can depend on realized inflation and indexation lags, so the position is not simply a static inflation forecast.",
+          fr: "Les breakeven trades comparent obligations nominales et réelles en cherchant à isoler le pricing de l’inflation. Le carry peut dépendre de l’inflation réalisée et des lags d’indexation, donc la position n’est pas une simple prévision statique.",
+        },
+        Professional: {
+          en: "Inflation markets separate real-rate risk from inflation compensation, but liquidity and inflation-risk premia can vary through time. Analysts should distinguish market-implied breakevens from pure expected inflation.",
+          fr: "Les marchés d’inflation séparent risque de real rate et compensation d’inflation, mais liquidité et inflation-risk premia varient dans le temps. Les analystes doivent distinguer breakevens implicites du marché et pure expected inflation.",
+        },
+      },
+      formula: {
+        label: { en: "Approximate breakeven inflation", fr: "Breakeven inflation approximatif" },
+        expression: "Breakeven Inflation ≈ Nominal Yield − Real Yield",
+        explanation: { en: "This approximation ignores some compounding, liquidity and risk-premium differences.", fr: "Cette approximation ignore certaines différences de compounding, liquidité et risk premium." },
+      },
+      vocabulary: [
+        { en: "Real yield", fr: "real yield", definition: { en: "Yield measured after explicit inflation indexation.", fr: "Yield mesuré après indexation explicite à l’inflation." } },
+        { en: "Breakeven inflation", fr: "breakeven inflation", definition: { en: "Inflation rate at which nominal and inflation-linked returns are approximately equal.", fr: "Taux d’inflation auquel returns nominaux et indexés sont approximativement égaux." } },
+      ],
+    },
+    {
+      id: "portfolio-positioning",
+      kicker: { en: "09 · PORTFOLIO POSITIONING", fr: "09 · POSITIONNEMENT DE PORTEFEUILLE" },
+      title: { en: "Fixed-income alpha can come from duration, curve, spread, carry and security selection", fr: "L’alpha fixed income peut venir de duration, courbe, spread, carry et security selection" },
+      coreFacts: [
+        { en: "Duration positioning expresses a view on the general direction of rates.", fr: "Le positionnement duration exprime une vue sur la direction générale des taux." },
+        { en: "Curve trades express relative views between maturities.", fr: "Les curve trades expriment des vues relatives entre maturités." },
+        { en: "Credit positioning expresses views on spread compensation, default risk and relative value.", fr: "Le positionnement crédit exprime des vues sur compensation de spread, default risk et relative value." },
+        { en: "Carry and roll can contribute materially to total return even when yields and spreads finish near their starting levels.", fr: "Carry and roll peuvent contribuer significativement au total return même si yields et spreads finissent proches de leurs niveaux initiaux." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A bond investor can make money not only because rates fall. Coupon income, curve shape, spread changes and choosing the right securities can all matter.",
+          fr: "Un investisseur obligataire peut gagner de l’argent pas seulement lorsque les taux baissent. Coupon income, forme de courbe, variations de spread et choix des titres peuvent tous compter.",
+        },
+        Intermediate: {
+          en: "Before entering a trade, identify the intended source of return and hedge unwanted exposures. A credit-spread view should not accidentally become a large duration bet unless that is intentional.",
+          fr: "Avant d’entrer un trade, identifie la source de return recherchée et hedge les expositions non souhaitées. Une vue de credit spread ne doit pas accidentellement devenir un gros pari de duration sauf si c’est intentionnel.",
+        },
+        Professional: {
+          en: "Portfolio construction should combine expected excess return with DV01, key-rate duration, spread DV01, liquidity, convexity and scenario loss. Relative-value trades are strongest when the analyst can identify both the catalyst and the risk that the relationship remains dislocated.",
+          fr: "La construction de portefeuille doit combiner expected excess return avec DV01, key-rate duration, spread DV01, liquidité, convexity et scenario loss. Les relative-value trades sont plus solides lorsque l’analyste identifie à la fois le catalyst et le risque que la relation reste disloquée.",
+        },
+      },
+      vocabulary: [
+        { en: "Carry", fr: "carry", definition: { en: "Expected income and financing effect from holding a position over time.", fr: "Income attendu et effet de financement provenant de la détention d’une position dans le temps." } },
+        { en: "Roll-down", fr: "roll-down", definition: { en: "Price effect from a bond moving to a shorter maturity point on an unchanged yield curve.", fr: "Effet de prix provenant du passage d’une obligation vers une maturité plus courte sur une courbe inchangée." } },
+        { en: "Relative value", fr: "relative value", definition: { en: "Assessment of whether one security or segment is attractive relative to another after adjusting for risk.", fr: "Évaluation de l’attractivité d’un titre ou segment relativement à un autre après ajustement du risque." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "spot-curve",
+      question: { en: "What does a spot curve represent?", fr: "Que représente une spot curve ?" },
+      options: [
+        { id: "a", label: { en: "Zero-coupon discount rates by maturity", fr: "Des taux zéro-coupon par maturité" } },
+        { id: "b", label: { en: "Only coupon rates of corporate bonds", fr: "Uniquement les coupons des obligations corporate" } },
+        { id: "c", label: { en: "Only historical inflation", fr: "Uniquement l’inflation historique" } },
+        { id: "d", label: { en: "Stock dividend yields", fr: "Les dividend yields des actions" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Spot rates discount individual future cash flows at their specific maturities.", fr: "Les spot rates actualisent chaque cash flow futur selon sa maturité spécifique." },
+    },
+    {
+      id: "q2",
+      conceptKey: "forward-rate",
+      question: { en: "What is a forward rate?", fr: "Qu’est-ce qu’un forward rate ?" },
+      options: [
+        { id: "a", label: { en: "A future rate implied by today’s term structure", fr: "Un taux futur implicite dans la term structure actuelle" } },
+        { id: "b", label: { en: "A guaranteed central-bank forecast", fr: "Une prévision garantie de banque centrale" } },
+        { id: "c", label: { en: "A stock-price target", fr: "Un target de cours d’action" } },
+        { id: "d", label: { en: "A recovery rate", fr: "Une recovery rate" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Forward rates are implied mathematically by current spot rates and do not equal pure forecasts.", fr: "Les forward rates sont mathématiquement implicites dans les spot rates actuels et ne sont pas des prévisions pures." },
+    },
+    {
+      id: "q3",
+      conceptKey: "dv01",
+      question: { en: "What does DV01 measure?", fr: "Que mesure le DV01 ?" },
+      options: [
+        { id: "a", label: { en: "Approximate dollar price change for a 1 bp yield move", fr: "Variation approximative en dollars pour un mouvement de yield de 1 bp" } },
+        { id: "b", label: { en: "Annual revenue growth", fr: "Croissance annuelle du revenue" } },
+        { id: "c", label: { en: "Default recovery only", fr: "Uniquement la recovery de défaut" } },
+        { id: "d", label: { en: "Equity beta", fr: "Equity beta" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "DV01 converts rate sensitivity into an approximate money value for a one-basis-point move.", fr: "Le DV01 transforme la sensibilité aux taux en valeur monétaire approximative pour un mouvement d’un basis point." },
+    },
+    {
+      id: "q4",
+      conceptKey: "key-rate-duration",
+      question: { en: "Why use key-rate duration?", fr: "Pourquoi utiliser la key-rate duration ?" },
+      options: [
+        { id: "a", label: { en: "To identify sensitivity at specific curve maturities", fr: "Pour identifier la sensibilité sur des maturités précises de la courbe" } },
+        { id: "b", label: { en: "To calculate company revenue", fr: "Pour calculer le revenue d’une société" } },
+        { id: "c", label: { en: "To eliminate convexity", fr: "Pour éliminer la convexity" } },
+        { id: "d", label: { en: "To measure dividend payout", fr: "Pour mesurer le dividend payout" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Key-rate duration shows where along the curve the portfolio carries interest-rate exposure.", fr: "La key-rate duration montre où sur la courbe le portefeuille porte son exposition aux taux." },
+    },
+    {
+      id: "q5",
+      conceptKey: "oas",
+      question: { en: "Why is OAS useful for bonds with embedded options?", fr: "Pourquoi l’OAS est-il utile pour les obligations avec options intégrées ?" },
+      options: [
+        { id: "a", label: { en: "It adjusts the spread for estimated option value", fr: "Il ajuste le spread de la valeur estimée de l’option" } },
+        { id: "b", label: { en: "It ignores interest-rate volatility", fr: "Il ignore la volatilité des taux" } },
+        { id: "c", label: { en: "It guarantees no default", fr: "Il garantit l’absence de défaut" } },
+        { id: "d", label: { en: "It equals the coupon", fr: "Il est égal au coupon" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "OAS attempts to separate option value from the remaining compensation for credit, liquidity and other risks.", fr: "L’OAS cherche à séparer la valeur de l’option de la compensation restante pour crédit, liquidité et autres risques." },
+    },
+    {
+      id: "q6",
+      conceptKey: "expected-loss",
+      question: { en: "A simplified expected credit loss is approximately what?", fr: "Une expected credit loss simplifiée est approximativement égale à quoi ?" },
+      options: [
+        { id: "a", label: { en: "Probability of default × loss given default", fr: "Probability of default × loss given default" } },
+        { id: "b", label: { en: "Coupon × duration", fr: "Coupon × duration" } },
+        { id: "c", label: { en: "Price × revenue", fr: "Prix × revenue" } },
+        { id: "d", label: { en: "Beta × EPS", fr: "Beta × EPS" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Expected loss combines the chance of default with the percentage loss if default occurs.", fr: "L’expected loss combine la probabilité de défaut avec le pourcentage de perte si le défaut se produit." },
+    },
+    {
+      id: "q7",
+      conceptKey: "negative-convexity",
+      question: { en: "Why can mortgage-backed securities exhibit negative convexity?", fr: "Pourquoi les mortgage-backed securities peuvent-ils présenter une convexity négative ?" },
+      options: [
+        { id: "a", label: { en: "Borrowers refinance faster when rates fall and slower when rates rise", fr: "Les emprunteurs refinancent plus vite lorsque les taux baissent et plus lentement lorsqu’ils montent" } },
+        { id: "b", label: { en: "Mortgages never prepay", fr: "Les mortgages ne sont jamais remboursés par anticipation" } },
+        { id: "c", label: { en: "Their coupons are always zero", fr: "Leurs coupons sont toujours nuls" } },
+        { id: "d", label: { en: "They have no interest-rate risk", fr: "Ils n’ont aucun risque de taux" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Prepayment behavior can cap upside when rates fall and extend duration when rates rise.", fr: "Le comportement de prepayment peut limiter l’upside lorsque les taux baissent et allonger la duration lorsqu’ils montent." },
+    },
+    {
+      id: "q8",
+      conceptKey: "tranching",
+      question: { en: "What does tranching do in a securitization?", fr: "Que fait le tranching dans une titrisation ?" },
+      options: [
+        { id: "a", label: { en: "It allocates cash-flow and loss priority across different securities", fr: "Il répartit la priorité des cash flows et pertes entre différents titres" } },
+        { id: "b", label: { en: "It eliminates all credit risk", fr: "Il élimine tout risque crédit" } },
+        { id: "c", label: { en: "It converts bonds into equities", fr: "Il transforme les obligations en actions" } },
+        { id: "d", label: { en: "It removes all prepayment risk", fr: "Il supprime tout risque de prepayment" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Tranches receive cash and absorb losses according to contractual priority.", fr: "Les tranches reçoivent le cash et absorbent les pertes selon une priorité contractuelle." },
+    },
+    {
+      id: "q9",
+      conceptKey: "breakeven",
+      question: { en: "Nominal yield is 4.0% and real yield is 1.5%. What is approximate breakeven inflation?", fr: "Le nominal yield est 4,0 % et le real yield 1,5 %. Quel est le breakeven inflation approximatif ?" },
+      options: [
+        { id: "a", label: { en: "2.5%", fr: "2,5 %" } },
+        { id: "b", label: { en: "5.5%", fr: "5,5 %" } },
+        { id: "c", label: { en: "1.5%", fr: "1,5 %" } },
+        { id: "d", label: { en: "4.0%", fr: "4,0 %" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Approximate breakeven = 4.0% − 1.5% = 2.5%.", fr: "Breakeven approximatif = 4,0 % − 1,5 % = 2,5 %." },
+    },
+    {
+      id: "q10",
+      conceptKey: "portfolio-positioning",
+      question: { en: "What should a fixed-income trader identify before entering a relative-value trade?", fr: "Que doit identifier un trader fixed income avant un relative-value trade ?" },
+      options: [
+        { id: "a", label: { en: "Intended source of return and unwanted risks to hedge", fr: "La source de return recherchée et les risques non souhaités à hedger" } },
+        { id: "b", label: { en: "Only the bond’s name", fr: "Uniquement le nom de l’obligation" } },
+        { id: "c", label: { en: "Only last year’s coupon income", fr: "Uniquement le coupon income de l’an dernier" } },
+        { id: "d", label: { en: "No scenario analysis", fr: "Aucune scenario analysis" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Professional positioning isolates the intended view while controlling unrelated rate, spread and liquidity exposures.", fr: "Un positionnement professionnel isole la vue recherchée tout en contrôlant les expositions non souhaitées de taux, spread et liquidité." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "You expect the yield curve to steepen but do not want a large outright duration view. How would you structure and risk-manage the trade?",
+      fr: "Tu anticipes un steepening de la yield curve mais tu ne veux pas prendre une grosse vue directionnelle de duration. Comment structurerais-tu et gérerais-tu le risque du trade ?",
+    },
+    framework: [
+      { en: "Define which curve points are expected to move relative to each other.", fr: "Définir quelles maturités de la courbe devraient bouger relativement les unes aux autres." },
+      { en: "Choose instruments with liquid exposure to those maturities.", fr: "Choisir des instruments liquides exposés à ces maturités." },
+      { en: "Size the long and short legs using DV01 or key-rate duration to neutralize most parallel-shift risk.", fr: "Dimensionner les jambes long et short avec DV01 ou key-rate duration pour neutraliser l’essentiel du risque de parallel shift." },
+      { en: "Estimate carry and roll so the trade is not dependent only on the curve move.", fr: "Estimer carry and roll afin que le trade ne dépende pas seulement du mouvement de courbe." },
+      { en: "Stress non-parallel moves, volatility, liquidity and hedge basis.", fr: "Stresser mouvements non parallèles, volatilité, liquidité et hedge basis." },
+      { en: "Define the catalyst, stop conditions and what evidence would invalidate the curve thesis.", fr: "Définir catalyst, stop conditions et les éléments qui invalideraient la thèse de courbe." },
+    ],
+    sample: {
+      en: "I would first define the exact steepening view, for example whether I expect the ten-year yield to rise relative to the two-year yield or the two-year yield to fall faster. Then I would choose liquid instruments at those maturity points and size the legs using DV01 so the trade has limited exposure to a parallel shift in rates. I would also examine key-rate duration because two positions with equal total DV01 can still carry different curve exposures. Before entering the trade, I would calculate carry and roll, financing cost and the P&L under several curve scenarios. I would then stress basis risk, volatility and liquidity, especially if the hedge uses different instruments. Finally, I would define the macro catalyst and the conditions that would invalidate the steepening view so the trade has a clear risk-management framework.",
+      fr: "Je commencerais par définir précisément la vue de steepening, par exemple si j’anticipe une hausse du yield dix ans relativement au deux ans ou une baisse plus rapide du deux ans. Je choisirais ensuite des instruments liquides sur ces maturités et dimensionnerais les jambes avec le DV01 afin de limiter l’exposition à un parallel shift des taux. J’examinerais aussi la key-rate duration car deux positions avec le même DV01 total peuvent porter des expositions de courbe différentes. Avant d’entrer le trade, je calculerais carry and roll, coût de financement et P&L sous plusieurs scénarios de courbe. Je stresserais ensuite basis risk, volatilité et liquidité, surtout si le hedge utilise des instruments différents. Enfin, je définirais le catalyst macro et les conditions qui invalideraient la vue de steepening afin que le trade possède un cadre clair de risk management.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
