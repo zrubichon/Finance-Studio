@@ -26036,7 +26036,372 @@ export const riskManagementLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson];
+
+
+export const maAnalysisLesson: FinanceLesson = {
+  slug: "year-3-ma-analysis",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "M&A Analysis", fr: "Analyse M&A" },
+  title: { en: "M&A Analysis", fr: "Analyse M&A" },
+  subtitle: {
+    en: "Learn how to analyze acquisitions from strategic rationale through purchase price, financing, synergies, accretion/dilution, purchase accounting, sensitivities and deal risks.",
+    fr: "Comprendre comment analyser une acquisition, de la logique stratégique au purchase price, financement, synergies, accretion/dilution, purchase accounting, sensitivities et risques du deal.",
+  },
+  duration: { en: "155–185 min", fr: "155–185 min" },
+  prerequisites: [
+    { en: "Investment Banking", fr: "Investment Banking" },
+    { en: "Corporate Finance", fr: "Finance d’entreprise / Corporate Finance" },
+    { en: "Financial Statement Analysis", fr: "Analyse des états financiers" },
+    { en: "DCF & Relative Valuation", fr: "DCF & valorisation relative" },
+    { en: "Financial Modeling I", fr: "Modélisation financière I" },
+  ],
+  objectives: [
+    { en: "Explain strategic and financial rationales for M&A.", fr: "Expliquer les logiques stratégiques et financières du M&A." },
+    { en: "Bridge offer price from equity value to enterprise value.", fr: "Faire le bridge du offer price de l’equity value vers l’enterprise value." },
+    { en: "Understand cash, debt and stock consideration.", fr: "Comprendre cash, dette et stock consideration." },
+    { en: "Model synergies, purchase accounting and accretion/dilution.", fr: "Modéliser synergies, purchase accounting et accretion/dilution." },
+    { en: "Analyze premiums, financing mix and transaction sensitivities.", fr: "Analyser premiums, mix de financement et sensitivities du deal." },
+    { en: "Identify integration, regulatory and execution risks.", fr: "Identifier integration, regulatory et execution risks." },
+  ],
+  overviewFlow: {
+    title: { en: "From strategic rationale to pro forma outcome", fr: "De la logique stratégique au résultat pro forma" },
+    steps: [
+      { title: { en: "Rationale", fr: "Rationale" }, detail: { en: "Strategy · fit · value", fr: "Stratégie · fit · valeur" } },
+      { title: { en: "Price", fr: "Prix" }, detail: { en: "Premium · EV · consideration", fr: "Premium · EV · consideration" } },
+      { title: { en: "Combine", fr: "Combiner" }, detail: { en: "Synergies · accounting · financing", fr: "Synergies · accounting · financement" } },
+      { title: { en: "Test", fr: "Tester" }, detail: { en: "EPS · sensitivities · risks", fr: "EPS · sensitivities · risques" } },
+    ],
+  },
+  sections: [
+    {
+      id: "strategic-rationale",
+      kicker: { en: "01 · STRATEGIC RATIONALE", fr: "01 · LOGIQUE STRATÉGIQUE" },
+      title: { en: "A deal should create value for a reason, not simply because two companies can combine", fr: "Un deal doit créer de la valeur pour une raison précise, pas simplement parce que deux entreprises peuvent fusionner" },
+      coreFacts: [
+        { en: "Common rationales include scale, market entry, product expansion, vertical integration and cost efficiency.", fr: "Les rationales courantes incluent scale, entrée sur un marché, expansion produit, intégration verticale et efficacité de coûts." },
+        { en: "Strategic fit should be translated into measurable financial outcomes.", fr: "Le strategic fit doit être traduit en résultats financiers mesurables." },
+        { en: "A compelling strategic story does not justify any purchase price.", fr: "Une histoire stratégique convaincante ne justifie pas n’importe quel purchase price." },
+        { en: "The buyer must compare standalone value with value after synergies and integration costs.", fr: "L’acheteur doit comparer standalone value et valeur après synergies et coûts d’intégration." },
+      ],
+      explanation: {
+        Beginner: { en: "A buyer should be able to explain why owning the target makes the combined company better and how that improvement becomes real financial value.", fr: "Un acheteur doit pouvoir expliquer pourquoi posséder la cible améliore l’entreprise combinée et comment cette amélioration devient une vraie valeur financière." },
+        Intermediate: { en: "Strategic rationale can come from new customers, broader products, purchasing power, manufacturing efficiency or removing duplicate costs. Each rationale should connect to revenue, margins or capital needs.", fr: "La logique stratégique peut venir de nouveaux clients, produits plus larges, purchasing power, efficacité industrielle ou suppression de coûts dupliqués. Chaque rationale doit se relier au revenue, aux marges ou aux besoins de capital." },
+        Professional: { en: "The key question is incremental value after execution risk. A theoretically attractive strategic fit can destroy value if the buyer overpays, integration fails or expected synergies are already embedded in the premium.", fr: "La question clé est la valeur incrémentale après execution risk. Un fit stratégique théoriquement attractif peut détruire de la valeur si l’acheteur surpaye, si l’intégration échoue ou si les synergies attendues sont déjà intégrées dans la premium." },
+      },
+      vocabulary: [
+        { en: "Strategic rationale", fr: "logique stratégique", definition: { en: "Economic reason why combining two businesses may create value.", fr: "Raison économique pour laquelle combiner deux entreprises peut créer de la valeur." } },
+        { en: "Integration risk", fr: "risque d’intégration", definition: { en: "Risk that expected benefits are not realized after closing.", fr: "Risque que les bénéfices attendus ne soient pas réalisés après le closing." } },
+      ],
+    },
+    {
+      id: "purchase-price",
+      kicker: { en: "02 · PURCHASE PRICE & PREMIUM", fr: "02 · PURCHASE PRICE & PREMIUM" },
+      title: { en: "Purchase price must be translated across share price, equity value and enterprise value", fr: "Le purchase price doit être traduit entre share price, equity value et enterprise value" },
+      coreFacts: [
+        { en: "Offer price per share determines implied equity value for listed targets.", fr: "Le offer price par action détermine l’implied equity value pour les cibles cotées." },
+        { en: "Enterprise value adds debt and other claims and subtracts cash or non-operating assets as appropriate.", fr: "L’enterprise value ajoute dette et autres claims puis soustrait cash ou actifs non opérationnels selon le cas." },
+        { en: "Offer premium is usually measured against an unaffected share price.", fr: "La offer premium est généralement mesurée par rapport à un unaffected share price." },
+        { en: "Debt-like items and working-capital adjustments can materially affect final economics.", fr: "Les debt-like items et ajustements de working capital peuvent fortement affecter l’économie finale." },
+      ],
+      explanation: {
+        Beginner: { en: "If a buyer offers $60 for a stock trading at $50 before the deal, the headline premium is 20%. But the total price of the business also depends on debt and cash.", fr: "Si un acheteur offre 60 $ pour une action qui cotait 50 $ avant le deal, la headline premium est de 20 %. Mais le prix total du business dépend aussi de la dette et du cash." },
+        Intermediate: { en: "Analysts bridge from diluted shares × offer price to equity purchase price, then adjust for debt, cash, minority interests and other items to calculate transaction enterprise value.", fr: "Les analystes font le bridge de diluted shares × offer price vers equity purchase price, puis ajustent dette, cash, minority interests et autres éléments pour calculer transaction enterprise value." },
+        Professional: { en: "The exact bridge should reflect the SPA and capital structure. Pension deficits, leases, earn-outs, non-controlling interests or restricted cash may require transaction-specific treatment.", fr: "Le bridge exact doit refléter le SPA et la capital structure. Pension deficits, leases, earn-outs, non-controlling interests ou restricted cash peuvent exiger un traitement spécifique au deal." },
+      },
+      formula: {
+        label: { en: "Offer premium", fr: "Offer premium" },
+        expression: "Offer Premium = Offer Price / Unaffected Price − 1",
+        explanation: { en: "Use a defensible unaffected date before deal speculation materially influenced the stock.", fr: "Utiliser une date unaffected défendable avant que la spéculation sur le deal n’influence matériellement le titre." },
+      },
+      vocabulary: [
+        { en: "Unaffected price", fr: "unaffected price", definition: { en: "Share price before material deal speculation or announcement.", fr: "Cours avant spéculation ou annonce significative du deal." } },
+        { en: "Debt-like item", fr: "debt-like item", definition: { en: "Liability economically similar to debt for transaction-value purposes.", fr: "Passif économiquement similaire à de la dette pour la transaction value." } },
+      ],
+    },
+    {
+      id: "consideration-financing",
+      kicker: { en: "03 · CONSIDERATION & FINANCING", fr: "03 · CONSIDERATION & FINANCING" },
+      title: { en: "Cash, debt and stock shift both economics and risk between buyer and seller", fr: "Cash, dette et actions déplacent l’économie et le risque entre acheteur et vendeur" },
+      coreFacts: [
+        { en: "Cash consideration gives sellers certainty of value but requires buyer funding.", fr: "Le cash consideration donne au vendeur une certitude de valeur mais exige du financement côté acheteur." },
+        { en: "Stock consideration shares post-deal upside and downside with target shareholders.", fr: "Le stock consideration partage l’upside et le downside post-deal avec les actionnaires de la cible." },
+        { en: "Debt financing increases interest expense and leverage.", fr: "Le financement par dette augmente interest expense et leverage." },
+        { en: "Mixed consideration can balance financing capacity, dilution and transaction risk.", fr: "Un consideration mixte peut équilibrer capacité de financement, dilution et risque transactionnel." },
+      ],
+      explanation: {
+        Beginner: { en: "If a buyer pays cash, the seller exits completely. If the buyer pays in shares, target shareholders become owners of the combined company.", fr: "Si l’acheteur paie en cash, le vendeur sort complètement. Si l’acheteur paie en actions, les actionnaires de la cible deviennent propriétaires de l’entreprise combinée." },
+        Intermediate: { en: "Cash may be funded from balance-sheet cash or new debt. Stock avoids some cash funding but dilutes existing shareholders. The funding mix therefore affects EPS, leverage and ownership.", fr: "Le cash peut être financé par le bilan ou par nouvelle dette. Le stock évite une partie du financement cash mais dilue les actionnaires existants. Le funding mix affecte donc EPS, leverage et ownership." },
+        Professional: { en: "Consideration choice also signals risk allocation. Fixed-value stock, fixed-exchange-ratio structures, collars and financing conditions determine who bears changes in market value between signing and closing.", fr: "Le choix de consideration répartit aussi le risque. Fixed-value stock, fixed exchange ratio, collars et financing conditions déterminent qui porte les variations de valeur de marché entre signing et closing." },
+      },
+      vocabulary: [
+        { en: "Exchange ratio", fr: "exchange ratio", definition: { en: "Number of buyer shares issued for each target share in a stock deal.", fr: "Nombre d’actions acheteur émises pour chaque action cible dans un stock deal." } },
+        { en: "Collar", fr: "collar", definition: { en: "Mechanism limiting changes in stock consideration value or exchange ratio.", fr: "Mécanisme limitant les changements de valeur ou d’exchange ratio dans un stock deal." } },
+      ],
+    },
+    {
+      id: "synergies",
+      kicker: { en: "04 · SYNERGIES", fr: "04 · SYNERGIES" },
+      title: { en: "Synergies create value only after timing, costs, taxes and execution risk are considered", fr: "Les synergies ne créent de valeur qu’après prise en compte du timing, des coûts, taxes et execution risk" },
+      coreFacts: [
+        { en: "Cost synergies often come from duplicated functions, procurement or footprint optimization.", fr: "Les cost synergies viennent souvent de fonctions dupliquées, procurement ou optimisation du footprint." },
+        { en: "Revenue synergies may come from cross-selling, pricing or broader distribution.", fr: "Les revenue synergies peuvent venir de cross-selling, pricing ou distribution plus large." },
+        { en: "One-time integration costs reduce near-term value.", fr: "Les one-time integration costs réduisent la valeur à court terme." },
+        { en: "Synergy realization should be phased rather than assumed fully on day one.", fr: "La réalisation des synergies doit être phasée plutôt que supposée complète dès le jour 1." },
+      ],
+      explanation: {
+        Beginner: { en: "If two companies combine and remove duplicate headquarters costs, that saving can increase profit. But achieving the saving may require restructuring costs first.", fr: "Si deux sociétés fusionnent et suppriment des coûts de siège dupliqués, cette économie peut augmenter le profit. Mais l’obtenir peut nécessiter des restructuring costs d’abord." },
+        Intermediate: { en: "Analysts model run-rate synergies, ramp-up timing, taxes and integration costs. Revenue synergies generally receive more conservative treatment because they depend more heavily on customer behavior.", fr: "Les analystes modélisent run-rate synergies, ramp-up, taxes et integration costs. Les revenue synergies sont généralement traitées plus prudemment car elles dépendent davantage du comportement client." },
+        Professional: { en: "Synergy underwriting should avoid double counting with standalone forecasts. If the target forecast already assumes margin improvement, only incremental combination benefits should be treated as deal synergies.", fr: "L’underwriting des synergies doit éviter le double counting avec les standalone forecasts. Si le forecast de la cible suppose déjà une amélioration de marge, seuls les bénéfices incrémentaux de combinaison doivent être traités comme deal synergies." },
+      },
+      formula: {
+        label: { en: "After-tax synergy", fr: "Synergie après impôts" },
+        expression: "After-Tax Synergy ≈ Pre-Tax Synergy × (1 − Tax Rate)",
+        explanation: { en: "A simplified formula before timing and integration-cost effects.", fr: "Formule simplifiée avant effets de timing et coûts d’intégration." },
+      },
+      vocabulary: [
+        { en: "Run-rate synergy", fr: "run-rate synergy", definition: { en: "Recurring annual synergy once fully implemented.", fr: "Synergie annuelle récurrente une fois pleinement réalisée." } },
+        { en: "Integration cost", fr: "integration cost", definition: { en: "One-time cost required to combine operations and capture synergies.", fr: "Coût ponctuel nécessaire pour combiner les opérations et capturer les synergies." } },
+      ],
+    },
+    {
+      id: "purchase-accounting",
+      kicker: { en: "05 · PURCHASE ACCOUNTING", fr: "05 · PURCHASE ACCOUNTING" },
+      title: { en: "Acquisition accounting can change reported earnings even when cash economics are unchanged", fr: "Le purchase accounting peut modifier les earnings publiés même si l’économie cash ne change pas" },
+      coreFacts: [
+        { en: "Acquired assets and liabilities may be remeasured to fair value.", fr: "Les actifs et passifs acquis peuvent être réévalués à fair value." },
+        { en: "Intangible asset step-ups can create additional amortization.", fr: "Les step-ups d’intangibles peuvent créer une amortization supplémentaire." },
+        { en: "Inventory step-ups can temporarily reduce post-close gross profit.", fr: "Les inventory step-ups peuvent temporairement réduire le gross profit post-close." },
+        { en: "Goodwill is generally the residual after identifiable net assets and consideration are reconciled.", fr: "Le goodwill est généralement le résiduel après rapprochement des net assets identifiables et de la consideration." },
+      ],
+      explanation: {
+        Beginner: { en: "Buying a company can create new accounting expenses because acquired assets are revalued. Those expenses can reduce reported EPS even though they are not always cash costs in the same period.", fr: "Acheter une entreprise peut créer de nouvelles dépenses comptables car les actifs acquis sont réévalués. Ces dépenses peuvent réduire l’EPS publié même si elles ne représentent pas toujours des cash costs sur la même période." },
+        Intermediate: { en: "Purchase accounting matters for accretion/dilution because amortization of acquired intangibles, inventory step-up and financing fees affect pro forma earnings.", fr: "Le purchase accounting compte pour accretion/dilution car amortization des intangibles acquis, inventory step-up et financing fees affectent les pro forma earnings." },
+        Professional: { en: "Analysts should distinguish cash economics from accounting presentation while still modeling GAAP or IFRS impacts correctly. Management-adjusted EPS may exclude items that investors still view as economically relevant.", fr: "Les analystes doivent distinguer économie cash et présentation comptable tout en modélisant correctement les impacts GAAP ou IFRS. Le management-adjusted EPS peut exclure des éléments que les investisseurs considèrent encore comme économiquement pertinents." },
+      },
+      vocabulary: [
+        { en: "Goodwill", fr: "goodwill", definition: { en: "Residual purchase value after identifiable net assets are measured.", fr: "Valeur résiduelle d’acquisition après mesure des net assets identifiables." } },
+        { en: "Step-up", fr: "step-up", definition: { en: "Increase in carrying value of an acquired asset to fair value.", fr: "Augmentation de la valeur comptable d’un actif acquis vers sa fair value." } },
+      ],
+    },
+    {
+      id: "accretion-dilution-model",
+      kicker: { en: "06 · ACCRETION / DILUTION MODEL", fr: "06 · MODÈLE ACCRETION / DILUTION" },
+      title: { en: "Accretion/dilution combines target earnings, financing cost, dilution and synergies", fr: "Accretion/dilution combine target earnings, coût du financement, dilution et synergies" },
+      coreFacts: [
+        { en: "Pro forma earnings start with buyer and target earnings, then adjust for financing, purchase accounting and synergies.", fr: "Les pro forma earnings commencent avec earnings acheteur et cible puis ajustent financement, purchase accounting et synergies." },
+        { en: "Stock consideration increases pro forma share count.", fr: "Le stock consideration augmente le nombre d’actions pro forma." },
+        { en: "Debt consideration adds interest expense.", fr: "Le financement par dette ajoute des interest expenses." },
+        { en: "EPS accretion is not equivalent to NPV value creation.", fr: "L’EPS accretion n’est pas équivalente à la création de valeur NPV." },
+      ],
+      explanation: {
+        Beginner: { en: "A deal is accretive if the buyer’s pro forma EPS rises after the acquisition and dilutive if it falls.", fr: "Un deal est accretive si le pro forma EPS de l’acheteur augmente après l’acquisition et dilutive s’il baisse." },
+        Intermediate: { en: "The model combines buyer net income, target net income, lost interest on cash, new debt interest, purchase-accounting effects, synergies and new shares issued.", fr: "Le modèle combine buyer net income, target net income, lost interest on cash, new debt interest, effets de purchase accounting, synergies et nouvelles actions émises." },
+        Professional: { en: "Accretion can be engineered through financing mix and relative P/E without creating economic value. Analysts should therefore pair EPS analysis with NPV, strategic logic and return-on-invested-capital analysis.", fr: "L’accretion peut être créée via funding mix et P/E relatif sans création de valeur économique. Les analystes doivent donc associer l’analyse EPS à NPV, logique stratégique et return-on-invested-capital." },
+      },
+      formula: {
+        label: { en: "Accretion / dilution", fr: "Accretion / dilution" },
+        expression: "Accretion / Dilution % = Pro Forma EPS / Buyer Standalone EPS − 1",
+        explanation: { en: "Positive is accretive; negative is dilutive.", fr: "Positif = accretive ; négatif = dilutive." },
+      },
+      vocabulary: [
+        { en: "Pro forma EPS", fr: "pro forma EPS", definition: { en: "Estimated EPS of the combined company after transaction adjustments.", fr: "EPS estimé de l’entreprise combinée après ajustements transactionnels." } },
+        { en: "Foregone interest", fr: "foregone interest", definition: { en: "Interest income lost when cash is used to fund an acquisition.", fr: "Revenu d’intérêt perdu lorsque le cash sert à financer une acquisition." } },
+      ],
+    },
+    {
+      id: "sensitivities",
+      kicker: { en: "07 · SENSITIVITIES & DEAL ECONOMICS", fr: "07 · SENSITIVITIES & ÉCONOMIE DU DEAL" },
+      title: { en: "Good M&A analysis shows which assumptions actually drive the outcome", fr: "Une bonne analyse M&A montre quelles hypothèses déterminent réellement le résultat" },
+      coreFacts: [
+        { en: "Purchase price, synergies, financing cost and target forecasts are major deal sensitivities.", fr: "Purchase price, synergies, coût de financement et target forecasts sont des sensitivities majeures." },
+        { en: "Higher purchase price generally reduces buyer returns and increases required synergies.", fr: "Un purchase price plus élevé réduit généralement les returns de l’acheteur et augmente les synergies requises." },
+        { en: "Interest-rate changes can alter accretion for debt-funded transactions.", fr: "Les variations de taux peuvent modifier l’accretion dans les deals financés par dette." },
+        { en: "Break-even analysis can show the synergy amount needed for zero EPS dilution.", fr: "Une break-even analysis peut montrer le niveau de synergies nécessaire pour obtenir zéro EPS dilution." },
+      ],
+      explanation: {
+        Beginner: { en: "A model should answer 'what if?' What if the buyer pays more, synergies arrive later or debt costs more than expected?", fr: "Un modèle doit répondre à « et si ? ». Et si l’acheteur paie plus, si les synergies arrivent plus tard ou si la dette coûte plus cher ?" },
+        Intermediate: { en: "Sensitivity tables help bankers and boards see which assumptions matter most. This is especially useful during negotiation because every additional dollar of price can be translated into EPS or return impact.", fr: "Les sensitivity tables aident bankers et boards à voir quelles hypothèses comptent le plus. C’est particulièrement utile en négociation car chaque dollar de prix supplémentaire peut être traduit en impact EPS ou return." },
+        Professional: { en: "Decision-useful sensitivities should focus on uncertain variables management can observe or negotiate. Mechanical tables with arbitrary ranges are less useful than scenario-based cases linked to deal strategy.", fr: "Les sensitivities utiles doivent se concentrer sur les variables incertaines que le management peut observer ou négocier. Des tableaux mécaniques avec ranges arbitraires sont moins utiles que des scénarios liés à la stratégie du deal." },
+      },
+      vocabulary: [
+        { en: "Break-even synergy", fr: "break-even synergy", definition: { en: "Synergy amount required to reach a specified transaction outcome such as zero EPS dilution.", fr: "Montant de synergie nécessaire pour atteindre un résultat donné comme zéro EPS dilution." } },
+        { en: "Sensitivity table", fr: "sensitivity table", definition: { en: "Table showing output changes under different assumptions.", fr: "Tableau montrant les changements d’output selon différentes hypothèses." } },
+      ],
+    },
+    {
+      id: "deal-risks-interview",
+      kicker: { en: "08 · DEAL RISKS & INTERVIEWS", fr: "08 · RISQUES DU DEAL & ENTRETIENS" },
+      title: { en: "The best M&A answers connect strategic logic, price, financing and execution risk", fr: "Les meilleures réponses M&A relient logique stratégique, prix, financement et execution risk" },
+      coreFacts: [
+        { en: "Regulatory approval, shareholder votes and financing conditions can prevent closing.", fr: "Regulatory approval, shareholder votes et conditions de financement peuvent empêcher le closing." },
+        { en: "Integration risk can destroy expected synergies after closing.", fr: "L’integration risk peut détruire les synergies attendues après le closing." },
+        { en: "Culture, customer churn and employee retention can be material deal risks.", fr: "Culture, customer churn et employee retention peuvent être des risques matériels du deal." },
+        { en: "A strong interview answer explains both mechanics and economic intuition.", fr: "Une bonne réponse d’entretien explique à la fois mécanique et intuition économique." },
+      ],
+      explanation: {
+        Beginner: { en: "A deal can look attractive in Excel and still fail in real life. The buyer has to close the transaction and then successfully combine the businesses.", fr: "Un deal peut sembler attractif dans Excel et échouer dans la vraie vie. L’acheteur doit closer puis réussir à combiner les entreprises." },
+        Intermediate: { en: "When discussing an acquisition, structure the answer around rationale, valuation, financing, synergies, accretion/dilution and major execution risks.", fr: "Pour discuter d’une acquisition, structure la réponse autour de rationale, valuation, financement, synergies, accretion/dilution et principaux execution risks." },
+        Professional: { en: "A complete view distinguishes signing risk, closing risk and post-close value-realization risk. Different protections—reverse termination fees, financing commitments, covenants or integration planning—address different points in that chain.", fr: "Une vue complète distingue signing risk, closing risk et risque de réalisation de valeur post-close. Différentes protections—reverse termination fees, financing commitments, covenants ou integration planning—traitent différents points de cette chaîne." },
+      },
+      vocabulary: [
+        { en: "Closing risk", fr: "closing risk", definition: { en: "Risk that a signed transaction does not complete.", fr: "Risque qu’une transaction signée ne soit pas finalisée." } },
+        { en: "Reverse termination fee", fr: "reverse termination fee", definition: { en: "Fee payable by buyer in certain circumstances if the transaction fails to close.", fr: "Fee payable par l’acheteur dans certains cas si la transaction ne close pas." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "rationale",
+      question: { en: "What makes an M&A strategic rationale credible?", fr: "Qu’est-ce qui rend une rationale M&A crédible ?" },
+      options: [
+        { id: "a", label: { en: "It links strategic fit to measurable financial benefits", fr: "Elle relie le strategic fit à des bénéfices financiers mesurables" } },
+        { id: "b", label: { en: "It assumes any purchase price is acceptable", fr: "Elle suppose que n’importe quel prix est acceptable" } },
+        { id: "c", label: { en: "It ignores integration", fr: "Elle ignore l’intégration" } },
+        { id: "d", label: { en: "It relies only on company size", fr: "Elle repose uniquement sur la taille" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Strategic logic should translate into financial value and remain attractive after price and execution risk.", fr: "La logique stratégique doit se traduire en valeur financière et rester attractive après prix et execution risk." },
+    },
+    {
+      id: "q2",
+      conceptKey: "premium",
+      question: { en: "A stock trades at $50 unaffected and the offer is $60. The premium is:", fr: "Une action cote 50 $ unaffected et l’offre est de 60 $. La premium est :" },
+      options: [
+        { id: "a", label: { en: "20%", fr: "20 %" } },
+        { id: "b", label: { en: "10%", fr: "10 %" } },
+        { id: "c", label: { en: "50%", fr: "50 %" } },
+        { id: "d", label: { en: "120%", fr: "120 %" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "60 / 50 − 1 = 20%.", fr: "60 / 50 − 1 = 20 %." },
+    },
+    {
+      id: "q3",
+      conceptKey: "stock-deal",
+      question: { en: "What happens in a stock-financed acquisition?", fr: "Que se passe-t-il dans une acquisition financée en actions ?" },
+      options: [
+        { id: "a", label: { en: "Target shareholders receive ownership in the combined company", fr: "Les actionnaires de la cible reçoivent de l’ownership dans l’entreprise combinée" } },
+        { id: "b", label: { en: "No new shares are ever issued", fr: "Aucune nouvelle action n’est jamais émise" } },
+        { id: "c", label: { en: "Debt always falls to zero", fr: "La dette tombe toujours à zéro" } },
+        { id: "d", label: { en: "The target receives no value", fr: "La cible ne reçoit aucune valeur" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Stock consideration makes target holders shareholders of the combined business.", fr: "Le stock consideration fait des actionnaires de la cible des actionnaires du groupe combiné." },
+    },
+    {
+      id: "q4",
+      conceptKey: "synergy",
+      question: { en: "Which synergy is usually easier to underwrite?", fr: "Quelle synergie est généralement plus facile à underwrite ?" },
+      options: [
+        { id: "a", label: { en: "Specific cost savings", fr: "Économies de coûts spécifiques" } },
+        { id: "b", label: { en: "Unlimited revenue upside", fr: "Upside de revenue illimité" } },
+        { id: "c", label: { en: "Unquantified optimism", fr: "Optimisme non quantifié" } },
+        { id: "d", label: { en: "No operational change", fr: "Aucun changement opérationnel" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Specific cost savings are generally more identifiable and controllable than revenue synergies.", fr: "Les économies de coûts spécifiques sont généralement plus identifiables et contrôlables que les revenue synergies." },
+    },
+    {
+      id: "q5",
+      conceptKey: "purchase-accounting",
+      question: { en: "What can an intangible asset step-up create?", fr: "Que peut créer un intangible asset step-up ?" },
+      options: [
+        { id: "a", label: { en: "Additional amortization expense", fr: "Une charge d’amortization supplémentaire" } },
+        { id: "b", label: { en: "Guaranteed revenue growth", fr: "Une croissance garantie du revenue" } },
+        { id: "c", label: { en: "No accounting impact", fr: "Aucun impact comptable" } },
+        { id: "d", label: { en: "Automatic debt repayment", fr: "Un remboursement automatique de dette" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Fair-value step-ups in finite-lived intangibles can create additional amortization.", fr: "Les fair-value step-ups d’intangibles à durée de vie finie peuvent créer une amortization supplémentaire." },
+    },
+    {
+      id: "q6",
+      conceptKey: "accretion",
+      question: { en: "A deal is EPS-accretive when:", fr: "Un deal est EPS-accretive lorsque :" },
+      options: [
+        { id: "a", label: { en: "Pro forma EPS is above buyer standalone EPS", fr: "Le pro forma EPS est supérieur au buyer standalone EPS" } },
+        { id: "b", label: { en: "Purchase price is always lower", fr: "Le purchase price est toujours plus faible" } },
+        { id: "c", label: { en: "No financing is used", fr: "Aucun financement n’est utilisé" } },
+        { id: "d", label: { en: "The target has no debt", fr: "La cible n’a aucune dette" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Accretion compares pro forma EPS with the buyer’s standalone EPS.", fr: "L’accretion compare le pro forma EPS avec le buyer standalone EPS." },
+    },
+    {
+      id: "q7",
+      conceptKey: "value-creation",
+      question: { en: "Why is EPS accretion not proof of value creation?", fr: "Pourquoi l’EPS accretion ne prouve-t-elle pas la création de valeur ?" },
+      options: [
+        { id: "a", label: { en: "Financing and relative valuation can make EPS rise even if NPV is poor", fr: "Le financement et la valuation relative peuvent faire monter l’EPS même si la NPV est mauvaise" } },
+        { id: "b", label: { en: "EPS never changes after acquisitions", fr: "L’EPS ne change jamais après une acquisition" } },
+        { id: "c", label: { en: "Accretive deals have no synergies", fr: "Les deals accretive n’ont pas de synergies" } },
+        { id: "d", label: { en: "NPV is always zero", fr: "La NPV est toujours nulle" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Accretion is an accounting outcome, while value creation depends on economic returns relative to price paid.", fr: "L’accretion est un résultat comptable, tandis que la création de valeur dépend des returns économiques par rapport au prix payé." },
+    },
+    {
+      id: "q8",
+      conceptKey: "sensitivity",
+      question: { en: "Which variable is commonly tested in M&A sensitivity analysis?", fr: "Quelle variable est couramment testée dans une sensitivity analysis M&A ?" },
+      options: [
+        { id: "a", label: { en: "Purchase price and synergy realization", fr: "Purchase price et réalisation des synergies" } },
+        { id: "b", label: { en: "Company logo color", fr: "Couleur du logo" } },
+        { id: "c", label: { en: "Office furniture only", fr: "Uniquement le mobilier de bureau" } },
+        { id: "d", label: { en: "Historical ticker symbol", fr: "Ticker historique" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Purchase price and synergies are major drivers of transaction economics.", fr: "Purchase price et synergies sont des drivers majeurs de l’économie du deal." },
+    },
+    {
+      id: "q9",
+      conceptKey: "closing-risk",
+      question: { en: "What is closing risk?", fr: "Qu’est-ce que le closing risk ?" },
+      options: [
+        { id: "a", label: { en: "Risk that a signed deal does not complete", fr: "Risque qu’un deal signé ne soit pas finalisé" } },
+        { id: "b", label: { en: "Risk that accounting closes monthly", fr: "Risque que la comptabilité ferme chaque mois" } },
+        { id: "c", label: { en: "Risk of a dividend payment", fr: "Risque d’un dividende" } },
+        { id: "d", label: { en: "Risk of no stock ticker", fr: "Risque d’absence de ticker" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Regulatory, financing or contractual issues can prevent closing after signing.", fr: "Des problèmes réglementaires, financiers ou contractuels peuvent empêcher le closing après signing." },
+    },
+    {
+      id: "q10",
+      conceptKey: "ma-framework",
+      question: { en: "What is the strongest framework for analyzing an acquisition?", fr: "Quel est le meilleur framework pour analyser une acquisition ?" },
+      options: [
+        { id: "a", label: { en: "Rationale, valuation, financing, synergies, pro forma impact and risks", fr: "Rationale, valuation, financement, synergies, impact pro forma et risques" } },
+        { id: "b", label: { en: "Only headline price", fr: "Uniquement le headline price" } },
+        { id: "c", label: { en: "Only EPS accretion", fr: "Uniquement l’EPS accretion" } },
+        { id: "d", label: { en: "Only company size", fr: "Uniquement la taille de l’entreprise" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A complete deal analysis links strategic logic with economics and execution risk.", fr: "Une analyse complète relie logique stratégique, économie et execution risk." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Walk me through how you would analyze whether an acquisition creates value for the buyer.",
+      fr: "Explique comment tu analyserais si une acquisition crée de la valeur pour l’acheteur.",
+    },
+    framework: [
+      { en: "Start with the strategic rationale and standalone values.", fr: "Commencer par la strategic rationale et les standalone values." },
+      { en: "Calculate offer premium, equity purchase price and transaction enterprise value.", fr: "Calculer offer premium, equity purchase price et transaction enterprise value." },
+      { en: "Define financing mix between cash, debt and stock.", fr: "Définir le funding mix entre cash, dette et actions." },
+      { en: "Model synergies, integration costs and purchase-accounting effects.", fr: "Modéliser synergies, integration costs et effets de purchase accounting." },
+      { en: "Calculate pro forma EPS and accretion/dilution.", fr: "Calculer pro forma EPS et accretion/dilution." },
+      { en: "Stress purchase price, synergies, financing costs and execution risks.", fr: "Stresser purchase price, synergies, coûts de financement et execution risks." },
+    ],
+    sample: {
+      en: "I would first ask why the buyer wants the target and what strategic value can be created beyond the target’s standalone value. Then I would calculate the offer premium, diluted equity purchase price and transaction enterprise value, including debt, cash and other transaction adjustments. Next I would determine how the deal is funded with cash, debt and/or stock because that drives interest expense, dilution and leverage. I would model cost and revenue synergies with realistic timing, taxes and integration costs, then incorporate purchase-accounting effects such as intangible amortization. With those inputs I would build pro forma net income, share count and EPS to measure accretion or dilution. But I would not stop at EPS: I would test whether the price paid is justified economically through NPV or returns on invested capital. Finally, I would run sensitivities around purchase price, synergy realization and financing cost, and assess closing, regulatory and integration risks.",
+      fr: "Je commencerais par demander pourquoi l’acheteur veut la cible et quelle valeur stratégique peut être créée au-delà de la standalone value. Ensuite, je calculerais la offer premium, le diluted equity purchase price et la transaction enterprise value, en incluant dette, cash et autres ajustements. Puis je déterminerais comment le deal est financé entre cash, dette et/ou actions car cela détermine interest expense, dilution et leverage. Je modéliserais cost et revenue synergies avec un timing réaliste, taxes et integration costs, puis j’intégrerais les effets de purchase accounting comme l’amortization des intangibles. Avec ces inputs, je construirais le pro forma net income, le share count et l’EPS afin de mesurer accretion ou dilution. Mais je ne m’arrêterais pas à l’EPS : je testerais si le prix payé est économiquement justifié via NPV ou returns on invested capital. Enfin, je lancerais des sensitivities sur purchase price, réalisation des synergies et coût de financement, puis j’évaluerais closing, regulatory et integration risks.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
