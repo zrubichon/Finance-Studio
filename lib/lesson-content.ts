@@ -16741,7 +16741,977 @@ export const durationConvexityLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson];
+
+export const portfolioTheoryCapmLesson: FinanceLesson = {
+  slug: "year-2-portfolio-theory-capm",
+  year: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  domain: {
+    en: "Portfolio & Risk",
+    fr: "Portefeuille & risque / Portfolio & Risk",
+  },
+  title: {
+    en: "Portfolio Theory & CAPM",
+    fr: "Théorie de portefeuille / Portfolio Theory & CAPM",
+  },
+  subtitle: {
+    en: "Build the quantitative foundations of portfolio construction: expected return, variance, covariance, correlation, diversification, the efficient frontier, Sharpe ratio, systematic risk, beta, CAPM and the Security Market Line.",
+    fr: "Construire les fondations quantitatives de la gestion de portefeuille : rendement attendu / expected return, variance, covariance, corrélation / correlation, diversification, frontière efficiente / efficient frontier, Sharpe ratio, risque systématique / systematic risk, beta, CAPM et Security Market Line.",
+  },
+  duration: { en: "120–145 min", fr: "120–145 min" },
+  prerequisites: [
+    { en: "Statistics & Probability", fr: "Statistiques & probabilités / Statistics & Probability" },
+    { en: "Risk, Return & Diversification", fr: "Risque, rendement & diversification / Risk, Return & Diversification" },
+  ],
+  objectives: [
+    {
+      en: "Calculate portfolio expected return from asset weights and expected returns.",
+      fr: "Calculer le rendement attendu / expected return d’un portefeuille à partir des poids et des rendements attendus des actifs.",
+    },
+    {
+      en: "Distinguish variance, volatility, covariance and correlation.",
+      fr: "Distinguer variance, volatilité / volatility, covariance et corrélation / correlation.",
+    },
+    {
+      en: "Calculate two-asset portfolio variance and explain mathematically why diversification works.",
+      fr: "Calculer la variance d’un portefeuille à deux actifs et expliquer mathématiquement pourquoi la diversification fonctionne.",
+    },
+    {
+      en: "Interpret the efficient frontier, minimum-variance portfolio and tangency portfolio.",
+      fr: "Interpréter l’efficient frontier, le minimum-variance portfolio et le tangency portfolio.",
+    },
+    {
+      en: "Use the Sharpe ratio to compare excess return per unit of total volatility.",
+      fr: "Utiliser le Sharpe ratio pour comparer l’excess return par unité de volatilité totale.",
+    },
+    {
+      en: "Explain systematic versus idiosyncratic risk, beta, CAPM and the Security Market Line.",
+      fr: "Expliquer systematic risk versus idiosyncratic risk, beta, CAPM et Security Market Line.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "From one asset to a market-pricing model",
+      fr: "D’un actif unique à un modèle de pricing du marché",
+    },
+    steps: [
+      {
+        title: { en: "Measure", fr: "Mesurer" },
+        detail: { en: "Return · variance · volatility", fr: "Return · variance · volatilité" },
+      },
+      {
+        title: { en: "Combine", fr: "Combiner" },
+        detail: { en: "Covariance · correlation · diversification", fr: "Covariance · corrélation · diversification" },
+      },
+      {
+        title: { en: "Optimize", fr: "Optimiser" },
+        detail: { en: "Efficient frontier · Sharpe", fr: "Efficient frontier · Sharpe" },
+      },
+      {
+        title: { en: "Price risk", fr: "Pricer le risque" },
+        detail: { en: "Beta · CAPM · SML", fr: "Beta · CAPM · SML" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "expected-return",
+      kicker: { en: "01 · EXPECTED RETURN", fr: "01 · RENDEMENT ATTENDU / EXPECTED RETURN" },
+      title: {
+        en: "Portfolio expected return is the weighted average of asset expected returns",
+        fr: "Le rendement attendu du portefeuille est la moyenne pondérée des rendements attendus des actifs",
+      },
+      coreFacts: [
+        {
+          en: "Expected return is a probability-weighted or model-based estimate of future return, not a guaranteed outcome.",
+          fr: "L’expected return est une estimation future pondérée par probabilités ou issue d’un modèle, pas un résultat garanti.",
+        },
+        {
+          en: "Portfolio expected return is linear in portfolio weights.",
+          fr: "L’expected return d’un portefeuille est linéaire dans les poids du portefeuille.",
+        },
+        {
+          en: "Portfolio weights sum to one for a fully invested unlevered long-only portfolio, though leverage or shorting can change this convention.",
+          fr: "Les poids somment à un pour un portefeuille long-only non levier entièrement investi, même si leverage ou shorting peuvent modifier cette convention.",
+        },
+        {
+          en: "Expected return alone is insufficient for portfolio choice because it ignores uncertainty and co-movement.",
+          fr: "L’expected return seul est insuffisant pour choisir un portefeuille car il ignore l’incertitude et les co-mouvements.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose 60% of a portfolio is in Asset A with expected return 8% and 40% is in Asset B with expected return 12%. Expected portfolio return is 0.60×8% + 0.40×12% = 9.6%.",
+          fr: "Supposons 60 % du portefeuille dans l’actif A avec expected return 8 % et 40 % dans l’actif B avec expected return 12 %. L’expected return du portefeuille vaut 0,60×8 % + 0,40×12 % = 9,6 %.",
+        },
+        Intermediate: {
+          en: "The return calculation is straightforward because expectations add linearly. Risk is harder: portfolio volatility is not simply a weighted average of asset volatilities because covariance matters.",
+          fr: "Le calcul du return est simple car les espérances s’additionnent linéairement. Le risque est plus complexe : la portfolio volatility n’est pas une simple moyenne pondérée des volatilités car la covariance compte.",
+        },
+        Professional: {
+          en: "Portfolio expected returns are model inputs, not observable truths. Strategic allocation may use long-run capital-market assumptions, while tactical portfolios may use factor, macro or security-level forecasts. Estimation error can dominate optimization results.",
+          fr: "Les expected returns sont des inputs de modèle, pas des vérités observables. Une allocation stratégique peut utiliser des capital-market assumptions long terme, tandis qu’un portefeuille tactique peut utiliser des forecasts factor, macro ou security-level. L’erreur d’estimation peut dominer les résultats d’optimisation.",
+        },
+      },
+      formula: {
+        label: { en: "Portfolio expected return", fr: "Expected return du portefeuille" },
+        expression: "E[Rₚ] = Σ wᵢ × E[Rᵢ]",
+        explanation: {
+          en: "wᵢ is the portfolio weight and E[Rᵢ] the expected return of asset i.",
+          fr: "wᵢ est le poids du portefeuille et E[Rᵢ] l’expected return de l’actif i.",
+        },
+        workedExample: {
+          en: "60%×8% + 40%×12% = 9.6%.",
+          fr: "60 %×8 % + 40 %×12 % = 9,6 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Portfolio weight",
+          fr: "poids de portefeuille / portfolio weight",
+          definition: {
+            en: "Fraction of portfolio capital allocated to an asset or exposure.",
+            fr: "Fraction du capital du portefeuille allouée à un actif ou une exposition.",
+          },
+        },
+        {
+          en: "Expected return",
+          fr: "rendement attendu / expected return",
+          definition: {
+            en: "Model-based expectation of future investment return.",
+            fr: "Espérance modélisée du rendement futur d’un investissement.",
+          },
+        },
+      ],
+    },
+    {
+      id: "variance-volatility",
+      kicker: { en: "02 · VARIANCE & VOLATILITY", fr: "02 · VARIANCE & VOLATILITÉ" },
+      title: {
+        en: "Variance measures dispersion; volatility puts that dispersion back into return units",
+        fr: "La variance mesure la dispersion ; la volatility remet cette dispersion dans les unités du return",
+      },
+      coreFacts: [
+        {
+          en: "Variance measures expected squared deviation of returns around their mean.",
+          fr: "La variance mesure la déviation quadratique attendue des returns autour de leur moyenne.",
+        },
+        {
+          en: "Volatility is the square root of variance and is therefore expressed in the same return units.",
+          fr: "La volatility est la racine carrée de la variance et s’exprime donc dans les mêmes unités que le return.",
+        },
+        {
+          en: "Historical volatility is estimated from realized returns; forward-looking risk may differ.",
+          fr: "La historical volatility est estimée à partir des realized returns ; le risque forward-looking peut être différent.",
+        },
+        {
+          en: "Volatility treats upside and downside deviations symmetrically and is therefore an incomplete measure of risk.",
+          fr: "La volatility traite symétriquement les deviations haussières et baissières ; elle constitue donc une mesure incomplète du risque.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If returns stay very close to their average, variance and volatility are low. If returns jump widely above and below the average, volatility is high. A 15% volatility does not mean the investment will lose 15%; it describes dispersion under the chosen measurement framework.",
+          fr: "Si les returns restent proches de leur moyenne, variance et volatility sont faibles. S’ils bougent fortement au-dessus et en dessous de la moyenne, la volatility est élevée. Une volatility de 15 % ne signifie pas que l’investissement perdra 15 % ; elle décrit la dispersion selon le framework choisi.",
+        },
+        Intermediate: {
+          en: "Variance is mathematically convenient because covariances combine directly with it. Volatility is easier to communicate because it returns the measure to percentage-return units.",
+          fr: "La variance est mathématiquement pratique car les covariances s’y combinent directement. La volatility est plus facile à communiquer car elle remet la mesure en unités de return en pourcentage.",
+        },
+        Professional: {
+          en: "Volatility is horizon- and model-dependent. Annualization using square-root-of-time assumes conditions such as weak serial dependence and stable variance that may fail during stressed markets.",
+          fr: "La volatility dépend de l’horizon et du modèle. L’annualisation via square-root-of-time suppose notamment une dépendance temporelle faible et une variance stable, conditions qui peuvent échouer pendant les stressed markets.",
+        },
+      },
+      formula: {
+        label: { en: "Variance and volatility", fr: "Variance et volatility" },
+        expression: "Var(R) = E[(R − E[R])²]   ·   σ = √Var(R)",
+        explanation: {
+          en: "σ is the standard deviation, commonly called volatility in finance.",
+          fr: "σ est l’écart-type / standard deviation, couramment appelé volatility en finance.",
+        },
+        workedExample: {
+          en: "Variance 0.0225 → volatility = √0.0225 = 15%.",
+          fr: "Variance 0,0225 → volatility = √0,0225 = 15 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Variance",
+          fr: "variance",
+          definition: {
+            en: "Expected squared dispersion around a mean.",
+            fr: "Dispersion quadratique attendue autour d’une moyenne.",
+          },
+        },
+        {
+          en: "Volatility",
+          fr: "volatilité / volatility",
+          definition: {
+            en: "Standard deviation of returns under a specified methodology.",
+            fr: "Écart-type des returns selon une méthodologie définie.",
+          },
+        },
+      ],
+    },
+    {
+      id: "covariance-correlation",
+      kicker: { en: "03 · COVARIANCE & CORRELATION", fr: "03 · COVARIANCE & CORRÉLATION" },
+      title: {
+        en: "Portfolio risk depends on how assets move together",
+        fr: "Le risque du portefeuille dépend de la manière dont les actifs bougent ensemble",
+      },
+      coreFacts: [
+        {
+          en: "Covariance measures the direction and scale of joint return movement.",
+          fr: "La covariance mesure la direction et l’échelle des mouvements conjoints de returns.",
+        },
+        {
+          en: "Correlation standardizes covariance to a range from −1 to +1.",
+          fr: "La correlation standardise la covariance dans une plage de −1 à +1.",
+        },
+        {
+          en: "A correlation below +1 creates diversification potential in a two-asset portfolio.",
+          fr: "Une correlation inférieure à +1 crée un potentiel de diversification dans un portefeuille à deux actifs.",
+        },
+        {
+          en: "Correlation can change through time and often rises among risky assets during stress.",
+          fr: "La correlation peut changer dans le temps et augmente souvent entre risky assets pendant les périodes de stress.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If two assets always rise and fall together, diversification is weak. If their movements are less synchronized, one asset can offset part of the other's movement. Correlation tells you how synchronized they are.",
+          fr: "Si deux actifs montent et baissent toujours ensemble, la diversification est faible. Si leurs mouvements sont moins synchronisés, un actif peut compenser une partie du mouvement de l’autre. La correlation mesure ce degré de synchronisation.",
+        },
+        Intermediate: {
+          en: "Correlation of +1 means perfectly aligned standardized movements; 0 means no linear correlation; −1 means perfectly opposite standardized movements. Zero correlation does not necessarily imply statistical independence.",
+          fr: "Une correlation de +1 signifie des mouvements standardisés parfaitement alignés ; 0 signifie absence de correlation linéaire ; −1 signifie mouvements parfaitement opposés. Une correlation nulle n’implique pas nécessairement une indépendance statistique.",
+        },
+        Professional: {
+          en: "Correlation is an unstable estimate and can be regime-dependent. Portfolio construction should therefore stress correlations rather than rely only on historical sample estimates.",
+          fr: "La correlation est une estimation instable et peut dépendre du régime. La construction de portefeuille doit donc stress-tester les correlations plutôt que dépendre uniquement des estimations historiques.",
+        },
+      },
+      formula: {
+        label: { en: "Correlation from covariance", fr: "Correlation à partir de la covariance" },
+        expression: "ρ₍A,B₎ = Cov(A,B) ÷ (σ_A × σ_B)",
+        explanation: {
+          en: "Equivalently, Cov(A,B) = ρ₍A,B₎ × σ_A × σ_B.",
+          fr: "Équivalent : Cov(A,B) = ρ₍A,B₎ × σ_A × σ_B.",
+        },
+        workedExample: {
+          en: "ρ=0.25, σ_A=10%, σ_B=20% → covariance = 0.25×0.10×0.20 = 0.005.",
+          fr: "ρ=0,25, σ_A=10 %, σ_B=20 % → covariance = 0,25×0,10×0,20 = 0,005.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Covariance",
+          fr: "covariance",
+          definition: {
+            en: "Measure of joint variation between two returns.",
+            fr: "Mesure de variation conjointe entre deux returns.",
+          },
+        },
+        {
+          en: "Correlation",
+          fr: "corrélation / correlation",
+          definition: {
+            en: "Standardized linear co-movement measure between −1 and +1.",
+            fr: "Mesure standardisée du co-mouvement linéaire entre −1 et +1.",
+          },
+        },
+      ],
+    },
+    {
+      id: "portfolio-variance-diversification",
+      kicker: { en: "04 · PORTFOLIO VARIANCE & DIVERSIFICATION", fr: "04 · VARIANCE DE PORTEFEUILLE & DIVERSIFICATION" },
+      title: {
+        en: "Diversification works through covariance, not by simply owning more securities",
+        fr: "La diversification fonctionne grâce à la covariance, pas simplement parce qu’on possède davantage de titres",
+      },
+      coreFacts: [
+        {
+          en: "Two-asset portfolio variance contains each asset's weighted variance plus a covariance term.",
+          fr: "La variance d’un portefeuille à deux actifs contient la variance pondérée de chaque actif plus un terme de covariance.",
+        },
+        {
+          en: "Lower correlation reduces portfolio variance for given weights and individual volatilities.",
+          fr: "Une correlation plus faible réduit la portfolio variance pour des poids et individual volatilities donnés.",
+        },
+        {
+          en: "Diversification reduces asset-specific risk but does not eliminate common systematic exposures.",
+          fr: "La diversification réduit le risque spécifique aux actifs mais n’élimine pas les expositions systématiques communes.",
+        },
+        {
+          en: "Owning many highly correlated assets can provide less diversification than owning fewer economically distinct exposures.",
+          fr: "Posséder beaucoup d’actifs fortement corrélés peut fournir moins de diversification que posséder moins d’expositions économiquement distinctes.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Using 60% Asset A with 10% volatility and 40% Asset B with 20% volatility, correlation 0.25, portfolio volatility is about 11.14%. That is lower than the simple weighted-average volatility of 14% because the assets do not move perfectly together.",
+          fr: "Avec 60 % d’actif A à volatility 10 % et 40 % d’actif B à volatility 20 %, correlation 0,25, la portfolio volatility vaut environ 11,14 %. C’est inférieur à la simple moyenne pondérée de volatility de 14 % car les actifs ne bougent pas parfaitement ensemble.",
+        },
+        Intermediate: {
+          en: "The covariance term can materially reduce total variance. The benefit is strongest when correlation is low or negative and both positions are meaningful in size.",
+          fr: "Le terme de covariance peut réduire matériellement la variance totale. Le bénéfice est maximal lorsque la correlation est faible ou négative et que les deux positions ont des poids significatifs.",
+        },
+        Professional: {
+          en: "Diversification should be understood by economic risk drivers, not ticker count. Ten regional banks may still represent one concentrated rates-and-credit factor exposure. Factor decomposition often reveals concentration hidden by security-level diversification.",
+          fr: "La diversification doit être comprise via les economic risk drivers, pas le nombre de tickers. Dix banques régionales peuvent encore représenter une seule exposition concentrée aux facteurs rates et credit. Une factor decomposition révèle souvent une concentration cachée par la diversification au niveau security.",
+        },
+      },
+      formula: {
+        label: { en: "Two-asset portfolio variance", fr: "Variance d’un portefeuille à deux actifs" },
+        expression: "σₚ² = w_A²σ_A² + w_B²σ_B² + 2w_Aw_Bρ_ABσ_Aσ_B",
+        explanation: {
+          en: "The correlation term is the mathematical source of diversification benefit.",
+          fr: "Le terme de correlation est la source mathématique du bénéfice de diversification.",
+        },
+        workedExample: {
+          en: "w_A=60%, w_B=40%, σ_A=10%, σ_B=20%, ρ=0.25 → variance=0.0124 and volatility≈11.14%.",
+          fr: "w_A=60 %, w_B=40 %, σ_A=10 %, σ_B=20 %, ρ=0,25 → variance=0,0124 et volatility≈11,14 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Diversification benefit",
+          fr: "bénéfice de diversification / diversification benefit",
+          definition: {
+            en: "Reduction in portfolio risk from combining imperfectly correlated exposures.",
+            fr: "Réduction du risque de portefeuille obtenue en combinant des expositions imparfaitement corrélées.",
+          },
+        },
+        {
+          en: "Concentration risk",
+          fr: "risque de concentration / concentration risk",
+          definition: {
+            en: "Risk arising from excessive exposure to a security, sector, factor or common driver.",
+            fr: "Risque provenant d’une exposition excessive à un titre, secteur, facteur ou driver commun.",
+          },
+        },
+      ],
+    },
+    {
+      id: "efficient-frontier",
+      kicker: { en: "05 · EFFICIENT FRONTIER", fr: "05 · FRONTIÈRE EFFICIENTE / EFFICIENT FRONTIER" },
+      title: {
+        en: "Efficient portfolios offer the highest expected return for a given level of risk",
+        fr: "Les portefeuilles efficients offrent le meilleur expected return pour un niveau de risque donné",
+      },
+      coreFacts: [
+        {
+          en: "The feasible set contains all portfolios achievable from the available assets under the stated constraints.",
+          fr: "Le feasible set contient tous les portefeuilles réalisables à partir des actifs disponibles sous les contraintes définies.",
+        },
+        {
+          en: "The efficient frontier is the upper boundary of portfolios that maximize expected return for each volatility level.",
+          fr: "L’efficient frontier est la frontière supérieure des portefeuilles maximisant l’expected return pour chaque niveau de volatility.",
+        },
+        {
+          en: "The global minimum-variance portfolio is the feasible portfolio with the lowest total variance.",
+          fr: "Le global minimum-variance portfolio est le portefeuille réalisable ayant la variance totale la plus faible.",
+        },
+        {
+          en: "A portfolio below the efficient frontier is mean-variance dominated by another feasible portfolio.",
+          fr: "Un portefeuille situé sous l’efficient frontier est dominé en mean-variance par un autre portefeuille réalisable.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Imagine plotting expected return vertically and volatility horizontally. Some combinations are inefficient because another portfolio offers more return for the same risk or less risk for the same return. The best boundary is the efficient frontier.",
+          fr: "Imagine un graphique avec expected return verticalement et volatility horizontalement. Certaines combinaisons sont inefficientes car un autre portefeuille offre davantage de return pour le même risque ou moins de risque pour le même return. La meilleure frontière est l’efficient frontier.",
+        },
+        Intermediate: {
+          en: "The efficient frontier depends on expected returns, variances and covariances. Small changes in estimated inputs can move the optimal weights substantially, which makes unconstrained optimization unstable.",
+          fr: "L’efficient frontier dépend des expected returns, variances et covariances. De petits changements dans les inputs estimés peuvent modifier fortement les poids optimaux, ce qui rend l’optimisation unconstrained instable.",
+        },
+        Professional: {
+          en: "Institutional optimizers therefore use constraints, shrinkage, Bayesian views, robust covariance matrices and turnover penalties. The theoretical frontier is useful, but implementation must control estimation error and transaction costs.",
+          fr: "Les optimizers institutionnels utilisent donc constraints, shrinkage, Bayesian views, robust covariance matrices et turnover penalties. La frontière théorique est utile, mais son implémentation doit contrôler estimation error et transaction costs.",
+        },
+      },
+      comparison: {
+        title: { en: "Mean-variance map", fr: "Carte mean-variance" },
+        headers: [
+          { en: "Concept", fr: "Concept" },
+          { en: "Meaning", fr: "Signification" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Feasible set", fr: "Feasible set" },
+            { en: "All portfolios allowed by constraints", fr: "Tous les portefeuilles autorisés par les contraintes" },
+          ]},
+          { cells: [
+            { en: "Minimum-variance portfolio", fr: "Minimum-variance portfolio" },
+            { en: "Lowest attainable volatility", fr: "Volatility minimale atteignable" },
+          ]},
+          { cells: [
+            { en: "Efficient frontier", fr: "Efficient frontier" },
+            { en: "Best expected return for each risk level", fr: "Meilleur expected return pour chaque niveau de risque" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Efficient frontier",
+          fr: "frontière efficiente / efficient frontier",
+          definition: {
+            en: "Set of mean-variance-efficient portfolios under stated assumptions and constraints.",
+            fr: "Ensemble des portefeuilles efficients en mean-variance selon des hypothèses et contraintes définies.",
+          },
+        },
+        {
+          en: "Minimum-variance portfolio",
+          fr: "portefeuille de variance minimale / minimum-variance portfolio",
+          definition: {
+            en: "Portfolio with the lowest variance among the feasible portfolios.",
+            fr: "Portefeuille ayant la variance la plus faible parmi les portefeuilles réalisables.",
+          },
+        },
+      ],
+    },
+    {
+      id: "risk-free-sharpe",
+      kicker: { en: "06 · RISK-FREE ASSET & SHARPE RATIO", fr: "06 · ACTIF SANS RISQUE & SHARPE RATIO" },
+      title: {
+        en: "The Sharpe ratio measures excess return per unit of total volatility",
+        fr: "Le Sharpe ratio mesure l’excess return par unité de volatilité totale",
+      },
+      coreFacts: [
+        {
+          en: "The Sharpe ratio compares portfolio excess return over a risk-free rate with total volatility.",
+          fr: "Le Sharpe ratio compare l’excess return du portefeuille au-dessus d’un risk-free rate avec la total volatility.",
+        },
+        {
+          en: "A higher Sharpe ratio indicates more excess return per unit of measured volatility, under the same methodology.",
+          fr: "Un Sharpe ratio plus élevé indique davantage d’excess return par unité de volatility mesurée, selon la même méthodologie.",
+        },
+        {
+          en: "The tangency portfolio is the risky portfolio with the highest Sharpe ratio in the standard mean-variance framework.",
+          fr: "Le tangency portfolio est le risky portfolio ayant le Sharpe ratio le plus élevé dans le framework mean-variance standard.",
+        },
+        {
+          en: "Combining the risk-free asset with the tangency portfolio creates the Capital Market Line under the classical assumptions.",
+          fr: "Combiner le risk-free asset avec le tangency portfolio crée la Capital Market Line selon les hypothèses classiques.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a portfolio returns 10%, the risk-free rate is 4%, and volatility is 12%, the Sharpe ratio is (10%−4%)/12%=0.50. The portfolio earned 0.50 units of excess return for each unit of measured volatility.",
+          fr: "Si un portefeuille rapporte 10 %, le risk-free rate vaut 4 % et la volatility 12 %, le Sharpe ratio vaut (10 %−4 %)/12 %=0,50. Le portefeuille a généré 0,50 unité d’excess return par unité de volatility mesurée.",
+        },
+        Intermediate: {
+          en: "Sharpe ratios are comparable only when return horizon, volatility methodology and risk-free benchmark are consistent. A high historical Sharpe can also reflect a strategy that hides tail risk.",
+          fr: "Les Sharpe ratios ne sont comparables que si horizon de return, méthodologie de volatility et benchmark risk-free sont cohérents. Un historical Sharpe élevé peut aussi refléter une stratégie cachant du tail risk.",
+        },
+        Professional: {
+          en: "The tangency result is elegant but fragile because expected returns and covariance estimates are noisy. Portfolio managers therefore combine Sharpe-based optimization with drawdown, liquidity, skew, stress and capacity constraints.",
+          fr: "Le résultat de tangency est élégant mais fragile car expected returns et covariance estimates sont bruités. Les portfolio managers complètent donc l’optimisation Sharpe par drawdown, liquidity, skew, stress et capacity constraints.",
+        },
+      },
+      formula: {
+        label: { en: "Sharpe ratio", fr: "Sharpe ratio" },
+        expression: "Sharpe = (E[Rₚ] − R_f) ÷ σₚ",
+        explanation: {
+          en: "The ratio uses total portfolio volatility in the denominator.",
+          fr: "Le ratio utilise la total portfolio volatility au dénominateur.",
+        },
+        workedExample: {
+          en: "Expected return 10%, risk-free rate 4%, volatility 12% → Sharpe=0.50.",
+          fr: "Expected return 10 %, risk-free rate 4 %, volatility 12 % → Sharpe=0,50.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Tangency portfolio",
+          fr: "portefeuille tangent / tangency portfolio",
+          definition: {
+            en: "Risky portfolio maximizing the Sharpe ratio under the classical mean-variance setup.",
+            fr: "Risky portfolio maximisant le Sharpe ratio dans le framework mean-variance classique.",
+          },
+        },
+        {
+          en: "Capital Market Line",
+          fr: "Capital Market Line / CML",
+          definition: {
+            en: "Line of risk-free and tangency-portfolio combinations in expected-return versus total-volatility space.",
+            fr: "Ligne des combinaisons risk-free asset et tangency portfolio dans l’espace expected return versus total volatility.",
+          },
+        },
+      ],
+    },
+    {
+      id: "systematic-idiosyncratic",
+      kicker: { en: "07 · SYSTEMATIC VS IDIOSYNCRATIC RISK", fr: "07 · SYSTEMATIC VS IDIOSYNCRATIC RISK" },
+      title: {
+        en: "Diversification can remove much idiosyncratic risk, but not market-wide risk",
+        fr: "La diversification peut retirer une grande partie de l’idiosyncratic risk, mais pas le risque de marché",
+      },
+      coreFacts: [
+        {
+          en: "Systematic risk comes from common factors that affect many assets and cannot be eliminated simply by holding more securities.",
+          fr: "Le systematic risk vient de facteurs communs affectant de nombreux actifs et ne peut pas être éliminé simplement en possédant plus de titres.",
+        },
+        {
+          en: "Idiosyncratic risk is specific to a company, asset or narrow exposure and can often be diversified substantially.",
+          fr: "L’idiosyncratic risk est spécifique à une entreprise, un actif ou une exposition étroite et peut souvent être fortement diversifié.",
+        },
+        {
+          en: "CAPM prices systematic risk through beta rather than total volatility.",
+          fr: "Le CAPM price le systematic risk via beta plutôt que la total volatility.",
+        },
+        {
+          en: "Diversification does not make a portfolio risk-free because shared macro and market factors remain.",
+          fr: "La diversification ne rend pas un portefeuille risk-free car les facteurs macro et de marché communs subsistent.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A factory fire at one company is largely idiosyncratic. A global recession or broad interest-rate shock can affect many companies at once and is systematic. Owning many stocks helps with the first risk much more than the second.",
+          fr: "Un incendie dans l’usine d’une seule entreprise est largement idiosyncratic. Une récession mondiale ou un large shock de taux peut affecter de nombreuses entreprises à la fois et est systematic. Posséder beaucoup d’actions aide beaucoup plus pour le premier risque que pour le second.",
+        },
+        Intermediate: {
+          en: "In the CAPM logic, diversified investors are not compensated for bearing avoidable idiosyncratic risk. Required return therefore depends on covariance with the market, summarized by beta.",
+          fr: "Dans la logique CAPM, les investisseurs diversifiés ne sont pas rémunérés pour supporter un idiosyncratic risk évitable. Le required return dépend donc de la covariance avec le marché, résumée par beta.",
+        },
+        Professional: {
+          en: "Modern portfolio analysis extends systematic risk beyond one market factor into rates, value, momentum, quality, credit, volatility and other factors. CAPM remains foundational because it introduces the idea that priced risk is covariance risk.",
+          fr: "L’analyse moderne étend le systematic risk au-delà d’un seul market factor vers rates, value, momentum, quality, credit, volatility et autres factors. Le CAPM reste fondamental car il introduit l’idée que le priced risk est un covariance risk.",
+        },
+      },
+      comparison: {
+        title: { en: "Two types of risk", fr: "Deux types de risque" },
+        headers: [
+          { en: "Risk", fr: "Risque" },
+          { en: "Example", fr: "Exemple" },
+          { en: "Diversifiable?", fr: "Diversifiable ?" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Idiosyncratic", fr: "Idiosyncratic" },
+            { en: "Product failure at one company", fr: "Échec produit d’une entreprise" },
+            { en: "Largely yes", fr: "En grande partie oui" },
+          ]},
+          { cells: [
+            { en: "Systematic", fr: "Systematic" },
+            { en: "Broad recession / market shock", fr: "Récession large / market shock" },
+            { en: "Not by simple security diversification", fr: "Pas via simple diversification de titres" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Systematic risk",
+          fr: "risque systématique / systematic risk",
+          definition: {
+            en: "Common-factor risk affecting broad groups of assets.",
+            fr: "Risque de facteurs communs affectant de larges groupes d’actifs.",
+          },
+        },
+        {
+          en: "Idiosyncratic risk",
+          fr: "risque idiosyncratique / idiosyncratic risk",
+          definition: {
+            en: "Asset-specific risk that can often be diversified.",
+            fr: "Risque spécifique à un actif pouvant souvent être diversifié.",
+          },
+        },
+      ],
+    },
+    {
+      id: "beta",
+      kicker: { en: "08 · BETA", fr: "08 · BETA" },
+      title: {
+        en: "Beta measures sensitivity to the market factor, not total risk",
+        fr: "Le beta mesure la sensibilité au market factor, pas le risque total",
+      },
+      coreFacts: [
+        {
+          en: "Beta equals covariance of the asset with the market divided by market variance in the standard definition.",
+          fr: "Le beta est égal à la covariance entre l’actif et le marché divisée par la variance du marché dans la définition standard.",
+        },
+        {
+          en: "A beta above one indicates greater sensitivity to market movements under the estimated relationship.",
+          fr: "Un beta supérieur à un indique une sensibilité supérieure aux mouvements du marché selon la relation estimée.",
+        },
+        {
+          en: "A beta below one indicates lower market sensitivity, but the asset can still have substantial idiosyncratic volatility.",
+          fr: "Un beta inférieur à un indique une sensibilité de marché plus faible, mais l’actif peut toujours avoir une forte idiosyncratic volatility.",
+        },
+        {
+          en: "Beta is estimated from historical or model relationships and can change over time with business mix, leverage and regime.",
+          fr: "Le beta est estimé à partir de relations historiques ou de modèle et peut changer avec business mix, leverage et régime.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A beta of 1.2 means that, in the estimated linear relationship, the asset tends to move about 1.2% for a 1% market move on average, before idiosyncratic noise. It does not mean the asset always moves exactly 1.2 times the market.",
+          fr: "Un beta de 1,2 signifie que, dans la relation linéaire estimée, l’actif tend à bouger d’environ 1,2 % pour un mouvement de marché de 1 % en moyenne, avant idiosyncratic noise. Cela ne signifie pas qu’il bouge toujours exactement 1,2 fois le marché.",
+        },
+        Intermediate: {
+          en: "Beta can also be written as correlation with the market multiplied by asset volatility divided by market volatility. This shows that beta depends on both co-movement and relative volatility.",
+          fr: "Le beta peut aussi s’écrire correlation avec le marché multipliée par asset volatility divisée par market volatility. Cela montre que beta dépend à la fois du co-movement et de la volatility relative.",
+        },
+        Professional: {
+          en: "Equity beta depends on operating risk and financial leverage. Valuation practitioners often unlever peer betas and relever them to a target capital structure when estimating cost of equity.",
+          fr: "L’equity beta dépend du risque opérationnel et du financial leverage. Les valuation practitioners unlever souvent les betas des peers puis les releverent vers une target capital structure pour estimer le cost of equity.",
+        },
+      },
+      formula: {
+        label: { en: "Market beta", fr: "Market beta" },
+        expression: "βᵢ = Cov(Rᵢ,Rₘ) ÷ Var(Rₘ) = ρᵢₘ × (σᵢ ÷ σₘ)",
+        explanation: {
+          en: "Beta measures exposure to the market factor in the standard single-factor setup.",
+          fr: "Le beta mesure l’exposition au market factor dans le framework standard à un seul facteur.",
+        },
+        workedExample: {
+          en: "Correlation with market 0.75, asset volatility 18%, market volatility 15% → beta=0.75×18/15=0.90.",
+          fr: "Correlation avec le marché 0,75, asset volatility 18 %, market volatility 15 % → beta=0,75×18/15=0,90.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Beta",
+          fr: "beta",
+          definition: {
+            en: "Estimated sensitivity of an asset's return to a chosen market factor.",
+            fr: "Sensibilité estimée du return d’un actif à un market factor choisi.",
+          },
+        },
+        {
+          en: "Unlevered beta",
+          fr: "beta désendetté / unlevered beta",
+          definition: {
+            en: "Beta adjusted to remove the effect of financial leverage under a stated framework.",
+            fr: "Beta ajusté pour retirer l’effet du financial leverage selon un framework défini.",
+          },
+        },
+      ],
+    },
+    {
+      id: "capm-sml",
+      kicker: { en: "09 · CAPM & SECURITY MARKET LINE", fr: "09 · CAPM & SECURITY MARKET LINE" },
+      title: {
+        en: "CAPM links expected return to systematic market risk",
+        fr: "Le CAPM relie expected return et systematic market risk",
+      },
+      coreFacts: [
+        {
+          en: "CAPM states that expected return equals the risk-free rate plus beta times the market risk premium under its assumptions.",
+          fr: "Le CAPM indique que l’expected return est égal au risk-free rate plus beta multiplié par la market risk premium sous ses hypothèses.",
+        },
+        {
+          en: "The Security Market Line plots CAPM expected return against beta, not total volatility.",
+          fr: "La Security Market Line représente l’expected return CAPM en fonction du beta, pas de la total volatility.",
+        },
+        {
+          en: "CAPM alpha is the difference between an asset's return or expected return and the CAPM-implied benchmark, depending on the context and estimation method.",
+          fr: "L’alpha CAPM est la différence entre le return ou expected return d’un actif et le benchmark impliqué par le CAPM, selon le contexte et la méthode d’estimation.",
+        },
+        {
+          en: "CAPM is a foundational model but relies on restrictive assumptions and one market factor cannot explain all observed return patterns.",
+          fr: "Le CAPM est un modèle fondamental mais repose sur des hypothèses restrictives et un seul market factor n’explique pas tous les patterns de returns observés.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If the risk-free rate is 4%, expected market return is 9%, and a stock has beta 1.2, CAPM expected return is 4% + 1.2×(9%−4%) = 10%.",
+          fr: "Si le risk-free rate vaut 4 %, l’expected market return 9 % et une action possède beta 1,2, l’expected return CAPM vaut 4 % + 1,2×(9 %−4 %) = 10 %.",
+        },
+        Intermediate: {
+          en: "The market risk premium is the expected market return minus the risk-free rate. Beta scales this premium according to systematic exposure. Under CAPM, idiosyncratic volatility does not earn a separate expected premium.",
+          fr: "La market risk premium est l’expected market return moins le risk-free rate. Beta scale cette prime selon l’exposition systématique. Sous CAPM, l’idiosyncratic volatility ne reçoit pas de prime attendue séparée.",
+        },
+        Professional: {
+          en: "CAPM remains widely used for cost of equity because it is transparent and operational, but practitioners frequently supplement it with size, country, industry or multifactor considerations. The model should be treated as a framework, not as an exact law of returns.",
+          fr: "Le CAPM reste largement utilisé pour le cost of equity car il est transparent et opérationnel, mais les practitioners le complètent souvent avec size, country, industry ou multifactor considerations. Le modèle doit être traité comme un framework, pas comme une loi exacte des returns.",
+        },
+      },
+      formula: {
+        label: { en: "Capital Asset Pricing Model", fr: "Capital Asset Pricing Model / CAPM" },
+        expression: "E[Rᵢ] = R_f + βᵢ × (E[Rₘ] − R_f)",
+        explanation: {
+          en: "E[Rₘ]−R_f is the market risk premium.",
+          fr: "E[Rₘ]−R_f est la market risk premium.",
+        },
+        workedExample: {
+          en: "R_f=4%, β=1.2, E[R_m]=9% → required return=4%+1.2×5%=10%.",
+          fr: "R_f=4 %, β=1,2, E[R_m]=9 % → required return=4 %+1,2×5 %=10 %.",
+        },
+      },
+      comparison: {
+        title: { en: "CML vs SML", fr: "CML vs SML" },
+        headers: [
+          { en: "Line", fr: "Ligne" },
+          { en: "Risk axis", fr: "Axe de risque" },
+          { en: "Applies to", fr: "S’applique à" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Capital Market Line", fr: "Capital Market Line / CML" },
+            { en: "Total volatility", fr: "Total volatility" },
+            { en: "Efficient portfolios in the classical model", fr: "Portefeuilles efficients dans le modèle classique" },
+          ]},
+          { cells: [
+            { en: "Security Market Line", fr: "Security Market Line / SML" },
+            { en: "Beta", fr: "Beta" },
+            { en: "Individual assets and portfolios under CAPM", fr: "Actifs individuels et portefeuilles sous CAPM" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "CAPM is used in corporate valuation through cost of equity, while portfolio managers use beta and factor exposures to distinguish market-driven performance from security-specific performance.",
+        fr: "Le CAPM est utilisé en corporate valuation via le cost of equity, tandis que les portfolio managers utilisent beta et factor exposures pour distinguer performance liée au marché et performance spécifique aux securities.",
+      },
+      vocabulary: [
+        {
+          en: "Market risk premium",
+          fr: "prime de risque de marché / market risk premium",
+          definition: {
+            en: "Expected market return above the risk-free rate.",
+            fr: "Expected market return au-dessus du risk-free rate.",
+          },
+        },
+        {
+          en: "Security Market Line",
+          fr: "Security Market Line / SML",
+          definition: {
+            en: "CAPM relationship between expected return and beta.",
+            fr: "Relation CAPM entre expected return et beta.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "portfolio-expected-return",
+      question: {
+        en: "A portfolio is 60% in an asset with 8% expected return and 40% in an asset with 12%. Expected portfolio return is:",
+        fr: "Un portefeuille est investi à 60 % dans un actif avec expected return 8 % et 40 % dans un actif à 12 %. L’expected return du portefeuille vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "8.0%", fr: "8,0 %" } },
+        { id: "b", label: { en: "9.6%", fr: "9,6 %" } },
+        { id: "c", label: { en: "10.0%", fr: "10,0 %" } },
+        { id: "d", label: { en: "12.0%", fr: "12,0 %" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "0.60×8% + 0.40×12% = 9.6%.",
+        fr: "0,60×8 % + 0,40×12 % = 9,6 %.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "variance-volatility",
+      question: {
+        en: "If variance is 0.0225, volatility is:",
+        fr: "Si la variance vaut 0,0225, la volatility vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "2.25%", fr: "2,25 %" } },
+        { id: "b", label: { en: "10%", fr: "10 %" } },
+        { id: "c", label: { en: "15%", fr: "15 %" } },
+        { id: "d", label: { en: "22.5%", fr: "22,5 %" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "√0.0225 = 0.15 = 15%.",
+        fr: "√0,0225 = 0,15 = 15 %.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "correlation",
+      question: {
+        en: "Which correlation generally provides the greatest diversification benefit, all else equal?",
+        fr: "Quelle correlation offre généralement le plus grand bénéfice de diversification, toutes choses égales par ailleurs ?",
+      },
+      options: [
+        { id: "a", label: { en: "+1.0", fr: "+1,0" } },
+        { id: "b", label: { en: "+0.8", fr: "+0,8" } },
+        { id: "c", label: { en: "0.0", fr: "0,0" } },
+        { id: "d", label: { en: "−1.0", fr: "−1,0" } },
+      ],
+      correctOption: "d",
+      explanation: {
+        en: "Lower correlation increases diversification potential; −1 is the theoretical strongest case.",
+        fr: "Une correlation plus faible augmente le potentiel de diversification ; −1 est le cas théorique le plus fort.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "portfolio-volatility",
+      question: {
+        en: "With weights 60%/40%, volatilities 10%/20% and correlation 0.25, portfolio volatility is approximately:",
+        fr: "Avec poids 60 %/40 %, volatilities 10 %/20 % et correlation 0,25, la portfolio volatility vaut environ :",
+      },
+      options: [
+        { id: "a", label: { en: "9.6%", fr: "9,6 %" } },
+        { id: "b", label: { en: "11.14%", fr: "11,14 %" } },
+        { id: "c", label: { en: "14.0%", fr: "14,0 %" } },
+        { id: "d", label: { en: "30.0%", fr: "30,0 %" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "The two-asset variance is 0.0124, so volatility is √0.0124≈11.14%.",
+        fr: "La variance à deux actifs vaut 0,0124, donc volatility = √0,0124≈11,14 %.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "efficient-frontier",
+      question: {
+        en: "What defines the efficient frontier?",
+        fr: "Qu’est-ce qui définit l’efficient frontier ?",
+      },
+      options: [
+        { id: "a", label: { en: "Portfolios with the highest expected return for each risk level", fr: "Les portefeuilles avec le meilleur expected return pour chaque niveau de risque" } },
+        { id: "b", label: { en: "Every possible portfolio", fr: "Tous les portefeuilles possibles" } },
+        { id: "c", label: { en: "Only the portfolio with the highest volatility", fr: "Uniquement le portefeuille à volatility la plus élevée" } },
+        { id: "d", label: { en: "Only cash", fr: "Uniquement le cash" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Efficient portfolios are not mean-variance dominated by another feasible portfolio.",
+        fr: "Les portefeuilles efficients ne sont pas dominés en mean-variance par un autre portefeuille réalisable.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "sharpe",
+      question: {
+        en: "Expected portfolio return is 10%, risk-free rate 4%, volatility 12%. Sharpe ratio is:",
+        fr: "Expected portfolio return 10 %, risk-free rate 4 %, volatility 12 %. Le Sharpe ratio vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "0.25", fr: "0,25" } },
+        { id: "b", label: { en: "0.50", fr: "0,50" } },
+        { id: "c", label: { en: "0.83", fr: "0,83" } },
+        { id: "d", label: { en: "1.20", fr: "1,20" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "(10%−4%)/12%=0.50.",
+        fr: "(10 %−4 %)/12 %=0,50.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "systematic-risk",
+      question: {
+        en: "Which risk is least likely to be eliminated by simply owning many different stocks?",
+        fr: "Quel risque est le moins susceptible d’être éliminé simplement en possédant beaucoup d’actions différentes ?",
+      },
+      options: [
+        { id: "a", label: { en: "Company-specific product failure", fr: "Échec produit spécifique à une entreprise" } },
+        { id: "b", label: { en: "Systematic market risk", fr: "Systematic market risk" } },
+        { id: "c", label: { en: "One CEO resignation", fr: "La démission d’un seul CEO" } },
+        { id: "d", label: { en: "One factory accident", fr: "Un accident dans une seule usine" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Broad common-factor risk remains even in a diversified stock portfolio.",
+        fr: "Le risque provenant de facteurs communs larges subsiste même dans un portefeuille d’actions diversifié.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "beta",
+      question: {
+        en: "Correlation with the market is 0.75, asset volatility 18%, market volatility 15%. Beta is approximately:",
+        fr: "Correlation avec le marché 0,75, asset volatility 18 %, market volatility 15 %. Le beta vaut environ :",
+      },
+      options: [
+        { id: "a", label: { en: "0.60", fr: "0,60" } },
+        { id: "b", label: { en: "0.75", fr: "0,75" } },
+        { id: "c", label: { en: "0.90", fr: "0,90" } },
+        { id: "d", label: { en: "1.20", fr: "1,20" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "0.75×18%/15%=0.90.",
+        fr: "0,75×18 %/15 %=0,90.",
+      },
+    },
+    {
+      id: "q9",
+      conceptKey: "capm",
+      question: {
+        en: "Risk-free rate is 4%, beta is 1.2 and expected market return is 9%. CAPM required return is:",
+        fr: "Risk-free rate 4 %, beta 1,2 et expected market return 9 %. Le required return CAPM vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "5%", fr: "5 %" } },
+        { id: "b", label: { en: "8%", fr: "8 %" } },
+        { id: "c", label: { en: "10%", fr: "10 %" } },
+        { id: "d", label: { en: "13%", fr: "13 %" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "4% + 1.2×(9%−4%) = 10%.",
+        fr: "4 % + 1,2×(9 %−4 %) = 10 %.",
+      },
+    },
+    {
+      id: "q10",
+      conceptKey: "sml",
+      question: {
+        en: "What is on the horizontal axis of the Security Market Line?",
+        fr: "Qu’est-ce qui se trouve sur l’axe horizontal de la Security Market Line ?",
+      },
+      options: [
+        { id: "a", label: { en: "Total volatility", fr: "Total volatility" } },
+        { id: "b", label: { en: "Beta", fr: "Beta" } },
+        { id: "c", label: { en: "Revenue growth", fr: "Revenue growth" } },
+        { id: "d", label: { en: "Bond duration", fr: "Bond duration" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "The SML relates CAPM expected return to systematic risk measured by beta.",
+        fr: "La SML relie l’expected return CAPM au systematic risk mesuré par beta.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Two assets each have 15% volatility. If I combine them, will my portfolio volatility also be 15%? Walk me through the answer and connect it to CAPM.",
+      fr: "Deux actifs ont chacun 15 % de volatility. Si je les combine, la portfolio volatility sera-t-elle aussi de 15 % ? Explique la réponse et relie-la au CAPM.",
+    },
+    framework: [
+      {
+        en: "Say not necessarily: portfolio risk depends on weights and the covariance or correlation between the two assets.",
+        fr: "Répondre pas nécessairement : le portfolio risk dépend des poids et de la covariance ou correlation entre les deux actifs.",
+      },
+      {
+        en: "If correlation is below +1, diversification can make portfolio volatility lower than 15%.",
+        fr: "Si la correlation est inférieure à +1, la diversification peut rendre la portfolio volatility inférieure à 15 %.",
+      },
+      {
+        en: "Explain that diversification mainly removes idiosyncratic risk, while systematic common-factor risk remains.",
+        fr: "Expliquer que la diversification retire surtout l’idiosyncratic risk, tandis que le systematic common-factor risk subsiste.",
+      },
+      {
+        en: "Connect CAPM: diversified investors are compensated for systematic risk, measured by beta, rather than avoidable idiosyncratic volatility.",
+        fr: "Relier au CAPM : les investisseurs diversifiés sont rémunérés pour le systematic risk, mesuré par beta, plutôt que pour l’idiosyncratic volatility évitable.",
+      },
+      {
+        en: "Finish with the CAPM equation and note that beta measures covariance with the market, not total volatility.",
+        fr: "Terminer avec l’équation CAPM et rappeler que beta mesure la covariance avec le marché, pas la total volatility.",
+      },
+    ],
+    sample: {
+      en: "Not necessarily. Even if both assets have 15% standalone volatility, portfolio volatility depends on the portfolio weights and, crucially, on the covariance between the assets. If their correlation is below +1, the assets do not move perfectly together, so diversification can reduce total portfolio volatility below 15%. This is why portfolio risk cannot be calculated as a simple weighted average of standalone volatilities. As the portfolio becomes more diversified, much of the company-specific idiosyncratic risk can be reduced, but broad systematic market risk remains. CAPM builds on that idea: it says investors should be compensated for systematic risk rather than diversifiable idiosyncratic risk. That systematic exposure is summarized by beta, which is covariance with the market divided by market variance. CAPM then gives required return as the risk-free rate plus beta times the market risk premium.",
+      fr: "Pas nécessairement. Même si les deux actifs ont chacun 15 % de standalone volatility, la portfolio volatility dépend des poids et surtout de la covariance entre les actifs. Si leur correlation est inférieure à +1, ils ne bougent pas parfaitement ensemble ; la diversification peut donc réduire la volatility totale du portefeuille sous 15 %. C’est pourquoi le portfolio risk ne se calcule pas comme une simple moyenne pondérée des standalone volatilities. À mesure que le portefeuille devient plus diversifié, une grande partie de l’idiosyncratic risk spécifique aux entreprises peut être réduite, mais le systematic market risk subsiste. Le CAPM repose sur cette idée : les investisseurs doivent être rémunérés pour le systematic risk plutôt que pour l’idiosyncratic risk diversifiable. Cette exposition systématique est résumée par beta, qui est la covariance avec le marché divisée par la variance du marché. Le CAPM donne ensuite le required return comme risk-free rate plus beta multiplié par la market risk premium.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
