@@ -24107,7 +24107,490 @@ export const equityResearchLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson];
+
+
+export const creditAnalysisLesson: FinanceLesson = {
+  slug: "year-3-credit-analysis",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Credit Analysis", fr: "Analyse crédit / Credit Analysis" },
+  title: { en: "Credit Analysis", fr: "Analyse crédit / Credit Analysis" },
+  subtitle: {
+    en: "Learn how credit analysts evaluate a borrower’s ability and willingness to repay debt through business risk, leverage, coverage, cash flow, capital structure, covenants, recovery and downside analysis.",
+    fr: "Comprendre comment les analystes crédit évaluent la capacité et la volonté d’un emprunteur à rembourser sa dette à travers business risk, leverage, coverage, cash flow, capital structure, covenants, recovery et downside analysis.",
+  },
+  duration: { en: "150–180 min", fr: "150–180 min" },
+  prerequisites: [
+    { en: "Financial Statement Analysis", fr: "Analyse des états financiers / Financial Statement Analysis" },
+    { en: "Fixed Income & Yield Curves", fr: "Fixed Income & Yield Curves" },
+    { en: "Corporate Finance", fr: "Finance d’entreprise / Corporate Finance" },
+    { en: "Financial Modeling I", fr: "Modélisation financière I / Financial Modeling I" },
+    { en: "Investment Banking", fr: "Investment Banking" },
+  ],
+  objectives: [
+    { en: "Explain how credit analysis differs from equity analysis.", fr: "Expliquer la différence entre analyse crédit et analyse equity." },
+    { en: "Evaluate business risk, financial risk, leverage and debt-service capacity.", fr: "Évaluer business risk, financial risk, leverage et capacité de service de la dette." },
+    { en: "Use coverage ratios, free cash flow and liquidity analysis to assess repayment capacity.", fr: "Utiliser coverage ratios, free cash flow et analyse de liquidité pour évaluer la capacité de remboursement." },
+    { en: "Understand capital structure, seniority, security, covenants and recovery.", fr: "Comprendre capital structure, seniority, security, covenants et recovery." },
+    { en: "Interpret credit spreads, ratings and market-implied risk.", fr: "Interpréter credit spreads, ratings et risque implicite du marché." },
+    { en: "Build downside and stress cases to test default and refinancing risk.", fr: "Construire downside et stress cases pour tester default et refinancing risk." },
+  ],
+  overviewFlow: {
+    title: { en: "From borrower quality to downside protection", fr: "De la qualité de l’emprunteur à la protection downside" },
+    steps: [
+      { title: { en: "Business", fr: "Business" }, detail: { en: "Industry · model · stability", fr: "Industrie · modèle · stabilité" } },
+      { title: { en: "Financials", fr: "Financials" }, detail: { en: "Leverage · coverage · cash flow", fr: "Leverage · coverage · cash flow" } },
+      { title: { en: "Structure", fr: "Structure" }, detail: { en: "Seniority · covenants · liquidity", fr: "Seniority · covenants · liquidité" } },
+      { title: { en: "Downside", fr: "Downside" }, detail: { en: "Stress · default · recovery", fr: "Stress · défaut · recovery" } },
+    ],
+  },
+  sections: [
+    {
+      id: "credit-vs-equity",
+      kicker: { en: "01 · CREDIT MINDSET", fr: "01 · LOGIQUE CRÉDIT" },
+      title: { en: "Equity asks how much upside exists; credit first asks whether you get repaid", fr: "L’equity demande combien d’upside existe ; le crédit demande d’abord si tu seras remboursé" },
+      coreFacts: [
+        { en: "Credit investors focus on downside protection, repayment capacity and probability of default.", fr: "Les investisseurs crédit se concentrent sur downside protection, capacité de remboursement et probabilité de défaut." },
+        { en: "Bond upside is typically capped relative to equity, while downside can be significant if credit quality deteriorates.", fr: "L’upside d’une obligation est généralement plafonné par rapport à l’equity, tandis que le downside peut être important si la qualité de crédit se dégrade." },
+        { en: "Credit analysis emphasizes stable cash flow, leverage, liquidity and contractual protections.", fr: "L’analyse crédit insiste sur stabilité du cash flow, leverage, liquidité et protections contractuelles." },
+        { en: "The same company can look attractive to equity holders and unattractive to creditors depending on capital structure and risk.", fr: "La même entreprise peut sembler attractive aux actionnaires et peu attractive aux créanciers selon la structure du capital et le risque." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you own a bond, your main goal is usually to receive interest and get your principal back. You care less about unlimited upside and more about whether the company can keep paying.",
+          fr: "Si tu détiens une obligation, ton objectif principal est généralement de recevoir les intérêts et de récupérer ton principal. Tu t’intéresses moins à un upside illimité qu’à la capacité de l’entreprise à continuer de payer.",
+        },
+        Intermediate: {
+          en: "Equity investors may welcome aggressive growth funded by debt if returns are high. Credit investors may worry that the same strategy increases leverage, refinancing risk and downside volatility.",
+          fr: "Les investisseurs equity peuvent apprécier une croissance agressive financée par dette si les returns sont élevés. Les investisseurs crédit peuvent craindre que la même stratégie augmente leverage, refinancing risk et volatilité downside.",
+        },
+        Professional: {
+          en: "Credit analysis is fundamentally asymmetric. Because contractual upside is limited, the analyst must focus on tail risk, covenant protection, structural seniority, liquidity runway and recovery value under stressed outcomes.",
+          fr: "L’analyse crédit est fondamentalement asymétrique. Puisque l’upside contractuel est limité, l’analyste doit se concentrer sur tail risk, covenant protection, seniority structurelle, liquidity runway et recovery value dans les scénarios stressés.",
+        },
+      },
+      comparison: {
+        title: { en: "Equity vs credit lens", fr: "Vision equity vs crédit" },
+        headers: [{ en: "Question", fr: "Question" }, { en: "Equity", fr: "Equity" }, { en: "Credit", fr: "Credit" }],
+        rows: [
+          { cells: [{ en: "Primary objective", fr: "Objectif principal" }, { en: "Maximize upside", fr: "Maximiser l’upside" }, { en: "Protect repayment", fr: "Protéger le remboursement" }] },
+          { cells: [{ en: "Key risk", fr: "Risque clé" }, { en: "Earnings / valuation", fr: "Earnings / valuation" }, { en: "Default / recovery", fr: "Default / recovery" }] },
+          { cells: [{ en: "Capital structure focus", fr: "Focus structure capital" }, { en: "Residual claim", fr: "Créance résiduelle" }, { en: "Seniority and security", fr: "Seniority et security" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Default risk", fr: "risque de défaut", definition: { en: "Risk that a borrower fails to meet contractual debt obligations.", fr: "Risque qu’un emprunteur ne respecte pas ses obligations contractuelles de dette." } },
+        { en: "Recovery", fr: "recovery", definition: { en: "Value creditors recover after a default or restructuring.", fr: "Valeur récupérée par les créanciers après un défaut ou une restructuration." } },
+      ],
+    },
+    {
+      id: "business-risk",
+      kicker: { en: "02 · BUSINESS RISK", fr: "02 · BUSINESS RISK" },
+      title: { en: "Stable cash generation begins with a resilient business model", fr: "Une génération de cash stable commence par un business model résilient" },
+      coreFacts: [
+        { en: "Industry cyclicality, competition, customer concentration and pricing power affect credit quality.", fr: "Cyclicality du secteur, concurrence, concentration clients et pricing power affectent la qualité de crédit." },
+        { en: "Recurring revenue and diversified customers can support more predictable debt service.", fr: "Un revenue récurrent et une base clients diversifiée peuvent soutenir un debt service plus prévisible." },
+        { en: "Capital intensity and working-capital needs can reduce free cash flow even when EBITDA appears strong.", fr: "Capital intensity et besoins de working capital peuvent réduire le free cash flow même si l’EBITDA paraît solide." },
+        { en: "Event risk such as acquisitions, litigation or regulation can change a credit profile quickly.", fr: "Event risk comme acquisitions, litiges ou réglementation peut modifier rapidement un profil de crédit." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company with predictable customers and stable demand is usually easier to lend to than a company whose revenue changes dramatically every year.",
+          fr: "Une entreprise avec des clients prévisibles et une demande stable est généralement plus facile à financer qu’une entreprise dont le revenue varie fortement chaque année.",
+        },
+        Intermediate: {
+          en: "Credit analysts ask whether the business can maintain cash flow through a downturn. They examine customer concentration, cost structure, pricing flexibility, barriers to entry and cyclicality.",
+          fr: "Les analystes crédit demandent si le business peut maintenir du cash flow en période de ralentissement. Ils examinent concentration clients, structure de coûts, flexibilité de pricing, barrières à l’entrée et cyclicality.",
+        },
+        Professional: {
+          en: "Business risk should be linked directly to debt capacity. A highly recurring subscription model may support more leverage than a volatile commodity producer because cash-flow visibility and refinancing resilience differ materially.",
+          fr: "Le business risk doit être relié directement à la capacité d’endettement. Un modèle d’abonnement très récurrent peut supporter davantage de leverage qu’un producteur de commodities volatil car visibilité des cash flows et résilience de refinancement diffèrent fortement.",
+        },
+      },
+      vocabulary: [
+        { en: "Cyclicality", fr: "cyclicality", definition: { en: "Sensitivity of business performance to the economic cycle.", fr: "Sensibilité de la performance d’un business au cycle économique." } },
+        { en: "Customer concentration", fr: "concentration clients", definition: { en: "Dependence on a small number of customers for revenue.", fr: "Dépendance à un petit nombre de clients pour le revenue." } },
+        { en: "Capital intensity", fr: "intensité capitalistique", definition: { en: "Amount of capital investment required to operate and grow the business.", fr: "Montant de capital nécessaire pour exploiter et développer le business." } },
+      ],
+    },
+    {
+      id: "leverage",
+      kicker: { en: "03 · LEVERAGE", fr: "03 · LEVERAGE" },
+      title: { en: "Leverage measures how much debt sits on top of the cash-flow engine", fr: "Le leverage mesure la quantité de dette reposant sur le moteur de cash flow" },
+      coreFacts: [
+        { en: "Debt/EBITDA is a common leverage metric but should be interpreted with industry context and EBITDA quality.", fr: "Debt/EBITDA est une métrique de leverage courante mais doit être interprétée avec le contexte sectoriel et la qualité de l’EBITDA." },
+        { en: "Net debt adjusts gross debt for cash that is reasonably available to reduce debt.", fr: "Net debt ajuste la dette brute du cash raisonnablement disponible pour réduire la dette." },
+        { en: "Higher leverage generally reduces financial flexibility and increases refinancing risk.", fr: "Un leverage plus élevé réduit généralement la flexibilité financière et augmente le refinancing risk." },
+        { en: "Leverage should be analyzed under both base and stress scenarios.", fr: "Le leverage doit être analysé en base case et en stress case." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company has $500 million of debt and $100 million of annual EBITDA, debt/EBITDA is 5×. The higher that ratio, the more debt the company carries relative to its earnings capacity.",
+          fr: "Si une entreprise a 500 M$ de dette et 100 M$ d’EBITDA annuel, debt/EBITDA est de 5×. Plus ce ratio est élevé, plus la dette est importante par rapport à la capacité de profits.",
+        },
+        Intermediate: {
+          en: "Leverage ratios are only useful if EBITDA is sustainable. Analysts adjust for one-time items and consider capex, working capital and taxes because EBITDA is not cash available for debt repayment.",
+          fr: "Les ratios de leverage ne sont utiles que si l’EBITDA est durable. Les analystes ajustent les éléments ponctuels et considèrent capex, working capital et taxes car EBITDA n’est pas le cash disponible pour rembourser la dette.",
+        },
+        Professional: {
+          en: "Credit analysis should test gross leverage, net leverage and secured leverage by layer of the capital structure. The same consolidated leverage can imply different creditor risk depending on where debt sits and which assets support it.",
+          fr: "L’analyse crédit doit tester gross leverage, net leverage et secured leverage par niveau de capital structure. Le même leverage consolidé peut impliquer un risque créancier différent selon l’endroit où se trouve la dette et les actifs qui la garantissent.",
+        },
+      },
+      formula: {
+        label: { en: "Net leverage", fr: "Net leverage" },
+        expression: "Net Leverage = (Total Debt − Available Cash) / EBITDA",
+        explanation: { en: "Available cash should be defined conservatively; not all reported cash may be accessible.", fr: "Le cash disponible doit être défini prudemment ; tout le cash publié n’est pas forcément accessible." },
+        workedExample: { en: "$500m debt − $50m cash, divided by $100m EBITDA = 4.5× net leverage.", fr: "500 M$ de dette − 50 M$ de cash, divisés par 100 M$ d’EBITDA = 4,5× de net leverage." },
+      },
+      vocabulary: [
+        { en: "Gross leverage", fr: "gross leverage", definition: { en: "Debt relative to EBITDA before subtracting cash.", fr: "Dette rapportée à l’EBITDA avant soustraction du cash." } },
+        { en: "Net leverage", fr: "net leverage", definition: { en: "Debt net of eligible cash relative to EBITDA.", fr: "Dette nette du cash éligible rapportée à l’EBITDA." } },
+      ],
+    },
+    {
+      id: "coverage-cash-flow",
+      kicker: { en: "04 · COVERAGE & CASH FLOW", fr: "04 · COVERAGE & CASH FLOW" },
+      title: { en: "Debt is repaid with cash, not with accounting EBITDA", fr: "La dette est remboursée avec du cash, pas avec de l’EBITDA comptable" },
+      coreFacts: [
+        { en: "Interest coverage compares earnings capacity with interest obligations.", fr: "L’interest coverage compare la capacité de profit aux obligations d’intérêts." },
+        { en: "Free cash flow after capex, working capital and taxes is central to debt repayment analysis.", fr: "Le free cash flow après capex, working capital et taxes est central dans l’analyse de remboursement de dette." },
+        { en: "A borrower can show strong EBITDA but weak cash generation because of capex or working-capital needs.", fr: "Un emprunteur peut afficher un EBITDA solide mais une faible génération de cash à cause du capex ou des besoins de working capital." },
+        { en: "Coverage should be tested under downside assumptions, not only current results.", fr: "La coverage doit être testée sous des hypothèses downside, pas seulement sur les résultats actuels." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company earns $100 before interest and has $20 of interest expense, it has more room to pay interest than a company earning $30 with the same $20 bill.",
+          fr: "Si une entreprise gagne 100 avant intérêts et paie 20 d’intérêts, elle a davantage de marge qu’une entreprise gagnant 30 avec la même charge d’intérêts.",
+        },
+        Intermediate: {
+          en: "EBITDA/interest is common, but analysts also examine cash interest, capex and free cash flow because the true question is whether the company can fund all obligations without relying on new borrowing.",
+          fr: "EBITDA/interest est courant, mais les analystes examinent aussi cash interest, capex et free cash flow car la vraie question est de savoir si l’entreprise peut financer ses obligations sans dépendre de nouveaux emprunts.",
+        },
+        Professional: {
+          en: "Coverage analysis should distinguish fixed-charge coverage, cash interest coverage and free-cash-flow conversion. Weak conversion can signal that reported earnings overstate debt-service capacity.",
+          fr: "L’analyse de coverage doit distinguer fixed-charge coverage, cash interest coverage et conversion en free cash flow. Une faible conversion peut signaler que les earnings publiés surestiment la capacité de service de la dette.",
+        },
+      },
+      formula: {
+        label: { en: "Interest coverage", fr: "Interest coverage" },
+        expression: "Interest Coverage = EBITDA / Cash Interest Expense",
+        explanation: { en: "Higher coverage generally indicates more capacity to service interest, all else equal.", fr: "Une coverage plus élevée indique généralement une meilleure capacité à servir les intérêts, toutes choses égales par ailleurs." },
+        workedExample: { en: "$120m EBITDA / $30m cash interest = 4.0× coverage.", fr: "120 M$ d’EBITDA / 30 M$ de cash interest = 4,0× de coverage." },
+      },
+      vocabulary: [
+        { en: "Interest coverage", fr: "interest coverage", definition: { en: "Measure of earnings or cash flow relative to interest expense.", fr: "Mesure des earnings ou cash flows par rapport aux charges d’intérêts." } },
+        { en: "Free cash flow", fr: "free cash flow", definition: { en: "Cash remaining after operating needs and required investment.", fr: "Cash restant après besoins opérationnels et investissements nécessaires." } },
+      ],
+    },
+    {
+      id: "liquidity-maturity",
+      kicker: { en: "05 · LIQUIDITY & MATURITY", fr: "05 · LIQUIDITÉ & MATURITÉ" },
+      title: { en: "A solvent company can still fail if it runs out of liquidity at the wrong time", fr: "Une entreprise solvable peut quand même échouer si elle manque de liquidité au mauvais moment" },
+      coreFacts: [
+        { en: "Liquidity sources include cash, operating cash flow, revolver availability and asset sales.", fr: "Les sources de liquidité incluent cash, operating cash flow, revolver disponible et ventes d’actifs." },
+        { en: "Liquidity uses include debt maturities, interest, capex, working capital and other contractual obligations.", fr: "Les besoins de liquidité incluent maturités de dette, intérêts, capex, working capital et autres obligations contractuelles." },
+        { en: "A maturity wall can create refinancing pressure even for a profitable company.", fr: "Un maturity wall peut créer une forte pression de refinancement même pour une entreprise profitable." },
+        { en: "Revolver access and covenant compliance can become critical during stress.", fr: "L’accès au revolver et la conformité aux covenants peuvent devenir critiques en période de stress." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company may be profitable but still get into trouble if a large debt repayment is due next month and it does not have enough cash or refinancing access.",
+          fr: "Une entreprise peut être profitable mais se retrouver en difficulté si une grosse dette arrive à échéance le mois prochain et qu’elle n’a pas assez de cash ou d’accès au refinancement.",
+        },
+        Intermediate: {
+          en: "Credit analysts build a liquidity bridge comparing cash and committed facilities with expected cash needs over the next several quarters or years.",
+          fr: "Les analystes crédit construisent un liquidity bridge comparant cash et committed facilities avec les besoins de cash attendus sur les prochains trimestres ou années.",
+        },
+        Professional: {
+          en: "Liquidity analysis must consider springing covenants, borrowing-base availability, restricted cash, collateral requirements and market access. Headline cash alone can materially overstate true liquidity.",
+          fr: "L’analyse de liquidité doit considérer springing covenants, borrowing-base availability, restricted cash, collateral requirements et accès au marché. Le cash headline peut surestimer fortement la liquidité réelle.",
+        },
+      },
+      vocabulary: [
+        { en: "Maturity wall", fr: "maturity wall", definition: { en: "Concentration of significant debt maturities within a limited period.", fr: "Concentration de grosses maturités de dette sur une période limitée." } },
+        { en: "Revolver", fr: "revolver", definition: { en: "Committed revolving credit facility available subject to terms and covenants.", fr: "Ligne de crédit renouvelable engagée, disponible sous certaines conditions et covenants." } },
+        { en: "Liquidity runway", fr: "liquidity runway", definition: { en: "Time a borrower can continue meeting obligations with available liquidity.", fr: "Durée pendant laquelle un emprunteur peut continuer à honorer ses obligations avec la liquidité disponible." } },
+      ],
+    },
+    {
+      id: "capital-structure-seniority",
+      kicker: { en: "06 · CAPITAL STRUCTURE & SENIORITY", fr: "06 · CAPITAL STRUCTURE & SENIORITY" },
+      title: { en: "Where you sit in the capital structure matters when things go wrong", fr: "Ta place dans la capital structure devient essentielle quand les choses vont mal" },
+      coreFacts: [
+        { en: "Secured debt has claims on specified collateral; unsecured debt relies on the general credit of the borrower.", fr: "La dette secured possède des droits sur un collateral spécifique ; la dette unsecured repose sur le crédit général de l’emprunteur." },
+        { en: "Senior creditors generally recover before subordinated creditors.", fr: "Les créanciers senior récupèrent généralement avant les créanciers subordonnés." },
+        { en: "Structural subordination can arise when debt is issued at a holding company above operating subsidiaries.", fr: "La structural subordination peut apparaître lorsque la dette est émise au niveau d’une holding au-dessus des filiales opérationnelles." },
+        { en: "Collateral quality and legal claim priority influence recovery value.", fr: "La qualité du collateral et la priorité juridique influencent la recovery value." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company fails, creditors are not all paid equally. A secured lender with collateral may recover more than a junior unsecured lender.",
+          fr: "Si une entreprise fait défaut, tous les créanciers ne sont pas payés de la même façon. Un prêteur secured avec collateral peut récupérer davantage qu’un prêteur junior unsecured.",
+        },
+        Intermediate: {
+          en: "Analysts map each debt instrument by legal entity, collateral, guarantees, maturity and priority. That structure determines which creditors have first claim on cash flows and assets.",
+          fr: "Les analystes cartographient chaque instrument de dette selon entité juridique, collateral, garanties, maturité et priorité. Cette structure détermine quels créanciers ont la première créance sur cash flows et actifs.",
+        },
+        Professional: {
+          en: "Enterprise value at default must be allocated through the legal waterfall. Recovery depends not only on aggregate enterprise value but also on entity-level assets, guarantees, intercompany claims and structural subordination.",
+          fr: "L’enterprise value au défaut doit être répartie selon la legal waterfall. La recovery dépend non seulement de l’enterprise value globale mais aussi des actifs par entité, garanties, intercompany claims et structural subordination.",
+        },
+      },
+      vocabulary: [
+        { en: "Secured debt", fr: "dette secured", definition: { en: "Debt backed by pledged collateral.", fr: "Dette garantie par un collateral nanti." } },
+        { en: "Subordination", fr: "subordination", definition: { en: "Lower priority claim relative to more senior creditors.", fr: "Créance de priorité inférieure par rapport aux créanciers plus senior." } },
+        { en: "Collateral", fr: "collateral", definition: { en: "Assets pledged to support a debt obligation.", fr: "Actifs donnés en garantie d’une obligation de dette." } },
+      ],
+    },
+    {
+      id: "covenants",
+      kicker: { en: "07 · COVENANTS", fr: "07 · COVENANTS" },
+      title: { en: "Covenants define what the borrower can and cannot do", fr: "Les covenants définissent ce que l’emprunteur peut et ne peut pas faire" },
+      coreFacts: [
+        { en: "Maintenance covenants require ongoing compliance with financial tests.", fr: "Les maintenance covenants exigent un respect continu de tests financiers." },
+        { en: "Incurrence covenants restrict actions only when the borrower takes specified actions such as adding debt or making distributions.", fr: "Les incurrence covenants restreignent certaines actions seulement lorsque l’emprunteur effectue une opération comme ajouter de la dette ou verser des distributions." },
+        { en: "Covenants can protect creditors by limiting leverage, asset sales, restricted payments or additional liens.", fr: "Les covenants peuvent protéger les créanciers en limitant leverage, asset sales, restricted payments ou nouveaux liens." },
+        { en: "Loose covenants can increase creditor risk even when headline leverage looks acceptable.", fr: "Des covenants faibles peuvent augmenter le risque créancier même lorsque le leverage headline semble acceptable." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Covenants are rules in the debt agreement. They can stop a company from taking too much additional debt or moving valuable assets away from creditors.",
+          fr: "Les covenants sont des règles dans le contrat de dette. Ils peuvent empêcher une entreprise de prendre trop de dette supplémentaire ou de déplacer des actifs précieux loin des créanciers.",
+        },
+        Intermediate: {
+          en: "A maintenance covenant may require net leverage below a threshold every quarter. An incurrence covenant may allow leverage above that level but prevent new debt if the test is not met.",
+          fr: "Un maintenance covenant peut exiger que le net leverage reste sous un seuil chaque trimestre. Un incurrence covenant peut tolérer un niveau plus élevé mais empêcher de nouvelles dettes si le test n’est pas respecté.",
+        },
+        Professional: {
+          en: "Documentation analysis matters because covenant baskets, grower provisions, EBITDA add-backs and unrestricted subsidiary provisions can materially weaken creditor protection without changing the stated coupon or maturity.",
+          fr: "L’analyse de documentation est importante car covenant baskets, grower provisions, EBITDA add-backs et unrestricted subsidiary provisions peuvent affaiblir fortement la protection des créanciers sans modifier coupon ou maturité affichés.",
+        },
+      },
+      vocabulary: [
+        { en: "Maintenance covenant", fr: "maintenance covenant", definition: { en: "Financial test that must be met periodically.", fr: "Test financier devant être respecté périodiquement." } },
+        { en: "Incurrence covenant", fr: "incurrence covenant", definition: { en: "Restriction triggered when the borrower takes a specified action.", fr: "Restriction déclenchée lorsque l’emprunteur réalise une action donnée." } },
+        { en: "Restricted payment", fr: "restricted payment", definition: { en: "Distribution such as dividend or share repurchase limited by debt documentation.", fr: "Distribution comme dividende ou rachat d’actions limitée par la documentation de dette." } },
+      ],
+    },
+    {
+      id: "ratings-spreads",
+      kicker: { en: "08 · RATINGS & CREDIT SPREADS", fr: "08 · RATINGS & CREDIT SPREADS" },
+      title: { en: "Credit spreads summarize market compensation for risk, but they are not pure default probabilities", fr: "Les credit spreads résument la rémunération du risque, mais ne sont pas de pures probabilités de défaut" },
+      coreFacts: [
+        { en: "Credit ratings summarize agency views of relative default risk and loss severity.", fr: "Les credit ratings résument la vue des agences sur le risque relatif de défaut et la sévérité de perte." },
+        { en: "Investment-grade and high-yield categories generally reflect different levels of credit quality and market behavior.", fr: "Les catégories investment-grade et high-yield reflètent généralement des niveaux différents de qualité de crédit et de comportement de marché." },
+        { en: "Credit spreads compensate for default risk, liquidity, uncertainty and other risk premia.", fr: "Les credit spreads rémunèrent default risk, liquidité, incertitude et autres risk premia." },
+        { en: "Spread widening typically indicates deteriorating market-perceived credit conditions or risk appetite.", fr: "Un élargissement des spreads indique généralement une dégradation de la perception du crédit ou du risk appetite." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a risky corporate bond must offer a much higher yield than a government bond, that extra yield is partly compensation for the possibility that the company may not repay.",
+          fr: "Si une obligation corporate risquée doit offrir un yield beaucoup plus élevé qu’une obligation d’État, ce rendement supplémentaire rémunère en partie la possibilité que l’entreprise ne rembourse pas.",
+        },
+        Intermediate: {
+          en: "Analysts compare spreads with peers, history and fundamentals. A bond can look cheap if its spread is wide relative to its actual credit risk, but the analyst must understand why the market demands the extra compensation.",
+          fr: "Les analystes comparent spreads avec peers, historique et fondamentaux. Une obligation peut sembler cheap si son spread est large par rapport à son risque de crédit réel, mais l’analyste doit comprendre pourquoi le marché exige cette compensation supplémentaire.",
+        },
+        Professional: {
+          en: "Observed spreads embed expected loss, liquidity premium, risk aversion and technical supply-demand effects. Therefore spread-implied default risk should be interpreted as a market price of risk, not a literal actuarial probability.",
+          fr: "Les spreads observés intègrent expected loss, liquidity premium, risk aversion et effets techniques offre-demande. Le default risk implicite dans les spreads doit donc être interprété comme un prix de marché du risque, pas comme une probabilité actuarielle littérale.",
+        },
+      },
+      formula: {
+        label: { en: "Simplified expected-loss intuition", fr: "Intuition simplifiée de l’expected loss" },
+        expression: "Expected Loss ≈ Probability of Default × (1 − Recovery Rate)",
+        explanation: { en: "This is a simplified framework; actual credit spreads include additional premia.", fr: "C’est un cadre simplifié ; les credit spreads réels incluent d’autres primes." },
+      },
+      vocabulary: [
+        { en: "Credit spread", fr: "credit spread", definition: { en: "Yield compensation above a reference rate for bearing credit and related risks.", fr: "Compensation de yield au-dessus d’un taux de référence pour porter le risque de crédit et risques associés." } },
+        { en: "Investment grade", fr: "investment grade", definition: { en: "Higher-rated credit category generally viewed as lower default risk.", fr: "Catégorie de crédit mieux notée généralement considérée comme présentant un risque de défaut plus faible." } },
+        { en: "High yield", fr: "high yield", definition: { en: "Lower-rated credit category offering higher yields to compensate for greater risk.", fr: "Catégorie de crédit moins bien notée offrant des yields plus élevés pour compenser un risque supérieur." } },
+      ],
+    },
+    {
+      id: "stress-default-recovery",
+      kicker: { en: "09 · STRESS, DEFAULT & RECOVERY", fr: "09 · STRESS, DEFAULT & RECOVERY" },
+      title: { en: "The real credit test is what happens when the base case breaks", fr: "Le vrai test crédit est ce qui se passe lorsque le base case casse" },
+      coreFacts: [
+        { en: "Stress cases should test revenue decline, margin compression, higher rates, weaker working capital and reduced refinancing access.", fr: "Les stress cases doivent tester baisse du revenue, compression des marges, taux plus élevés, working capital plus faible et accès réduit au refinancement." },
+        { en: "Default can occur because of missed payments, covenant breaches or restructuring events depending on documentation.", fr: "Le défaut peut survenir à cause de paiements manqués, covenant breaches ou événements de restructuration selon la documentation." },
+        { en: "Recovery analysis estimates enterprise value under distress and allocates value through the creditor waterfall.", fr: "La recovery analysis estime l’enterprise value en distress et répartit la valeur selon la creditor waterfall." },
+        { en: "A strong credit thesis identifies both the path to repayment and the path to loss.", fr: "Une bonne credit thesis identifie à la fois le chemin vers le remboursement et le chemin vers la perte." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A credit analyst should not only ask what happens if everything goes right. The important question is whether the company still survives if sales fall and refinancing becomes difficult.",
+          fr: "Un analyste crédit ne doit pas seulement demander ce qui se passe si tout va bien. La question importante est de savoir si l’entreprise survit encore si les ventes baissent et que le refinancement devient difficile.",
+        },
+        Intermediate: {
+          en: "A downside model reduces revenue and margins, recalculates EBITDA, leverage, coverage and cash flow, then checks liquidity and upcoming maturities. If the company cannot meet obligations, recovery analysis becomes central.",
+          fr: "Un modèle downside réduit revenue et marges, recalcule EBITDA, leverage, coverage et cash flow, puis vérifie liquidité et maturités à venir. Si l’entreprise ne peut pas honorer ses obligations, la recovery analysis devient centrale.",
+        },
+        Professional: {
+          en: "Recovery should be scenario-based, not a single arbitrary percentage. Analysts stress enterprise value, apply asset or EBITDA multiples appropriate for distress, account for restructuring costs and then allocate value by legal priority.",
+          fr: "La recovery doit être basée sur des scénarios, pas sur un pourcentage arbitraire unique. Les analystes stressent l’enterprise value, appliquent des multiples d’actifs ou EBITDA adaptés au distress, prennent en compte restructuring costs puis allouent la valeur selon la priorité juridique.",
+        },
+      },
+      vocabulary: [
+        { en: "Default", fr: "défaut", definition: { en: "Failure to meet contractual debt obligations or specified credit events.", fr: "Non-respect d’obligations contractuelles de dette ou survenance d’événements de crédit définis." } },
+        { en: "Recovery rate", fr: "recovery rate", definition: { en: "Percentage of claim value recovered after default or restructuring.", fr: "Pourcentage de la créance récupéré après défaut ou restructuration." } },
+        { en: "Creditor waterfall", fr: "creditor waterfall", definition: { en: "Order in which value is distributed among creditors by priority.", fr: "Ordre dans lequel la valeur est distribuée entre créanciers selon leur priorité." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "credit-mindset",
+      question: { en: "What is the primary focus of credit analysis?", fr: "Quel est le focus principal de l’analyse crédit ?" },
+      options: [
+        { id: "a", label: { en: "Repayment capacity and downside protection", fr: "Capacité de remboursement et downside protection" } },
+        { id: "b", label: { en: "Unlimited equity upside", fr: "Upside equity illimité" } },
+        { id: "c", label: { en: "Only dividend growth", fr: "Uniquement la croissance du dividende" } },
+        { id: "d", label: { en: "Only share-price momentum", fr: "Uniquement le momentum du cours" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Credit investors prioritize being repaid and limiting loss severity.", fr: "Les investisseurs crédit priorisent le remboursement et la limitation de la sévérité des pertes." },
+    },
+    {
+      id: "q2",
+      conceptKey: "business-risk",
+      question: { en: "Which business generally supports more predictable debt service?", fr: "Quel business soutient généralement un debt service plus prévisible ?" },
+      options: [
+        { id: "a", label: { en: "Stable recurring revenue with diversified customers", fr: "Revenue récurrent stable avec clients diversifiés" } },
+        { id: "b", label: { en: "Highly volatile revenue with one customer", fr: "Revenue très volatil avec un seul client" } },
+        { id: "c", label: { en: "No visibility on cash flow", fr: "Aucune visibilité sur le cash flow" } },
+        { id: "d", label: { en: "Permanent negative gross margin", fr: "Gross margin durablement négative" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Stable and diversified cash generation generally supports stronger credit quality.", fr: "Une génération de cash stable et diversifiée soutient généralement une meilleure qualité de crédit." },
+    },
+    {
+      id: "q3",
+      conceptKey: "net-leverage",
+      question: { en: "Debt is $500m, cash is $50m and EBITDA is $100m. Net leverage is:", fr: "La dette est de 500 M$, le cash de 50 M$ et l’EBITDA de 100 M$. Le net leverage est :" },
+      options: [
+        { id: "a", label: { en: "4.5×", fr: "4,5×" } },
+        { id: "b", label: { en: "5.5×", fr: "5,5×" } },
+        { id: "c", label: { en: "0.5×", fr: "0,5×" } },
+        { id: "d", label: { en: "10×", fr: "10×" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "(500 − 50) / 100 = 4.5×.", fr: "(500 − 50) / 100 = 4,5×." },
+    },
+    {
+      id: "q4",
+      conceptKey: "coverage",
+      question: { en: "What does interest coverage measure?", fr: "Que mesure l’interest coverage ?" },
+      options: [
+        { id: "a", label: { en: "Earnings or cash flow relative to interest expense", fr: "Earnings ou cash flow par rapport aux charges d’intérêts" } },
+        { id: "b", label: { en: "Only revenue growth", fr: "Uniquement la croissance du revenue" } },
+        { id: "c", label: { en: "Only market capitalization", fr: "Uniquement la capitalisation boursière" } },
+        { id: "d", label: { en: "Only dividend yield", fr: "Uniquement le dividend yield" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Coverage indicates how comfortably a borrower can service interest obligations.", fr: "La coverage indique avec quelle marge un emprunteur peut servir ses obligations d’intérêts." },
+    },
+    {
+      id: "q5",
+      conceptKey: "liquidity",
+      question: { en: "Why can a maturity wall be dangerous?", fr: "Pourquoi un maturity wall peut-il être dangereux ?" },
+      options: [
+        { id: "a", label: { en: "Large debt repayments can create refinancing pressure", fr: "De grosses échéances de dette peuvent créer une pression de refinancement" } },
+        { id: "b", label: { en: "It always increases cash", fr: "Il augmente toujours le cash" } },
+        { id: "c", label: { en: "It eliminates interest expense", fr: "Il élimine les charges d’intérêts" } },
+        { id: "d", label: { en: "It guarantees lower spreads", fr: "Il garantit des spreads plus faibles" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Concentrated maturities can force a borrower to refinance at an unfavorable time.", fr: "Des maturités concentrées peuvent forcer un refinancement à un mauvais moment." },
+    },
+    {
+      id: "q6",
+      conceptKey: "seniority",
+      question: { en: "Which creditor generally has stronger recovery protection?", fr: "Quel créancier bénéficie généralement d’une meilleure protection de recovery ?" },
+      options: [
+        { id: "a", label: { en: "Senior secured creditor", fr: "Créancier senior secured" } },
+        { id: "b", label: { en: "Junior unsecured creditor", fr: "Créancier junior unsecured" } },
+        { id: "c", label: { en: "Common equity holder", fr: "Actionnaire ordinaire" } },
+        { id: "d", label: { en: "No-claim holder", fr: "Détenteur sans créance" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Senior secured debt typically has priority claims and collateral support.", fr: "La dette senior secured possède généralement une priorité de créance et du collateral." },
+    },
+    {
+      id: "q7",
+      conceptKey: "covenants",
+      question: { en: "What is a maintenance covenant?", fr: "Qu’est-ce qu’un maintenance covenant ?" },
+      options: [
+        { id: "a", label: { en: "A financial test that must be met periodically", fr: "Un test financier devant être respecté périodiquement" } },
+        { id: "b", label: { en: "A stock-price target", fr: "Un objectif de cours" } },
+        { id: "c", label: { en: "A guaranteed recovery rate", fr: "Un recovery rate garanti" } },
+        { id: "d", label: { en: "A dividend forecast", fr: "Une prévision de dividende" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Maintenance covenants require ongoing compliance with stated financial thresholds.", fr: "Les maintenance covenants exigent le respect continu de seuils financiers." },
+    },
+    {
+      id: "q8",
+      conceptKey: "spread",
+      question: { en: "What can cause credit spreads to widen?", fr: "Qu’est-ce qui peut faire élargir les credit spreads ?" },
+      options: [
+        { id: "a", label: { en: "Higher perceived credit risk or weaker risk appetite", fr: "Risque de crédit perçu plus élevé ou risk appetite plus faible" } },
+        { id: "b", label: { en: "Guaranteed repayment", fr: "Remboursement garanti" } },
+        { id: "c", label: { en: "Zero uncertainty", fr: "Aucune incertitude" } },
+        { id: "d", label: { en: "Perfect liquidity in all markets", fr: "Liquidité parfaite sur tous les marchés" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Wider spreads usually reflect higher required compensation for risk.", fr: "Des spreads plus larges reflètent généralement une compensation requise plus élevée pour le risque." },
+    },
+    {
+      id: "q9",
+      conceptKey: "expected-loss",
+      question: { en: "In a simplified framework, expected credit loss depends on:", fr: "Dans un cadre simplifié, l’expected credit loss dépend de :" },
+      options: [
+        { id: "a", label: { en: "Probability of default and loss given default", fr: "Probabilité de défaut et perte en cas de défaut" } },
+        { id: "b", label: { en: "Only revenue", fr: "Uniquement le revenue" } },
+        { id: "c", label: { en: "Only coupon rate", fr: "Uniquement le coupon" } },
+        { id: "d", label: { en: "Only market capitalization", fr: "Uniquement la capitalisation boursière" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Expected loss reflects both the chance of default and severity if default occurs.", fr: "L’expected loss reflète à la fois la probabilité de défaut et la sévérité si le défaut survient." },
+    },
+    {
+      id: "q10",
+      conceptKey: "stress-case",
+      question: { en: "Why is downside analysis essential in credit?", fr: "Pourquoi l’analyse downside est-elle essentielle en crédit ?" },
+      options: [
+        { id: "a", label: { en: "Because repayment depends on surviving adverse conditions", fr: "Parce que le remboursement dépend de la capacité à survivre à des conditions défavorables" } },
+        { id: "b", label: { en: "Because base cases are always wrong", fr: "Parce que les base cases sont toujours faux" } },
+        { id: "c", label: { en: "Because spreads never change", fr: "Parce que les spreads ne changent jamais" } },
+        { id: "d", label: { en: "Because leverage is irrelevant", fr: "Parce que le leverage n’a aucune importance" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Credit investors need to know whether the borrower can still service and repay debt when performance weakens.", fr: "Les investisseurs crédit doivent savoir si l’emprunteur peut toujours servir et rembourser la dette lorsque la performance se dégrade." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Walk me through how you would analyze the credit quality of a corporate borrower.",
+      fr: "Explique comment tu analyserais la qualité de crédit d’un emprunteur corporate.",
+    },
+    framework: [
+      { en: "Start with the business model, industry cyclicality, competitive position and stability of cash generation.", fr: "Commencer par business model, cyclicality du secteur, position concurrentielle et stabilité de génération de cash." },
+      { en: "Analyze leverage, coverage, free cash flow and earnings quality.", fr: "Analyser leverage, coverage, free cash flow et qualité des earnings." },
+      { en: "Review liquidity sources, debt maturities and refinancing needs.", fr: "Examiner sources de liquidité, maturités de dette et besoins de refinancement." },
+      { en: "Map the capital structure, seniority, security and covenant protections.", fr: "Cartographier capital structure, seniority, security et protections de covenants." },
+      { en: "Compare ratings and market spreads with fundamentals and peers.", fr: "Comparer ratings et spreads de marché avec fondamentaux et peers." },
+      { en: "Run downside scenarios and estimate default and recovery outcomes.", fr: "Construire des scénarios downside et estimer défaut et recovery." },
+    ],
+    sample: {
+      en: "I would begin with business risk because debt capacity depends on how resilient the underlying cash-flow engine is. I would assess industry cyclicality, competitive position, customer concentration, pricing power and capital intensity. Then I would analyze the financial profile using gross and net leverage, interest coverage, free-cash-flow conversion and earnings quality. Next I would build a liquidity schedule showing cash, revolver availability, debt maturities and expected uses of cash. I would map the capital structure by legal entity, seniority, collateral and covenants because creditor protection depends on where the instrument sits. I would compare the borrower’s ratings and credit spreads with peers and with my fundamental view. Finally, I would run stress cases for lower revenue, weaker margins, higher rates and reduced refinancing access. If the company breaches liquidity or cannot refinance, I would estimate recovery by stressing enterprise value and applying the creditor waterfall. The final credit view should explain both why the borrower can repay in the base case and how much protection exists if the base case fails.",
+      fr: "Je commencerais par le business risk car la capacité d’endettement dépend de la résilience du moteur de cash flow sous-jacent. J’évaluerais cyclicality du secteur, position concurrentielle, concentration clients, pricing power et capital intensity. Ensuite, j’analyserais le profil financier avec gross et net leverage, interest coverage, conversion en free cash flow et qualité des earnings. Puis je construirais un liquidity schedule montrant cash, revolver disponible, maturités de dette et besoins de cash attendus. Je cartographierais la capital structure par entité juridique, seniority, collateral et covenants car la protection du créancier dépend de la place de l’instrument. Je comparerais ratings et credit spreads avec les peers et avec ma vue fondamentale. Enfin, je lancerais des stress cases sur baisse du revenue, marges plus faibles, taux plus élevés et accès réduit au refinancement. Si l’entreprise rencontre un problème de liquidité ou ne peut pas refinancer, j’estimerais la recovery en stressant l’enterprise value puis en appliquant la creditor waterfall. La vue crédit finale doit expliquer à la fois pourquoi l’emprunteur peut rembourser dans le base case et quelle protection existe si le base case échoue.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
