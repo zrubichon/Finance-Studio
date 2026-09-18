@@ -8709,7 +8709,1258 @@ export const excelFoundationsForFinanceLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson];
+
+export const financialVocabularyFrEnLesson: FinanceLesson = {
+  slug: "year-1-financial-vocabulary-fr-en",
+  year: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations" },
+  domain: {
+    en: "Professional Vocabulary",
+    fr: "Vocabulaire professionnel / Professional Vocabulary",
+  },
+  title: {
+    en: "Financial Vocabulary FR ↔ EN",
+    fr: "Vocabulaire financier FR ↔ EN / Financial Vocabulary",
+  },
+  subtitle: {
+    en: "Master the bilingual vocabulary used in accounting, valuation, markets, rates, credit, equities, derivatives, portfolio management, banking and interviews — with definitions, context and common translation traps.",
+    fr: "Maîtriser le vocabulaire bilingue utilisé en comptabilité / accounting, valorisation / valuation, marchés / markets, taux / rates, crédit / credit, actions / equities, produits dérivés / derivatives, gestion de portefeuille / portfolio management, banque / banking et entretiens / interviews — avec définitions, contexte et pièges de traduction.",
+  },
+  duration: { en: "90–115 min", fr: "90–115 min" },
+  prerequisites: [
+    {
+      en: "Financial Accounting I",
+      fr: "Comptabilité financière I / Financial Accounting I",
+    },
+    {
+      en: "Macroeconomics for Markets",
+      fr: "Macroéconomie pour les marchés / Macroeconomics for Markets",
+    },
+  ],
+  objectives: [
+    {
+      en: "Use core finance terms naturally in both English and French.",
+      fr: "Utiliser naturellement les principaux termes de finance en français / English.",
+    },
+    {
+      en: "Distinguish close but non-equivalent terms such as revenue, income, profit, yield and return.",
+      fr: "Distinguer les termes proches mais non équivalents comme chiffre d’affaires / revenue, résultat / income, bénéfice / profit, rendement obligataire / yield et rendement d’investissement / return.",
+    },
+    {
+      en: "Recognize context-dependent words such as equity, spread, margin, duration and leverage.",
+      fr: "Reconnaître les mots dépendant du contexte comme capitaux propres / equity, écart / spread, marge / margin, duration et levier / leverage.",
+    },
+    {
+      en: "Understand the vocabulary used in markets, banking, valuation and interview questions.",
+      fr: "Comprendre le vocabulaire utilisé sur les marchés / markets, en banque / banking, en valorisation / valuation et en entretien / interview.",
+    },
+    {
+      en: "Translate finance concepts without relying on literal word-for-word translation.",
+      fr: "Traduire les concepts financiers sans dépendre d’une traduction littérale mot à mot.",
+    },
+    {
+      en: "Speak more precisely when explaining a company, trade, portfolio or market view.",
+      fr: "S’exprimer avec davantage de précision pour expliquer une entreprise, une position / trade, un portefeuille / portfolio ou une vue de marché / market view.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "A finance vocabulary map",
+      fr: "Carte du vocabulaire financier / Finance vocabulary map",
+    },
+    steps: [
+      {
+        title: { en: "Company", fr: "Entreprise / Company" },
+        detail: { en: "Accounting · valuation · capital", fr: "Comptabilité · valorisation · capital" },
+      },
+      {
+        title: { en: "Markets", fr: "Marchés / Markets" },
+        detail: { en: "Prices · rates · credit · trading", fr: "Prix · taux · crédit · trading" },
+      },
+      {
+        title: { en: "Risk", fr: "Risque / Risk" },
+        detail: { en: "Portfolio · derivatives · hedging", fr: "Portefeuille · dérivés · couverture" },
+      },
+      {
+        title: { en: "Communication", fr: "Communication" },
+        detail: { en: "Interviews · research · professional usage", fr: "Entretiens · recherche · usage professionnel" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "accounting-language",
+      kicker: { en: "01 · ACCOUNTING LANGUAGE", fr: "01 · LANGAGE COMPTABLE / ACCOUNTING" },
+      title: {
+        en: "Revenue, profit, cash and equity are not interchangeable",
+        fr: "Chiffre d’affaires / revenue, bénéfice / profit, cash et capitaux propres / equity ne sont pas interchangeables",
+      },
+      coreFacts: [
+        {
+          en: "Revenue is the top-line amount recognized from selling goods or services; profit is what remains after relevant expenses.",
+          fr: "Le chiffre d’affaires / revenue correspond au montant comptabilisé des ventes de biens ou services ; le bénéfice / profit correspond à ce qui reste après les dépenses pertinentes.",
+        },
+        {
+          en: "Income can refer to different profit measures depending on context, such as operating income or net income.",
+          fr: "Le terme résultat / income peut désigner différents niveaux de bénéfice selon le contexte, par exemple résultat opérationnel / operating income ou résultat net / net income.",
+        },
+        {
+          en: "Cash flow is not the same as accounting earnings because accrual accounting creates timing and non-cash differences.",
+          fr: "Le flux de trésorerie / cash flow n’est pas identique au bénéfice comptable / accounting earnings car la comptabilité d’engagement / accrual accounting crée des différences de timing et des éléments non cash.",
+        },
+        {
+          en: "Equity can mean shareholders' book equity, the equity asset class, or ownership interest depending on context.",
+          fr: "Le mot capitaux propres / equity peut désigner les capitaux propres comptables, la classe d’actifs actions / equities ou une participation au capital selon le contexte.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company sells $1 million of products, that is revenue, not profit. After costs, interest and taxes, perhaps only $80,000 remains as net income. If customers have not paid yet, cash may still be different again.",
+          fr: "Si une entreprise vend pour 1 million de dollars de produits, il s’agit de chiffre d’affaires / revenue et non de bénéfice / profit. Après coûts, intérêts et impôts, il peut ne rester que 80 000 $ de résultat net / net income. Et si les clients n’ont pas encore payé, le cash peut encore être différent.",
+        },
+        Intermediate: {
+          en: "Accounting vocabulary is hierarchical. Revenue flows into gross profit, then operating income, pre-tax income and net income. Balance-sheet terms describe stocks at a date; income-statement terms describe flows over a period.",
+          fr: "Le vocabulaire comptable est hiérarchique. Le chiffre d’affaires / revenue conduit à la marge brute / gross profit, puis au résultat opérationnel / operating income, au résultat avant impôt / pre-tax income et au résultat net / net income. Les termes du bilan / balance sheet décrivent des stocks à une date ; ceux du compte de résultat / income statement décrivent des flux sur une période.",
+        },
+        Professional: {
+          en: "Professionals use terminology precisely because small wording differences imply different claim structures, accounting locations or valuation treatment. 'Earnings', 'EBIT', 'EBITDA', 'net income' and 'free cash flow' should never be treated as synonyms.",
+          fr: "Les professionnels utilisent les termes avec précision car de petites différences de vocabulaire impliquent des structures de créance, positions comptables ou traitements de valorisation différents. Bénéfices / earnings, EBIT, EBITDA, résultat net / net income et flux de trésorerie disponible / free cash flow ne sont jamais des synonymes.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Revenue",
+          fr: "chiffre d’affaires / revenue",
+          definition: {
+            en: "Amount recognized from sales before expenses.",
+            fr: "Montant comptabilisé provenant des ventes avant déduction des dépenses.",
+          },
+        },
+        {
+          en: "Gross profit",
+          fr: "marge brute en valeur / gross profit",
+          definition: {
+            en: "Revenue minus cost of goods or services sold.",
+            fr: "Chiffre d’affaires / revenue moins coût des ventes / COGS.",
+          },
+        },
+        {
+          en: "Operating income",
+          fr: "résultat opérationnel / operating income",
+          definition: {
+            en: "Profit after operating costs before selected financing, tax and non-operating items.",
+            fr: "Résultat après coûts opérationnels avant certains éléments financiers, fiscaux et non opérationnels.",
+          },
+        },
+        {
+          en: "Net income",
+          fr: "résultat net / net income",
+          definition: {
+            en: "Accounting profit attributable after recognized expenses, interest, taxes and other items.",
+            fr: "Bénéfice comptable final après dépenses reconnues, intérêts, impôts et autres éléments.",
+          },
+        },
+        {
+          en: "Balance sheet",
+          fr: "bilan / balance sheet",
+          definition: {
+            en: "Point-in-time statement of assets, liabilities and equity.",
+            fr: "État présentant à une date donnée actifs, passifs et capitaux propres / equity.",
+          },
+        },
+        {
+          en: "Cash flow statement",
+          fr: "tableau des flux de trésorerie / cash flow statement",
+          definition: {
+            en: "Statement explaining cash movements through operating, investing and financing activities.",
+            fr: "État expliquant les mouvements de cash via activités opérationnelles / operating, d’investissement / investing et de financement / financing.",
+          },
+        },
+        {
+          en: "Accounts receivable",
+          fr: "créances clients / accounts receivable",
+          definition: {
+            en: "Amounts customers owe the company for recognized sales.",
+            fr: "Montants dus à l’entreprise par les clients au titre de ventes déjà comptabilisées.",
+          },
+        },
+        {
+          en: "Accounts payable",
+          fr: "dettes fournisseurs / accounts payable",
+          definition: {
+            en: "Amounts the company owes suppliers.",
+            fr: "Montants dus par l’entreprise à ses fournisseurs.",
+          },
+        },
+      ],
+    },
+    {
+      id: "valuation-corporate-finance",
+      kicker: { en: "02 · VALUATION & CORPORATE FINANCE", fr: "02 · VALORISATION & FINANCE D’ENTREPRISE" },
+      title: {
+        en: "Enterprise value, equity value and cash flow language",
+        fr: "Valeur d’entreprise / enterprise value, valeur des capitaux propres / equity value et vocabulaire des cash flows",
+      },
+      coreFacts: [
+        {
+          en: "Enterprise value and equity value represent different claims and should not be used interchangeably.",
+          fr: "La valeur d’entreprise / enterprise value et la valeur des capitaux propres / equity value représentent des créances différentes et ne doivent pas être confondues.",
+        },
+        {
+          en: "A multiple is only meaningful when numerator and denominator correspond economically.",
+          fr: "Un multiple n’est pertinent que lorsque numérateur et dénominateur correspondent économiquement.",
+        },
+        {
+          en: "Discount rate, cost of capital and required return overlap conceptually but are not always identical in application.",
+          fr: "Taux d’actualisation / discount rate, coût du capital / cost of capital et rendement exigé / required return se recoupent conceptuellement mais ne sont pas toujours identiques en pratique.",
+        },
+        {
+          en: "Dilution means an existing holder's ownership percentage or per-share claim can fall when new shares or equivalents are issued.",
+          fr: "La dilution / dilution signifie que le pourcentage de détention ou la créance par action d’un actionnaire existant peut diminuer lorsque de nouvelles actions ou équivalents sont émis.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Equity value is the value belonging to shareholders. Enterprise value is a broader value of the operating business available to all capital providers before allocating value between debt and equity.",
+          fr: "La valeur des capitaux propres / equity value correspond à la valeur revenant aux actionnaires. La valeur d’entreprise / enterprise value est une mesure plus large de la valeur des opérations avant répartition entre dette / debt et capitaux propres / equity.",
+        },
+        Intermediate: {
+          en: "This distinction explains why EV/EBITDA is an enterprise multiple while P/E is an equity multiple. EBITDA is before interest to debt holders, while net income is after interest and belongs lower in the capital structure.",
+          fr: "Cette distinction explique pourquoi EV/EBITDA est un multiple d’entreprise / enterprise multiple alors que P/E est un multiple d’actions / equity multiple. EBITDA est calculé avant intérêts versés aux créanciers, tandis que le résultat net / net income est après intérêts et correspond davantage à la créance actionnariale.",
+        },
+        Professional: {
+          en: "Valuation vocabulary encodes claim seniority and cash-flow ownership. Analysts should match unlevered cash flows with enterprise discount rates and levered equity cash flows with equity-required returns, while adjusting for non-operating assets and debt-like claims.",
+          fr: "Le vocabulaire de valorisation encode la priorité des créances / claim seniority et la propriété des cash flows. Les analystes associent les flux non levier / unlevered cash flows à un taux d’actualisation d’entreprise et les flux d’equity levier / levered equity cash flows au rendement exigé des actionnaires, tout en ajustant les actifs non opérationnels et passifs assimilables à de la dette.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Enterprise value",
+          fr: "valeur d’entreprise / enterprise value",
+          definition: {
+            en: "Value of the operating business attributable to debt and equity capital providers before selected non-operating adjustments.",
+            fr: "Valeur des opérations attribuable aux apporteurs de dette / debt et de capitaux propres / equity avant certains ajustements non opérationnels.",
+          },
+        },
+        {
+          en: "Equity value",
+          fr: "valeur des capitaux propres / equity value",
+          definition: {
+            en: "Value attributable to common equity holders.",
+            fr: "Valeur attribuable aux actionnaires ordinaires / common equity holders.",
+          },
+        },
+        {
+          en: "DCF",
+          fr: "actualisation des flux de trésorerie / discounted cash flow",
+          definition: {
+            en: "Valuation framework that discounts forecast cash flows to present value.",
+            fr: "Méthode de valorisation actualisant les cash flows prévisionnels en valeur actuelle / present value.",
+          },
+        },
+        {
+          en: "Terminal value",
+          fr: "valeur terminale / terminal value",
+          definition: {
+            en: "Estimated value of cash flows beyond the explicit forecast period.",
+            fr: "Valeur estimée des cash flows au-delà de la période de prévision explicite.",
+          },
+        },
+        {
+          en: "WACC",
+          fr: "coût moyen pondéré du capital / weighted average cost of capital",
+          definition: {
+            en: "Weighted required return across debt and equity financing under a standard corporate-finance framework.",
+            fr: "Rendement exigé pondéré entre financement par dette / debt et capitaux propres / equity dans un cadre standard de finance d’entreprise.",
+          },
+        },
+        {
+          en: "Multiple",
+          fr: "multiple de valorisation / valuation multiple",
+          definition: {
+            en: "Ratio comparing a value measure with an operating or financial metric.",
+            fr: "Ratio comparant une mesure de valeur à une métrique opérationnelle ou financière.",
+          },
+        },
+        {
+          en: "Accretion / dilution",
+          fr: "relution / dilution / accretion / dilution",
+          definition: {
+            en: "Increase or decrease in a per-share metric after a transaction, depending on the metric and assumptions.",
+            fr: "Hausse ou baisse d’une métrique par action après une transaction selon la métrique et les hypothèses utilisées.",
+          },
+        },
+        {
+          en: "Capital structure",
+          fr: "structure du capital / capital structure",
+          definition: {
+            en: "Mix of debt, equity and other financing claims used by a company.",
+            fr: "Combinaison de dette / debt, capitaux propres / equity et autres sources de financement d’une entreprise.",
+          },
+        },
+      ],
+    },
+    {
+      id: "market-language",
+      kicker: { en: "03 · MARKET & TRADING LANGUAGE", fr: "03 · VOCABULAIRE DE MARCHÉ & TRADING" },
+      title: {
+        en: "Bid, ask, spread, liquidity and execution",
+        fr: "Prix acheteur / bid, prix vendeur / ask, écart / spread, liquidité / liquidity et exécution / execution",
+      },
+      coreFacts: [
+        {
+          en: "Bid is the price a buyer is willing to pay; ask or offer is the price a seller is willing to accept.",
+          fr: "Le prix acheteur / bid est le prix qu’un acheteur est prêt à payer ; le prix vendeur / ask ou offer est le prix auquel un vendeur accepte de vendre.",
+        },
+        {
+          en: "Bid-ask spread is a transaction-cost and liquidity concept, distinct from credit spread or yield spread.",
+          fr: "L’écart bid-ask / bid-ask spread est un concept de coût de transaction et de liquidité, différent d’un spread de crédit / credit spread ou d’un écart de rendement / yield spread.",
+        },
+        {
+          en: "Liquidity means the ability to transact meaningful size quickly with limited price impact, not simply the existence of a quoted price.",
+          fr: "La liquidité / liquidity désigne la capacité à exécuter une taille significative rapidement avec un impact de prix limité, pas seulement l’existence d’un prix affiché.",
+        },
+        {
+          en: "A long position benefits from price appreciation, while a short position generally benefits from price decline, subject to financing and other risks.",
+          fr: "Une position acheteuse / long bénéficie généralement d’une hausse du prix, tandis qu’une position vendeuse / short bénéficie généralement d’une baisse, sous réserve des coûts de financement et autres risques.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a stock shows a bid of $99.90 and an ask of $100.00, buyers are currently bidding $99.90 while sellers are offering at $100.00. The $0.10 difference is the bid-ask spread.",
+          fr: "Si une action affiche un bid à 99,90 $ et un ask à 100,00 $, les acheteurs proposent actuellement 99,90 $ tandis que les vendeurs demandent 100,00 $. La différence de 0,10 $ est l’écart bid-ask / bid-ask spread.",
+        },
+        Intermediate: {
+          en: "Market vocabulary distinguishes price, size, liquidity and execution. A liquid market can absorb orders with limited slippage; a thin market may show a quote but move sharply when meaningful size trades.",
+          fr: "Le vocabulaire de marché distingue prix, taille / size, liquidité / liquidity et exécution / execution. Un marché liquide peut absorber des ordres avec peu de slippage ; un marché peu profond / thin peut afficher un prix mais bouger fortement lorsqu’une taille significative est exécutée.",
+        },
+        Professional: {
+          en: "Execution quality depends on spread, depth, volatility, information leakage, market impact and timing. 'Liquidity' is therefore a multi-dimensional market-microstructure concept rather than a binary property.",
+          fr: "La qualité d’exécution dépend du spread, de la profondeur / depth, de la volatilité, des fuites d’information / information leakage, de l’impact de marché / market impact et du timing. La liquidité est donc un concept multidimensionnel de microstructure de marché plutôt qu’une propriété binaire.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Bid",
+          fr: "prix acheteur / bid",
+          definition: {
+            en: "Highest quoted price a buyer is currently willing to pay.",
+            fr: "Prix coté le plus élevé qu’un acheteur est actuellement prêt à payer.",
+          },
+        },
+        {
+          en: "Ask / offer",
+          fr: "prix vendeur / ask / offer",
+          definition: {
+            en: "Lowest quoted price a seller is currently willing to accept.",
+            fr: "Prix coté le plus faible qu’un vendeur est actuellement prêt à accepter.",
+          },
+        },
+        {
+          en: "Bid-ask spread",
+          fr: "écart achat-vente / bid-ask spread",
+          definition: {
+            en: "Difference between best ask and best bid.",
+            fr: "Différence entre meilleur prix vendeur / ask et meilleur prix acheteur / bid.",
+          },
+        },
+        {
+          en: "Liquidity",
+          fr: "liquidité / liquidity",
+          definition: {
+            en: "Ability to transact with limited delay and price impact.",
+            fr: "Capacité à effectuer une transaction avec délai et impact de prix limités.",
+          },
+        },
+        {
+          en: "Slippage",
+          fr: "écart d’exécution / slippage",
+          definition: {
+            en: "Difference between an expected execution price and the price actually achieved.",
+            fr: "Différence entre le prix d’exécution attendu et le prix réellement obtenu.",
+          },
+        },
+        {
+          en: "Market depth",
+          fr: "profondeur de marché / market depth",
+          definition: {
+            en: "Amount of executable interest available across price levels.",
+            fr: "Quantité d’intérêt acheteur et vendeur exécutable à différents niveaux de prix.",
+          },
+        },
+        {
+          en: "Long",
+          fr: "position acheteuse / long",
+          definition: {
+            en: "Exposure that generally benefits from an increase in the underlying value.",
+            fr: "Exposition bénéficiant généralement d’une hausse de la valeur du sous-jacent.",
+          },
+        },
+        {
+          en: "Short",
+          fr: "position vendeuse / short",
+          definition: {
+            en: "Exposure structured to benefit from a decline in the underlying value, with potentially asymmetric risks.",
+            fr: "Exposition structurée pour bénéficier d’une baisse du sous-jacent, avec des risques pouvant être asymétriques.",
+          },
+        },
+      ],
+    },
+    {
+      id: "rates-fixed-income",
+      kicker: { en: "04 · RATES & FIXED INCOME", fr: "04 · TAUX & OBLIGATIONS / FIXED INCOME" },
+      title: {
+        en: "Yield is not coupon, and duration is not simply maturity",
+        fr: "Le rendement obligataire / yield n’est pas le coupon, et la duration n’est pas simplement la maturité",
+      },
+      coreFacts: [
+        {
+          en: "Coupon is a contractual payment rate or amount, while yield is a return measure implied by price and cash flows.",
+          fr: "Le coupon est un taux ou paiement contractuel, tandis que le rendement obligataire / yield est une mesure de rendement implicite dans le prix et les cash flows.",
+        },
+        {
+          en: "Yield curve describes yields across maturities or tenors for related debt instruments.",
+          fr: "La courbe des taux / yield curve décrit les yields selon les maturités / maturities ou tenors d’instruments de dette comparables.",
+        },
+        {
+          en: "Duration is a measure related to bond price sensitivity to yield changes, not simply the remaining years to maturity.",
+          fr: "La duration est une mesure liée à la sensibilité du prix obligataire aux variations de yield, et non simplement au nombre d’années avant maturité.",
+        },
+        {
+          en: "Basis point is one hundredth of a percentage point.",
+          fr: "Un point de base / basis point correspond à un centième de point de pourcentage.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A 5% coupon bond does not necessarily have a 5% yield. If the bond price moves above or below par, the return implied by the bond's cash flows changes even though the contractual coupon does not.",
+          fr: "Une obligation avec coupon de 5 % n’a pas nécessairement un yield de 5 %. Si son prix passe au-dessus ou en dessous du pair / par, le rendement implicite des cash flows change même si le coupon contractuel ne change pas.",
+        },
+        Intermediate: {
+          en: "Rates vocabulary separates policy rates, spot yields, forward rates and spreads. A curve can steepen or flatten because short and long maturities move by different amounts.",
+          fr: "Le vocabulaire de taux distingue taux directeurs / policy rates, taux spot / spot yields, taux forward / forward rates et spreads. Une courbe peut se pentifier / steepen ou s’aplatir / flatten parce que les maturités courtes et longues ne bougent pas du même montant.",
+        },
+        Professional: {
+          en: "Fixed-income language is convention-heavy. Yield measures depend on compounding, day count, settlement and embedded-option assumptions. Professionals therefore specify which yield or spread measure they mean rather than using 'yield' generically.",
+          fr: "Le langage obligataire dépend fortement des conventions. Les mesures de yield varient selon capitalisation / compounding, day count, settlement et hypothèses sur options intégrées. Les professionnels précisent donc le type exact de yield ou spread plutôt que d’utiliser un terme générique.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Yield",
+          fr: "rendement obligataire / yield",
+          definition: {
+            en: "A return measure linked to an instrument's price and expected cash flows under a specified convention.",
+            fr: "Mesure de rendement liée au prix d’un instrument et à ses cash flows attendus selon une convention donnée.",
+          },
+        },
+        {
+          en: "Coupon",
+          fr: "coupon",
+          definition: {
+            en: "Contractual interest payment on a bond, often stated as a rate of face value.",
+            fr: "Paiement d’intérêt contractuel d’une obligation, souvent exprimé en pourcentage de la valeur nominale.",
+          },
+        },
+        {
+          en: "Maturity",
+          fr: "échéance / maturity",
+          definition: {
+            en: "Date when the principal is contractually due, subject to instrument terms.",
+            fr: "Date à laquelle le principal doit contractuellement être remboursé selon les termes de l’instrument.",
+          },
+        },
+        {
+          en: "Duration",
+          fr: "duration / sensibilité de taux",
+          definition: {
+            en: "Measure related to bond-price sensitivity to changes in yield.",
+            fr: "Mesure liée à la sensibilité du prix d’une obligation aux variations de yield.",
+          },
+        },
+        {
+          en: "Yield curve",
+          fr: "courbe des taux / yield curve",
+          definition: {
+            en: "Relationship between yields and maturities for comparable debt instruments.",
+            fr: "Relation entre yields et maturités d’instruments de dette comparables.",
+          },
+        },
+        {
+          en: "Basis point",
+          fr: "point de base / basis point",
+          definition: {
+            en: "0.01 percentage point; 100 basis points equal 1 percentage point.",
+            fr: "0,01 point de pourcentage ; 100 points de base correspondent à 1 point de pourcentage.",
+          },
+        },
+        {
+          en: "Steepening",
+          fr: "pentification de la courbe / steepening",
+          definition: {
+            en: "Increase in the slope between selected longer- and shorter-maturity yields.",
+            fr: "Augmentation de la pente entre certains yields longs et courts.",
+          },
+        },
+        {
+          en: "Flattening",
+          fr: "aplatissement de la courbe / flattening",
+          definition: {
+            en: "Decrease in the slope between selected longer- and shorter-maturity yields.",
+            fr: "Réduction de la pente entre certains yields longs et courts.",
+          },
+        },
+      ],
+    },
+    {
+      id: "credit-language",
+      kicker: { en: "05 · CREDIT", fr: "05 · CRÉDIT / CREDIT" },
+      title: {
+        en: "Spread, default, recovery and seniority describe different risks",
+        fr: "Spread, défaut / default, taux de recouvrement / recovery et séniorité / seniority décrivent différents risques",
+      },
+      coreFacts: [
+        {
+          en: "Credit spread is compensation relative to a reference yield for credit and related risks, depending on the measure.",
+          fr: "Le spread de crédit / credit spread est une rémunération par rapport à un yield de référence pour le risque de crédit et risques associés, selon la mesure utilisée.",
+        },
+        {
+          en: "Default means failure to meet contractual obligations under the instrument terms, not simply a fall in market price.",
+          fr: "Un défaut / default signifie le non-respect d’obligations contractuelles selon les termes de l’instrument, pas simplement une baisse du prix de marché.",
+        },
+        {
+          en: "Recovery rate describes value recovered after default relative to a specified claim basis.",
+          fr: "Le taux de recouvrement / recovery rate décrit la valeur récupérée après défaut relativement à une base de créance donnée.",
+        },
+        {
+          en: "Seniority determines priority of claims in the capital structure, subject to legal structure and collateral.",
+          fr: "La séniorité / seniority détermine la priorité des créances dans la structure du capital, sous réserve de la structure juridique et des sûretés / collateral.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A corporate bond may yield more than a government bond because investors demand compensation for the possibility that the company may not repay fully or on time. The difference is often discussed as a credit spread, although exact spread measures vary.",
+          fr: "Une obligation d’entreprise peut offrir un yield supérieur à une obligation souveraine car les investisseurs demandent une compensation pour le risque que l’entreprise ne rembourse pas totalement ou à temps. Cette différence est souvent décrite comme un spread de crédit / credit spread, même si les mesures exactes de spread varient.",
+        },
+        Intermediate: {
+          en: "Credit language distinguishes probability of default from loss given default. A risky issuer can still have high recovery if debt is well collateralized and senior, while an unsecured junior claim may recover much less.",
+          fr: "Le langage du crédit distingue probabilité de défaut / probability of default et perte en cas de défaut / loss given default. Un émetteur risqué peut conserver un recovery élevé si la dette est bien sécurisée et senior, tandis qu’une créance junior non sécurisée peut récupérer beaucoup moins.",
+        },
+        Professional: {
+          en: "Spread is a market price of several risks: expected credit loss, liquidity, uncertainty, technicals and risk premium. Analysts separate fundamental credit quality from spread valuation because a good company can still have an expensive bond and vice versa.",
+          fr: "Le spread est un prix de marché combinant plusieurs risques : perte de crédit attendue, liquidité, incertitude, facteurs techniques / technicals et prime de risque. Les analystes distinguent qualité fondamentale du crédit et valorisation du spread car une bonne entreprise peut avoir une obligation chère, et inversement.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Credit spread",
+          fr: "écart de crédit / credit spread",
+          definition: {
+            en: "Yield or spread premium versus a reference associated with credit and related risks.",
+            fr: "Prime de yield ou de spread par rapport à une référence associée au risque de crédit et aux risques connexes.",
+          },
+        },
+        {
+          en: "Default",
+          fr: "défaut / default",
+          definition: {
+            en: "Failure to satisfy a contractual credit obligation under its terms.",
+            fr: "Non-respect d’une obligation contractuelle de crédit selon ses termes.",
+          },
+        },
+        {
+          en: "Recovery rate",
+          fr: "taux de recouvrement / recovery rate",
+          definition: {
+            en: "Portion of a claim recovered after default under a specified measurement basis.",
+            fr: "Part d’une créance récupérée après défaut selon une base de mesure donnée.",
+          },
+        },
+        {
+          en: "Loss given default",
+          fr: "perte en cas de défaut / loss given default",
+          definition: {
+            en: "Loss severity conditional on default, often related to one minus recovery.",
+            fr: "Sévérité de la perte conditionnelle au défaut, souvent liée à un moins le taux de recouvrement.",
+          },
+        },
+        {
+          en: "Investment grade",
+          fr: "catégorie investissement / investment grade",
+          definition: {
+            en: "Credit-rating category above the conventional speculative-grade cutoff under rating-agency scales.",
+            fr: "Catégorie de notation située au-dessus du seuil conventionnel de speculative grade selon les échelles des agences.",
+          },
+        },
+        {
+          en: "High yield",
+          fr: "haut rendement / high yield",
+          definition: {
+            en: "Credit market segment below the conventional investment-grade rating threshold.",
+            fr: "Segment du marché du crédit situé sous le seuil conventionnel investment grade.",
+          },
+        },
+        {
+          en: "Seniority",
+          fr: "séniorité / seniority",
+          definition: {
+            en: "Priority of a claim relative to other claims.",
+            fr: "Priorité d’une créance par rapport aux autres créances.",
+          },
+        },
+        {
+          en: "Collateral",
+          fr: "sûreté / collateral",
+          definition: {
+            en: "Assets pledged or otherwise securing a borrowing obligation.",
+            fr: "Actifs donnés en garantie ou servant autrement à sécuriser une obligation d’emprunt.",
+          },
+        },
+      ],
+    },
+    {
+      id: "equity-investing",
+      kicker: { en: "06 · EQUITIES & INVESTING", fr: "06 · ACTIONS & INVESTISSEMENT / EQUITIES" },
+      title: {
+        en: "Shares, market cap, EPS, catalysts and guidance",
+        fr: "Actions / shares, capitalisation / market cap, BPA / EPS, catalyseurs / catalysts et prévisions / guidance",
+      },
+      coreFacts: [
+        {
+          en: "Stock and share are often used interchangeably in everyday finance, while equity can refer more broadly to ownership capital.",
+          fr: "Action / stock et action / share sont souvent utilisés de manière interchangeable en pratique, tandis que capitaux propres / equity peut désigner plus largement le capital de propriété.",
+        },
+        {
+          en: "Market capitalization equals share price times shares outstanding under the chosen share count.",
+          fr: "La capitalisation boursière / market capitalization correspond au prix de l’action multiplié par le nombre d’actions en circulation / shares outstanding selon le nombre retenu.",
+        },
+        {
+          en: "EPS is earnings per share; it differs from total net income because it incorporates share count.",
+          fr: "Le BPA / EPS correspond au bénéfice par action / earnings per share ; il diffère du net income total car il intègre le nombre d’actions.",
+        },
+        {
+          en: "A catalyst is an event or development expected to change market expectations or valuation.",
+          fr: "Un catalyseur / catalyst est un événement ou développement susceptible de modifier les attentes du marché ou la valorisation.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company has 100 million shares and each trades at $20, its market capitalization is $2 billion. If it earns $200 million, simple EPS is $2 per share before considering dilution conventions.",
+          fr: "Si une entreprise possède 100 millions d’actions / shares et que chacune vaut 20 $, sa capitalisation boursière / market cap est de 2 milliards de dollars. Si elle réalise 200 millions de dollars de résultat, le BPA / EPS simple est de 2 $ par action avant prise en compte des conventions de dilution.",
+        },
+        Intermediate: {
+          en: "Equity research vocabulary separates fundamentals from expectations. A company can report strong absolute results but miss consensus, lower guidance or reveal weaker margins, causing the stock to fall.",
+          fr: "Le vocabulaire de recherche actions / equity research distingue fondamentaux et attentes. Une entreprise peut publier de bons résultats absolus mais manquer le consensus, abaisser ses prévisions / guidance ou révéler des marges plus faibles, entraînant une baisse du titre.",
+        },
+        Professional: {
+          en: "Equity language often describes the path from thesis to catalyst to earnings revisions to multiple re-rating. 'Upside' and 'downside' are relative to a reference price or scenario and should be stated explicitly.",
+          fr: "Le langage actions décrit souvent la chaîne thèse / thesis → catalyseur / catalyst → révisions de bénéfices / earnings revisions → revalorisation du multiple / multiple re-rating. Potentiel haussier / upside et risque baissier / downside sont relatifs à un prix ou scénario de référence et doivent être précisés.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Share / stock",
+          fr: "action / share / stock",
+          definition: {
+            en: "Unit of equity ownership in a company.",
+            fr: "Unité de participation en capitaux propres / equity d’une entreprise.",
+          },
+        },
+        {
+          en: "Market capitalization",
+          fr: "capitalisation boursière / market capitalization",
+          definition: {
+            en: "Share price multiplied by the relevant shares outstanding.",
+            fr: "Prix de l’action multiplié par le nombre pertinent d’actions en circulation / shares outstanding.",
+          },
+        },
+        {
+          en: "EPS",
+          fr: "bénéfice par action / earnings per share",
+          definition: {
+            en: "Earnings allocated per share under the relevant accounting share-count convention.",
+            fr: "Bénéfice attribué par action selon la convention comptable pertinente de nombre d’actions.",
+          },
+        },
+        {
+          en: "Guidance",
+          fr: "prévisions communiquées par la direction / guidance",
+          definition: {
+            en: "Forward-looking information management provides about expected performance.",
+            fr: "Informations prospectives fournies par la direction sur la performance attendue.",
+          },
+        },
+        {
+          en: "Catalyst",
+          fr: "catalyseur / catalyst",
+          definition: {
+            en: "Event expected to change investor expectations or valuation.",
+            fr: "Événement susceptible de modifier les attentes des investisseurs ou la valorisation.",
+          },
+        },
+        {
+          en: "Consensus",
+          fr: "consensus",
+          definition: {
+            en: "Summary of analyst or market expectations for a metric.",
+            fr: "Synthèse des attentes d’analystes ou du marché pour une métrique.",
+          },
+        },
+        {
+          en: "Upside",
+          fr: "potentiel haussier / upside",
+          definition: {
+            en: "Potential increase relative to a stated reference value.",
+            fr: "Hausse potentielle par rapport à une valeur de référence précisée.",
+          },
+        },
+        {
+          en: "Downside",
+          fr: "risque baissier / downside",
+          definition: {
+            en: "Potential decrease or adverse scenario relative to a reference.",
+            fr: "Baisse potentielle ou scénario défavorable par rapport à une référence.",
+          },
+        },
+      ],
+    },
+    {
+      id: "derivatives-language",
+      kicker: { en: "07 · DERIVATIVES", fr: "07 · PRODUITS DÉRIVÉS / DERIVATIVES" },
+      title: {
+        en: "Forward, future, option and hedge describe contracts and purposes",
+        fr: "Forward, future, option et couverture / hedge décrivent des contrats et des objectifs différents",
+      },
+      coreFacts: [
+        {
+          en: "A forward and a future both create obligations linked to a future transaction, but contract structure and trading venue differ.",
+          fr: "Un forward et un future créent tous deux des obligations liées à une transaction future, mais leur structure contractuelle et leur lieu de négociation diffèrent.",
+        },
+        {
+          en: "An option gives the holder a right, not an obligation, subject to contract terms.",
+          fr: "Une option donne au détenteur un droit et non une obligation, selon les termes du contrat.",
+        },
+        {
+          en: "Hedging aims to reduce or reshape risk; speculation intentionally takes risk to seek return.",
+          fr: "La couverture / hedging vise à réduire ou remodeler un risque ; la spéculation / speculation prend intentionnellement un risque pour rechercher un rendement.",
+        },
+        {
+          en: "Delta, gamma, vega and theta describe different option sensitivities and should not be used interchangeably.",
+          fr: "Delta, gamma, vega et theta décrivent différentes sensibilités d’options et ne doivent pas être confondus.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A call option gives the holder the right to buy under specified terms; a put gives the right to sell. Buying an option is different from entering a forward because the holder has a choice rather than a symmetric future obligation.",
+          fr: "Une option d’achat / call donne au détenteur le droit d’acheter selon des termes définis ; une option de vente / put donne le droit de vendre. Acheter une option est différent d’entrer dans un forward car le détenteur possède un choix plutôt qu’une obligation future symétrique.",
+        },
+        Intermediate: {
+          en: "Derivative vocabulary describes payoff geometry. Delta measures first-order sensitivity to the underlying, gamma the change in delta, vega sensitivity to implied volatility and theta sensitivity to passage of time.",
+          fr: "Le vocabulaire des dérivés décrit la géométrie du payoff. Delta mesure la sensibilité de premier ordre au sous-jacent / underlying, gamma la variation du delta, vega la sensibilité à la volatilité implicite / implied volatility et theta la sensibilité au passage du temps.",
+        },
+        Professional: {
+          en: "A hedge rarely eliminates every risk because basis risk, convexity, volatility, liquidity and model assumptions remain. Professionals specify what risk is hedged and with which instrument rather than saying a position is simply 'hedged'.",
+          fr: "Une couverture / hedge élimine rarement tous les risques car risque de base / basis risk, convexité / convexity, volatilité, liquidité et hypothèses de modèle subsistent. Les professionnels précisent quel risque est couvert et avec quel instrument plutôt que de dire qu’une position est simplement « couverte ».",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Forward",
+          fr: "contrat à terme de gré à gré / forward",
+          definition: {
+            en: "Contract to transact an underlying at a future date under agreed terms, typically over the counter.",
+            fr: "Contrat prévoyant une transaction future sur un sous-jacent selon des termes convenus, généralement de gré à gré / OTC.",
+          },
+        },
+        {
+          en: "Future",
+          fr: "contrat à terme standardisé / future",
+          definition: {
+            en: "Standardized exchange-traded forward-like contract with margining and clearing conventions.",
+            fr: "Contrat à terme standardisé négocié sur marché organisé avec conventions de marge / margining et compensation / clearing.",
+          },
+        },
+        {
+          en: "Call",
+          fr: "option d’achat / call",
+          definition: {
+            en: "Option giving the holder the right to buy the underlying under specified terms.",
+            fr: "Option donnant au détenteur le droit d’acheter le sous-jacent selon des conditions définies.",
+          },
+        },
+        {
+          en: "Put",
+          fr: "option de vente / put",
+          definition: {
+            en: "Option giving the holder the right to sell the underlying under specified terms.",
+            fr: "Option donnant au détenteur le droit de vendre le sous-jacent selon des conditions définies.",
+          },
+        },
+        {
+          en: "Strike",
+          fr: "prix d’exercice / strike",
+          definition: {
+            en: "Contractual exercise price of an option.",
+            fr: "Prix contractuel auquel l’option peut être exercée.",
+          },
+        },
+        {
+          en: "Implied volatility",
+          fr: "volatilité implicite / implied volatility",
+          definition: {
+            en: "Volatility parameter implied by an option price under a pricing model.",
+            fr: "Paramètre de volatilité implicite dans le prix d’une option selon un modèle de valorisation.",
+          },
+        },
+        {
+          en: "Hedge",
+          fr: "couverture / hedge",
+          definition: {
+            en: "Position designed to offset or reshape a specified risk.",
+            fr: "Position conçue pour compenser ou remodeler un risque précis.",
+          },
+        },
+        {
+          en: "Underlying",
+          fr: "sous-jacent / underlying",
+          definition: {
+            en: "Asset, rate, index or variable on which a derivative payoff depends.",
+            fr: "Actif, taux, indice ou variable dont dépend le payoff d’un produit dérivé.",
+          },
+        },
+      ],
+    },
+    {
+      id: "portfolio-risk-language",
+      kicker: { en: "08 · PORTFOLIO & RISK", fr: "08 · PORTEFEUILLE & RISQUE / PORTFOLIO & RISK" },
+      title: {
+        en: "Allocation, exposure, beta, drawdown and attribution",
+        fr: "Allocation, exposition / exposure, beta, drawdown et attribution de performance / attribution",
+      },
+      coreFacts: [
+        {
+          en: "Allocation describes how capital or risk is distributed across assets, strategies or categories.",
+          fr: "L’allocation décrit la manière dont le capital ou le risque est réparti entre actifs, stratégies ou catégories.",
+        },
+        {
+          en: "Exposure measures sensitivity or amount at risk to a position, asset, factor or market.",
+          fr: "L’exposition / exposure mesure la sensibilité ou le montant exposé à une position, un actif, un facteur ou un marché.",
+        },
+        {
+          en: "Drawdown measures decline from a prior peak and differs from volatility.",
+          fr: "Le drawdown mesure la baisse depuis un sommet antérieur et diffère de la volatilité / volatility.",
+        },
+        {
+          en: "Performance attribution explains where portfolio returns came from rather than merely reporting total return.",
+          fr: "L’attribution de performance / performance attribution explique l’origine des rendements du portefeuille plutôt que de simplement afficher le rendement total.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A portfolio can be 60% equities and 40% bonds by capital allocation, but its risk may not be split 60/40 because equities may contribute much more volatility. Capital weight and risk contribution are different ideas.",
+          fr: "Un portefeuille peut être alloué à 60 % en actions / equities et 40 % en obligations / bonds en poids de capital, mais son risque ne sera pas forcément réparti 60/40 car les actions peuvent contribuer beaucoup plus à la volatilité. Poids de capital et contribution au risque sont deux notions différentes.",
+        },
+        Intermediate: {
+          en: "Portfolio language distinguishes absolute return, benchmark-relative return, alpha, beta and tracking error. The same portfolio can have positive absolute return but negative relative performance versus its benchmark.",
+          fr: "Le langage de portefeuille distingue rendement absolu / absolute return, rendement relatif au benchmark, alpha, beta et tracking error. Un portefeuille peut afficher un rendement absolu positif mais une performance relative négative face à son indice de référence / benchmark.",
+        },
+        Professional: {
+          en: "Risk communication should specify exposure by factor, gross versus net, liquidity and horizon. A low-volatility portfolio can still contain concentrated tail or liquidity risk that standard deviation does not reveal.",
+          fr: "La communication du risque doit préciser exposition par facteur, exposition brute / gross versus nette / net, liquidité et horizon. Un portefeuille à faible volatilité peut malgré tout concentrer du tail risk ou du risque de liquidité non visible dans l’écart-type.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Asset allocation",
+          fr: "allocation d’actifs / asset allocation",
+          definition: {
+            en: "Distribution of a portfolio across asset classes or strategies.",
+            fr: "Répartition d’un portefeuille entre classes d’actifs ou stratégies.",
+          },
+        },
+        {
+          en: "Exposure",
+          fr: "exposition / exposure",
+          definition: {
+            en: "Economic sensitivity or amount linked to a position, market or risk factor.",
+            fr: "Sensibilité économique ou montant lié à une position, un marché ou un facteur de risque.",
+          },
+        },
+        {
+          en: "Benchmark",
+          fr: "indice de référence / benchmark",
+          definition: {
+            en: "Reference portfolio or index used for comparison.",
+            fr: "Portefeuille ou indice de référence utilisé pour comparer la performance.",
+          },
+        },
+        {
+          en: "Alpha",
+          fr: "alpha",
+          definition: {
+            en: "Return component interpreted as beyond modeled benchmark or factor exposure, depending on methodology.",
+            fr: "Composante de rendement interprétée comme supérieure à celle expliquée par un benchmark ou des facteurs selon la méthodologie.",
+          },
+        },
+        {
+          en: "Beta",
+          fr: "beta",
+          definition: {
+            en: "Sensitivity of an asset or portfolio to a specified market or factor.",
+            fr: "Sensibilité d’un actif ou portefeuille à un marché ou facteur donné.",
+          },
+        },
+        {
+          en: "Drawdown",
+          fr: "baisse depuis un sommet / drawdown",
+          definition: {
+            en: "Decline from a prior peak to a subsequent trough.",
+            fr: "Baisse entre un sommet antérieur et un point bas ultérieur.",
+          },
+        },
+        {
+          en: "Tracking error",
+          fr: "écart de suivi / tracking error",
+          definition: {
+            en: "Volatility of active return relative to a benchmark.",
+            fr: "Volatilité du rendement actif / active return par rapport à un benchmark.",
+          },
+        },
+        {
+          en: "Attribution",
+          fr: "attribution de performance / performance attribution",
+          definition: {
+            en: "Decomposition of portfolio performance into sources such as allocation, selection or factors.",
+            fr: "Décomposition de la performance en sources comme allocation, sélection de titres / selection ou facteurs.",
+          },
+        },
+      ],
+    },
+    {
+      id: "banking-interview-language",
+      kicker: { en: "09 · BANKING & INTERVIEW LANGUAGE", fr: "09 · BANQUE & ENTRETIENS / BANKING & INTERVIEWS" },
+      title: {
+        en: "Pitch, deal, mandate, book, desk and market view",
+        fr: "Pitch, transaction / deal, mandat / mandate, book, desk et vue de marché / market view",
+      },
+      coreFacts: [
+        {
+          en: "A desk is a functional trading or sales unit; a book is a portfolio of positions or business tracked together.",
+          fr: "Un desk est une unité fonctionnelle de trading ou de vente / sales ; un book est un ensemble de positions ou d’activité suivi comme un portefeuille.",
+        },
+        {
+          en: "A mandate is an authorized client engagement, while a pitch is a proposal intended to win business.",
+          fr: "Un mandat / mandate est un engagement client autorisé, tandis qu’un pitch est une proposition destinée à remporter un mandat.",
+        },
+        {
+          en: "A deal or transaction can refer to M&A, financing, issuance or another executed transaction depending on context.",
+          fr: "Une transaction / deal peut désigner une opération de M&A, financement, émission ou autre transaction exécutée selon le contexte.",
+        },
+        {
+          en: "Interview language should be concise, structured and technically precise rather than filled with unexplained jargon.",
+          fr: "Le langage d’entretien / interview doit être concis, structuré et techniquement précis plutôt que rempli de jargon non expliqué.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If an interviewer asks for your 'market view', they want your current interpretation of markets supported by evidence and risks — not just whether you feel bullish or bearish.",
+          fr: "Si un recruteur te demande ta vue de marché / market view, il attend ton interprétation actuelle des marchés appuyée par des éléments concrets et des risques — pas simplement si tu es haussière / bullish ou baissière / bearish.",
+        },
+        Intermediate: {
+          en: "A strong finance answer often follows: view, evidence, mechanism, risk and invalidation. This vocabulary makes the answer sound professional because each word has a precise analytical role.",
+          fr: "Une bonne réponse finance suit souvent : vue / view, preuves / evidence, mécanisme / mechanism, risque / risk et condition d’invalidation / invalidation. Ce vocabulaire rend la réponse professionnelle car chaque mot possède un rôle analytique précis.",
+        },
+        Professional: {
+          en: "Professional fluency means choosing the correct term for the business context. 'Client flow', 'inventory', 'risk limits', 'pipeline', 'mandate' and 'book' have desk-specific meanings, so candidates should demonstrate understanding without pretending all roles use identical language.",
+          fr: "La maîtrise professionnelle consiste à choisir le bon terme selon le contexte métier. Flux client / client flow, inventaire / inventory, limites de risque / risk limits, pipeline, mandat / mandate et book possèdent des significations spécifiques aux métiers ; un candidat doit montrer qu’il les comprend sans prétendre que tous les rôles utilisent exactement le même vocabulaire.",
+        },
+      },
+      comparison: {
+        title: { en: "Common professional terms", fr: "Termes professionnels courants" },
+        headers: [
+          { en: "English term", fr: "Terme anglais" },
+          { en: "French meaning", fr: "Sens en français" },
+          { en: "Context", fr: "Contexte" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Pitch", fr: "Pitch" },
+            { en: "Client proposal", fr: "Présentation ou proposition commerciale" },
+            { en: "Banking / sales", fr: "Banque / banking · vente / sales" },
+          ]},
+          { cells: [
+            { en: "Mandate", fr: "Mandat / mandate" },
+            { en: "Authorized client engagement", fr: "Mission officiellement confiée par le client" },
+            { en: "Investment banking", fr: "Banque d’investissement / investment banking" },
+          ]},
+          { cells: [
+            { en: "Desk", fr: "Desk" },
+            { en: "Functional market team", fr: "Équipe fonctionnelle de marché" },
+            { en: "Sales & Trading", fr: "Sales & Trading" },
+          ]},
+          { cells: [
+            { en: "Book", fr: "Book / portefeuille de positions" },
+            { en: "Positions or business tracked together", fr: "Ensemble de positions ou d’activité suivi ensemble" },
+            { en: "Trading / risk", fr: "Trading / risque" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Pitch",
+          fr: "présentation commerciale / pitch",
+          definition: {
+            en: "Proposal or presentation designed to win business or support an idea.",
+            fr: "Proposition ou présentation destinée à gagner un mandat ou défendre une idée.",
+          },
+        },
+        {
+          en: "Mandate",
+          fr: "mandat / mandate",
+          definition: {
+            en: "Formal client authorization to perform an advisory or financing role.",
+            fr: "Autorisation formelle d’un client pour exercer un rôle de conseil ou de financement.",
+          },
+        },
+        {
+          en: "Deal",
+          fr: "transaction / deal",
+          definition: {
+            en: "Transaction such as acquisition, financing, issuance or restructuring.",
+            fr: "Opération comme acquisition, financement, émission ou restructuration.",
+          },
+        },
+        {
+          en: "Desk",
+          fr: "desk / équipe de marché",
+          definition: {
+            en: "Functional unit within a markets business such as rates, FX or equities.",
+            fr: "Unité fonctionnelle d’une activité de marchés comme taux / rates, FX ou actions / equities.",
+          },
+        },
+        {
+          en: "Book",
+          fr: "book / portefeuille de positions",
+          definition: {
+            en: "Set of positions or exposures managed or tracked together.",
+            fr: "Ensemble de positions ou expositions gérées ou suivies ensemble.",
+          },
+        },
+        {
+          en: "Pipeline",
+          fr: "pipeline / portefeuille d’opportunités",
+          definition: {
+            en: "Potential future business or transactions at different stages of development.",
+            fr: "Ensemble d’opportunités ou transactions potentielles à différents stades d’avancement.",
+          },
+        },
+        {
+          en: "Market view",
+          fr: "vue de marché / market view",
+          definition: {
+            en: "Structured interpretation of market conditions, drivers and risks.",
+            fr: "Interprétation structurée des conditions de marché, de leurs moteurs et de leurs risques.",
+          },
+        },
+        {
+          en: "Investment thesis",
+          fr: "thèse d’investissement / investment thesis",
+          definition: {
+            en: "Structured argument explaining why an asset may perform in a certain way and what would invalidate the view.",
+            fr: "Argument structuré expliquant pourquoi un actif pourrait évoluer d’une certaine manière et ce qui invaliderait cette vue.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "revenue-profit",
+      question: {
+        en: "Which statement is correct?",
+        fr: "Quelle affirmation est correcte ?",
+      },
+      options: [
+        { id: "a", label: { en: "Revenue and net income are always identical", fr: "Le chiffre d’affaires / revenue et le résultat net / net income sont toujours identiques" } },
+        { id: "b", label: { en: "Revenue is before relevant expenses; net income is after recognized expenses and other items", fr: "Le chiffre d’affaires / revenue est avant les dépenses pertinentes ; le résultat net / net income est après les dépenses reconnues et autres éléments" } },
+        { id: "c", label: { en: "Cash is always equal to profit", fr: "Le cash est toujours égal au bénéfice / profit" } },
+        { id: "d", label: { en: "Equity always means stock-market index", fr: "Equity signifie toujours indice boursier" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Revenue is top-line sales recognition, while net income is a bottom-line profit measure after recognized costs and other items.",
+        fr: "Le chiffre d’affaires / revenue est une mesure de ventes en haut du compte de résultat, tandis que le résultat net / net income est un bénéfice final après coûts et autres éléments reconnus.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "enterprise-equity-value",
+      question: {
+        en: "Which pairing is conceptually consistent?",
+        fr: "Quelle association est conceptuellement cohérente ?",
+      },
+      options: [
+        { id: "a", label: { en: "Enterprise value with EBITDA", fr: "Valeur d’entreprise / enterprise value avec EBITDA" } },
+        { id: "b", label: { en: "Equity value with debt interest before tax only", fr: "Equity value avec uniquement les intérêts de dette avant impôt" } },
+        { id: "c", label: { en: "Market cap equals enterprise value in every company", fr: "La capitalisation / market cap est toujours égale à enterprise value" } },
+        { id: "d", label: { en: "WACC is always identical to cost of equity", fr: "Le WACC est toujours identique au coût des capitaux propres / cost of equity" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "EV/EBITDA is a standard enterprise-level matching because EBITDA is before interest allocated to debt holders.",
+        fr: "EV/EBITDA est une association standard au niveau entreprise car EBITDA est calculé avant les intérêts revenant aux créanciers.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "bid-ask",
+      question: {
+        en: "A market shows bid 99.90 and ask 100.00. What is the bid-ask spread?",
+        fr: "Un marché affiche bid 99,90 et ask 100,00. Quel est le bid-ask spread ?",
+      },
+      options: [
+        { id: "a", label: { en: "0.01", fr: "0,01" } },
+        { id: "b", label: { en: "0.10", fr: "0,10" } },
+        { id: "c", label: { en: "99.90", fr: "99,90" } },
+        { id: "d", label: { en: "199.90", fr: "199,90" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "100.00−99.90 = 0.10.",
+        fr: "100,00−99,90 = 0,10.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "yield-coupon",
+      question: {
+        en: "Why can a bond's yield differ from its coupon?",
+        fr: "Pourquoi le yield d’une obligation peut-il différer de son coupon ?",
+      },
+      options: [
+        { id: "a", label: { en: "Because yield depends on market price and cash flows", fr: "Parce que le yield dépend du prix de marché et des cash flows" } },
+        { id: "b", label: { en: "Because coupon changes every second", fr: "Parce que le coupon change chaque seconde" } },
+        { id: "c", label: { en: "Because maturity never matters", fr: "Parce que la maturité ne compte jamais" } },
+        { id: "d", label: { en: "They can never differ", fr: "Ils ne peuvent jamais être différents" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Coupon is contractual while yield is a return measure implied by price and cash flows.",
+        fr: "Le coupon est contractuel tandis que le yield est une mesure de rendement implicite dans le prix et les cash flows.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "credit-default-recovery",
+      question: {
+        en: "Which term describes the portion of a credit claim recovered after default?",
+        fr: "Quel terme décrit la part d’une créance récupérée après défaut / default ?",
+      },
+      options: [
+        { id: "a", label: { en: "Recovery rate", fr: "Taux de recouvrement / recovery rate" } },
+        { id: "b", label: { en: "Bid-ask spread", fr: "Bid-ask spread" } },
+        { id: "c", label: { en: "Market cap", fr: "Capitalisation boursière / market cap" } },
+        { id: "d", label: { en: "Gamma", fr: "Gamma" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Recovery rate measures how much value is recovered after default under the stated basis.",
+        fr: "Le taux de recouvrement / recovery rate mesure la valeur récupérée après défaut selon la base définie.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "market-cap-eps",
+      question: {
+        en: "A company has 100 million shares trading at $20. What is its market capitalization?",
+        fr: "Une entreprise possède 100 millions d’actions cotant 20 $. Quelle est sa capitalisation boursière / market capitalization ?",
+      },
+      options: [
+        { id: "a", label: { en: "$200 million", fr: "200 millions $" } },
+        { id: "b", label: { en: "$2 billion", fr: "2 milliards $" } },
+        { id: "c", label: { en: "$20 billion", fr: "20 milliards $" } },
+        { id: "d", label: { en: "$120 million", fr: "120 millions $" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "100 million × $20 = $2 billion.",
+        fr: "100 millions × 20 $ = 2 milliards $.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "derivative-right-obligation",
+      question: {
+        en: "Which instrument gives its holder a right rather than a symmetric obligation, subject to contract terms?",
+        fr: "Quel instrument donne à son détenteur un droit plutôt qu’une obligation symétrique, selon les termes du contrat ?",
+      },
+      options: [
+        { id: "a", label: { en: "Option", fr: "Option" } },
+        { id: "b", label: { en: "Standard forward", fr: "Forward standard" } },
+        { id: "c", label: { en: "Common share", fr: "Action ordinaire / common share" } },
+        { id: "d", label: { en: "Accounts payable", fr: "Dettes fournisseurs / accounts payable" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "An option gives the holder a contractual right; forwards and futures create future obligations for both sides.",
+        fr: "Une option donne au détenteur un droit contractuel ; forwards et futures créent des obligations futures pour les deux parties.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "market-view",
+      question: {
+        en: "What makes a professional market view stronger?",
+        fr: "Qu’est-ce qui rend une vue de marché / market view plus professionnelle ?",
+      },
+      options: [
+        { id: "a", label: { en: "A view supported by evidence, mechanism, risks and invalidation", fr: "Une vue appuyée par preuves, mécanisme, risques et condition d’invalidation" } },
+        { id: "b", label: { en: "Using as much unexplained jargon as possible", fr: "Utiliser autant de jargon non expliqué que possible" } },
+        { id: "c", label: { en: "Saying only bullish or bearish", fr: "Dire seulement bullish ou bearish" } },
+        { id: "d", label: { en: "Ignoring what is already priced", fr: "Ignorer ce qui est déjà intégré dans les prix / priced" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Professional communication links a clear view to evidence, a causal mechanism, key risks and what would invalidate the thesis.",
+        fr: "Une communication professionnelle relie une vue claire à des preuves, un mécanisme causal, les principaux risques et ce qui invaliderait la thèse.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "In simple terms, explain the difference between revenue, EBITDA, net income and free cash flow.",
+      fr: "Explique simplement la différence entre chiffre d’affaires / revenue, EBITDA, résultat net / net income et flux de trésorerie disponible / free cash flow.",
+    },
+    framework: [
+      {
+        en: "Revenue is the top line: recognized sales before expenses.",
+        fr: "Le chiffre d’affaires / revenue est le haut du compte de résultat : ventes reconnues avant dépenses.",
+      },
+      {
+        en: "EBITDA is an operating profitability proxy before interest, tax, depreciation and amortization.",
+        fr: "EBITDA est une mesure de rentabilité opérationnelle avant intérêts, impôts, depreciation et amortization.",
+      },
+      {
+        en: "Net income is bottom-line accounting profit after recognized expenses, interest, taxes and other items.",
+        fr: "Le résultat net / net income est le bénéfice comptable final après dépenses reconnues, intérêts, impôts et autres éléments.",
+      },
+      {
+        en: "Free cash flow focuses on cash generated after the cash needs required by the chosen definition, such as capital expenditures.",
+        fr: "Le flux de trésorerie disponible / free cash flow se concentre sur le cash généré après les besoins de cash définis, par exemple les dépenses d’investissement / capex.",
+      },
+      {
+        en: "Finish by saying none of these measures is universally 'best'; each answers a different analytical question.",
+        fr: "Terminer en précisant qu’aucune de ces mesures n’est universellement « meilleure » : chacune répond à une question analytique différente.",
+      },
+    ],
+    sample: {
+      en: "Revenue is the company's top line: the sales it recognizes before expenses. EBITDA moves lower in the income statement and gives a rough view of operating profitability before interest, taxes, depreciation and amortization. Net income is the bottom-line accounting profit after those recognized expenses and other items. Free cash flow is different because it focuses on cash generation after the cash needs included in the chosen definition, such as capital expenditures. I would not say one metric is always better than the others; they answer different questions about scale, operating performance, shareholder earnings and cash generation.",
+      fr: "Le chiffre d’affaires / revenue est le haut du compte de résultat : les ventes reconnues avant dépenses. EBITDA descend plus bas dans le compte de résultat et donne une vision approximative de la rentabilité opérationnelle avant intérêts, impôts, depreciation et amortization. Le résultat net / net income est le bénéfice comptable final après ces dépenses reconnues et les autres éléments. Le flux de trésorerie disponible / free cash flow est différent car il se concentre sur la génération de cash après les besoins de cash inclus dans la définition retenue, par exemple le capex. Je ne dirais pas qu’une métrique est toujours meilleure que les autres : elles répondent à différentes questions sur taille, performance opérationnelle, bénéfice actionnarial et génération de cash.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
