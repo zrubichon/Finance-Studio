@@ -15765,7 +15765,983 @@ export const fixedIncomeYieldCurvesLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson];
+
+export const durationConvexityLesson: FinanceLesson = {
+  slug: "year-2-duration-convexity",
+  year: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  domain: {
+    en: "Markets & Instruments",
+    fr: "Marchés & instruments / Markets & Instruments",
+  },
+  title: {
+    en: "Duration & Convexity",
+    fr: "Duration & convexité / Convexity",
+  },
+  subtitle: {
+    en: "Measure and manage interest-rate risk using Macaulay duration, modified duration, DV01/PVBP, convexity, key-rate duration, portfolio aggregation and immunization.",
+    fr: "Mesurer et gérer le risque de taux avec Macaulay duration, modified duration, DV01/PVBP, convexité / convexity, key-rate duration, agrégation de portefeuille et immunization.",
+  },
+  duration: { en: "115–140 min", fr: "115–140 min" },
+  prerequisites: [
+    { en: "Fixed Income & Yield Curves", fr: "Obligations / Fixed Income & courbes des taux / Yield Curves" },
+    { en: "Time Value of Money", fr: "Valeur temps de l’argent / Time Value of Money" },
+  ],
+  objectives: [
+    {
+      en: "Explain why maturity alone is not enough to measure bond interest-rate risk.",
+      fr: "Expliquer pourquoi la maturity seule ne suffit pas à mesurer le risque de taux d’une obligation.",
+    },
+    {
+      en: "Calculate and interpret Macaulay and modified duration.",
+      fr: "Calculer et interpréter Macaulay duration et modified duration.",
+    },
+    {
+      en: "Use DV01/PVBP to express dollar sensitivity to a one-basis-point yield move.",
+      fr: "Utiliser DV01/PVBP pour exprimer la sensibilité en dollars à un mouvement de yield de 1 basis point.",
+    },
+    {
+      en: "Add convexity to improve price-change estimates for larger yield moves.",
+      fr: "Ajouter la convexity pour améliorer l’estimation des variations de prix lors de mouvements de yield plus importants.",
+    },
+    {
+      en: "Aggregate duration risk across a portfolio and distinguish parallel from non-parallel curve risk.",
+      fr: "Agréger le risque de duration dans un portefeuille et distinguer mouvements parallèles et non parallèles de la curve.",
+    },
+    {
+      en: "Understand key-rate duration, effective duration and immunization as professional risk-management tools.",
+      fr: "Comprendre key-rate duration, effective duration et immunization comme outils professionnels de gestion du risque.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "From bond price to rate-risk management",
+      fr: "Du prix obligataire à la gestion du risque de taux",
+    },
+    steps: [
+      {
+        title: { en: "Timing", fr: "Timing" },
+        detail: { en: "Macaulay duration", fr: "Macaulay duration" },
+      },
+      {
+        title: { en: "Sensitivity", fr: "Sensibilité" },
+        detail: { en: "Modified duration · DV01", fr: "Modified duration · DV01" },
+      },
+      {
+        title: { en: "Curvature", fr: "Courbure" },
+        detail: { en: "Convexity", fr: "Convexity" },
+      },
+      {
+        title: { en: "Manage", fr: "Gérer" },
+        detail: { en: "Key rates · portfolio · immunization", fr: "Key rates · portefeuille · immunization" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "duration-intuition",
+      kicker: { en: "01 · DURATION INTUITION", fr: "01 · INTUITION DE LA DURATION" },
+      title: {
+        en: "Maturity tells you when principal is repaid; duration tells you more about price sensitivity",
+        fr: "La maturity dit quand le principal est remboursé ; la duration renseigne davantage sur la sensibilité du prix",
+      },
+      coreFacts: [
+        {
+          en: "Two bonds with the same maturity can have different interest-rate sensitivity because their coupon cash flows arrive at different effective timings.",
+          fr: "Deux obligations avec la même maturity peuvent avoir une sensibilité au taux différente car leurs cash flows de coupon arrivent avec des timings économiques différents.",
+        },
+        {
+          en: "All else equal, longer maturity generally increases duration.",
+          fr: "Toutes choses égales par ailleurs, une maturity plus longue augmente généralement la duration.",
+        },
+        {
+          en: "All else equal, a lower coupon generally increases duration because more value is concentrated in the final principal payment.",
+          fr: "Toutes choses égales par ailleurs, un coupon plus faible augmente généralement la duration car une plus grande part de la valeur est concentrée dans le remboursement final du principal.",
+        },
+        {
+          en: "A zero-coupon bond's Macaulay duration equals its maturity under the standard definition.",
+          fr: "La Macaulay duration d’une zero-coupon bond est égale à sa maturity selon la définition standard.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Imagine two five-year bonds. One pays a large coupon every year; the other pays no coupon and gives you everything at year five. The second bond keeps more of your economic value locked in the distant future, so its price reacts more strongly when discount rates change.",
+          fr: "Imagine deux obligations cinq ans. L’une paie un gros coupon chaque année ; l’autre ne paie aucun coupon et verse tout en année cinq. La seconde conserve davantage de valeur économique loin dans le futur ; son prix réagit donc plus fortement lorsque les discount rates changent.",
+        },
+        Intermediate: {
+          en: "Maturity is one date. Duration compresses the timing of all discounted cash flows into a single risk measure. That makes it more useful for comparing bonds with different coupons and cash-flow structures.",
+          fr: "La maturity est une seule date. La duration compresse le timing de tous les cash flows actualisés dans une mesure de risque unique. Elle est donc plus utile pour comparer des obligations avec coupons et structures de cash flows différents.",
+        },
+        Professional: {
+          en: "Duration is a local first-order risk measure. It is powerful for small yield changes but cannot fully describe curve shape, convexity, optionality or credit-spread risk. Professional fixed-income risk therefore uses a vector of sensitivities rather than one number alone.",
+          fr: "La duration est une mesure locale de risque de premier ordre. Elle est puissante pour de petits changements de yield mais ne décrit pas complètement curve shape, convexity, optionality ou credit-spread risk. La gestion professionnelle utilise donc un vecteur de sensibilités plutôt qu’un seul chiffre.",
+        },
+      },
+      comparison: {
+        title: { en: "What tends to increase duration?", fr: "Qu’est-ce qui tend à augmenter la duration ?" },
+        headers: [
+          { en: "Feature", fr: "Caractéristique" },
+          { en: "Typical effect, all else equal", fr: "Effet typique, toutes choses égales par ailleurs" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Longer maturity", fr: "Maturity plus longue" },
+            { en: "Higher duration", fr: "Duration plus élevée" },
+          ]},
+          { cells: [
+            { en: "Lower coupon", fr: "Coupon plus faible" },
+            { en: "Higher duration", fr: "Duration plus élevée" },
+          ]},
+          { cells: [
+            { en: "Zero coupon", fr: "Zero coupon" },
+            { en: "Macaulay duration = maturity", fr: "Macaulay duration = maturity" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Interest-rate risk",
+          fr: "risque de taux / interest-rate risk",
+          definition: {
+            en: "Risk that a position's value changes because interest rates or yields change.",
+            fr: "Risque que la valeur d’une position change lorsque les taux ou yields évoluent.",
+          },
+        },
+        {
+          en: "First-order sensitivity",
+          fr: "sensibilité de premier ordre / first-order sensitivity",
+          definition: {
+            en: "Linear approximation of value change for a small change in a risk factor.",
+            fr: "Approximation linéaire de la variation de valeur pour un petit changement d’un facteur de risque.",
+          },
+        },
+      ],
+    },
+    {
+      id: "macaulay-duration",
+      kicker: { en: "02 · MACAULAY DURATION", fr: "02 · MACAULAY DURATION" },
+      title: {
+        en: "Macaulay duration is the present-value-weighted average timing of cash flows",
+        fr: "La Macaulay duration est le timing moyen des cash flows pondéré par leur present value",
+      },
+      coreFacts: [
+        {
+          en: "Each bond cash flow receives a weight equal to its present value divided by the bond price.",
+          fr: "Chaque cash flow obligataire reçoit un poids égal à sa present value divisée par le prix de l’obligation.",
+        },
+        {
+          en: "Macaulay duration is measured in units of time, commonly years.",
+          fr: "La Macaulay duration est mesurée en unités de temps, généralement en années.",
+        },
+        {
+          en: "Earlier coupon payments pull Macaulay duration below final maturity for a positive-coupon bond.",
+          fr: "Les coupons reçus avant maturity ramènent la Macaulay duration en dessous de la maturity finale pour une obligation à coupon positif.",
+        },
+        {
+          en: "Macaulay duration is useful conceptually and is also the starting point for modified duration under simple yield conventions.",
+          fr: "La Macaulay duration est utile conceptuellement et sert aussi de point de départ à la modified duration sous des conventions de yield simples.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "For our three-year 5% coupon bond priced at about $973.27 with a 6% YTM, some value arrives in years one and two through coupons and most arrives in year three. The weighted-average timing is about 2.857 years, not exactly three.",
+          fr: "Pour notre obligation trois ans, coupon 5 %, valorisée environ 973,27 $ avec YTM 6 %, une partie de la valeur arrive en années 1 et 2 via les coupons et la majorité en année 3. Le timing moyen pondéré vaut environ 2,857 ans, pas exactement trois.",
+        },
+        Intermediate: {
+          en: "The calculation weights each time t by PV(CF_t)/Price. This gives an economic center of gravity for the bond's discounted cash flows.",
+          fr: "Le calcul pondère chaque date t par PV(CF_t)/Price. Cela donne une sorte de centre de gravité économique des cash flows actualisés de l’obligation.",
+        },
+        Professional: {
+          en: "Macaulay duration is tied to the yield convention used to discount the bond. For multi-curve, credit or option-adjusted analytics, model-based effective or key-rate measures may be more relevant than classical Macaulay duration.",
+          fr: "La Macaulay duration dépend de la convention de yield utilisée pour actualiser l’obligation. Pour des analyses multi-curve, credit ou option-adjusted, des mesures model-based comme effective duration ou key-rate duration peuvent être plus pertinentes.",
+        },
+      },
+      formula: {
+        label: { en: "Macaulay duration", fr: "Macaulay duration" },
+        expression: "D_Mac = Σ [t × PV(CFₜ)] ÷ Bond Price",
+        explanation: {
+          en: "Each discounted cash flow is weighted by the time at which it is received.",
+          fr: "Chaque cash flow actualisé est pondéré par la date à laquelle il est reçu.",
+        },
+        workedExample: {
+          en: "3Y bond, 5% annual coupon, 6% YTM, price≈973.27 → Macaulay duration≈2.857 years.",
+          fr: "Obligation 3Y, coupon annuel 5 %, YTM 6 %, prix≈973,27 → Macaulay duration≈2,857 ans.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Cash-flow weight",
+          fr: "poids du cash flow / cash-flow weight",
+          definition: {
+            en: "Present value of one cash flow divided by total bond price.",
+            fr: "Present value d’un cash flow divisée par le prix total de l’obligation.",
+          },
+        },
+        {
+          en: "Macaulay duration",
+          fr: "Macaulay duration",
+          definition: {
+            en: "Present-value-weighted average time to the bond's cash flows.",
+            fr: "Temps moyen jusqu’aux cash flows de l’obligation, pondéré par leurs present values.",
+          },
+        },
+      ],
+    },
+    {
+      id: "modified-duration",
+      kicker: { en: "03 · MODIFIED DURATION", fr: "03 · MODIFIED DURATION" },
+      title: {
+        en: "Modified duration converts timing into approximate percentage price sensitivity",
+        fr: "La modified duration transforme le timing en sensibilité approximative du prix en pourcentage",
+      },
+      coreFacts: [
+        {
+          en: "Modified duration approximates the percentage bond-price change for a small change in yield.",
+          fr: "La modified duration approxime la variation en pourcentage du prix d’une obligation pour un petit changement de yield.",
+        },
+        {
+          en: "The duration approximation has a negative sign because bond price and yield move inversely.",
+          fr: "L’approximation de duration possède un signe négatif car prix obligataire et yield évoluent en sens inverse.",
+        },
+        {
+          en: "Under annual compounding, modified duration equals Macaulay duration divided by one plus yield.",
+          fr: "Avec capitalisation annuelle, la modified duration est égale à Macaulay duration divisée par un plus le yield.",
+        },
+        {
+          en: "The approximation becomes less accurate as the yield move becomes larger because the true price-yield relationship is curved.",
+          fr: "L’approximation devient moins précise lorsque le mouvement de yield devient plus important car la vraie relation prix-yield est courbe.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If modified duration is 2.70, a 1 percentage-point rise in yield suggests roughly a 2.70% price decline. A 0.10 percentage-point move, or 10bp, suggests roughly a 0.27% price move in the opposite direction.",
+          fr: "Si la modified duration vaut 2,70, une hausse du yield de 1 point suggère environ −2,70 % sur le prix. Un mouvement de 0,10 point, soit 10bp, suggère environ 0,27 % de mouvement de prix en sens inverse.",
+        },
+        Intermediate: {
+          en: "For the three-year example, Macaulay duration≈2.857 and YTM=6%, so modified duration≈2.857/1.06≈2.696. The first-order estimate for a +100bp yield move is therefore about −2.696%.",
+          fr: "Pour l’exemple trois ans, Macaulay duration≈2,857 et YTM=6 %, donc modified duration≈2,857/1,06≈2,696. L’estimation de premier ordre pour +100bp de yield vaut donc environ −2,696 %.",
+        },
+        Professional: {
+          en: "Modified duration is a yield sensitivity, so its interpretation depends on which yield is being shocked. For spread products, separating rate duration and spread duration can be necessary because government rates and credit spreads do not move as one factor.",
+          fr: "La modified duration est une sensibilité à un yield ; son interprétation dépend donc du yield que l’on choque. Pour les spread products, séparer rate duration et spread duration peut être nécessaire car government rates et credit spreads ne bougent pas comme un seul facteur.",
+        },
+      },
+      formula: {
+        label: { en: "Modified duration and price approximation", fr: "Modified duration et approximation du prix" },
+        expression: "D_Mod = D_Mac ÷ (1+y)   ·   ΔP/P ≈ −D_Mod × Δy",
+        explanation: {
+          en: "The displayed relation uses annual compounding for simplicity.",
+          fr: "La relation affichée utilise une capitalisation annuelle pour simplifier.",
+        },
+        workedExample: {
+          en: "D_Mac≈2.857, y=6% → D_Mod≈2.696. For Δy=+1%, duration-only estimate≈−2.696%.",
+          fr: "D_Mac≈2,857, y=6 % → D_Mod≈2,696. Pour Δy=+1 %, estimation duration-only≈−2,696 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Modified duration",
+          fr: "modified duration",
+          definition: {
+            en: "Approximate percentage price sensitivity to a small yield change under the relevant convention.",
+            fr: "Sensibilité approximative en pourcentage du prix à une petite variation de yield selon la convention pertinente.",
+          },
+        },
+        {
+          en: "Parallel shift",
+          fr: "déplacement parallèle / parallel shift",
+          definition: {
+            en: "Curve move in which all selected maturities change by the same yield amount.",
+            fr: "Mouvement de curve dans lequel toutes les maturités sélectionnées changent du même nombre de basis points.",
+          },
+        },
+      ],
+    },
+    {
+      id: "dv01-pvbp",
+      kicker: { en: "04 · DV01 / PVBP", fr: "04 · DV01 / PVBP" },
+      title: {
+        en: "DV01 expresses rate risk in money rather than percentages",
+        fr: "Le DV01 exprime le risque de taux en monnaie plutôt qu’en pourcentage",
+      },
+      coreFacts: [
+        {
+          en: "DV01 or PVBP measures the approximate price change for a one-basis-point yield move.",
+          fr: "Le DV01 ou PVBP mesure la variation approximative du prix pour un mouvement de yield de 1 basis point.",
+        },
+        {
+          en: "For a long standard fixed-rate bond position, DV01 is commonly quoted as a positive magnitude even though price falls when yield rises.",
+          fr: "Pour une position longue standard en obligation à taux fixe, le DV01 est souvent coté comme une magnitude positive même si le prix baisse lorsque le yield monte.",
+        },
+        {
+          en: "Dollar duration scales with position market value, making it useful for comparing and hedging positions of different sizes.",
+          fr: "La dollar duration se scale avec la market value de la position, ce qui permet de comparer et hedger des positions de tailles différentes.",
+        },
+        {
+          en: "Portfolio DV01 can be approximated by summing signed position DV01s for the same rate shock definition.",
+          fr: "Le portfolio DV01 peut être approximé en additionnant les DV01 signés des positions sous la même définition de rate shock.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Our example bond has price about $973.27 and modified duration about 2.696. One basis point is 0.0001, so DV01 is about 2.696×973.27×0.0001≈$0.262 per bond.",
+          fr: "Notre obligation vaut environ 973,27 $ et sa modified duration environ 2,696. Un basis point vaut 0,0001 ; le DV01 vaut donc environ 2,696×973,27×0,0001≈0,262 $ par obligation.",
+        },
+        Intermediate: {
+          en: "A $1 million market-value position with modified duration 2.696 has approximate DV01 of $269.60. A +1bp yield move therefore creates roughly a $269.60 loss for a long position, before convexity and other effects.",
+          fr: "Une position de market value 1 million $ avec modified duration 2,696 possède un DV01 d’environ 269,60 $. Un mouvement de +1bp crée donc environ 269,60 $ de perte pour une position longue, avant convexity et autres effets.",
+        },
+        Professional: {
+          en: "DV01 is the language of rates risk because hedge ratios can be built by matching signed dollar sensitivities. But a single parallel DV01 can hide curve-shape risk, so desks also track tenor-level or key-rate DV01 buckets.",
+          fr: "Le DV01 est le langage du rates risk car les hedge ratios peuvent être construits en faisant matcher les dollar sensitivities signées. Mais un seul parallel DV01 peut cacher du curve-shape risk ; les desks suivent donc aussi des buckets de DV01 par tenor ou key rate.",
+        },
+      },
+      formula: {
+        label: { en: "Approximate DV01", fr: "DV01 approximatif" },
+        expression: "DV01 ≈ Modified Duration × Market Value × 0.0001",
+        explanation: {
+          en: "This gives the magnitude of approximate value change for a 1bp yield move.",
+          fr: "Cela donne la magnitude approximative du changement de valeur pour un mouvement de yield de 1bp.",
+        },
+        workedExample: {
+          en: "2.6956×$973.27×0.0001≈$0.262 per bond. On $1,000,000 market value, DV01≈$269.56.",
+          fr: "2,6956×973,27 $×0,0001≈0,262 $ par obligation. Sur 1 000 000 $ de market value, DV01≈269,56 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "DV01",
+          fr: "Dollar Value of 01 / DV01",
+          definition: {
+            en: "Approximate dollar value change for a one-basis-point yield move.",
+            fr: "Variation approximative en dollars pour un mouvement de yield de 1 basis point.",
+          },
+        },
+        {
+          en: "PVBP",
+          fr: "Price Value of a Basis Point / PVBP",
+          definition: {
+            en: "Another common name for one-basis-point price sensitivity.",
+            fr: "Autre nom courant de la sensibilité du prix à 1 basis point.",
+          },
+        },
+      ],
+    },
+    {
+      id: "convexity",
+      kicker: { en: "05 · CONVEXITY", fr: "05 · CONVEXITÉ / CONVEXITY" },
+      title: {
+        en: "Convexity adds the curvature that duration misses",
+        fr: "La convexity ajoute la courbure que la duration ne capture pas",
+      },
+      coreFacts: [
+        {
+          en: "The price-yield relationship of a standard option-free bond is curved, so a straight-line duration estimate becomes less accurate for larger yield moves.",
+          fr: "La relation prix-yield d’une obligation standard sans option est courbe ; une estimation linéaire par duration devient donc moins précise pour de grands mouvements de yield.",
+        },
+        {
+          en: "Convexity is a second-order sensitivity measuring how duration itself changes as yield changes.",
+          fr: "La convexity est une sensibilité de second ordre mesurant comment la duration elle-même change lorsque le yield évolue.",
+        },
+        {
+          en: "Standard option-free bonds generally have positive convexity.",
+          fr: "Les obligations standard sans option ont généralement une convexity positive.",
+        },
+        {
+          en: "Positive convexity means price gains from a given yield decline tend to exceed price losses from an equal yield increase, all else equal.",
+          fr: "Une convexity positive signifie que les gains de prix pour une baisse donnée du yield tendent à dépasser les pertes pour une hausse équivalente, toutes choses égales par ailleurs.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Duration draws a tangent line to the bond's curved price-yield relationship. Convexity corrects part of the gap between that straight line and the true curve.",
+          fr: "La duration trace une tangente à la relation courbe entre prix et yield. La convexity corrige une partie de l’écart entre cette ligne droite et la vraie courbe.",
+        },
+        Intermediate: {
+          en: "For our example, modified duration≈2.6956 and convexity≈10.004. For a +100bp move, duration predicts −2.6956%. The convexity adjustment adds about +0.0500%, giving approximately −2.6456%, very close to the exact repricing of about −2.6464%.",
+          fr: "Pour notre exemple, modified duration≈2,6956 et convexity≈10,004. Pour +100bp, la duration prédit −2,6956 %. L’ajustement de convexity ajoute environ +0,0500 %, donnant ≈−2,6456 %, très proche du repricing exact d’environ −2,6464 %.",
+        },
+        Professional: {
+          en: "Convexity is valuable but not universally positive. Callable bonds and mortgage-related securities can exhibit negative effective convexity because borrower or issuer optionality changes expected cash-flow timing as rates move.",
+          fr: "La convexity est utile mais n’est pas universellement positive. Les callable bonds et mortgage-related securities peuvent présenter une effective convexity négative car l’optionalité de l’emprunteur ou de l’émetteur modifie le timing attendu des cash flows lorsque les taux bougent.",
+        },
+      },
+      formula: {
+        label: { en: "Duration + convexity approximation", fr: "Approximation duration + convexity" },
+        expression: "ΔP/P ≈ −D_Mod × Δy + ½ × Convexity × (Δy)²",
+        explanation: {
+          en: "Convexity provides the second-order correction to the linear duration estimate.",
+          fr: "La convexity fournit la correction de second ordre à l’estimation linéaire de duration.",
+        },
+        workedExample: {
+          en: "D_Mod=2.6956, Convexity=10.004, Δy=+1% → estimated ΔP/P≈−2.6456%; exact repricing≈−2.6464%.",
+          fr: "D_Mod=2,6956, Convexity=10,004, Δy=+1 % → ΔP/P estimé≈−2,6456 % ; repricing exact≈−2,6464 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Convexity",
+          fr: "convexité / convexity",
+          definition: {
+            en: "Second-order sensitivity describing curvature in the price-yield relationship.",
+            fr: "Sensibilité de second ordre décrivant la courbure de la relation prix-yield.",
+          },
+        },
+        {
+          en: "Negative convexity",
+          fr: "convexité négative / negative convexity",
+          definition: {
+            en: "Condition where favorable price curvature is reduced or reversed, often because embedded options alter cash flows.",
+            fr: "Situation où la courbure favorable du prix est réduite ou inversée, souvent parce que des embedded options modifient les cash flows.",
+          },
+        },
+      ],
+    },
+    {
+      id: "portfolio-duration",
+      kicker: { en: "06 · PORTFOLIO DURATION", fr: "06 · DURATION DE PORTEFEUILLE" },
+      title: {
+        en: "Portfolio duration aggregates rate exposure across positions",
+        fr: "La portfolio duration agrège l’exposition au taux entre plusieurs positions",
+      },
+      coreFacts: [
+        {
+          en: "For a portfolio of conventional bonds, duration can be approximated as the market-value-weighted average of position durations.",
+          fr: "Pour un portefeuille d’obligations conventionnelles, la duration peut être approximée comme la moyenne pondérée par market value des durations des positions.",
+        },
+        {
+          en: "Portfolio DV01 is often more operational for hedging because it expresses the aggregate exposure in currency units.",
+          fr: "Le portfolio DV01 est souvent plus opérationnel pour le hedging car il exprime l’exposition agrégée en unités monétaires.",
+        },
+        {
+          en: "Long and short positions contribute signed rate exposure.",
+          fr: "Les positions longues et courtes contribuent une exposition de taux signée.",
+        },
+        {
+          en: "Duration aggregation is most informative when the assumed rate shock is reasonably aligned across instruments.",
+          fr: "L’agrégation de duration est plus informative lorsque le rate shock supposé est raisonnablement cohérent entre les instruments.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If half a portfolio has duration 2 and half has duration 6, the simple market-value-weighted duration is 4. A 1 percentage-point parallel rise in yields suggests roughly a 4% loss before convexity.",
+          fr: "Si la moitié d’un portefeuille possède une duration 2 et l’autre moitié duration 6, la duration pondérée par market value vaut 4. Une hausse parallèle des yields de 1 point suggère environ −4 % avant convexity.",
+        },
+        Intermediate: {
+          en: "Portfolio DV01 is usually calculated position by position because instruments can have different prices, durations and signs. A short Treasury position can offset part of the positive DV01 of a long corporate-bond portfolio.",
+          fr: "Le portfolio DV01 est généralement calculé position par position car les instruments ont différents prix, durations et signes. Une position short Treasury peut compenser une partie du DV01 positif d’un portefeuille long de corporate bonds.",
+        },
+        Professional: {
+          en: "A portfolio with net DV01 near zero can still carry substantial curve, basis, spread or convexity risk. Risk-neutral to one factor does not mean economically riskless.",
+          fr: "Un portefeuille avec net DV01 proche de zéro peut malgré tout porter beaucoup de curve risk, basis risk, spread risk ou convexity risk. Être neutralisé sur un facteur ne signifie pas être sans risque.",
+        },
+      },
+      formula: {
+        label: { en: "Approximate portfolio duration", fr: "Portfolio duration approximative" },
+        expression: "D_Portfolio ≈ Σ [Market Value Weightᵢ × Durationᵢ]",
+        explanation: {
+          en: "For hedging, signed portfolio DV01 is often the more direct implementation metric.",
+          fr: "Pour le hedging, le portfolio DV01 signé est souvent la métrique d’implémentation la plus directe.",
+        },
+        workedExample: {
+          en: "50% at duration 2 + 50% at duration 6 → portfolio duration≈4.",
+          fr: "50 % à duration 2 + 50 % à duration 6 → portfolio duration≈4.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Dollar duration",
+          fr: "dollar duration",
+          definition: {
+            en: "Value sensitivity expressed in currency units for a specified yield change.",
+            fr: "Sensibilité de valeur exprimée en unités monétaires pour une variation de yield donnée.",
+          },
+        },
+        {
+          en: "Hedge ratio",
+          fr: "ratio de couverture / hedge ratio",
+          definition: {
+            en: "Quantity of a hedging instrument used relative to an exposure to offset a specified risk.",
+            fr: "Quantité d’un instrument de couverture utilisée relativement à une exposition afin de compenser un risque défini.",
+          },
+        },
+      ],
+    },
+    {
+      id: "key-rate-effective-duration",
+      kicker: { en: "07 · KEY-RATE & EFFECTIVE DURATION", fr: "07 · KEY-RATE & EFFECTIVE DURATION" },
+      title: {
+        en: "Real yield curves move by tenor, not as one single yield",
+        fr: "Les vraies yield curves bougent par tenor, pas comme un yield unique",
+      },
+      coreFacts: [
+        {
+          en: "Key-rate duration measures sensitivity to a localized move at a selected maturity or curve node under a specified bump method.",
+          fr: "La key-rate duration mesure la sensibilité à un mouvement localisé d’une maturity ou d’un node de curve selon une méthode de bump définie.",
+        },
+        {
+          en: "A bond or portfolio can have similar overall duration but very different exposures across the curve.",
+          fr: "Une obligation ou un portefeuille peut avoir une overall duration similaire mais des expositions très différentes le long de la curve.",
+        },
+        {
+          en: "Effective duration estimates price sensitivity by repricing the instrument under small upward and downward curve shocks.",
+          fr: "L’effective duration estime la sensibilité du prix en repricant l’instrument sous de petits shocks de curve à la hausse et à la baisse.",
+        },
+        {
+          en: "Effective duration is especially useful when cash flows can change as rates change, such as for callable or mortgage-related instruments.",
+          fr: "L’effective duration est particulièrement utile lorsque les cash flows peuvent changer avec les taux, comme pour callable ou mortgage-related instruments.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A portfolio can be exposed mostly to the two-year point while another is exposed mostly to the ten-year point. If both have total duration 4, they can still behave very differently when the curve steepens or flattens.",
+          fr: "Un portefeuille peut être surtout exposé au point 2 ans tandis qu’un autre l’est surtout au 10 ans. Même avec total duration 4, ils peuvent se comporter très différemment lorsque la curve steepen ou flatten.",
+        },
+        Intermediate: {
+          en: "Key-rate duration creates a vector such as 2Y, 5Y, 10Y and 30Y sensitivity. This allows a risk manager to see where on the curve the position earns or loses money.",
+          fr: "La key-rate duration crée un vecteur de sensibilités, par exemple 2Y, 5Y, 10Y et 30Y. Cela permet au risk manager de voir où sur la curve la position gagne ou perd de la valeur.",
+        },
+        Professional: {
+          en: "Effective duration is model-dependent because the instrument is repriced under shocked curves. For optional securities, the pricing model must allow exercise behavior or cash-flow timing to change as rates change.",
+          fr: "L’effective duration dépend du modèle car l’instrument est repricé sous des curves choquées. Pour des securities optionnels, le pricing model doit permettre au comportement d’exercice ou au timing des cash flows de changer avec les taux.",
+        },
+      },
+      formula: {
+        label: { en: "Effective duration", fr: "Effective duration" },
+        expression: "D_Eff ≈ (P₋ − P₊) ÷ (2 × P₀ × Δy)",
+        explanation: {
+          en: "P₋ is price after a downward yield shock and P₊ after an upward shock of equal size.",
+          fr: "P₋ est le prix après un shock de yield à la baisse et P₊ après un shock à la hausse de même amplitude.",
+        },
+        workedExample: {
+          en: "If P₀=100, P₋=101.9, P₊=98.1 and Δy=0.005, effective duration≈3.8.",
+          fr: "Si P₀=100, P₋=101,9, P₊=98,1 et Δy=0,005, effective duration≈3,8.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Key-rate duration",
+          fr: "key-rate duration",
+          definition: {
+            en: "Sensitivity to a specified point or bucket of the yield curve.",
+            fr: "Sensibilité à un point ou bucket donné de la yield curve.",
+          },
+        },
+        {
+          en: "Effective duration",
+          fr: "effective duration",
+          definition: {
+            en: "Model-based price sensitivity estimated from upward and downward rate shocks.",
+            fr: "Sensibilité de prix model-based estimée à partir de shocks de taux à la hausse et à la baisse.",
+          },
+        },
+      ],
+    },
+    {
+      id: "immunization",
+      kicker: { en: "08 · IMMUNIZATION & LIABILITY MATCHING", fr: "08 · IMMUNIZATION & LIABILITY MATCHING" },
+      title: {
+        en: "Duration can help match assets to future liabilities",
+        fr: "La duration peut aider à faire matcher actifs et liabilities futurs",
+      },
+      coreFacts: [
+        {
+          en: "Immunization aims to reduce the sensitivity of a funding position to interest-rate changes.",
+          fr: "L’immunization vise à réduire la sensibilité d’une position de financement aux variations de taux.",
+        },
+        {
+          en: "A basic single-liability immunization framework matches present value and duration between assets and liabilities.",
+          fr: "Un framework simple d’immunization d’une liability unique fait matcher present value et duration entre assets et liabilities.",
+        },
+        {
+          en: "Convexity and non-parallel curve changes mean duration matching alone is not a permanent guarantee.",
+          fr: "Convexity et mouvements non parallèles de la curve signifient que le duration matching seul n’est pas une garantie permanente.",
+        },
+        {
+          en: "Rebalancing is often necessary because durations change over time and as yields move.",
+          fr: "Le rebalancing est souvent nécessaire car les durations évoluent avec le temps et les mouvements de yield.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose a pension plan owes a fixed payment in the future. It can hold bonds whose value and duration are chosen so that a small rate change affects the asset value and liability value similarly.",
+          fr: "Supposons qu’un pension plan doive payer une somme fixe dans le futur. Il peut détenir des obligations choisies pour que leur valeur et leur duration réagissent de manière similaire à la valeur et duration de la liability lors d’un petit changement de taux.",
+        },
+        Intermediate: {
+          en: "Matching present value ensures the funding values begin aligned; matching duration aligns first-order sensitivity. Convexity and cash-flow dispersion then determine how well the hedge behaves for larger or more complex moves.",
+          fr: "Faire matcher la present value aligne les valeurs de départ ; faire matcher la duration aligne la sensibilité de premier ordre. Convexity et dispersion des cash flows déterminent ensuite la qualité du hedge pour des mouvements plus grands ou complexes.",
+        },
+        Professional: {
+          en: "Liability-driven investing often manages multiple curve buckets, inflation exposure and spread risk rather than relying on one scalar duration target. Derivatives can be used to alter rate exposure without fully reallocating physical assets.",
+          fr: "Le liability-driven investing gère souvent plusieurs curve buckets, l’exposition inflation et le spread risk plutôt que de dépendre d’un seul objectif de duration. Des derivatives peuvent modifier l’exposition rates sans réallouer entièrement les actifs physiques.",
+        },
+      },
+      comparison: {
+        title: { en: "Basic immunization checklist", fr: "Checklist simple d’immunization" },
+        headers: [
+          { en: "Step", fr: "Étape" },
+          { en: "Purpose", fr: "Objectif" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Match present value", fr: "Matcher la present value" },
+            { en: "Align asset and liability value", fr: "Aligner valeur des assets et liabilities" },
+          ]},
+          { cells: [
+            { en: "Match duration", fr: "Matcher la duration" },
+            { en: "Align first-order rate sensitivity", fr: "Aligner la sensibilité de premier ordre" },
+          ]},
+          { cells: [
+            { en: "Monitor convexity / curve risk", fr: "Surveiller convexity / curve risk" },
+            { en: "Control second-order and shape effects", fr: "Contrôler les effets de second ordre et de shape" },
+          ]},
+          { cells: [
+            { en: "Rebalance", fr: "Rebalancer" },
+            { en: "Restore hedge as time and rates change", fr: "Restaurer le hedge lorsque temps et taux évoluent" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Immunization",
+          fr: "immunization / immunisation",
+          definition: {
+            en: "Strategy designed to reduce the effect of interest-rate changes on a funding objective.",
+            fr: "Stratégie conçue pour réduire l’effet des changements de taux sur un objectif de financement.",
+          },
+        },
+        {
+          en: "Liability-driven investing",
+          fr: "investissement guidé par les passifs / liability-driven investing",
+          definition: {
+            en: "Portfolio framework centered on meeting specified future liabilities.",
+            fr: "Framework de portefeuille centré sur la couverture de liabilities futures définies.",
+          },
+        },
+      ],
+    },
+    {
+      id: "professional-rate-risk",
+      kicker: { en: "09 · PROFESSIONAL RATE-RISK MANAGEMENT", fr: "09 · GESTION PROFESSIONNELLE DU RISQUE DE TAUX" },
+      title: {
+        en: "Duration is a starting point, not a complete risk system",
+        fr: "La duration est un point de départ, pas un système de risque complet",
+      },
+      coreFacts: [
+        {
+          en: "A rate-risk report should distinguish parallel duration, curve risk, convexity, basis risk and spread risk.",
+          fr: "Un rate-risk report doit distinguer parallel duration, curve risk, convexity, basis risk et spread risk.",
+        },
+        {
+          en: "Hedges should be defined against the risk factor being managed rather than chosen only because the instrument looks similar.",
+          fr: "Les hedges doivent être définis par rapport au facteur de risque géré plutôt que choisis seulement parce que l’instrument semble similaire.",
+        },
+        {
+          en: "A DV01-neutral trade can still make or lose money from curve reshaping, carry, roll-down, spread changes and convexity.",
+          fr: "Un trade DV01-neutral peut encore gagner ou perdre de l’argent via reshaping de curve, carry, roll-down, mouvements de spread et convexity.",
+        },
+        {
+          en: "Risk measures are local approximations and should be complemented by scenario and stress testing.",
+          fr: "Les mesures de risque sont des approximations locales et doivent être complétées par scenario et stress testing.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you hedge a bond so its overall DV01 is zero, you have neutralized one small parallel-rate risk. You have not eliminated every possible way the position can lose money.",
+          fr: "Si tu hedges une obligation jusqu’à obtenir un overall DV01 nul, tu as neutralisé un petit risque de mouvement parallèle. Tu n’as pas éliminé toutes les façons dont la position peut perdre de l’argent.",
+        },
+        Intermediate: {
+          en: "A good risk process asks: what happens if the whole curve shifts, if the curve steepens, if only the five-year point moves, if spreads widen, and if volatility changes? Duration answers only part of that map.",
+          fr: "Un bon risk process demande : que se passe-t-il si toute la curve bouge, si elle steepen, si seul le point 5 ans bouge, si les spreads widen, ou si la volatility change ? La duration ne répond qu’à une partie de cette carte.",
+        },
+        Professional: {
+          en: "Desks often manage bucketed DV01, key-rate risk, spread DV01, convexity and scenario P&L simultaneously. Hedge effectiveness depends on basis stability, liquidity, financing, transaction costs and model consistency.",
+          fr: "Les desks gèrent souvent simultanément bucketed DV01, key-rate risk, spread DV01, convexity et scenario P&L. L’efficacité du hedge dépend de basis stability, liquidité, financement, transaction costs et cohérence du modèle.",
+        },
+      },
+      comparison: {
+        title: { en: "Rate-risk toolkit", fr: "Toolkit de risque de taux" },
+        headers: [
+          { en: "Measure", fr: "Mesure" },
+          { en: "What it captures", fr: "Ce qu’elle capture" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Modified duration", fr: "Modified duration" },
+            { en: "Approximate % sensitivity", fr: "Sensibilité approximative en %" },
+          ]},
+          { cells: [
+            { en: "DV01", fr: "DV01" },
+            { en: "Dollar sensitivity to 1bp", fr: "Sensibilité monétaire à 1bp" },
+          ]},
+          { cells: [
+            { en: "Convexity", fr: "Convexity" },
+            { en: "Second-order curvature", fr: "Courbure de second ordre" },
+          ]},
+          { cells: [
+            { en: "Key-rate duration", fr: "Key-rate duration" },
+            { en: "Curve-node sensitivity", fr: "Sensibilité par node de curve" },
+          ]},
+          { cells: [
+            { en: "Stress test", fr: "Stress test" },
+            { en: "Non-local scenario loss", fr: "Perte sous scénario non local" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "Rates desks and fixed-income portfolio managers commonly express risk in DV01 and curve buckets because a view such as 'rates higher' is incomplete without specifying maturity and shape.",
+        fr: "Les rates desks et fixed-income portfolio managers expriment couramment le risque en DV01 et curve buckets car une vue comme « rates higher » est incomplète sans préciser maturity et shape.",
+      },
+      vocabulary: [
+        {
+          en: "Spread DV01",
+          fr: "spread DV01",
+          definition: {
+            en: "Approximate dollar sensitivity to a one-basis-point change in credit or other spread, under a stated model.",
+            fr: "Sensibilité monétaire approximative à un mouvement de 1bp d’un credit spread ou autre spread, selon un modèle défini.",
+          },
+        },
+        {
+          en: "Scenario P&L",
+          fr: "P&L de scénario / scenario P&L",
+          definition: {
+            en: "Estimated profit or loss under a specified set of market shocks.",
+            fr: "Profit ou perte estimé sous un ensemble défini de shocks de marché.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "duration-intuition",
+      question: {
+        en: "All else equal, which bond generally has higher duration?",
+        fr: "Toutes choses égales par ailleurs, quelle obligation possède généralement la duration la plus élevée ?",
+      },
+      options: [
+        { id: "a", label: { en: "Longer maturity, lower coupon bond", fr: "Obligation à maturity plus longue et coupon plus faible" } },
+        { id: "b", label: { en: "Shorter maturity, higher coupon bond", fr: "Obligation à maturity plus courte et coupon plus élevé" } },
+        { id: "c", label: { en: "Duration never depends on cash-flow timing", fr: "La duration ne dépend jamais du timing des cash flows" } },
+        { id: "d", label: { en: "All bonds have duration 1", fr: "Toutes les obligations ont duration 1" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Longer maturity and lower coupon generally push more value farther into the future, increasing duration.",
+        fr: "Une maturity plus longue et un coupon plus faible déplacent généralement davantage de valeur vers le futur, augmentant la duration.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "zero-duration",
+      question: {
+        en: "Under the standard definition, Macaulay duration of a zero-coupon bond is:",
+        fr: "Selon la définition standard, la Macaulay duration d’une zero-coupon bond est :",
+      },
+      options: [
+        { id: "a", label: { en: "Zero", fr: "Zéro" } },
+        { id: "b", label: { en: "Equal to its maturity", fr: "Égale à sa maturity" } },
+        { id: "c", label: { en: "Always one year", fr: "Toujours un an" } },
+        { id: "d", label: { en: "Equal to its coupon rate", fr: "Égale à son coupon rate" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "A zero-coupon bond has only one cash flow, so the present-value-weighted average time is exactly maturity.",
+        fr: "Une zero-coupon bond possède un seul cash flow ; le timing moyen pondéré par present value est donc exactement la maturity.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "modified-duration",
+      question: {
+        en: "A bond has modified duration 4.0. For a small +25bp yield move, the duration-only price estimate is approximately:",
+        fr: "Une obligation possède modified duration 4,0. Pour un petit mouvement de yield de +25bp, l’estimation duration-only du prix est environ :",
+      },
+      options: [
+        { id: "a", label: { en: "+1.0%", fr: "+1,0 %" } },
+        { id: "b", label: { en: "−1.0%", fr: "−1,0 %" } },
+        { id: "c", label: { en: "−4.0%", fr: "−4,0 %" } },
+        { id: "d", label: { en: "+25.0%", fr: "+25,0 %" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "−4.0×0.0025=−1.0%.",
+        fr: "−4,0×0,0025=−1,0 %.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "dv01",
+      question: {
+        en: "A $1,000,000 position has modified duration 2.5. Approximate DV01 is:",
+        fr: "Une position de 1 000 000 $ possède modified duration 2,5. Le DV01 approximatif vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "$25", fr: "25 $" } },
+        { id: "b", label: { en: "$250", fr: "250 $" } },
+        { id: "c", label: { en: "$2,500", fr: "2 500 $" } },
+        { id: "d", label: { en: "$25,000", fr: "25 000 $" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "2.5×1,000,000×0.0001=$250.",
+        fr: "2,5×1 000 000×0,0001=250 $.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "convexity",
+      question: {
+        en: "What does convexity add to a duration estimate?",
+        fr: "Qu’ajoute la convexity à une estimation par duration ?",
+      },
+      options: [
+        { id: "a", label: { en: "A second-order curvature adjustment", fr: "Un ajustement de courbure de second ordre" } },
+        { id: "b", label: { en: "The issuer's revenue forecast", fr: "Le forecast de revenue de l’émetteur" } },
+        { id: "c", label: { en: "A stock P/E multiple", fr: "Un multiple P/E actions" } },
+        { id: "d", label: { en: "It removes all model risk", fr: "Elle supprime tout model risk" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Convexity corrects the linear duration approximation for curvature in the price-yield relation.",
+        fr: "La convexity corrige l’approximation linéaire de duration pour la courbure de la relation prix-yield.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "positive-convexity",
+      question: {
+        en: "For a standard option-free bond with positive convexity, an equal-sized yield fall and rise generally produce:",
+        fr: "Pour une obligation standard sans option à convexity positive, une baisse et une hausse de yield de même amplitude produisent généralement :",
+      },
+      options: [
+        { id: "a", label: { en: "A larger price gain from the yield fall than price loss from the rise", fr: "Un gain de prix plus grand lors de la baisse du yield que la perte lors de la hausse" } },
+        { id: "b", label: { en: "Exactly symmetric price changes", fr: "Des variations de prix exactement symétriques" } },
+        { id: "c", label: { en: "No price change", fr: "Aucun changement de prix" } },
+        { id: "d", label: { en: "Bond price always falls in both cases", fr: "Le prix baisse toujours dans les deux cas" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Positive convexity makes the price-yield curve bow outward, creating favorable asymmetry.",
+        fr: "La convexity positive courbe la relation prix-yield vers l’extérieur et crée une asymétrie favorable.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "portfolio-duration",
+      question: {
+        en: "Half a portfolio has duration 2 and half has duration 6 by market value. Approximate portfolio duration is:",
+        fr: "La moitié d’un portefeuille possède duration 2 et l’autre moitié duration 6 en market value. La portfolio duration approximative vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "2", fr: "2" } },
+        { id: "b", label: { en: "3", fr: "3" } },
+        { id: "c", label: { en: "4", fr: "4" } },
+        { id: "d", label: { en: "8", fr: "8" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "0.5×2 + 0.5×6 = 4.",
+        fr: "0,5×2 + 0,5×6 = 4.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "key-rate-duration",
+      question: {
+        en: "Why use key-rate duration?",
+        fr: "Pourquoi utiliser la key-rate duration ?",
+      },
+      options: [
+        { id: "a", label: { en: "To measure sensitivity to different points of the yield curve", fr: "Pour mesurer la sensibilité à différents points de la yield curve" } },
+        { id: "b", label: { en: "Because every curve move is perfectly parallel", fr: "Parce que tous les mouvements de curve sont parfaitement parallèles" } },
+        { id: "c", label: { en: "To calculate corporate revenue", fr: "Pour calculer le revenue d’une entreprise" } },
+        { id: "d", label: { en: "To eliminate the need for market prices", fr: "Pour éliminer le besoin de market prices" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Key-rate duration reveals where along the curve the position is sensitive.",
+        fr: "La key-rate duration révèle où le long de la curve la position est sensible.",
+      },
+    },
+    {
+      id: "q9",
+      conceptKey: "effective-duration",
+      question: {
+        en: "Effective duration is especially useful when:",
+        fr: "L’effective duration est particulièrement utile lorsque :",
+      },
+      options: [
+        { id: "a", label: { en: "Cash flows can change when rates change because of embedded options", fr: "Les cash flows peuvent changer lorsque les taux changent à cause d’embedded options" } },
+        { id: "b", label: { en: "The instrument has no value", fr: "L’instrument n’a aucune valeur" } },
+        { id: "c", label: { en: "Only accounting margins matter", fr: "Seules les marges comptables comptent" } },
+        { id: "d", label: { en: "Rates can never move", fr: "Les taux ne peuvent jamais bouger" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Effective duration reprices the instrument under rate shocks and can capture cash-flow changes caused by options.",
+        fr: "L’effective duration reprice l’instrument sous des shocks de taux et peut capturer les changements de cash flows dus aux options.",
+      },
+    },
+    {
+      id: "q10",
+      conceptKey: "immunization",
+      question: {
+        en: "A basic single-liability immunization strategy typically starts by matching:",
+        fr: "Une stratégie simple d’immunization pour une liability unique commence généralement par matcher :",
+      },
+      options: [
+        { id: "a", label: { en: "Present value and duration of assets and liabilities", fr: "Present value et duration des assets et liabilities" } },
+        { id: "b", label: { en: "Only the stock price", fr: "Uniquement le prix d’une action" } },
+        { id: "c", label: { en: "Only coupon rates", fr: "Uniquement les coupon rates" } },
+        { id: "d", label: { en: "Only accounting revenue", fr: "Uniquement le revenue comptable" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Matching present value aligns funding value; matching duration aligns first-order rate sensitivity.",
+        fr: "Matcher la present value aligne la valeur de financement ; matcher la duration aligne la sensibilité de premier ordre aux taux.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "A bond portfolio has positive DV01. What does that mean, and how would you hedge the interest-rate risk?",
+      fr: "Un portefeuille obligataire possède un DV01 positif. Qu’est-ce que cela signifie et comment hedgerais-tu le risque de taux ?",
+    },
+    framework: [
+      {
+        en: "Define DV01 as approximate dollar sensitivity to a one-basis-point yield move.",
+        fr: "Définir DV01 comme la sensibilité monétaire approximative à un mouvement de yield de 1 basis point.",
+      },
+      {
+        en: "For a conventional long bond portfolio, positive DV01 magnitude means rising yields produce losses and falling yields produce gains.",
+        fr: "Pour un portefeuille long d’obligations conventionnelles, une magnitude de DV01 positive signifie que hausse des yields produit des pertes et baisse des yields des gains.",
+      },
+      {
+        en: "Choose a hedge instrument linked to the rate factor being managed, such as a government bond, future or swap exposure.",
+        fr: "Choisir un hedge instrument lié au facteur de taux géré, par exemple government bond, future ou exposition swap.",
+      },
+      {
+        en: "Size the hedge so the signed DV01 of the hedge approximately offsets the portfolio DV01.",
+        fr: "Dimensionner le hedge pour que son DV01 signé compense approximativement le portfolio DV01.",
+      },
+      {
+        en: "Check key-rate exposures because equal total DV01 does not guarantee protection against steepening or flattening.",
+        fr: "Vérifier les key-rate exposures car un total DV01 égal ne garantit pas la protection contre steepening ou flattening.",
+      },
+      {
+        en: "Monitor convexity, basis and spread risk and stress-test larger moves.",
+        fr: "Surveiller convexity, basis et spread risk et stress-tester les mouvements plus importants.",
+      },
+    ],
+    sample: {
+      en: "DV01 is the approximate dollar change in portfolio value for a one-basis-point move in yield. For a conventional long fixed-rate portfolio, a positive DV01 magnitude means the portfolio loses value when yields rise and gains when yields fall. I would identify which point or points of the curve drive the exposure, then choose a liquid hedge such as a government-bond future, cash bond or interest-rate swap that loads on the same rate factor. I would size the hedge so its signed DV01 approximately offsets the portfolio DV01. I would not stop there, because a DV01-neutral portfolio can still have curve risk if the key-rate exposures do not match, as well as convexity, basis and credit-spread risk. I would therefore check the bucketed key-rate DV01s and run steepener, flattener and larger shock scenarios.",
+      fr: "Le DV01 est la variation approximative en dollars de la valeur du portefeuille pour un mouvement de yield de 1 basis point. Pour un portefeuille long conventionnel à taux fixe, une magnitude de DV01 positive signifie que le portefeuille perd de la valeur lorsque les yields montent et en gagne lorsqu’ils baissent. J’identifierais d’abord quel point ou quels points de la curve portent l’exposition, puis je choisirais un hedge liquide comme un government-bond future, une cash bond ou un interest-rate swap exposé au même facteur de taux. Je dimensionnerais le hedge pour que son DV01 signé compense approximativement celui du portefeuille. Je ne m’arrêterais pas là car un portefeuille DV01-neutral peut encore avoir du curve risk si les key-rate exposures ne matchent pas, ainsi que convexity, basis et credit-spread risk. Je vérifierais donc les bucketed key-rate DV01 et lancerais des scénarios de steepener, flattener et de shocks plus importants.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
