@@ -23140,7 +23140,487 @@ export const assetManagementLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson];
+
+
+export const wealthManagementLesson: FinanceLesson = {
+  slug: "year-3-wealth-management",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Wealth Management", fr: "Gestion de patrimoine / Wealth Management" },
+  title: { en: "Wealth Management", fr: "Gestion de patrimoine / Wealth Management" },
+  subtitle: {
+    en: "Learn how wealth managers translate a client’s goals, balance sheet, risk profile, taxes, liquidity needs and life events into a disciplined investment and planning strategy.",
+    fr: "Comprendre comment les wealth managers traduisent les objectifs, le bilan personnel, le profil de risque, la fiscalité, les besoins de liquidité et les événements de vie d’un client en une stratégie d’investissement et de planification disciplinée.",
+  },
+  duration: { en: "150–180 min", fr: "150–180 min" },
+  prerequisites: [
+    { en: "Risk, Return & Diversification", fr: "Risque, rendement & diversification" },
+    { en: "Portfolio Theory & CAPM", fr: "Portfolio Theory & CAPM" },
+    { en: "Asset Management", fr: "Gestion d’actifs / Asset Management" },
+    { en: "Time Value of Money", fr: "Valeur temps de l’argent / Time Value of Money" },
+    { en: "Stocks, Bonds, ETFs & Funds", fr: "Actions, obligations, ETFs & fonds" },
+  ],
+  objectives: [
+    { en: "Explain how wealth management differs from asset management and investment banking.", fr: "Expliquer la différence entre wealth management, asset management et investment banking." },
+    { en: "Build a client discovery framework covering goals, assets, liabilities, cash flow, taxes and family circumstances.", fr: "Construire un cadre de client discovery couvrant objectifs, actifs, passifs, cash flow, fiscalité et situation familiale." },
+    { en: "Distinguish risk tolerance, risk capacity and required return.", fr: "Distinguer risk tolerance, risk capacity et required return." },
+    { en: "Translate an Investment Policy Statement into an asset-allocation and liquidity framework.", fr: "Traduire un Investment Policy Statement en cadre d’asset allocation et de liquidité." },
+    { en: "Understand tax-aware investing, retirement planning, concentrated-position risk and estate-planning coordination at a conceptual level.", fr: "Comprendre à un niveau conceptuel l’investissement fiscalement efficace, la retraite, le risque de positions concentrées et la coordination de l’estate planning." },
+    { en: "Recognize behavioral biases, fiduciary responsibilities and communication standards in long-term advisory relationships.", fr: "Reconnaître les biais comportementaux, responsabilités fiduciaires et standards de communication dans une relation de conseil long terme." },
+  ],
+  overviewFlow: {
+    title: { en: "From client discovery to long-term wealth plan", fr: "Du client discovery au plan patrimonial long terme" },
+    steps: [
+      { title: { en: "Discover", fr: "Découvrir" }, detail: { en: "Goals · balance sheet · cash flow", fr: "Objectifs · bilan · cash flow" } },
+      { title: { en: "Design", fr: "Concevoir" }, detail: { en: "Risk · IPS · allocation", fr: "Risque · IPS · allocation" } },
+      { title: { en: "Implement", fr: "Implémenter" }, detail: { en: "Invest · tax · liquidity", fr: "Investir · fiscalité · liquidité" } },
+      { title: { en: "Review", fr: "Réviser" }, detail: { en: "Rebalance · life events · communication", fr: "Rebalance · événements de vie · communication" } },
+    ],
+  },
+  sections: [
+    {
+      id: "role-and-client-discovery",
+      kicker: { en: "01 · ROLE & CLIENT DISCOVERY", fr: "01 · RÔLE & CLIENT DISCOVERY" },
+      title: { en: "Wealth management starts with the person, not the product", fr: "Le wealth management commence par la personne, pas par le produit" },
+      coreFacts: [
+        { en: "Wealth managers advise individuals and families across investments, liquidity, retirement, taxes, estate coordination and major financial decisions.", fr: "Les wealth managers conseillent individus et familles sur investissements, liquidité, retraite, fiscalité, coordination successorale et grandes décisions financières." },
+        { en: "Client discovery should identify goals, time horizons, income, spending, assets, liabilities, liquidity needs and family circumstances.", fr: "Le client discovery doit identifier objectifs, horizons, revenus, dépenses, actifs, passifs, besoins de liquidité et situation familiale." },
+        { en: "A portfolio recommendation is only appropriate if it fits the client’s broader financial plan.", fr: "Une recommandation de portefeuille n’est appropriée que si elle correspond au plan financier global du client." },
+        { en: "Wealth management is relationship-driven and typically requires recurring review as client circumstances change.", fr: "Le wealth management repose sur la relation client et exige généralement des revues régulières lorsque la situation évolue." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A wealth manager does more than pick investments. The adviser first learns what the client is trying to achieve, what resources the client has and what risks the client can realistically take.",
+          fr: "Un wealth manager ne fait pas que choisir des investissements. Le conseiller commence par comprendre les objectifs du client, ses ressources et le niveau de risque qu’il peut réellement supporter.",
+        },
+        Intermediate: {
+          en: "Client discovery creates a personal financial map: net worth, income, spending, debt, emergency liquidity, future goals, family obligations and tax considerations. Investment decisions are then built around that map.",
+          fr: "Le client discovery crée une carte financière personnelle : net worth, revenus, dépenses, dette, liquidité de sécurité, objectifs futurs, obligations familiales et considérations fiscales. Les décisions d’investissement se construisent ensuite autour de cette carte.",
+        },
+        Professional: {
+          en: "High-quality advisory work converts qualitative objectives into measurable planning variables. A liquidity need, expected business sale, philanthropic objective or concentrated stock position can materially change the portfolio even when two clients have the same age and nominal net worth.",
+          fr: "Un conseil de qualité transforme des objectifs qualitatifs en variables mesurables. Un besoin de liquidité, une future vente d’entreprise, un objectif philanthropique ou une position concentrée en actions peuvent modifier fortement le portefeuille même si deux clients ont le même âge et le même patrimoine nominal.",
+        },
+      },
+      comparison: {
+        title: { en: "Wealth management vs asset management", fr: "Wealth management vs asset management" },
+        headers: [{ en: "Area", fr: "Dimension" }, { en: "Wealth Management", fr: "Wealth Management" }, { en: "Asset Management", fr: "Asset Management" }],
+        rows: [
+          { cells: [{ en: "Primary client", fr: "Client principal" }, { en: "Individuals and families", fr: "Individus et familles" }, { en: "Funds and institutional mandates", fr: "Fonds et mandats institutionnels" }] },
+          { cells: [{ en: "Scope", fr: "Périmètre" }, { en: "Investments + planning", fr: "Investissements + planification" }, { en: "Portfolio management", fr: "Gestion de portefeuille" }] },
+          { cells: [{ en: "Key focus", fr: "Focus clé" }, { en: "Life goals and total balance sheet", fr: "Objectifs de vie et bilan global" }, { en: "Mandate performance and risk", fr: "Performance et risque du mandat" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Net worth", fr: "patrimoine net", definition: { en: "Total assets minus total liabilities.", fr: "Total des actifs moins total des passifs." } },
+        { en: "Client discovery", fr: "client discovery", definition: { en: "Structured process for understanding a client’s financial situation, goals and constraints.", fr: "Processus structuré visant à comprendre situation financière, objectifs et contraintes d’un client." } },
+        { en: "Holistic advice", fr: "conseil global", definition: { en: "Advice considering investments together with broader financial circumstances.", fr: "Conseil considérant les investissements avec l’ensemble de la situation financière." } },
+      ],
+    },
+    {
+      id: "risk-profile-required-return",
+      kicker: { en: "02 · RISK PROFILE", fr: "02 · PROFIL DE RISQUE" },
+      title: { en: "Risk tolerance, risk capacity and required return are different questions", fr: "Risk tolerance, risk capacity et required return sont trois questions différentes" },
+      coreFacts: [
+        { en: "Risk tolerance reflects willingness to experience investment losses and volatility.", fr: "La risk tolerance reflète la volonté psychologique de subir pertes et volatilité." },
+        { en: "Risk capacity reflects the financial ability to absorb losses without jeopardizing goals.", fr: "La risk capacity reflète la capacité financière à absorber des pertes sans compromettre les objectifs." },
+        { en: "Required return is the return needed to make the plan financially feasible.", fr: "Le required return est le rendement nécessaire pour rendre le plan financièrement réalisable." },
+        { en: "The final portfolio should respect the most restrictive practical constraint rather than maximize theoretical return.", fr: "Le portefeuille final doit respecter la contrainte pratique la plus restrictive plutôt que maximiser le rendement théorique." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A client may say they love risk, but if they need the money for a house next year, they may not have the capacity to take much risk. Feelings and financial ability are not the same thing.",
+          fr: "Un client peut dire qu’il aime le risque, mais s’il a besoin de l’argent pour acheter une maison l’an prochain, il n’a peut-être pas la capacité de prendre beaucoup de risque. Le ressenti et la capacité financière sont différents.",
+        },
+        Intermediate: {
+          en: "Advisers compare psychological tolerance with objective capacity. A long horizon, stable income and excess wealth may increase capacity; near-term spending needs, debt or concentrated exposure may reduce it.",
+          fr: "Les advisers comparent tolérance psychologique et capacité objective. Un horizon long, des revenus stables et un patrimoine excédentaire peuvent augmenter la capacité ; des dépenses proches, de la dette ou une forte concentration peuvent la réduire.",
+        },
+        Professional: {
+          en: "Portfolio risk should be calibrated to the interaction between required return, funded status, liabilities, human capital, liquidity and behavioral tolerance. Excessive required return may signal that the goals, saving rate or spending assumptions—not the portfolio—need to change.",
+          fr: "Le risque du portefeuille doit être calibré selon l’interaction entre required return, funded status, liabilities, capital humain, liquidité et tolérance comportementale. Un required return excessif peut indiquer que les objectifs, le taux d’épargne ou les hypothèses de dépenses—not the portfolio—doivent changer.",
+        },
+      },
+      vocabulary: [
+        { en: "Risk tolerance", fr: "tolérance au risque", definition: { en: "Psychological willingness to accept volatility and losses.", fr: "Volonté psychologique d’accepter volatilité et pertes." } },
+        { en: "Risk capacity", fr: "capacité de risque", definition: { en: "Financial ability to absorb investment losses.", fr: "Capacité financière à absorber des pertes d’investissement." } },
+        { en: "Required return", fr: "rendement requis", definition: { en: "Return needed for the financial plan to meet its objectives.", fr: "Rendement nécessaire pour que le plan financier atteigne ses objectifs." } },
+      ],
+    },
+    {
+      id: "investment-policy-statement",
+      kicker: { en: "03 · INVESTMENT POLICY STATEMENT", fr: "03 · INVESTMENT POLICY STATEMENT" },
+      title: { en: "The IPS turns goals into portfolio rules", fr: "L’IPS transforme les objectifs en règles de portefeuille" },
+      coreFacts: [
+        { en: "An Investment Policy Statement documents objectives, risk parameters, time horizon, liquidity and investment constraints.", fr: "Un Investment Policy Statement documente objectifs, paramètres de risque, horizon, liquidité et contraintes d’investissement." },
+        { en: "The IPS provides a framework for decisions during both calm and stressed markets.", fr: "L’IPS fournit un cadre de décision aussi bien en marché calme qu’en période de stress." },
+        { en: "Strategic asset allocation should reflect the IPS rather than short-term market emotion.", fr: "La strategic asset allocation doit refléter l’IPS plutôt que les émotions de marché à court terme." },
+        { en: "The IPS should be reviewed after material changes in wealth, goals, family structure or liquidity needs.", fr: "L’IPS doit être revu après des changements importants de patrimoine, objectifs, structure familiale ou besoins de liquidité." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "The IPS is the written rulebook for the portfolio. It explains what the money is for, how much risk is acceptable and what kinds of investments can be used.",
+          fr: "L’IPS est le règlement écrit du portefeuille. Il explique à quoi sert l’argent, quel risque est acceptable et quels types d’investissements peuvent être utilisés.",
+        },
+        Intermediate: {
+          en: "An IPS can include target allocation ranges, minimum liquidity, concentration limits and rebalancing policy. This prevents every market headline from becoming a reason to redesign the portfolio.",
+          fr: "Un IPS peut inclure ranges d’allocation cibles, liquidité minimale, limites de concentration et politique de rebalancing. Cela évite que chaque headline de marché devienne une raison de refaire le portefeuille.",
+        },
+        Professional: {
+          en: "The IPS is both an investment document and a governance tool. It makes assumptions explicit, creates accountability and separates strategic decisions from tactical implementation, reducing the risk of ad hoc portfolio changes.",
+          fr: "L’IPS est à la fois un document d’investissement et un outil de gouvernance. Il rend les hypothèses explicites, crée de l’accountability et sépare décisions stratégiques et implémentation tactique, réduisant le risque de changements ad hoc.",
+        },
+      },
+      vocabulary: [
+        { en: "IPS", fr: "Investment Policy Statement", definition: { en: "Document defining investment objectives, constraints and governance rules.", fr: "Document définissant objectifs d’investissement, contraintes et règles de gouvernance." } },
+        { en: "Strategic allocation", fr: "allocation stratégique", definition: { en: "Long-term target mix of asset classes.", fr: "Mix cible long terme entre classes d’actifs." } },
+      ],
+    },
+    {
+      id: "goals-liquidity-buckets",
+      kicker: { en: "04 · GOALS & LIQUIDITY", fr: "04 · OBJECTIFS & LIQUIDITÉ" },
+      title: { en: "Different goals can require different time horizons and risk buckets", fr: "Des objectifs différents peuvent nécessiter des horizons et risk buckets différents" },
+      coreFacts: [
+        { en: "Near-term spending needs usually require more liquidity and lower volatility than long-term goals.", fr: "Les dépenses à court terme nécessitent généralement davantage de liquidité et moins de volatilité que les objectifs long terme." },
+        { en: "Goal-based planning can separate emergency liquidity, medium-term goals and long-term growth capital.", fr: "La planification par objectifs peut séparer liquidité d’urgence, objectifs moyen terme et capital de croissance long terme." },
+        { en: "Holding too little cash can force asset sales during poor markets; holding too much cash can reduce long-term expected return.", fr: "Détenir trop peu de cash peut forcer des ventes en mauvais marché ; en détenir trop peut réduire le rendement attendu à long terme." },
+        { en: "Liquidity planning should include known obligations and reasonable contingencies.", fr: "La planification de liquidité doit inclure obligations connues et contingences raisonnables." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Money needed next month should not usually be invested the same way as money intended for retirement in 30 years. The time horizon changes the amount of risk that makes sense.",
+          fr: "L’argent nécessaire le mois prochain ne doit généralement pas être investi comme l’argent destiné à la retraite dans 30 ans. L’horizon change le niveau de risque raisonnable.",
+        },
+        Intermediate: {
+          en: "A bucket framework might hold cash for immediate needs, high-quality fixed income for intermediate spending and growth assets for long-term objectives. The exact design depends on the client.",
+          fr: "Un bucket framework peut détenir du cash pour les besoins immédiats, du fixed income de haute qualité pour les dépenses intermédiaires et des growth assets pour les objectifs long terme. Le design exact dépend du client.",
+        },
+        Professional: {
+          en: "Liquidity segmentation should be integrated with expected cash flows, credit availability, tax consequences and sequence-of-returns risk. Buckets are useful when they improve planning discipline, not when they create artificial accounting silos.",
+          fr: "La segmentation de liquidité doit être intégrée aux cash flows attendus, au crédit disponible, aux conséquences fiscales et au sequence-of-returns risk. Les buckets sont utiles lorsqu’ils améliorent la discipline de planification, pas lorsqu’ils créent des silos artificiels.",
+        },
+      },
+      vocabulary: [
+        { en: "Liquidity reserve", fr: "réserve de liquidité", definition: { en: "Cash or highly liquid assets held for expected or emergency spending.", fr: "Cash ou actifs très liquides détenus pour dépenses prévues ou urgentes." } },
+        { en: "Sequence-of-returns risk", fr: "sequence-of-returns risk", definition: { en: "Risk that poor returns early in a withdrawal period materially damage long-term sustainability.", fr: "Risque que de mauvais rendements au début d’une période de retraits détériorent fortement la soutenabilité long terme." } },
+      ],
+    },
+    {
+      id: "tax-aware-investing",
+      kicker: { en: "05 · TAX-AWARE INVESTING", fr: "05 · INVESTISSEMENT FISCALEMENT EFFICACE" },
+      title: { en: "After-tax return is often more relevant to the client than pre-tax return", fr: "Le rendement après impôts est souvent plus pertinent pour le client que le rendement avant impôts" },
+      coreFacts: [
+        { en: "Taxes can materially affect realized investment outcomes.", fr: "La fiscalité peut affecter de manière significative les résultats réellement reçus par l’investisseur." },
+        { en: "Asset location means deciding which types of investments are held in different account types based on tax characteristics.", fr: "L’asset location consiste à décider quels investissements sont détenus dans quels types de comptes selon leurs caractéristiques fiscales." },
+        { en: "Turnover, realized gains, dividends and interest can have different tax consequences depending on jurisdiction and account structure.", fr: "Turnover, gains réalisés, dividendes et intérêts peuvent avoir des conséquences fiscales différentes selon juridiction et structure de compte." },
+        { en: "Tax strategy should be coordinated with qualified tax professionals when advice becomes jurisdiction-specific.", fr: "La stratégie fiscale doit être coordonnée avec des professionnels fiscaux qualifiés lorsque le conseil devient spécifique à une juridiction." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Two investments can have the same return before tax but leave the client with different amounts after tax. Wealth managers therefore care about what the client actually keeps.",
+          fr: "Deux investissements peuvent avoir le même rendement avant impôts mais laisser des montants différents après impôts. Les wealth managers s’intéressent donc à ce que le client conserve réellement.",
+        },
+        Intermediate: {
+          en: "Tax-aware management may consider holding periods, account location, realized gains and losses, turnover and withdrawal sequencing. The objective is not simply to minimize tax in one year but to improve after-tax wealth over time.",
+          fr: "La gestion tax-aware peut considérer holding periods, localisation des actifs, gains et pertes réalisés, turnover et séquence des retraits. L’objectif n’est pas seulement de minimiser l’impôt une année mais d’améliorer le patrimoine après impôts dans le temps.",
+        },
+        Professional: {
+          en: "Tax optimization is path-dependent and client-specific. Advisers must weigh tax deferral against portfolio risk, concentration, transaction cost and changing tax rules. Tax efficiency should support—not override—the economic investment case.",
+          fr: "L’optimisation fiscale dépend du chemin et du client. Les advisers doivent arbitrer tax deferral contre risque du portefeuille, concentration, coûts de transaction et évolution des règles fiscales. L’efficacité fiscale doit soutenir—not override—la logique économique d’investissement.",
+        },
+      },
+      vocabulary: [
+        { en: "Asset location", fr: "asset location", definition: { en: "Placement of investments across account types based partly on tax characteristics.", fr: "Placement des investissements entre différents types de comptes en fonction notamment de leurs caractéristiques fiscales." } },
+        { en: "Tax deferral", fr: "report d’imposition", definition: { en: "Postponing tax recognition to a later period when legally permitted.", fr: "Reporter la reconnaissance fiscale à une période ultérieure lorsqu’autorisé." } },
+        { en: "After-tax return", fr: "rendement après impôts", definition: { en: "Investment return remaining after applicable taxes.", fr: "Rendement d’investissement restant après les impôts applicables." } },
+      ],
+    },
+    {
+      id: "retirement-withdrawal-planning",
+      kicker: { en: "06 · RETIREMENT & WITHDRAWALS", fr: "06 · RETRAITE & RETRAITS" },
+      title: { en: "Retirement planning converts accumulated wealth into sustainable future spending", fr: "La planification retraite transforme le patrimoine accumulé en dépenses futures soutenables" },
+      coreFacts: [
+        { en: "Retirement planning depends on savings, spending, horizon, expected returns, inflation and longevity.", fr: "La planification retraite dépend de l’épargne, des dépenses, de l’horizon, des rendements attendus, de l’inflation et de la longévité." },
+        { en: "Withdrawal rates must be evaluated together with portfolio risk and sequence-of-returns risk.", fr: "Les withdrawal rates doivent être évalués avec le risque du portefeuille et le sequence-of-returns risk." },
+        { en: "Inflation matters because retirement liabilities are often long-dated real spending needs.", fr: "L’inflation est importante car les liabilities de retraite correspondent souvent à des besoins de dépenses réelles de long terme." },
+        { en: "Retirement planning should be updated rather than treated as a one-time calculation.", fr: "La planification retraite doit être mise à jour plutôt que traitée comme un calcul ponctuel." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Retirement planning asks whether today’s savings and future investment returns can support future spending for many years.",
+          fr: "La planification retraite demande si l’épargne actuelle et les futurs rendements peuvent financer les dépenses futures pendant de nombreuses années.",
+        },
+        Intermediate: {
+          en: "A plan models contributions before retirement and withdrawals after retirement. Higher spending, lower returns, higher inflation or longer life expectancy increase the amount of capital required.",
+          fr: "Un plan modélise contributions avant la retraite et retraits après. Des dépenses plus élevées, des rendements plus faibles, davantage d’inflation ou une longévité plus grande augmentent le capital nécessaire.",
+        },
+        Professional: {
+          en: "Retirement sustainability is a dynamic funding problem. Fixed assumptions can be misleading because returns, inflation, taxes and longevity are uncertain. Scenario analysis and adaptive spending policies can therefore be more useful than a single deterministic projection.",
+          fr: "La soutenabilité de la retraite est un problème dynamique de financement. Des hypothèses fixes peuvent être trompeuses car rendements, inflation, fiscalité et longévité sont incertains. Scenario analysis et politiques de dépenses adaptatives peuvent donc être plus utiles qu’une projection déterministe unique.",
+        },
+      },
+      formula: {
+        label: { en: "Simple funded ratio", fr: "Funded ratio simplifié" },
+        expression: "Funded Ratio = Present Value of Available Resources / Present Value of Future Goals",
+        explanation: { en: "A higher ratio generally indicates greater financial capacity relative to planned obligations.", fr: "Un ratio plus élevé indique généralement une plus grande capacité financière par rapport aux obligations prévues." },
+      },
+      vocabulary: [
+        { en: "Longevity risk", fr: "risque de longévité", definition: { en: "Risk of living longer than the financial plan can sustainably fund.", fr: "Risque de vivre plus longtemps que ce que le plan financier peut soutenir." } },
+        { en: "Withdrawal rate", fr: "taux de retrait", definition: { en: "Amount withdrawn from a portfolio relative to its value.", fr: "Montant retiré d’un portefeuille par rapport à sa valeur." } },
+      ],
+    },
+    {
+      id: "concentrated-wealth",
+      kicker: { en: "07 · CONCENTRATED WEALTH", fr: "07 · PATRIMOINE CONCENTRÉ" },
+      title: { en: "A large single position can dominate both financial and emotional risk", fr: "Une seule grande position peut dominer le risque financier et émotionnel" },
+      coreFacts: [
+        { en: "Founders, executives and long-term investors may hold a large portion of wealth in one company or asset.", fr: "Fondateurs, dirigeants et investisseurs long terme peuvent détenir une grande part de leur patrimoine dans une seule société ou un seul actif." },
+        { en: "Concentrated positions create idiosyncratic risk even when the underlying company is high quality.", fr: "Les positions concentrées créent un risque idiosyncratique même lorsque l’entreprise sous-jacente est de grande qualité." },
+        { en: "Diversification decisions can be complicated by taxes, lockups, control, emotional attachment and signaling concerns.", fr: "Les décisions de diversification peuvent être compliquées par fiscalité, lockups, contrôle, attachement émotionnel et problèmes de signal." },
+        { en: "Risk reduction can involve staged sales, broader diversification, hedging or other planning tools depending on legal and tax constraints.", fr: "La réduction du risque peut impliquer ventes progressives, diversification, hedging ou autres outils selon contraintes juridiques et fiscales." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If 70% of a client’s wealth is one company stock, the client’s future depends heavily on that one company. Diversification can reduce that dependence.",
+          fr: "Si 70 % du patrimoine d’un client est une seule action, son avenir financier dépend fortement de cette entreprise. La diversification peut réduire cette dépendance.",
+        },
+        Intermediate: {
+          en: "Selling immediately may create taxes or other constraints, so advisers often compare the benefit of diversification with transaction, tax and timing costs.",
+          fr: "Vendre immédiatement peut créer des impôts ou d’autres contraintes ; les advisers comparent donc le bénéfice de diversification aux coûts de transaction, fiscalité et timing.",
+        },
+        Professional: {
+          en: "Concentrated-wealth planning requires integrating market risk with legal restrictions, tax basis, liquidity, estate objectives and behavioral preferences. The economically ideal hedge may be impractical if governance or tax consequences are ignored.",
+          fr: "La planification d’un patrimoine concentré exige d’intégrer risque de marché, restrictions juridiques, tax basis, liquidité, objectifs successoraux et préférences comportementales. Le hedge économiquement idéal peut être impraticable si gouvernance ou conséquences fiscales sont ignorées.",
+        },
+      },
+      vocabulary: [
+        { en: "Concentration risk", fr: "risque de concentration", definition: { en: "Risk created by excessive exposure to one asset, issuer, sector or factor.", fr: "Risque créé par une exposition excessive à un seul actif, émetteur, secteur ou facteur." } },
+        { en: "Tax basis", fr: "base fiscale", definition: { en: "Tax reference value used to determine taxable gain or loss in many jurisdictions.", fr: "Valeur de référence fiscale utilisée pour déterminer gain ou perte imposable dans de nombreuses juridictions." } },
+      ],
+    },
+    {
+      id: "estate-philanthropy-coordination",
+      kicker: { en: "08 · ESTATE & PHILANTHROPY COORDINATION", fr: "08 · SUCCESSION & PHILANTHROPIE" },
+      title: { en: "Wealth planning extends beyond investment return to transfer, control and purpose", fr: "La planification patrimoniale va au-delà du rendement vers transfert, contrôle et finalité" },
+      coreFacts: [
+        { en: "Estate planning addresses how assets are owned, controlled and transferred over time or at death.", fr: "L’estate planning traite de la manière dont les actifs sont détenus, contrôlés et transférés dans le temps ou au décès." },
+        { en: "Philanthropic planning can connect charitable goals with broader wealth and tax planning.", fr: "La planification philanthropique peut relier objectifs caritatifs et planification patrimoniale et fiscale globale." },
+        { en: "Wealth managers often coordinate with attorneys, accountants and other specialists rather than replace them.", fr: "Les wealth managers coordonnent souvent avec avocats, comptables et autres spécialistes plutôt que de les remplacer." },
+        { en: "Beneficiary designations, ownership structures and estate documents should be kept aligned with the client’s current intent.", fr: "Beneficiary designations, structures de détention et documents successoraux doivent rester alignés avec l’intention actuelle du client." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Investing well is only one part of wealth planning. Clients may also care about who receives assets, when they receive them and whether part of the wealth supports family or charitable goals.",
+          fr: "Bien investir n’est qu’une partie de la planification patrimoniale. Les clients peuvent aussi se préoccuper de qui reçoit les actifs, quand, et si une partie du patrimoine soutient famille ou objectifs philanthropiques.",
+        },
+        Intermediate: {
+          en: "The wealth manager helps identify planning needs and coordinates implementation with legal and tax professionals. Investment decisions should remain consistent with the ownership and transfer structure.",
+          fr: "Le wealth manager aide à identifier les besoins de planification et coordonne l’implémentation avec professionnels juridiques et fiscaux. Les décisions d’investissement doivent rester cohérentes avec les structures de détention et transfert.",
+        },
+        Professional: {
+          en: "Complex wealth planning integrates investment liquidity, family governance, intergenerational objectives, tax exposure, charitable intent and legal control. The adviser’s role is often orchestration across specialists and across time.",
+          fr: "La planification patrimoniale complexe intègre liquidité d’investissement, gouvernance familiale, objectifs intergénérationnels, exposition fiscale, intention philanthropique et contrôle juridique. Le rôle de l’adviser est souvent d’orchestrer les spécialistes et les décisions dans le temps.",
+        },
+      },
+      vocabulary: [
+        { en: "Estate planning", fr: "planification successorale", definition: { en: "Planning for ownership, control and transfer of assets.", fr: "Planification de la détention, du contrôle et du transfert des actifs." } },
+        { en: "Beneficiary", fr: "bénéficiaire", definition: { en: "Person or entity designated to receive assets or benefits.", fr: "Personne ou entité désignée pour recevoir des actifs ou bénéfices." } },
+        { en: "Philanthropy", fr: "philanthropie", definition: { en: "Use of wealth to support charitable or public-benefit objectives.", fr: "Utilisation du patrimoine pour soutenir des objectifs caritatifs ou d’intérêt général." } },
+      ],
+    },
+    {
+      id: "behavior-ethics-communication",
+      kicker: { en: "09 · BEHAVIOR, ETHICS & COMMUNICATION", fr: "09 · COMPORTEMENT, ÉTHIQUE & COMMUNICATION" },
+      title: { en: "The adviser manages behavior and trust as well as capital", fr: "L’adviser gère le comportement et la confiance autant que le capital" },
+      coreFacts: [
+        { en: "Behavioral biases can cause clients to buy high, sell low or concentrate excessively in familiar assets.", fr: "Les biais comportementaux peuvent pousser les clients à acheter haut, vendre bas ou se concentrer excessivement dans des actifs familiers." },
+        { en: "Loss aversion, recency bias, overconfidence and anchoring are common investment biases.", fr: "Loss aversion, recency bias, overconfidence et anchoring sont des biais fréquents." },
+        { en: "Advisers should communicate fees, risks, conflicts and assumptions clearly.", fr: "Les advisers doivent communiquer clairement fees, risques, conflits et hypothèses." },
+        { en: "Long-term trust depends on suitability, ethical conduct, confidentiality and consistent follow-through.", fr: "La confiance long terme dépend de suitability, conduite éthique, confidentialité et suivi cohérent." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Clients are human. Fear after a market crash can make someone sell at exactly the wrong time. A good adviser helps the client follow a sensible plan rather than react emotionally to every market move.",
+          fr: "Les clients sont humains. La peur après un krach peut pousser quelqu’un à vendre exactement au mauvais moment. Un bon adviser aide le client à suivre un plan cohérent plutôt qu’à réagir émotionnellement à chaque mouvement de marché.",
+        },
+        Intermediate: {
+          en: "Good communication sets expectations before volatility arrives. If the client understands the expected range of outcomes, purpose of diversification and rebalancing policy in advance, stressful periods are easier to navigate.",
+          fr: "Une bonne communication fixe les attentes avant l’arrivée de la volatilité. Si le client comprend à l’avance la range de résultats possibles, le rôle de la diversification et la politique de rebalancing, les périodes de stress sont plus faciles à traverser.",
+        },
+        Professional: {
+          en: "Advisory quality is partly behavioral alpha: helping clients avoid destructive timing decisions, maintain appropriate risk and act consistently with long-term objectives. This value must be delivered within strong ethical, disclosure and conflict-management standards.",
+          fr: "La qualité du conseil est en partie un behavioral alpha : aider les clients à éviter des décisions de timing destructrices, maintenir un risque approprié et agir conformément aux objectifs long terme. Cette valeur doit être fournie avec des standards élevés d’éthique, disclosure et gestion des conflits.",
+        },
+      },
+      comparison: {
+        title: { en: "Common behavioral biases", fr: "Biais comportementaux fréquents" },
+        headers: [{ en: "Bias", fr: "Biais" }, { en: "Typical behavior", fr: "Comportement typique" }],
+        rows: [
+          { cells: [{ en: "Loss aversion", fr: "Loss aversion" }, { en: "Losses feel more painful than equivalent gains feel rewarding", fr: "Les pertes paraissent plus douloureuses que des gains équivalents ne sont satisfaisants" }] },
+          { cells: [{ en: "Recency bias", fr: "Recency bias" }, { en: "Overweighting recent market performance", fr: "Surpondérer les performances récentes" }] },
+          { cells: [{ en: "Overconfidence", fr: "Overconfidence" }, { en: "Overestimating forecasting or security-selection ability", fr: "Surestimer sa capacité de prévision ou sélection" }] },
+          { cells: [{ en: "Anchoring", fr: "Anchoring" }, { en: "Fixating on an old price or reference point", fr: "Se fixer sur un ancien prix ou point de référence" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Behavioral alpha", fr: "behavioral alpha", definition: { en: "Value created by helping investors avoid harmful behavioral decisions.", fr: "Valeur créée en aidant les investisseurs à éviter des décisions comportementales nuisibles." } },
+        { en: "Suitability", fr: "adéquation", definition: { en: "Degree to which a recommendation fits the client’s circumstances and objectives.", fr: "Degré auquel une recommandation correspond à la situation et aux objectifs du client." } },
+        { en: "Conflict of interest", fr: "conflit d’intérêts", definition: { en: "Situation where adviser incentives may differ from the client’s interests.", fr: "Situation où les incitations du conseiller peuvent différer des intérêts du client." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "client-discovery",
+      question: { en: "What should a wealth manager understand before recommending a portfolio?", fr: "Que doit comprendre un wealth manager avant de recommander un portefeuille ?" },
+      options: [
+        { id: "a", label: { en: "Goals, assets, liabilities, cash flow, liquidity and constraints", fr: "Objectifs, actifs, passifs, cash flow, liquidité et contraintes" } },
+        { id: "b", label: { en: "Only the client’s favorite stock", fr: "Uniquement l’action préférée du client" } },
+        { id: "c", label: { en: "Only last month’s market return", fr: "Uniquement le rendement du marché le mois dernier" } },
+        { id: "d", label: { en: "Nothing beyond age", fr: "Rien au-delà de l’âge" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Advice should begin with the client’s full financial situation and objectives.", fr: "Le conseil doit commencer par l’ensemble de la situation financière et des objectifs du client." },
+    },
+    {
+      id: "q2",
+      conceptKey: "risk-capacity",
+      question: { en: "Which best describes risk capacity?", fr: "Quelle proposition décrit le mieux la risk capacity ?" },
+      options: [
+        { id: "a", label: { en: "Financial ability to absorb losses", fr: "Capacité financière à absorber des pertes" } },
+        { id: "b", label: { en: "How exciting markets feel", fr: "À quel point les marchés semblent excitants" } },
+        { id: "c", label: { en: "The number of stocks owned", fr: "Le nombre d’actions détenues" } },
+        { id: "d", label: { en: "Yesterday’s market direction", fr: "La direction du marché hier" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Risk capacity is based on financial circumstances rather than emotion.", fr: "La risk capacity repose sur la situation financière plutôt que sur l’émotion." },
+    },
+    {
+      id: "q3",
+      conceptKey: "ips",
+      question: { en: "What is the main purpose of an IPS?", fr: "Quel est le rôle principal d’un IPS ?" },
+      options: [
+        { id: "a", label: { en: "Translate objectives and constraints into investment rules", fr: "Transformer objectifs et contraintes en règles d’investissement" } },
+        { id: "b", label: { en: "Predict every market move", fr: "Prédire chaque mouvement de marché" } },
+        { id: "c", label: { en: "Guarantee positive returns", fr: "Garantir des rendements positifs" } },
+        { id: "d", label: { en: "Replace all legal documents", fr: "Remplacer tous les documents juridiques" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The IPS creates a durable framework for portfolio decisions.", fr: "L’IPS crée un cadre durable pour les décisions de portefeuille." },
+    },
+    {
+      id: "q4",
+      conceptKey: "liquidity",
+      question: { en: "Why are near-term spending needs usually invested more conservatively?", fr: "Pourquoi les besoins de dépenses proches sont-ils généralement investis plus prudemment ?" },
+      options: [
+        { id: "a", label: { en: "There is less time to recover from market losses", fr: "Il y a moins de temps pour récupérer après des pertes de marché" } },
+        { id: "b", label: { en: "Cash always earns the highest return", fr: "Le cash offre toujours le rendement le plus élevé" } },
+        { id: "c", label: { en: "Short horizons eliminate risk", fr: "Les horizons courts éliminent le risque" } },
+        { id: "d", label: { en: "Equities cannot be sold", fr: "Les actions ne peuvent pas être vendues" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Short horizons reduce the ability to wait through a market drawdown.", fr: "Les horizons courts réduisent la capacité à attendre la récupération après un drawdown." },
+    },
+    {
+      id: "q5",
+      conceptKey: "after-tax",
+      question: { en: "Why is after-tax return important in wealth management?", fr: "Pourquoi le rendement après impôts est-il important en wealth management ?" },
+      options: [
+        { id: "a", label: { en: "It better reflects the wealth the client actually keeps", fr: "Il reflète mieux le patrimoine réellement conservé par le client" } },
+        { id: "b", label: { en: "Taxes never affect investors", fr: "Les impôts n’affectent jamais les investisseurs" } },
+        { id: "c", label: { en: "Pre-tax and after-tax returns are always identical", fr: "Les rendements avant et après impôts sont toujours identiques" } },
+        { id: "d", label: { en: "Only corporations pay taxes", fr: "Seules les entreprises paient des impôts" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Client outcomes depend on what remains after applicable taxes and costs.", fr: "Le résultat client dépend de ce qui reste après impôts et coûts applicables." },
+    },
+    {
+      id: "q6",
+      conceptKey: "retirement",
+      question: { en: "Which factor can increase the amount of capital needed for retirement?", fr: "Quel facteur peut augmenter le capital nécessaire à la retraite ?" },
+      options: [
+        { id: "a", label: { en: "Higher spending or longer longevity", fr: "Dépenses plus élevées ou longévité plus grande" } },
+        { id: "b", label: { en: "Lower future spending", fr: "Dépenses futures plus faibles" } },
+        { id: "c", label: { en: "Shorter retirement horizon", fr: "Horizon de retraite plus court" } },
+        { id: "d", label: { en: "Lower inflation with all else equal", fr: "Inflation plus faible toutes choses égales par ailleurs" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "More spending or more years of spending requires greater financial resources.", fr: "Davantage de dépenses ou davantage d’années de dépenses nécessitent plus de ressources financières." },
+    },
+    {
+      id: "q7",
+      conceptKey: "concentration",
+      question: { en: "Why is a concentrated stock position risky?", fr: "Pourquoi une position concentrée en actions est-elle risquée ?" },
+      options: [
+        { id: "a", label: { en: "A large share of wealth depends on one company-specific outcome", fr: "Une grande part du patrimoine dépend d’un seul résultat spécifique à une entreprise" } },
+        { id: "b", label: { en: "Concentration always guarantees higher return", fr: "La concentration garantit toujours un rendement supérieur" } },
+        { id: "c", label: { en: "Single stocks have no volatility", fr: "Les actions individuelles n’ont aucune volatilité" } },
+        { id: "d", label: { en: "Diversification increases issuer-specific risk", fr: "La diversification augmente le risque spécifique à l’émetteur" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Concentration increases idiosyncratic exposure to one issuer or asset.", fr: "La concentration augmente l’exposition idiosyncratique à un seul émetteur ou actif." },
+    },
+    {
+      id: "q8",
+      conceptKey: "estate",
+      question: { en: "What is a common role of a wealth manager in estate planning?", fr: "Quel est un rôle fréquent du wealth manager en estate planning ?" },
+      options: [
+        { id: "a", label: { en: "Coordinate investment planning with legal and tax specialists", fr: "Coordonner la planification d’investissement avec spécialistes juridiques et fiscaux" } },
+        { id: "b", label: { en: "Replace every attorney", fr: "Remplacer tous les avocats" } },
+        { id: "c", label: { en: "Ignore beneficiary designations", fr: "Ignorer les beneficiary designations" } },
+        { id: "d", label: { en: "Guarantee tax outcomes", fr: "Garantir les résultats fiscaux" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Wealth managers often coordinate the financial plan with specialized legal and tax advice.", fr: "Les wealth managers coordonnent souvent le plan financier avec des conseils juridiques et fiscaux spécialisés." },
+    },
+    {
+      id: "q9",
+      conceptKey: "behavioral-bias",
+      question: { en: "What is recency bias?", fr: "Qu’est-ce que le recency bias ?" },
+      options: [
+        { id: "a", label: { en: "Giving excessive weight to recent events or returns", fr: "Donner un poids excessif aux événements ou rendements récents" } },
+        { id: "b", label: { en: "Ignoring all recent information", fr: "Ignorer toute information récente" } },
+        { id: "c", label: { en: "Holding exactly the benchmark", fr: "Détenir exactement le benchmark" } },
+        { id: "d", label: { en: "Calculating net worth", fr: "Calculer le patrimoine net" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Recency bias leads investors to extrapolate recent experience too strongly.", fr: "Le recency bias pousse les investisseurs à extrapoler trop fortement l’expérience récente." },
+    },
+    {
+      id: "q10",
+      conceptKey: "adviser-value",
+      question: { en: "Which is an important source of long-term adviser value?", fr: "Quelle est une source importante de valeur à long terme d’un adviser ?" },
+      options: [
+        { id: "a", label: { en: "Helping clients maintain suitable decisions through changing markets and life events", fr: "Aider les clients à maintenir des décisions appropriées malgré les marchés et événements de vie" } },
+        { id: "b", label: { en: "Promising guaranteed market timing", fr: "Promettre un market timing garanti" } },
+        { id: "c", label: { en: "Hiding fees and conflicts", fr: "Cacher les fees et conflits" } },
+        { id: "d", label: { en: "Changing strategy after every headline", fr: "Changer de stratégie après chaque headline" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Long-term advice combines financial planning, investment discipline and behavioral support.", fr: "Le conseil long terme combine planification financière, discipline d’investissement et accompagnement comportemental." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "A new high-net-worth client comes to you with significant cash, one concentrated stock position and several long-term goals. How would you approach the relationship?",
+      fr: "Un nouveau client high-net-worth arrive avec beaucoup de cash, une position concentrée en actions et plusieurs objectifs long terme. Comment aborderais-tu la relation ?",
+    },
+    framework: [
+      { en: "Begin with discovery: goals, family context, assets, liabilities, cash flows, taxes and liquidity needs.", fr: "Commencer par le discovery : objectifs, contexte familial, actifs, passifs, cash flows, fiscalité et besoins de liquidité." },
+      { en: "Assess risk tolerance, risk capacity and required return separately.", fr: "Évaluer séparément risk tolerance, risk capacity et required return." },
+      { en: "Create an IPS with strategic allocation, liquidity ranges and concentration limits.", fr: "Créer un IPS avec allocation stratégique, ranges de liquidité et limites de concentration." },
+      { en: "Analyze the concentrated position, including diversification benefits, tax basis, restrictions and potential risk-management paths.", fr: "Analyser la position concentrée, notamment bénéfices de diversification, tax basis, restrictions et options de risk management." },
+      { en: "Coordinate retirement, tax, estate and philanthropic needs with relevant specialists.", fr: "Coordonner besoins retraite, fiscalité, estate et philanthropie avec les spécialistes appropriés." },
+      { en: "Implement gradually where appropriate, then establish a recurring review and communication process.", fr: "Implémenter progressivement lorsque pertinent, puis établir un processus régulier de revue et communication." },
+    ],
+    sample: {
+      en: "I would start with a full discovery process rather than immediately recommending investments. I would map the client’s goals, family situation, assets, liabilities, spending, income, taxes and near-term liquidity needs. Then I would assess risk tolerance, risk capacity and the return actually required to meet the plan. With that information, I would create an Investment Policy Statement defining strategic allocation, liquidity, concentration limits and rebalancing rules. I would separately analyze the concentrated stock position because it may dominate total risk; the diversification plan would need to consider tax basis, legal restrictions, liquidity and the client’s attachment to the position. I would also identify where tax, estate, retirement or philanthropic specialists should be involved. Finally, I would implement the plan in a disciplined way and establish regular reviews because both markets and the client’s life will change over time.",
+      fr: "Je commencerais par un discovery complet plutôt que de recommander immédiatement des investissements. Je cartographierais objectifs, situation familiale, actifs, passifs, dépenses, revenus, fiscalité et besoins de liquidité à court terme. Ensuite, j’évaluerais risk tolerance, risk capacity et le rendement réellement nécessaire pour atteindre le plan. Avec ces informations, je créerais un Investment Policy Statement définissant allocation stratégique, liquidité, limites de concentration et règles de rebalancing. J’analyserais séparément la position concentrée car elle peut dominer le risque total ; le plan de diversification devrait tenir compte du tax basis, des restrictions juridiques, de la liquidité et de l’attachement du client à la position. J’identifierais aussi les domaines nécessitant l’intervention de spécialistes en fiscalité, estate, retraite ou philanthropie. Enfin, j’implémenterais le plan avec discipline et mettrais en place des revues régulières car les marchés et la vie du client évolueront dans le temps.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
