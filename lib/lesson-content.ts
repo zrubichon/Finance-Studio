@@ -6826,7 +6826,935 @@ export const financialAccountingILesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson];
+
+export const statisticsProbabilityLesson: FinanceLesson = {
+  slug: "year-1-statistics-probability",
+  year: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations" },
+  domain: { en: "Portfolio & Risk", fr: "Portefeuille & risque / Portfolio & Risk" },
+  title: {
+    en: "Statistics & Probability",
+    fr: "Statistiques & probabilités / Statistics & Probability",
+  },
+  subtitle: {
+    en: "Build the quantitative language used throughout finance: descriptive statistics, distributions, z-scores, probability, conditional probability, Bayes, sampling and dependence between variables.",
+    fr: "Construire le langage quantitatif utilisé dans toute la finance : statistiques descriptives, distributions, z-scores, probabilités, probabilités conditionnelles, Bayes, échantillonnage et dépendance entre variables.",
+  },
+  duration: { en: "95–120 min", fr: "95–120 min" },
+  prerequisites: [
+    {
+      en: "Basic algebra, percentages and square roots",
+      fr: "Algèbre, pourcentages et racines carrées de base",
+    },
+    {
+      en: "Risk, Return & Diversification",
+      fr: "Risque, rendement & diversification / Risk, Return & Diversification",
+    },
+  ],
+  objectives: [
+    {
+      en: "Calculate and interpret mean, median, percentiles, variance and standard deviation.",
+      fr: "Calculer et interpréter moyenne / mean, médiane / median, percentiles, variance et écart-type / standard deviation.",
+    },
+    {
+      en: "Understand distributions, skewness, outliers and why averages can be misleading.",
+      fr: "Comprendre distributions, asymétrie / skewness, outliers et pourquoi les moyennes peuvent être trompeuses.",
+    },
+    {
+      en: "Calculate and interpret z-scores and use them to standardize observations.",
+      fr: "Calculer et interpréter les z-scores et les utiliser pour standardiser des observations.",
+    },
+    {
+      en: "Apply basic probability rules, conditional probability and Bayes' theorem.",
+      fr: "Appliquer les règles de probabilité de base, les probabilités conditionnelles et le théorème de Bayes.",
+    },
+    {
+      en: "Explain sampling, standard error and why larger samples usually reduce sampling uncertainty.",
+      fr: "Expliquer échantillonnage / sampling, erreur standard / standard error et pourquoi des échantillons plus grands réduisent généralement l’incertitude d’échantillonnage.",
+    },
+    {
+      en: "Distinguish covariance, correlation and causation.",
+      fr: "Distinguer covariance, corrélation / correlation et causalité / causation.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "From raw data to a financial conclusion",
+      fr: "Des données brutes à une conclusion financière",
+    },
+    steps: [
+      {
+        title: { en: "Describe", fr: "Décrire" },
+        detail: { en: "Mean · median · dispersion", fr: "Moyenne · médiane · dispersion" },
+      },
+      {
+        title: { en: "Standardize", fr: "Standardiser" },
+        detail: { en: "Percentiles · z-scores · distributions", fr: "Percentiles · z-scores · distributions" },
+      },
+      {
+        title: { en: "Infer", fr: "Inférer" },
+        detail: { en: "Probability · sampling · Bayes", fr: "Probabilité · échantillonnage · Bayes" },
+      },
+      {
+        title: { en: "Relate", fr: "Relier" },
+        detail: { en: "Covariance · correlation · finance decisions", fr: "Covariance · corrélation · décisions financières" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "center",
+      kicker: { en: "01 · CENTER OF A DISTRIBUTION", fr: "01 · CENTRE D’UNE DISTRIBUTION" },
+      title: {
+        en: "Mean and median summarize different notions of a typical value",
+        fr: "Moyenne et médiane résument différentes notions d’une valeur typique",
+      },
+      coreFacts: [
+        {
+          en: "The arithmetic mean is the sum of observations divided by the number of observations.",
+          fr: "La moyenne arithmétique / arithmetic mean est la somme des observations divisée par leur nombre.",
+        },
+        {
+          en: "The median is the middle observation after sorting the data, or the average of the two middle observations for an even sample size.",
+          fr: "La médiane / median est l’observation centrale après tri, ou la moyenne des deux observations centrales lorsque l’échantillon contient un nombre pair de valeurs.",
+        },
+        {
+          en: "The mean is sensitive to extreme observations; the median is more robust to outliers.",
+          fr: "La moyenne est sensible aux observations extrêmes / outliers ; la médiane y est plus robuste.",
+        },
+        {
+          en: "In skewed financial data, mean and median can tell very different stories.",
+          fr: "Dans des données financières asymétriques / skewed, moyenne et médiane peuvent raconter des histoires très différentes.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose five returns are 2%, 3%, 4%, 5% and 26%. The mean is 8%, but four of the five observations are below 8%. The median is 4%, which better describes the center of this skewed sample.",
+          fr: "Supposons cinq rendements : 2 %, 3 %, 4 %, 5 % et 26 %. La moyenne vaut 8 %, mais quatre observations sur cinq sont inférieures à 8 %. La médiane vaut 4 % et décrit mieux le centre de cet échantillon asymétrique.",
+        },
+        Intermediate: {
+          en: "The mean uses every observation and is the natural center for many models, but robustness matters when data contain outliers or heavy tails. Median and trimmed statistics can sometimes better represent a typical observation.",
+          fr: "La moyenne utilise toutes les observations et constitue un centre naturel pour de nombreux modèles, mais la robustesse compte lorsque les données contiennent outliers ou queues épaisses / heavy tails. Médiane et statistiques tronquées peuvent parfois mieux représenter une observation typique.",
+        },
+        Professional: {
+          en: "Choice of location statistic should reflect the data-generating process and objective. Mean is optimal under some symmetric loss functions, while median minimizes absolute deviation. For cross-sectional valuation multiples or wealth data, skewness often makes median-based summaries more informative.",
+          fr: "Le choix de la statistique de position doit refléter le processus de génération des données et l’objectif. La moyenne est optimale sous certaines fonctions de perte symétriques, tandis que la médiane minimise la déviation absolue. Pour des multiples de valorisation ou données de patrimoine, l’asymétrie rend souvent les statistiques basées sur la médiane plus informatives.",
+        },
+      },
+      formula: {
+        label: { en: "Arithmetic mean", fr: "Moyenne arithmétique / Arithmetic mean" },
+        expression: "Mean = Σxᵢ ÷ n",
+        explanation: {
+          en: "Add all observations and divide by the number of observations.",
+          fr: "Additionner toutes les observations puis diviser par leur nombre.",
+        },
+        workedExample: {
+          en: "(2 + 3 + 4 + 5 + 26) ÷ 5 = 8.",
+          fr: "(2 + 3 + 4 + 5 + 26) ÷ 5 = 8.",
+        },
+      },
+      comparison: {
+        title: { en: "Mean vs median", fr: "Moyenne vs médiane" },
+        headers: [
+          { en: "Statistic", fr: "Statistique" },
+          { en: "Strength", fr: "Avantage" },
+          { en: "Weakness", fr: "Limite" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Mean", fr: "Moyenne / mean" },
+            { en: "Uses all observations", fr: "Utilise toutes les observations" },
+            { en: "Sensitive to outliers", fr: "Sensible aux outliers" },
+          ]},
+          { cells: [
+            { en: "Median", fr: "Médiane / median" },
+            { en: "Robust to extremes", fr: "Robuste aux extrêmes" },
+            { en: "Uses less magnitude information", fr: "Utilise moins l’amplitude des observations" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Outlier",
+          fr: "valeur aberrante / outlier",
+          definition: {
+            en: "An observation unusually far from the rest of the data.",
+            fr: "Observation située inhabituellement loin du reste des données.",
+          },
+        },
+        {
+          en: "Skewness",
+          fr: "asymétrie / skewness",
+          definition: {
+            en: "A measure or description of asymmetry in a distribution.",
+            fr: "Mesure ou description de l’asymétrie d’une distribution.",
+          },
+        },
+      ],
+    },
+    {
+      id: "percentiles",
+      kicker: { en: "02 · PERCENTILES & RANKS", fr: "02 · PERCENTILES & RANGS" },
+      title: {
+        en: "Percentiles tell you where an observation sits relative to others",
+        fr: "Les percentiles montrent où se situe une observation par rapport aux autres",
+      },
+      coreFacts: [
+        {
+          en: "A percentile describes the relative position of an observation within a distribution.",
+          fr: "Un percentile décrit la position relative d’une observation dans une distribution.",
+        },
+        {
+          en: "The 50th percentile corresponds to the median under common conventions.",
+          fr: "Le 50e percentile correspond à la médiane selon les conventions courantes.",
+        },
+        {
+          en: "Quartiles divide ordered data into four regions and are often used with the interquartile range.",
+          fr: "Les quartiles divisent les données ordonnées en quatre régions et sont souvent utilisés avec l’intervalle interquartile / interquartile range.",
+        },
+        {
+          en: "Exact percentile interpolation rules can vary by software and statistical convention.",
+          fr: "Les règles exactes d’interpolation des percentiles peuvent varier selon le logiciel et la convention statistique.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If your score is at the 90th percentile, you are above roughly 90% of the reference observations under the chosen convention. It does not mean you scored 90% on the test.",
+          fr: "Si ton score se situe au 90e percentile, il est supérieur à environ 90 % des observations de référence selon la convention utilisée. Cela ne signifie pas que tu as obtenu 90 % au test.",
+        },
+        Intermediate: {
+          en: "Percentiles are useful when distributions are skewed because they do not assume normality. Finance uses ranks for valuation screens, factor portfolios, credit scoring and performance comparisons.",
+          fr: "Les percentiles sont utiles lorsque les distributions sont asymétriques car ils ne supposent pas de normalité. En finance, les rangs servent aux screens de valorisation, portefeuilles factoriels, scores de crédit et comparaisons de performance.",
+        },
+        Professional: {
+          en: "Rank transforms reduce sensitivity to scale and extremes but discard distance information. Cross-sectional strategies often use percentile or quantile buckets to stabilize noisy raw signals before portfolio construction.",
+          fr: "Les transformations en rang réduisent la sensibilité à l’échelle et aux valeurs extrêmes mais perdent l’information de distance. Les stratégies cross-section utilisent souvent percentiles ou quantiles pour stabiliser des signaux bruts avant construction de portefeuille.",
+        },
+      },
+      formula: {
+        label: { en: "Interquartile range", fr: "Intervalle interquartile / Interquartile range" },
+        expression: "IQR = Q3 − Q1",
+        explanation: {
+          en: "IQR captures the spread of the middle 50% of observations.",
+          fr: "L’IQR mesure la dispersion des 50 % centraux des observations.",
+        },
+        workedExample: {
+          en: "If Q1=10 and Q3=18, IQR=8.",
+          fr: "Si Q1=10 et Q3=18, IQR=8.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Quartile",
+          fr: "quartile",
+          definition: {
+            en: "A cutoff dividing ordered observations into four groups under a chosen convention.",
+            fr: "Seuil divisant les observations ordonnées en quatre groupes selon une convention choisie.",
+          },
+        },
+        {
+          en: "Interquartile range",
+          fr: "intervalle interquartile / interquartile range",
+          definition: {
+            en: "The distance between the 75th and 25th percentiles.",
+            fr: "Distance entre le 75e et le 25e percentile.",
+          },
+        },
+      ],
+    },
+    {
+      id: "dispersion",
+      kicker: { en: "03 · VARIANCE & STANDARD DEVIATION", fr: "03 · VARIANCE & ÉCART-TYPE" },
+      title: {
+        en: "Two datasets can have the same mean and completely different risk",
+        fr: "Deux jeux de données peuvent avoir la même moyenne et un risque totalement différent",
+      },
+      coreFacts: [
+        {
+          en: "Variance measures average squared distance from the mean under the chosen population or sample convention.",
+          fr: "La variance mesure l’écart quadratique moyen à la moyenne selon la convention population ou échantillon choisie.",
+        },
+        {
+          en: "Standard deviation is the square root of variance and is expressed in the same units as the observations.",
+          fr: "L’écart-type / standard deviation est la racine carrée de la variance et s’exprime dans les mêmes unités que les observations.",
+        },
+        {
+          en: "Sample variance commonly divides by n−1 rather than n to correct bias in estimating population variance under standard assumptions.",
+          fr: "La variance d’échantillon / sample variance divise couramment par n−1 plutôt que n afin de corriger le biais d’estimation de la variance de population sous des hypothèses standard.",
+        },
+        {
+          en: "Standard deviation measures dispersion, not guaranteed downside loss.",
+          fr: "L’écart-type mesure la dispersion, pas une perte future garantie.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Returns of 4%, 5%, 6% are much more stable than −10%, 5%, 20%, even though both samples have a mean of 5%. Standard deviation tells you how spread out the observations are around the mean.",
+          fr: "Les rendements 4 %, 5 %, 6 % sont beaucoup plus stables que −10 %, 5 %, 20 %, même si les deux échantillons ont une moyenne de 5 %. L’écart-type décrit l’ampleur de la dispersion autour de la moyenne.",
+        },
+        Intermediate: {
+          en: "Variance squares deviations so they do not cancel. Sample and population formulas differ because estimating an unknown population mean uses one degree of freedom.",
+          fr: "La variance met les écarts au carré afin qu’ils ne s’annulent pas. Les formules échantillon et population diffèrent car l’estimation d’une moyenne de population inconnue consomme un degré de liberté.",
+        },
+        Professional: {
+          en: "Variance is a second-moment risk measure and can be unstable in heavy-tailed financial data. Real-world risk estimation often uses rolling windows, robust estimators, shrinkage or volatility models rather than one static sample estimate.",
+          fr: "La variance est une mesure de risque de second moment et peut être instable avec des données financières à queues épaisses. L’estimation réelle du risque utilise souvent fenêtres glissantes, estimateurs robustes, shrinkage ou modèles de volatilité plutôt qu’une seule estimation statique.",
+        },
+      },
+      formula: {
+        label: { en: "Sample variance", fr: "Variance d’échantillon / Sample variance" },
+        expression: "s² = Σ(xᵢ − x̄)² ÷ (n − 1)   ·   s = √s²",
+        explanation: {
+          en: "Use the sample convention when estimating variance from a sample under standard assumptions.",
+          fr: "Utiliser la convention d’échantillon lorsqu’on estime une variance à partir d’un échantillon sous des hypothèses standard.",
+        },
+        workedExample: {
+          en: "For 4,5,6: mean=5; squared deviations=1,0,1; sample variance=2/2=1; sample standard deviation=1.",
+          fr: "Pour 4,5,6 : moyenne=5 ; écarts au carré=1,0,1 ; variance d’échantillon=2/2=1 ; écart-type=1.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Degree of freedom",
+          fr: "degré de liberté / degree of freedom",
+          definition: {
+            en: "The number of independent pieces of information available after estimating constraints such as the sample mean.",
+            fr: "Nombre d’informations indépendantes restantes après estimation de contraintes comme la moyenne d’échantillon.",
+          },
+        },
+        {
+          en: "Dispersion",
+          fr: "dispersion",
+          definition: {
+            en: "The extent to which observations are spread around a central value.",
+            fr: "Amplitude avec laquelle les observations sont réparties autour d’une valeur centrale.",
+          },
+        },
+      ],
+    },
+    {
+      id: "distributions-zscores",
+      kicker: { en: "04 · DISTRIBUTIONS & Z-SCORES", fr: "04 · DISTRIBUTIONS & Z-SCORES" },
+      title: {
+        en: "Standardization lets you compare observations across different scales",
+        fr: "La standardisation permet de comparer des observations sur différentes échelles",
+      },
+      coreFacts: [
+        {
+          en: "A probability distribution describes possible values and how probability is allocated across them.",
+          fr: "Une distribution de probabilité décrit les valeurs possibles et la manière dont la probabilité est répartie entre elles.",
+        },
+        {
+          en: "A z-score measures how many standard deviations an observation lies above or below the mean.",
+          fr: "Un z-score mesure le nombre d’écarts-types séparant une observation de la moyenne.",
+        },
+        {
+          en: "A positive z-score lies above the mean and a negative z-score below it.",
+          fr: "Un z-score positif se situe au-dessus de la moyenne et un z-score négatif en dessous.",
+        },
+        {
+          en: "Normal-distribution rules are useful approximations but financial returns often exhibit skewness, fat tails and volatility clustering.",
+          fr: "Les règles de distribution normale sont des approximations utiles, mais les rendements financiers présentent souvent skewness, fat tails et clustering de volatilité.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If the mean exam score is 70 and standard deviation is 10, a score of 90 has a z-score of +2. It is two standard deviations above the mean. A score of 60 has a z-score of −1.",
+          fr: "Si la moyenne d’un examen est 70 et l’écart-type 10, un score de 90 a un z-score de +2 : il est à deux écarts-types au-dessus de la moyenne. Un score de 60 a un z-score de −1.",
+        },
+        Intermediate: {
+          en: "Z-scores put variables on a common scale centered at zero with unit standard deviation. Under a normal distribution, about 68% of observations lie within one standard deviation and about 95% within two, but this approximation depends on normality.",
+          fr: "Les z-scores placent les variables sur une échelle commune centrée à zéro avec écart-type unitaire. Sous distribution normale, environ 68 % des observations se situent à ±1 écart-type et environ 95 % à ±2, mais cette approximation dépend de la normalité.",
+        },
+        Professional: {
+          en: "Standardization is common in factor models and signal construction, but extreme z-scores in finance should not be interpreted with naive Gaussian tail probabilities when the empirical distribution is heavy-tailed.",
+          fr: "La standardisation est courante dans les factor models et la construction de signaux, mais les z-scores extrêmes en finance ne doivent pas être interprétés avec des probabilités de queue gaussiennes naïves lorsque la distribution empirique est à queues épaisses.",
+        },
+      },
+      formula: {
+        label: { en: "Z-score", fr: "Z-score" },
+        expression: "z = (x − μ) ÷ σ",
+        explanation: {
+          en: "x is the observation, μ the reference mean and σ the reference standard deviation.",
+          fr: "x est l’observation, μ la moyenne de référence et σ l’écart-type de référence.",
+        },
+        workedExample: {
+          en: "(90 − 70) ÷ 10 = +2.0.",
+          fr: "(90 − 70) ÷ 10 = +2,0.",
+        },
+      },
+      marketConnection: {
+        en: "Traders and analysts often use standardized moves to compare an unusually large move in one asset with moves in another asset that has a different natural volatility.",
+        fr: "Les traders et analystes utilisent souvent des mouvements standardisés pour comparer un mouvement inhabituel d’un actif avec celui d’un autre actif ayant une volatilité naturelle différente.",
+      },
+      vocabulary: [
+        {
+          en: "Normal distribution",
+          fr: "distribution normale / normal distribution",
+          definition: {
+            en: "A symmetric bell-shaped probability distribution defined by its mean and variance.",
+            fr: "Distribution de probabilité symétrique en cloche définie par sa moyenne et sa variance.",
+          },
+        },
+        {
+          en: "Fat tails",
+          fr: "queues épaisses / fat tails",
+          definition: {
+            en: "More probability in extreme outcomes than a reference thin-tailed distribution such as the normal.",
+            fr: "Probabilité plus élevée d’événements extrêmes qu’avec une distribution de référence à queues fines comme la normale.",
+          },
+        },
+      ],
+    },
+    {
+      id: "probability-rules",
+      kicker: { en: "05 · BASIC PROBABILITY", fr: "05 · PROBABILITÉS DE BASE" },
+      title: {
+        en: "Probability rules prevent intuitive mistakes",
+        fr: "Les règles de probabilité évitent de nombreuses erreurs intuitives",
+      },
+      coreFacts: [
+        {
+          en: "Probabilities range from 0 to 1 and sum to 1 across mutually exclusive exhaustive outcomes.",
+          fr: "Les probabilités vont de 0 à 1 et totalisent 1 pour des événements mutuellement exclusifs couvrant tous les résultats possibles.",
+        },
+        {
+          en: "The complement rule states P(not A)=1−P(A).",
+          fr: "La règle du complément indique P(non A)=1−P(A).",
+        },
+        {
+          en: "For independent events, the probability of both occurring equals the product of their probabilities.",
+          fr: "Pour des événements indépendants, la probabilité que les deux se produisent est le produit de leurs probabilités.",
+        },
+        {
+          en: "Mutually exclusive and independent are different concepts.",
+          fr: "Mutuellement exclusif / mutually exclusive et indépendant / independent sont deux concepts différents.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If there is a 30% chance of loss, there is a 70% chance of no loss under a two-outcome setup. If two independent events each have 50% probability, the chance both happen is 25%.",
+          fr: "S’il existe 30 % de probabilité de perte, alors il existe 70 % de probabilité de non-perte dans un cadre à deux résultats. Si deux événements indépendants ont chacun 50 % de probabilité, la probabilité que les deux se produisent vaut 25 %.",
+        },
+        Intermediate: {
+          en: "Probability errors often come from confusing disjoint events with independent events. If two events are mutually exclusive and each has positive probability, observing one makes the other impossible, so they are not independent.",
+          fr: "Les erreurs de probabilité viennent souvent de la confusion entre événements disjoints et indépendants. Si deux événements sont mutuellement exclusifs et ont chacun une probabilité positive, observer l’un rend l’autre impossible ; ils ne sont donc pas indépendants.",
+        },
+        Professional: {
+          en: "Financial risk systems aggregate events under dependence structures that are rarely truly independent. Assuming independence can dramatically understate joint tail risk when common factors drive multiple positions.",
+          fr: "Les systèmes de risque financier agrègent des événements dont les dépendances sont rarement réellement indépendantes. Supposer l’indépendance peut fortement sous-estimer le joint tail risk lorsque plusieurs positions dépendent de facteurs communs.",
+        },
+      },
+      formula: {
+        label: { en: "Independent joint probability", fr: "Probabilité conjointe pour événements indépendants" },
+        expression: "If A and B are independent: P(A ∩ B) = P(A) × P(B)",
+        explanation: {
+          en: "Only use the multiplication shortcut when independence is justified.",
+          fr: "N’utiliser le raccourci multiplicatif que lorsque l’indépendance est justifiée.",
+        },
+        workedExample: {
+          en: "Two independent 50% events: 0.50×0.50=0.25, or 25%.",
+          fr: "Deux événements indépendants à 50 % : 0,50×0,50=0,25, soit 25 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Independent events",
+          fr: "événements indépendants / independent events",
+          definition: {
+            en: "Events where occurrence of one does not change the probability of the other under the model.",
+            fr: "Événements pour lesquels la réalisation de l’un ne modifie pas la probabilité de l’autre dans le modèle.",
+          },
+        },
+        {
+          en: "Mutually exclusive",
+          fr: "mutuellement exclusif / mutually exclusive",
+          definition: {
+            en: "Events that cannot occur at the same time.",
+            fr: "Événements qui ne peuvent pas se produire simultanément.",
+          },
+        },
+      ],
+    },
+    {
+      id: "conditional-bayes",
+      kicker: { en: "06 · CONDITIONAL PROBABILITY & BAYES", fr: "06 · PROBABILITÉ CONDITIONNELLE & BAYES" },
+      title: {
+        en: "New information should update probabilities",
+        fr: "Une nouvelle information doit mettre à jour les probabilités",
+      },
+      coreFacts: [
+        {
+          en: "Conditional probability asks for the probability of one event given that another event has occurred.",
+          fr: "La probabilité conditionnelle / conditional probability demande la probabilité d’un événement sachant qu’un autre s’est produit.",
+        },
+        {
+          en: "Bayes' theorem reverses conditional probabilities using prior probabilities and evidence.",
+          fr: "Le théorème de Bayes inverse les probabilités conditionnelles à l’aide des probabilités a priori / priors et de l’évidence observée.",
+        },
+        {
+          en: "Base rates matter: a strong signal can still imply a modest posterior probability when the event is very rare.",
+          fr: "Les taux de base / base rates comptent : même un signal fort peut produire une probabilité postérieure modeste lorsque l’événement est très rare.",
+        },
+        {
+          en: "Bayesian thinking is useful whenever investors update beliefs after earnings, macro data, credit events or new company information.",
+          fr: "Le raisonnement bayésien est utile chaque fois que les investisseurs mettent à jour leurs croyances après résultats, données macro, événements de crédit ou nouvelles informations d’entreprise.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose only 10% of firms are truly distressed. A warning signal appears in 80% of distressed firms but also in 20% of healthy firms. Seeing the warning does not mean there is an 80% chance the firm is distressed. You must combine the signal with the low base rate.",
+          fr: "Supposons que seulement 10 % des entreprises soient réellement en difficulté. Un signal d’alerte apparaît chez 80 % des entreprises en difficulté mais aussi chez 20 % des entreprises saines. Voir le signal ne signifie pas qu’il existe 80 % de probabilité que l’entreprise soit en difficulté. Il faut combiner le signal avec le faible base rate.",
+        },
+        Intermediate: {
+          en: "Bayes combines prior probability with likelihood. In the example, the posterior probability of distress after the warning is 0.10×0.80 divided by [0.10×0.80 + 0.90×0.20], which is about 30.8%.",
+          fr: "Bayes combine la probabilité a priori avec la vraisemblance / likelihood. Dans l’exemple, la probabilité postérieure de difficulté après le signal vaut 0,10×0,80 divisé par [0,10×0,80 + 0,90×0,20], soit environ 30,8 %.",
+        },
+        Professional: {
+          en: "Bayesian updating formalizes belief revision as evidence arrives. In practice, finance rarely knows exact priors and likelihoods, but the framework disciplines analysts to distinguish prior belief, signal reliability and posterior conviction.",
+          fr: "La mise à jour bayésienne formalise la révision des croyances lorsque l’information arrive. En pratique, la finance connaît rarement exactement priors et likelihoods, mais le cadre force les analystes à distinguer croyance initiale, fiabilité du signal et conviction postérieure.",
+        },
+      },
+      formula: {
+        label: { en: "Bayes' theorem", fr: "Théorème de Bayes" },
+        expression: "P(A|B) = P(B|A) × P(A) ÷ P(B)",
+        explanation: {
+          en: "P(A) is the prior, P(B|A) the likelihood and P(A|B) the posterior probability.",
+          fr: "P(A) est le prior, P(B|A) la likelihood et P(A|B) la probabilité postérieure.",
+        },
+        workedExample: {
+          en: "0.80×0.10 ÷ [0.80×0.10 + 0.20×0.90] ≈ 30.8%.",
+          fr: "0,80×0,10 ÷ [0,80×0,10 + 0,20×0,90] ≈ 30,8 %.",
+        },
+      },
+      marketConnection: {
+        en: "An earnings miss should not reset a company thesis from 100% bullish to 100% bearish; analysts should update conviction according to how informative the miss is relative to what they already believed.",
+        fr: "Un earnings miss ne doit pas transformer automatiquement une thèse 100 % bullish en 100 % bearish ; l’analyste doit mettre à jour sa conviction selon l’information réellement contenue dans la publication relativement à ses croyances initiales.",
+      },
+      vocabulary: [
+        {
+          en: "Prior",
+          fr: "probabilité a priori / prior",
+          definition: {
+            en: "A probability assessment before incorporating new evidence.",
+            fr: "Évaluation probabiliste avant incorporation d’une nouvelle information.",
+          },
+        },
+        {
+          en: "Posterior",
+          fr: "probabilité postérieure / posterior",
+          definition: {
+            en: "The updated probability after incorporating evidence.",
+            fr: "Probabilité mise à jour après incorporation de l’évidence.",
+          },
+        },
+      ],
+    },
+    {
+      id: "sampling",
+      kicker: { en: "07 · SAMPLING & STANDARD ERROR", fr: "07 · ÉCHANTILLONNAGE & ERREUR STANDARD" },
+      title: {
+        en: "A sample estimate is noisy — and sample size matters",
+        fr: "Une estimation d’échantillon est bruitée — et la taille de l’échantillon compte",
+      },
+      coreFacts: [
+        {
+          en: "A sample is a subset used to learn about a broader population.",
+          fr: "Un échantillon / sample est un sous-ensemble utilisé pour apprendre quelque chose sur une population plus large.",
+        },
+        {
+          en: "Sampling error is the difference between a sample statistic and the population quantity it estimates due to random sampling variation.",
+          fr: "L’erreur d’échantillonnage / sampling error est l’écart entre une statistique d’échantillon et la quantité de population estimée, dû à la variation aléatoire d’échantillonnage.",
+        },
+        {
+          en: "The standard error of the sample mean decreases with the square root of sample size under standard independent-sampling assumptions.",
+          fr: "L’erreur standard de la moyenne diminue avec la racine carrée de la taille de l’échantillon sous des hypothèses standard d’échantillonnage indépendant.",
+        },
+        {
+          en: "A larger sample reduces random sampling uncertainty but does not automatically fix biased data or poor measurement.",
+          fr: "Un échantillon plus grand réduit l’incertitude aléatoire mais ne corrige pas automatiquement un biais de sélection ou une mauvaise mesure.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you estimate average customer spending from only 4 customers, one unusual customer can move the result a lot. With 400 representative customers, the average is usually more stable. But 400 badly selected customers can still give a biased answer.",
+          fr: "Si tu estimes la dépense moyenne à partir de seulement 4 clients, un client inhabituel peut beaucoup déplacer le résultat. Avec 400 clients représentatifs, la moyenne est généralement plus stable. Mais 400 clients mal sélectionnés peuvent toujours donner une estimation biaisée.",
+        },
+        Intermediate: {
+          en: "For an independent sample, standard error of the mean is approximately sample standard deviation divided by square root of n. Quadrupling sample size roughly halves the standard error.",
+          fr: "Pour un échantillon indépendant, l’erreur standard de la moyenne est approximativement égale à l’écart-type d’échantillon divisé par racine de n. Multiplier la taille par quatre divise approximativement l’erreur standard par deux.",
+        },
+        Professional: {
+          en: "Financial samples often violate simple iid assumptions through autocorrelation, heteroskedasticity and regime shifts. Naive standard errors can then overstate precision, motivating robust, clustered or time-series-aware inference.",
+          fr: "Les échantillons financiers violent souvent les hypothèses iid simples via autocorrélation, hétéroscédasticité et changements de régime. Les erreurs standards naïves peuvent alors surestimer la précision, d’où l’usage d’inférences robustes, clusterisées ou adaptées aux séries temporelles.",
+        },
+      },
+      formula: {
+        label: { en: "Standard error of the mean", fr: "Erreur standard de la moyenne / Standard error" },
+        expression: "SE(x̄) ≈ s ÷ √n",
+        explanation: {
+          en: "s is sample standard deviation and n sample size under the standard approximation.",
+          fr: "s est l’écart-type de l’échantillon et n sa taille dans l’approximation standard.",
+        },
+        workedExample: {
+          en: "If s=20 and n=100, SE≈20/10=2.",
+          fr: "Si s=20 et n=100, SE≈20/10=2.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Population",
+          fr: "population",
+          definition: {
+            en: "The full set of observations or units the analysis aims to understand.",
+            fr: "Ensemble complet des observations ou unités que l’analyse cherche à comprendre.",
+          },
+        },
+        {
+          en: "Sampling bias",
+          fr: "biais d’échantillonnage / sampling bias",
+          definition: {
+            en: "Systematic distortion caused by a sample that is not representative of the target population.",
+            fr: "Distorsion systématique causée par un échantillon non représentatif de la population cible.",
+          },
+        },
+      ],
+    },
+    {
+      id: "confidence",
+      kicker: { en: "08 · CONFIDENCE & UNCERTAINTY", fr: "08 · CONFIANCE & INCERTITUDE" },
+      title: {
+        en: "An estimate should come with uncertainty, not false precision",
+        fr: "Une estimation doit être accompagnée d’incertitude, pas d’une fausse précision",
+      },
+      coreFacts: [
+        {
+          en: "A confidence interval is a range produced by a procedure designed to contain the true parameter at a stated long-run frequency under assumptions.",
+          fr: "Un intervalle de confiance / confidence interval est une plage produite par une procédure conçue pour contenir le vrai paramètre avec une fréquence donnée à long terme sous certaines hypothèses.",
+        },
+        {
+          en: "A wider confidence interval reflects less precision; a narrower interval reflects more precision under the same framework.",
+          fr: "Un intervalle plus large reflète moins de précision ; un intervalle plus étroit davantage de précision dans le même cadre.",
+        },
+        {
+          en: "Confidence level and interval width trade off: higher confidence generally requires a wider interval, all else equal.",
+          fr: "Niveau de confiance et largeur de l’intervalle impliquent un compromis : un niveau plus élevé exige généralement un intervalle plus large, toutes choses égales par ailleurs.",
+        },
+        {
+          en: "Statistical significance is not the same as economic significance.",
+          fr: "La significativité statistique / statistical significance n’est pas la même chose que la significativité économique / economic significance.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If an estimated average is 10 with a rough 95% interval from 8 to 12, the result is not saying the true value is definitely inside that one interval with 95% probability under frequentist interpretation. It means the method would capture the true value about 95% of the time over repeated samples under the assumptions.",
+          fr: "Si une moyenne estimée vaut 10 avec un intervalle à 95 % de 8 à 12, l’interprétation fréquentiste ne dit pas que le vrai nombre a 95 % de probabilité d’être dans cet intervalle particulier. Elle dit que la procédure couvrirait la vraie valeur environ 95 % du temps sur des échantillons répétés sous les hypothèses.",
+        },
+        Intermediate: {
+          en: "Approximate normal confidence intervals use estimate plus or minus a critical value times standard error. More data reduce standard error, while higher confidence increases the critical value.",
+          fr: "Les intervalles approximativement normaux utilisent estimation plus ou moins valeur critique multipliée par erreur standard. Davantage de données réduisent l’erreur standard, tandis qu’un niveau de confiance plus élevé augmente la valeur critique.",
+        },
+        Professional: {
+          en: "Inference quality depends on model assumptions, estimator properties and data dependence. In finance, multiple testing, data mining and non-stationarity can make apparently precise confidence intervals misleading.",
+          fr: "La qualité de l’inférence dépend des hypothèses du modèle, des propriétés de l’estimateur et de la dépendance des données. En finance, multiple testing, data mining et non-stationnarité peuvent rendre trompeurs des intervalles apparemment précis.",
+        },
+      },
+      formula: {
+        label: { en: "Approximate 95% confidence interval", fr: "Intervalle de confiance approximatif à 95 %" },
+        expression: "Estimate ± 1.96 × Standard Error",
+        explanation: {
+          en: "This common approximation relies on conditions supporting an approximately normal sampling distribution.",
+          fr: "Cette approximation courante repose sur des conditions permettant une distribution d’échantillonnage approximativement normale.",
+        },
+        workedExample: {
+          en: "Estimate 10, SE 1 → approximate 95% interval = 10 ± 1.96 = [8.04, 11.96].",
+          fr: "Estimation 10, SE 1 → intervalle approximatif à 95 % = 10 ± 1,96 = [8,04 ; 11,96].",
+        },
+      },
+      marketConnection: {
+        en: "A strategy backtest with a tiny apparent edge but huge uncertainty should not be treated as equally credible to one supported by a large, robust sample.",
+        fr: "Un backtest avec un très petit edge apparent mais une énorme incertitude ne doit pas être traité comme aussi crédible qu’un résultat soutenu par un échantillon large et robuste.",
+      },
+    },
+    {
+      id: "covariance-correlation-causation",
+      kicker: { en: "09 · DEPENDENCE & CAUSATION", fr: "09 · DÉPENDANCE & CAUSALITÉ" },
+      title: {
+        en: "Correlation measures co-movement; it does not prove cause",
+        fr: "La corrélation mesure le co-mouvement ; elle ne prouve pas la causalité",
+      },
+      coreFacts: [
+        {
+          en: "Covariance measures joint variation but depends on the scale of the variables.",
+          fr: "La covariance mesure la variation conjointe mais dépend de l’échelle des variables.",
+        },
+        {
+          en: "Correlation standardizes covariance between −1 and +1.",
+          fr: "La corrélation standardise la covariance entre −1 et +1.",
+        },
+        {
+          en: "Correlation does not establish that one variable causes the other.",
+          fr: "Une corrélation n’établit pas qu’une variable cause l’autre.",
+        },
+        {
+          en: "A hidden common factor can create correlation between two variables even when neither causes the other.",
+          fr: "Un facteur commun caché peut créer une corrélation entre deux variables même si aucune ne cause l’autre.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Ice-cream sales and sunburns may rise together in summer. That does not mean ice cream causes sunburn. Hot weather affects both. Finance has the same problem: two assets can move together because both react to interest rates.",
+          fr: "Les ventes de glaces et les coups de soleil peuvent augmenter ensemble en été. Cela ne signifie pas que les glaces causent les coups de soleil. La chaleur influence les deux. En finance, deux actifs peuvent bouger ensemble parce qu’ils réagissent tous deux aux taux d’intérêt.",
+        },
+        Intermediate: {
+          en: "Correlation is useful for portfolio construction and risk analysis, but causal interpretation requires stronger identification. Reverse causality, omitted variables and regime dependence can all create misleading relationships.",
+          fr: "La corrélation est utile pour la construction de portefeuille et l’analyse de risque, mais une interprétation causale exige une identification plus forte. Causalité inverse, variables omises et dépendance au régime peuvent créer des relations trompeuses.",
+        },
+        Professional: {
+          en: "Finance frequently observes endogenous systems where prices, flows and expectations influence each other. Causal claims require experimental or quasi-experimental identification, structural assumptions or carefully designed econometrics rather than correlation alone.",
+          fr: "La finance observe fréquemment des systèmes endogènes où prix, flux et anticipations s’influencent mutuellement. Les affirmations causales nécessitent identification expérimentale ou quasi-expérimentale, hypothèses structurelles ou économétrie soigneusement conçue plutôt qu’une simple corrélation.",
+        },
+      },
+      formula: {
+        label: { en: "Correlation from covariance", fr: "Corrélation à partir de la covariance" },
+        expression: "ρ₍X,Y₎ = Cov(X,Y) ÷ (σX × σY)",
+        explanation: {
+          en: "Correlation is scale-free but remains a measure of linear association, not causation.",
+          fr: "La corrélation est indépendante de l’échelle mais reste une mesure d’association linéaire, pas de causalité.",
+        },
+        workedExample: {
+          en: "Cov=0.012, σX=20%, σY=30% → correlation = 0.012/(0.20×0.30)=0.20.",
+          fr: "Cov=0,012, σX=20 %, σY=30 % → corrélation = 0,012/(0,20×0,30)=0,20.",
+        },
+      },
+      comparison: {
+        title: { en: "Correlation vs causation", fr: "Corrélation vs causalité" },
+        headers: [
+          { en: "Concept", fr: "Concept" },
+          { en: "What it tells you", fr: "Ce qu’il indique" },
+          { en: "What it does not prove", fr: "Ce qu’il ne prouve pas" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Correlation", fr: "Corrélation / correlation" },
+            { en: "Linear co-movement", fr: "Co-mouvement linéaire" },
+            { en: "Cause and effect", fr: "Cause et effet" },
+          ]},
+          { cells: [
+            { en: "Causal relationship", fr: "Relation causale" },
+            { en: "Changing one variable changes another under a valid identification framework", fr: "Modifier une variable change l’autre dans un cadre d’identification valide" },
+            { en: "Established by correlation alone", fr: "Établie par simple corrélation" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Omitted-variable bias",
+          fr: "biais de variable omise / omitted-variable bias",
+          definition: {
+            en: "Bias that can arise when a relevant variable affecting the relationship is excluded.",
+            fr: "Biais pouvant apparaître lorsqu’une variable pertinente influençant la relation est exclue.",
+          },
+        },
+        {
+          en: "Endogeneity",
+          fr: "endogénéité / endogeneity",
+          definition: {
+            en: "A situation where an explanatory variable is correlated with the model error or jointly determined with the outcome.",
+            fr: "Situation où une variable explicative est corrélée avec l’erreur du modèle ou déterminée conjointement avec le résultat.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "mean-median",
+      question: {
+        en: "For the data 2, 3, 4, 5, 26, what are the mean and median?",
+        fr: "Pour les données 2, 3, 4, 5, 26, quelles sont la moyenne et la médiane ?",
+      },
+      options: [
+        { id: "a", label: { en: "Mean 8, median 4", fr: "Moyenne 8, médiane 4" } },
+        { id: "b", label: { en: "Mean 4, median 8", fr: "Moyenne 4, médiane 8" } },
+        { id: "c", label: { en: "Mean 5, median 5", fr: "Moyenne 5, médiane 5" } },
+        { id: "d", label: { en: "Mean 26, median 4", fr: "Moyenne 26, médiane 4" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "The mean is 40/5=8 and the middle ordered observation is 4.",
+        fr: "La moyenne vaut 40/5=8 et l’observation centrale triée vaut 4.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "sample-variance",
+      question: {
+        en: "For the sample 4, 5, 6, what is the sample standard deviation?",
+        fr: "Pour l’échantillon 4, 5, 6, quel est l’écart-type d’échantillon ?",
+      },
+      options: [
+        { id: "a", label: { en: "0", fr: "0" } },
+        { id: "b", label: { en: "1", fr: "1" } },
+        { id: "c", label: { en: "2", fr: "2" } },
+        { id: "d", label: { en: "5", fr: "5" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Mean=5; squared deviations sum to 2; sample variance=2/(3−1)=1; standard deviation=1.",
+        fr: "Moyenne=5 ; somme des écarts au carré=2 ; variance d’échantillon=2/(3−1)=1 ; écart-type=1.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "z-score",
+      question: {
+        en: "Mean=70, standard deviation=10 and x=90. What is the z-score?",
+        fr: "Moyenne=70, écart-type=10 et x=90. Quel est le z-score ?",
+      },
+      options: [
+        { id: "a", label: { en: "−2", fr: "−2" } },
+        { id: "b", label: { en: "−1", fr: "−1" } },
+        { id: "c", label: { en: "+1", fr: "+1" } },
+        { id: "d", label: { en: "+2", fr: "+2" } },
+      ],
+      correctOption: "d",
+      explanation: {
+        en: "(90−70)/10=+2.",
+        fr: "(90−70)/10=+2.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "independence",
+      question: {
+        en: "Two independent events each have probability 50%. What is the probability both occur?",
+        fr: "Deux événements indépendants ont chacun une probabilité de 50 %. Quelle est la probabilité que les deux se produisent ?",
+      },
+      options: [
+        { id: "a", label: { en: "25%", fr: "25 %" } },
+        { id: "b", label: { en: "50%", fr: "50 %" } },
+        { id: "c", label: { en: "75%", fr: "75 %" } },
+        { id: "d", label: { en: "100%", fr: "100 %" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "0.50×0.50=0.25, or 25%.",
+        fr: "0,50×0,50=0,25, soit 25 %.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "bayes",
+      question: {
+        en: "Why can a strong warning signal still produce a modest posterior probability of distress?",
+        fr: "Pourquoi un signal d’alerte fort peut-il malgré tout produire une probabilité postérieure modeste de difficulté ?",
+      },
+      options: [
+        { id: "a", label: { en: "Because base rates matter", fr: "Parce que les base rates comptent" } },
+        { id: "b", label: { en: "Because Bayes ignores prior information", fr: "Parce que Bayes ignore les informations a priori" } },
+        { id: "c", label: { en: "Because conditional probability is always 50%", fr: "Parce que toute probabilité conditionnelle vaut 50 %" } },
+        { id: "d", label: { en: "Because signals cannot contain information", fr: "Parce que les signaux ne peuvent jamais contenir d’information" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Posterior probability combines the prior base rate with signal reliability.",
+        fr: "La probabilité postérieure combine le base rate initial avec la fiabilité du signal.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "standard-error",
+      question: {
+        en: "If sample standard deviation is 20 and sample size is 100, approximate standard error of the mean is:",
+        fr: "Si l’écart-type d’échantillon vaut 20 et la taille 100, l’erreur standard approximative de la moyenne vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "0.2", fr: "0,2" } },
+        { id: "b", label: { en: "2", fr: "2" } },
+        { id: "c", label: { en: "10", fr: "10" } },
+        { id: "d", label: { en: "20", fr: "20" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "20/√100 = 20/10 = 2.",
+        fr: "20/√100 = 20/10 = 2.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "confidence-interval",
+      question: {
+        en: "Estimate=10 and standard error=1. What is the approximate 95% confidence interval using ±1.96 SE?",
+        fr: "Estimation=10 et erreur standard=1. Quel est l’intervalle de confiance approximatif à 95 % avec ±1,96 SE ?",
+      },
+      options: [
+        { id: "a", label: { en: "[9, 11]", fr: "[9 ; 11]" } },
+        { id: "b", label: { en: "[8.04, 11.96]", fr: "[8,04 ; 11,96]" } },
+        { id: "c", label: { en: "[0, 20]", fr: "[0 ; 20]" } },
+        { id: "d", label: { en: "[10, 11.96]", fr: "[10 ; 11,96]" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "10±1.96 gives approximately [8.04, 11.96].",
+        fr: "10±1,96 donne environ [8,04 ; 11,96].",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "correlation-causation",
+      question: {
+        en: "Which statement is correct?",
+        fr: "Quelle proposition est correcte ?",
+      },
+      options: [
+        { id: "a", label: { en: "High correlation proves causation", fr: "Une forte corrélation prouve la causalité" } },
+        { id: "b", label: { en: "Correlation measures linear co-movement but does not by itself prove causation", fr: "La corrélation mesure un co-mouvement linéaire mais ne prouve pas à elle seule la causalité" } },
+        { id: "c", label: { en: "Zero correlation always means independence", fr: "Une corrélation nulle signifie toujours indépendance" } },
+        { id: "d", label: { en: "Covariance and correlation are always numerically equal", fr: "Covariance et corrélation sont toujours numériquement égales" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Correlation measures association, not cause and effect.",
+        fr: "La corrélation mesure une association, pas une relation de cause à effet.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Explain the difference between standard deviation and standard error, and why that distinction matters in finance.",
+      fr: "Explique la différence entre écart-type / standard deviation et erreur standard / standard error, et pourquoi cette distinction compte en finance.",
+    },
+    framework: [
+      {
+        en: "Define standard deviation as dispersion of observations or returns around their mean.",
+        fr: "Définir l’écart-type comme la dispersion des observations ou rendements autour de leur moyenne.",
+      },
+      {
+        en: "Define standard error as uncertainty around an estimated statistic, such as the sample mean.",
+        fr: "Définir l’erreur standard comme l’incertitude autour d’une statistique estimée, par exemple la moyenne d’échantillon.",
+      },
+      {
+        en: "State SE(mean) ≈ s/√n under standard assumptions.",
+        fr: "Donner SE(mean) ≈ s/√n sous des hypothèses standard.",
+      },
+      {
+        en: "Explain that more data can reduce estimation uncertainty without reducing the underlying volatility of the asset.",
+        fr: "Expliquer que davantage de données peuvent réduire l’incertitude d’estimation sans réduire la volatilité réelle de l’actif.",
+      },
+      {
+        en: "Connect the distinction to confidence in backtests, expected returns and risk estimates.",
+        fr: "Relier la distinction à la confiance dans backtests, expected returns et estimations de risque.",
+      },
+    ],
+    sample: {
+      en: "Standard deviation measures how dispersed the underlying observations are, so for returns it is often used as a measure of volatility. Standard error measures how uncertain an estimated statistic is. For the sample mean, a common approximation is standard deviation divided by the square root of sample size. That distinction matters because adding more observations can make our estimate of average return more precise even though the asset itself remains just as volatile. In finance, confusing the two can make a backtest or expected-return estimate look much more reliable than it really is.",
+      fr: "L’écart-type mesure la dispersion des observations sous-jacentes ; pour des rendements, il est souvent utilisé comme mesure de volatilité. L’erreur standard mesure l’incertitude autour d’une statistique estimée. Pour la moyenne d’échantillon, une approximation courante est écart-type divisé par racine de la taille de l’échantillon. La distinction compte car ajouter davantage d’observations peut rendre notre estimation du rendement moyen plus précise sans rendre l’actif lui-même moins volatil. En finance, confondre les deux peut faire paraître un backtest ou une estimation d’expected return beaucoup plus fiable qu’elle ne l’est réellement.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
