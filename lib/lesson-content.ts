@@ -26401,7 +26401,496 @@ export const maAnalysisLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson];
+
+export const advancedValuationLesson: FinanceLesson = {
+  slug: "year-3-advanced-valuation",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Advanced Valuation", fr: "Valorisation avancée / Advanced Valuation" },
+  title: { en: "Advanced Valuation", fr: "Valorisation avancée / Advanced Valuation" },
+  subtitle: {
+    en: "Move beyond mechanical DCFs and trading multiples. Learn how professionals normalize earnings, choose the right cash-flow framework, stress terminal value, value complex businesses and turn valuation into an investment or deal decision.",
+    fr: "Aller au-delà des DCF et multiples mécaniques. Apprendre à normaliser les résultats, choisir le bon cadre de cash-flow, stresser la valeur terminale, valoriser des entreprises complexes et transformer la valorisation en décision d’investissement ou de deal.",
+  },
+  duration: { en: "155–190 min", fr: "155–190 min" },
+  prerequisites: [
+    { en: "DCF & Relative Valuation", fr: "DCF & Relative Valuation" },
+    { en: "Financial Statement Analysis", fr: "Analyse des états financiers" },
+    { en: "Corporate Finance", fr: "Corporate Finance" },
+    { en: "Investment Banking", fr: "Investment Banking" },
+    { en: "M&A Analysis", fr: "M&A Analysis" },
+  ],
+  objectives: [
+    { en: "Normalize reported earnings and cash flow before applying valuation methods.", fr: "Normaliser les résultats publiés et les cash flows avant d’appliquer les méthodes de valorisation." },
+    { en: "Choose between FCFF, FCFE, dividend, residual-income and asset-based frameworks.", fr: "Choisir entre FCFF, FCFE, dividendes, residual income et approches patrimoniales." },
+    { en: "Estimate and challenge WACC, cost of equity and capital-structure assumptions.", fr: "Estimer et challenger le WACC, le cost of equity et les hypothèses de structure du capital." },
+    { en: "Build defensible terminal-value assumptions using growth and exit-multiple methods.", fr: "Construire des hypothèses défendables de terminal value avec croissance perpétuelle et exit multiples." },
+    { en: "Use trading comps, transaction comps and SOTP while controlling for business mix and accounting differences.", fr: "Utiliser trading comps, transaction comps et SOTP en contrôlant le business mix et les différences comptables." },
+    { en: "Value cyclical, high-growth, financial and multi-segment companies with appropriate adjustments.", fr: "Valoriser les sociétés cycliques, de forte croissance, financières et multi-segments avec les ajustements appropriés." },
+    { en: "Convert valuation ranges into an investment, financing or transaction conclusion.", fr: "Transformer une fourchette de valorisation en conclusion d’investissement, de financement ou de transaction." },
+  ],
+  overviewFlow: {
+    title: { en: "From reported numbers to decision-ready valuation", fr: "Des chiffres publiés à une valorisation exploitable pour décider" },
+    steps: [
+      { title: { en: "Normalize", fr: "Normaliser" }, detail: { en: "Earnings · cash flow · capital", fr: "Résultats · cash flow · capital" } },
+      { title: { en: "Select framework", fr: "Choisir le cadre" }, detail: { en: "DCF · multiples · SOTP · alternatives", fr: "DCF · multiples · SOTP · alternatives" } },
+      { title: { en: "Stress assumptions", fr: "Stresser les hypothèses" }, detail: { en: "Growth · margins · WACC · terminal value", fr: "Croissance · marges · WACC · terminal value" } },
+      { title: { en: "Decide", fr: "Décider" }, detail: { en: "Range · upside/downside · action", fr: "Fourchette · upside/downside · action" } },
+    ],
+  },
+  sections: [
+    {
+      id: "normalization",
+      kicker: { en: "01 · NORMALIZATION", fr: "01 · NORMALISATION" },
+      title: { en: "Valuation starts by separating sustainable economics from reported accounting", fr: "La valorisation commence par séparer l’économie durable de la comptabilité publiée" },
+      coreFacts: [
+        { en: "Reported earnings can contain one-off gains, restructuring charges, unusual litigation, temporary tax effects or acquisition accounting.", fr: "Les résultats publiés peuvent contenir gains exceptionnels, restructuring charges, litiges inhabituels, effets fiscaux temporaires ou purchase accounting." },
+        { en: "Normalization asks what revenue, margins, taxes, capex and working capital should look like on a sustainable basis.", fr: "La normalisation cherche le niveau soutenable du chiffre d’affaires, des marges, taxes, capex et working capital." },
+        { en: "An adjustment is useful only when it improves comparability or forecasts future economics more accurately.", fr: "Un ajustement n’est utile que s’il améliore la comparabilité ou la prévision de l’économie future." },
+        { en: "Repeated 'one-off' costs may be economically recurring and should not automatically be added back.", fr: "Des coûts 'exceptionnels' répétés peuvent être économiquement récurrents et ne doivent pas être automatiquement réintégrés." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Before valuing a company, clean the numbers. If a company sold a building for a large gain, that gain does not mean its normal business suddenly became more profitable.",
+          fr: "Avant de valoriser une entreprise, il faut nettoyer les chiffres. Si elle vend un immeuble avec un gros gain, cela ne signifie pas que son activité normale est soudainement plus rentable.",
+        },
+        Intermediate: {
+          en: "Analysts often normalize EBITDA, EBIT, net income and free cash flow by removing genuinely non-recurring items and rebuilding sustainable tax, capex and working-capital assumptions.",
+          fr: "Les analystes normalisent souvent EBITDA, EBIT, net income et free cash flow en retirant les éléments réellement non récurrents et en reconstruisant des hypothèses soutenables de taxes, capex et working capital.",
+        },
+        Professional: {
+          en: "Normalization is judgment-intensive. The key is to reconcile adjusted metrics back to reported statements, document every add-back, distinguish accounting non-cash items from real economic costs and avoid management-defined metrics that systematically flatter profitability.",
+          fr: "La normalisation demande du jugement. Il faut réconcilier les métriques ajustées avec les comptes publiés, documenter chaque add-back, distinguer les éléments comptables non cash des vrais coûts économiques et éviter les métriques management qui embellissent systématiquement la rentabilité.",
+        },
+      },
+      vocabulary: [
+        { en: "Normalized earnings", fr: "résultats normalisés", definition: { en: "Estimate of sustainable recurring profitability after removing distortions.", fr: "Estimation de la rentabilité récurrente soutenable après retrait des distorsions." } },
+        { en: "Add-back", fr: "add-back", definition: { en: "Expense added back to reported profit when judged non-recurring or non-economic for the valuation purpose.", fr: "Charge réintégrée au résultat lorsqu’elle est jugée non récurrente ou non économique pour la valorisation." } },
+        { en: "Quality of earnings", fr: "quality of earnings", definition: { en: "Degree to which reported profit reflects durable, cash-generative economics.", fr: "Degré auquel le résultat publié reflète une économie durable et génératrice de cash." } },
+      ],
+    },
+    {
+      id: "cash-flow-frameworks",
+      kicker: { en: "02 · CASH-FLOW FRAMEWORKS", fr: "02 · CADRES DE CASH-FLOW" },
+      title: { en: "The correct cash flow depends on what claim you are valuing", fr: "Le bon cash flow dépend de la créance que tu valorises" },
+      coreFacts: [
+        { en: "FCFF values the operations for all capital providers and is discounted at WACC.", fr: "Le FCFF valorise les opérations pour tous les apporteurs de capitaux et est actualisé au WACC." },
+        { en: "FCFE values cash flow available to common equity and is discounted at the cost of equity.", fr: "Le FCFE valorise le cash flow disponible pour les actionnaires ordinaires et est actualisé au cost of equity." },
+        { en: "Dividend and residual-income models can be more useful when free cash flow is difficult to interpret, especially for financial institutions.", fr: "Les modèles de dividendes et residual income peuvent être plus utiles lorsque le free cash flow est difficile à interpréter, notamment pour les institutions financières." },
+        { en: "Enterprise value and equity value must never be mixed with the wrong cash-flow or discount-rate framework.", fr: "Enterprise value et equity value ne doivent jamais être mélangées avec le mauvais cash-flow ou taux d’actualisation." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you value cash available to both lenders and shareholders, you obtain enterprise value. If you value only cash left for shareholders after debt flows, you obtain equity value.",
+          fr: "Si tu valorises le cash disponible pour prêteurs et actionnaires, tu obtiens l’enterprise value. Si tu valorises seulement le cash restant pour les actionnaires après les flux de dette, tu obtiens l’equity value.",
+        },
+        Intermediate: {
+          en: "FCFF is usually cleaner when leverage may change because financing is handled through WACC rather than inside cash flow. FCFE can be intuitive when debt policy is stable and equity cash flows are forecast reliably.",
+          fr: "Le FCFF est souvent plus propre lorsque le leverage peut changer car le financement est traité via le WACC plutôt qu’à l’intérieur du cash flow. Le FCFE peut être intuitif lorsque la politique de dette est stable et les cash flows equity prévisibles.",
+        },
+        Professional: {
+          en: "Framework selection should reflect the economic claim, capital structure and industry. For banks, debt is closer to an operating input than a financing choice, so equity-based frameworks such as excess return or dividend capacity are often more meaningful than standard FCFF.",
+          fr: "Le choix du cadre doit refléter la créance économique, la structure du capital et le secteur. Pour les banques, la dette ressemble davantage à un input opérationnel qu’à un choix de financement, donc des cadres equity comme excess return ou dividend capacity sont souvent plus pertinents qu’un FCFF standard.",
+        },
+      },
+      formula: {
+        label: { en: "Free cash flow to firm", fr: "Free cash flow to firm" },
+        expression: "FCFF = EBIT × (1 − Tax Rate) + D&A − Capex − ΔNWC",
+        explanation: { en: "This is the unlevered cash flow generated by operations before debt financing flows.", fr: "C’est le cash flow unlevered généré par l’exploitation avant les flux de financement par dette." },
+      },
+      vocabulary: [
+        { en: "FCFF", fr: "FCFF", definition: { en: "Cash flow available to debt and equity capital providers.", fr: "Cash flow disponible pour les apporteurs de dette et d’equity." } },
+        { en: "FCFE", fr: "FCFE", definition: { en: "Cash flow available to common shareholders after debt financing effects.", fr: "Cash flow disponible pour les actionnaires après effets du financement par dette." } },
+        { en: "Residual income", fr: "residual income", definition: { en: "Accounting profit after charging equity capital for its required return.", fr: "Résultat comptable après imputation d’un coût au capital equity." } },
+      ],
+    },
+    {
+      id: "discount-rates",
+      kicker: { en: "03 · DISCOUNT RATES", fr: "03 · TAUX D’ACTUALISATION" },
+      title: { en: "A small discount-rate change can move valuation dramatically", fr: "Une petite variation du taux d’actualisation peut déplacer fortement la valorisation" },
+      coreFacts: [
+        { en: "WACC combines the required returns of debt and equity using market-value capital weights.", fr: "Le WACC combine les rendements exigés de la dette et de l’equity avec des pondérations en valeur de marché." },
+        { en: "Cost of equity is often estimated with CAPM but beta, risk-free rate and equity-risk premium require judgment.", fr: "Le cost of equity est souvent estimé avec le CAPM mais beta, risk-free rate et equity-risk premium demandent du jugement." },
+        { en: "Cost of debt should reflect the company’s current marginal borrowing cost rather than only the historical coupon.", fr: "Le cost of debt doit refléter le coût marginal actuel d’emprunt plutôt que seulement le coupon historique." },
+        { en: "Target capital structure can be more appropriate than current capital structure when leverage is temporarily abnormal.", fr: "La target capital structure peut être plus appropriée que la structure actuelle lorsque le leverage est temporairement anormal." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "The discount rate is the return investors require for taking the risk of the cash flows. Riskier cash flows should generally be worth less today, all else equal.",
+          fr: "Le taux d’actualisation est le rendement exigé par les investisseurs pour prendre le risque des cash flows. Des cash flows plus risqués valent généralement moins aujourd’hui, toutes choses égales par ailleurs.",
+        },
+        Intermediate: {
+          en: "For WACC, use market values, a forward-looking cost of debt and a cost of equity consistent with the company’s business and leverage. Do not automatically copy a single data-provider WACC.",
+          fr: "Pour le WACC, utilise des valeurs de marché, un cost of debt forward-looking et un cost of equity cohérent avec le business et le leverage. Ne recopie pas automatiquement le WACC d’un data provider.",
+        },
+        Professional: {
+          en: "In complex cases, analysts unlever peer betas, estimate an operating beta, relever it to a target capital structure and consider country, size or project-specific risk only when those adjustments are conceptually justified rather than double-counting risk already embedded in cash flows.",
+          fr: "Dans les cas complexes, les analystes désendettent les betas des peers, estiment un operating beta, le réendettent avec une target capital structure et considèrent country, size ou project-specific risk seulement si ces ajustements sont conceptuellement justifiés sans compter deux fois un risque déjà inclus dans les cash flows.",
+        },
+      },
+      formula: {
+        label: { en: "Weighted average cost of capital", fr: "Weighted average cost of capital" },
+        expression: "WACC = E/(D+E) × Re + D/(D+E) × Rd × (1 − T)",
+        explanation: { en: "Use market-value weights and a debt cost consistent with current financing conditions.", fr: "Utiliser des pondérations en valeur de marché et un coût de dette cohérent avec les conditions de financement actuelles." },
+      },
+      vocabulary: [
+        { en: "Marginal cost of debt", fr: "marginal cost of debt", definition: { en: "Rate the company would likely pay on new borrowing today.", fr: "Taux que la société paierait probablement sur une nouvelle dette aujourd’hui." } },
+        { en: "Unlevered beta", fr: "beta unlevered", definition: { en: "Beta adjusted to remove the effect of financial leverage.", fr: "Beta ajusté pour retirer l’effet du leverage financier." } },
+        { en: "Target capital structure", fr: "target capital structure", definition: { en: "Long-run debt/equity mix judged appropriate for the business.", fr: "Mix dette/equity de long terme jugé approprié pour l’entreprise." } },
+      ],
+    },
+    {
+      id: "terminal-value",
+      kicker: { en: "04 · TERMINAL VALUE", fr: "04 · TERMINAL VALUE" },
+      title: { en: "Terminal value is often the largest DCF component, so it deserves the most skepticism", fr: "La terminal value est souvent la plus grosse composante du DCF, donc elle mérite le plus de scepticisme" },
+      coreFacts: [
+        { en: "A perpetuity-growth terminal value assumes the company reaches a stable state after the explicit forecast period.", fr: "Une terminal value par croissance perpétuelle suppose que la société atteint un état stable après la période de forecast explicite." },
+        { en: "Long-run growth should normally be consistent with the economy and inflation of the relevant market.", fr: "La croissance de long terme doit normalement être cohérente avec l’économie et l’inflation du marché concerné." },
+        { en: "An exit multiple should reflect normalized terminal-period fundamentals, not simply today’s market multiple.", fr: "Un exit multiple doit refléter des fondamentaux normalisés en période terminale, pas simplement le multiple de marché actuel." },
+        { en: "If terminal value dominates enterprise value, small assumptions can overwhelm the quality of the explicit forecast.", fr: "Si la terminal value domine l’enterprise value, de petites hypothèses peuvent écraser la qualité du forecast explicite." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A DCF cannot forecast every year forever, so it estimates all value after the forecast period with a terminal value. That shortcut is powerful but sensitive.",
+          fr: "Un DCF ne peut pas prévoir chaque année pour toujours, donc il estime toute la valeur après la période explicite avec une terminal value. Ce raccourci est puissant mais sensible.",
+        },
+        Intermediate: {
+          en: "With the perpetuity method, terminal growth must remain below the discount rate and should represent stable economics. With the exit-multiple method, the multiple should match the company’s expected growth, margins, returns and risk at exit.",
+          fr: "Avec la méthode perpétuelle, la croissance terminale doit rester inférieure au taux d’actualisation et représenter une économie stable. Avec l’exit multiple, le multiple doit correspondre à la croissance, aux marges, aux returns et au risque attendus à la sortie.",
+        },
+        Professional: {
+          en: "A robust DCF cross-checks both methods, calculates implied exit multiples from the perpetuity case and implied perpetual growth from the exit-multiple case, and tests whether reinvestment assumptions are consistent with growth and return on invested capital.",
+          fr: "Un DCF robuste croise les deux méthodes, calcule l’implied exit multiple du cas perpétuel et l’implied perpetual growth du cas exit multiple, puis vérifie que les hypothèses de réinvestissement sont cohérentes avec croissance et ROIC.",
+        },
+      },
+      formula: {
+        label: { en: "Perpetuity-growth terminal value", fr: "Terminal value en croissance perpétuelle" },
+        expression: "TV = FCFₙ₊₁ / (WACC − g)",
+        explanation: { en: "The terminal growth rate g should reflect a sustainable long-run state.", fr: "Le taux de croissance terminal g doit refléter un état soutenable à long terme." },
+      },
+      vocabulary: [
+        { en: "Perpetuity growth", fr: "croissance perpétuelle", definition: { en: "Constant long-run growth assumption used beyond the explicit forecast.", fr: "Hypothèse de croissance constante à long terme au-delà du forecast explicite." } },
+        { en: "Exit multiple", fr: "exit multiple", definition: { en: "Valuation multiple applied to a terminal-period financial metric.", fr: "Multiple de valorisation appliqué à une métrique financière en période terminale." } },
+        { en: "Implied multiple", fr: "implied multiple", definition: { en: "Multiple mathematically embedded in a valuation produced by another method.", fr: "Multiple implicitement intégré dans une valorisation issue d’une autre méthode." } },
+      ],
+    },
+    {
+      id: "relative-valuation",
+      kicker: { en: "05 · RELATIVE VALUATION", fr: "05 · VALORISATION RELATIVE" },
+      title: { en: "A multiple is only meaningful when the numerator, denominator and business economics match", fr: "Un multiple n’a de sens que si numérateur, dénominateur et économie du business sont cohérents" },
+      coreFacts: [
+        { en: "Enterprise-value multiples should generally be paired with pre-interest metrics such as revenue, EBITDA or EBIT.", fr: "Les multiples d’enterprise value doivent généralement être associés à des métriques avant intérêts comme revenue, EBITDA ou EBIT." },
+        { en: "Equity-value multiples should generally be paired with after-interest metrics such as net income, EPS or book value.", fr: "Les multiples d’equity value doivent généralement être associés à des métriques après intérêts comme net income, EPS ou book value." },
+        { en: "Peer selection matters more than the number of companies in the comp set.", fr: "La sélection des peers compte davantage que le nombre de sociétés dans le comp set." },
+        { en: "Differences in growth, margins, capital intensity, accounting and leverage can justify materially different multiples.", fr: "Les différences de croissance, marges, intensité capitalistique, comptabilité et leverage peuvent justifier des multiples très différents." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company trading at 20× earnings is not automatically expensive. It may deserve a higher multiple if it grows faster, earns better returns or has lower risk than peers.",
+          fr: "Une entreprise à 20× les bénéfices n’est pas automatiquement chère. Elle peut mériter un multiple plus élevé si elle croît plus vite, gagne de meilleurs returns ou présente moins de risque que ses peers.",
+        },
+        Intermediate: {
+          en: "Use forward metrics when the question is forward-looking, normalize cyclical earnings, and check that accounting treatments such as leases, stock compensation or R&D capitalization do not distort comparisons.",
+          fr: "Utilise des métriques forward lorsque la question est forward-looking, normalise les earnings cycliques et vérifie que les traitements comptables comme leases, stock compensation ou capitalisation de R&D ne déforment pas les comparaisons.",
+        },
+        Professional: {
+          en: "Relative valuation becomes stronger when the analyst links the multiple to its economic drivers. For example, higher P/E can be justified by higher expected growth, higher payout, stronger ROE and lower cost of equity. This prevents peer-median valuation from becoming a purely mechanical exercise.",
+          fr: "La valorisation relative devient plus forte lorsque l’analyste relie le multiple à ses drivers économiques. Par exemple, un P/E plus élevé peut être justifié par une croissance attendue supérieure, un payout plus fort, un ROE meilleur et un cost of equity plus faible. Cela évite de transformer la médiane des peers en exercice purement mécanique.",
+        },
+      },
+      comparison: {
+        title: { en: "Common valuation multiples", fr: "Multiples de valorisation courants" },
+        headers: [{ en: "Multiple", fr: "Multiple" }, { en: "Best suited for", fr: "Adapté à" }, { en: "Main caution", fr: "Prudence principale" }],
+        rows: [
+          { cells: [{ en: "EV / EBITDA", fr: "EV / EBITDA" }, { en: "Operating businesses with comparable capital intensity", fr: "Businesses opérationnels avec intensité capitalistique comparable" }, { en: "Ignores capex and tax differences", fr: "Ignore les différences de capex et taxes" }] },
+          { cells: [{ en: "EV / EBIT", fr: "EV / EBIT" }, { en: "Businesses where D&A reflects real asset consumption", fr: "Businesses où D&A reflète une vraie consommation d’actifs" }, { en: "Still sensitive to accounting policy", fr: "Reste sensible aux politiques comptables" }] },
+          { cells: [{ en: "P / E", fr: "P / E" }, { en: "Stable equity earnings", fr: "Earnings equity stables" }, { en: "Affected by leverage and non-operating items", fr: "Affecté par leverage et éléments non opérationnels" }] },
+          { cells: [{ en: "P / B", fr: "P / B" }, { en: "Banks and balance-sheet-driven businesses", fr: "Banques et businesses guidés par le bilan" }, { en: "Book-value quality matters", fr: "La qualité de la book value compte" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Forward multiple", fr: "forward multiple", definition: { en: "Multiple using forecast rather than historical financial metrics.", fr: "Multiple utilisant des métriques financières prévues plutôt qu’historiques." } },
+        { en: "Peer set", fr: "peer set", definition: { en: "Group of comparable companies used as relative valuation references.", fr: "Groupe de sociétés comparables utilisé comme référence de valorisation relative." } },
+        { en: "Re-rating", fr: "re-rating", definition: { en: "Expansion or contraction of the valuation multiple applied by the market.", fr: "Expansion ou contraction du multiple de valorisation appliqué par le marché." } },
+      ],
+    },
+    {
+      id: "sotp-and-complex-businesses",
+      kicker: { en: "06 · SOTP & COMPLEX BUSINESSES", fr: "06 · SOTP & BUSINESSES COMPLEXES" },
+      title: { en: "A conglomerate should not be forced into one multiple if its segments have different economics", fr: "Un conglomérat ne doit pas être forcé dans un seul multiple si ses segments ont des économies différentes" },
+      coreFacts: [
+        { en: "Sum-of-the-parts values each business segment separately and then combines them.", fr: "La sum-of-the-parts valorise chaque segment séparément puis les combine." },
+        { en: "Different segments may require different peers, multiples or DCF assumptions.", fr: "Des segments différents peuvent nécessiter des peers, multiples ou hypothèses DCF différents." },
+        { en: "Corporate costs, holding-company debt, minorities and non-operating assets must be handled explicitly.", fr: "Les corporate costs, holding-company debt, minorities et actifs non opérationnels doivent être traités explicitement." },
+        { en: "A conglomerate discount or premium should not be assumed without economic justification.", fr: "Un conglomerate discount ou premium ne doit pas être supposé sans justification économique." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If one company owns a software business and an industrial business, using a single market multiple can hide important differences. SOTP values them separately.",
+          fr: "Si une entreprise possède un business software et un business industriel, utiliser un seul multiple peut masquer des différences importantes. Le SOTP les valorise séparément.",
+        },
+        Intermediate: {
+          en: "For each segment, choose a valuation method that fits its economics, then add excess cash and other assets, subtract debt and other claims, and account for central costs before reaching equity value.",
+          fr: "Pour chaque segment, choisis une méthode cohérente avec son économie, puis ajoute excess cash et autres actifs, retranche dette et autres créances, et traite les coûts centraux avant d’arriver à l’equity value.",
+        },
+        Professional: {
+          en: "SOTP is especially useful in restructurings, spin-offs and activist situations because it exposes hidden cross-subsidies and capital-allocation choices. But the analyst must avoid double-counting shared assets, tax effects or corporate overhead.",
+          fr: "Le SOTP est particulièrement utile dans restructurings, spin-offs et situations activistes car il révèle les cross-subsidies et choix d’allocation du capital. Mais l’analyste doit éviter de compter deux fois les actifs partagés, effets fiscaux ou corporate overhead.",
+        },
+      },
+      formula: {
+        label: { en: "SOTP equity value", fr: "Equity value SOTP" },
+        expression: "Equity Value = Σ Segment EV + Non-operating Assets − Net Debt − Other Claims",
+        explanation: { en: "Adjust explicitly for corporate costs, minorities, pensions and other claims where relevant.", fr: "Ajuster explicitement corporate costs, minorities, pensions et autres créances si nécessaire." },
+      },
+      vocabulary: [
+        { en: "Sum-of-the-parts", fr: "sum-of-the-parts", definition: { en: "Valuation approach that values separate segments independently.", fr: "Approche de valorisation qui valorise séparément les différents segments." } },
+        { en: "Conglomerate discount", fr: "conglomerate discount", definition: { en: "Market valuation below the apparent sum of separately valued businesses.", fr: "Valorisation de marché inférieure à la somme apparente des businesses valorisés séparément." } },
+      ],
+    },
+    {
+      id: "special-situations",
+      kicker: { en: "07 · SPECIAL SITUATIONS", fr: "07 · CAS SPÉCIAUX" },
+      title: { en: "Different business models require different valuation logic", fr: "Des business models différents exigent des logiques de valorisation différentes" },
+      coreFacts: [
+        { en: "Cyclical companies should be valued on mid-cycle economics rather than peak or trough earnings alone.", fr: "Les sociétés cycliques doivent être valorisées sur une économie mid-cycle plutôt que seulement sur des earnings de pic ou creux." },
+        { en: "High-growth companies may require long explicit forecast periods because margins and reinvestment are far from steady state.", fr: "Les sociétés à forte croissance peuvent nécessiter de longues périodes explicites car marges et réinvestissement sont loin de l’état stable." },
+        { en: "Banks are often better analyzed with P/B, P/E, dividend capacity or residual-income methods than standard EV/EBITDA.", fr: "Les banques sont souvent mieux analysées avec P/B, P/E, dividend capacity ou residual-income qu’avec un EV/EBITDA standard." },
+        { en: "Early-stage companies may require scenario-weighted valuation because the distribution of outcomes is unusually wide.", fr: "Les entreprises early-stage peuvent nécessiter une valorisation pondérée par scénarios car la distribution des résultats est très large." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "The same valuation method does not fit every company. A bank, a mining company and a fast-growing software company generate value in different ways.",
+          fr: "La même méthode ne convient pas à toutes les entreprises. Une banque, une société minière et un software en forte croissance créent de la valeur de façons différentes.",
+        },
+        Intermediate: {
+          en: "For cyclicals, normalize price, volume and margins. For high-growth businesses, model the path from growth to maturity. For financials, focus on ROE, capital, credit quality and sustainable payout. For early-stage firms, probability-weight scenarios.",
+          fr: "Pour les cycliques, normalise prix, volumes et marges. Pour les sociétés de croissance, modélise le passage de la croissance à la maturité. Pour les financières, concentre-toi sur ROE, capital, qualité du crédit et payout soutenable. Pour les early-stage, pondère les scénarios par probabilité.",
+        },
+        Professional: {
+          en: "Advanced valuation is less about finding exotic formulas than about matching the valuation architecture to the economics of the business. The forecast horizon, steady-state assumptions, denominator choice and capital adjustments should all reflect how value is actually created.",
+          fr: "La valorisation avancée consiste moins à trouver des formules exotiques qu’à adapter l’architecture de valorisation à l’économie du business. Horizon de forecast, hypothèses de steady state, choix du dénominateur et ajustements de capital doivent refléter la vraie création de valeur.",
+        },
+      },
+      vocabulary: [
+        { en: "Mid-cycle", fr: "mid-cycle", definition: { en: "Normalized economic conditions between cyclical peaks and troughs.", fr: "Conditions économiques normalisées entre pics et creux du cycle." } },
+        { en: "Steady state", fr: "steady state", definition: { en: "Mature condition in which growth, margins and reinvestment become sustainable.", fr: "État mature dans lequel croissance, marges et réinvestissement deviennent soutenables." } },
+        { en: "Scenario-weighted value", fr: "valeur pondérée par scénarios", definition: { en: "Expected value built from multiple outcomes multiplied by their probabilities.", fr: "Valeur attendue construite à partir de plusieurs résultats multipliés par leurs probabilités." } },
+      ],
+    },
+    {
+      id: "sensitivity-and-scenarios",
+      kicker: { en: "08 · SENSITIVITY & SCENARIOS", fr: "08 · SENSIBILITÉS & SCÉNARIOS" },
+      title: { en: "A valuation range is more informative than a single false-precision target", fr: "Une fourchette de valorisation est plus informative qu’un target unique faussement précis" },
+      coreFacts: [
+        { en: "Sensitivity analysis changes one or two assumptions systematically to show valuation exposure.", fr: "La sensitivity analysis modifie systématiquement une ou deux hypothèses pour montrer l’exposition de la valorisation." },
+        { en: "Scenario analysis changes a coherent set of assumptions to represent different economic outcomes.", fr: "La scenario analysis modifie un ensemble cohérent d’hypothèses pour représenter différents résultats économiques." },
+        { en: "Base, bull and bear cases should differ in business drivers, not only in the discount rate.", fr: "Les cas base, bull et bear doivent différer sur les business drivers, pas seulement sur le taux d’actualisation." },
+        { en: "The most decision-relevant variables are often revenue growth, margins, reinvestment, WACC and terminal assumptions.", fr: "Les variables les plus importantes pour la décision sont souvent revenue growth, marges, réinvestissement, WACC et hypothèses terminales." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company is not exactly worth $53.27 per share. Valuation depends on assumptions, so a range helps show what must happen for different values to be justified.",
+          fr: "Une entreprise ne vaut pas exactement 53,27 $ par action. La valorisation dépend d’hypothèses, donc une fourchette montre ce qui doit se produire pour justifier différentes valeurs.",
+        },
+        Intermediate: {
+          en: "Build sensitivities around the assumptions that actually drive value. A WACC/growth table is useful, but it should be complemented with operating scenarios involving revenue, margins and reinvestment.",
+          fr: "Construis les sensitivities autour des hypothèses qui créent réellement la valeur. Une table WACC/growth est utile, mais elle doit être complétée par des scénarios opérationnels sur revenue, marges et réinvestissement.",
+        },
+        Professional: {
+          en: "Professional valuation communicates both parameter uncertainty and model risk. Reverse DCF can be especially powerful: instead of asking what the company is worth, solve for the growth, margin or return assumptions embedded in the current market price and judge whether they are plausible.",
+          fr: "La valorisation professionnelle communique à la fois l’incertitude des paramètres et le model risk. Le reverse DCF est particulièrement puissant : au lieu de demander combien vaut la société, on résout les hypothèses de croissance, marge ou returns intégrées dans le cours actuel et on juge leur plausibilité.",
+        },
+      },
+      vocabulary: [
+        { en: "Reverse DCF", fr: "reverse DCF", definition: { en: "Method that solves for the operating assumptions implied by the current market price.", fr: "Méthode qui résout les hypothèses opérationnelles implicites dans le cours de marché actuel." } },
+        { en: "Sensitivity table", fr: "table de sensibilité", definition: { en: "Grid showing valuation under combinations of key assumptions.", fr: "Grille montrant la valorisation sous différentes combinaisons d’hypothèses clés." } },
+        { en: "Model risk", fr: "model risk", definition: { en: "Risk that the valuation framework itself is inappropriate or incomplete.", fr: "Risque que le cadre de valorisation lui-même soit inadapté ou incomplet." } },
+      ],
+    },
+    {
+      id: "decision-and-communication",
+      kicker: { en: "09 · DECISION & COMMUNICATION", fr: "09 · DÉCISION & COMMUNICATION" },
+      title: { en: "Valuation matters only when it changes a decision", fr: "La valorisation n’a de valeur que lorsqu’elle change une décision" },
+      coreFacts: [
+        { en: "A valuation conclusion should explain method, key assumptions, range, catalysts, risks and decision implications.", fr: "Une conclusion de valorisation doit expliquer méthode, hypothèses clés, fourchette, catalysts, risques et implications pour la décision." },
+        { en: "Different methods can produce different values because they embed different assumptions and information sets.", fr: "Des méthodes différentes peuvent produire des valeurs différentes car elles intègrent des hypothèses et informations différentes." },
+        { en: "Weighting methods should reflect relevance and reliability, not a mechanical average.", fr: "La pondération des méthodes doit refléter pertinence et fiabilité, pas une moyenne mécanique." },
+        { en: "A good analyst can explain what would make the valuation wrong.", fr: "Un bon analyste peut expliquer ce qui rendrait sa valorisation erronée." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "The final answer is not just a number. You need to explain why the company might be undervalued or overvalued and what could change the market’s view.",
+          fr: "La réponse finale n’est pas juste un nombre. Tu dois expliquer pourquoi la société peut être sous-valorisée ou survalorisée et ce qui pourrait changer la vue du marché.",
+        },
+        Intermediate: {
+          en: "Present a valuation range, identify the methods you trust most and explain why. Then connect the range to current price, upside/downside, catalysts and key risks.",
+          fr: "Présente une fourchette, identifie les méthodes auxquelles tu fais le plus confiance et explique pourquoi. Ensuite relie la fourchette au cours actuel, upside/downside, catalysts et risques clés.",
+        },
+        Professional: {
+          en: "In investment banking, valuation supports negotiation and deal structure; in equity research, it supports a target price and thesis; in asset management, it supports expected return and sizing. The same valuation mechanics can therefore lead to different decisions depending on mandate and context.",
+          fr: "En investment banking, la valorisation soutient la négociation et la deal structure ; en equity research, elle soutient le target price et la thesis ; en asset management, elle soutient expected return et sizing. Les mêmes mécaniques peuvent donc mener à des décisions différentes selon mandat et contexte.",
+        },
+      },
+      vocabulary: [
+        { en: "Valuation range", fr: "fourchette de valorisation", definition: { en: "Interval of defensible values across methods and assumptions.", fr: "Intervalle de valeurs défendables entre méthodes et hypothèses." } },
+        { en: "Catalyst", fr: "catalyst", definition: { en: "Event or development that may cause market price to move toward estimated value.", fr: "Événement ou développement pouvant pousser le prix de marché vers la valeur estimée." } },
+        { en: "Margin of safety", fr: "margin of safety", definition: { en: "Difference between estimated intrinsic value and purchase price that protects against error.", fr: "Écart entre valeur intrinsèque estimée et prix d’achat qui protège contre l’erreur." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "normalization",
+      question: { en: "Why normalize earnings before valuation?", fr: "Pourquoi normaliser les résultats avant une valorisation ?" },
+      options: [
+        { id: "a", label: { en: "To estimate sustainable recurring economics", fr: "Pour estimer une économie récurrente soutenable" } },
+        { id: "b", label: { en: "To maximize every add-back", fr: "Pour maximiser tous les add-backs" } },
+        { id: "c", label: { en: "To ignore cash flow", fr: "Pour ignorer le cash flow" } },
+        { id: "d", label: { en: "To remove all expenses", fr: "Pour retirer toutes les charges" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Valuation should reflect sustainable future economics rather than temporary accounting distortions.", fr: "La valorisation doit refléter l’économie future soutenable plutôt que des distorsions comptables temporaires." },
+    },
+    {
+      id: "q2",
+      conceptKey: "fcff",
+      question: { en: "Which discount rate is normally paired with FCFF?", fr: "Quel taux d’actualisation est normalement associé au FCFF ?" },
+      options: [
+        { id: "a", label: { en: "WACC", fr: "WACC" } },
+        { id: "b", label: { en: "Dividend yield", fr: "Dividend yield" } },
+        { id: "c", label: { en: "Coupon rate only", fr: "Coupon rate uniquement" } },
+        { id: "d", label: { en: "No discount rate", fr: "Aucun taux" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "FCFF is available to all capital providers, so it is discounted at the blended required return on debt and equity.", fr: "Le FCFF est disponible pour tous les apporteurs de capitaux, donc il est actualisé au rendement exigé combiné dette/equity." },
+    },
+    {
+      id: "q3",
+      conceptKey: "wacc",
+      question: { en: "Why use market-value capital weights in WACC?", fr: "Pourquoi utiliser des pondérations en valeur de marché dans le WACC ?" },
+      options: [
+        { id: "a", label: { en: "They better reflect current economic claims on the business", fr: "Elles reflètent mieux les créances économiques actuelles sur le business" } },
+        { id: "b", label: { en: "Because book value always equals market value", fr: "Parce que book value égale toujours market value" } },
+        { id: "c", label: { en: "To eliminate risk", fr: "Pour éliminer le risque" } },
+        { id: "d", label: { en: "Because debt has no cost", fr: "Parce que la dette n’a aucun coût" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "WACC is an opportunity-cost concept, so current market values are generally more relevant than historical accounting values.", fr: "Le WACC est un concept d’opportunity cost, donc les valeurs de marché actuelles sont généralement plus pertinentes que les valeurs comptables historiques." },
+    },
+    {
+      id: "q4",
+      conceptKey: "terminal-growth",
+      question: { en: "What is a key constraint on perpetual growth in a DCF?", fr: "Quelle est une contrainte clé sur la croissance perpétuelle dans un DCF ?" },
+      options: [
+        { id: "a", label: { en: "It must be sustainable and below the discount rate", fr: "Elle doit être soutenable et inférieure au taux d’actualisation" } },
+        { id: "b", label: { en: "It should always equal 20%", fr: "Elle doit toujours être égale à 20 %" } },
+        { id: "c", label: { en: "It must exceed WACC", fr: "Elle doit dépasser le WACC" } },
+        { id: "d", label: { en: "It has no effect on valuation", fr: "Elle n’a aucun effet sur la valorisation" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A perpetual-growth model requires a sustainable long-run growth rate below the discount rate.", fr: "Un modèle de croissance perpétuelle exige un taux soutenable à long terme inférieur au taux d’actualisation." },
+    },
+    {
+      id: "q5",
+      conceptKey: "multiple-pairing",
+      question: { en: "Which pairing is conceptually consistent?", fr: "Quelle association est conceptuellement cohérente ?" },
+      options: [
+        { id: "a", label: { en: "Enterprise Value / EBITDA", fr: "Enterprise Value / EBITDA" } },
+        { id: "b", label: { en: "Enterprise Value / EPS", fr: "Enterprise Value / EPS" } },
+        { id: "c", label: { en: "Equity Value / Revenue before all capital claims", fr: "Equity Value / Revenue avant toutes les créances de capital" } },
+        { id: "d", label: { en: "Debt / EPS as a valuation multiple", fr: "Debt / EPS comme multiple de valorisation" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Enterprise-value numerators should generally pair with operating metrics before interest expense.", fr: "Les numérateurs d’enterprise value doivent généralement être associés à des métriques opérationnelles avant intérêts." },
+    },
+    {
+      id: "q6",
+      conceptKey: "sotp",
+      question: { en: "When is SOTP especially useful?", fr: "Quand le SOTP est-il particulièrement utile ?" },
+      options: [
+        { id: "a", label: { en: "When a company has segments with very different economics", fr: "Quand une société possède des segments aux économies très différentes" } },
+        { id: "b", label: { en: "When every segment is identical", fr: "Quand tous les segments sont identiques" } },
+        { id: "c", label: { en: "Only when the company has no debt", fr: "Seulement quand la société n’a pas de dette" } },
+        { id: "d", label: { en: "Only for government bonds", fr: "Seulement pour les obligations souveraines" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "SOTP allows each segment to be valued with the method and peer set that best fit its economics.", fr: "Le SOTP permet de valoriser chaque segment avec la méthode et les peers les plus adaptés à son économie." },
+    },
+    {
+      id: "q7",
+      conceptKey: "cyclicals",
+      question: { en: "How should a highly cyclical company usually be approached?", fr: "Comment aborder généralement une société très cyclique ?" },
+      options: [
+        { id: "a", label: { en: "Normalize toward mid-cycle economics", fr: "Normaliser vers une économie mid-cycle" } },
+        { id: "b", label: { en: "Use peak earnings forever", fr: "Utiliser les peak earnings pour toujours" } },
+        { id: "c", label: { en: "Ignore the cycle", fr: "Ignorer le cycle" } },
+        { id: "d", label: { en: "Value only cash on the balance sheet", fr: "Valoriser uniquement le cash du bilan" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Peak or trough results can distort sustainable earning power, so mid-cycle normalization is often more informative.", fr: "Les résultats de pic ou de creux peuvent déformer l’earning power soutenable, donc la normalisation mid-cycle est souvent plus informative." },
+    },
+    {
+      id: "q8",
+      conceptKey: "reverse-dcf",
+      question: { en: "What does a reverse DCF ask?", fr: "Que cherche un reverse DCF ?" },
+      options: [
+        { id: "a", label: { en: "What operating assumptions are implied by the current market price?", fr: "Quelles hypothèses opérationnelles sont implicites dans le cours actuel ?" } },
+        { id: "b", label: { en: "What was last year’s dividend only?", fr: "Quel était uniquement le dividende de l’année passée ?" } },
+        { id: "c", label: { en: "How to eliminate all uncertainty?", fr: "Comment éliminer toute incertitude ?" } },
+        { id: "d", label: { en: "How to ignore terminal value?", fr: "Comment ignorer la terminal value ?" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Reverse DCF solves backward from price to the growth, margin or return assumptions the market appears to embed.", fr: "Le reverse DCF remonte du prix vers les hypothèses de croissance, marge ou returns que le marché semble intégrer." },
+    },
+    {
+      id: "q9",
+      conceptKey: "valuation-range",
+      question: { en: "Why is a valuation range often better than a single point estimate?", fr: "Pourquoi une fourchette est-elle souvent préférable à un point unique ?" },
+      options: [
+        { id: "a", label: { en: "It communicates uncertainty in assumptions and methods", fr: "Elle communique l’incertitude des hypothèses et méthodes" } },
+        { id: "b", label: { en: "Because exact assumptions never matter", fr: "Parce que les hypothèses exactes ne comptent jamais" } },
+        { id: "c", label: { en: "Because all companies have the same value", fr: "Parce que toutes les sociétés ont la même valeur" } },
+        { id: "d", label: { en: "Because ranges eliminate downside", fr: "Parce que les fourchettes éliminent le downside" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Valuation is assumption-dependent, so a range better reflects uncertainty than false precision.", fr: "La valorisation dépend d’hypothèses, donc une fourchette reflète mieux l’incertitude qu’une fausse précision." },
+    },
+    {
+      id: "q10",
+      conceptKey: "decision",
+      question: { en: "What makes an advanced valuation decision-useful?", fr: "Qu’est-ce qui rend une valorisation avancée utile à la décision ?" },
+      options: [
+        { id: "a", label: { en: "Clear assumptions, method relevance, range, catalysts and risks", fr: "Hypothèses claires, pertinence des méthodes, fourchette, catalysts et risques" } },
+        { id: "b", label: { en: "The largest possible target value", fr: "La plus grande target value possible" } },
+        { id: "c", label: { en: "Using every method with equal weight", fr: "Utiliser toutes les méthodes avec le même poids" } },
+        { id: "d", label: { en: "Ignoring what could make the thesis wrong", fr: "Ignorer ce qui pourrait rendre la thesis fausse" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A valuation is useful when its assumptions and uncertainty are transparent and it connects directly to a decision.", fr: "Une valorisation est utile lorsque ses hypothèses et son incertitude sont transparentes et qu’elle se relie directement à une décision." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "A company looks cheap on P/E but expensive on DCF. How would you reconcile the difference?",
+      fr: "Une société semble bon marché sur le P/E mais chère sur le DCF. Comment réconcilierais-tu cette différence ?",
+    },
+    framework: [
+      { en: "Check whether earnings are normalized and whether P/E is distorted by leverage, one-offs or accounting.", fr: "Vérifier si les earnings sont normalisés et si le P/E est déformé par leverage, one-offs ou comptabilité." },
+      { en: "Review the peer set and whether the market multiple is appropriate for the company’s growth and risk.", fr: "Revoir le peer set et vérifier si le multiple de marché est approprié à la croissance et au risque de la société." },
+      { en: "Audit DCF assumptions for revenue growth, margins, reinvestment, WACC and terminal value.", fr: "Auditer les hypothèses DCF de revenue growth, marges, réinvestissement, WACC et terminal value." },
+      { en: "Reconcile enterprise value to equity value and confirm no claims or non-operating assets are omitted.", fr: "Réconcilier enterprise value et equity value et confirmer qu’aucune créance ni actif non opérationnel n’est oublié." },
+      { en: "Use reverse valuation to identify which assumptions create the disagreement.", fr: "Utiliser une reverse valuation pour identifier quelles hypothèses créent le désaccord." },
+      { en: "Conclude with the method that is most economically relevant and present a range rather than forcing agreement.", fr: "Conclure avec la méthode la plus pertinente économiquement et présenter une fourchette plutôt que forcer l’accord." },
+    ],
+    sample: {
+      en: "I would not assume one method is right and the other is wrong. First I would normalize the earnings used in the P/E and check whether leverage, unusual items or accounting choices make that multiple artificially low. I would also test whether the selected peers deserve similar multiples given differences in growth, margins and risk. Then I would audit the DCF, especially the operating forecast, reinvestment, WACC and terminal value, because a small change in those assumptions can move value materially. I would reconcile enterprise value to equity value to make sure debt, cash, minorities and other claims are handled consistently. Finally, I would use a reverse DCF or implied-multiple analysis to identify exactly which assumptions are causing the gap. My conclusion would weight the method that best reflects the company’s economics and would communicate a valuation range with the key conditions required for each outcome.",
+      fr: "Je ne supposerais pas qu’une méthode est juste et l’autre fausse. Je commencerais par normaliser les earnings utilisés dans le P/E et vérifier si leverage, éléments inhabituels ou choix comptables rendent ce multiple artificiellement bas. Je testerais aussi si les peers sélectionnés méritent des multiples similaires compte tenu des différences de croissance, marges et risque. Ensuite, j’auditerais le DCF, surtout le forecast opérationnel, le réinvestissement, le WACC et la terminal value, car de petites variations peuvent déplacer fortement la valeur. Je réconcilierais enterprise value et equity value pour vérifier que dette, cash, minorities et autres créances sont traités de façon cohérente. Enfin, j’utiliserais un reverse DCF ou une analyse d’implied multiple pour identifier précisément les hypothèses qui créent l’écart. Ma conclusion pondérerait la méthode qui reflète le mieux l’économie de la société et présenterait une fourchette avec les conditions clés nécessaires à chaque résultat.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, advancedValuationLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
