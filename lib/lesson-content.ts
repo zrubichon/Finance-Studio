@@ -22655,7 +22655,492 @@ export const salesTradingLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson];
+
+
+export const assetManagementLesson: FinanceLesson = {
+  slug: "year-3-asset-management",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Asset Management", fr: "Gestion d’actifs / Asset Management" },
+  title: { en: "Asset Management", fr: "Gestion d’actifs / Asset Management" },
+  subtitle: {
+    en: "Learn how professional investors build portfolios, define mandates, generate ideas, allocate capital, manage risk, measure performance and communicate investment decisions across active and passive strategies.",
+    fr: "Comprendre comment les investisseurs professionnels construisent des portefeuilles, définissent des mandats, génèrent des idées, allouent le capital, gèrent le risque, mesurent la performance et communiquent leurs décisions entre stratégies actives et passives.",
+  },
+  duration: { en: "145–175 min", fr: "145–175 min" },
+  prerequisites: [
+    { en: "Risk, Return & Diversification", fr: "Risque, rendement & diversification" },
+    { en: "Portfolio Theory & CAPM", fr: "Portfolio Theory & CAPM" },
+    { en: "Equity Valuation", fr: "Valorisation des actions / Equity Valuation" },
+    { en: "Fixed Income & Yield Curves", fr: "Fixed Income & Yield Curves" },
+    { en: "Macroeconomics for Markets", fr: "Macroéconomie pour les marchés" },
+  ],
+  objectives: [
+    { en: "Explain the role of an asset manager and the difference between mandates, funds and benchmarks.", fr: "Expliquer le rôle d’un asset manager et la différence entre mandats, fonds et benchmarks." },
+    { en: "Understand active vs passive management and top-down vs bottom-up investing.", fr: "Comprendre gestion active vs passive et investissement top-down vs bottom-up." },
+    { en: "Build a basic portfolio from investment objectives, constraints and risk budgets.", fr: "Construire un portefeuille simple à partir d’objectifs, contraintes et risk budgets." },
+    { en: "Evaluate investment ideas using thesis, valuation, catalysts and risk.", fr: "Évaluer des idées d’investissement via thèse, valuation, catalysts et risques." },
+    { en: "Measure performance using absolute return, relative return, alpha, beta, Sharpe ratio and attribution.", fr: "Mesurer la performance avec rendement absolu, relatif, alpha, beta, Sharpe ratio et attribution." },
+    { en: "Explain portfolio rebalancing, liquidity, drawdowns and investment communication.", fr: "Expliquer rebalancing, liquidité, drawdowns et communication d’investissement." },
+  ],
+  overviewFlow: {
+    title: { en: "From mandate to portfolio decision", fr: "Du mandat à la décision de portefeuille" },
+    steps: [
+      { title: { en: "Mandate", fr: "Mandat" }, detail: { en: "Objective · benchmark · constraints", fr: "Objectif · benchmark · contraintes" } },
+      { title: { en: "Research", fr: "Recherche" }, detail: { en: "Ideas · valuation · catalysts", fr: "Idées · valuation · catalysts" } },
+      { title: { en: "Allocate", fr: "Allouer" }, detail: { en: "Sizing · diversification · risk", fr: "Sizing · diversification · risque" } },
+      { title: { en: "Review", fr: "Réviser" }, detail: { en: "Performance · attribution · rebalance", fr: "Performance · attribution · rebalance" } },
+    ],
+  },
+  sections: [
+    {
+      id: "role-and-mandates",
+      kicker: { en: "01 · ROLE & MANDATES", fr: "01 · RÔLE & MANDATS" },
+      title: { en: "Asset management starts with the client objective, not with a stock idea", fr: "L’asset management commence par l’objectif client, pas par une idée d’action" },
+      coreFacts: [
+        { en: "Asset managers invest capital on behalf of clients such as individuals, pension funds, insurers, endowments and institutions.", fr: "Les asset managers investissent du capital pour des clients comme particuliers, pension funds, assureurs, endowments et institutions." },
+        { en: "A mandate defines the objective, benchmark, eligible assets, risk limits, liquidity needs and other constraints.", fr: "Un mandat définit objectif, benchmark, actifs éligibles, risk limits, besoins de liquidité et autres contraintes." },
+        { en: "Portfolio decisions should be consistent with the mandate even when an individual investment idea appears attractive.", fr: "Les décisions de portefeuille doivent rester cohérentes avec le mandat même lorsqu’une idée individuelle semble attractive." },
+        { en: "The benchmark provides a reference for relative risk and performance.", fr: "Le benchmark fournit une référence pour le risque relatif et la performance." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "An asset manager is paid to invest someone else’s money according to agreed rules. A retirement fund and a high-growth equity fund can own very different portfolios because their goals and constraints are different.",
+          fr: "Un asset manager est payé pour investir l’argent d’un client selon des règles convenues. Un fonds de retraite et un fonds actions croissance peuvent avoir des portefeuilles très différents car leurs objectifs et contraintes diffèrent.",
+        },
+        Intermediate: {
+          en: "Before selecting securities, the manager defines return objective, investment horizon, benchmark, acceptable volatility, drawdown tolerance, liquidity and eligible instruments. These choices determine what a sensible portfolio can look like.",
+          fr: "Avant de sélectionner des titres, le manager définit objectif de rendement, horizon, benchmark, volatilité acceptable, tolérance au drawdown, liquidité et instruments éligibles. Ces choix déterminent à quoi peut ressembler un portefeuille cohérent.",
+        },
+        Professional: {
+          en: "Institutional mandates also specify concentration limits, tracking-error budgets, leverage, derivatives use, cash ranges, ESG or legal restrictions, currency-hedging policy and governance requirements. Portfolio construction is therefore a constrained optimization problem.",
+          fr: "Les mandats institutionnels précisent aussi concentration limits, tracking-error budgets, leverage, usage des dérivés, cash ranges, contraintes ESG ou juridiques, policy de couverture FX et gouvernance. La construction de portefeuille est donc un problème d’optimisation sous contraintes.",
+        },
+      },
+      vocabulary: [
+        { en: "Mandate", fr: "mandat", definition: { en: "Formal set of objectives and constraints governing how capital may be invested.", fr: "Ensemble formel d’objectifs et contraintes régissant la manière dont le capital peut être investi." } },
+        { en: "Benchmark", fr: "benchmark", definition: { en: "Reference portfolio or index used to evaluate performance and risk.", fr: "Portefeuille ou indice de référence utilisé pour évaluer performance et risque." } },
+        { en: "Tracking error", fr: "tracking error", definition: { en: "Volatility of active returns relative to a benchmark.", fr: "Volatilité des rendements actifs par rapport à un benchmark." } },
+      ],
+    },
+    {
+      id: "active-passive",
+      kicker: { en: "02 · ACTIVE VS PASSIVE", fr: "02 · GESTION ACTIVE VS PASSIVE" },
+      title: { en: "Active management accepts benchmark risk in pursuit of excess return", fr: "La gestion active accepte un risque par rapport au benchmark pour rechercher un rendement supérieur" },
+      coreFacts: [
+        { en: "Passive strategies seek to replicate an index or systematic exposure at low cost.", fr: "Les stratégies passives cherchent à répliquer un indice ou une exposition systématique à faible coût." },
+        { en: "Active strategies intentionally deviate from a benchmark to seek excess return.", fr: "Les stratégies actives s’écartent volontairement du benchmark pour rechercher un rendement supérieur." },
+        { en: "Active return equals portfolio return minus benchmark return.", fr: "Le rendement actif est égal au rendement du portefeuille moins celui du benchmark." },
+        { en: "Fees, turnover, taxes and implementation costs reduce realized investor returns.", fr: "Fees, turnover, taxes et coûts d’implémentation réduisent le rendement réellement reçu par l’investisseur." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A passive fund mainly tries to match an index. An active fund deliberately chooses different weights because the manager believes some investments will perform better than others.",
+          fr: "Un fonds passif cherche surtout à répliquer un indice. Un fonds actif choisit volontairement des poids différents parce que le manager pense que certains investissements feront mieux que d’autres.",
+        },
+        Intermediate: {
+          en: "An active manager can outperform through security selection, sector allocation, duration, curve positioning, country exposure or other active decisions. But those same decisions can also create underperformance.",
+          fr: "Un manager actif peut surperformer via security selection, allocation sectorielle, duration, curve positioning, exposition pays ou autres décisions actives. Mais ces mêmes décisions peuvent aussi créer de la sous-performance.",
+        },
+        Professional: {
+          en: "The relevant question is not simply active versus passive. It is whether expected alpha, after fees and implementation costs, justifies the active risk budget. Capacity, market efficiency and strategy crowding also affect the answer.",
+          fr: "La vraie question n’est pas simplement active versus passive. Il faut savoir si l’alpha attendu, après fees et coûts d’implémentation, justifie le budget de risque actif. Capacity, efficacité du marché et crowding de stratégie influencent aussi la réponse.",
+        },
+      },
+      formula: {
+        label: { en: "Active return", fr: "Rendement actif" },
+        expression: "Active Return = Portfolio Return − Benchmark Return",
+        explanation: { en: "Positive active return means the portfolio outperformed the benchmark over the period.", fr: "Un rendement actif positif signifie que le portefeuille a surperformé le benchmark sur la période." },
+      },
+      comparison: {
+        title: { en: "Active vs passive", fr: "Active vs passive" },
+        headers: [{ en: "Dimension", fr: "Dimension" }, { en: "Active", fr: "Active" }, { en: "Passive", fr: "Passive" }],
+        rows: [
+          { cells: [{ en: "Goal", fr: "Objectif" }, { en: "Beat benchmark", fr: "Battre le benchmark" }, { en: "Track benchmark", fr: "Répliquer le benchmark" }] },
+          { cells: [{ en: "Research intensity", fr: "Intensité de recherche" }, { en: "High", fr: "Élevée" }, { en: "Lower", fr: "Plus faible" }] },
+          { cells: [{ en: "Typical fees", fr: "Fees typiques" }, { en: "Higher", fr: "Plus élevés" }, { en: "Lower", fr: "Plus faibles" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Alpha", fr: "alpha", definition: { en: "Return not explained by benchmark or systematic risk exposure.", fr: "Rendement non expliqué par le benchmark ou l’exposition au risque systématique." } },
+        { en: "Active weight", fr: "poids actif", definition: { en: "Portfolio weight minus benchmark weight in a security or segment.", fr: "Poids du portefeuille moins poids du benchmark sur un titre ou segment." } },
+      ],
+    },
+    {
+      id: "research-and-idea-generation",
+      kicker: { en: "03 · RESEARCH & IDEA GENERATION", fr: "03 · RESEARCH & GÉNÉRATION D’IDÉES" },
+      title: { en: "A portfolio idea needs both fundamental logic and portfolio relevance", fr: "Une idée de portefeuille a besoin d’une logique fondamentale et d’une pertinence pour le portefeuille" },
+      coreFacts: [
+        { en: "Bottom-up investing starts with company or security analysis; top-down investing starts with macro, asset class, sector or regional views.", fr: "L’investissement bottom-up part de l’analyse d’une société ou d’un titre ; le top-down part de vues macro, asset class, secteur ou région." },
+        { en: "A complete thesis identifies valuation, catalysts, expected return, risks and what would invalidate the view.", fr: "Une thèse complète identifie valuation, catalysts, rendement attendu, risques et ce qui invaliderait la vue." },
+        { en: "An attractive security may still be a poor addition if it duplicates risks already present in the portfolio.", fr: "Un titre attractif peut rester une mauvaise addition s’il duplique des risques déjà présents dans le portefeuille." },
+        { en: "Research quality depends on evidence, differentiated insight and disciplined updating when facts change.", fr: "La qualité de la recherche dépend des preuves, d’un insight différencié et d’une mise à jour disciplinée lorsque les faits changent." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Finding a good company is not enough. You also need to ask whether its stock is already expensive, what could make the market change its view, and whether owning it improves the overall portfolio.",
+          fr: "Trouver une bonne entreprise ne suffit pas. Il faut aussi demander si son action est déjà chère, ce qui pourrait changer l’opinion du marché, et si la détenir améliore réellement le portefeuille.",
+        },
+        Intermediate: {
+          en: "A bottom-up analyst may build earnings estimates, valuation and a catalyst path. A top-down manager may start with growth, inflation and policy before deciding sectors, countries or duration exposure.",
+          fr: "Un analyste bottom-up peut construire des forecasts d’earnings, une valuation et un chemin de catalysts. Un manager top-down peut commencer par croissance, inflation et policy avant de choisir secteurs, pays ou exposition duration.",
+        },
+        Professional: {
+          en: "Idea quality should be judged against consensus, market-implied expectations and opportunity cost. The manager needs a differentiated view, a reason the market may reprice and a clear understanding of how the position interacts with portfolio factor exposures.",
+          fr: "La qualité d’une idée doit être jugée par rapport au consensus, aux attentes implicites du marché et à l’opportunity cost. Le manager a besoin d’une vue différenciée, d’une raison pour laquelle le marché pourrait re-pricer, et d’une compréhension claire de l’interaction de la position avec les factor exposures du portefeuille.",
+        },
+      },
+      vocabulary: [
+        { en: "Top-down", fr: "top-down", definition: { en: "Investment approach beginning with macro or broad market views.", fr: "Approche d’investissement commençant par des vues macro ou de marché globales." } },
+        { en: "Bottom-up", fr: "bottom-up", definition: { en: "Investment approach beginning with individual companies or securities.", fr: "Approche d’investissement commençant par l’étude de sociétés ou titres individuels." } },
+        { en: "Consensus", fr: "consensus", definition: { en: "Common market expectation reflected in forecasts or pricing.", fr: "Attente moyenne du marché reflétée dans les forecasts ou les prix." } },
+      ],
+    },
+    {
+      id: "portfolio-construction",
+      kicker: { en: "04 · PORTFOLIO CONSTRUCTION", fr: "04 · CONSTRUCTION DE PORTEFEUILLE" },
+      title: { en: "Position sizing is where conviction meets risk", fr: "Le position sizing est l’endroit où la conviction rencontre le risque" },
+      coreFacts: [
+        { en: "Portfolio construction determines how much capital is allocated to each idea.", fr: "La construction de portefeuille détermine combien de capital est alloué à chaque idée." },
+        { en: "Position size should reflect expected return, confidence, downside, liquidity and correlation with existing positions.", fr: "La taille d’une position doit refléter rendement attendu, conviction, downside, liquidité et corrélation avec les positions existantes." },
+        { en: "Diversification reduces dependence on any single outcome but does not remove systematic risk.", fr: "La diversification réduit la dépendance à un seul résultat mais ne supprime pas le risque systématique." },
+        { en: "Concentration can increase upside from correct views while also increasing drawdown risk.", fr: "La concentration peut accroître l’upside lorsque les vues sont correctes mais augmente aussi le risque de drawdown." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A portfolio is not just a list of favorite investments. You have to decide how much of each one to own so that one mistake does not damage the whole portfolio.",
+          fr: "Un portefeuille n’est pas juste une liste d’investissements préférés. Il faut décider combien détenir de chacun afin qu’une seule erreur n’endommage pas tout le portefeuille.",
+        },
+        Intermediate: {
+          en: "Managers compare expected return with volatility, drawdown potential and correlation. Two positions that look different can still carry the same hidden risk, such as sensitivity to interest rates or economic growth.",
+          fr: "Les managers comparent rendement attendu avec volatilité, potentiel de drawdown et corrélation. Deux positions qui semblent différentes peuvent porter le même risque caché, par exemple sensibilité aux taux ou à la croissance.",
+        },
+        Professional: {
+          en: "Portfolio construction combines security-level conviction with factor exposures, liquidity, scenario analysis, marginal risk contribution and mandate constraints. Sizing is therefore an optimization decision, not simply a ranking of ideas.",
+          fr: "La construction de portefeuille combine conviction au niveau du titre avec factor exposures, liquidité, scenario analysis, contribution marginale au risque et contraintes du mandat. Le sizing est donc une décision d’optimisation, pas simplement un classement d’idées.",
+        },
+      },
+      formula: {
+        label: { en: "Portfolio expected return", fr: "Rendement attendu du portefeuille" },
+        expression: "E(Rp) = Σ wi × E(Ri)",
+        explanation: { en: "Expected portfolio return is the weighted average of expected asset returns.", fr: "Le rendement attendu du portefeuille est la moyenne pondérée des rendements attendus des actifs." },
+      },
+      vocabulary: [
+        { en: "Position sizing", fr: "position sizing", definition: { en: "Choosing how large each portfolio position should be.", fr: "Choisir la taille de chaque position du portefeuille." } },
+        { en: "Risk budget", fr: "budget de risque", definition: { en: "Amount of portfolio risk allocated to a strategy, factor or position.", fr: "Quantité de risque du portefeuille allouée à une stratégie, un facteur ou une position." } },
+        { en: "Marginal risk contribution", fr: "contribution marginale au risque", definition: { en: "Incremental portfolio risk associated with a position.", fr: "Risque additionnel du portefeuille associé à une position." } },
+      ],
+    },
+    {
+      id: "asset-allocation",
+      kicker: { en: "05 · ASSET ALLOCATION", fr: "05 · ASSET ALLOCATION" },
+      title: { en: "Asset allocation often matters more than individual security selection for total portfolio behavior", fr: "L’asset allocation compte souvent davantage que la sélection individuelle pour le comportement global du portefeuille" },
+      coreFacts: [
+        { en: "Strategic asset allocation defines long-term target exposures across asset classes.", fr: "La strategic asset allocation définit les expositions long terme cibles entre classes d’actifs." },
+        { en: "Tactical asset allocation makes temporary deviations based on valuation, macro or market views.", fr: "La tactical asset allocation crée des écarts temporaires basés sur valuation, macro ou vues de marché." },
+        { en: "Stocks, bonds, cash and alternatives respond differently to growth, inflation, rates and liquidity conditions.", fr: "Actions, obligations, cash et alternatives réagissent différemment à croissance, inflation, taux et conditions de liquidité." },
+        { en: "Correlation can rise during stress, reducing diversification benefits when they are needed most.", fr: "La corrélation peut augmenter pendant les périodes de stress, réduisant les bénéfices de diversification au moment où ils sont les plus nécessaires." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Asset allocation is the decision about how much of the portfolio goes into categories such as stocks, bonds or cash. This often has a major effect on overall risk.",
+          fr: "L’asset allocation est la décision sur la part du portefeuille investie en actions, obligations, cash ou autres catégories. Elle a souvent un effet majeur sur le risque global.",
+        },
+        Intermediate: {
+          en: "Strategic allocation reflects long-term objectives, while tactical allocation expresses temporary views. For example, a manager may temporarily reduce equity exposure if valuations are high and recession risk is increasing.",
+          fr: "L’allocation stratégique reflète les objectifs long terme, tandis que l’allocation tactique exprime des vues temporaires. Par exemple, un manager peut réduire temporairement l’exposition actions si les valuations sont élevées et le risque de récession augmente.",
+        },
+        Professional: {
+          en: "Institutional allocation incorporates capital-market assumptions, covariance, liability profile, liquidity needs, inflation sensitivity and regime dependence. Historical correlations should not be treated as stable constants.",
+          fr: "L’allocation institutionnelle intègre capital-market assumptions, covariance, profil des liabilities, besoins de liquidité, sensibilité à l’inflation et dépendance au régime. Les corrélations historiques ne doivent pas être traitées comme des constantes stables.",
+        },
+      },
+      vocabulary: [
+        { en: "Strategic asset allocation", fr: "allocation stratégique", definition: { en: "Long-term target mix across asset classes.", fr: "Mix cible long terme entre classes d’actifs." } },
+        { en: "Tactical asset allocation", fr: "allocation tactique", definition: { en: "Temporary deviation from strategic targets to express a market view.", fr: "Écart temporaire par rapport aux cibles stratégiques pour exprimer une vue de marché." } },
+      ],
+    },
+    {
+      id: "risk-and-drawdowns",
+      kicker: { en: "06 · RISK & DRAWDOWNS", fr: "06 · RISQUE & DRAWDOWNS" },
+      title: { en: "Risk is more than volatility: drawdown, liquidity and permanent loss matter", fr: "Le risque ne se limite pas à la volatilité : drawdown, liquidité et perte permanente comptent" },
+      coreFacts: [
+        { en: "Volatility measures variability of returns but does not capture every form of investment risk.", fr: "La volatilité mesure la variabilité des rendements mais ne capture pas toutes les formes de risque." },
+        { en: "Drawdown measures decline from a prior portfolio peak.", fr: "Le drawdown mesure la baisse depuis un précédent sommet du portefeuille." },
+        { en: "Liquidity risk matters because positions may be difficult to exit during stress.", fr: "Le liquidity risk est important car certaines positions peuvent être difficiles à sortir en période de stress." },
+        { en: "Scenario and stress testing help evaluate portfolio behavior beyond normal historical variation.", fr: "Scenario et stress testing permettent d’évaluer le comportement du portefeuille au-delà des variations historiques normales." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A portfolio can look stable in normal markets but still suffer a large loss when conditions change. That is why managers look at more than average volatility.",
+          fr: "Un portefeuille peut sembler stable en temps normal mais subir une forte perte lorsque les conditions changent. C’est pourquoi les managers regardent plus que la volatilité moyenne.",
+        },
+        Intermediate: {
+          en: "Managers track concentration, factor exposure, beta, duration, liquidity and historical drawdowns. They also test what happens if rates jump, credit spreads widen or equities fall sharply.",
+          fr: "Les managers suivent concentration, factor exposure, beta, duration, liquidité et drawdowns historiques. Ils testent aussi ce qui se passe si les taux montent brutalement, les credit spreads s’élargissent ou les actions chutent.",
+        },
+        Professional: {
+          en: "Risk management combines ex-ante models with scenario judgment. Correlations can break, volatility can gap and liquidity can vanish, so stress testing and qualitative risk review remain essential even in quantitatively managed portfolios.",
+          fr: "La gestion du risque combine modèles ex-ante et jugement de scénario. Les corrélations peuvent se rompre, la volatilité peut gapper et la liquidité disparaître ; stress testing et revue qualitative restent donc essentiels même dans les portefeuilles quantitatifs.",
+        },
+      },
+      formula: {
+        label: { en: "Drawdown", fr: "Drawdown" },
+        expression: "Drawdown = Current Portfolio Value / Previous Peak − 1",
+        explanation: { en: "The most negative drawdown over a period is the maximum drawdown.", fr: "Le drawdown le plus négatif sur une période est le maximum drawdown." },
+      },
+      vocabulary: [
+        { en: "Drawdown", fr: "drawdown", definition: { en: "Loss from a prior portfolio peak to a later value.", fr: "Perte depuis un précédent sommet du portefeuille jusqu’à une valeur ultérieure." } },
+        { en: "Stress test", fr: "stress test", definition: { en: "Analysis of portfolio behavior under severe hypothetical conditions.", fr: "Analyse du comportement du portefeuille sous des conditions hypothétiques sévères." } },
+        { en: "Liquidity risk", fr: "risque de liquidité", definition: { en: "Risk of being unable to trade at a reasonable price when needed.", fr: "Risque de ne pas pouvoir trader à un prix raisonnable lorsque nécessaire." } },
+      ],
+    },
+    {
+      id: "performance-measurement",
+      kicker: { en: "07 · PERFORMANCE MEASUREMENT", fr: "07 · MESURE DE PERFORMANCE" },
+      title: { en: "Performance must be judged relative to risk, benchmark and investment objective", fr: "La performance doit être jugée par rapport au risque, au benchmark et à l’objectif d’investissement" },
+      coreFacts: [
+        { en: "Absolute return measures the portfolio’s own gain or loss; relative return compares it with a benchmark.", fr: "Le rendement absolu mesure le gain ou la perte propre du portefeuille ; le rendement relatif le compare à un benchmark." },
+        { en: "The Sharpe ratio measures excess return per unit of total volatility.", fr: "Le Sharpe ratio mesure le rendement excédentaire par unité de volatilité totale." },
+        { en: "Alpha attempts to isolate return not explained by systematic risk exposure.", fr: "L’alpha cherche à isoler le rendement non expliqué par le risque systématique." },
+        { en: "Performance attribution decomposes where relative return came from.", fr: "La performance attribution décompose l’origine du rendement relatif." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A fund returning 8% may look good, but if its benchmark returned 12%, it underperformed. You need context to judge performance.",
+          fr: "Un fonds qui gagne 8 % peut sembler bon, mais si son benchmark a gagné 12 %, il a sous-performé. Il faut du contexte pour juger la performance.",
+        },
+        Intermediate: {
+          en: "Managers distinguish return caused by market exposure from return caused by active decisions. Attribution can separate sector allocation from security selection.",
+          fr: "Les managers distinguent le rendement causé par l’exposition au marché de celui créé par les décisions actives. L’attribution peut séparer allocation sectorielle et security selection.",
+        },
+        Professional: {
+          en: "Performance evaluation should account for factor exposures, implementation cost, benchmark suitability, time horizon and statistical uncertainty. Short periods can make apparent alpha indistinguishable from noise.",
+          fr: "L’évaluation de performance doit intégrer factor exposures, coûts d’implémentation, pertinence du benchmark, horizon et incertitude statistique. Sur de courtes périodes, un alpha apparent peut être difficile à distinguer du bruit.",
+        },
+      },
+      formula: {
+        label: { en: "Sharpe ratio", fr: "Sharpe ratio" },
+        expression: "Sharpe Ratio = (Portfolio Return − Risk-Free Rate) / Portfolio Volatility",
+        explanation: { en: "Higher Sharpe indicates more excess return per unit of total risk, all else equal.", fr: "Un Sharpe plus élevé indique davantage de rendement excédentaire par unité de risque total, toutes choses égales par ailleurs." },
+      },
+      vocabulary: [
+        { en: "Sharpe ratio", fr: "Sharpe ratio", definition: { en: "Excess return divided by portfolio volatility.", fr: "Rendement excédentaire divisé par la volatilité du portefeuille." } },
+        { en: "Performance attribution", fr: "performance attribution", definition: { en: "Framework decomposing sources of portfolio return relative to a benchmark.", fr: "Cadre décomposant les sources de rendement du portefeuille par rapport à un benchmark." } },
+        { en: "Relative return", fr: "rendement relatif", definition: { en: "Portfolio return minus benchmark return.", fr: "Rendement du portefeuille moins rendement du benchmark." } },
+      ],
+    },
+    {
+      id: "rebalancing-and-liquidity",
+      kicker: { en: "08 · REBALANCING & LIQUIDITY", fr: "08 · REBALANCING & LIQUIDITÉ" },
+      title: { en: "Portfolios drift, so managers must decide when and how to rebalance", fr: "Les portefeuilles dérivent, donc les managers doivent décider quand et comment rebalancer" },
+      coreFacts: [
+        { en: "Market moves cause portfolio weights to drift away from targets.", fr: "Les mouvements de marché font dériver les poids du portefeuille par rapport aux cibles." },
+        { en: "Rebalancing restores target exposures but creates transaction costs and potential tax consequences.", fr: "Le rebalancing restaure les expositions cibles mais crée des coûts de transaction et potentiellement des conséquences fiscales." },
+        { en: "Liquidity affects how quickly and cheaply a manager can adjust positions.", fr: "La liquidité affecte la vitesse et le coût avec lesquels un manager peut ajuster les positions." },
+        { en: "Cash flows from subscriptions, redemptions or client needs can also drive portfolio trades.", fr: "Les cash flows provenant de souscriptions, rachats ou besoins clients peuvent aussi déclencher des trades de portefeuille." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If stocks rise faster than bonds, a 60/40 portfolio may become 70/30. Rebalancing means trading to move the portfolio back toward the intended mix.",
+          fr: "Si les actions montent plus vite que les obligations, un portefeuille 60/40 peut devenir 70/30. Rebalancer signifie trader pour revenir vers le mix prévu.",
+        },
+        Intermediate: {
+          en: "Managers can rebalance on a schedule, when weights breach tolerance bands or when investment views change. The method should balance risk control against trading costs.",
+          fr: "Les managers peuvent rebalancer selon un calendrier, lorsque les poids dépassent des tolerance bands ou lorsque les vues changent. La méthode doit équilibrer contrôle du risque et coûts de trading.",
+        },
+        Professional: {
+          en: "Rebalancing is an implementation problem involving liquidity, market impact, tax lots, derivatives overlays, cash management and urgency. The optimal trade list may differ from the theoretically ideal portfolio.",
+          fr: "Le rebalancing est un problème d’implémentation impliquant liquidité, market impact, tax lots, overlays dérivés, cash management et urgence. La trade list optimale peut différer du portefeuille théoriquement idéal.",
+        },
+      },
+      vocabulary: [
+        { en: "Rebalancing", fr: "rebalancing", definition: { en: "Trading to restore or change desired portfolio exposures.", fr: "Trading destiné à restaurer ou modifier les expositions souhaitées du portefeuille." } },
+        { en: "Tolerance band", fr: "tolerance band", definition: { en: "Range around a target weight within which no rebalance is required.", fr: "Intervalle autour d’un poids cible dans lequel aucun rebalancing n’est requis." } },
+      ],
+    },
+    {
+      id: "investment-communication",
+      kicker: { en: "09 · INVESTMENT COMMUNICATION", fr: "09 · COMMUNICATION D’INVESTISSEMENT" },
+      title: { en: "A strong investment process must be explainable before and after the trade", fr: "Un bon processus d’investissement doit être explicable avant et après le trade" },
+      coreFacts: [
+        { en: "Portfolio managers must communicate thesis, sizing, risk and performance clearly to clients and internal committees.", fr: "Les portfolio managers doivent communiquer clairement thèse, sizing, risque et performance aux clients et comités internes." },
+        { en: "An investment memo should distinguish facts, assumptions and judgment.", fr: "Un investment memo doit distinguer faits, hypothèses et jugement." },
+        { en: "Post-investment review helps identify whether gains or losses came from process quality, luck or an incorrect thesis.", fr: "La revue post-investissement aide à identifier si gains ou pertes viennent de la qualité du process, de la chance ou d’une thèse erronée." },
+        { en: "Good communication acknowledges uncertainty rather than hiding it.", fr: "Une bonne communication reconnaît l’incertitude plutôt que de la cacher." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A manager should be able to explain: what do we own, why do we own it, what could go wrong, and what would make us sell?",
+          fr: "Un manager doit pouvoir expliquer : que détenons-nous, pourquoi, qu’est-ce qui peut mal tourner, et qu’est-ce qui nous ferait vendre ?",
+        },
+        Intermediate: {
+          en: "A strong investment memo includes thesis, valuation, catalysts, downside case, portfolio role, sizing rationale and exit conditions. This creates accountability when the investment is reviewed later.",
+          fr: "Un bon investment memo inclut thèse, valuation, catalysts, downside case, rôle dans le portefeuille, logique de sizing et conditions de sortie. Cela crée de l’accountability lors de la revue ultérieure.",
+        },
+        Professional: {
+          en: "Institutional communication links security-level decisions to mandate objectives and portfolio risk. Attribution should explain not only what happened but whether outcomes were consistent with the intended process.",
+          fr: "La communication institutionnelle relie décisions au niveau du titre aux objectifs du mandat et au risque du portefeuille. L’attribution doit expliquer non seulement ce qui s’est passé mais aussi si les résultats sont cohérents avec le process prévu.",
+        },
+      },
+      vocabulary: [
+        { en: "Investment memo", fr: "investment memo", definition: { en: "Structured document recording thesis, assumptions, valuation and risks.", fr: "Document structuré enregistrant thèse, hypothèses, valuation et risques." } },
+        { en: "Investment committee", fr: "investment committee", definition: { en: "Group responsible for reviewing or approving investment decisions and process.", fr: "Groupe chargé de revoir ou approuver les décisions et le processus d’investissement." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "mandate",
+      question: { en: "What should come before security selection in professional asset management?", fr: "Qu’est-ce qui doit venir avant la sélection de titres en asset management professionnel ?" },
+      options: [
+        { id: "a", label: { en: "Understanding the mandate and constraints", fr: "Comprendre le mandat et les contraintes" } },
+        { id: "b", label: { en: "Buying the most popular stock", fr: "Acheter l’action la plus populaire" } },
+        { id: "c", label: { en: "Ignoring liquidity", fr: "Ignorer la liquidité" } },
+        { id: "d", label: { en: "Removing the benchmark", fr: "Supprimer le benchmark" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Portfolio decisions must first satisfy the client objective and investment constraints.", fr: "Les décisions de portefeuille doivent d’abord respecter objectif client et contraintes d’investissement." },
+    },
+    {
+      id: "q2",
+      conceptKey: "active-return",
+      question: { en: "Portfolio return is 9% and benchmark return is 7%. What is active return?", fr: "Le portefeuille gagne 9 % et le benchmark 7 %. Quel est le rendement actif ?" },
+      options: [
+        { id: "a", label: { en: "2%", fr: "2 %" } },
+        { id: "b", label: { en: "16%", fr: "16 %" } },
+        { id: "c", label: { en: "7%", fr: "7 %" } },
+        { id: "d", label: { en: "-2%", fr: "-2 %" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Active return = 9% − 7% = 2%.", fr: "Rendement actif = 9 % − 7 % = 2 %." },
+    },
+    {
+      id: "q3",
+      conceptKey: "bottom-up",
+      question: { en: "Which best describes bottom-up investing?", fr: "Quelle proposition décrit le mieux l’investissement bottom-up ?" },
+      options: [
+        { id: "a", label: { en: "Starting with individual securities and companies", fr: "Commencer par les titres et sociétés individuelles" } },
+        { id: "b", label: { en: "Starting only with central-bank policy", fr: "Commencer uniquement par la politique de banque centrale" } },
+        { id: "c", label: { en: "Ignoring valuation", fr: "Ignorer la valuation" } },
+        { id: "d", label: { en: "Holding only cash", fr: "Détenir uniquement du cash" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Bottom-up research begins with company- or security-specific analysis.", fr: "La recherche bottom-up commence par l’analyse spécifique des entreprises ou titres." },
+    },
+    {
+      id: "q4",
+      conceptKey: "position-sizing",
+      question: { en: "Which factor should affect position size?", fr: "Quel facteur doit influencer la taille d’une position ?" },
+      options: [
+        { id: "a", label: { en: "Expected return, downside, confidence, liquidity and correlation", fr: "Rendement attendu, downside, conviction, liquidité et corrélation" } },
+        { id: "b", label: { en: "Only the company name", fr: "Seulement le nom de l’entreprise" } },
+        { id: "c", label: { en: "Only yesterday’s price move", fr: "Seulement le mouvement de prix d’hier" } },
+        { id: "d", label: { en: "No risk information", fr: "Aucune information de risque" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Sizing should reflect expected reward and contribution to total portfolio risk.", fr: "Le sizing doit refléter rendement attendu et contribution au risque total du portefeuille." },
+    },
+    {
+      id: "q5",
+      conceptKey: "asset-allocation",
+      question: { en: "What is strategic asset allocation?", fr: "Qu’est-ce que la strategic asset allocation ?" },
+      options: [
+        { id: "a", label: { en: "Long-term target mix across asset classes", fr: "Mix cible long terme entre classes d’actifs" } },
+        { id: "b", label: { en: "A one-day trading signal", fr: "Un signal de trading d’un jour" } },
+        { id: "c", label: { en: "A bid-ask spread", fr: "Un bid-ask spread" } },
+        { id: "d", label: { en: "A company’s capital structure", fr: "La structure du capital d’une société" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Strategic allocation defines the long-term portfolio mix consistent with objectives and constraints.", fr: "L’allocation stratégique définit le mix long terme cohérent avec objectifs et contraintes." },
+    },
+    {
+      id: "q6",
+      conceptKey: "drawdown",
+      question: { en: "A portfolio falls from 100 to 80. What is the drawdown?", fr: "Un portefeuille passe de 100 à 80. Quel est le drawdown ?" },
+      options: [
+        { id: "a", label: { en: "-20%", fr: "-20 %" } },
+        { id: "b", label: { en: "20%", fr: "20 %" } },
+        { id: "c", label: { en: "-80%", fr: "-80 %" } },
+        { id: "d", label: { en: "0%", fr: "0 %" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "80 / 100 − 1 = -20%.", fr: "80 / 100 − 1 = -20 %." },
+    },
+    {
+      id: "q7",
+      conceptKey: "sharpe",
+      question: { en: "What does the Sharpe ratio measure?", fr: "Que mesure le Sharpe ratio ?" },
+      options: [
+        { id: "a", label: { en: "Excess return per unit of total volatility", fr: "Rendement excédentaire par unité de volatilité totale" } },
+        { id: "b", label: { en: "Revenue growth only", fr: "Uniquement la croissance du revenue" } },
+        { id: "c", label: { en: "Debt maturity only", fr: "Uniquement la maturité de la dette" } },
+        { id: "d", label: { en: "Bid-ask spread only", fr: "Uniquement le bid-ask spread" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Sharpe compares excess return with total return volatility.", fr: "Le Sharpe compare le rendement excédentaire à la volatilité totale des rendements." },
+    },
+    {
+      id: "q8",
+      conceptKey: "rebalancing",
+      question: { en: "Why do portfolios need rebalancing?", fr: "Pourquoi les portefeuilles ont-ils besoin de rebalancing ?" },
+      options: [
+        { id: "a", label: { en: "Market moves cause weights to drift from intended exposures", fr: "Les mouvements de marché font dériver les poids par rapport aux expositions prévues" } },
+        { id: "b", label: { en: "Benchmarks never change", fr: "Les benchmarks ne changent jamais" } },
+        { id: "c", label: { en: "Every asset has identical returns", fr: "Tous les actifs ont des rendements identiques" } },
+        { id: "d", label: { en: "Rebalancing has no relation to risk", fr: "Le rebalancing n’a aucun lien avec le risque" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Different asset returns cause actual weights to move away from target weights.", fr: "Les rendements différents des actifs font dériver les poids réels par rapport aux poids cibles." },
+    },
+    {
+      id: "q9",
+      conceptKey: "performance-attribution",
+      question: { en: "What is performance attribution used for?", fr: "À quoi sert la performance attribution ?" },
+      options: [
+        { id: "a", label: { en: "Explaining the sources of portfolio performance", fr: "Expliquer les sources de performance du portefeuille" } },
+        { id: "b", label: { en: "Setting accounting tax rates", fr: "Fixer les taux d’imposition comptables" } },
+        { id: "c", label: { en: "Calculating only cash balances", fr: "Calculer uniquement les soldes de cash" } },
+        { id: "d", label: { en: "Eliminating investment risk", fr: "Éliminer le risque d’investissement" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Attribution decomposes where return or relative return came from.", fr: "L’attribution décompose l’origine du rendement ou du rendement relatif." },
+    },
+    {
+      id: "q10",
+      conceptKey: "investment-process",
+      question: { en: "What should a strong investment memo include?", fr: "Que doit inclure un bon investment memo ?" },
+      options: [
+        { id: "a", label: { en: "Thesis, valuation, catalysts, risks, sizing logic and exit conditions", fr: "Thèse, valuation, catalysts, risques, logique de sizing et conditions de sortie" } },
+        { id: "b", label: { en: "Only the ticker symbol", fr: "Seulement le ticker" } },
+        { id: "c", label: { en: "Only upside assumptions", fr: "Uniquement les hypothèses upside" } },
+        { id: "d", label: { en: "No record of assumptions", fr: "Aucun enregistrement des hypothèses" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A complete memo creates decision discipline and accountability.", fr: "Un memo complet crée discipline de décision et accountability." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "How would you evaluate whether a stock belongs in an actively managed portfolio?",
+      fr: "Comment évaluerais-tu si une action mérite une place dans un portefeuille géré activement ?",
+    },
+    framework: [
+      { en: "Start with the mandate, benchmark and portfolio objective.", fr: "Commencer par le mandat, le benchmark et l’objectif du portefeuille." },
+      { en: "Build the investment thesis using fundamentals, valuation and market expectations.", fr: "Construire la thèse à partir des fondamentaux, de la valuation et des attentes du marché." },
+      { en: "Identify catalysts and what could invalidate the thesis.", fr: "Identifier les catalysts et ce qui pourrait invalider la thèse." },
+      { en: "Estimate upside and downside, then compare expected return with risk.", fr: "Estimer upside et downside, puis comparer rendement attendu et risque." },
+      { en: "Assess correlation, factor exposure, liquidity and portfolio diversification effects.", fr: "Évaluer corrélation, factor exposure, liquidité et effets sur la diversification du portefeuille." },
+      { en: "Choose a position size and define monitoring and exit conditions.", fr: "Choisir une taille de position et définir conditions de suivi et de sortie." },
+    ],
+    sample: {
+      en: "I would begin with the portfolio mandate because a good stock is not automatically a good portfolio position. Then I would build the thesis around earnings power, competitive position, valuation and what the market already expects. I would identify the catalysts that could cause repricing and the evidence that would invalidate the thesis. Next I would estimate a base, upside and downside case and compare expected return with downside risk. I would also look at how the stock changes the portfolio’s factor exposures, sector concentration, liquidity and correlation with existing holdings. Only then would I decide the position size. Finally, I would define what I need to monitor and the conditions under which I would add, reduce or exit the position.",
+      fr: "Je commencerais par le mandat du portefeuille car une bonne action n’est pas automatiquement une bonne position de portefeuille. Ensuite, je construirais la thèse autour de l’earnings power, du positionnement concurrentiel, de la valuation et de ce que le marché attend déjà. J’identifierais les catalysts susceptibles de provoquer un repricing ainsi que les éléments qui invalideraient la thèse. Puis j’estimerais un cas base, upside et downside et comparerais le rendement attendu au risque de baisse. J’analyserais aussi comment l’action modifie les factor exposures, la concentration sectorielle, la liquidité et la corrélation avec les positions existantes. Ce n’est qu’ensuite que je déciderais la taille de position. Enfin, je définirais les éléments à surveiller et les conditions selon lesquelles j’augmenterais, réduirais ou sortirais la position.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
