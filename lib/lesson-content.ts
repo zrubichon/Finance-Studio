@@ -5026,7 +5026,929 @@ export const microeconomicsForFinanceLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson];
+
+export const macroeconomicsForMarketsLesson: FinanceLesson = {
+  slug: "year-1-macroeconomics-for-markets",
+  year: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations" },
+  domain: { en: "Macro & Economics", fr: "Macro & économie / Macro & Economics" },
+  title: {
+    en: "Macroeconomics for Markets",
+    fr: "Macroéconomie pour les marchés / Macroeconomics for Markets",
+  },
+  subtitle: {
+    en: "Learn how growth, inflation, employment, fiscal policy and economic cycles shape expectations — and how markets translate macro surprises into moves across rates, equities, credit, FX and commodities.",
+    fr: "Comprendre comment croissance, inflation, emploi, politique budgétaire / fiscal policy et cycles économiques façonnent les anticipations — puis comment les marchés transforment les surprises macro en mouvements sur rates, actions, crédit, FX et matières premières.",
+  },
+  duration: { en: "90–110 min", fr: "90–110 min" },
+  prerequisites: [
+    {
+      en: "Money, Banking & Central Banks",
+      fr: "Monnaie, banques & banques centrales / Money, Banking & Central Banks",
+    },
+    {
+      en: "Microeconomics for Finance",
+      fr: "Microéconomie pour la finance / Microeconomics for Finance",
+    },
+  ],
+  objectives: [
+    {
+      en: "Explain GDP, real growth and the expenditure components of economic activity.",
+      fr: "Expliquer PIB / GDP, croissance réelle / real growth et composantes de la dépense dans l’activité économique.",
+    },
+    {
+      en: "Distinguish nominal growth from real growth and interpret inflation-adjusted data.",
+      fr: "Distinguer croissance nominale et croissance réelle et interpréter des données ajustées de l’inflation.",
+    },
+    {
+      en: "Read inflation and labor-market indicators without relying on one headline number.",
+      fr: "Lire les indicateurs d’inflation et du marché du travail sans dépendre d’un seul chiffre headline.",
+    },
+    {
+      en: "Identify leading, coincident and lagging indicators and place data inside the business cycle.",
+      fr: "Identifier indicateurs avancés / leading, coïncidents / coincident et retardés / lagging et replacer les données dans le cycle économique.",
+    },
+    {
+      en: "Explain how fiscal policy can affect aggregate demand, borrowing needs and financial markets.",
+      fr: "Expliquer comment la politique budgétaire / fiscal policy peut affecter demande globale, besoins de financement et marchés financiers.",
+    },
+    {
+      en: "Analyze macro data as a surprise versus expectations and map scenarios across asset classes.",
+      fr: "Analyser une donnée macro comme une surprise par rapport aux attentes et construire des scénarios multi-actifs.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "How macro data becomes a market move",
+      fr: "Comment une donnée macro devient un mouvement de marché",
+    },
+    steps: [
+      {
+        title: { en: "Economic data", fr: "Données économiques" },
+        detail: { en: "Growth · inflation · jobs · fiscal", fr: "Croissance · inflation · emploi · budget" },
+      },
+      {
+        title: { en: "Expectation gap", fr: "Écart aux attentes" },
+        detail: { en: "Actual vs consensus vs prior", fr: "Réel vs consensus vs précédent" },
+      },
+      {
+        title: { en: "Policy & earnings path", fr: "Trajectoire politique & bénéfices" },
+        detail: { en: "Rates · profits · credit quality", fr: "Taux · profits · qualité de crédit" },
+      },
+      {
+        title: { en: "Cross-asset repricing", fr: "Repricing multi-actifs" },
+        detail: { en: "Rates · equities · credit · FX · commodities", fr: "Rates · actions · crédit · FX · commodities" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "gdp-growth",
+      kicker: { en: "01 · GDP & GROWTH", fr: "01 · PIB & CROISSANCE" },
+      title: {
+        en: "GDP measures production, but markets care about the growth path",
+        fr: "Le PIB mesure la production, mais les marchés regardent surtout la trajectoire de croissance",
+      },
+      coreFacts: [
+        {
+          en: "Gross domestic product measures the value of final goods and services produced within an economy over a period under the relevant statistical framework.",
+          fr: "Le produit intérieur brut / gross domestic product mesure la valeur des biens et services finaux produits dans une économie sur une période selon le cadre statistique utilisé.",
+        },
+        {
+          en: "The expenditure identity decomposes GDP into consumption, investment, government spending and net exports.",
+          fr: "L’identité par la dépense décompose le PIB entre consommation, investissement, dépenses publiques et exportations nettes.",
+        },
+        {
+          en: "Markets often react more to changes in the expected growth trajectory than to the absolute level of GDP.",
+          fr: "Les marchés réagissent souvent davantage aux changements de trajectoire de croissance attendue qu’au niveau absolu du PIB.",
+        },
+        {
+          en: "GDP is broad but backward-looking and can be revised as more complete data become available.",
+          fr: "Le PIB est une mesure large mais rétrospective et peut être révisé lorsque des données plus complètes deviennent disponibles.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Think of GDP as a very large scorecard for what an economy produces. If households spend more, companies invest more, governments purchase more goods and services, or exports rise relative to imports, measured GDP can increase. But investors care about whether growth is accelerating, slowing or surprising expectations.",
+          fr: "Pense au PIB comme à un très grand tableau de score de ce que produit une économie. Si les ménages consomment davantage, les entreprises investissent plus, les administrations achètent davantage de biens et services, ou si les exportations progressent par rapport aux importations, le PIB peut augmenter. Mais les investisseurs regardent surtout si la croissance accélère, ralentit ou surprend les attentes.",
+        },
+        Intermediate: {
+          en: "GDP accounting separates demand into household consumption, private investment, government purchases and net exports. Each component has different drivers, cyclicality and market implications. Inventory changes and trade can make a headline print stronger or weaker than underlying domestic demand.",
+          fr: "La comptabilité du PIB sépare la demande entre consommation des ménages, investissement privé, achats publics et exportations nettes. Chaque composante possède ses propres drivers, sa cyclicité et ses implications de marché. Les variations de stocks et le commerce extérieur peuvent rendre le chiffre headline plus fort ou plus faible que la demande domestique sous-jacente.",
+        },
+        Professional: {
+          en: "Macro investors decompose headline GDP into final domestic demand, inventories, trade and sector contributions, then compare the observed mix with trend productivity, labor input and potential output. A high headline growth rate driven by volatile inventories can carry a different signal from equally strong household and business demand.",
+          fr: "Les investisseurs macro décomposent le PIB headline entre demande domestique finale, stocks, commerce et contributions sectorielles, puis comparent ce mix à la productivité tendancielle, au facteur travail et au potentiel de production. Une forte croissance alimentée par des stocks volatils n’envoie pas le même signal qu’une croissance équivalente portée par ménages et entreprises.",
+        },
+      },
+      formula: {
+        label: { en: "GDP expenditure identity", fr: "Identité du PIB par la dépense" },
+        expression: "GDP = C + I + G + (X − M)",
+        explanation: {
+          en: "C = consumption, I = investment, G = government purchases, X = exports and M = imports.",
+          fr: "C = consommation, I = investissement, G = achats publics, X = exportations et M = importations.",
+        },
+        workedExample: {
+          en: "C=700, I=180, G=220, exports=120, imports=150 → GDP = 700+180+220+(120−150)=1,070.",
+          fr: "C=700, I=180, G=220, exportations=120, importations=150 → PIB = 700+180+220+(120−150)=1 070.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Final domestic demand",
+          fr: "demande domestique finale / final domestic demand",
+          definition: {
+            en: "Domestic consumption and fixed investment plus government demand, excluding some volatile inventory and trade effects depending on definition.",
+            fr: "Mesure de demande intérieure combinant notamment consommation, investissement fixe et demande publique, en excluant certains effets volatils de stocks et de commerce selon la définition.",
+          },
+        },
+        {
+          en: "Potential output",
+          fr: "production potentielle / potential output",
+          definition: {
+            en: "An estimate of sustainable economic output consistent with available labor, capital and productivity.",
+            fr: "Estimation du niveau soutenable de production compte tenu du travail, du capital et de la productivité disponibles.",
+          },
+        },
+      ],
+    },
+    {
+      id: "nominal-real",
+      kicker: { en: "02 · NOMINAL VS REAL", fr: "02 · NOMINAL VS RÉEL" },
+      title: {
+        en: "Nominal growth mixes quantity and price changes",
+        fr: "La croissance nominale mélange variation des quantités et variation des prix",
+      },
+      coreFacts: [
+        {
+          en: "Nominal GDP values output at current prices; real GDP adjusts for changes in the price level using a statistical methodology.",
+          fr: "Le PIB nominal valorise la production aux prix courants ; le PIB réel / real GDP ajuste les variations du niveau des prix selon une méthodologie statistique.",
+        },
+        {
+          en: "Strong nominal revenue growth can come from real volume growth, inflation, or both.",
+          fr: "Une forte croissance nominale du revenu peut venir de la croissance réelle des volumes, de l’inflation ou des deux.",
+        },
+        {
+          en: "The GDP deflator is a broad price measure linked to domestically produced final output.",
+          fr: "Le déflateur du PIB / GDP deflator est une mesure large des prix liée à la production finale domestique.",
+        },
+        {
+          en: "For approximation, nominal growth is roughly real growth plus inflation, but exact compounding is multiplicative.",
+          fr: "En approximation, croissance nominale ≈ croissance réelle + inflation, mais la relation exacte est multiplicative.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If an economy produces the same number of goods but prices rise 5%, nominal GDP can rise even though real output did not. Real GDP tries to remove that price effect so we can see whether the economy actually produced more.",
+          fr: "Si une économie produit exactement la même quantité mais que les prix augmentent de 5 %, le PIB nominal peut augmenter alors que la production réelle n’a pas changé. Le PIB réel cherche à retirer cet effet prix pour voir si l’économie a réellement produit davantage.",
+        },
+        Intermediate: {
+          en: "Separating real activity from price effects is essential because assets respond differently to growth and inflation. A company with 8% nominal sales growth during 7% inflation may have very little real volume growth.",
+          fr: "Séparer activité réelle et effet prix est essentiel car les actifs réagissent différemment à la croissance et à l’inflation. Une entreprise affichant +8 % de ventes nominales pendant une inflation de 7 % peut avoir très peu de croissance réelle en volume.",
+        },
+        Professional: {
+          en: "Nominal-versus-real decomposition is central to revenue forecasting, debt sustainability and rates analysis. Real activity drives physical utilization and labor demand, while the price component influences nominal cash flows, tax bases and the central-bank reaction function.",
+          fr: "La décomposition nominal/réel est centrale pour prévisions de revenu, soutenabilité de la dette et analyse de taux. L’activité réelle influence utilisation physique et demande de travail, tandis que la composante prix influence cash flows nominaux, bases fiscales et fonction de réaction de la banque centrale.",
+        },
+      },
+      formula: {
+        label: { en: "GDP deflator", fr: "Déflateur du PIB / GDP deflator" },
+        expression: "GDP Deflator = (Nominal GDP ÷ Real GDP) × 100",
+        explanation: {
+          en: "A deflator above 100 relative to its base reference reflects a higher aggregate price level under the index methodology.",
+          fr: "Un déflateur supérieur à 100 par rapport à sa référence de base reflète un niveau agrégé de prix plus élevé selon la méthodologie de l’indice.",
+        },
+        workedExample: {
+          en: "Nominal GDP=1,100 and real GDP=1,000 → deflator = 110.",
+          fr: "PIB nominal=1 100 et PIB réel=1 000 → déflateur = 110.",
+        },
+      },
+      marketConnection: {
+        en: "A nominal-growth slowdown caused by falling inflation can have very different implications for margins, bond yields and central-bank policy than a slowdown caused by collapsing real demand.",
+        fr: "Un ralentissement de croissance nominale provoqué par la baisse de l’inflation peut avoir des implications très différentes pour marges, yields obligataires et banques centrales qu’un ralentissement causé par un effondrement de la demande réelle.",
+      },
+    },
+    {
+      id: "inflation",
+      kicker: { en: "03 · INFLATION DATA", fr: "03 · DONNÉES D’INFLATION" },
+      title: {
+        en: "Headline, core, goods, services and shelter can tell different stories",
+        fr: "Headline, core, biens, services et logement peuvent raconter des histoires différentes",
+      },
+      coreFacts: [
+        {
+          en: "Inflation measures the rate of change in a defined price index, not the absolute level of prices.",
+          fr: "L’inflation mesure le taux de variation d’un indice de prix défini, pas le niveau absolu des prix.",
+        },
+        {
+          en: "Headline inflation includes all components in the index; core measures often exclude selected volatile categories to reveal persistence, depending on methodology.",
+          fr: "L’inflation headline inclut toutes les composantes de l’indice ; les mesures core excluent souvent certaines catégories volatiles afin d’observer la persistance, selon la méthodologie.",
+        },
+        {
+          en: "Monthly, quarterly and year-over-year rates answer different questions and can send different signals during turning points.",
+          fr: "Les taux mensuels, trimestriels et year-over-year répondent à des questions différentes et peuvent envoyer des signaux différents aux points de retournement.",
+        },
+        {
+          en: "Markets often decompose inflation into goods, services, housing, wages and other components rather than relying only on one headline rate.",
+          fr: "Les marchés décomposent souvent l’inflation entre biens, services, logement, salaires et autres composantes plutôt que dépendre d’un seul taux headline.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If the price index was 120 last year and is 123.6 this year, year-over-year inflation is 3%. That does not mean prices fell — prices are still higher; they simply increased by 3% over the year.",
+          fr: "Si l’indice des prix valait 120 l’an dernier et 123,6 cette année, l’inflation year-over-year vaut 3 %. Cela ne signifie pas que les prix ont baissé : ils sont toujours plus élevés ; ils ont simplement augmenté de 3 % sur l’année.",
+        },
+        Intermediate: {
+          en: "Macro analysis distinguishes inflation level, momentum and breadth. A high year-over-year rate can coexist with weak recent monthly momentum because the annual comparison includes older data. Base effects therefore matter.",
+          fr: "L’analyse macro distingue niveau, momentum et diffusion de l’inflation. Un taux year-over-year élevé peut coexister avec un faible momentum mensuel récent car la comparaison annuelle inclut des données plus anciennes. Les effets de base / base effects comptent donc.",
+        },
+        Professional: {
+          en: "Rates markets focus on inflation persistence, diffusion, wage-sensitive services, housing lags and the policy-relevant measure for the jurisdiction. Short-run prints are filtered through seasonal adjustment, base effects and potential measurement noise before being mapped into the expected policy path.",
+          fr: "Les marchés de taux se concentrent sur persistance de l’inflation, diffusion, services sensibles aux salaires, retards du logement et mesure pertinente pour la banque centrale concernée. Les prints court terme sont filtrés par ajustement saisonnier, base effects et bruit de mesure avant d’être traduits en trajectoire de politique monétaire.",
+        },
+      },
+      formula: {
+        label: { en: "Year-over-year inflation", fr: "Inflation year-over-year" },
+        expression: "Inflation = (Price Indexₜ ÷ Price Indexₜ₋₁₂ − 1) × 100",
+        explanation: {
+          en: "The exact time reference depends on the reporting frequency and index convention.",
+          fr: "La référence temporelle exacte dépend de la fréquence de publication et de la convention de l’indice.",
+        },
+        workedExample: {
+          en: "123.6 ÷ 120 − 1 = 3.0%.",
+          fr: "123,6 ÷ 120 − 1 = 3,0 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Base effect",
+          fr: "effet de base / base effect",
+          definition: {
+            en: "A change in the comparison rate caused partly by an unusually high or low base-period observation.",
+            fr: "Variation d’un taux de comparaison causée en partie par une observation inhabituellement haute ou basse de la période de base.",
+          },
+        },
+        {
+          en: "Core inflation",
+          fr: "inflation sous-jacente / core inflation",
+          definition: {
+            en: "An inflation measure excluding selected components under a defined methodology to study underlying price pressure.",
+            fr: "Mesure d’inflation excluant certaines composantes selon une méthodologie définie afin d’étudier les pressions sous-jacentes.",
+          },
+        },
+      ],
+    },
+    {
+      id: "labor-market",
+      kicker: { en: "04 · LABOR MARKET", fr: "04 · MARCHÉ DU TRAVAIL" },
+      title: {
+        en: "Employment data reveal both demand strength and economic slack",
+        fr: "Les données d’emploi révèlent à la fois la force de la demande et le slack économique",
+      },
+      coreFacts: [
+        {
+          en: "The unemployment rate divides unemployed people by the labor force under the applicable statistical definition.",
+          fr: "Le taux de chômage / unemployment rate divise le nombre de chômeurs par la population active / labor force selon la définition statistique utilisée.",
+        },
+        {
+          en: "The labor-force participation rate measures the share of a reference population that is working or actively seeking work, under the chosen definition.",
+          fr: "Le taux de participation / labor-force participation rate mesure la part d’une population de référence qui travaille ou recherche activement un emploi, selon la définition choisie.",
+        },
+        {
+          en: "Payroll growth, unemployment, hours worked, wage growth, vacancies and layoffs capture different dimensions of labor demand.",
+          fr: "Croissance de l’emploi, chômage, heures travaillées, salaires, postes vacants et licenciements décrivent différentes dimensions de la demande de travail.",
+        },
+        {
+          en: "A low unemployment rate can coexist with slowing hiring if the economy is moving from very strong conditions toward balance.",
+          fr: "Un faible taux de chômage peut coexister avec un ralentissement des embauches si l’économie passe d’une situation très forte vers un meilleur équilibre.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If 95 people are working and 5 are actively looking for work, the labor force is 100 and unemployment is 5%. Someone who is not working and not actively looking may be outside the labor force under the statistical definition, so the unemployment rate alone does not describe everyone without a job.",
+          fr: "Si 95 personnes travaillent et 5 recherchent activement un emploi, la population active est 100 et le chômage vaut 5 %. Une personne sans emploi qui ne recherche pas activement peut être hors de la labor force selon la définition statistique ; le taux de chômage ne décrit donc pas toutes les personnes sans travail.",
+        },
+        Intermediate: {
+          en: "Labor-market analysis combines stocks and flows. Unemployment is a stock measure, while hiring, quits and layoffs reveal flows. Wage growth matters because it can support household income but can also affect service-sector costs and inflation persistence.",
+          fr: "L’analyse du marché du travail combine stocks et flux. Le chômage est une mesure de stock, tandis qu’embauches, démissions et licenciements révèlent les flux. La croissance salariale soutient le revenu des ménages mais peut aussi influencer coûts des services et persistance de l’inflation.",
+        },
+        Professional: {
+          en: "Macro desks watch the joint signal from payrolls, unemployment, participation, hours, earnings, vacancies and claims. A strong payroll headline with falling hours and weak household employment can produce a different market interpretation from a uniformly strong report.",
+          fr: "Les desks macro observent le signal conjoint provenant des payrolls, chômage, participation, heures, salaires, vacancies et claims. Un headline payroll fort accompagné d’une baisse des heures et d’un emploi ménages faible peut être interprété différemment d’un rapport uniformément solide.",
+        },
+      },
+      formula: {
+        label: { en: "Unemployment rate", fr: "Taux de chômage / Unemployment rate" },
+        expression: "Unemployment Rate = Unemployed ÷ Labor Force × 100",
+        explanation: {
+          en: "Labor force generally includes employed plus unemployed people meeting the relevant definition.",
+          fr: "La labor force comprend généralement personnes employées plus chômeurs répondant à la définition pertinente.",
+        },
+        workedExample: {
+          en: "5 unemployed and 95 employed → labor force=100 → unemployment rate=5%.",
+          fr: "5 chômeurs et 95 personnes employées → labor force=100 → taux de chômage=5 %.",
+        },
+      },
+      marketConnection: {
+        en: "A labor report can move short-term rates sharply because investors update both growth expectations and the expected central-bank reaction.",
+        fr: "Un rapport sur l’emploi peut fortement déplacer les taux courts car les investisseurs révisent à la fois leurs anticipations de croissance et la réaction attendue de la banque centrale.",
+      },
+      vocabulary: [
+        {
+          en: "Labor-force participation",
+          fr: "taux de participation / labor-force participation",
+          definition: {
+            en: "The share of the defined reference population that is in the labor force.",
+            fr: "Part de la population de référence définie appartenant à la population active.",
+          },
+        },
+        {
+          en: "Economic slack",
+          fr: "slack économique / economic slack",
+          definition: {
+            en: "Underutilized labor or productive capacity relative to a sustainable benchmark.",
+            fr: "Sous-utilisation du travail ou des capacités productives par rapport à un benchmark soutenable.",
+          },
+        },
+      ],
+    },
+    {
+      id: "business-cycle",
+      kicker: { en: "05 · BUSINESS CYCLE", fr: "05 · CYCLE ÉCONOMIQUE" },
+      title: {
+        en: "Different indicators turn at different moments of the cycle",
+        fr: "Les indicateurs se retournent à différents moments du cycle",
+      },
+      coreFacts: [
+        {
+          en: "Leading indicators tend to change before broader economic activity, coincident indicators move roughly with activity and lagging indicators turn later.",
+          fr: "Les indicateurs avancés / leading tendent à changer avant l’activité globale, les indicateurs coïncidents / coincident évoluent approximativement avec elle et les indicateurs retardés / lagging se retournent plus tard.",
+        },
+        {
+          en: "No single indicator reliably identifies every cycle turning point.",
+          fr: "Aucun indicateur unique n’identifie de manière fiable tous les retournements de cycle.",
+        },
+        {
+          en: "Credit conditions, new orders, housing, confidence and financial conditions can contain forward-looking information, but relationships are not perfectly stable.",
+          fr: "Conditions de crédit, nouvelles commandes, logement, confiance et conditions financières peuvent contenir de l’information prospective, mais les relations ne sont pas parfaitement stables.",
+        },
+        {
+          en: "Markets often price a cycle turn before official GDP data confirm it.",
+          fr: "Les marchés pricent souvent un retournement du cycle avant que les données officielles de PIB ne le confirment.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Imagine a company sees fewer new orders. It may first reduce overtime, then hiring, then production. Months later unemployment might rise. The order data were leading, production was closer to coincident, and unemployment may have lagged.",
+          fr: "Imagine qu’une entreprise reçoive moins de nouvelles commandes. Elle peut d’abord réduire les heures supplémentaires, puis les embauches, puis la production. Des mois plus tard, le chômage peut augmenter. Les commandes étaient avancées, la production plutôt coïncidente, et le chômage peut avoir été retardé.",
+        },
+        Intermediate: {
+          en: "Cycle analysis uses a dashboard rather than a single threshold. Investors look for breadth and persistence across manufacturing, services, labor, housing, credit and income. A slowdown is not automatically a recession, and a rebound in one survey is not automatically a new expansion.",
+          fr: "L’analyse du cycle utilise un dashboard plutôt qu’un seuil unique. Les investisseurs recherchent amplitude et persistance entre industrie, services, emploi, logement, crédit et revenus. Un ralentissement n’est pas automatiquement une récession, et un rebond d’une enquête n’est pas automatiquement une nouvelle expansion.",
+        },
+        Professional: {
+          en: "A market-relevant cycle framework distinguishes level, rate of change and surprise. Assets can rally in weak absolute growth if the rate of deterioration slows and expectations were worse. Macro positioning therefore often depends on second derivatives as much as levels.",
+          fr: "Un cadre de cycle pertinent pour les marchés distingue niveau, variation et surprise. Les actifs peuvent monter malgré une croissance absolue faible si le rythme de détérioration ralentit et que les attentes étaient plus mauvaises. Le positionnement macro dépend donc souvent de la dérivée seconde autant que du niveau.",
+        },
+      },
+      comparison: {
+        title: { en: "Indicator timing", fr: "Timing des indicateurs" },
+        headers: [
+          { en: "Type", fr: "Type" },
+          { en: "Typical role", fr: "Rôle typique" },
+          { en: "Examples of categories", fr: "Exemples de catégories" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Leading", fr: "Avancé / leading" },
+            { en: "May turn before broad activity", fr: "Peut se retourner avant l’activité globale" },
+            { en: "New orders · housing · credit conditions", fr: "Nouvelles commandes · logement · crédit" },
+          ]},
+          { cells: [
+            { en: "Coincident", fr: "Coïncident / coincident" },
+            { en: "Moves with current activity", fr: "Évolue avec l’activité actuelle" },
+            { en: "Production · income · employment", fr: "Production · revenu · emploi" },
+          ]},
+          { cells: [
+            { en: "Lagging", fr: "Retardé / lagging" },
+            { en: "Confirms after the turn", fr: "Confirme après le retournement" },
+            { en: "Some inflation and labor measures", fr: "Certaines mesures d’inflation et d’emploi" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Rate of change",
+          fr: "rythme de variation / rate of change",
+          definition: {
+            en: "How quickly an economic variable is increasing or decreasing rather than its absolute level.",
+            fr: "Vitesse à laquelle une variable économique augmente ou diminue, plutôt que son niveau absolu.",
+          },
+        },
+        {
+          en: "Business cycle",
+          fr: "cycle économique / business cycle",
+          definition: {
+            en: "Fluctuations in aggregate economic activity around longer-run trends.",
+            fr: "Fluctuations de l’activité économique agrégée autour de tendances de plus long terme.",
+          },
+        },
+      ],
+    },
+    {
+      id: "fiscal-policy",
+      kicker: { en: "06 · FISCAL POLICY", fr: "06 · POLITIQUE BUDGÉTAIRE" },
+      title: {
+        en: "Taxes and public spending change demand, income and financing needs",
+        fr: "Taxes et dépenses publiques modifient demande, revenu et besoins de financement",
+      },
+      coreFacts: [
+        {
+          en: "Fiscal policy operates through government spending, taxation and transfers under the relevant legal and institutional process.",
+          fr: "La politique budgétaire / fiscal policy agit via dépenses publiques, fiscalité et transferts selon le processus juridique et institutionnel applicable.",
+        },
+        {
+          en: "A fiscal deficit occurs when government expenditures exceed revenues over the measured period under the accounting definition.",
+          fr: "Un déficit budgétaire apparaît lorsque les dépenses publiques dépassent les recettes sur la période mesurée selon la définition comptable.",
+        },
+        {
+          en: "Fiscal expansion can support aggregate demand, but the size and timing of the effect depend on economic slack, financing, household behavior, import leakage, monetary conditions and implementation.",
+          fr: "Une expansion budgétaire peut soutenir la demande globale, mais la taille et le timing de l’effet dépendent du slack économique, du financement, du comportement des ménages, des importations, des conditions monétaires et de l’exécution.",
+        },
+        {
+          en: "Government borrowing needs can affect bond supply and term premia, but market outcomes depend on the broader macro and policy environment.",
+          fr: "Les besoins de financement public peuvent influencer l’offre obligataire et les primes de terme / term premia, mais les réactions de marché dépendent du contexte macro et monétaire global.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a government spends more than it receives in taxes during a period, it runs a deficit and generally needs financing. That spending can support household or business income, but the effect on growth and inflation depends on where the money goes and on the state of the economy.",
+          fr: "Si un gouvernement dépense davantage qu’il ne reçoit en impôts sur une période, il enregistre un déficit et doit généralement se financer. Ces dépenses peuvent soutenir le revenu des ménages ou des entreprises, mais l’effet sur croissance et inflation dépend de l’utilisation des fonds et de l’état de l’économie.",
+        },
+        Intermediate: {
+          en: "Fiscal impulse is not equal to the headline deficit. Analysts distinguish automatic stabilizers, discretionary measures, timing and composition. Transfers, infrastructure and tax changes can have different multipliers and different effects on labor supply, investment and imports.",
+          fr: "L’impulsion budgétaire n’est pas égale au déficit headline. Les analystes distinguent stabilisateurs automatiques, mesures discrétionnaires, timing et composition. Transferts, infrastructure et modifications fiscales peuvent avoir des multiplicateurs différents et des effets différents sur offre de travail, investissement et importations.",
+        },
+        Professional: {
+          en: "Markets connect fiscal policy to growth impulse, inflation risk, sovereign issuance and the policy mix. The same deficit can be interpreted differently depending on the cycle, maturity structure, domestic savings, currency regime, central-bank response and confidence in the fiscal framework.",
+          fr: "Les marchés relient fiscal policy à l’impulsion de croissance, au risque d’inflation, aux émissions souveraines et au policy mix. Un même déficit peut être interprété différemment selon le cycle, la structure de maturité, l’épargne domestique, le régime de change, la réponse de la banque centrale et la confiance dans le cadre budgétaire.",
+        },
+      },
+      formula: {
+        label: { en: "Simple budget balance", fr: "Solde budgétaire simple / Budget balance" },
+        expression: "Budget Balance = Government Revenue − Government Expenditure",
+        explanation: {
+          en: "A negative result represents a deficit under this simplified convention.",
+          fr: "Un résultat négatif représente un déficit dans cette convention simplifiée.",
+        },
+        workedExample: {
+          en: "Revenue=450 and expenditure=500 → balance = −50, a deficit of 50.",
+          fr: "Recettes=450 et dépenses=500 → solde = −50, soit un déficit de 50.",
+        },
+      },
+      marketConnection: {
+        en: "A large fiscal change can affect sovereign yields, sector earnings, inflation expectations and FX simultaneously, which is why investors analyze the full policy mix rather than spending alone.",
+        fr: "Un changement budgétaire important peut affecter simultanément yields souverains, bénéfices sectoriels, anticipations d’inflation et FX ; les investisseurs analysent donc l’ensemble du policy mix plutôt que la dépense seule.",
+      },
+      vocabulary: [
+        {
+          en: "Automatic stabilizer",
+          fr: "stabilisateur automatique / automatic stabilizer",
+          definition: {
+            en: "A fiscal mechanism that changes automatically with economic conditions without a new discretionary decision each time.",
+            fr: "Mécanisme budgétaire qui évolue automatiquement avec les conditions économiques sans nouvelle décision discrétionnaire à chaque fois.",
+          },
+        },
+        {
+          en: "Fiscal multiplier",
+          fr: "multiplicateur budgétaire / fiscal multiplier",
+          definition: {
+            en: "A measure of the change in economic activity associated with a change in fiscal action under specified conditions.",
+            fr: "Mesure de la variation d’activité économique associée à une variation de politique budgétaire sous des conditions données.",
+          },
+        },
+      ],
+    },
+    {
+      id: "macro-surprises",
+      kicker: { en: "07 · DATA SURPRISES", fr: "07 · SURPRISES DE DONNÉES" },
+      title: {
+        en: "Markets trade the gap between reality and expectations",
+        fr: "Les marchés tradent l’écart entre réalité et attentes",
+      },
+      coreFacts: [
+        {
+          en: "An economic release can be objectively strong but still disappoint markets if consensus expected an even stronger result.",
+          fr: "Une publication économique peut être objectivement forte mais décevoir les marchés si le consensus attendait un chiffre encore plus élevé.",
+        },
+        {
+          en: "Investors compare actual data with consensus, prior readings and revisions.",
+          fr: "Les investisseurs comparent le chiffre réel au consensus, aux données précédentes et aux révisions.",
+        },
+        {
+          en: "The market impact depends on which part of the release matters for policy, growth, earnings or positioning.",
+          fr: "L’impact de marché dépend de la partie de la publication qui compte pour politique monétaire, croissance, bénéfices ou positionnement.",
+        },
+        {
+          en: "Crowded positioning can amplify or reverse the intuitive reaction when traders are forced to unwind.",
+          fr: "Un positionnement très consensuel / crowded peut amplifier ou inverser la réaction intuitive lorsque les traders doivent unwinder leurs positions.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose economists expect 200,000 new jobs and the report shows 150,000. Employment still increased, but the result is weaker than expected. Markets may react to that negative surprise rather than to the fact that jobs were positive.",
+          fr: "Supposons que les économistes attendent 200 000 créations d’emplois et que le rapport en affiche 150 000. L’emploi a quand même augmenté, mais le chiffre est inférieur aux attentes. Les marchés peuvent réagir à cette surprise négative plutôt qu’au fait que l’emploi soit positif.",
+        },
+        Intermediate: {
+          en: "Surprise analysis asks actual minus consensus, then interprets the composition and revisions. A lower unemployment rate may be less bullish if participation collapsed, while a strong inflation headline may matter less if the policy-sensitive components softened.",
+          fr: "L’analyse de surprise calcule réel moins consensus puis interprète composition et révisions. Un chômage plus faible peut être moins bullish si la participation s’effondre, tandis qu’une inflation headline forte peut compter moins si les composantes sensibles à la politique se détendent.",
+        },
+        Professional: {
+          en: "Markets price a distribution before the event. The reaction is therefore a function of standardized surprise, information content, revision structure, policy sensitivity, positioning and liquidity. Event studies often distinguish immediate price shock from the later narrative as analysts process details.",
+          fr: "Les marchés pricent une distribution avant l’événement. La réaction dépend donc de la surprise standardisée, du contenu informationnel, des révisions, de la sensibilité à la politique, du positionnement et de la liquidité. Les event studies distinguent souvent le choc immédiat de prix du narratif ultérieur lorsque les détails sont digérés.",
+        },
+      },
+      formula: {
+        label: { en: "Simple data surprise", fr: "Surprise de donnée simple" },
+        expression: "Surprise = Actual − Consensus",
+        explanation: {
+          en: "For comparison across different indicators, professionals may standardize surprises by historical forecast error or volatility.",
+          fr: "Pour comparer différents indicateurs, les professionnels peuvent standardiser les surprises par l’erreur historique de prévision ou la volatilité.",
+        },
+        workedExample: {
+          en: "Actual payroll growth 150k versus consensus 200k → surprise = −50k.",
+          fr: "Créations d’emplois réelles 150k vs consensus 200k → surprise = −50k.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Consensus",
+          fr: "consensus",
+          definition: {
+            en: "A summary estimate of market or economist expectations before a release.",
+            fr: "Estimation synthétique des attentes du marché ou des économistes avant une publication.",
+          },
+        },
+        {
+          en: "Revision",
+          fr: "révision / revision",
+          definition: {
+            en: "A later change to a previously published data estimate.",
+            fr: "Modification ultérieure d’une estimation statistique déjà publiée.",
+          },
+        },
+      ],
+    },
+    {
+      id: "cross-asset-regimes",
+      kicker: { en: "08 · MACRO REGIMES", fr: "08 · RÉGIMES MACRO" },
+      title: {
+        en: "Growth and inflation create different cross-asset environments",
+        fr: "Croissance et inflation créent différents environnements multi-actifs",
+      },
+      coreFacts: [
+        {
+          en: "Asset reactions depend on both growth and inflation because they affect earnings, discount rates, policy and risk premia.",
+          fr: "Les réactions des actifs dépendent à la fois de la croissance et de l’inflation car elles influencent bénéfices, discount rates, politique monétaire et primes de risque.",
+        },
+        {
+          en: "A growth acceleration with contained inflation can have different market implications from growth acceleration with inflation pressure.",
+          fr: "Une accélération de croissance avec inflation contenue peut avoir des implications très différentes d’une accélération accompagnée de pression inflationniste.",
+        },
+        {
+          en: "Cross-asset relationships are conditional, not mechanical; valuation, positioning and policy expectations can dominate simple regime rules.",
+          fr: "Les relations multi-actifs sont conditionnelles et non mécaniques ; valorisation, positionnement et attentes de politique peuvent dominer les règles simples de régime.",
+        },
+        {
+          en: "Scenario analysis is more useful than assuming one asset class always benefits from one macro variable.",
+          fr: "L’analyse de scénarios est plus utile que supposer qu’une classe d’actifs bénéficie toujours d’une variable macro donnée.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If growth improves and inflation stays calm, companies may earn more while interest-rate pressure remains limited. If growth improves but inflation also jumps, bond yields may rise and valuations can face pressure. The same growth number can therefore produce different market outcomes.",
+          fr: "Si la croissance s’améliore et que l’inflation reste calme, les entreprises peuvent gagner davantage alors que la pression sur les taux reste limitée. Si croissance et inflation accélèrent ensemble, les yields obligataires peuvent monter et peser sur les valorisations. Un même chiffre de croissance peut donc produire des réactions différentes.",
+        },
+        Intermediate: {
+          en: "A useful macro grid has four quadrants: growth up/down crossed with inflation up/down. It helps organize likely pressure on policy expectations, nominal yields, real yields, margins and currencies without pretending the mapping is deterministic.",
+          fr: "Une grille macro utile comporte quatre quadrants : croissance en hausse/baisse croisée avec inflation en hausse/baisse. Elle aide à organiser la pression probable sur anticipations de politique, yields nominaux, taux réels, marges et devises sans prétendre que le mapping est déterministe.",
+        },
+        Professional: {
+          en: "Cross-asset macro trading separates the level of growth and inflation from their momentum and surprise. A disinflationary growth slowdown can be bullish for duration before it becomes bearish for credit if the slowdown later threatens cash flows. Sequencing matters.",
+          fr: "Le trading macro multi-actifs sépare niveau de croissance/inflation de leur momentum et surprise. Un ralentissement désinflationniste peut d’abord être bullish pour la duration avant de devenir bearish pour le crédit si le ralentissement menace ensuite les cash flows. La séquence compte.",
+        },
+      },
+      comparison: {
+        title: { en: "Simple growth-inflation regime map", fr: "Carte simple croissance-inflation" },
+        headers: [
+          { en: "Regime", fr: "Régime" },
+          { en: "Typical macro tension", fr: "Tension macro typique" },
+          { en: "What to watch", fr: "À surveiller" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Growth ↑ / Inflation ↓", fr: "Croissance ↑ / Inflation ↓" },
+            { en: "Improving activity with disinflation", fr: "Activité plus forte avec désinflation" },
+            { en: "Earnings breadth · policy easing expectations", fr: "Largeur des bénéfices · attentes d’assouplissement" },
+          ]},
+          { cells: [
+            { en: "Growth ↑ / Inflation ↑", fr: "Croissance ↑ / Inflation ↑" },
+            { en: "Overheating risk", fr: "Risque de surchauffe" },
+            { en: "Yields · margins · policy repricing", fr: "Yields · marges · repricing monétaire" },
+          ]},
+          { cells: [
+            { en: "Growth ↓ / Inflation ↓", fr: "Croissance ↓ / Inflation ↓" },
+            { en: "Demand slowdown", fr: "Ralentissement de la demande" },
+            { en: "Duration · credit quality · earnings cuts", fr: "Duration · qualité crédit · révisions bénéficiaires" },
+          ]},
+          { cells: [
+            { en: "Growth ↓ / Inflation ↑", fr: "Croissance ↓ / Inflation ↑" },
+            { en: "Stagflationary pressure", fr: "Pression stagflationniste" },
+            { en: "Real income · margins · policy constraint", fr: "Revenu réel · marges · contrainte monétaire" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Stagflation",
+          fr: "stagflation",
+          definition: {
+            en: "A difficult macro environment combining weak growth with elevated inflation pressure.",
+            fr: "Environnement macro difficile combinant faible croissance et pression inflationniste élevée.",
+          },
+        },
+        {
+          en: "Disinflation",
+          fr: "désinflation / disinflation",
+          definition: {
+            en: "A decline in the rate of inflation while the price level can still be rising.",
+            fr: "Baisse du taux d’inflation alors que le niveau général des prix peut continuer d’augmenter.",
+          },
+        },
+      ],
+    },
+    {
+      id: "macro-dashboard",
+      kicker: { en: "09 · BUILD A MACRO DASHBOARD", fr: "09 · CONSTRUIRE UN DASHBOARD MACRO" },
+      title: {
+        en: "Think in levels, momentum, surprises and cross-asset confirmation",
+        fr: "Raisonner en niveaux, momentum, surprises et confirmation multi-actifs",
+      },
+      coreFacts: [
+        {
+          en: "A strong macro process tracks a small set of indicators consistently rather than reacting to every headline.",
+          fr: "Un bon processus macro suit de manière cohérente un ensemble limité d’indicateurs plutôt que réagir à chaque headline.",
+        },
+        {
+          en: "For each indicator, separate level, direction, acceleration or deceleration, consensus surprise and revisions.",
+          fr: "Pour chaque indicateur, séparer niveau, direction, accélération/décélération, surprise face au consensus et révisions.",
+        },
+        {
+          en: "Cross-asset confirmation can reveal whether the market is interpreting a release mainly through growth, inflation, policy or risk sentiment.",
+          fr: "La confirmation multi-actifs peut montrer si le marché interprète une publication principalement via croissance, inflation, politique monétaire ou sentiment de risque.",
+        },
+        {
+          en: "A macro thesis should include an invalidation condition because incoming data can change the regime.",
+          fr: "Une thèse macro doit inclure une condition d’invalidation car les nouvelles données peuvent modifier le régime.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Do not memorize hundreds of indicators. Start with growth, inflation, labor, credit and policy. For each one, ask: is it strong or weak, getting better or worse, above or below expectations, and what did markets do after the release?",
+          fr: "Il n’est pas nécessaire de mémoriser des centaines d’indicateurs. Commence par croissance, inflation, emploi, crédit et politique monétaire. Pour chacun, demande : est-il fort ou faible, s’améliore-t-il ou se détériore-t-il, est-il au-dessus ou en dessous des attentes, et comment les marchés ont-ils réagi ?",
+        },
+        Intermediate: {
+          en: "A practical dashboard combines hard data and surveys, uses rolling trends rather than one print and records revisions. The objective is not to predict every release; it is to maintain a coherent view of the economy and know what evidence would change that view.",
+          fr: "Un dashboard pratique combine données dures et enquêtes, utilise des tendances glissantes plutôt qu’un seul print et enregistre les révisions. L’objectif n’est pas de prédire chaque publication mais de maintenir une vision cohérente de l’économie et de savoir quelles preuves changeraient cette vision.",
+        },
+        Professional: {
+          en: "Professional macro frameworks map data into latent factors such as growth, inflation and liquidity, then connect those factors to policy pricing and asset sensitivities. The edge comes from identifying where the market narrative, positioning and incoming data disagree.",
+          fr: "Les cadres macro professionnels traduisent les données en facteurs latents comme croissance, inflation et liquidité, puis relient ces facteurs au pricing de politique monétaire et aux sensibilités des actifs. L’edge vient de l’identification des divergences entre narratif de marché, positionnement et données entrantes.",
+        },
+      },
+      comparison: {
+        title: { en: "A five-question macro checklist", fr: "Checklist macro en cinq questions" },
+        headers: [
+          { en: "Question", fr: "Question" },
+          { en: "Purpose", fr: "Objectif" },
+        ],
+        rows: [
+          { cells: [
+            { en: "What is the level?", fr: "Quel est le niveau ?" },
+            { en: "Know the current state", fr: "Connaître l’état actuel" },
+          ]},
+          { cells: [
+            { en: "What is the direction?", fr: "Quelle est la direction ?" },
+            { en: "Identify momentum", fr: "Identifier le momentum" },
+          ]},
+          { cells: [
+            { en: "What was expected?", fr: "Qu’attendait le marché ?" },
+            { en: "Measure surprise", fr: "Mesurer la surprise" },
+          ]},
+          { cells: [
+            { en: "What was revised?", fr: "Qu’est-ce qui a été révisé ?" },
+            { en: "Check signal quality", fr: "Vérifier la qualité du signal" },
+          ]},
+          { cells: [
+            { en: "How did assets respond?", fr: "Comment les actifs ont-ils réagi ?" },
+            { en: "Infer the market narrative", fr: "Déduire le narratif de marché" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "This framework becomes the foundation for FinanceStudio's future live News & Analysis engine, where each release can be linked to rates, equities, credit, FX and commodities.",
+        fr: "Ce cadre devient la base du futur moteur live News & Analysis de FinanceStudio, où chaque publication pourra être reliée aux taux, actions, crédit, FX et matières premières.",
+      },
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "gdp-identity",
+      question: {
+        en: "If C=700, I=180, G=220, exports=120 and imports=150, what is GDP using the expenditure identity?",
+        fr: "Si C=700, I=180, G=220, exportations=120 et importations=150, quel est le PIB selon l’identité par la dépense ?",
+      },
+      options: [
+        { id: "a", label: { en: "950", fr: "950" } },
+        { id: "b", label: { en: "1,070", fr: "1 070" } },
+        { id: "c", label: { en: "1,170", fr: "1 170" } },
+        { id: "d", label: { en: "1,370", fr: "1 370" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "700+180+220+(120−150)=1,070.",
+        fr: "700+180+220+(120−150)=1 070.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "gdp-deflator",
+      question: {
+        en: "Nominal GDP is 1,100 and real GDP is 1,000. What is the GDP deflator?",
+        fr: "Le PIB nominal vaut 1 100 et le PIB réel 1 000. Quel est le déflateur du PIB ?",
+      },
+      options: [
+        { id: "a", label: { en: "90", fr: "90" } },
+        { id: "b", label: { en: "100", fr: "100" } },
+        { id: "c", label: { en: "110", fr: "110" } },
+        { id: "d", label: { en: "1,100", fr: "1 100" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "(1,100 ÷ 1,000)×100 = 110.",
+        fr: "(1 100 ÷ 1 000)×100 = 110.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "inflation-rate",
+      question: {
+        en: "A price index rises from 120 to 123.6 over one year. Approximate year-over-year inflation is:",
+        fr: "Un indice des prix passe de 120 à 123,6 sur un an. L’inflation year-over-year approximative vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "1%", fr: "1 %" } },
+        { id: "b", label: { en: "2%", fr: "2 %" } },
+        { id: "c", label: { en: "3%", fr: "3 %" } },
+        { id: "d", label: { en: "6%", fr: "6 %" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "123.6 ÷ 120 − 1 = 3%.",
+        fr: "123,6 ÷ 120 − 1 = 3 %.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "unemployment-rate",
+      question: {
+        en: "There are 95 employed people and 5 unemployed people in the labor force. What is the unemployment rate?",
+        fr: "Il y a 95 personnes employées et 5 chômeurs dans la labor force. Quel est le taux de chômage ?",
+      },
+      options: [
+        { id: "a", label: { en: "4%", fr: "4 %" } },
+        { id: "b", label: { en: "5%", fr: "5 %" } },
+        { id: "c", label: { en: "5.3%", fr: "5,3 %" } },
+        { id: "d", label: { en: "10%", fr: "10 %" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Labor force = 100, so 5 ÷ 100 = 5%.",
+        fr: "La labor force vaut 100, donc 5 ÷ 100 = 5 %.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "indicator-timing",
+      question: {
+        en: "Which statement best describes a leading indicator?",
+        fr: "Quelle proposition décrit le mieux un indicateur avancé / leading indicator ?",
+      },
+      options: [
+        { id: "a", label: { en: "It tends to turn before broader economic activity", fr: "Il tend à se retourner avant l’activité économique globale" } },
+        { id: "b", label: { en: "It can only be observed years later", fr: "Il ne peut être observé que plusieurs années plus tard" } },
+        { id: "c", label: { en: "It always predicts recessions perfectly", fr: "Il prédit toujours parfaitement les récessions" } },
+        { id: "d", label: { en: "It is identical to GDP", fr: "Il est identique au PIB" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Leading indicators tend to move before the broader cycle, but they are not perfect predictors.",
+        fr: "Les indicateurs avancés tendent à évoluer avant le cycle global, mais ne sont pas des prédicteurs parfaits.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "fiscal-balance",
+      question: {
+        en: "Government revenue is 450 and expenditure is 500. What is the simplified budget balance?",
+        fr: "Les recettes publiques valent 450 et les dépenses 500. Quel est le solde budgétaire simplifié ?",
+      },
+      options: [
+        { id: "a", label: { en: "+50 surplus", fr: "+50 d’excédent" } },
+        { id: "b", label: { en: "0", fr: "0" } },
+        { id: "c", label: { en: "−50 deficit", fr: "−50 de déficit" } },
+        { id: "d", label: { en: "−950 deficit", fr: "−950 de déficit" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "450−500 = −50.",
+        fr: "450−500 = −50.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "macro-surprise",
+      question: {
+        en: "Payroll growth is 150k versus 200k consensus. What is the simple surprise?",
+        fr: "Les créations d’emplois sont de 150k contre un consensus de 200k. Quelle est la surprise simple ?",
+      },
+      options: [
+        { id: "a", label: { en: "+350k", fr: "+350k" } },
+        { id: "b", label: { en: "+50k", fr: "+50k" } },
+        { id: "c", label: { en: "−50k", fr: "−50k" } },
+        { id: "d", label: { en: "0", fr: "0" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "Actual−consensus = 150k−200k = −50k.",
+        fr: "Réel−consensus = 150k−200k = −50k.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "macro-regime",
+      question: {
+        en: "Why is a growth acceleration with falling inflation different from growth acceleration with rising inflation?",
+        fr: "Pourquoi une accélération de croissance avec inflation en baisse diffère-t-elle d’une accélération avec inflation en hausse ?",
+      },
+      options: [
+        { id: "a", label: { en: "Because inflation changes policy and discount-rate implications", fr: "Parce que l’inflation modifie les implications pour politique monétaire et discount rates" } },
+        { id: "b", label: { en: "Because GDP stops mattering when inflation rises", fr: "Parce que le PIB ne compte plus quand l’inflation augmente" } },
+        { id: "c", label: { en: "Because asset prices are unrelated to rates", fr: "Parce que les prix d’actifs n’ont aucun lien avec les taux" } },
+        { id: "d", label: { en: "There is never any difference", fr: "Il n’existe jamais aucune différence" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Growth and inflation jointly shape expected earnings, policy, yields and valuation, so the regime matters.",
+        fr: "Croissance et inflation influencent ensemble bénéfices attendus, politique monétaire, yields et valorisation ; le régime compte donc.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "A jobs report is stronger than expected. Walk me through how you would think about the market reaction.",
+      fr: "Un rapport sur l’emploi est plus fort que prévu. Explique comment tu analyserais la réaction des marchés.",
+    },
+    framework: [
+      {
+        en: "Start with the surprise versus consensus, not just the absolute job number.",
+        fr: "Commencer par la surprise face au consensus, pas seulement le chiffre absolu d’emplois.",
+      },
+      {
+        en: "Check composition: unemployment, participation, wages, hours and revisions.",
+        fr: "Vérifier la composition : chômage, participation, salaires, heures et révisions.",
+      },
+      {
+        en: "Translate into growth and inflation implications.",
+        fr: "Traduire le rapport en implications pour croissance et inflation.",
+      },
+      {
+        en: "Update the expected central-bank path and front-end rates.",
+        fr: "Mettre à jour la trajectoire attendue de la banque centrale et les taux courts.",
+      },
+      {
+        en: "Then map to equities, credit and FX while considering prior positioning and what was already priced.",
+        fr: "Puis relier aux actions, crédit et FX en tenant compte du positionnement préalable et de ce qui était déjà pricé.",
+      },
+    ],
+    sample: {
+      en: "I would begin with the surprise relative to consensus because markets react to new information, not just the headline level. Then I would check the details: unemployment, participation, wage growth, hours worked and revisions. If the report is broadly strong and wage pressure is also firm, markets may price a stronger growth outlook but also a more restrictive expected central-bank path, which can push front-end yields higher. Equities could benefit from stronger growth but face valuation pressure from higher discount rates, so sector composition matters. Credit could initially like better growth, while FX would depend on the change in relative rate expectations. I would also check positioning because a crowded pre-release view can change the price reaction.",
+      fr: "Je commencerais par la surprise par rapport au consensus car les marchés réagissent à l’information nouvelle, pas seulement au niveau headline. Ensuite je regarderais les détails : chômage, participation, croissance des salaires, heures travaillées et révisions. Si le rapport est largement solide et que les pressions salariales restent fortes, les marchés peuvent pricer une meilleure croissance mais aussi une trajectoire de banque centrale plus restrictive, ce qui peut faire monter les taux courts. Les actions peuvent bénéficier de la croissance mais subir une pression de valorisation via des discount rates plus élevés ; la composition sectorielle compte donc. Le crédit peut initialement apprécier la meilleure croissance, tandis que le FX dépendra du changement des différentiels de taux attendus. Je regarderais aussi le positionnement, car un consensus très crowded avant la publication peut modifier la réaction des prix.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
