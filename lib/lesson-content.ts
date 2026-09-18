@@ -27375,7 +27375,488 @@ export const leveragedFinanceLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, advancedValuationLesson, leveragedFinanceLesson];
+
+export const financialModelingIILesson: FinanceLesson = {
+  slug: "year-3-financial-modeling-ii",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Financial Modeling II", fr: "Modélisation financière II / Financial Modeling II" },
+  title: { en: "Financial Modeling II", fr: "Modélisation financière II / Financial Modeling II" },
+  subtitle: {
+    en: "Build a professional integrated three-statement model from historical financials through operating forecasts, working capital, capex, debt, cash flow, scenarios and model checks.",
+    fr: "Construire un modèle professionnel intégré des trois états financiers, depuis les historiques jusqu’aux forecasts opérationnels, working capital, capex, dette, cash flow, scénarios et contrôles du modèle.",
+  },
+  duration: { en: "170–210 min", fr: "170–210 min" },
+  prerequisites: [
+    { en: "Financial Modeling I", fr: "Financial Modeling I" },
+    { en: "Financial Statement Analysis", fr: "Analyse des états financiers" },
+    { en: "Corporate Finance", fr: "Corporate Finance" },
+    { en: "DCF & Relative Valuation", fr: "DCF & Relative Valuation" },
+    { en: "M&A Analysis", fr: "M&A Analysis" },
+  ],
+  objectives: [
+    { en: "Design a clean model architecture separating inputs, calculations and outputs.", fr: "Concevoir une architecture propre séparant inputs, calculs et outputs." },
+    { en: "Link the income statement, balance sheet and cash-flow statement dynamically.", fr: "Relier dynamiquement income statement, balance sheet et cash-flow statement." },
+    { en: "Forecast revenue, margins, working capital, capex and depreciation using business drivers.", fr: "Prévoir revenue, marges, working capital, capex et depreciation à partir de business drivers." },
+    { en: "Build debt, interest and cash schedules without breaking model integrity.", fr: "Construire les schedules de dette, intérêts et cash sans casser l’intégrité du modèle." },
+    { en: "Handle circularity, minimum cash, revolver draws and debt repayment logic.", fr: "Gérer circularity, minimum cash, tirages revolver et logique de remboursement de dette." },
+    { en: "Create scenario and sensitivity analysis for key operating and financing assumptions.", fr: "Créer des analyses de scénarios et sensitivities sur les hypothèses opérationnelles et financières clés." },
+    { en: "Apply professional model checks, formatting and audit discipline.", fr: "Appliquer des contrôles, un formatage et une discipline d’audit professionnels." },
+  ],
+  overviewFlow: {
+    title: { en: "From raw financials to decision-ready integrated model", fr: "Des états financiers bruts au modèle intégré exploitable pour décider" },
+    steps: [
+      { title: { en: "Structure", fr: "Structurer" }, detail: { en: "Inputs · historicals · schedules", fr: "Inputs · historiques · schedules" } },
+      { title: { en: "Forecast", fr: "Prévoir" }, detail: { en: "Revenue · margins · capital needs", fr: "Revenue · marges · besoins en capital" } },
+      { title: { en: "Integrate", fr: "Intégrer" }, detail: { en: "IS · BS · CFS · debt · cash", fr: "IS · BS · CFS · dette · cash" } },
+      { title: { en: "Stress & audit", fr: "Stresser & auditer" }, detail: { en: "Scenarios · sensitivities · checks", fr: "Scénarios · sensitivities · contrôles" } },
+    ],
+  },
+  sections: [
+    {
+      id: "model-architecture",
+      kicker: { en: "01 · MODEL ARCHITECTURE", fr: "01 · ARCHITECTURE DU MODÈLE" },
+      title: { en: "A strong model is easy to follow before it is sophisticated", fr: "Un bon modèle doit être facile à suivre avant d’être sophistiqué" },
+      coreFacts: [
+        { en: "Inputs, calculations and outputs should be visually and logically separated.", fr: "Inputs, calculs et outputs doivent être séparés visuellement et logiquement." },
+        { en: "Historical data should flow from source statements into forecast schedules with minimal hard-coding.", fr: "Les historiques doivent alimenter les forecast schedules avec un minimum de hard-coding." },
+        { en: "Each major line item should have a clear driver rather than an unexplained growth assumption.", fr: "Chaque poste majeur doit avoir un driver clair plutôt qu’une hypothèse de croissance inexpliquée." },
+        { en: "Consistency in signs, dates, units and formula direction reduces model errors.", fr: "La cohérence des signes, dates, unités et sens des formules réduit les erreurs." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A financial model is easier to trust when you can quickly see what was typed manually, what was calculated and what is being presented as an output.",
+          fr: "Un modèle financier est plus fiable lorsqu’on voit rapidement ce qui a été saisi manuellement, ce qui est calculé et ce qui sert d’output.",
+        },
+        Intermediate: {
+          en: "Use one timeline across statements, keep assumptions close to their schedules, avoid duplicate inputs and create one source of truth for every key variable.",
+          fr: "Utilise une seule timeline entre les états financiers, garde les hypothèses proches de leurs schedules, évite les inputs dupliqués et crée une source unique pour chaque variable clé.",
+        },
+        Professional: {
+          en: "Professional models are designed for handoff. Another analyst should be able to audit the flow, identify assumptions, trace formulas and change a scenario without breaking unrelated parts of the workbook.",
+          fr: "Les modèles professionnels sont conçus pour être transmis. Un autre analyste doit pouvoir auditer les flux, identifier les hypothèses, tracer les formules et changer un scénario sans casser le reste du workbook.",
+        },
+      },
+      vocabulary: [
+        { en: "Hard-code", fr: "hard-code", definition: { en: "Manually entered value rather than a linked or calculated value.", fr: "Valeur saisie manuellement plutôt que liée ou calculée." } },
+        { en: "Model architecture", fr: "architecture du modèle", definition: { en: "Organization of inputs, statements, schedules, calculations and outputs.", fr: "Organisation des inputs, états, schedules, calculs et outputs." } },
+        { en: "One source of truth", fr: "source unique", definition: { en: "Using one controlled assumption or data point rather than duplicating it across the model.", fr: "Utiliser une seule hypothèse ou donnée contrôlée plutôt que la dupliquer dans le modèle." } },
+      ],
+    },
+    {
+      id: "three-statement-integration",
+      kicker: { en: "02 · THREE-STATEMENT INTEGRATION", fr: "02 · INTÉGRATION DES TROIS ÉTATS" },
+      title: { en: "The model works only when the three statements move together", fr: "Le modèle ne fonctionne que lorsque les trois états évoluent ensemble" },
+      coreFacts: [
+        { en: "Net income from the income statement feeds retained earnings and the cash-flow statement.", fr: "Le net income de l’income statement alimente retained earnings et le cash-flow statement." },
+        { en: "Non-cash charges such as depreciation are added back in operating cash flow while reducing asset carrying values.", fr: "Les charges non cash comme depreciation sont réintégrées dans operating cash flow tout en réduisant la valeur comptable des actifs." },
+        { en: "Capex increases PP&E on the balance sheet and appears as an investing cash outflow.", fr: "Le capex augmente PP&E au bilan et apparaît comme un cash outflow d’investissement." },
+        { en: "Ending cash from the cash-flow statement must equal cash on the ending balance sheet.", fr: "Le cash final du cash-flow statement doit être égal au cash du bilan final." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Think of the three statements as one system. A transaction usually affects more than one statement, so a correct model must capture all linked effects.",
+          fr: "Pense aux trois états financiers comme à un seul système. Une transaction affecte généralement plusieurs états, donc le modèle doit capturer tous les effets liés.",
+        },
+        Intermediate: {
+          en: "The income statement calculates profit, the cash-flow statement converts profit into cash movement, and the balance sheet records the ending financial position. Linking these correctly creates an integrated model.",
+          fr: "L’income statement calcule le profit, le cash-flow statement transforme le profit en mouvements de cash, et le bilan enregistre la position financière finale. Les relier correctement crée un modèle intégré.",
+        },
+        Professional: {
+          en: "Integration should rely on schedules for working capital, fixed assets, debt, equity and taxes. Statements should summarize those schedules rather than contain disconnected plug assumptions.",
+          fr: "L’intégration doit s’appuyer sur des schedules de working capital, fixed assets, dette, equity et taxes. Les états doivent résumer ces schedules plutôt que contenir des plugs déconnectés.",
+        },
+      },
+      formula: {
+        label: { en: "Balance-sheet check", fr: "Contrôle du bilan" },
+        expression: "Balance Check = Total Assets − (Total Liabilities + Equity)",
+        explanation: { en: "A correctly integrated model should produce a zero balance check.", fr: "Un modèle correctement intégré doit produire un balance check égal à zéro." },
+      },
+      vocabulary: [
+        { en: "Three-statement model", fr: "three-statement model", definition: { en: "Integrated forecast linking income statement, balance sheet and cash-flow statement.", fr: "Forecast intégré reliant income statement, bilan et cash-flow statement." } },
+        { en: "Balance check", fr: "balance check", definition: { en: "Control confirming that assets equal liabilities plus equity.", fr: "Contrôle confirmant que actifs = passifs + equity." } },
+      ],
+    },
+    {
+      id: "revenue-forecasting",
+      kicker: { en: "03 · REVENUE FORECASTING", fr: "03 · FORECAST DU REVENUE" },
+      title: { en: "Revenue should be forecast from operating drivers whenever possible", fr: "Le revenue doit être prévu à partir de drivers opérationnels lorsque c’est possible" },
+      coreFacts: [
+        { en: "Driver-based forecasts are more informative than applying one growth rate to total revenue.", fr: "Les forecasts basés sur des drivers sont plus informatifs qu’un taux de croissance unique appliqué au revenue total." },
+        { en: "Common drivers include volume, price, customers, units, stores, subscribers, utilization or market share.", fr: "Les drivers courants incluent volume, prix, clients, unités, magasins, abonnés, utilisation ou market share." },
+        { en: "Segment-level forecasting can reveal different growth and margin profiles inside one company.", fr: "Le forecast par segment peut révéler des profils de croissance et de marge différents au sein d’une même société." },
+        { en: "Forecast assumptions should reconcile with industry growth, capacity and management guidance.", fr: "Les hypothèses de forecast doivent être cohérentes avec croissance du secteur, capacité et guidance du management." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Instead of saying sales will grow 10%, ask why. If a retailer opens 5% more stores and sales per store rise 3%, those drivers explain the revenue forecast.",
+          fr: "Au lieu de dire que les ventes vont croître de 10 %, demande pourquoi. Si un retailer ouvre 5 % de magasins en plus et que les ventes par magasin montent de 3 %, ces drivers expliquent le forecast.",
+        },
+        Intermediate: {
+          en: "Build revenue by segment and separate volume from pricing when possible. This allows scenarios to reflect real business changes rather than arbitrary percentage changes.",
+          fr: "Construis le revenue par segment et sépare volume et pricing lorsque possible. Cela permet aux scénarios de refléter de vrais changements du business plutôt que des pourcentages arbitraires.",
+        },
+        Professional: {
+          en: "Revenue forecasts should be constrained by addressable market, installed capacity, churn, customer acquisition, contract structure, backlog and competitive dynamics. A good model makes these operating assumptions visible.",
+          fr: "Les forecasts de revenue doivent être contraints par addressable market, capacité installée, churn, acquisition client, structure contractuelle, backlog et dynamique concurrentielle. Un bon modèle rend ces hypothèses opérationnelles visibles.",
+        },
+      },
+      formula: {
+        label: { en: "Simple driver-based revenue", fr: "Revenue simple basé sur des drivers" },
+        expression: "Revenue = Volume × Average Price",
+        explanation: { en: "The specific drivers differ by business model, but the principle is to connect revenue to operational activity.", fr: "Les drivers exacts diffèrent selon le business model, mais le principe est de relier le revenue à l’activité opérationnelle." },
+      },
+      vocabulary: [
+        { en: "Driver-based forecast", fr: "forecast par drivers", definition: { en: "Forecast built from underlying operating variables rather than a single top-line growth rate.", fr: "Forecast construit à partir de variables opérationnelles plutôt qu’un seul taux de croissance." } },
+        { en: "Churn", fr: "churn", definition: { en: "Rate at which customers or subscribers leave a service.", fr: "Taux auquel les clients ou abonnés quittent un service." } },
+      ],
+    },
+    {
+      id: "margins-and-costs",
+      kicker: { en: "04 · COSTS & MARGINS", fr: "04 · COÛTS & MARGES" },
+      title: { en: "Margin forecasts should explain operating leverage, not just extrapolate history", fr: "Les forecasts de marge doivent expliquer l’operating leverage, pas seulement extrapoler l’historique" },
+      coreFacts: [
+        { en: "Variable costs tend to move with revenue or activity, while fixed costs move more slowly.", fr: "Les coûts variables évoluent avec revenue ou activité, tandis que les coûts fixes évoluent plus lentement." },
+        { en: "Operating leverage can expand margins when revenue grows faster than fixed costs.", fr: "L’operating leverage peut augmenter les marges lorsque le revenue croît plus vite que les coûts fixes." },
+        { en: "Inflation, wage pressure, mix, pricing and productivity can move gross and operating margins differently.", fr: "Inflation, pression salariale, mix, pricing et productivité peuvent déplacer différemment gross margin et operating margin." },
+        { en: "Management cost-saving targets should be translated into timing, implementation cost and realistic capture.", fr: "Les objectifs de cost savings du management doivent être traduits en timing, coûts d’implémentation et capture réaliste." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If rent stays almost unchanged while sales increase, profit margin can rise because the same fixed cost supports more revenue.",
+          fr: "Si le loyer reste presque inchangé tandis que les ventes augmentent, la marge peut progresser car le même coût fixe supporte davantage de revenue.",
+        },
+        Intermediate: {
+          en: "Forecast major cost lines separately where economics differ. For example, COGS may depend on input prices while SG&A may depend on headcount and inflation.",
+          fr: "Prévois séparément les principales lignes de coûts lorsque leur économie diffère. Par exemple, COGS peut dépendre des input prices tandis que SG&A dépend davantage des effectifs et de l’inflation.",
+        },
+        Professional: {
+          en: "A credible margin bridge separates price, volume, mix, productivity, inflation and structural cost actions. This helps avoid assuming permanent margin expansion without an operating mechanism.",
+          fr: "Un margin bridge crédible sépare price, volume, mix, productivité, inflation et actions structurelles sur les coûts. Cela évite de supposer une expansion permanente des marges sans mécanisme opérationnel.",
+        },
+      },
+      vocabulary: [
+        { en: "Operating leverage", fr: "operating leverage", definition: { en: "Sensitivity of operating profit to changes in revenue due to fixed-cost structure.", fr: "Sensibilité du profit opérationnel aux variations du revenue en raison de la structure de coûts fixes." } },
+        { en: "Margin bridge", fr: "margin bridge", definition: { en: "Reconciliation explaining changes in margin through underlying drivers.", fr: "Réconciliation expliquant l’évolution de la marge à travers ses drivers." } },
+      ],
+    },
+    {
+      id: "working-capital",
+      kicker: { en: "05 · WORKING CAPITAL", fr: "05 · WORKING CAPITAL" },
+      title: { en: "Working capital connects growth to cash consumption", fr: "Le working capital relie la croissance à la consommation de cash" },
+      coreFacts: [
+        { en: "Accounts receivable are commonly forecast with days sales outstanding.", fr: "Les accounts receivable sont souvent prévus avec les days sales outstanding." },
+        { en: "Inventory can be forecast from inventory days or turnover.", fr: "L’inventory peut être prévu à partir des inventory days ou du turnover." },
+        { en: "Accounts payable are often forecast with days payable outstanding.", fr: "Les accounts payable sont souvent prévus avec les days payable outstanding." },
+        { en: "Rapid growth can consume cash even when reported earnings are strong.", fr: "Une croissance rapide peut consommer du cash même lorsque les earnings publiés sont solides." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company sells products today but collects cash 60 days later, growth creates receivables before it creates cash. That is why working capital matters.",
+          fr: "Si une société vend aujourd’hui mais collecte le cash 60 jours plus tard, la croissance crée des receivables avant de créer du cash. C’est pourquoi le working capital compte.",
+        },
+        Intermediate: {
+          en: "Use historical days metrics, business trends and management initiatives to forecast receivables, inventory and payables. Then calculate the cash-flow impact from period-to-period changes.",
+          fr: "Utilise les métriques historiques en jours, les tendances du business et les initiatives management pour prévoir receivables, inventory et payables. Calcule ensuite l’impact cash à partir des variations entre périodes.",
+        },
+        Professional: {
+          en: "Working-capital assumptions should reflect seasonality, payment terms, channel mix, supply-chain strategy and revenue timing. Blindly holding historical percentages constant can hide major liquidity risk.",
+          fr: "Les hypothèses de working capital doivent refléter saisonnalité, payment terms, channel mix, stratégie supply chain et timing du revenue. Maintenir aveuglément les pourcentages historiques peut cacher un risque de liquidité important.",
+        },
+      },
+      formula: {
+        label: { en: "Accounts receivable forecast", fr: "Forecast des accounts receivable" },
+        expression: "A/R = Revenue × DSO / 365",
+        explanation: { en: "This converts a collection-period assumption into a balance-sheet forecast.", fr: "Cette formule transforme une hypothèse de délai de collecte en forecast du bilan." },
+      },
+      vocabulary: [
+        { en: "DSO", fr: "DSO", definition: { en: "Days sales outstanding; approximate number of days required to collect receivables.", fr: "Days sales outstanding ; nombre approximatif de jours nécessaires pour collecter les créances clients." } },
+        { en: "DPO", fr: "DPO", definition: { en: "Days payable outstanding; approximate number of days a company takes to pay suppliers.", fr: "Days payable outstanding ; nombre approximatif de jours pris pour payer les fournisseurs." } },
+        { en: "Inventory days", fr: "inventory days", definition: { en: "Approximate number of days inventory remains before sale.", fr: "Nombre approximatif de jours pendant lesquels le stock reste avant vente." } },
+      ],
+    },
+    {
+      id: "capex-and-depreciation",
+      kicker: { en: "06 · CAPEX & DEPRECIATION", fr: "06 · CAPEX & DEPRECIATION" },
+      title: { en: "Fixed-asset schedules translate investment needs into cash flow and earnings", fr: "Les fixed-asset schedules traduisent les besoins d’investissement en cash flow et earnings" },
+      coreFacts: [
+        { en: "Capex increases PP&E and reduces cash through investing activities.", fr: "Le capex augmente PP&E et réduit le cash via les activités d’investissement." },
+        { en: "Depreciation reduces earnings without being a current-period cash outflow.", fr: "La depreciation réduit les earnings sans être un cash outflow de la période." },
+        { en: "Maintenance capex and growth capex can have different economic purposes.", fr: "Maintenance capex et growth capex peuvent avoir des objectifs économiques différents." },
+        { en: "Asset intensity and useful lives determine how capex translates into future depreciation.", fr: "L’intensité en actifs et les useful lives déterminent comment le capex se transforme en depreciation future." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Buying equipment uses cash today, but accounting usually spreads the expense over the asset’s useful life through depreciation.",
+          fr: "Acheter un équipement utilise du cash aujourd’hui, mais la comptabilité répartit généralement la charge sur la useful life via depreciation.",
+        },
+        Intermediate: {
+          en: "Create a PP&E roll-forward using beginning balance, capex, depreciation and disposals. Link depreciation expense back to the income statement and capex to the cash-flow statement.",
+          fr: "Crée un roll-forward PP&E avec beginning balance, capex, depreciation et disposals. Relie depreciation à l’income statement et capex au cash-flow statement.",
+        },
+        Professional: {
+          en: "For capital-intensive businesses, forecast capex using capacity additions, maintenance requirements and asset age rather than a simplistic percentage of revenue. This can materially change free cash flow and valuation.",
+          fr: "Pour les businesses capitalistiques, prévois le capex à partir des capacity additions, besoins de maintenance et âge des actifs plutôt qu’un simple pourcentage du revenue. Cela peut modifier fortement free cash flow et valuation.",
+        },
+      },
+      formula: {
+        label: { en: "PP&E roll-forward", fr: "Roll-forward PP&E" },
+        expression: "Ending PP&E = Beginning PP&E + Capex − Depreciation − Disposals",
+        explanation: { en: "This schedule links investment spending to the balance sheet and depreciation expense.", fr: "Ce schedule relie les investissements au bilan et à la depreciation expense." },
+      },
+      vocabulary: [
+        { en: "Maintenance capex", fr: "maintenance capex", definition: { en: "Spending required to maintain existing productive capacity.", fr: "Dépenses nécessaires pour maintenir la capacité productive existante." } },
+        { en: "Growth capex", fr: "growth capex", definition: { en: "Investment intended to expand future capacity or revenue.", fr: "Investissement destiné à accroître la capacité ou le revenue futur." } },
+      ],
+    },
+    {
+      id: "debt-interest-and-circularity",
+      kicker: { en: "07 · DEBT, INTEREST & CIRCULARITY", fr: "07 · DETTE, INTÉRÊTS & CIRCULARITY" },
+      title: { en: "Debt schedules are where financing logic becomes dynamic", fr: "Les debt schedules sont l’endroit où la logique de financement devient dynamique" },
+      coreFacts: [
+        { en: "Debt schedules track beginning balance, draws, repayments, mandatory amortization and ending balance by instrument.", fr: "Les debt schedules suivent beginning balance, tirages, remboursements, amortization obligatoire et ending balance par instrument." },
+        { en: "Interest expense should reflect debt balances and instrument-specific rates.", fr: "L’interest expense doit refléter les balances de dette et les taux propres à chaque instrument." },
+        { en: "Minimum-cash assumptions determine whether excess cash repays debt or a revolver must be drawn.", fr: "Les hypothèses de minimum cash déterminent si l’excess cash rembourse la dette ou si un revolver doit être tiré." },
+        { en: "Circularity arises because interest affects cash flow, cash flow affects debt, and debt affects interest.", fr: "La circularity apparaît car les intérêts affectent le cash flow, le cash flow affecte la dette et la dette affecte les intérêts." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If the company generates extra cash, it may repay debt. Lower debt then reduces future interest expense. Because these items influence each other, the model can become circular.",
+          fr: "Si la société génère du cash supplémentaire, elle peut rembourser de la dette. Une dette plus faible réduit ensuite les intérêts futurs. Comme ces éléments s’influencent, le modèle peut devenir circulaire.",
+        },
+        Intermediate: {
+          en: "Build each debt tranche separately, calculate mandatory repayments, apply cash sweep logic and use average balances for interest where appropriate. Keep revolver logic distinct from long-term term debt.",
+          fr: "Construis chaque tranche séparément, calcule les mandatory repayments, applique une cash sweep logic et utilise les average balances pour les intérêts lorsque pertinent. Garde le revolver distinct de la dette term long terme.",
+        },
+        Professional: {
+          en: "Circularity can be solved with iterative calculation, copy-paste convergence or algebraic methods. The chosen method should be transparent and stable under scenario changes, especially in LBO and leveraged-finance models.",
+          fr: "La circularity peut être résolue avec iterative calculation, convergence copy-paste ou méthodes algébriques. La méthode doit être transparente et stable sous changement de scénario, surtout dans les modèles LBO et leveraged finance.",
+        },
+      },
+      formula: {
+        label: { en: "Simple interest estimate", fr: "Estimation simple des intérêts" },
+        expression: "Interest Expense ≈ Average Debt Balance × Interest Rate",
+        explanation: { en: "Using average debt can better reflect intra-period repayments than beginning or ending debt alone.", fr: "Utiliser l’average debt peut mieux refléter les remboursements intrapériode que beginning ou ending debt seuls." },
+      },
+      vocabulary: [
+        { en: "Cash sweep", fr: "cash sweep", definition: { en: "Mechanism using excess cash to repay debt.", fr: "Mécanisme utilisant l’excess cash pour rembourser la dette." } },
+        { en: "Circularity", fr: "circularity", definition: { en: "Feedback loop in which formulas depend indirectly on themselves.", fr: "Boucle de rétroaction dans laquelle des formules dépendent indirectement d’elles-mêmes." } },
+        { en: "Minimum cash", fr: "minimum cash", definition: { en: "Cash balance required to operate the business safely.", fr: "Solde de cash nécessaire pour faire fonctionner le business correctement." } },
+      ],
+    },
+    {
+      id: "scenarios-and-sensitivities",
+      kicker: { en: "08 · SCENARIOS & SENSITIVITIES", fr: "08 · SCÉNARIOS & SENSITIVITIES" },
+      title: { en: "A professional model should answer 'what changes if the assumptions are wrong?'", fr: "Un modèle professionnel doit répondre à 'que se passe-t-il si les hypothèses sont fausses ?'" },
+      coreFacts: [
+        { en: "Scenarios change a coherent set of assumptions such as growth, margins, capex and financing.", fr: "Les scénarios modifient un ensemble cohérent d’hypothèses comme croissance, marges, capex et financement." },
+        { en: "Sensitivity tables isolate the effect of one or two key variables.", fr: "Les sensitivity tables isolent l’effet d’une ou deux variables clés." },
+        { en: "Downside cases should stress both operating performance and financial flexibility.", fr: "Les downside cases doivent stresser à la fois performance opérationnelle et flexibilité financière." },
+        { en: "Scenario switches should flow through the model without manual rewrites.", fr: "Les scenario switches doivent se propager dans le modèle sans réécriture manuelle." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A model is more useful when you can quickly see what happens if sales are weaker, margins are lower or interest rates are higher.",
+          fr: "Un modèle est plus utile lorsque tu peux rapidement voir ce qui se passe si les ventes sont plus faibles, les marges plus basses ou les taux plus élevés.",
+        },
+        Intermediate: {
+          en: "Create base, upside and downside assumptions in a dedicated scenario block and use one switch to select the active case. Then build sensitivities around the variables that matter most to the decision.",
+          fr: "Crée des hypothèses base, upside et downside dans un bloc dédié et utilise un seul switch pour sélectionner le scénario actif. Construis ensuite des sensitivities autour des variables les plus importantes pour la décision.",
+        },
+        Professional: {
+          en: "Scenario design should preserve economic relationships. For example, a recession scenario may combine lower volume, weaker pricing, margin pressure, slower collections and tighter financing rather than changing only revenue growth.",
+          fr: "Le design des scénarios doit préserver les relations économiques. Par exemple, un scénario de récession peut combiner volume plus faible, pricing plus faible, pression sur marges, collections plus lentes et financement plus serré plutôt que changer seulement le revenue growth.",
+        },
+      },
+      vocabulary: [
+        { en: "Scenario switch", fr: "scenario switch", definition: { en: "Control that changes the active set of forecast assumptions.", fr: "Contrôle qui change l’ensemble actif d’hypothèses de forecast." } },
+        { en: "Sensitivity analysis", fr: "sensitivity analysis", definition: { en: "Systematic test of output changes caused by selected input changes.", fr: "Test systématique de l’évolution des outputs causée par des changements d’inputs sélectionnés." } },
+      ],
+    },
+    {
+      id: "model-checks-and-audit",
+      kicker: { en: "09 · MODEL CHECKS & AUDIT", fr: "09 · CONTRÔLES & AUDIT DU MODÈLE" },
+      title: { en: "A model is not finished when it calculates; it is finished when it can be trusted", fr: "Un modèle n’est pas terminé lorsqu’il calcule ; il est terminé lorsqu’on peut lui faire confiance" },
+      coreFacts: [
+        { en: "Balance-sheet checks should equal zero in every forecast period.", fr: "Les balance-sheet checks doivent être égaux à zéro sur chaque période de forecast." },
+        { en: "Cash-flow reconciliation should explain the movement from beginning cash to ending cash.", fr: "La cash-flow reconciliation doit expliquer le mouvement du beginning cash vers ending cash." },
+        { en: "Error flags can detect negative debt, impossible margins, broken scenarios or unresolved circularity.", fr: "Des error flags peuvent détecter dette négative, marges impossibles, scénarios cassés ou circularity non résolue." },
+        { en: "Professional formatting distinguishes hard-codes, formulas, cross-sheet links and external links consistently.", fr: "Le formatage professionnel distingue de manière cohérente hard-codes, formules, liens inter-feuilles et liens externes." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Even if the spreadsheet opens without an error message, the logic can still be wrong. Model checks act like alarms.",
+          fr: "Même si le spreadsheet s’ouvre sans message d’erreur, la logique peut être fausse. Les model checks agissent comme des alarmes.",
+        },
+        Intermediate: {
+          en: "Audit formulas across rows, inspect unusual jumps, test scenarios, trace precedents and ensure no hard-codes accidentally appear inside forecast formulas.",
+          fr: "Audite les formules sur les lignes, inspecte les variations anormales, teste les scénarios, trace les precedents et vérifie qu’aucun hard-code accidentel n’apparaît dans les formules de forecast.",
+        },
+        Professional: {
+          en: "The final model should be robust to new periods, changed scenarios and reasonable input shocks. Good modeling is not only about producing a correct base case once; it is about creating a controlled analytical system.",
+          fr: "Le modèle final doit rester robuste avec de nouvelles périodes, des scénarios différents et des chocs raisonnables sur les inputs. Une bonne modélisation ne consiste pas seulement à produire un base case correct une fois ; elle crée un système analytique contrôlé.",
+        },
+      },
+      vocabulary: [
+        { en: "Error flag", fr: "error flag", definition: { en: "Formula designed to identify a broken condition or inconsistent model state.", fr: "Formule conçue pour identifier une condition cassée ou un état incohérent du modèle." } },
+        { en: "Trace precedents", fr: "trace precedents", definition: { en: "Audit technique showing which cells feed a selected formula.", fr: "Technique d’audit montrant quelles cellules alimentent une formule sélectionnée." } },
+        { en: "Model integrity", fr: "intégrité du modèle", definition: { en: "Degree to which a model remains logically consistent and reliable under changes.", fr: "Degré auquel un modèle reste logiquement cohérent et fiable sous différents changements." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "architecture",
+      question: { en: "Why separate inputs, calculations and outputs?", fr: "Pourquoi séparer inputs, calculs et outputs ?" },
+      options: [
+        { id: "a", label: { en: "To improve auditability and reduce errors", fr: "Pour améliorer l’auditabilité et réduire les erreurs" } },
+        { id: "b", label: { en: "To maximize hard-coding", fr: "Pour maximiser le hard-coding" } },
+        { id: "c", label: { en: "To remove formulas", fr: "Pour supprimer les formules" } },
+        { id: "d", label: { en: "To hide assumptions", fr: "Pour cacher les hypothèses" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Clear structure makes the model easier to understand, test and hand off.", fr: "Une structure claire rend le modèle plus facile à comprendre, tester et transmettre." },
+    },
+    {
+      id: "q2",
+      conceptKey: "integration",
+      question: { en: "Where should ending cash on the cash-flow statement appear?", fr: "Où doit apparaître le ending cash du cash-flow statement ?" },
+      options: [
+        { id: "a", label: { en: "As cash on the ending balance sheet", fr: "Comme cash sur le bilan final" } },
+        { id: "b", label: { en: "As revenue", fr: "Comme revenue" } },
+        { id: "c", label: { en: "As depreciation", fr: "Comme depreciation" } },
+        { id: "d", label: { en: "Nowhere", fr: "Nulle part" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Ending cash must reconcile directly to the cash balance on the balance sheet.", fr: "Le ending cash doit se réconcilier directement avec le cash du bilan." },
+    },
+    {
+      id: "q3",
+      conceptKey: "revenue-drivers",
+      question: { en: "Which is a driver-based revenue forecast?", fr: "Quel exemple est un forecast de revenue basé sur des drivers ?" },
+      options: [
+        { id: "a", label: { en: "Units sold × average selling price", fr: "Unités vendues × prix moyen" } },
+        { id: "b", label: { en: "Revenue grows because the model says so", fr: "Le revenue croît parce que le modèle le dit" } },
+        { id: "c", label: { en: "Random annual growth rates", fr: "Des taux de croissance annuels aléatoires" } },
+        { id: "d", label: { en: "Only last year’s net income", fr: "Uniquement le net income de l’an dernier" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Driver-based forecasts connect revenue to underlying operating activity.", fr: "Les forecasts par drivers relient le revenue à l’activité opérationnelle sous-jacente." },
+    },
+    {
+      id: "q4",
+      conceptKey: "working-capital",
+      question: { en: "If DSO rises materially, what generally happens to cash flow?", fr: "Si le DSO augmente fortement, qu’arrive-t-il généralement au cash flow ?" },
+      options: [
+        { id: "a", label: { en: "Cash flow weakens because collection slows", fr: "Le cash flow se détériore car la collecte ralentit" } },
+        { id: "b", label: { en: "Cash flow automatically improves", fr: "Le cash flow s’améliore automatiquement" } },
+        { id: "c", label: { en: "Debt disappears", fr: "La dette disparaît" } },
+        { id: "d", label: { en: "Capex becomes zero", fr: "Le capex devient zéro" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Higher receivable days mean more cash remains tied up in receivables.", fr: "Des jours de créances plus élevés signifient davantage de cash immobilisé dans les receivables." },
+    },
+    {
+      id: "q5",
+      conceptKey: "ppe",
+      question: { en: "What increases PP&E in a standard fixed-asset schedule?", fr: "Qu’est-ce qui augmente PP&E dans un fixed-asset schedule standard ?" },
+      options: [
+        { id: "a", label: { en: "Capital expenditures", fr: "Capital expenditures" } },
+        { id: "b", label: { en: "Depreciation", fr: "Depreciation" } },
+        { id: "c", label: { en: "Debt repayment", fr: "Remboursement de dette" } },
+        { id: "d", label: { en: "Dividends", fr: "Dividendes" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Capex adds new fixed assets while depreciation reduces their carrying value over time.", fr: "Le capex ajoute de nouveaux fixed assets tandis que depreciation réduit leur valeur comptable au fil du temps." },
+    },
+    {
+      id: "q6",
+      conceptKey: "circularity",
+      question: { en: "Why can interest expense create circularity?", fr: "Pourquoi l’interest expense peut-il créer une circularity ?" },
+      options: [
+        { id: "a", label: { en: "Interest affects cash, cash affects debt, and debt affects interest", fr: "Les intérêts affectent le cash, le cash affecte la dette et la dette affecte les intérêts" } },
+        { id: "b", label: { en: "Interest never affects cash flow", fr: "Les intérêts n’affectent jamais le cash flow" } },
+        { id: "c", label: { en: "Debt is always constant", fr: "La dette est toujours constante" } },
+        { id: "d", label: { en: "Revenue equals debt", fr: "Revenue égale dette" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The feedback loop between interest, cash and debt creates the circular relationship.", fr: "La boucle entre intérêts, cash et dette crée la relation circulaire." },
+    },
+    {
+      id: "q7",
+      conceptKey: "minimum-cash",
+      question: { en: "What is minimum cash used for in a financing model?", fr: "À quoi sert le minimum cash dans un modèle de financement ?" },
+      options: [
+        { id: "a", label: { en: "To preserve operating liquidity before optional debt paydown", fr: "À préserver la liquidité opérationnelle avant un remboursement facultatif de dette" } },
+        { id: "b", label: { en: "To eliminate working capital", fr: "À éliminer le working capital" } },
+        { id: "c", label: { en: "To increase revenue automatically", fr: "À augmenter automatiquement le revenue" } },
+        { id: "d", label: { en: "To replace EBITDA", fr: "À remplacer l’EBITDA" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A company generally cannot use every dollar of cash to repay debt because it needs liquidity to operate.", fr: "Une société ne peut généralement pas utiliser chaque dollar de cash pour rembourser la dette car elle a besoin de liquidité pour fonctionner." },
+    },
+    {
+      id: "q8",
+      conceptKey: "scenario",
+      question: { en: "What makes a downside scenario more realistic?", fr: "Qu’est-ce qui rend un downside scenario plus réaliste ?" },
+      options: [
+        { id: "a", label: { en: "Changing several economically linked assumptions together", fr: "Modifier ensemble plusieurs hypothèses économiquement liées" } },
+        { id: "b", label: { en: "Changing only the font color", fr: "Changer uniquement la couleur de police" } },
+        { id: "c", label: { en: "Keeping every business driver identical", fr: "Garder tous les business drivers identiques" } },
+        { id: "d", label: { en: "Deleting the cash-flow statement", fr: "Supprimer le cash-flow statement" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Downturns usually affect multiple operating and financing variables at once.", fr: "Les ralentissements affectent généralement plusieurs variables opérationnelles et financières en même temps." },
+    },
+    {
+      id: "q9",
+      conceptKey: "balance-check",
+      question: { en: "What should the balance-sheet check equal in a correct model?", fr: "À combien doit être égal le balance-sheet check dans un modèle correct ?" },
+      options: [
+        { id: "a", label: { en: "Zero", fr: "Zéro" } },
+        { id: "b", label: { en: "Revenue", fr: "Revenue" } },
+        { id: "c", label: { en: "EBITDA", fr: "EBITDA" } },
+        { id: "d", label: { en: "Total debt", fr: "Total debt" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Assets must equal liabilities plus equity, so the difference should be zero.", fr: "Les actifs doivent être égaux aux passifs plus equity, donc la différence doit être zéro." },
+    },
+    {
+      id: "q10",
+      conceptKey: "model-integrity",
+      question: { en: "What best defines a professional financial model?", fr: "Qu’est-ce qui définit le mieux un modèle financier professionnel ?" },
+      options: [
+        { id: "a", label: { en: "Transparent, integrated, auditable and robust under scenario changes", fr: "Transparent, intégré, auditable et robuste aux changements de scénario" } },
+        { id: "b", label: { en: "The model with the most worksheets", fr: "Le modèle avec le plus de feuilles" } },
+        { id: "c", label: { en: "The model with the most hard-codes", fr: "Le modèle avec le plus de hard-codes" } },
+        { id: "d", label: { en: "A model that works only once", fr: "Un modèle qui fonctionne une seule fois" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Professional modeling prioritizes integrity, traceability and repeatable decision support.", fr: "La modélisation professionnelle privilégie intégrité, traçabilité et aide à la décision reproductible." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Walk me through how you would build an integrated three-statement forecast model from a company’s historical financials.",
+      fr: "Explique comment tu construirais un modèle de forecast intégré des trois états financiers à partir des historiques d’une entreprise.",
+    },
+    framework: [
+      { en: "Standardize historical income statement, balance sheet and cash-flow data.", fr: "Standardiser les historiques income statement, bilan et cash-flow statement." },
+      { en: "Identify operational drivers for revenue, margins and major cost lines.", fr: "Identifier les drivers opérationnels du revenue, des marges et des principales lignes de coûts." },
+      { en: "Build working-capital and fixed-asset schedules.", fr: "Construire les schedules de working capital et fixed assets." },
+      { en: "Forecast the income statement and link net income into cash flow and retained earnings.", fr: "Prévoir l’income statement et relier net income au cash flow et aux retained earnings." },
+      { en: "Build debt, interest, minimum-cash and optional repayment logic.", fr: "Construire la logique de dette, intérêts, minimum cash et remboursements facultatifs." },
+      { en: "Complete the cash-flow statement, calculate ending cash and link it to the balance sheet.", fr: "Compléter le cash-flow statement, calculer ending cash et le relier au bilan." },
+      { en: "Add balance checks, scenarios, sensitivities and error flags before using outputs.", fr: "Ajouter balance checks, scénarios, sensitivities et error flags avant d’utiliser les outputs." },
+    ],
+    sample: {
+      en: "I would begin by standardizing the historical three statements and making sure they reconcile. Then I would identify the operating drivers of the business rather than simply extrapolating every line. I would forecast revenue by segment or by volume and price where possible, then model margins and major cost categories. Next I would build working-capital schedules using days metrics and a PP&E schedule linking capex and depreciation. Once the operating model is complete, I would build the debt schedule, calculate interest, define minimum cash and model revolver draws or debt paydown. Net income would feed retained earnings and cash flow, while ending cash from the cash-flow statement would link back to the balance sheet. Finally, I would add balance-sheet checks, scenario switches and sensitivities so the model remains auditable and useful under different assumptions.",
+      fr: "Je commencerais par standardiser les trois états financiers historiques et vérifier qu’ils se réconcilient. Ensuite, j’identifierais les drivers opérationnels du business plutôt que d’extrapoler chaque ligne. Je prévoirais le revenue par segment ou via volume et prix lorsque possible, puis les marges et principales catégories de coûts. Je construirais ensuite les schedules de working capital avec des days metrics et un schedule PP&E reliant capex et depreciation. Une fois le modèle opérationnel terminé, je construirais le debt schedule, calculerais les intérêts, définirais le minimum cash et modéliserais les tirages revolver ou remboursements de dette. Le net income alimenterait retained earnings et cash flow, tandis que le ending cash du cash-flow statement serait relié au bilan. Enfin, j’ajouterais balance-sheet checks, scenario switches et sensitivities afin que le modèle reste auditable et utile sous différentes hypothèses.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, advancedValuationLesson, leveragedFinanceLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
