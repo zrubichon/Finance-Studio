@@ -11879,7 +11879,945 @@ export const corporateFinanceLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson];
+
+export const financialStatementAnalysisLesson: FinanceLesson = {
+  slug: "year-2-financial-statement-analysis",
+  year: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  domain: { en: "Accounting & Statements", fr: "Comptabilité & états financiers / Accounting & Statements" },
+  title: {
+    en: "Financial Statement Analysis",
+    fr: "Analyse des états financiers / Financial Statement Analysis",
+  },
+  subtitle: {
+    en: "Move from reading financial statements to diagnosing a business: profitability, returns, liquidity, leverage, efficiency, DuPont analysis, cash conversion, earnings quality and peer comparison.",
+    fr: "Passer de la lecture des états financiers au diagnostic d’une entreprise : rentabilité, rendements, liquidité, leverage, efficacité, analyse DuPont, conversion en cash, qualité des bénéfices et comparaison entre pairs.",
+  },
+  duration: { en: "110–135 min", fr: "110–135 min" },
+  prerequisites: [
+    { en: "Financial Accounting I", fr: "Comptabilité financière I / Financial Accounting I" },
+    { en: "Corporate Finance", fr: "Finance d’entreprise / Corporate Finance" },
+  ],
+  objectives: [
+    {
+      en: "Analyze margins and profitability across the income statement.",
+      fr: "Analyser les marges et la rentabilité à travers l’income statement.",
+    },
+    {
+      en: "Interpret ROA, ROE and ROIC while recognizing denominator distortions.",
+      fr: "Interpréter ROA, ROE et ROIC tout en reconnaissant les distorsions possibles des dénominateurs.",
+    },
+    {
+      en: "Assess liquidity, leverage and debt-servicing capacity.",
+      fr: "Évaluer liquidité, leverage et capacité de service de la dette.",
+    },
+    {
+      en: "Measure asset efficiency and working-capital discipline.",
+      fr: "Mesurer l’efficacité des actifs et la discipline du working capital.",
+    },
+    {
+      en: "Use DuPont analysis to explain what is driving ROE.",
+      fr: "Utiliser l’analyse DuPont pour expliquer ce qui détermine le ROE.",
+    },
+    {
+      en: "Identify earnings-quality red flags and compare companies on a normalized basis.",
+      fr: "Identifier les red flags de qualité des bénéfices et comparer les entreprises sur une base normalisée.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "A financial-statement analysis workflow",
+      fr: "Workflow d’analyse des états financiers",
+    },
+    steps: [
+      {
+        title: { en: "Profitability", fr: "Rentabilité" },
+        detail: { en: "Margins · ROA · ROE · ROIC", fr: "Marges · ROA · ROE · ROIC" },
+      },
+      {
+        title: { en: "Balance-sheet risk", fr: "Risque de bilan" },
+        detail: { en: "Liquidity · leverage · coverage", fr: "Liquidité · leverage · coverage" },
+      },
+      {
+        title: { en: "Efficiency", fr: "Efficacité" },
+        detail: { en: "Turnover · working capital · DuPont", fr: "Turnover · working capital · DuPont" },
+      },
+      {
+        title: { en: "Quality", fr: "Qualité" },
+        detail: { en: "Cash conversion · red flags · peers", fr: "Cash conversion · red flags · peers" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "profitability-margins",
+      kicker: { en: "01 · PROFITABILITY & MARGINS", fr: "01 · RENTABILITÉ & MARGES" },
+      title: {
+        en: "Margins reveal where economics improve or deteriorate",
+        fr: "Les marges montrent où les economics s’améliorent ou se détériorent",
+      },
+      coreFacts: [
+        {
+          en: "Gross margin measures revenue remaining after cost of goods or services sold.",
+          fr: "La marge brute / gross margin mesure la part du revenue restant après le coût des ventes / COGS.",
+        },
+        {
+          en: "Operating margin captures profitability after operating expenses but before selected financing and tax items.",
+          fr: "La marge opérationnelle / operating margin mesure la rentabilité après dépenses opérationnelles mais avant certains éléments financiers et fiscaux.",
+        },
+        {
+          en: "Net margin measures bottom-line profit relative to revenue.",
+          fr: "La marge nette / net margin mesure le bénéfice final relativement au revenue.",
+        },
+        {
+          en: "Margin analysis is most useful when trends are decomposed into price, volume, mix and cost drivers.",
+          fr: "L’analyse des marges est plus utile lorsqu’elle décompose price, volume, mix et coûts.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If revenue is $100 and COGS is $60, gross profit is $40 and gross margin is 40%. If operating expenses are $20, operating income is $20 and operating margin is 20%.",
+          fr: "Si le revenue vaut 100 $ et le COGS 60 $, le gross profit vaut 40 $ et la gross margin 40 %. Si les dépenses opérationnelles valent 20 $, l’operating income vaut 20 $ et l’operating margin 20 %.",
+        },
+        Intermediate: {
+          en: "A rising gross margin can reflect better pricing, lower input costs or favorable product mix. A falling operating margin despite stable gross margin may indicate faster growth in SG&A, R&D or other operating costs.",
+          fr: "Une hausse de gross margin peut refléter meilleur pricing, baisse des coûts d’inputs ou mix produit favorable. Une baisse d’operating margin malgré une gross margin stable peut indiquer une croissance plus rapide des SG&A, R&D ou autres coûts opérationnels.",
+        },
+        Professional: {
+          en: "Margin analysis should separate structural economics from temporary effects. FX, commodity costs, acquisition mix, stock compensation, restructuring and one-time items can distort reported margins relative to normalized profitability.",
+          fr: "L’analyse des marges doit séparer economics structurels et effets temporaires. FX, coûts de commodities, mix d’acquisitions, stock compensation, restructuring et éléments exceptionnels peuvent déformer les marges publiées par rapport à la rentabilité normalisée.",
+        },
+      },
+      formula: {
+        label: { en: "Core margins", fr: "Marges principales" },
+        expression: "Gross Margin = Gross Profit ÷ Revenue   ·   Operating Margin = Operating Income ÷ Revenue   ·   Net Margin = Net Income ÷ Revenue",
+        explanation: {
+          en: "Use consistently defined numerators and periods when comparing companies.",
+          fr: "Utiliser des numérateurs et périodes définis de manière cohérente lorsque l’on compare des entreprises.",
+        },
+        workedExample: {
+          en: "Revenue 100, gross profit 40, operating income 20, net income 12 → gross margin 40%, operating margin 20%, net margin 12%.",
+          fr: "Revenue 100, gross profit 40, operating income 20, net income 12 → gross margin 40 %, operating margin 20 %, net margin 12 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Margin expansion",
+          fr: "expansion de marge / margin expansion",
+          definition: {
+            en: "Increase in a profit margin over time.",
+            fr: "Hausse d’une marge de profit dans le temps.",
+          },
+        },
+        {
+          en: "Operating leverage",
+          fr: "levier opérationnel / operating leverage",
+          definition: {
+            en: "Sensitivity of operating profit to changes in revenue because of fixed versus variable cost structure.",
+            fr: "Sensibilité du profit opérationnel aux variations du revenue en raison de la structure coûts fixes versus variables.",
+          },
+        },
+      ],
+    },
+    {
+      id: "returns-on-capital",
+      kicker: { en: "02 · ROA, ROE & ROIC", fr: "02 · ROA, ROE & ROIC" },
+      title: {
+        en: "Return ratios connect profit to the capital required to generate it",
+        fr: "Les ratios de rendement relient le profit au capital nécessaire pour le générer",
+      },
+      coreFacts: [
+        {
+          en: "ROA relates profit to the asset base used by the business.",
+          fr: "Le ROA relie le profit à la base d’actifs utilisée par l’entreprise.",
+        },
+        {
+          en: "ROE relates net income to common equity and can rise because of stronger profitability, better asset efficiency or higher leverage.",
+          fr: "Le ROE relie net income à common equity et peut augmenter grâce à une meilleure rentabilité, une meilleure efficacité des actifs ou davantage de leverage.",
+        },
+        {
+          en: "ROIC focuses more directly on operating return relative to invested operating capital.",
+          fr: "Le ROIC se concentre davantage sur le rendement opérationnel relativement au capital opérationnel investi.",
+        },
+        {
+          en: "Average balance-sheet values are often preferable to ending balances when pairing period earnings with point-in-time capital.",
+          fr: "Les valeurs moyennes du bilan sont souvent préférables aux valeurs de clôture lorsqu’on associe bénéfices sur une période et capital mesuré à une date.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Two companies can each earn $10 of profit, but if Company A needs $50 of assets and Company B needs $200, Company A uses its asset base much more efficiently.",
+          fr: "Deux entreprises peuvent chacune gagner 10 $, mais si l’entreprise A nécessite 50 $ d’actifs et B 200 $, A utilise sa base d’actifs beaucoup plus efficacement.",
+        },
+        Intermediate: {
+          en: "ROE can be misleading when equity is very small or negative after buybacks, accumulated losses or accounting adjustments. A very high ROE is not automatically evidence of a superior business.",
+          fr: "Le ROE peut être trompeur lorsque l’equity est très faible ou négative après buybacks, pertes accumulées ou ajustements comptables. Un ROE très élevé n’est pas automatiquement la preuve d’une entreprise supérieure.",
+        },
+        Professional: {
+          en: "ROIC is often more useful for comparing operating economics across capital structures because it focuses on NOPAT and invested capital. Still, definitions of goodwill, leases, excess cash and acquired intangibles must be standardized for robust comparisons.",
+          fr: "Le ROIC est souvent plus utile pour comparer les economics opérationnels entre structures de capital car il se concentre sur NOPAT et invested capital. Cependant, goodwill, leases, excess cash et intangibles acquis doivent être normalisés pour des comparaisons robustes.",
+        },
+      },
+      formula: {
+        label: { en: "Return ratios", fr: "Ratios de rendement" },
+        expression: "ROA = Net Income ÷ Average Assets   ·   ROE = Net Income ÷ Average Equity   ·   ROIC = NOPAT ÷ Average Invested Capital",
+        explanation: {
+          en: "The appropriate numerator and denominator depend on the analytical purpose and accounting adjustments.",
+          fr: "Le numérateur et le dénominateur appropriés dépendent de l’objectif analytique et des ajustements comptables.",
+        },
+        workedExample: {
+          en: "Net income 20, average equity 100 → ROE 20%. NOPAT 24, average invested capital 160 → ROIC 15%.",
+          fr: "Net income 20, equity moyenne 100 → ROE 20 %. NOPAT 24, invested capital moyen 160 → ROIC 15 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Average balance",
+          fr: "solde moyen / average balance",
+          definition: {
+            en: "Average of balance-sheet values over a period, often approximated using beginning and ending balances.",
+            fr: "Moyenne des valeurs de bilan sur une période, souvent approximée avec valeurs d’ouverture et de clôture.",
+          },
+        },
+        {
+          en: "Capital intensity",
+          fr: "intensité capitalistique / capital intensity",
+          definition: {
+            en: "Amount of assets or invested capital required to generate revenue or profit.",
+            fr: "Quantité d’actifs ou de capital investi nécessaire pour générer revenue ou profit.",
+          },
+        },
+      ],
+    },
+    {
+      id: "liquidity",
+      kicker: { en: "03 · LIQUIDITY", fr: "03 · LIQUIDITÉ" },
+      title: {
+        en: "Liquidity ratios test near-term financial flexibility",
+        fr: "Les ratios de liquidité testent la flexibilité financière court terme",
+      },
+      coreFacts: [
+        {
+          en: "The current ratio compares current assets with current liabilities.",
+          fr: "Le current ratio compare actifs courants et passifs courants.",
+        },
+        {
+          en: "The quick ratio excludes less liquid current assets such as inventory under common definitions.",
+          fr: "Le quick ratio exclut des actifs courants moins liquides comme inventory selon des définitions courantes.",
+        },
+        {
+          en: "Liquidity quality matters more than the headline ratio because receivables and inventory may not convert to cash quickly.",
+          fr: "La qualité de la liquidité compte davantage que le ratio headline car receivables et inventory peuvent ne pas se convertir rapidement en cash.",
+        },
+        {
+          en: "Committed credit facilities and debt maturities can materially change the liquidity picture.",
+          fr: "Les lignes de crédit engagées et les maturités de dette peuvent fortement modifier l’analyse de liquidité.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If current assets are $150 and current liabilities are $100, the current ratio is 1.5×. That suggests current assets exceed near-term liabilities, but you still need to ask what those assets actually are.",
+          fr: "Si les actifs courants valent 150 $ et les passifs courants 100 $, le current ratio vaut 1,5×. Cela suggère que les actifs courants dépassent les obligations court terme, mais il faut encore regarder la qualité de ces actifs.",
+        },
+        Intermediate: {
+          en: "A retailer may operate safely with a low current ratio because inventory turns quickly and suppliers finance part of working capital. A distressed industrial company with slow-moving inventory may need a much stronger ratio.",
+          fr: "Un retailer peut fonctionner correctement avec un current ratio faible si inventory tourne rapidement et les fournisseurs financent une partie du working capital. Une entreprise industrielle en difficulté avec des stocks lents peut nécessiter un ratio bien plus élevé.",
+        },
+        Professional: {
+          en: "Liquidity analysis should stress actual cash availability, revolver capacity, covenant headroom, seasonal working-capital needs and maturity walls. Static ratios alone can miss timing mismatches.",
+          fr: "L’analyse de liquidité doit stresser cash réellement disponible, revolver capacity, covenant headroom, besoins saisonniers de working capital et maturity walls. Les ratios statiques peuvent manquer les problèmes de timing.",
+        },
+      },
+      formula: {
+        label: { en: "Liquidity ratios", fr: "Ratios de liquidité" },
+        expression: "Current Ratio = Current Assets ÷ Current Liabilities   ·   Quick Ratio ≈ (Cash + Marketable Securities + Receivables) ÷ Current Liabilities",
+        explanation: {
+          en: "Quick-ratio definitions vary, so comparisons should use a consistent convention.",
+          fr: "Les définitions du quick ratio varient ; les comparaisons doivent utiliser une convention cohérente.",
+        },
+        workedExample: {
+          en: "Current assets 150, current liabilities 100 → current ratio 1.5×. Quick assets 90 → quick ratio 0.9×.",
+          fr: "Actifs courants 150, passifs courants 100 → current ratio 1,5×. Quick assets 90 → quick ratio 0,9×.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Maturity wall",
+          fr: "mur de maturités / maturity wall",
+          definition: {
+            en: "Concentration of debt maturities in a relatively short future period.",
+            fr: "Concentration de maturités de dette sur une période future relativement courte.",
+          },
+        },
+        {
+          en: "Headroom",
+          fr: "marge de sécurité / headroom",
+          definition: {
+            en: "Remaining capacity before a liquidity, covenant or financing limit is reached.",
+            fr: "Capacité restante avant d’atteindre une limite de liquidité, covenant ou financement.",
+          },
+        },
+      ],
+    },
+    {
+      id: "leverage-coverage",
+      kicker: { en: "04 · LEVERAGE & COVERAGE", fr: "04 · LEVIER & COUVERTURE" },
+      title: {
+        en: "Debt ratios ask whether the company can carry its financing burden",
+        fr: "Les ratios de dette demandent si l’entreprise peut supporter son financement",
+      },
+      coreFacts: [
+        {
+          en: "Debt-to-EBITDA is a common leverage proxy but is not an accounting standard and can vary by definition.",
+          fr: "Debt-to-EBITDA est un proxy courant de leverage mais n’est pas une norme comptable et varie selon les définitions.",
+        },
+        {
+          en: "Net debt subtracts selected cash balances from gross debt under the chosen convention.",
+          fr: "La net debt soustrait certains soldes de cash de la dette brute selon la convention retenue.",
+        },
+        {
+          en: "Interest coverage compares profit or cash-flow capacity with interest expense.",
+          fr: "L’interest coverage compare la capacité de profit ou cash flow avec les intérêts à payer.",
+        },
+        {
+          en: "Leverage should be analyzed with cyclicality, cash-flow volatility, maturity profile and covenant terms.",
+          fr: "Le leverage doit être analysé avec cyclicité, volatilité des cash flows, maturity profile et covenants.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If net debt is $300 and EBITDA is $100, net debt/EBITDA is 3.0×. If EBIT is $80 and interest expense is $20, EBIT interest coverage is 4.0×.",
+          fr: "Si la net debt vaut 300 $ et l’EBITDA 100 $, net debt/EBITDA vaut 3,0×. Si l’EBIT vaut 80 $ et les intérêts 20 $, l’interest coverage EBIT vaut 4,0×.",
+        },
+        Intermediate: {
+          en: "A 3× leverage ratio can be manageable for stable recurring cash flows and risky for a highly cyclical company. Coverage and liquidity should therefore be read together with leverage.",
+          fr: "Un ratio de leverage de 3× peut être gérable avec des cash flows récurrents et stables, mais risqué pour une entreprise très cyclique. Coverage et liquidity doivent donc être lus avec le leverage.",
+        },
+        Professional: {
+          en: "Analysts often normalize EBITDA for leases, acquisitions, synergies and one-offs, but overly aggressive adjustments can understate leverage. Free-cash-flow debt paydown capacity can be more informative than EBITDA leverage alone.",
+          fr: "Les analystes normalisent souvent EBITDA pour leases, acquisitions, synergies et one-offs, mais des ajustements trop agressifs peuvent sous-estimer le leverage. La capacité de remboursement via free cash flow peut être plus informative que le leverage EBITDA seul.",
+        },
+      },
+      formula: {
+        label: { en: "Leverage and interest coverage", fr: "Leverage et interest coverage" },
+        expression: "Net Debt / EBITDA = Net Debt ÷ EBITDA   ·   Interest Coverage = EBIT ÷ Interest Expense",
+        explanation: {
+          en: "Definitions must be standardized before peer comparison.",
+          fr: "Les définitions doivent être standardisées avant toute comparaison de pairs.",
+        },
+        workedExample: {
+          en: "Net debt 300 / EBITDA 100 = 3.0×. EBIT 80 / interest 20 = 4.0× coverage.",
+          fr: "Net debt 300 / EBITDA 100 = 3,0×. EBIT 80 / intérêts 20 = coverage 4,0×.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Gross debt",
+          fr: "dette brute / gross debt",
+          definition: {
+            en: "Total debt obligations before subtracting cash under the chosen definition.",
+            fr: "Total des obligations de dette avant soustraction du cash selon la définition retenue.",
+          },
+        },
+        {
+          en: "Coverage ratio",
+          fr: "ratio de couverture / coverage ratio",
+          definition: {
+            en: "Ratio comparing resources available with a contractual payment burden.",
+            fr: "Ratio comparant les ressources disponibles à une charge contractuelle.",
+          },
+        },
+      ],
+    },
+    {
+      id: "efficiency-turnover",
+      kicker: { en: "05 · EFFICIENCY & TURNOVER", fr: "05 · EFFICACITÉ & ROTATION" },
+      title: {
+        en: "Turnover ratios measure how productively assets are used",
+        fr: "Les turnover ratios mesurent l’efficacité d’utilisation des actifs",
+      },
+      coreFacts: [
+        {
+          en: "Asset turnover measures revenue generated per unit of average assets.",
+          fr: "L’asset turnover mesure le revenue généré par unité d’actifs moyens.",
+        },
+        {
+          en: "Inventory turnover compares cost of goods sold with average inventory.",
+          fr: "L’inventory turnover compare COGS à inventory moyenne.",
+        },
+        {
+          en: "Receivables turnover compares credit sales or revenue with average receivables under the chosen convention.",
+          fr: "Le receivables turnover compare ventes à crédit ou revenue avec receivables moyens selon la convention choisie.",
+        },
+        {
+          en: "Efficiency ratios should be interpreted relative to industry economics and business model.",
+          fr: "Les ratios d’efficacité doivent être interprétés relativement aux economics du secteur et au business model.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company produces $500 of revenue using $250 of average assets, asset turnover is 2.0×. Another company with the same revenue but $500 of assets has only 1.0× turnover.",
+          fr: "Si une entreprise produit 500 $ de revenue avec 250 $ d’actifs moyens, l’asset turnover vaut 2,0×. Une autre entreprise avec le même revenue mais 500 $ d’actifs n’a qu’un turnover de 1,0×.",
+        },
+        Intermediate: {
+          en: "High turnover can offset low margins. Grocery retailers often operate with thin margins but fast asset and inventory turns, while software companies may have much higher margins and different asset intensity.",
+          fr: "Un turnover élevé peut compenser de faibles marges. Les distributeurs alimentaires opèrent souvent avec des marges faibles mais une rotation rapide, tandis que les sociétés de software ont des marges plus élevées et une intensité d’actifs différente.",
+        },
+        Professional: {
+          en: "Efficiency deterioration can be an early warning sign. Receivables growing faster than revenue or inventory building faster than COGS can signal weaker collections, demand slowdown or channel stuffing, though seasonality and acquisitions must be checked first.",
+          fr: "Une détérioration de l’efficacité peut être un early warning. Receivables progressant plus vite que revenue ou inventory plus vite que COGS peuvent signaler recouvrement plus faible, ralentissement de demande ou channel stuffing, même s’il faut d’abord vérifier saisonnalité et acquisitions.",
+        },
+      },
+      formula: {
+        label: { en: "Turnover ratios", fr: "Turnover ratios" },
+        expression: "Asset Turnover = Revenue ÷ Average Assets   ·   Inventory Turnover = COGS ÷ Average Inventory",
+        explanation: {
+          en: "Use average balance-sheet values when practical to match period flows with balance-sheet stocks.",
+          fr: "Utiliser des valeurs moyennes de bilan lorsque possible pour faire correspondre flux de période et stocks de bilan.",
+        },
+        workedExample: {
+          en: "Revenue 500 / average assets 250 = 2.0× asset turnover. COGS 300 / average inventory 75 = 4.0× inventory turnover.",
+          fr: "Revenue 500 / actifs moyens 250 = asset turnover 2,0×. COGS 300 / inventory moyenne 75 = inventory turnover 4,0×.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Channel stuffing",
+          fr: "gonflement artificiel du canal / channel stuffing",
+          definition: {
+            en: "Pushing unusually high product volume into distributors or customers, potentially accelerating reported sales.",
+            fr: "Pousser un volume inhabituellement élevé chez distributeurs ou clients, pouvant accélérer artificiellement les ventes publiées.",
+          },
+        },
+        {
+          en: "Turnover",
+          fr: "rotation / turnover",
+          definition: {
+            en: "Rate at which an asset base is converted into sales or cost activity.",
+            fr: "Vitesse à laquelle une base d’actifs est convertie en ventes ou activité de coûts.",
+          },
+        },
+      ],
+    },
+    {
+      id: "dupont",
+      kicker: { en: "06 · DUPONT ANALYSIS", fr: "06 · ANALYSE DUPONT" },
+      title: {
+        en: "ROE can rise because of margin, efficiency or leverage",
+        fr: "Le ROE peut augmenter grâce à la marge, l’efficacité ou le leverage",
+      },
+      coreFacts: [
+        {
+          en: "The three-step DuPont identity decomposes ROE into net profit margin, asset turnover and equity multiplier.",
+          fr: "L’identité DuPont en trois étapes décompose le ROE entre net profit margin, asset turnover et equity multiplier.",
+        },
+        {
+          en: "A high ROE driven mainly by leverage carries different economics from one driven by strong margins and efficient assets.",
+          fr: "Un ROE élevé provenant principalement du leverage possède des economics différents d’un ROE élevé grâce aux marges et à l’efficacité des actifs.",
+        },
+        {
+          en: "DuPont analysis helps compare business models with different margin and turnover structures.",
+          fr: "L’analyse DuPont aide à comparer des business models ayant des structures de marge et de turnover différentes.",
+        },
+        {
+          en: "Very small or negative equity can make ROE and the equity multiplier unstable or misleading.",
+          fr: "Une equity très faible ou négative peut rendre ROE et equity multiplier instables ou trompeurs.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company can improve ROE three ways: earn more profit on each dollar of sales, generate more sales from each dollar of assets, or use more assets relative to shareholder equity.",
+          fr: "Une entreprise peut améliorer son ROE de trois façons : gagner plus de profit par dollar de ventes, générer davantage de ventes par dollar d’actifs, ou utiliser davantage d’actifs relativement à l’equity des actionnaires.",
+        },
+        Intermediate: {
+          en: "DuPont prevents a common mistake: calling a company 'more profitable' simply because ROE is higher. The higher ROE may come from more leverage rather than stronger operations.",
+          fr: "DuPont évite une erreur fréquente : qualifier une entreprise de « plus rentable » uniquement parce que son ROE est plus élevé. Le ROE supérieur peut provenir d’un leverage plus important plutôt que de meilleures opérations.",
+        },
+        Professional: {
+          en: "Multi-period DuPont analysis identifies whether changes in shareholder returns are operational, capital-efficiency-driven or financing-driven. This decomposition is especially useful when buybacks materially shrink book equity.",
+          fr: "Une analyse DuPont sur plusieurs périodes identifie si l’évolution du rendement actionnarial vient des opérations, de l’efficacité du capital ou du financement. Cette décomposition est particulièrement utile lorsque des buybacks réduisent fortement la book equity.",
+        },
+      },
+      formula: {
+        label: { en: "Three-step DuPont ROE", fr: "ROE DuPont en trois étapes" },
+        expression: "ROE = Net Margin × Asset Turnover × Equity Multiplier",
+        explanation: {
+          en: "Equity Multiplier = Average Assets ÷ Average Equity.",
+          fr: "Equity Multiplier = Actifs moyens ÷ Equity moyenne.",
+        },
+        workedExample: {
+          en: "Net margin 10% × asset turnover 1.5× × equity multiplier 2.0× = ROE 30%.",
+          fr: "Net margin 10 % × asset turnover 1,5× × equity multiplier 2,0× = ROE 30 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Equity multiplier",
+          fr: "multiplicateur des capitaux propres / equity multiplier",
+          definition: {
+            en: "Assets relative to equity, used as a simple financial-leverage component in DuPont analysis.",
+            fr: "Actifs relativement à equity, utilisé comme composante simple de leverage financier dans DuPont.",
+          },
+        },
+        {
+          en: "DuPont analysis",
+          fr: "analyse DuPont / DuPont analysis",
+          definition: {
+            en: "Framework decomposing return on equity into operating and financing drivers.",
+            fr: "Framework décomposant le ROE entre moteurs opérationnels et financiers.",
+          },
+        },
+      ],
+    },
+    {
+      id: "cash-conversion-quality",
+      kicker: { en: "07 · CASH CONVERSION & EARNINGS QUALITY", fr: "07 · CASH CONVERSION & QUALITÉ DES BÉNÉFICES" },
+      title: {
+        en: "Strong earnings are more convincing when they convert into cash",
+        fr: "Des bénéfices sont plus convaincants lorsqu’ils se convertissent en cash",
+      },
+      coreFacts: [
+        {
+          en: "Operating cash flow can differ materially from net income because of non-cash items and working-capital timing.",
+          fr: "Le CFO peut différer fortement du net income à cause d’éléments non cash et du timing du working capital.",
+        },
+        {
+          en: "Free cash flow commonly subtracts capital expenditures from operating cash flow in a simplified formulation.",
+          fr: "Le free cash flow soustrait couramment le capex du CFO dans une formulation simplifiée.",
+        },
+        {
+          en: "Persistent earnings growth without matching cash generation can deserve closer investigation.",
+          fr: "Une croissance persistante des bénéfices sans génération de cash correspondante mérite une analyse plus approfondie.",
+        },
+        {
+          en: "One weak cash-conversion period can be normal because of seasonality, growth investment or working-capital timing.",
+          fr: "Une seule période de faible conversion en cash peut être normale à cause de saisonnalité, investissement de croissance ou timing du working capital.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If net income is $100 but CFO is only $60 because receivables and inventory rose sharply, the company reported profit faster than it collected cash.",
+          fr: "Si le net income vaut 100 $ mais le CFO seulement 60 $ parce que receivables et inventory ont fortement augmenté, l’entreprise a comptabilisé du profit plus vite qu’elle n’a encaissé le cash.",
+        },
+        Intermediate: {
+          en: "Analysts reconcile net income to CFO and ask whether differences are recurring, growth-related or accounting-related. Then they subtract capex to understand how much cash remains after maintaining and growing the asset base.",
+          fr: "Les analystes réconcilient net income et CFO et demandent si les écarts sont récurrents, liés à la croissance ou comptables. Ensuite ils soustraient le capex pour comprendre le cash restant après maintien et croissance de la base d’actifs.",
+        },
+        Professional: {
+          en: "Quality-of-earnings analysis often focuses on accrual intensity, working-capital reversals, capitalized costs, stock-based compensation, restructuring and acquisition accounting. The objective is to estimate sustainable cash economics, not mechanically maximize CFO/NI.",
+          fr: "L’analyse de quality of earnings se concentre souvent sur intensité des accruals, reversals de working capital, coûts capitalisés, stock-based compensation, restructuring et acquisition accounting. L’objectif est d’estimer les economics cash soutenables, pas de maximiser mécaniquement CFO/NI.",
+        },
+      },
+      formula: {
+        label: { en: "Cash conversion and simple FCF", fr: "Cash conversion et FCF simplifié" },
+        expression: "Cash Conversion = CFO ÷ Net Income   ·   Simple FCF = CFO − Capex",
+        explanation: {
+          en: "Both formulas are diagnostic tools and should be interpreted with business context.",
+          fr: "Les deux formules sont des outils de diagnostic et doivent être interprétées avec le contexte du business.",
+        },
+        workedExample: {
+          en: "CFO 120, net income 100 → cash conversion 1.20×. Capex 40 → simple FCF 80.",
+          fr: "CFO 120, net income 100 → cash conversion 1,20×. Capex 40 → FCF simplifié 80.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Accrual intensity",
+          fr: "intensité des accruals / accrual intensity",
+          definition: {
+            en: "Degree to which reported earnings depend on accrual accounting rather than realized cash flow.",
+            fr: "Degré auquel les bénéfices publiés dépendent des accruals plutôt que du cash réalisé.",
+          },
+        },
+        {
+          en: "Free cash flow",
+          fr: "flux de trésorerie disponible / free cash flow",
+          definition: {
+            en: "Cash flow remaining after specified operating and investment needs under a chosen definition.",
+            fr: "Cash flow restant après certains besoins opérationnels et d’investissement selon la définition retenue.",
+          },
+        },
+      ],
+    },
+    {
+      id: "red-flags",
+      kicker: { en: "08 · RED FLAGS & ACCOUNTING QUALITY", fr: "08 · RED FLAGS & QUALITÉ COMPTABLE" },
+      title: {
+        en: "The goal is not to assume fraud — it is to know what deserves investigation",
+        fr: "L’objectif n’est pas de supposer une fraude — mais de savoir ce qui mérite investigation",
+      },
+      coreFacts: [
+        {
+          en: "Receivables growing materially faster than revenue can indicate weaker collections or aggressive revenue recognition, but may also reflect mix or timing.",
+          fr: "Des receivables augmentant nettement plus vite que revenue peuvent indiquer recouvrement plus faible ou revenue recognition agressive, mais peuvent aussi refléter mix ou timing.",
+        },
+        {
+          en: "Inventory growing materially faster than sales can indicate demand slowdown, stocking decisions or acquisition effects.",
+          fr: "Un inventory progressant nettement plus vite que les ventes peut indiquer ralentissement de demande, décisions de stockage ou effets d’acquisition.",
+        },
+        {
+          en: "Repeated one-time adjustments deserve scrutiny because recurring 'one-offs' may be economically recurring.",
+          fr: "Des ajustements exceptionnels répétés méritent attention car des « one-offs » récurrents peuvent être économiquement récurrents.",
+        },
+        {
+          en: "Changes in accounting estimates, capitalization policies, supplier finance or receivables factoring can materially affect reported ratios and cash flow.",
+          fr: "Des changements d’estimations comptables, politiques de capitalisation, supplier finance ou factoring de receivables peuvent fortement affecter ratios publiés et cash flow.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A red flag does not mean a company did something wrong. It means the analyst should ask another question. For example, if sales grow 5% but receivables grow 30%, ask why customers are paying more slowly.",
+          fr: "Un red flag ne signifie pas qu’une entreprise a mal agi. Il signifie que l’analyste doit poser une question supplémentaire. Par exemple, si les ventes augmentent de 5 % mais receivables de 30 %, il faut demander pourquoi les clients paient plus lentement.",
+        },
+        Intermediate: {
+          en: "Useful red flags include persistent CFO below net income, falling reserves without clear economics, accelerating capitalized costs, large acquisition adjustments and a widening gap between GAAP/IFRS and adjusted metrics.",
+          fr: "Les red flags utiles incluent CFO durablement inférieur au net income, baisse de provisions sans explication économique claire, accélération des coûts capitalisés, importants ajustements d’acquisition et écart croissant entre métriques GAAP/IFRS et ajustées.",
+        },
+        Professional: {
+          en: "Forensic-style analysis triangulates statements, footnotes, cash flow, segment disclosures and management commentary. The task is to understand incentives and accounting judgment without making unsupported allegations.",
+          fr: "Une analyse de type forensic triangule états financiers, footnotes, cash flow, segment disclosures et commentaires du management. Le but est de comprendre incitations et jugement comptable sans formuler d’accusations non étayées.",
+        },
+      },
+      comparison: {
+        title: { en: "Common red flags to investigate", fr: "Red flags courants à investiguer" },
+        headers: [
+          { en: "Observation", fr: "Observation" },
+          { en: "Possible question", fr: "Question possible" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Receivables > revenue growth", fr: "Receivables > croissance du revenue" },
+            { en: "Are collections weakening?", fr: "Les encaissements ralentissent-ils ?" },
+          ]},
+          { cells: [
+            { en: "Inventory > sales growth", fr: "Inventory > croissance des ventes" },
+            { en: "Is demand slowing or stock building?", fr: "La demande ralentit-elle ou les stocks montent-ils ?" },
+          ]},
+          { cells: [
+            { en: "CFO persistently < net income", fr: "CFO durablement < net income" },
+            { en: "What accruals explain the gap?", fr: "Quels accruals expliquent l’écart ?" },
+          ]},
+          { cells: [
+            { en: "Repeated one-offs", fr: "One-offs répétés" },
+            { en: "Are they actually recurring?", fr: "Sont-ils en réalité récurrents ?" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Factoring",
+          fr: "affacturage / factoring",
+          definition: {
+            en: "Sale or financing of receivables to obtain cash earlier.",
+            fr: "Vente ou financement de créances afin d’obtenir du cash plus tôt.",
+          },
+        },
+        {
+          en: "Capitalized cost",
+          fr: "coût capitalisé / capitalized cost",
+          definition: {
+            en: "Cost recorded as an asset rather than expensed immediately, subject to accounting rules.",
+            fr: "Coût enregistré comme actif plutôt qu’en charge immédiate, selon les règles comptables.",
+          },
+        },
+      ],
+    },
+    {
+      id: "peer-comparison",
+      kicker: { en: "09 · PEER & TREND ANALYSIS", fr: "09 · COMPARAISON DE PAIRS & TENDANCES" },
+      title: {
+        en: "A ratio only becomes useful when compared with something meaningful",
+        fr: "Un ratio ne devient utile que lorsqu’il est comparé à une référence pertinente",
+      },
+      coreFacts: [
+        {
+          en: "Trend analysis compares the same company across time; peer analysis compares companies with similar economics.",
+          fr: "Trend analysis compare la même entreprise dans le temps ; peer analysis compare des entreprises aux economics similaires.",
+        },
+        {
+          en: "Ratios should be normalized for accounting policy, acquisitions, fiscal calendars and business mix where practical.",
+          fr: "Les ratios doivent être normalisés pour accounting policy, acquisitions, calendriers fiscaux et business mix lorsque possible.",
+        },
+        {
+          en: "Sector structure determines which ratios matter most.",
+          fr: "La structure sectorielle détermine quels ratios sont les plus importants.",
+        },
+        {
+          en: "A company can have weaker margins but superior returns if asset turnover is materially higher.",
+          fr: "Une entreprise peut avoir des marges plus faibles mais des rendements supérieurs si son asset turnover est nettement plus élevé.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A 10% margin is not automatically good or bad. If peers earn 3%, it may be excellent. If peers earn 30%, it may be weak. Context turns a number into analysis.",
+          fr: "Une marge de 10 % n’est pas automatiquement bonne ou mauvaise. Si les pairs gagnent 3 %, elle peut être excellente. Si les pairs gagnent 30 %, elle peut être faible. Le contexte transforme un chiffre en analyse.",
+        },
+        Intermediate: {
+          en: "A strong peer comparison uses several dimensions: growth, margins, returns, leverage, cash conversion and valuation. Looking at only one metric can reward a business that is strong in one area but fragile elsewhere.",
+          fr: "Une bonne comparaison de pairs utilise plusieurs dimensions : croissance, marges, returns, leverage, cash conversion et valuation. Regarder une seule métrique peut favoriser une entreprise forte sur un axe mais fragile ailleurs.",
+        },
+        Professional: {
+          en: "Peer analysis works best when the economic model is comparable. Banks, software, retailers and industrials require different ratio sets. Normalization should preserve economic differences rather than force every company into one template.",
+          fr: "La peer analysis fonctionne mieux lorsque les business models sont comparables. Banks, software, retailers et industrials nécessitent des sets de ratios différents. La normalisation doit préserver les différences économiques plutôt que forcer toutes les entreprises dans le même template.",
+        },
+      },
+      comparison: {
+        title: { en: "Example peer scorecard", fr: "Exemple de scorecard de pairs" },
+        headers: [
+          { en: "Dimension", fr: "Dimension" },
+          { en: "Examples", fr: "Exemples" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Growth", fr: "Croissance" },
+            { en: "Revenue · EPS · FCF", fr: "Revenue · EPS · FCF" },
+          ]},
+          { cells: [
+            { en: "Profitability", fr: "Rentabilité" },
+            { en: "Gross margin · operating margin · ROIC", fr: "Gross margin · operating margin · ROIC" },
+          ]},
+          { cells: [
+            { en: "Balance-sheet risk", fr: "Risque de bilan" },
+            { en: "Net debt/EBITDA · coverage · liquidity", fr: "Net debt/EBITDA · coverage · liquidity" },
+          ]},
+          { cells: [
+            { en: "Quality", fr: "Qualité" },
+            { en: "Cash conversion · accruals · working capital", fr: "Cash conversion · accruals · working capital" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "Earnings releases are often traded on changes in these ratios and trends rather than on absolute headline profit alone.",
+        fr: "Les earnings releases sont souvent tradés sur l’évolution de ces ratios et tendances plutôt que sur le seul profit headline.",
+      },
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "margins",
+      question: {
+        en: "Revenue is 100 and gross profit is 40. What is gross margin?",
+        fr: "Le revenue vaut 100 et le gross profit 40. Quelle est la gross margin ?",
+      },
+      options: [
+        { id: "a", label: { en: "20%", fr: "20 %" } },
+        { id: "b", label: { en: "40%", fr: "40 %" } },
+        { id: "c", label: { en: "60%", fr: "60 %" } },
+        { id: "d", label: { en: "140%", fr: "140 %" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "40/100 = 40%.",
+        fr: "40/100 = 40 %.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "roe",
+      question: {
+        en: "Net income is 20 and average equity is 100. ROE is:",
+        fr: "Le net income vaut 20 et l’equity moyenne 100. Le ROE vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "5%", fr: "5 %" } },
+        { id: "b", label: { en: "10%", fr: "10 %" } },
+        { id: "c", label: { en: "20%", fr: "20 %" } },
+        { id: "d", label: { en: "50%", fr: "50 %" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "20/100 = 20%.",
+        fr: "20/100 = 20 %.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "liquidity-ratio",
+      question: {
+        en: "Current assets are 150 and current liabilities are 100. Current ratio is:",
+        fr: "Les actifs courants valent 150 et les passifs courants 100. Le current ratio vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "0.67×", fr: "0,67×" } },
+        { id: "b", label: { en: "1.0×", fr: "1,0×" } },
+        { id: "c", label: { en: "1.5×", fr: "1,5×" } },
+        { id: "d", label: { en: "2.5×", fr: "2,5×" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "150/100 = 1.5×.",
+        fr: "150/100 = 1,5×.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "leverage",
+      question: {
+        en: "Net debt is 300 and EBITDA is 100. Net debt/EBITDA is:",
+        fr: "La net debt vaut 300 et l’EBITDA 100. Net debt/EBITDA vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "0.3×", fr: "0,3×" } },
+        { id: "b", label: { en: "1.0×", fr: "1,0×" } },
+        { id: "c", label: { en: "3.0×", fr: "3,0×" } },
+        { id: "d", label: { en: "30×", fr: "30×" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "300/100 = 3.0×.",
+        fr: "300/100 = 3,0×.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "interest-coverage",
+      question: {
+        en: "EBIT is 80 and interest expense is 20. EBIT interest coverage is:",
+        fr: "L’EBIT vaut 80 et les intérêts 20. L’interest coverage EBIT vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "2.0×", fr: "2,0×" } },
+        { id: "b", label: { en: "4.0×", fr: "4,0×" } },
+        { id: "c", label: { en: "8.0×", fr: "8,0×" } },
+        { id: "d", label: { en: "100×", fr: "100×" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "80/20 = 4.0×.",
+        fr: "80/20 = 4,0×.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "asset-turnover",
+      question: {
+        en: "Revenue is 500 and average assets are 250. Asset turnover is:",
+        fr: "Le revenue vaut 500 et les actifs moyens 250. L’asset turnover vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "0.5×", fr: "0,5×" } },
+        { id: "b", label: { en: "1.0×", fr: "1,0×" } },
+        { id: "c", label: { en: "2.0×", fr: "2,0×" } },
+        { id: "d", label: { en: "5.0×", fr: "5,0×" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "500/250 = 2.0×.",
+        fr: "500/250 = 2,0×.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "dupont",
+      question: {
+        en: "Net margin 10%, asset turnover 1.5× and equity multiplier 2.0× imply ROE of:",
+        fr: "Net margin 10 %, asset turnover 1,5× et equity multiplier 2,0× impliquent un ROE de :",
+      },
+      options: [
+        { id: "a", label: { en: "10%", fr: "10 %" } },
+        { id: "b", label: { en: "15%", fr: "15 %" } },
+        { id: "c", label: { en: "20%", fr: "20 %" } },
+        { id: "d", label: { en: "30%", fr: "30 %" } },
+      ],
+      correctOption: "d",
+      explanation: {
+        en: "10%×1.5×2.0 = 30%.",
+        fr: "10 %×1,5×2,0 = 30 %.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "cash-conversion",
+      question: {
+        en: "CFO is 120 and net income is 100. Cash conversion is:",
+        fr: "Le CFO vaut 120 et le net income 100. La cash conversion vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "0.80×", fr: "0,80×" } },
+        { id: "b", label: { en: "1.00×", fr: "1,00×" } },
+        { id: "c", label: { en: "1.20×", fr: "1,20×" } },
+        { id: "d", label: { en: "2.20×", fr: "2,20×" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "120/100 = 1.20×.",
+        fr: "120/100 = 1,20×.",
+      },
+    },
+    {
+      id: "q9",
+      conceptKey: "red-flags",
+      question: {
+        en: "Revenue grows 5% while receivables grow 30%. What is the best analytical response?",
+        fr: "Le revenue augmente de 5 % tandis que receivables augmentent de 30 %. Quelle est la meilleure réaction analytique ?",
+      },
+      options: [
+        { id: "a", label: { en: "Immediately conclude fraud", fr: "Conclure immédiatement à une fraude" } },
+        { id: "b", label: { en: "Investigate collections, mix, timing and revenue recognition", fr: "Investiguer recouvrement, mix, timing et revenue recognition" } },
+        { id: "c", label: { en: "Ignore the balance sheet", fr: "Ignorer le bilan" } },
+        { id: "d", label: { en: "Assume receivables never matter", fr: "Supposer que receivables ne comptent jamais" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "The divergence is a red flag to investigate, not proof of wrongdoing.",
+        fr: "La divergence est un red flag à investiguer, pas une preuve d’un problème volontaire.",
+      },
+    },
+    {
+      id: "q10",
+      conceptKey: "peer-analysis",
+      question: {
+        en: "Why can a company with lower margins still earn higher returns than a peer?",
+        fr: "Pourquoi une entreprise avec des marges plus faibles peut-elle malgré tout générer des rendements supérieurs à un pair ?",
+      },
+      options: [
+        { id: "a", label: { en: "Higher asset turnover can offset lower margins", fr: "Un asset turnover plus élevé peut compenser des marges plus faibles" } },
+        { id: "b", label: { en: "Margins are the only driver of returns", fr: "Les marges sont le seul driver des returns" } },
+        { id: "c", label: { en: "Assets never matter", fr: "Les actifs ne comptent jamais" } },
+        { id: "d", label: { en: "ROE is unrelated to efficiency", fr: "Le ROE n’a aucun lien avec l’efficacité" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Return on capital depends on both profitability and capital efficiency.",
+        fr: "Le rendement du capital dépend à la fois de la rentabilité et de l’efficacité du capital.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Company A has a 30% ROE and Company B has a 15% ROE. Is Company A necessarily the better business?",
+      fr: "L’entreprise A a un ROE de 30 % et l’entreprise B un ROE de 15 %. L’entreprise A est-elle nécessairement un meilleur business ?",
+    },
+    framework: [
+      {
+        en: "Say no: ROE alone does not explain the source or quality of the return.",
+        fr: "Répondre non : le ROE seul n’explique ni la source ni la qualité du rendement.",
+      },
+      {
+        en: "Use DuPont: compare net margin, asset turnover and equity multiplier.",
+        fr: "Utiliser DuPont : comparer net margin, asset turnover et equity multiplier.",
+      },
+      {
+        en: "Check whether Company A's higher ROE is driven by superior operations or simply much higher leverage.",
+        fr: "Vérifier si le ROE supérieur de A vient de meilleures opérations ou simplement d’un leverage beaucoup plus élevé.",
+      },
+      {
+        en: "Review cash conversion, ROIC, balance-sheet risk and whether equity is unusually small or negative.",
+        fr: "Examiner cash conversion, ROIC, risque de bilan et si l’equity est anormalement faible ou négative.",
+      },
+      {
+        en: "Compare the companies across a full peer scorecard rather than one headline ratio.",
+        fr: "Comparer les entreprises sur une scorecard complète plutôt qu’un seul ratio headline.",
+      },
+    ],
+    sample: {
+      en: "No. A higher ROE is not automatically evidence of a better business because ROE can rise through higher margins, better asset efficiency or higher financial leverage. I would decompose both companies with DuPont analysis. If Company A has similar margins and asset turnover but a much larger equity multiplier, its 30% ROE may simply reflect more leverage and more risk. I would also compare ROIC, cash conversion, liquidity, debt coverage and whether book equity has been reduced by buybacks or accounting losses. A business with a lower ROE but stronger ROIC, cleaner cash conversion and a safer balance sheet can be economically superior.",
+      fr: "Non. Un ROE plus élevé ne prouve pas automatiquement qu’un business est meilleur car le ROE peut augmenter grâce à des marges supérieures, une meilleure efficacité des actifs ou davantage de leverage financier. Je décomposerais les deux entreprises avec DuPont. Si A possède des marges et un asset turnover similaires mais un equity multiplier beaucoup plus élevé, son ROE de 30 % peut simplement refléter davantage de leverage et donc davantage de risque. Je comparerais également ROIC, cash conversion, liquidité, debt coverage et vérifierais si la book equity a été réduite par des buybacks ou pertes comptables. Une entreprise au ROE plus faible mais avec meilleur ROIC, cash conversion plus propre et bilan plus sûr peut être économiquement supérieure.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
