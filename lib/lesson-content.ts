@@ -14761,7 +14761,1011 @@ export const dcfRelativeValuationLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson];
+
+export const fixedIncomeYieldCurvesLesson: FinanceLesson = {
+  slug: "year-2-fixed-income-yield-curves",
+  year: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  domain: {
+    en: "Markets & Instruments",
+    fr: "Marchés & instruments / Markets & Instruments",
+  },
+  title: {
+    en: "Fixed Income & Yield Curves",
+    fr: "Obligations / Fixed Income & courbes des taux / Yield Curves",
+  },
+  subtitle: {
+    en: "Understand how bonds are priced, why coupon and yield differ, how YTM relates to price, and how spot, forward and par curves describe the term structure of interest rates.",
+    fr: "Comprendre comment les obligations sont valorisées, pourquoi coupon et yield diffèrent, comment le YTM est relié au prix, et comment les courbes spot, forward et par décrivent la structure par terme des taux d’intérêt.",
+  },
+  duration: { en: "115–140 min", fr: "115–140 min" },
+  prerequisites: [
+    { en: "Money, Banking & Central Banks", fr: "Monnaie, banques & banques centrales / Money, Banking & Central Banks" },
+    { en: "Time Value of Money", fr: "Valeur temps de l’argent / Time Value of Money" },
+  ],
+  objectives: [
+    {
+      en: "Price fixed-rate and zero-coupon bonds from discounted cash flows.",
+      fr: "Valoriser des obligations à taux fixe et zéro-coupon à partir de cash flows actualisés.",
+    },
+    {
+      en: "Distinguish coupon rate, current yield and yield to maturity.",
+      fr: "Distinguer coupon rate, current yield et yield to maturity / YTM.",
+    },
+    {
+      en: "Explain the inverse relationship between bond price and yield.",
+      fr: "Expliquer la relation inverse entre prix d’une obligation et yield.",
+    },
+    {
+      en: "Use spot rates and discount factors to value cash flows at different maturities.",
+      fr: "Utiliser spot rates et discount factors pour valoriser des cash flows à différentes maturités.",
+    },
+    {
+      en: "Derive simple forward rates from spot rates.",
+      fr: "Dériver des forward rates simples à partir de spot rates.",
+    },
+    {
+      en: "Interpret yield-curve shape, steepening, flattening and inversion without treating them as mechanical forecasts.",
+      fr: "Interpréter forme de la yield curve, steepening, flattening et inversion sans les traiter comme des prévisions mécaniques.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "From a bond cash flow to the yield curve",
+      fr: "Du cash flow obligataire à la courbe des taux",
+    },
+    steps: [
+      {
+        title: { en: "Cash flows", fr: "Cash flows" },
+        detail: { en: "Coupon · principal · maturity", fr: "Coupon · principal · maturity" },
+      },
+      {
+        title: { en: "Discount", fr: "Actualiser" },
+        detail: { en: "YTM · spot rates · discount factors", fr: "YTM · spot rates · discount factors" },
+      },
+      {
+        title: { en: "Curve", fr: "Courbe" },
+        detail: { en: "Spot · par · forward", fr: "Spot · par · forward" },
+      },
+      {
+        title: { en: "Interpret", fr: "Interpréter" },
+        detail: { en: "Slope · shifts · policy · term premium", fr: "Pente · mouvements · policy · term premium" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "bond-anatomy",
+      kicker: { en: "01 · BOND ANATOMY", fr: "01 · ANATOMIE D’UNE OBLIGATION" },
+      title: {
+        en: "A bond is a contractual package of future cash flows",
+        fr: "Une obligation est un ensemble contractuel de cash flows futurs",
+      },
+      coreFacts: [
+        {
+          en: "A plain fixed-rate bond usually pays periodic coupons and repays principal at maturity.",
+          fr: "Une obligation classique à taux fixe paie généralement des coupons périodiques et rembourse le principal à maturité.",
+        },
+        {
+          en: "Face value or par value is the contractual principal amount used to calculate coupon payments.",
+          fr: "La valeur nominale / face value ou par value est le principal contractuel utilisé pour calculer les coupons.",
+        },
+        {
+          en: "Coupon rate is set contractually and does not automatically change when market yields move.",
+          fr: "Le coupon rate est fixé contractuellement et ne change pas automatiquement lorsque les market yields évoluent.",
+        },
+        {
+          en: "Maturity is the contractual date at which principal is due, subject to the instrument terms.",
+          fr: "La maturity est la date contractuelle à laquelle le principal doit être remboursé, selon les termes de l’instrument.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A $1,000 bond with a 5% annual coupon pays $50 per year. If it matures in three years, the investor receives $50 in year 1, $50 in year 2, and $1,050 in year 3 if the issuer performs as promised.",
+          fr: "Une obligation de 1 000 $ avec coupon annuel de 5 % paie 50 $ par an. Si elle arrive à maturité dans trois ans, l’investisseur reçoit 50 $ en année 1, 50 $ en année 2 et 1 050 $ en année 3 si l’émetteur respecte ses obligations.",
+        },
+        Intermediate: {
+          en: "Bond pricing begins with the contractual cash-flow schedule, but real instruments may include semiannual coupons, floating rates, calls, puts, amortization or inflation linkage. Each feature changes the cash-flow map.",
+          fr: "La valorisation obligataire commence par le calendrier contractuel des cash flows, mais les instruments réels peuvent inclure coupons semestriels, floating rates, calls, puts, amortization ou indexation inflation. Chaque caractéristique modifie le cash-flow map.",
+        },
+        Professional: {
+          en: "Security terms determine the legal claim. Coupon frequency, day-count convention, settlement date, business-day adjustment and embedded options can all affect accrued interest and valuation. Fixed-income analytics therefore depend heavily on conventions.",
+          fr: "Les termes du security déterminent la créance juridique. Fréquence des coupons, day-count convention, settlement date, business-day adjustment et embedded options peuvent tous affecter accrued interest et valorisation. L’analyse fixed income dépend donc fortement des conventions.",
+        },
+      },
+      formula: {
+        label: { en: "Annual coupon", fr: "Coupon annuel" },
+        expression: "Annual Coupon = Face Value × Coupon Rate",
+        explanation: {
+          en: "For a standard fixed-rate bond, coupon payment is derived from contractual face value and coupon rate.",
+          fr: "Pour une obligation standard à taux fixe, le coupon est calculé à partir de la face value contractuelle et du coupon rate.",
+        },
+        workedExample: {
+          en: "$1,000 face value × 5% coupon = $50 annual coupon.",
+          fr: "1 000 $ de face value × coupon 5 % = coupon annuel de 50 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Face value / par value",
+          fr: "valeur nominale / face value / par value",
+          definition: {
+            en: "Contractual principal amount of a bond.",
+            fr: "Montant principal contractuel d’une obligation.",
+          },
+        },
+        {
+          en: "Maturity",
+          fr: "échéance / maturity",
+          definition: {
+            en: "Contractual date at which principal is due.",
+            fr: "Date contractuelle à laquelle le principal est dû.",
+          },
+        },
+      ],
+    },
+    {
+      id: "bond-pricing",
+      kicker: { en: "02 · BOND PRICING", fr: "02 · PRICING OBLIGATAIRE" },
+      title: {
+        en: "A bond price is the present value of its promised cash flows",
+        fr: "Le prix d’une obligation est la valeur actuelle de ses cash flows promis",
+      },
+      coreFacts: [
+        {
+          en: "A fixed-rate bond can be valued by discounting each coupon and principal payment at rates appropriate to their timing and risk.",
+          fr: "Une obligation à taux fixe peut être valorisée en actualisant chaque coupon et remboursement de principal à des taux adaptés à leur timing et leur risque.",
+        },
+        {
+          en: "Using one YTM to discount all contractual cash flows is a convenient summary method for a plain bond.",
+          fr: "Utiliser un seul YTM pour actualiser tous les cash flows contractuels est une méthode de synthèse pratique pour une obligation simple.",
+        },
+        {
+          en: "When market yield exceeds coupon rate, a standard fixed-rate bond generally trades below par; when yield is below coupon, it generally trades above par.",
+          fr: "Lorsque le market yield dépasse le coupon rate, une obligation standard à taux fixe cote généralement sous le pair ; lorsque le yield est inférieur au coupon, elle cote généralement au-dessus du pair.",
+        },
+        {
+          en: "At maturity, absent default and unusual terms, price converges toward principal repayment because little time value remains.",
+          fr: "À maturité, hors default et termes inhabituels, le prix converge vers le principal remboursé car il reste peu de valeur temps.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Take a $1,000 bond with a 5% coupon and three years remaining. If investors require 6%, the bond's $50 coupons are less attractive than a new 6% market return, so the bond must trade below $1,000. Discounting the cash flows gives about $973.27.",
+          fr: "Prenons une obligation de 1 000 $ avec coupon 5 % et trois ans restants. Si les investisseurs exigent 6 %, les coupons de 50 $ sont moins attractifs qu’un nouveau rendement de marché à 6 % ; l’obligation doit donc coter sous 1 000 $. L’actualisation des cash flows donne environ 973,27 $.",
+        },
+        Intermediate: {
+          en: "The bond price is simply a DCF. The difference from corporate valuation is that bond cash flows are largely contractual, so the central uncertainty shifts toward discount rates, credit risk and embedded options rather than operating forecasts.",
+          fr: "Le prix obligataire est simplement un DCF. La différence avec la valuation corporate est que les cash flows obligataires sont largement contractuels ; l’incertitude centrale se déplace donc vers discount rates, credit risk et embedded options plutôt que vers forecasts opérationnels.",
+        },
+        Professional: {
+          en: "A single-YTM approach assumes one internal rate summarizes a term structure that may actually vary across maturities. Arbitrage-consistent valuation therefore discounts each cash flow using a maturity-specific spot rate when the spot curve is available.",
+          fr: "Une approche avec un seul YTM suppose qu’un taux interne résume une term structure qui varie en réalité selon les maturités. Une valorisation cohérente avec l’arbitrage actualise donc chaque cash flow avec un spot rate spécifique à sa maturité lorsque la spot curve est disponible.",
+        },
+      },
+      formula: {
+        label: { en: "Plain-bond price using one yield", fr: "Prix d’une obligation simple avec un yield unique" },
+        expression: "Price = Σ [Couponₜ ÷ (1+y)ᵗ] + Face Value ÷ (1+y)ⁿ",
+        explanation: {
+          en: "y is the periodic yield matched to the coupon frequency under the chosen convention.",
+          fr: "y est le yield périodique correspondant à la fréquence des coupons selon la convention retenue.",
+        },
+        workedExample: {
+          en: "$1,000 face, 5% annual coupon, 3 years, 6% annual YTM → price ≈ $973.27.",
+          fr: "Face 1 000 $, coupon annuel 5 %, 3 ans, YTM annuel 6 % → prix ≈ 973,27 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Premium bond",
+          fr: "obligation au-dessus du pair / premium bond",
+          definition: {
+            en: "Bond trading above face value.",
+            fr: "Obligation négociée au-dessus de sa valeur nominale.",
+          },
+        },
+        {
+          en: "Discount bond",
+          fr: "obligation sous le pair / discount bond",
+          definition: {
+            en: "Bond trading below face value.",
+            fr: "Obligation négociée sous sa valeur nominale.",
+          },
+        },
+      ],
+    },
+    {
+      id: "coupon-current-yield-ytm",
+      kicker: { en: "03 · COUPON, CURRENT YIELD & YTM", fr: "03 · COUPON, CURRENT YIELD & YTM" },
+      title: {
+        en: "Three yield concepts answer three different questions",
+        fr: "Trois concepts de yield répondent à trois questions différentes",
+      },
+      coreFacts: [
+        {
+          en: "Coupon rate is contractual coupon divided by face value.",
+          fr: "Le coupon rate est le coupon contractuel divisé par la face value.",
+        },
+        {
+          en: "Current yield is annual coupon divided by current market price.",
+          fr: "Le current yield est le coupon annuel divisé par le market price actuel.",
+        },
+        {
+          en: "YTM is the internal rate of return that equates a bond's current price with the present value of scheduled cash flows under standard assumptions.",
+          fr: "Le YTM est l’internal rate of return qui égalise le prix actuel de l’obligation et la valeur actuelle de ses cash flows programmés sous des hypothèses standard.",
+        },
+        {
+          en: "YTM assumes scheduled cash flows occur as modeled and does not by itself guarantee the investor's realized return.",
+          fr: "Le YTM suppose que les cash flows prévus se réalisent comme modélisé et ne garantit pas à lui seul le realized return de l’investisseur.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "For a $1,000 face bond paying $50 per year, the coupon rate is always 5%. If the bond trades at $950, current yield is $50/$950 ≈ 5.26%. YTM is different again because it also includes the gain from $950 toward $1,000 at maturity.",
+          fr: "Pour une obligation de face 1 000 $ payant 50 $ par an, le coupon rate reste 5 %. Si elle cote 950 $, le current yield vaut 50/950 ≈ 5,26 %. Le YTM est encore différent car il inclut aussi le gain potentiel de 950 $ vers 1 000 $ à maturité.",
+        },
+        Intermediate: {
+          en: "A discount bond with no default typically has YTM above current yield because part of the total return comes from pull-to-par. A premium bond typically has YTM below current yield because price is expected to pull down toward par.",
+          fr: "Une discount bond sans default possède généralement un YTM supérieur au current yield car une partie du return vient du pull-to-par. Une premium bond possède généralement un YTM inférieur au current yield car le prix tend à redescendre vers le pair.",
+        },
+        Professional: {
+          en: "YTM is a useful quotation but compresses a term structure into one number and embeds reinvestment assumptions for interim coupons. For relative-value work, traders often use spot spreads, asset-swap spreads or option-adjusted spreads rather than YTM alone.",
+          fr: "Le YTM est une quotation utile mais compresse toute une term structure en un seul chiffre et intègre des hypothèses de réinvestissement des coupons intermédiaires. Pour relative value, les traders utilisent souvent spot spreads, asset-swap spreads ou option-adjusted spreads plutôt que le seul YTM.",
+        },
+      },
+      formula: {
+        label: { en: "Current yield", fr: "Current yield" },
+        expression: "Current Yield = Annual Coupon ÷ Bond Price",
+        explanation: {
+          en: "Current yield ignores principal gain or loss and time value beyond the annual coupon.",
+          fr: "Le current yield ignore gain ou perte sur le principal ainsi que la valeur temps au-delà du coupon annuel.",
+        },
+        workedExample: {
+          en: "$50 coupon / $950 price ≈ 5.26% current yield.",
+          fr: "Coupon 50 $ / prix 950 $ ≈ current yield 5,26 %.",
+        },
+      },
+      comparison: {
+        title: { en: "Coupon rate vs current yield vs YTM", fr: "Coupon rate vs current yield vs YTM" },
+        headers: [
+          { en: "Measure", fr: "Mesure" },
+          { en: "Uses market price?", fr: "Utilise le market price ?" },
+          { en: "Includes pull-to-par?", fr: "Inclut pull-to-par ?" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Coupon rate", fr: "Coupon rate" },
+            { en: "No", fr: "Non" },
+            { en: "No", fr: "Non" },
+          ]},
+          { cells: [
+            { en: "Current yield", fr: "Current yield" },
+            { en: "Yes", fr: "Oui" },
+            { en: "No", fr: "Non" },
+          ]},
+          { cells: [
+            { en: "YTM", fr: "YTM" },
+            { en: "Yes", fr: "Oui" },
+            { en: "Yes, under model assumptions", fr: "Oui, sous hypothèses du modèle" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Pull-to-par",
+          fr: "convergence vers le pair / pull-to-par",
+          definition: {
+            en: "Tendency of a bond price to move toward face value as maturity approaches, absent default and other effects.",
+            fr: "Tendance du prix d’une obligation à converger vers sa face value à l’approche de la maturité, hors default et autres effets.",
+          },
+        },
+        {
+          en: "Yield to maturity",
+          fr: "rendement à maturité / yield to maturity",
+          definition: {
+            en: "Internal rate equating current bond price to scheduled discounted cash flows under stated assumptions.",
+            fr: "Taux interne égalisant le prix actuel de l’obligation avec ses cash flows actualisés sous des hypothèses définies.",
+          },
+        },
+      ],
+    },
+    {
+      id: "price-yield-relationship",
+      kicker: { en: "04 · PRICE–YIELD RELATIONSHIP", fr: "04 · RELATION PRIX–YIELD" },
+      title: {
+        en: "Bond prices and yields move in opposite directions",
+        fr: "Les prix obligataires et les yields évoluent en sens inverse",
+      },
+      coreFacts: [
+        {
+          en: "For a standard fixed-rate bond, higher required yield reduces present value and therefore lowers price.",
+          fr: "Pour une obligation standard à taux fixe, un required yield plus élevé réduit la valeur actuelle et donc le prix.",
+        },
+        {
+          en: "Lower required yield raises present value and therefore raises price.",
+          fr: "Un required yield plus faible augmente la valeur actuelle et donc le prix.",
+        },
+        {
+          en: "The price-yield relationship is curved rather than perfectly linear.",
+          fr: "La relation prix-yield est courbe plutôt que parfaitement linéaire.",
+        },
+        {
+          en: "Longer maturity and lower coupon generally increase price sensitivity to yield changes, all else equal.",
+          fr: "Une maturity plus longue et un coupon plus faible augmentent généralement la sensibilité du prix aux variations de yield, toutes choses égales par ailleurs.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A bond pays fixed dollars. If new bonds offer higher yields, your old fixed payments become less attractive, so buyers will only purchase your bond at a lower price. If market yields fall, your fixed payments become more attractive and price rises.",
+          fr: "Une obligation paie des montants fixes. Si de nouvelles obligations offrent des yields supérieurs, tes paiements fixes deviennent moins attractifs ; les acheteurs n’accepteront ton obligation qu’à un prix inférieur. Si les market yields baissent, tes paiements fixes deviennent plus attractifs et le prix monte.",
+        },
+        Intermediate: {
+          en: "Sensitivity is not symmetric. A 100bp fall in yield generally raises price by slightly more than a 100bp rise lowers it for a standard option-free bond. Duration and convexity formalize this behavior in the next course.",
+          fr: "La sensibilité n’est pas symétrique. Une baisse de 100bp du yield augmente généralement le prix légèrement plus qu’une hausse de 100bp ne le réduit pour une obligation standard sans option. Duration et convexity formaliseront ce comportement dans le prochain cours.",
+        },
+        Professional: {
+          en: "Curve shifts are rarely perfectly parallel. A real bond has key-rate exposures across maturities, so one YTM move is only a compressed description of a multi-point term-structure repricing.",
+          fr: "Les mouvements de courbe sont rarement parfaitement parallèles. Une obligation réelle possède des key-rate exposures sur plusieurs maturités ; un seul mouvement de YTM n’est qu’une description compressée d’un repricing multi-points de la term structure.",
+        },
+      },
+      formula: {
+        label: { en: "Discounting intuition", fr: "Intuition d’actualisation" },
+        expression: "Higher y → Lower PV of Cash Flows → Lower Bond Price",
+        explanation: {
+          en: "The inverse relation follows directly from present-value mathematics.",
+          fr: "La relation inverse découle directement des mathématiques de present value.",
+        },
+        workedExample: {
+          en: "For the same fixed cash flows, discounting at 6% gives a lower price than discounting at 5%.",
+          fr: "Pour les mêmes cash flows fixes, actualiser à 6 % donne un prix inférieur à une actualisation à 5 %.",
+        },
+      },
+      marketConnection: {
+        en: "When government-bond yields rise sharply, fixed-rate bond portfolios generally experience mark-to-market losses, with the magnitude depending on duration and curve exposure.",
+        fr: "Lorsque les government-bond yields montent fortement, les portefeuilles d’obligations à taux fixe subissent généralement des mark-to-market losses, dont l’ampleur dépend de la duration et de l’exposition à la courbe.",
+      },
+      vocabulary: [
+        {
+          en: "Mark-to-market",
+          fr: "valorisation au prix de marché / mark-to-market",
+          definition: {
+            en: "Revaluation of a position using current market prices.",
+            fr: "Réévaluation d’une position selon les prix de marché actuels.",
+          },
+        },
+        {
+          en: "Basis point",
+          fr: "point de base / basis point",
+          definition: {
+            en: "0.01 percentage point; 100bp equals 1 percentage point.",
+            fr: "0,01 point de pourcentage ; 100bp correspondent à 1 point de pourcentage.",
+          },
+        },
+      ],
+    },
+    {
+      id: "zero-coupon-spot-rates",
+      kicker: { en: "05 · ZERO-COUPON BONDS & SPOT RATES", fr: "05 · ZERO-COUPON BONDS & SPOT RATES" },
+      title: {
+        en: "A spot rate prices one cash flow at one maturity",
+        fr: "Un spot rate valorise un cash flow à une maturité donnée",
+      },
+      coreFacts: [
+        {
+          en: "A zero-coupon bond has no interim coupon and pays a single principal amount at maturity.",
+          fr: "Une zero-coupon bond ne paie aucun coupon intermédiaire et verse un seul principal à maturité.",
+        },
+        {
+          en: "A spot rate is the yield used to discount a single cash flow from a specific future maturity under the stated convention.",
+          fr: "Un spot rate est le yield utilisé pour actualiser un cash flow unique provenant d’une maturité future précise selon la convention retenue.",
+        },
+        {
+          en: "A discount factor is the present value of one unit of currency received at a future date.",
+          fr: "Un discount factor est la valeur actuelle d’une unité monétaire reçue à une date future.",
+        },
+        {
+          en: "A coupon bond can be valued by discounting each cash flow with the spot rate matching that cash flow's maturity.",
+          fr: "Une coupon bond peut être valorisée en actualisant chaque cash flow avec le spot rate correspondant à sa maturité.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you will receive $1,000 in three years and the three-year spot rate is 4.5% with annual compounding, present value is about $876.30. There are no coupons to complicate the calculation.",
+          fr: "Si tu dois recevoir 1 000 $ dans trois ans et que le spot rate 3 ans vaut 4,5 % avec capitalisation annuelle, la valeur actuelle est environ 876,30 $. Aucun coupon ne complique le calcul.",
+        },
+        Intermediate: {
+          en: "Spot-rate valuation avoids forcing one YTM onto all cash flows. A two-year coupon payment can be discounted at the two-year spot rate while a five-year principal payment uses the five-year spot rate.",
+          fr: "La valorisation par spot rates évite d’imposer un seul YTM à tous les cash flows. Un coupon à deux ans peut être actualisé au spot rate 2 ans tandis qu’un principal à cinq ans utilise le spot rate 5 ans.",
+        },
+        Professional: {
+          en: "Discount curves are constructed from liquid market instruments using bootstrapping and interpolation. Modern derivatives markets may use different curves for discounting and projection depending on collateral and benchmark conventions.",
+          fr: "Les discount curves sont construites à partir d’instruments liquides via bootstrapping et interpolation. Les marchés de derivatives modernes peuvent utiliser différentes curves pour discounting et projection selon collateral et benchmark conventions.",
+        },
+      },
+      formula: {
+        label: { en: "Zero-coupon price", fr: "Prix d’une zero-coupon bond" },
+        expression: "Price = Face Value ÷ (1 + sₙ)ⁿ",
+        explanation: {
+          en: "sₙ is the n-period spot rate under the stated compounding convention.",
+          fr: "sₙ est le spot rate à n périodes selon la convention de capitalisation retenue.",
+        },
+        workedExample: {
+          en: "$1,000 received in 3 years at a 4.5% annual spot rate → PV ≈ $876.30.",
+          fr: "1 000 $ reçus dans 3 ans avec spot rate annuel 4,5 % → PV ≈ 876,30 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Spot rate",
+          fr: "taux spot / spot rate",
+          definition: {
+            en: "Rate associated with discounting a single cash flow at a specified maturity.",
+            fr: "Taux associé à l’actualisation d’un cash flow unique à une maturité donnée.",
+          },
+        },
+        {
+          en: "Discount factor",
+          fr: "facteur d’actualisation / discount factor",
+          definition: {
+            en: "Present value today of one unit paid at a future date.",
+            fr: "Valeur actuelle aujourd’hui d’une unité payée à une date future.",
+          },
+        },
+      ],
+    },
+    {
+      id: "bootstrapping-par-curve",
+      kicker: { en: "06 · BOOTSTRAPPING & PAR CURVE", fr: "06 · BOOTSTRAPPING & PAR CURVE" },
+      title: {
+        en: "Market bond prices can be converted into a spot curve",
+        fr: "Les prix obligataires de marché peuvent être transformés en spot curve",
+      },
+      coreFacts: [
+        {
+          en: "Bootstrapping solves sequentially for discount factors or spot rates using instruments with increasing maturities.",
+          fr: "Le bootstrapping résout séquentiellement discount factors ou spot rates à partir d’instruments de maturités croissantes.",
+        },
+        {
+          en: "A par yield is the coupon rate that makes a bond trade at par for a given maturity under the curve.",
+          fr: "Un par yield est le coupon rate qui fait coter une obligation au pair pour une maturity donnée sous la courbe.",
+        },
+        {
+          en: "The par curve is not generally identical to the spot curve because coupon bonds contain cash flows at several dates.",
+          fr: "La par curve n’est généralement pas identique à la spot curve car les coupon bonds contiennent des cash flows à plusieurs dates.",
+        },
+        {
+          en: "Yield curves shown in market commentary may refer to par yields, zero rates, swap rates or specific security yields, so the curve definition matters.",
+          fr: "Les yield curves présentées dans les commentaires de marché peuvent désigner par yields, zero rates, swap rates ou yields de securities spécifiques ; la définition de la courbe compte donc.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Imagine you know the one-year discount rate. A two-year bond gives cash flows in year 1 and year 2. Because you already know how to discount the year-1 cash flow, the bond's market price can help solve for the year-2 discount factor.",
+          fr: "Imagine que tu connaisses déjà le discount rate à un an. Une obligation deux ans donne des cash flows en année 1 et 2. Comme tu sais déjà actualiser le cash flow d’année 1, le prix de marché de l’obligation peut servir à résoudre le discount factor d’année 2.",
+        },
+        Intermediate: {
+          en: "Bootstrapping builds an arbitrage-consistent set of zero-coupon discount factors from market prices. Par yields can then be calculated from those discount factors as the coupon rates that set price equal to face value.",
+          fr: "Le bootstrapping construit un ensemble cohérent avec l’arbitrage de zero-coupon discount factors à partir des prix de marché. Les par yields peuvent ensuite être calculés comme les coupon rates qui rendent le prix égal à la face value.",
+        },
+        Professional: {
+          en: "Real curve construction requires instrument selection, interpolation, day-count and collateral conventions. Small methodology differences can matter for pricing and hedging large fixed-income or derivatives books.",
+          fr: "La construction réelle d’une curve nécessite sélection des instruments, interpolation, day-count et collateral conventions. De petites différences méthodologiques peuvent compter pour le pricing et hedging de gros books fixed income ou derivatives.",
+        },
+      },
+      formula: {
+        label: { en: "Two-year par yield from annual discount factors", fr: "Par yield deux ans à partir de discount factors annuels" },
+        expression: "Par Yield₂ = (1 − DF₂) ÷ (DF₁ + DF₂)",
+        explanation: {
+          en: "For unit face value and annual coupons, the par coupon equates discounted coupons plus principal to par.",
+          fr: "Pour une face value unitaire et coupons annuels, le par coupon égalise coupons actualisés plus principal avec le pair.",
+        },
+        workedExample: {
+          en: "With 1Y spot 4% and 2Y spot 5%: DF₁≈0.9615, DF₂≈0.9070, so 2Y par yield≈4.98%.",
+          fr: "Avec spot 1Y 4 % et spot 2Y 5 % : DF₁≈0,9615, DF₂≈0,9070, donc par yield 2Y≈4,98 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Bootstrapping",
+          fr: "bootstrapping",
+          definition: {
+            en: "Sequential process for deriving discount factors or spot rates from market instrument prices.",
+            fr: "Processus séquentiel permettant de dériver discount factors ou spot rates à partir de prix d’instruments de marché.",
+          },
+        },
+        {
+          en: "Par yield",
+          fr: "taux au pair / par yield",
+          definition: {
+            en: "Coupon rate that makes a bond price equal face value under the relevant curve and conventions.",
+            fr: "Coupon rate qui rend le prix d’une obligation égal à sa face value selon la curve et les conventions pertinentes.",
+          },
+        },
+      ],
+    },
+    {
+      id: "forward-rates",
+      kicker: { en: "07 · FORWARD RATES", fr: "07 · FORWARD RATES" },
+      title: {
+        en: "Forward rates are future-period rates implied by today's spot curve",
+        fr: "Les forward rates sont les taux de périodes futures implicites dans la spot curve actuelle",
+      },
+      coreFacts: [
+        {
+          en: "A forward rate links spot rates across maturities through no-arbitrage compounding relationships.",
+          fr: "Un forward rate relie les spot rates de plusieurs maturités via des relations de compounding sans arbitrage.",
+        },
+        {
+          en: "An implied forward rate is not automatically the market's pure forecast of a future realized short rate.",
+          fr: "Un implied forward rate n’est pas automatiquement la prévision pure du marché du futur realized short rate.",
+        },
+        {
+          en: "Forward rates can embed term premia, liquidity effects and technical factors in addition to rate expectations.",
+          fr: "Les forward rates peuvent intégrer term premia, effets de liquidité et facteurs techniques en plus des attentes de taux.",
+        },
+        {
+          en: "Forward curves are widely used in rates, FX, derivatives pricing and scenario analysis.",
+          fr: "Les forward curves sont largement utilisées en rates, FX, derivatives pricing et scenario analysis.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose the one-year spot rate is 4% and the two-year spot rate is 5%. The one-year rate starting one year from today that makes the two investment paths equivalent is about 6.01% under annual compounding.",
+          fr: "Supposons que le spot rate 1 an soit 4 % et le spot rate 2 ans 5 %. Le taux d’un an commençant dans un an qui rend les deux chemins d’investissement équivalents vaut environ 6,01 % avec capitalisation annuelle.",
+        },
+        Intermediate: {
+          en: "No-arbitrage says investing for two years at the two-year spot rate should match investing for one year at the one-year spot rate and then locking the implied one-year forward rate for year two.",
+          fr: "Le principe de no-arbitrage dit qu’investir deux ans au spot rate 2 ans doit correspondre à investir un an au spot rate 1 an puis verrouiller l’implied one-year forward rate pour la deuxième année.",
+        },
+        Professional: {
+          en: "The forward curve is a pricing object, not a literal forecast. Interpreting forwards requires decomposition between expected future short rates and term premium, which can vary through time and is not directly observable.",
+          fr: "La forward curve est un objet de pricing, pas une prévision littérale. Interpréter les forwards nécessite de distinguer expected future short rates et term premium, qui varie dans le temps et n’est pas directement observable.",
+        },
+      },
+      formula: {
+        label: { en: "One-year forward starting in one year", fr: "Forward 1 an commençant dans 1 an" },
+        expression: "(1 + s₂)² = (1 + s₁) × (1 + f₁,₁)",
+        explanation: {
+          en: "Solve for f₁,₁ using the one- and two-year spot rates under annual compounding.",
+          fr: "Résoudre f₁,₁ à partir des spot rates 1 an et 2 ans avec capitalisation annuelle.",
+        },
+        workedExample: {
+          en: "s₁=4%, s₂=5% → f₁,₁=(1.05²/1.04)−1≈6.01%.",
+          fr: "s₁=4 %, s₂=5 % → f₁,₁=(1,05²/1,04)−1≈6,01 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Forward rate",
+          fr: "taux forward / forward rate",
+          definition: {
+            en: "Future-period rate implied today by current spot rates under the chosen conventions.",
+            fr: "Taux d’une période future implicite aujourd’hui dans les spot rates actuels selon les conventions retenues.",
+          },
+        },
+        {
+          en: "No-arbitrage",
+          fr: "absence d’arbitrage / no-arbitrage",
+          definition: {
+            en: "Condition requiring economically equivalent cash-flow strategies to have consistent prices.",
+            fr: "Condition exigeant que des stratégies de cash flows économiquement équivalentes aient des prix cohérents.",
+          },
+        },
+      ],
+    },
+    {
+      id: "yield-curve-shape",
+      kicker: { en: "08 · YIELD-CURVE SHAPE & MOVES", fr: "08 · FORME & MOUVEMENTS DE LA YIELD CURVE" },
+      title: {
+        en: "Slope contains information about policy, growth, inflation and term premium",
+        fr: "La pente contient de l’information sur policy, croissance, inflation et term premium",
+      },
+      coreFacts: [
+        {
+          en: "A normal or upward-sloping curve has longer yields above shorter yields under the selected curve definition.",
+          fr: "Une courbe normale ou ascendante possède des yields longs supérieurs aux yields courts selon la définition de curve retenue.",
+        },
+        {
+          en: "An inverted curve has shorter yields above longer yields for the selected maturities.",
+          fr: "Une inverted curve possède des yields courts supérieurs aux yields longs pour les maturités sélectionnées.",
+        },
+        {
+          en: "Steepening means the yield difference between longer and shorter maturities increases; flattening means it decreases.",
+          fr: "Steepening signifie que l’écart entre yields longs et courts augmente ; flattening signifie qu’il diminue.",
+        },
+        {
+          en: "Curve changes can occur because short rates move, long rates move, or both move by different amounts.",
+          fr: "Les changements de curve peuvent provenir de mouvements des taux courts, des taux longs, ou des deux à des amplitudes différentes.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If the 2-year yield is 4% and the 10-year yield is 5%, the 2s10s slope is +1 percentage point, or +100bp. If the 2-year rises to 5% while the 10-year stays at 5%, the curve flattens to 0bp.",
+          fr: "Si le yield 2 ans vaut 4 % et le 10 ans 5 %, la pente 2s10s vaut +1 point, soit +100bp. Si le 2 ans monte à 5 % tandis que le 10 ans reste à 5 %, la curve flatten à 0bp.",
+        },
+        Intermediate: {
+          en: "A bull steepener occurs when yields fall and shorter maturities fall more than longer maturities. A bear steepener occurs when yields rise and longer maturities rise more than shorter maturities. Flatteners reverse the relative move.",
+          fr: "Un bull steepener se produit lorsque les yields baissent et que les maturités courtes baissent davantage que les longues. Un bear steepener se produit lorsque les yields montent et que les maturités longues montent davantage. Les flatteners inversent le mouvement relatif.",
+        },
+        Professional: {
+          en: "Curve shape reflects expected policy path, inflation uncertainty, supply-demand, term premium and risk positioning. An inversion has historically received macro attention, but it is not a deterministic recession timer and should not be used without context.",
+          fr: "La forme de la curve reflète expected policy path, incertitude d’inflation, supply-demand, term premium et positioning. Une inversion reçoit historiquement beaucoup d’attention macro, mais n’est pas un timer déterministe de récession et doit être interprétée avec contexte.",
+        },
+      },
+      formula: {
+        label: { en: "2s10s curve spread", fr: "Spread de courbe 2s10s" },
+        expression: "2s10s = 10Y Yield − 2Y Yield",
+        explanation: {
+          en: "Positive means the selected long yield is above the selected short yield; negative means inversion for this pair.",
+          fr: "Positif signifie que le yield long sélectionné dépasse le court ; négatif signifie inversion pour cette paire.",
+        },
+        workedExample: {
+          en: "10Y=5.00%, 2Y=4.00% → 2s10s=+1.00%=+100bp.",
+          fr: "10Y=5,00 %, 2Y=4,00 % → 2s10s=+1,00 %=+100bp.",
+        },
+      },
+      comparison: {
+        title: { en: "Curve moves", fr: "Mouvements de courbe" },
+        headers: [
+          { en: "Move", fr: "Mouvement" },
+          { en: "General pattern", fr: "Pattern général" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Bull steepener", fr: "Bull steepener" },
+            { en: "Yields fall; front end falls more", fr: "Yields baissent ; front end baisse davantage" },
+          ]},
+          { cells: [
+            { en: "Bear steepener", fr: "Bear steepener" },
+            { en: "Yields rise; long end rises more", fr: "Yields montent ; long end monte davantage" },
+          ]},
+          { cells: [
+            { en: "Bull flattener", fr: "Bull flattener" },
+            { en: "Yields fall; long end falls more", fr: "Yields baissent ; long end baisse davantage" },
+          ]},
+          { cells: [
+            { en: "Bear flattener", fr: "Bear flattener" },
+            { en: "Yields rise; front end rises more", fr: "Yields montent ; front end monte davantage" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Front end",
+          fr: "partie courte de la courbe / front end",
+          definition: {
+            en: "Short-maturity segment of the yield curve.",
+            fr: "Segment de maturités courtes de la yield curve.",
+          },
+        },
+        {
+          en: "Long end",
+          fr: "partie longue de la courbe / long end",
+          definition: {
+            en: "Long-maturity segment of the yield curve.",
+            fr: "Segment de maturités longues de la yield curve.",
+          },
+        },
+      ],
+    },
+    {
+      id: "professional-curve-reading",
+      kicker: { en: "09 · READING THE CURVE PROFESSIONALLY", fr: "09 · LIRE LA CURVE COMME UN PROFESSIONNEL" },
+      title: {
+        en: "Separate expectations, term premium, credit and liquidity",
+        fr: "Séparer expectations, term premium, crédit et liquidité",
+      },
+      coreFacts: [
+        {
+          en: "Government yield curves are often used as reference curves, but even government yields can contain term premium and liquidity effects.",
+          fr: "Les government yield curves sont souvent utilisées comme reference curves, mais même les government yields peuvent contenir term premium et effets de liquidité.",
+        },
+        {
+          en: "Corporate bond yield adds credit and liquidity compensation on top of the relevant risk-free or reference curve, depending on the spread measure.",
+          fr: "Le corporate bond yield ajoute une rémunération pour crédit et liquidité au-dessus de la risk-free ou reference curve pertinente, selon la mesure de spread.",
+        },
+        {
+          en: "A change in bond yield should be decomposed into underlying rate movement and spread movement when analyzing credit.",
+          fr: "Une variation du bond yield doit être décomposée entre mouvement du taux sous-jacent et mouvement du spread lors de l’analyse crédit.",
+        },
+        {
+          en: "Curve interpretation should be tied to a horizon and instrument because the same macro view can affect different maturities differently.",
+          fr: "L’interprétation de la curve doit être reliée à un horizon et un instrument car une même vue macro peut affecter différentes maturités différemment.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a corporate bond yield rises from 6% to 7%, that does not necessarily mean the company became riskier. Government yields may have risen while the company's credit spread stayed unchanged.",
+          fr: "Si le yield d’une corporate bond passe de 6 % à 7 %, cela ne signifie pas nécessairement que l’entreprise est devenue plus risquée. Les government yields peuvent avoir monté tandis que le credit spread de l’entreprise reste inchangé.",
+        },
+        Intermediate: {
+          en: "A practical decomposition is: reference rate + credit spread ≈ corporate yield, subject to the spread convention. Rates traders focus heavily on the curve and forwards; credit investors additionally monitor spread compensation and default fundamentals.",
+          fr: "Une décomposition pratique est : reference rate + credit spread ≈ corporate yield, sous réserve de la convention de spread. Les rates traders se concentrent fortement sur curve et forwards ; les credit investors surveillent en plus rémunération du spread et fondamentaux de default.",
+        },
+        Professional: {
+          en: "Curve trades express relative views rather than simple duration views. Steepeners, flatteners and butterflies can isolate different parts of the term structure. Professional interpretation also considers carry, roll-down, financing, liquidity and convexity.",
+          fr: "Les curve trades expriment des vues relatives plutôt que de simples vues de duration. Steepeners, flatteners et butterflies peuvent isoler différentes parties de la term structure. L’interprétation professionnelle considère aussi carry, roll-down, financement, liquidité et convexity.",
+        },
+      },
+      comparison: {
+        title: { en: "What can move a yield?", fr: "Qu’est-ce qui peut faire bouger un yield ?" },
+        headers: [
+          { en: "Component", fr: "Composante" },
+          { en: "Typical driver", fr: "Driver typique" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Expected short rates", fr: "Expected short rates" },
+            { en: "Policy and macro expectations", fr: "Attentes de policy et macro" },
+          ]},
+          { cells: [
+            { en: "Term premium", fr: "Term premium" },
+            { en: "Duration risk, uncertainty, supply-demand", fr: "Duration risk, incertitude, supply-demand" },
+          ]},
+          { cells: [
+            { en: "Credit spread", fr: "Credit spread" },
+            { en: "Default risk, risk premium, liquidity", fr: "Default risk, risk premium, liquidité" },
+          ]},
+          { cells: [
+            { en: "Liquidity / technicals", fr: "Liquidité / technicals" },
+            { en: "Flows, issuance, market depth", fr: "Flows, issuance, market depth" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "A rates interview answer should explain which point of the curve moves, why, and whether the move reflects policy expectations, term premium or another component rather than saying simply that 'rates go up.'",
+        fr: "Une réponse d’entretien rates doit expliquer quel point de la curve bouge, pourquoi, et si le mouvement reflète policy expectations, term premium ou une autre composante plutôt que simplement dire « les taux montent ».",
+      },
+      vocabulary: [
+        {
+          en: "Term premium",
+          fr: "prime de terme / term premium",
+          definition: {
+            en: "Compensation investors may require for bearing longer-maturity interest-rate risk beyond expected future short rates.",
+            fr: "Compensation que les investisseurs peuvent exiger pour supporter le risque de taux long au-delà des expected future short rates.",
+          },
+        },
+        {
+          en: "Roll-down",
+          fr: "roll-down",
+          definition: {
+            en: "Change in bond valuation as it moves down a non-flat yield curve with time, holding other factors constant.",
+            fr: "Variation de valorisation d’une obligation lorsqu’elle descend le long d’une yield curve non plate avec le temps, toutes choses égales par ailleurs.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "bond-coupon",
+      question: {
+        en: "A $1,000 face-value bond has a 5% annual coupon. Annual coupon payment is:",
+        fr: "Une obligation de face value 1 000 $ possède un coupon annuel de 5 %. Le coupon annuel vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "$5", fr: "5 $" } },
+        { id: "b", label: { en: "$50", fr: "50 $" } },
+        { id: "c", label: { en: "$500", fr: "500 $" } },
+        { id: "d", label: { en: "$1,050", fr: "1 050 $" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "$1,000×5%=$50.",
+        fr: "1 000 $×5 %=50 $.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "discount-bond",
+      question: {
+        en: "For a standard fixed-rate bond, if market yield rises above the coupon rate, the bond generally trades:",
+        fr: "Pour une obligation standard à taux fixe, si le market yield dépasse le coupon rate, l’obligation cote généralement :",
+      },
+      options: [
+        { id: "a", label: { en: "Above par", fr: "Au-dessus du pair" } },
+        { id: "b", label: { en: "At exactly twice par", fr: "Exactement deux fois le pair" } },
+        { id: "c", label: { en: "Below par", fr: "Sous le pair" } },
+        { id: "d", label: { en: "Yield and price are unrelated", fr: "Yield et prix sont sans relation" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "Higher required yield lowers the present value of fixed cash flows, pushing price below par when coupon is lower than yield.",
+        fr: "Un required yield supérieur réduit la present value des cash flows fixes, faisant passer le prix sous le pair lorsque coupon < yield.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "current-yield",
+      question: {
+        en: "Annual coupon is $50 and bond price is $950. Current yield is approximately:",
+        fr: "Le coupon annuel vaut 50 $ et le prix de l’obligation 950 $. Le current yield vaut environ :",
+      },
+      options: [
+        { id: "a", label: { en: "5.00%", fr: "5,00 %" } },
+        { id: "b", label: { en: "5.26%", fr: "5,26 %" } },
+        { id: "c", label: { en: "9.50%", fr: "9,50 %" } },
+        { id: "d", label: { en: "19.00%", fr: "19,00 %" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "50/950≈5.26%.",
+        fr: "50/950≈5,26 %.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "price-yield",
+      question: {
+        en: "All else equal, what happens to a fixed-rate bond price when required yield rises?",
+        fr: "Toutes choses égales par ailleurs, que devient le prix d’une obligation à taux fixe lorsque le required yield monte ?",
+      },
+      options: [
+        { id: "a", label: { en: "It rises", fr: "Il monte" } },
+        { id: "b", label: { en: "It falls", fr: "Il baisse" } },
+        { id: "c", label: { en: "It is always unchanged", fr: "Il reste toujours inchangé" } },
+        { id: "d", label: { en: "It automatically goes to zero", fr: "Il va automatiquement à zéro" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Higher discount rates reduce present value.",
+        fr: "Des discount rates plus élevés réduisent la present value.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "zero-coupon",
+      question: {
+        en: "$1,000 is received in 3 years and the annual spot rate is 4.5%. Present value is approximately:",
+        fr: "1 000 $ sont reçus dans 3 ans et le spot rate annuel vaut 4,5 %. La present value est environ :",
+      },
+      options: [
+        { id: "a", label: { en: "$750.00", fr: "750,00 $" } },
+        { id: "b", label: { en: "$876.30", fr: "876,30 $" } },
+        { id: "c", label: { en: "$955.00", fr: "955,00 $" } },
+        { id: "d", label: { en: "$1,135.00", fr: "1 135,00 $" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "1,000/(1.045³)≈876.30.",
+        fr: "1 000/(1,045³)≈876,30.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "par-yield",
+      question: {
+        en: "What is a par yield?",
+        fr: "Qu’est-ce qu’un par yield ?",
+      },
+      options: [
+        { id: "a", label: { en: "Coupon rate that makes a bond trade at par under the relevant curve", fr: "Coupon rate qui fait coter une obligation au pair selon la curve pertinente" } },
+        { id: "b", label: { en: "Always the overnight policy rate", fr: "Toujours le policy rate overnight" } },
+        { id: "c", label: { en: "The same as any bond's coupon", fr: "Toujours identique au coupon de n’importe quelle obligation" } },
+        { id: "d", label: { en: "A stock valuation multiple", fr: "Un multiple de valorisation actions" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "A par yield is the coupon rate consistent with price equal to face value for the selected maturity and curve.",
+        fr: "Un par yield est le coupon rate compatible avec un prix égal à la face value pour la maturity et la curve sélectionnées.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "forward-rate",
+      question: {
+        en: "1Y spot is 4% and 2Y spot is 5% under annual compounding. The 1Y forward rate starting in one year is approximately:",
+        fr: "Le spot 1Y vaut 4 % et le spot 2Y 5 % avec capitalisation annuelle. Le forward 1Y commençant dans un an vaut environ :",
+      },
+      options: [
+        { id: "a", label: { en: "4.00%", fr: "4,00 %" } },
+        { id: "b", label: { en: "5.00%", fr: "5,00 %" } },
+        { id: "c", label: { en: "6.01%", fr: "6,01 %" } },
+        { id: "d", label: { en: "9.00%", fr: "9,00 %" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "(1.05²/1.04)−1≈6.01%.",
+        fr: "(1,05²/1,04)−1≈6,01 %.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "curve-slope",
+      question: {
+        en: "10Y yield is 5.0% and 2Y yield is 4.0%. The 2s10s spread is:",
+        fr: "Le yield 10Y vaut 5,0 % et le yield 2Y 4,0 %. Le spread 2s10s vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "−100bp", fr: "−100bp" } },
+        { id: "b", label: { en: "0bp", fr: "0bp" } },
+        { id: "c", label: { en: "+100bp", fr: "+100bp" } },
+        { id: "d", label: { en: "+500bp", fr: "+500bp" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "5.0%−4.0%=1.0%=100bp.",
+        fr: "5,0 %−4,0 %=1,0 %=100bp.",
+      },
+    },
+    {
+      id: "q9",
+      conceptKey: "bull-steepener",
+      question: {
+        en: "Which pattern describes a bull steepener?",
+        fr: "Quel pattern décrit un bull steepener ?",
+      },
+      options: [
+        { id: "a", label: { en: "Yields fall and the front end falls more than the long end", fr: "Les yields baissent et le front end baisse davantage que le long end" } },
+        { id: "b", label: { en: "Yields rise and the front end rises more", fr: "Les yields montent et le front end monte davantage" } },
+        { id: "c", label: { en: "Every maturity is unchanged", fr: "Toutes les maturités restent inchangées" } },
+        { id: "d", label: { en: "Credit spreads always go to zero", fr: "Les credit spreads vont toujours à zéro" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Bull means yields are falling; steepener means the long-short slope widens, commonly because the front end falls more.",
+        fr: "Bull signifie yields en baisse ; steepener signifie que la pente long-short s’élargit, souvent parce que le front end baisse davantage.",
+      },
+    },
+    {
+      id: "q10",
+      conceptKey: "corporate-yield-decomposition",
+      question: {
+        en: "A corporate bond yield rises. Which conclusion is most accurate?",
+        fr: "Le yield d’une corporate bond monte. Quelle conclusion est la plus exacte ?",
+      },
+      options: [
+        { id: "a", label: { en: "The issuer's credit quality definitely deteriorated", fr: "La qualité de crédit de l’émetteur s’est forcément détériorée" } },
+        { id: "b", label: { en: "Decompose the move into reference rates and credit spread before concluding", fr: "Décomposer le mouvement entre reference rates et credit spread avant de conclure" } },
+        { id: "c", label: { en: "Government yields cannot affect corporate yields", fr: "Les government yields ne peuvent pas affecter les corporate yields" } },
+        { id: "d", label: { en: "Yield and credit risk are identical concepts", fr: "Yield et credit risk sont des concepts identiques" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Corporate yield can rise because underlying rates rise, credit spread widens, or both.",
+        fr: "Un corporate yield peut monter parce que les underlying rates montent, que le credit spread s’élargit, ou les deux.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Walk me through what happens to a fixed-rate bond and the yield curve when the market starts pricing a more hawkish central-bank path.",
+      fr: "Explique ce qui arrive à une obligation à taux fixe et à la yield curve lorsque le marché commence à pricer une trajectoire de banque centrale plus hawkish.",
+    },
+    framework: [
+      {
+        en: "Start with expectations: a more hawkish path raises expected short-term policy rates relative to the prior market view.",
+        fr: "Commencer par les attentes : une trajectoire plus hawkish augmente les expected short-term policy rates relativement à la vue précédente du marché.",
+      },
+      {
+        en: "Explain that front-end yields often reprice strongly because they are closely linked to the expected policy path.",
+        fr: "Expliquer que les front-end yields repricent souvent fortement car ils sont étroitement liés à l’expected policy path.",
+      },
+      {
+        en: "For an existing fixed-rate bond, higher required yields reduce present value and therefore price.",
+        fr: "Pour une obligation existante à taux fixe, des required yields plus élevés réduisent la present value et donc le prix.",
+      },
+      {
+        en: "Do not assume the whole curve moves equally: long yields also reflect growth, inflation and term premium.",
+        fr: "Ne pas supposer que toute la curve bouge de la même façon : les long yields reflètent aussi croissance, inflation et term premium.",
+      },
+      {
+        en: "Describe whether the move is a steepener or flattener only after comparing short- and long-end changes.",
+        fr: "Décrire le mouvement comme steepener ou flattener seulement après comparaison des changements front end et long end.",
+      },
+      {
+        en: "If discussing corporate bonds, separate the risk-free/reference-rate move from any change in credit spread.",
+        fr: "Si l’on parle de corporate bonds, séparer le mouvement risk-free/reference rate de toute variation de credit spread.",
+      },
+    ],
+    sample: {
+      en: "If the market starts pricing a more hawkish central-bank path, expected short-term policy rates move higher relative to the previous view, so I would first expect the front end of the yield curve to reprice. For an existing fixed-rate bond, higher required yields reduce the present value of its contractual coupons and principal, so its price falls. I would not automatically assume that long-end yields rise by the same amount because longer maturities also reflect growth expectations, inflation uncertainty and term premium. If the front end rises more than the long end, the curve bear-flattens; if the long end rises more, it bear-steepens. For a corporate bond, I would then separate the underlying government or swap-rate move from the credit-spread move, because a higher corporate yield does not necessarily mean the issuer's credit quality deteriorated.",
+      fr: "Si le marché commence à pricer une trajectoire de banque centrale plus hawkish, les expected short-term policy rates montent relativement à la vue précédente ; je m’attendrais donc d’abord à un repricing du front end de la yield curve. Pour une obligation existante à taux fixe, des required yields plus élevés réduisent la present value de ses coupons et de son principal contractuels, donc son prix baisse. Je ne supposerais pas automatiquement que les long-end yields montent du même montant car les maturités longues reflètent aussi growth expectations, inflation uncertainty et term premium. Si le front end monte davantage que le long end, la curve bear-flatten ; si le long end monte davantage, elle bear-steepen. Pour une corporate bond, je séparerais ensuite le mouvement du government ou swap rate sous-jacent de celui du credit spread, car un corporate yield plus élevé ne signifie pas nécessairement que la qualité de crédit de l’émetteur s’est détériorée.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
