@@ -23620,7 +23620,494 @@ export const wealthManagementLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson];
+
+
+export const equityResearchLesson: FinanceLesson = {
+  slug: "year-3-equity-research",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Equity Research", fr: "Recherche actions / Equity Research" },
+  title: { en: "Equity Research", fr: "Recherche actions / Equity Research" },
+  subtitle: {
+    en: "Learn how equity research analysts understand businesses, forecast earnings, value stocks, identify catalysts and risks, interpret earnings releases, and communicate differentiated investment views.",
+    fr: "Comprendre comment les analystes equity research étudient les entreprises, prévoient les earnings, valorisent les actions, identifient catalysts et risques, interprètent les résultats et communiquent des vues d’investissement différenciées.",
+  },
+  duration: { en: "150–180 min", fr: "150–180 min" },
+  prerequisites: [
+    { en: "Financial Statement Analysis", fr: "Analyse des états financiers / Financial Statement Analysis" },
+    { en: "Equity Valuation", fr: "Valorisation des actions / Equity Valuation" },
+    { en: "DCF & Relative Valuation", fr: "DCF & valorisation relative" },
+    { en: "Financial Modeling I", fr: "Modélisation financière I / Financial Modeling I" },
+    { en: "Asset Management", fr: "Gestion d’actifs / Asset Management" },
+  ],
+  objectives: [
+    { en: "Explain the role of sell-side and buy-side equity research.", fr: "Expliquer le rôle du sell-side et du buy-side equity research." },
+    { en: "Analyze a company’s business model, industry structure, competitive position and KPIs.", fr: "Analyser business model, structure sectorielle, position concurrentielle et KPIs d’une entreprise." },
+    { en: "Build earnings forecasts from operating drivers rather than simple extrapolation.", fr: "Construire des forecasts d’earnings à partir d’operating drivers plutôt que de simples extrapolations." },
+    { en: "Connect earnings forecasts to valuation and price targets.", fr: "Relier forecasts d’earnings à valuation et price targets." },
+    { en: "Structure an investment thesis around expectations, catalysts, risks and variant perception.", fr: "Structurer une thèse d’investissement autour des attentes, catalysts, risques et variant perception." },
+    { en: "Interpret earnings releases, guidance, estimate revisions and stock reactions.", fr: "Interpréter earnings releases, guidance, estimate revisions et réactions du cours." },
+  ],
+  overviewFlow: {
+    title: { en: "From business understanding to investment view", fr: "De la compréhension du business à la vue d’investissement" },
+    steps: [
+      { title: { en: "Understand", fr: "Comprendre" }, detail: { en: "Industry · business · KPIs", fr: "Industrie · business · KPIs" } },
+      { title: { en: "Forecast", fr: "Prévoir" }, detail: { en: "Revenue · margins · EPS", fr: "Revenue · marges · EPS" } },
+      { title: { en: "Value", fr: "Valoriser" }, detail: { en: "Multiples · DCF · target", fr: "Multiples · DCF · target" } },
+      { title: { en: "Communicate", fr: "Communiquer" }, detail: { en: "Thesis · catalysts · risks", fr: "Thèse · catalysts · risques" } },
+    ],
+  },
+  sections: [
+    {
+      id: "role-of-equity-research",
+      kicker: { en: "01 · ROLE OF EQUITY RESEARCH", fr: "01 · RÔLE DE L’EQUITY RESEARCH" },
+      title: { en: "Equity research turns company information into an investable view", fr: "L’equity research transforme l’information d’entreprise en vue investissable" },
+      coreFacts: [
+        { en: "Sell-side analysts publish research for institutional clients; buy-side analysts support internal portfolio decisions.", fr: "Les analystes sell-side publient de la recherche pour des clients institutionnels ; les analystes buy-side soutiennent les décisions internes de portefeuille." },
+        { en: "Analysts specialize by sector so they can compare business models, KPIs, valuation and competitive dynamics consistently.", fr: "Les analystes se spécialisent par secteur afin de comparer de manière cohérente business models, KPIs, valuation et dynamique concurrentielle." },
+        { en: "The job combines accounting, modeling, industry work, valuation, communication and continuous information updating.", fr: "Le métier combine accounting, modélisation, étude sectorielle, valuation, communication et mise à jour continue de l’information." },
+        { en: "The central question is not whether a company is good, but whether the stock offers attractive risk-reward relative to what is already priced in.", fr: "La question centrale n’est pas de savoir si l’entreprise est bonne, mais si l’action offre un risk-reward attractif par rapport à ce qui est déjà pricé." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "An equity research analyst studies companies and decides what their future earnings may look like and whether the current stock price seems attractive.",
+          fr: "Un analyste equity research étudie les entreprises, estime leurs futurs earnings et juge si le prix actuel de l’action semble attractif.",
+        },
+        Intermediate: {
+          en: "Research combines company fundamentals with expectations. A great company can still be a poor stock if the market already expects perfection, while a weak company can rally if results are less bad than expected.",
+          fr: "La recherche combine fondamentaux et attentes. Une excellente entreprise peut être une mauvaise action si le marché attend déjà la perfection, tandis qu’une entreprise faible peut monter si les résultats sont moins mauvais qu’attendu.",
+        },
+        Professional: {
+          en: "Research edge comes from differentiated forecasting, deeper industry understanding, superior interpretation of alternative data or a better framework for what the market is pricing. The analyst must constantly separate facts, consensus and variant perception.",
+          fr: "L’edge en research vient d’un forecasting différencié, d’une compréhension sectorielle plus profonde, d’une meilleure lecture des données alternatives ou d’un meilleur cadre sur ce que price le marché. L’analyste doit constamment séparer faits, consensus et variant perception.",
+        },
+      },
+      comparison: {
+        title: { en: "Sell-side vs buy-side research", fr: "Sell-side vs buy-side research" },
+        headers: [{ en: "Area", fr: "Dimension" }, { en: "Sell-side", fr: "Sell-side" }, { en: "Buy-side", fr: "Buy-side" }],
+        rows: [
+          { cells: [{ en: "Audience", fr: "Audience" }, { en: "External clients", fr: "Clients externes" }, { en: "Internal portfolio teams", fr: "Équipes portefeuille internes" }] },
+          { cells: [{ en: "Output", fr: "Output" }, { en: "Published notes and estimates", fr: "Notes publiées et estimates" }, { en: "Investment recommendations and internal research", fr: "Recommandations d’investissement et recherche interne" }] },
+          { cells: [{ en: "Core objective", fr: "Objectif clé" }, { en: "Useful differentiated research", fr: "Recherche utile et différenciée" }, { en: "Investment performance", fr: "Performance d’investissement" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Coverage universe", fr: "univers de couverture", definition: { en: "Set of companies regularly followed by an analyst or team.", fr: "Ensemble de sociétés suivies régulièrement par un analyste ou une équipe." } },
+        { en: "Consensus", fr: "consensus", definition: { en: "Aggregate market expectation for financial results or valuation.", fr: "Attente agrégée du marché sur les résultats ou la valuation." } },
+        { en: "Variant perception", fr: "variant perception", definition: { en: "Investment view meaningfully different from what the market appears to expect.", fr: "Vue d’investissement sensiblement différente de ce que le marché semble attendre." } },
+      ],
+    },
+    {
+      id: "industry-business-model",
+      kicker: { en: "02 · INDUSTRY & BUSINESS MODEL", fr: "02 · INDUSTRIE & BUSINESS MODEL" },
+      title: { en: "You cannot forecast a company well without understanding how it actually makes money", fr: "On ne peut pas bien prévoir une entreprise sans comprendre comment elle gagne réellement de l’argent" },
+      coreFacts: [
+        { en: "Industry structure influences pricing power, growth, margins and capital intensity.", fr: "La structure sectorielle influence pricing power, croissance, marges et intensité capitalistique." },
+        { en: "Analysts identify revenue drivers, cost drivers, customer economics, competitive advantages and key external dependencies.", fr: "Les analystes identifient revenue drivers, cost drivers, économie client, avantages concurrentiels et dépendances externes clés." },
+        { en: "Different sectors require different operating KPIs.", fr: "Des secteurs différents nécessitent des operating KPIs différents." },
+        { en: "Competitive position matters because market share and pricing can change future earnings faster than historical averages suggest.", fr: "La position concurrentielle compte car market share et pricing peuvent modifier les futurs earnings plus vite que ne le suggèrent les moyennes historiques." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Before forecasting revenue, ask what physically creates it. A software company may depend on subscribers and price per subscriber; a retailer may depend on stores, traffic and sales per store.",
+          fr: "Avant de forecast le revenue, demande ce qui le crée physiquement. Une société software peut dépendre du nombre d’abonnés et du prix par abonné ; un retailer du nombre de magasins, du trafic et des ventes par magasin.",
+        },
+        Intermediate: {
+          en: "Industry analysis examines market size, growth, concentration, barriers to entry, substitutes, regulation and competitive behavior. Those variables feed directly into company forecasts.",
+          fr: "L’analyse sectorielle examine taille du marché, croissance, concentration, barrières à l’entrée, substituts, réglementation et comportement concurrentiel. Ces variables alimentent directement les forecasts de l’entreprise.",
+        },
+        Professional: {
+          en: "The best sector models identify leading indicators rather than rely only on reported financials. Bookings, backlog, customer additions, utilization, pricing surveys or channel inventory may signal earnings changes before the income statement does.",
+          fr: "Les meilleurs modèles sectoriels identifient des leading indicators plutôt que de dépendre uniquement des financials publiés. Bookings, backlog, customer additions, utilization, pricing surveys ou channel inventory peuvent signaler une variation d’earnings avant l’income statement.",
+        },
+      },
+      vocabulary: [
+        { en: "KPI", fr: "KPI", definition: { en: "Key Performance Indicator used to track operating performance.", fr: "Key Performance Indicator utilisé pour suivre la performance opérationnelle." } },
+        { en: "Pricing power", fr: "pricing power", definition: { en: "Ability to raise prices without losing excessive demand.", fr: "Capacité à augmenter les prix sans perdre excessivement de demande." } },
+        { en: "Backlog", fr: "backlog", definition: { en: "Contracted or ordered business not yet recognized as revenue.", fr: "Activité commandée ou contractualisée pas encore reconnue en revenue." } },
+      ],
+    },
+    {
+      id: "kpis-and-normalization",
+      kicker: { en: "03 · KPIs & FINANCIAL NORMALIZATION", fr: "03 · KPIs & NORMALISATION FINANCIÈRE" },
+      title: { en: "Reported numbers often need to be normalized before they can be forecast or compared", fr: "Les chiffres publiés doivent souvent être normalisés avant d’être forecast ou comparés" },
+      coreFacts: [
+        { en: "Analysts distinguish recurring operating performance from one-time or unusual items.", fr: "Les analystes distinguent la performance opérationnelle récurrente des éléments ponctuels ou inhabituels." },
+        { en: "Non-GAAP metrics can be useful but must be reconciled carefully with accounting results.", fr: "Les métriques non-GAAP peuvent être utiles mais doivent être rapprochées avec prudence des résultats comptables." },
+        { en: "Segment reporting can reveal different growth and margin profiles hidden inside consolidated results.", fr: "Le segment reporting peut révéler des profils de croissance et de marge différents cachés dans les résultats consolidés." },
+        { en: "The analyst should maintain historical data consistency so forecast trends are comparable over time.", fr: "L’analyste doit maintenir une cohérence des historiques afin que les tendances de forecast restent comparables dans le temps." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company reports a large one-time legal charge, an analyst may remove it when estimating normal ongoing earnings. The goal is to understand repeatable economics.",
+          fr: "Si une entreprise publie une grosse charge juridique ponctuelle, l’analyste peut l’enlever lorsqu’il estime les earnings normaux. L’objectif est de comprendre l’économie récurrente.",
+        },
+        Intermediate: {
+          en: "Normalization can involve restructuring charges, acquisition costs, stock-based compensation, asset sales or unusual tax effects. The correct treatment depends on whether the item is genuinely non-recurring and economically relevant.",
+          fr: "La normalisation peut concerner restructuring charges, acquisition costs, stock-based compensation, ventes d’actifs ou effets fiscaux inhabituels. Le bon traitement dépend du caractère réellement non récurrent et économiquement pertinent de l’élément.",
+        },
+        Professional: {
+          en: "Analysts should avoid mechanical exclusions. If a company reports 'one-time' restructuring every year, the economic cost may be recurring. High-quality research reconciles management-adjusted metrics with cash economics and shareholder dilution.",
+          fr: "Les analystes doivent éviter les exclusions mécaniques. Si une entreprise publie une restructuration « one-time » chaque année, le coût économique peut être récurrent. Une recherche de qualité rapproche les métriques ajustées du management avec l’économie cash et la dilution actionnaire.",
+        },
+      },
+      vocabulary: [
+        { en: "Normalization", fr: "normalisation", definition: { en: "Adjusting reported financials to estimate sustainable ongoing performance.", fr: "Ajustement des financials publiés afin d’estimer la performance durable." } },
+        { en: "Non-GAAP", fr: "non-GAAP", definition: { en: "Company-defined measure that adjusts standard accounting results.", fr: "Mesure définie par l’entreprise ajustant les résultats comptables standards." } },
+        { en: "Segment reporting", fr: "segment reporting", definition: { en: "Financial disclosure separating major business units or geographies.", fr: "Information financière séparant les principales divisions ou zones géographiques." } },
+      ],
+    },
+    {
+      id: "forecasting-earnings",
+      kicker: { en: "04 · EARNINGS FORECASTING", fr: "04 · FORECASTING DES EARNINGS" },
+      title: { en: "The model should explain the earnings number, not merely produce it", fr: "Le modèle doit expliquer le chiffre d’earnings, pas seulement le produire" },
+      coreFacts: [
+        { en: "Revenue forecasts should be linked to explicit operating drivers.", fr: "Les forecasts de revenue doivent être reliés à des operating drivers explicites." },
+        { en: "Margins should reflect pricing, mix, input costs, scale and operating leverage.", fr: "Les marges doivent refléter pricing, mix, input costs, scale et operating leverage." },
+        { en: "EPS depends on operating profit, interest, taxes and share count.", fr: "L’EPS dépend du profit opérationnel, des intérêts, des taxes et du nombre d’actions." },
+        { en: "Forecast changes should be traceable to specific assumptions rather than unexplained spreadsheet overrides.", fr: "Les changements de forecast doivent être reliés à des hypothèses précises plutôt qu’à des overrides inexpliqués dans le spreadsheet." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Instead of guessing next year’s EPS, forecast the pieces that create it: sales, margins, interest, taxes and shares outstanding.",
+          fr: "Au lieu de deviner l’EPS de l’an prochain, prévois les éléments qui le créent : ventes, marges, intérêts, taxes et actions en circulation.",
+        },
+        Intermediate: {
+          en: "For each major line, choose the most economic driver. Revenue may use volume and price; gross margin may use product mix and input cost; SG&A may scale partly with revenue and partly with headcount.",
+          fr: "Pour chaque ligne importante, choisis le driver le plus économique. Revenue peut utiliser volume et prix ; gross margin product mix et input cost ; SG&A peut évoluer en partie avec le revenue et en partie avec le headcount.",
+        },
+        Professional: {
+          en: "Forecasting edge often comes from getting inflection points right. The analyst should identify leading indicators, scenario ranges and sensitivity to key assumptions rather than rely on a smooth base-case trend.",
+          fr: "L’edge de forecasting vient souvent de la bonne identification des points d’inflexion. L’analyste doit identifier leading indicators, ranges de scénarios et sensibilité aux hypothèses clés plutôt que dépendre d’une tendance base case trop lisse.",
+        },
+      },
+      formula: {
+        label: { en: "Earnings per share", fr: "Earnings per share" },
+        expression: "EPS = Net Income Available to Common / Diluted Shares Outstanding",
+        explanation: { en: "Analysts often forecast diluted EPS because it reflects potential share dilution.", fr: "Les analystes forecast souvent le diluted EPS car il reflète la dilution potentielle." },
+      },
+      vocabulary: [
+        { en: "Estimate", fr: "estimate", definition: { en: "Analyst forecast for a financial metric such as revenue, EBITDA or EPS.", fr: "Prévision analyste d’une métrique comme revenue, EBITDA ou EPS." } },
+        { en: "Operating leverage", fr: "operating leverage", definition: { en: "Sensitivity of operating profit to changes in revenue due to cost structure.", fr: "Sensibilité du profit opérationnel aux variations de revenue en raison de la structure des coûts." } },
+      ],
+    },
+    {
+      id: "valuation-price-target",
+      kicker: { en: "05 · VALUATION & PRICE TARGET", fr: "05 · VALUATION & PRICE TARGET" },
+      title: { en: "A price target is a valuation conclusion tied to explicit assumptions", fr: "Un price target est une conclusion de valuation reliée à des hypothèses explicites" },
+      coreFacts: [
+        { en: "Equity research commonly uses P/E, EV/EBITDA, EV/Sales, DCF and sector-specific multiples.", fr: "L’equity research utilise couramment P/E, EV/EBITDA, EV/Sales, DCF et multiples spécifiques au secteur." },
+        { en: "The chosen multiple should match the financial metric and business economics.", fr: "Le multiple choisi doit correspondre à la métrique financière et à l’économie du business." },
+        { en: "Price targets depend on forecast period, selected valuation multiple or DCF assumptions and capital structure.", fr: "Les price targets dépendent de la période de forecast, du multiple sélectionné ou des hypothèses DCF et de la structure du capital." },
+        { en: "Valuation should include downside and sensitivity rather than only one target number.", fr: "La valuation doit inclure downside et sensibilité plutôt qu’un seul target number." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you think a company will earn $5 per share next year and comparable companies trade at 20× earnings, a simple target might start around $100 per share before additional adjustments.",
+          fr: "Si tu penses qu’une entreprise gagnera 5 $ par action l’an prochain et que les comparables se traitent à 20× les earnings, une target simple peut commencer autour de 100 $ par action avant d’autres ajustements.",
+        },
+        Intermediate: {
+          en: "The analyst should justify both the earnings estimate and the multiple. A higher-quality or faster-growing company may deserve a premium, while a leveraged or cyclical company may deserve a discount.",
+          fr: "L’analyste doit justifier à la fois l’estimate d’earnings et le multiple. Une entreprise de meilleure qualité ou à croissance plus rapide peut mériter une prime, tandis qu’une société endettée ou cyclique peut mériter une décote.",
+        },
+        Professional: {
+          en: "Price targets should be internally consistent with growth, margins, returns on capital, duration of competitive advantage and discount rates. Multiple expansion without an economic reason is not a thesis.",
+          fr: "Les price targets doivent être cohérents avec croissance, marges, returns on capital, durée de l’avantage concurrentiel et discount rates. Une expansion de multiple sans raison économique n’est pas une thèse.",
+        },
+      },
+      formula: {
+        label: { en: "Simple P/E price target", fr: "Price target simple avec P/E" },
+        expression: "Price Target = Forecast EPS × Target P/E Multiple",
+        explanation: { en: "Both the earnings estimate and target multiple must be justified.", fr: "L’estimate d’earnings et le target multiple doivent tous deux être justifiés." },
+        workedExample: { en: "$5.00 forecast EPS × 20× target P/E = $100 price target.", fr: "5,00 $ d’EPS forecast × 20× de target P/E = 100 $ de price target." },
+      },
+      vocabulary: [
+        { en: "Price target", fr: "price target", definition: { en: "Analyst estimate of a stock’s future fair value over a stated horizon.", fr: "Estimation par l’analyste de la fair value future d’une action sur un horizon donné." } },
+        { en: "Target multiple", fr: "target multiple", definition: { en: "Valuation multiple applied to a forecast metric to estimate value.", fr: "Multiple de valuation appliqué à une métrique forecast afin d’estimer la valeur." } },
+      ],
+    },
+    {
+      id: "thesis-catalysts-risks",
+      kicker: { en: "06 · THESIS, CATALYSTS & RISKS", fr: "06 · THÈSE, CATALYSTS & RISQUES" },
+      title: { en: "A differentiated view needs a reason the market may eventually agree", fr: "Une vue différenciée a besoin d’une raison pour laquelle le marché pourrait finir par être d’accord" },
+      coreFacts: [
+        { en: "The investment thesis explains why expected future outcomes differ from current market expectations.", fr: "La thèse d’investissement explique pourquoi les résultats futurs attendus diffèrent des attentes actuelles du marché." },
+        { en: "Catalysts are events or developments that can cause the market to revise expectations.", fr: "Les catalysts sont des événements ou développements pouvant pousser le marché à réviser ses attentes." },
+        { en: "Risks should identify what can go wrong and which assumptions are most vulnerable.", fr: "Les risques doivent identifier ce qui peut mal tourner et quelles hypothèses sont les plus vulnérables." },
+        { en: "A good thesis has falsifiable conditions that indicate when the analyst is wrong.", fr: "Une bonne thèse possède des conditions falsifiables indiquant quand l’analyste a tort." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A stock pitch should answer four questions: why this stock, why now, what could make the market agree, and what could make you wrong?",
+          fr: "Un stock pitch doit répondre à quatre questions : pourquoi cette action, pourquoi maintenant, qu’est-ce qui pourrait convaincre le marché, et qu’est-ce qui pourrait te donner tort ?",
+        },
+        Intermediate: {
+          en: "A thesis should identify the earnings or valuation gap versus consensus. A catalyst may be an earnings release, product launch, margin inflection, regulation, capital return or balance-sheet change.",
+          fr: "Une thèse doit identifier le gap d’earnings ou de valuation par rapport au consensus. Un catalyst peut être une publication de résultats, lancement de produit, inflexion de marge, réglementation, capital return ou changement de bilan.",
+        },
+        Professional: {
+          en: "The strongest research explicitly maps thesis pillars to measurable indicators. If the supposed market-share gain does not appear in customer data or revenue growth, the thesis must be updated rather than defended emotionally.",
+          fr: "La meilleure recherche relie explicitement les piliers de la thèse à des indicateurs mesurables. Si le gain de market share supposé n’apparaît pas dans les données clients ou la croissance du revenue, la thèse doit être mise à jour plutôt que défendue émotionnellement.",
+        },
+      },
+      vocabulary: [
+        { en: "Catalyst", fr: "catalyst", definition: { en: "Potential event that can drive market repricing.", fr: "Événement potentiel susceptible de provoquer un repricing." } },
+        { en: "Thesis", fr: "thèse", definition: { en: "Core investment argument explaining expected upside or downside.", fr: "Argument central d’investissement expliquant upside ou downside attendu." } },
+        { en: "Falsifiable", fr: "falsifiable", definition: { en: "Capable of being tested and shown wrong by evidence.", fr: "Pouvant être testé et démontré faux par les faits." } },
+      ],
+    },
+    {
+      id: "earnings-season",
+      kicker: { en: "07 · EARNINGS SEASON", fr: "07 · EARNINGS SEASON" },
+      title: { en: "Stocks move on the gap between results, guidance and expectations", fr: "Les actions bougent selon l’écart entre résultats, guidance et attentes" },
+      coreFacts: [
+        { en: "An earnings beat or miss matters relative to both published consensus and investor positioning.", fr: "Un earnings beat ou miss compte par rapport au consensus publié mais aussi au positioning des investisseurs." },
+        { en: "Guidance can matter more than the quarter that was just reported.", fr: "La guidance peut compter davantage que le trimestre qui vient d’être publié." },
+        { en: "Estimate revisions after earnings can influence medium-term stock performance.", fr: "Les estimate revisions après earnings peuvent influencer la performance du titre à moyen terme." },
+        { en: "Analysts update models rapidly after results and separate one-time effects from changes in underlying earnings power.", fr: "Les analystes mettent rapidement à jour leurs modèles après les résultats et séparent effets ponctuels et changements de l’earnings power sous-jacent." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company can beat earnings and still fall if investors expected an even bigger beat or if management gives weak guidance for the future.",
+          fr: "Une entreprise peut battre les earnings et quand même baisser si les investisseurs attendaient un beat encore plus important ou si le management donne une guidance faible.",
+        },
+        Intermediate: {
+          en: "The analyst compares reported revenue, margins, EPS and KPIs with both consensus and their own estimates. Then they update future periods based on management commentary and new operating evidence.",
+          fr: "L’analyste compare revenue, marges, EPS et KPIs publiés avec le consensus et ses propres estimates. Puis il met à jour les périodes futures à partir des commentaires du management et des nouvelles données opérationnelles.",
+        },
+        Professional: {
+          en: "Post-earnings work focuses on the durability of the surprise. A one-quarter beat from timing is less important than a structural change in pricing, market share, margin trajectory or capital intensity that raises multi-year estimates.",
+          fr: "Le travail post-earnings se concentre sur la durabilité de la surprise. Un beat d’un trimestre dû au timing est moins important qu’un changement structurel de pricing, market share, trajectoire de marge ou capital intensity augmentant les estimates pluriannuelles.",
+        },
+      },
+      vocabulary: [
+        { en: "Beat", fr: "beat", definition: { en: "Reported result above the relevant expectation.", fr: "Résultat publié supérieur à l’attente pertinente." } },
+        { en: "Miss", fr: "miss", definition: { en: "Reported result below the relevant expectation.", fr: "Résultat publié inférieur à l’attente pertinente." } },
+        { en: "Guidance", fr: "guidance", definition: { en: "Management outlook for future financial or operating performance.", fr: "Prévisions ou indications du management sur la performance future." } },
+      ],
+    },
+    {
+      id: "research-reports",
+      kicker: { en: "08 · RESEARCH REPORTS & COMMUNICATION", fr: "08 · RAPPORTS & COMMUNICATION" },
+      title: { en: "Good research is concise enough to be usable and detailed enough to be defensible", fr: "Une bonne recherche est assez concise pour être utile et assez détaillée pour être défendable" },
+      coreFacts: [
+        { en: "Research notes usually communicate thesis, estimate changes, valuation, catalysts and risks.", fr: "Les research notes communiquent généralement thèse, changements d’estimates, valuation, catalysts et risques." },
+        { en: "The analyst should separate factual information from interpretation and recommendation.", fr: "L’analyste doit séparer information factuelle, interprétation et recommandation." },
+        { en: "Charts and tables should make key changes and comparisons easy to understand.", fr: "Charts et tableaux doivent rendre les changements et comparaisons clés faciles à comprendre." },
+        { en: "Credibility depends on consistency between the written thesis, financial model and valuation.", fr: "La crédibilité dépend de la cohérence entre thèse écrite, modèle financier et valuation." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A good research note quickly tells the reader what changed, why it matters, what the analyst now expects and what could go wrong.",
+          fr: "Une bonne note de recherche dit rapidement ce qui a changé, pourquoi cela compte, ce que l’analyste attend maintenant et ce qui pourrait mal tourner.",
+        },
+        Intermediate: {
+          en: "After an earnings release, the note might summarize the beat or miss, update estimates, explain guidance changes, adjust the price target and restate the key risks.",
+          fr: "Après une publication, la note peut résumer beat ou miss, mettre à jour les estimates, expliquer les changements de guidance, ajuster le price target et rappeler les risques clés.",
+        },
+        Professional: {
+          en: "The best research is decision-useful. It prioritizes material changes, quantifies estimate deltas, explains the causal chain from operating evidence to earnings and valuation, and makes the analyst’s differentiated view explicit.",
+          fr: "La meilleure recherche est utile à la décision. Elle priorise les changements matériels, quantifie les deltas d’estimates, explique la chaîne causale des données opérationnelles vers earnings et valuation, et rend explicite la vue différenciée de l’analyste.",
+        },
+      },
+      vocabulary: [
+        { en: "Research note", fr: "note de recherche", definition: { en: "Written analyst communication updating investment views or estimates.", fr: "Communication écrite de l’analyste mettant à jour vues ou estimates." } },
+        { en: "Estimate revision", fr: "révision d’estimate", definition: { en: "Change to a forecast for a future financial metric.", fr: "Modification d’une prévision sur une future métrique financière." } },
+      ],
+    },
+    {
+      id: "stock-pitch-interview",
+      kicker: { en: "09 · STOCK PITCH & INTERVIEWS", fr: "09 · STOCK PITCH & ENTRETIENS" },
+      title: { en: "A strong stock pitch is a compact research report spoken out loud", fr: "Un bon stock pitch est un rapport de recherche compact présenté à l’oral" },
+      coreFacts: [
+        { en: "A stock pitch should clearly state the recommendation and time horizon.", fr: "Un stock pitch doit annoncer clairement la recommandation et l’horizon." },
+        { en: "The thesis should include two or three differentiated drivers rather than a long list of generic positives.", fr: "La thèse doit inclure deux ou trois drivers différenciés plutôt qu’une longue liste de points positifs génériques." },
+        { en: "Valuation should connect forecasts to a credible target and downside case.", fr: "La valuation doit relier forecasts à une target crédible et à un downside case." },
+        { en: "The interviewer should be able to challenge the thesis and hear a reasoned response rather than memorized certainty.", fr: "L’interviewer doit pouvoir challenger la thèse et entendre une réponse raisonnée plutôt qu’une certitude mémorisée." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A simple pitch is: what is the company, why buy or avoid it, what is the valuation, what makes the view work, and what could go wrong?",
+          fr: "Un pitch simple est : quelle est l’entreprise, pourquoi acheter ou éviter, quelle est la valuation, qu’est-ce qui fait fonctionner la vue et qu’est-ce qui peut mal tourner ?",
+        },
+        Intermediate: {
+          en: "A strong pitch leads with recommendation, current price and target, then gives two or three thesis points, catalysts, valuation and risks. Keep the story consistent with the model.",
+          fr: "Un bon pitch commence par recommandation, prix actuel et target, puis donne deux ou trois points de thèse, catalysts, valuation et risques. L’histoire doit rester cohérente avec le modèle.",
+        },
+        Professional: {
+          en: "The best interview pitches show variant perception. The candidate should explain exactly which consensus assumption is wrong, why their evidence is better and what event can reveal the difference to the market.",
+          fr: "Les meilleurs pitches d’entretien montrent une variant perception. Le candidat doit expliquer précisément quelle hypothèse du consensus est erronée, pourquoi ses preuves sont meilleures et quel événement peut révéler cette différence au marché.",
+        },
+      },
+      comparison: {
+        title: { en: "Stock pitch structure", fr: "Structure d’un stock pitch" },
+        headers: [{ en: "Step", fr: "Étape" }, { en: "Content", fr: "Contenu" }],
+        rows: [
+          { cells: [{ en: "1. Recommendation", fr: "1. Recommandation" }, { en: "Buy / avoid / short idea, horizon", fr: "Buy / avoid / short idea, horizon" }] },
+          { cells: [{ en: "2. Thesis", fr: "2. Thèse" }, { en: "2–3 differentiated drivers", fr: "2–3 drivers différenciés" }] },
+          { cells: [{ en: "3. Valuation", fr: "3. Valuation" }, { en: "Target, upside and downside", fr: "Target, upside et downside" }] },
+          { cells: [{ en: "4. Catalysts & risks", fr: "4. Catalysts & risques" }, { en: "What reveals the thesis and what breaks it", fr: "Ce qui révèle la thèse et ce qui la casse" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Stock pitch", fr: "stock pitch", definition: { en: "Concise verbal investment recommendation supported by research and valuation.", fr: "Recommandation d’investissement concise à l’oral soutenue par recherche et valuation." } },
+        { en: "Upside", fr: "upside", definition: { en: "Potential percentage gain from current price to estimated value.", fr: "Gain potentiel en pourcentage entre prix actuel et valeur estimée." } },
+        { en: "Downside", fr: "downside", definition: { en: "Potential loss under a negative investment scenario.", fr: "Perte potentielle dans un scénario d’investissement négatif." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "research-role",
+      question: { en: "What is a core objective of equity research?", fr: "Quel est un objectif central de l’equity research ?" },
+      options: [
+        { id: "a", label: { en: "Translate company and industry information into an investment view", fr: "Transformer l’information entreprise et secteur en vue d’investissement" } },
+        { id: "b", label: { en: "Only record historical prices", fr: "Uniquement enregistrer les prix historiques" } },
+        { id: "c", label: { en: "Guarantee future returns", fr: "Garantir les rendements futurs" } },
+        { id: "d", label: { en: "Ignore valuation", fr: "Ignorer la valuation" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Equity research combines fundamentals, forecasts and valuation to form an investment view.", fr: "L’equity research combine fondamentaux, forecasts et valuation pour former une vue d’investissement." },
+    },
+    {
+      id: "q2",
+      conceptKey: "variant-perception",
+      question: { en: "What is variant perception?", fr: "Qu’est-ce que la variant perception ?" },
+      options: [
+        { id: "a", label: { en: "A view meaningfully different from market expectations", fr: "Une vue sensiblement différente des attentes du marché" } },
+        { id: "b", label: { en: "Exactly copying consensus", fr: "Copier exactement le consensus" } },
+        { id: "c", label: { en: "Ignoring company fundamentals", fr: "Ignorer les fondamentaux de l’entreprise" } },
+        { id: "d", label: { en: "Holding no opinion", fr: "N’avoir aucune opinion" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Research edge often comes from a well-supported view that differs from consensus.", fr: "L’edge de recherche vient souvent d’une vue bien étayée différente du consensus." },
+    },
+    {
+      id: "q3",
+      conceptKey: "kpis",
+      question: { en: "Why are sector-specific KPIs important?", fr: "Pourquoi les KPIs spécifiques au secteur sont-ils importants ?" },
+      options: [
+        { id: "a", label: { en: "They connect operating reality to financial forecasts", fr: "Ils relient la réalité opérationnelle aux forecasts financiers" } },
+        { id: "b", label: { en: "They replace all financial statements", fr: "Ils remplacent tous les états financiers" } },
+        { id: "c", label: { en: "They eliminate uncertainty", fr: "Ils éliminent l’incertitude" } },
+        { id: "d", label: { en: "They are identical across every industry", fr: "Ils sont identiques dans toutes les industries" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "KPIs help explain the economic drivers behind revenue, margins and future earnings.", fr: "Les KPIs aident à expliquer les drivers économiques derrière revenue, marges et futurs earnings." },
+    },
+    {
+      id: "q4",
+      conceptKey: "normalization",
+      question: { en: "What is the purpose of normalizing financial results?", fr: "Quel est l’objectif de normaliser les résultats financiers ?" },
+      options: [
+        { id: "a", label: { en: "Estimate sustainable ongoing performance", fr: "Estimer la performance durable et récurrente" } },
+        { id: "b", label: { en: "Make every company report the same revenue", fr: "Faire publier le même revenue à chaque entreprise" } },
+        { id: "c", label: { en: "Remove all expenses", fr: "Supprimer toutes les dépenses" } },
+        { id: "d", label: { en: "Avoid forecasting", fr: "Éviter le forecasting" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Normalization separates unusual items from repeatable economics.", fr: "La normalisation sépare les éléments inhabituels de l’économie récurrente." },
+    },
+    {
+      id: "q5",
+      conceptKey: "eps",
+      question: { en: "Which components can affect EPS?", fr: "Quels éléments peuvent affecter l’EPS ?" },
+      options: [
+        { id: "a", label: { en: "Operating profit, interest, taxes and diluted share count", fr: "Profit opérationnel, intérêts, taxes et nombre d’actions dilué" } },
+        { id: "b", label: { en: "Only revenue", fr: "Uniquement le revenue" } },
+        { id: "c", label: { en: "Only stock price", fr: "Uniquement le cours de l’action" } },
+        { id: "d", label: { en: "Only dividends", fr: "Uniquement les dividendes" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "EPS is the result of the full income statement and diluted share base.", fr: "L’EPS résulte de l’ensemble de l’income statement et de la base d’actions diluée." },
+    },
+    {
+      id: "q6",
+      conceptKey: "price-target",
+      question: { en: "Forecast EPS is $5 and target P/E is 20×. What is the simple price target?", fr: "L’EPS forecast est de 5 $ et le target P/E de 20×. Quel est le price target simple ?" },
+      options: [
+        { id: "a", label: { en: "$100", fr: "100 $" } },
+        { id: "b", label: { en: "$25", fr: "25 $" } },
+        { id: "c", label: { en: "$4", fr: "4 $" } },
+        { id: "d", label: { en: "$400", fr: "400 $" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "$5 × 20 = $100.", fr: "5 $ × 20 = 100 $." },
+    },
+    {
+      id: "q7",
+      conceptKey: "catalyst",
+      question: { en: "What is a catalyst?", fr: "Qu’est-ce qu’un catalyst ?" },
+      options: [
+        { id: "a", label: { en: "An event that may cause the market to reprice the stock", fr: "Un événement pouvant provoquer un repricing de l’action" } },
+        { id: "b", label: { en: "A historical accounting entry only", fr: "Uniquement une écriture comptable historique" } },
+        { id: "c", label: { en: "A guaranteed return", fr: "Un rendement garanti" } },
+        { id: "d", label: { en: "A fixed tax rate", fr: "Un taux d’imposition fixe" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Catalysts help explain why a valuation gap may close.", fr: "Les catalysts expliquent pourquoi un écart de valuation peut se refermer." },
+    },
+    {
+      id: "q8",
+      conceptKey: "earnings-reaction",
+      question: { en: "Why can a stock fall after an earnings beat?", fr: "Pourquoi une action peut-elle baisser après un earnings beat ?" },
+      options: [
+        { id: "a", label: { en: "Expectations may have been even higher or guidance may disappoint", fr: "Les attentes pouvaient être encore plus élevées ou la guidance décevoir" } },
+        { id: "b", label: { en: "Beats always reduce company value", fr: "Les beats réduisent toujours la valeur de l’entreprise" } },
+        { id: "c", label: { en: "Markets ignore guidance", fr: "Les marchés ignorent la guidance" } },
+        { id: "d", label: { en: "Stocks cannot rise after earnings", fr: "Les actions ne peuvent pas monter après earnings" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Stock reactions depend on results relative to what investors already expected and on future guidance.", fr: "Les réactions dépendent des résultats par rapport aux attentes déjà intégrées et de la guidance future." },
+    },
+    {
+      id: "q9",
+      conceptKey: "research-note",
+      question: { en: "What should a strong research note communicate?", fr: "Que doit communiquer une bonne research note ?" },
+      options: [
+        { id: "a", label: { en: "What changed, why it matters, estimate impact, valuation and risks", fr: "Ce qui a changé, pourquoi cela compte, impact sur les estimates, valuation et risques" } },
+        { id: "b", label: { en: "Only the company logo", fr: "Uniquement le logo de l’entreprise" } },
+        { id: "c", label: { en: "No financial model changes", fr: "Aucun changement de modèle financier" } },
+        { id: "d", label: { en: "Only historical facts with no interpretation", fr: "Uniquement des faits historiques sans interprétation" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Research should be decision-useful and connected to the model and valuation.", fr: "La recherche doit être utile à la décision et reliée au modèle et à la valuation." },
+    },
+    {
+      id: "q10",
+      conceptKey: "stock-pitch",
+      question: { en: "What is the strongest stock-pitch structure?", fr: "Quelle est la meilleure structure de stock pitch ?" },
+      options: [
+        { id: "a", label: { en: "Recommendation, differentiated thesis, valuation, catalysts and risks", fr: "Recommandation, thèse différenciée, valuation, catalysts et risques" } },
+        { id: "b", label: { en: "Only company history", fr: "Uniquement l’histoire de l’entreprise" } },
+        { id: "c", label: { en: "Only upside with no downside", fr: "Uniquement upside sans downside" } },
+        { id: "d", label: { en: "No time horizon", fr: "Aucun horizon temporel" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A stock pitch should connect the investment view to valuation, catalysts and falsifiable risks.", fr: "Un stock pitch doit relier la vue d’investissement à la valuation, aux catalysts et aux risques falsifiables." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Pitch me a stock. How would you structure a professional equity-research answer?",
+      fr: "Pitch-moi une action. Comment structurerais-tu une réponse professionnelle d’equity research ?",
+    },
+    framework: [
+      { en: "State the recommendation, current price context, target and time horizon.", fr: "Donner la recommandation, le contexte de prix actuel, la target et l’horizon." },
+      { en: "Explain the business in one or two sentences and identify the key KPIs.", fr: "Expliquer le business en une ou deux phrases et identifier les KPIs clés." },
+      { en: "Present two or three differentiated thesis points versus consensus.", fr: "Présenter deux ou trois points de thèse différenciés par rapport au consensus." },
+      { en: "Connect operating assumptions to earnings forecasts and valuation.", fr: "Relier hypothèses opérationnelles aux forecasts d’earnings et à la valuation." },
+      { en: "Identify catalysts that could reveal the thesis to the market.", fr: "Identifier les catalysts susceptibles de révéler la thèse au marché." },
+      { en: "Finish with the main downside risks and what would invalidate the view.", fr: "Terminer par les principaux risques downside et ce qui invaliderait la vue." },
+    ],
+    sample: {
+      en: "I would start with a clear recommendation and time horizon, then explain the company’s business model and the two or three operating KPIs that matter most. My thesis would focus on where my expectations differ from consensus—for example, stronger unit growth, better margins or a more durable competitive advantage than the market currently prices. I would show how those assumptions flow into revenue, EPS and free cash flow, then value the stock using the most appropriate sector multiple or DCF. I would identify the catalysts that could cause the market to recognize the difference, such as earnings revisions, a product cycle or margin inflection. Finally, I would present the downside case and the specific evidence that would make me change my mind. The goal is to demonstrate not only that the company is attractive, but that the current stock price does not fully reflect the outcome I expect.",
+      fr: "Je commencerais par une recommandation claire et un horizon temporel, puis j’expliquerais le business model de l’entreprise et les deux ou trois operating KPIs les plus importants. Ma thèse se concentrerait sur les points où mes attentes diffèrent du consensus—for example une croissance d’unités plus forte, de meilleures marges ou un avantage concurrentiel plus durable que ce que le marché price actuellement. Je montrerais comment ces hypothèses alimentent revenue, EPS et free cash flow, puis je valoriserais l’action avec le multiple sectoriel approprié ou un DCF. J’identifierais les catalysts capables de faire reconnaître cette différence par le marché, comme des earnings revisions, un product cycle ou une inflexion de marge. Enfin, je présenterais le downside case et les éléments précis qui me feraient changer d’avis. L’objectif est de montrer non seulement que l’entreprise est attractive, mais que le prix actuel de l’action ne reflète pas complètement le scénario que j’attends.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
