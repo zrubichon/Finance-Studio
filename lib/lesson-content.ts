@@ -22153,7 +22153,509 @@ export const investmentBankingLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson];
+
+
+export const salesTradingLesson: FinanceLesson = {
+  slug: "year-3-sales-trading",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Markets & Trading", fr: "Marchés & Trading / Markets & Trading" },
+  title: { en: "Sales & Trading", fr: "Sales & Trading" },
+  subtitle: {
+    en: "Understand how institutional markets operate in practice: client flow, market making, liquidity, bid-ask spreads, execution, risk, hedging, macro catalysts, P&L, and the roles of salespeople and traders across equities and FICC.",
+    fr: "Comprendre le fonctionnement pratique des marchés institutionnels : client flow, market making, liquidité, bid-ask spreads, exécution, risque, hedging, catalyseurs macro, P&L et rôles des sales et traders en equities et FICC.",
+  },
+  duration: { en: "145–175 min", fr: "145–175 min" },
+  prerequisites: [
+    { en: "Financial System & Market Structure", fr: "Système financier & structure des marchés" },
+    { en: "Stocks, Bonds, ETFs & Funds", fr: "Actions, obligations, ETFs & fonds" },
+    { en: "Fixed Income & Yield Curves", fr: "Fixed Income & Yield Curves" },
+    { en: "Derivatives Foundations", fr: "Fondamentaux des dérivés / Derivatives Foundations" },
+    { en: "Options & Option Greeks", fr: "Options & Greeks" },
+    { en: "FX & International Finance", fr: "FX & finance internationale" },
+  ],
+  objectives: [
+    { en: "Explain the difference between sales, trading, market making and research.", fr: "Expliquer la différence entre sales, trading, market making et research." },
+    { en: "Understand bid, ask, spread, liquidity, order flow and price discovery.", fr: "Comprendre bid, ask, spread, liquidité, order flow et price discovery." },
+    { en: "Understand how desks operate across equities and FICC.", fr: "Comprendre le fonctionnement des desks en equities et FICC." },
+    { en: "Connect client trades to inventory risk, hedging and desk P&L.", fr: "Relier les trades clients à inventory risk, hedging et P&L du desk." },
+    { en: "Interpret how macro data, central banks and positioning move markets.", fr: "Interpréter comment données macro, banques centrales et positioning font bouger les marchés." },
+    { en: "Answer common Sales & Trading interview questions with clear market logic.", fr: "Répondre aux questions classiques d’entretien Sales & Trading avec une logique de marché claire." },
+  ],
+  overviewFlow: {
+    title: { en: "From client need to executed and hedged risk", fr: "Du besoin client au risque exécuté et hedgé" },
+    steps: [
+      { title: { en: "Client", fr: "Client" }, detail: { en: "Need · view · order", fr: "Besoin · vue · ordre" } },
+      { title: { en: "Price", fr: "Prix" }, detail: { en: "Bid · ask · liquidity", fr: "Bid · ask · liquidité" } },
+      { title: { en: "Execute", fr: "Exécuter" }, detail: { en: "Trade · inventory · risk", fr: "Trade · inventory · risque" } },
+      { title: { en: "Hedge", fr: "Hedger" }, detail: { en: "Offset · monitor · P&L", fr: "Offset · suivi · P&L" } },
+    ],
+  },
+  sections: [
+    {
+      id: "roles-and-desks",
+      kicker: { en: "01 · SALES, TRADING & DESKS", fr: "01 · SALES, TRADING & DESKS" },
+      title: { en: "Sales & Trading connects institutional clients to markets and risk-taking capacity", fr: "Sales & Trading relie les clients institutionnels aux marchés et à la capacité de prise de risque" },
+      coreFacts: [
+        { en: "Salespeople understand client objectives, communicate market information and help source liquidity or trade ideas.", fr: "Les sales comprennent les objectifs clients, communiquent l’information de marché et aident à trouver de la liquidité ou des idées de trade." },
+        { en: "Traders price risk, execute transactions, manage inventory and hedge exposures.", fr: "Les traders pricent le risque, exécutent les transactions, gèrent l’inventory et hedgent les expositions." },
+        { en: "Equities desks cover stocks, equity derivatives and related products; FICC covers fixed income, currencies and commodities.", fr: "Les desks equities couvrent actions, equity derivatives et produits associés ; FICC couvre fixed income, currencies et commodities." },
+        { en: "Research, structuring, quant and electronic-trading teams often support the broader markets business.", fr: "Research, structuring, quant et electronic trading soutiennent souvent l’activité markets au sens large." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Sales talks to clients and understands what they want to buy, sell or hedge. Trading decides what price the bank can offer and then manages the risk created by the trade.",
+          fr: "Le sales parle aux clients et comprend ce qu’ils veulent acheter, vendre ou hedger. Le trading décide quel prix la banque peut offrir puis gère le risque créé par le trade.",
+        },
+        Intermediate: {
+          en: "A salesperson may tell a portfolio manager that liquidity has improved in a bond or that a macro catalyst is approaching. The trader then evaluates market depth, inventory and hedging cost before quoting a price.",
+          fr: "Un sales peut indiquer à un portfolio manager que la liquidité s’est améliorée sur une obligation ou qu’un catalyseur macro approche. Le trader évalue ensuite profondeur du marché, inventory et coût du hedge avant de quoter un prix.",
+        },
+        Professional: {
+          en: "A markets franchise monetizes client flow, information, balance sheet, technology and risk intermediation. The economic objective is not simply directional trading; it is to serve clients while pricing and managing risk transfer efficiently.",
+          fr: "Une franchise markets monétise client flow, information, bilan, technologie et intermédiation du risque. L’objectif économique n’est pas simplement de prendre des vues directionnelles ; il consiste à servir les clients tout en pricant et gérant efficacement le transfert de risque.",
+        },
+      },
+      comparison: {
+        title: { en: "Sales vs trading", fr: "Sales vs trading" },
+        headers: [{ en: "Role", fr: "Rôle" }, { en: "Primary focus", fr: "Focus principal" }, { en: "Core skill", fr: "Compétence clé" }],
+        rows: [
+          { cells: [{ en: "Sales", fr: "Sales" }, { en: "Client relationships and ideas", fr: "Relations clients et idées" }, { en: "Communication + market judgment", fr: "Communication + jugement marché" }] },
+          { cells: [{ en: "Trading", fr: "Trading" }, { en: "Pricing and risk management", fr: "Pricing et gestion du risque" }, { en: "Fast decisions + risk control", fr: "Décisions rapides + contrôle du risque" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "FICC", fr: "FICC", definition: { en: "Fixed Income, Currencies and Commodities.", fr: "Fixed Income, Currencies and Commodities." } },
+        { en: "Flow", fr: "flow", definition: { en: "Client trading activity moving through a desk.", fr: "Activité de trading des clients passant par un desk." } },
+        { en: "Inventory", fr: "inventory", definition: { en: "Positions held by a dealer as a result of market making or risk taking.", fr: "Positions détenues par un dealer du fait du market making ou de la prise de risque." } },
+      ],
+    },
+    {
+      id: "bid-ask-liquidity",
+      kicker: { en: "02 · BID, ASK & LIQUIDITY", fr: "02 · BID, ASK & LIQUIDITÉ" },
+      title: { en: "The spread is the price of immediacy, inventory risk and uncertainty", fr: "Le spread est le prix de l’immédiateté, de l’inventory risk et de l’incertitude" },
+      coreFacts: [
+        { en: "The bid is the price at which a dealer is willing to buy; the ask is the price at which the dealer is willing to sell.", fr: "Le bid est le prix auquel un dealer est prêt à acheter ; l’ask est le prix auquel il est prêt à vendre." },
+        { en: "The bid-ask spread compensates liquidity provision and risk bearing.", fr: "Le bid-ask spread rémunère la fourniture de liquidité et la prise de risque." },
+        { en: "More liquid markets generally have tighter spreads than less liquid markets.", fr: "Les marchés plus liquides ont généralement des spreads plus serrés que les marchés moins liquides." },
+        { en: "Spreads often widen during volatility, uncertainty or balance-sheet stress.", fr: "Les spreads s’élargissent souvent pendant les périodes de volatilité, d’incertitude ou de stress de bilan." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a stock is quoted 99.90 bid and 100.10 ask, you can sell near 99.90 or buy near 100.10. The 0.20 difference is the bid-ask spread.",
+          fr: "Si une action cote 99,90 bid et 100,10 ask, tu peux vendre autour de 99,90 ou acheter autour de 100,10. La différence de 0,20 est le bid-ask spread.",
+        },
+        Intermediate: {
+          en: "A dealer quotes two prices because buying from one client may leave inventory that must later be sold or hedged. The spread helps compensate for that risk and for adverse selection.",
+          fr: "Un dealer quote deux prix car acheter à un client peut créer un inventory qu’il faudra ensuite revendre ou hedger. Le spread aide à rémunérer ce risque et l’adverse selection.",
+        },
+        Professional: {
+          en: "Spread formation reflects expected hedging cost, market depth, volatility, information asymmetry, inventory concentration and capital usage. In stressed conditions, liquidity can disappear faster than headline volatility alone suggests.",
+          fr: "La formation du spread reflète coût attendu du hedge, profondeur de marché, volatilité, asymétrie d’information, concentration d’inventory et usage du capital. En période de stress, la liquidité peut disparaître plus vite que ne le suggère la seule volatilité affichée.",
+        },
+      },
+      formula: {
+        label: { en: "Bid-ask spread", fr: "Bid-ask spread" },
+        expression: "Spread = Ask Price − Bid Price",
+        explanation: { en: "A relative spread can divide this amount by the midpoint price.", fr: "Un spread relatif peut diviser ce montant par le midpoint." },
+        workedExample: { en: "Bid 99.90, ask 100.10 → spread = 0.20; midpoint = 100.00.", fr: "Bid 99,90, ask 100,10 → spread = 0,20 ; midpoint = 100,00." },
+      },
+      vocabulary: [
+        { en: "Liquidity", fr: "liquidité", definition: { en: "Ability to trade size quickly with limited price impact.", fr: "Capacité à trader une taille rapidement avec un impact limité sur le prix." } },
+        { en: "Market depth", fr: "profondeur de marché", definition: { en: "Amount of executable interest available around current prices.", fr: "Quantité d’intérêt exécutable disponible autour des prix actuels." } },
+        { en: "Adverse selection", fr: "adverse selection", definition: { en: "Risk of trading against a better-informed counterparty.", fr: "Risque de trader face à une contrepartie mieux informée." } },
+      ],
+    },
+    {
+      id: "market-making",
+      kicker: { en: "03 · MARKET MAKING", fr: "03 · MARKET MAKING" },
+      title: { en: "Market makers facilitate client trades while managing inventory risk", fr: "Les market makers facilitent les trades clients tout en gérant l’inventory risk" },
+      coreFacts: [
+        { en: "A market maker provides executable prices to buyers and sellers.", fr: "Un market maker fournit des prix exécutables aux acheteurs et vendeurs." },
+        { en: "Client flow can leave the desk long or short risk.", fr: "Le client flow peut laisser le desk long ou short en risque." },
+        { en: "The desk can warehouse risk temporarily, hedge it or offset it with opposite client flow.", fr: "Le desk peut conserver temporairement le risque, le hedger ou l’offset avec un flow client opposé." },
+        { en: "Good market making balances client service, competitiveness and risk-adjusted profitability.", fr: "Un bon market making équilibre service client, compétitivité et profitabilité ajustée du risque." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a client wants to sell a bond immediately, the dealer may buy it before another buyer appears. The dealer is providing liquidity and temporarily holding the bond.",
+          fr: "Si un client veut vendre immédiatement une obligation, le dealer peut l’acheter avant même qu’un autre acheteur apparaisse. Il fournit ainsi de la liquidité et détient temporairement l’obligation.",
+        },
+        Intermediate: {
+          en: "If a client sells $20 million of a corporate bond to the desk, the trader can keep the position, hedge duration with Treasuries or futures, hedge credit with an index, or find another client buyer.",
+          fr: "Si un client vend 20 M$ d’une obligation corporate au desk, le trader peut conserver la position, hedger la duration avec Treasuries ou futures, hedger le crédit avec un index, ou trouver un autre client acheteur.",
+        },
+        Professional: {
+          en: "Market making is a dynamic optimization problem. The trader adjusts quote width and skew based on inventory, flow information, hedge liquidity, volatility and risk limits while protecting client franchise value.",
+          fr: "Le market making est un problème d’optimisation dynamique. Le trader ajuste largeur et skew des quotes selon inventory, information de flow, liquidité du hedge, volatilité et risk limits tout en protégeant la valeur de la franchise client.",
+        },
+      },
+      vocabulary: [
+        { en: "Warehouse risk", fr: "warehouse risk", definition: { en: "Risk held temporarily by the dealer before it is offset or hedged.", fr: "Risque conservé temporairement par le dealer avant d’être offset ou hedgé." } },
+        { en: "Quote", fr: "quote", definition: { en: "Tradable price or pair of prices provided to a client.", fr: "Prix ou paire de prix exécutable fourni à un client." } },
+        { en: "Skew", fr: "skew de quote", definition: { en: "Asymmetric quote adjustment used to influence flow based on inventory.", fr: "Ajustement asymétrique d’une quote pour influencer le flow selon l’inventory." } },
+      ],
+    },
+    {
+      id: "risk-pnl-hedging",
+      kicker: { en: "04 · RISK, P&L & HEDGING", fr: "04 · RISQUE, P&L & HEDGING" },
+      title: { en: "Every trade changes both expected P&L and the desk’s risk profile", fr: "Chaque trade modifie à la fois le P&L attendu et le profil de risque du desk" },
+      coreFacts: [
+        { en: "Desk P&L can come from spreads, price moves, carry, financing, client flow and hedging outcomes.", fr: "Le P&L du desk peut venir des spreads, mouvements de prix, carry, financement, client flow et résultats de hedging." },
+        { en: "Hedging reduces selected risks but rarely removes every risk.", fr: "Le hedging réduit certains risques mais supprime rarement tous les risques." },
+        { en: "Risk limits constrain exposures such as delta, duration, DV01, vega, credit spread risk or position size.", fr: "Les risk limits contraignent des expositions comme delta, duration, DV01, vega, credit spread risk ou taille de position." },
+        { en: "A profitable trade can still be poor if it consumes disproportionate risk or capital.", fr: "Un trade profitable peut rester mauvais s’il consomme un niveau disproportionné de risque ou de capital." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A trader may make money because prices move in the desk’s favor or because the desk earns the spread. But the trader must constantly ask what risk is being held.",
+          fr: "Un trader peut gagner de l’argent parce que les prix évoluent en faveur du desk ou parce que le desk gagne le spread. Mais il doit constamment demander quel risque est détenu.",
+        },
+        Intermediate: {
+          en: "A bond trader may hedge interest-rate duration while still keeping credit-spread exposure. An options trader may hedge delta while retaining gamma or vega exposure.",
+          fr: "Un bond trader peut hedger la duration taux tout en conservant l’exposition au credit spread. Un options trader peut hedger delta tout en gardant gamma ou vega.",
+        },
+        Professional: {
+          en: "Risk management is multidimensional. Desks monitor directional sensitivities, basis risk, liquidity risk, jump risk, correlation, financing and stress scenarios. Hedging transforms risk; it does not make it disappear.",
+          fr: "La gestion du risque est multidimensionnelle. Les desks suivent directional sensitivities, basis risk, liquidity risk, jump risk, corrélation, financement et stress scenarios. Le hedging transforme le risque ; il ne le fait pas disparaître.",
+        },
+      },
+      formula: {
+        label: { en: "Simple trading P&L", fr: "P&L de trading simple" },
+        expression: "P&L ≈ Position × Price Change + Carry + Trading Revenue − Hedging / Funding Costs",
+        explanation: { en: "Real desk attribution is product-specific and can decompose risk factors more precisely.", fr: "L’attribution réelle du desk dépend du produit et peut décomposer plus précisément les facteurs de risque." },
+      },
+      vocabulary: [
+        { en: "DV01", fr: "DV01", definition: { en: "Approximate dollar change in value for a 1 bp move in yield.", fr: "Variation approximative en dollars de la valeur pour un mouvement de 1 bp du yield." } },
+        { en: "Carry", fr: "carry", definition: { en: "Return earned from holding a position if market conditions are otherwise unchanged.", fr: "Rendement provenant de la détention d’une position si les conditions de marché restent autrement inchangées." } },
+        { en: "Basis risk", fr: "basis risk", definition: { en: "Risk that a hedge does not move perfectly with the position being hedged.", fr: "Risque que le hedge n’évolue pas parfaitement avec la position hedgée." } },
+      ],
+    },
+    {
+      id: "execution-order-flow",
+      kicker: { en: "05 · EXECUTION & ORDER FLOW", fr: "05 · EXÉCUTION & ORDER FLOW" },
+      title: { en: "Execution quality depends on size, urgency, liquidity and information leakage", fr: "La qualité d’exécution dépend de la taille, de l’urgence, de la liquidité et de l’information leakage" },
+      coreFacts: [
+        { en: "Large orders can move prices, especially in less liquid markets.", fr: "Les gros ordres peuvent déplacer les prix, surtout sur les marchés moins liquides." },
+        { en: "Execution strategies trade off speed against market impact.", fr: "Les stratégies d’exécution arbitrent entre vitesse et market impact." },
+        { en: "Order flow can contain information about client positioning and supply-demand imbalance.", fr: "L’order flow peut contenir de l’information sur le positioning client et les déséquilibres offre-demande." },
+        { en: "Electronic execution is important in liquid standardized products, while voice trading remains relevant in many complex or illiquid markets.", fr: "L’exécution électronique est importante pour les produits liquides et standardisés, tandis que le voice trading reste pertinent dans de nombreux marchés complexes ou illiquides." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Buying one share usually has little effect on price. Buying millions of shares quickly can push the market higher because available liquidity is consumed.",
+          fr: "Acheter une action a généralement peu d’effet sur le prix. Acheter des millions d’actions rapidement peut pousser le marché à la hausse car la liquidité disponible est consommée.",
+        },
+        Intermediate: {
+          en: "A client deciding between immediate execution and a slower algorithmic strategy must balance certainty of completion against price impact and information leakage.",
+          fr: "Un client choisissant entre exécution immédiate et stratégie algorithmique plus lente doit arbitrer entre certitude d’exécution, impact sur le prix et information leakage.",
+        },
+        Professional: {
+          en: "Execution analytics consider spread cost, market impact, timing risk, venue selection, fill probability and benchmark performance. The optimal method depends on product, size and client objective.",
+          fr: "Les execution analytics considèrent spread cost, market impact, timing risk, choix de venue, probabilité de fill et performance versus benchmark. La méthode optimale dépend du produit, de la taille et de l’objectif client.",
+        },
+      },
+      vocabulary: [
+        { en: "Market impact", fr: "market impact", definition: { en: "Price movement caused by executing an order.", fr: "Mouvement de prix causé par l’exécution même d’un ordre." } },
+        { en: "Fill", fr: "fill", definition: { en: "Execution of all or part of an order.", fr: "Exécution de tout ou partie d’un ordre." } },
+        { en: "Information leakage", fr: "information leakage", definition: { en: "Risk that others infer the existence or direction of an order.", fr: "Risque que d’autres participants déduisent l’existence ou le sens d’un ordre." } },
+      ],
+    },
+    {
+      id: "macro-catalysts",
+      kicker: { en: "06 · MACRO CATALYSTS", fr: "06 · CATALYSEURS MACRO" },
+      title: { en: "Markets react to surprises relative to expectations, not data in isolation", fr: "Les marchés réagissent aux surprises par rapport aux attentes, pas aux données isolées" },
+      coreFacts: [
+        { en: "Central-bank decisions, inflation, employment and growth data can move rates, FX, equities and credit simultaneously.", fr: "Les décisions de banques centrales, inflation, emploi et croissance peuvent faire bouger simultanément taux, FX, equities et crédit." },
+        { en: "The market response depends on what was already priced in.", fr: "La réaction du marché dépend de ce qui était déjà pricé." },
+        { en: "Cross-asset relationships can change depending on the macro regime.", fr: "Les relations cross-asset peuvent changer selon le régime macro." },
+        { en: "Positioning and liquidity can amplify or reverse the initial reaction to news.", fr: "Le positioning et la liquidité peuvent amplifier ou inverser la réaction initiale à une news." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A strong jobs report does not always make stocks rise. If investors think it means interest rates will stay high, stocks can fall even though the data looks good.",
+          fr: "Un bon rapport sur l’emploi ne fait pas toujours monter les actions. Si les investisseurs pensent qu’il implique des taux plus élevés plus longtemps, les actions peuvent baisser même si la donnée paraît bonne.",
+        },
+        Intermediate: {
+          en: "Before a data release, traders compare consensus expectations with positioning and current pricing. The surprise matters most: actual data minus what the market expected.",
+          fr: "Avant une publication, les traders comparent consensus, positioning et pricing actuel. La surprise compte le plus : donnée réelle moins ce que le marché attendait.",
+        },
+        Professional: {
+          en: "Price action reflects the full distribution of expectations, not just consensus. A modest surprise can create a large move if positioning is crowded, liquidity is thin or the release changes the expected policy path.",
+          fr: "Le price action reflète toute la distribution des attentes, pas seulement le consensus. Une surprise modeste peut créer un gros mouvement si le positioning est crowded, la liquidité faible ou la publication modifie la trajectoire attendue de policy.",
+        },
+      },
+      marketConnection: {
+        en: "Around a catalyst, ask: what was expected, what happened, and how was the market positioned?",
+        fr: "Autour d’un catalyseur, demander : qu’attendait le marché, qu’est-il arrivé, et comment le marché était-il positionné ?",
+      },
+      vocabulary: [
+        { en: "Consensus", fr: "consensus", definition: { en: "Common market expectation for a release or event.", fr: "Attente moyenne du marché concernant une publication ou un événement." } },
+        { en: "Priced in", fr: "pricé", definition: { en: "Already reflected in current market prices.", fr: "Déjà intégré dans les prix de marché actuels." } },
+        { en: "Positioning", fr: "positioning", definition: { en: "How investors and traders are currently exposed to an asset or theme.", fr: "Façon dont investisseurs et traders sont actuellement exposés à un actif ou thème." } },
+      ],
+    },
+    {
+      id: "equities-ficc",
+      kicker: { en: "07 · EQUITIES & FICC", fr: "07 · EQUITIES & FICC" },
+      title: { en: "Different asset classes express different types of risk", fr: "Les différentes classes d’actifs expriment différents types de risque" },
+      coreFacts: [
+        { en: "Equity desks focus on company earnings, valuation, flows, volatility and corporate events.", fr: "Les desks equities se concentrent sur earnings, valuation, flows, volatilité et corporate events." },
+        { en: "Rates desks focus on yield curves, central banks, inflation expectations and duration risk.", fr: "Les rates desks se concentrent sur yield curves, banques centrales, inflation expectations et duration risk." },
+        { en: "Credit desks focus on default risk, spread compensation, recovery and capital structure.", fr: "Les credit desks se concentrent sur default risk, spread compensation, recovery et capital structure." },
+        { en: "FX desks focus on relative rates, growth, inflation, policy, flows and global risk sentiment.", fr: "Les desks FX se concentrent sur taux relatifs, croissance, inflation, policy, flows et sentiment de risque global." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A stock trader asks what changes a company’s value. A rates trader asks how interest rates may move. A credit trader asks whether the borrower will repay and whether the spread compensates for risk.",
+          fr: "Un stock trader demande ce qui change la valeur d’une entreprise. Un rates trader demande comment les taux peuvent évoluer. Un credit trader demande si l’emprunteur remboursera et si le spread rémunère le risque.",
+        },
+        Intermediate: {
+          en: "The same macro event can affect desks differently. Higher inflation may push yields higher, change FX policy expectations, compress equity multiples and widen some credit spreads.",
+          fr: "Le même événement macro peut affecter les desks différemment. Une inflation plus forte peut faire monter les yields, modifier les attentes de policy en FX, comprimer les multiples equity et élargir certains credit spreads.",
+        },
+        Professional: {
+          en: "Cross-asset trading requires understanding transmission channels. A policy shock can move front-end rates first, then FX, equity discount rates, funding conditions and credit spreads through interconnected repricing.",
+          fr: "Le cross-asset trading exige de comprendre les canaux de transmission. Un choc de policy peut d’abord bouger les taux courts, puis FX, discount rates equity, conditions de financement et credit spreads via un repricing interconnecté.",
+        },
+      },
+      comparison: {
+        title: { en: "What each desk watches", fr: "Ce que surveille chaque desk" },
+        headers: [{ en: "Desk", fr: "Desk" }, { en: "Core risks", fr: "Risques clés" }, { en: "Typical drivers", fr: "Drivers typiques" }],
+        rows: [
+          { cells: [{ en: "Equities", fr: "Equities" }, { en: "Earnings, valuation, volatility", fr: "Earnings, valuation, volatilité" }, { en: "Company news, flows, macro", fr: "News entreprise, flows, macro" }] },
+          { cells: [{ en: "Rates", fr: "Rates" }, { en: "Duration, curve, policy", fr: "Duration, curve, policy" }, { en: "Inflation, growth, central banks", fr: "Inflation, croissance, banques centrales" }] },
+          { cells: [{ en: "Credit", fr: "Credit" }, { en: "Spread, default, liquidity", fr: "Spread, défaut, liquidité" }, { en: "Leverage, cash flow, risk appetite", fr: "Leverage, cash flow, risk appetite" }] },
+          { cells: [{ en: "FX", fr: "FX" }, { en: "Relative macro and flows", fr: "Macro relative et flows" }, { en: "Rates, policy, growth, risk sentiment", fr: "Taux, policy, croissance, risk sentiment" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Rates", fr: "rates", definition: { en: "Interest-rate products such as government bonds, swaps and futures.", fr: "Produits de taux comme obligations souveraines, swaps et futures." } },
+        { en: "Credit", fr: "credit", definition: { en: "Markets for corporate and other instruments carrying credit risk.", fr: "Marchés d’instruments corporate et autres comportant du risque de crédit." } },
+        { en: "Cross-asset", fr: "cross-asset", definition: { en: "Analysis spanning multiple asset classes.", fr: "Analyse couvrant plusieurs classes d’actifs." } },
+      ],
+    },
+    {
+      id: "trade-idea-framework",
+      kicker: { en: "08 · TRADE IDEAS & MARKET VIEWS", fr: "08 · TRADE IDEAS & MARKET VIEWS" },
+      title: { en: "A good trade idea needs a thesis, catalyst, valuation or pricing logic, risk and exit plan", fr: "Une bonne idée de trade a besoin d’une thèse, d’un catalyseur, d’une logique de pricing, d’un risque et d’un plan de sortie" },
+      coreFacts: [
+        { en: "A trade thesis explains why the current market price may be wrong or incomplete.", fr: "Une trade thesis explique pourquoi le prix de marché actuel peut être erroné ou incomplet." },
+        { en: "A catalyst explains what may cause the market to reprice.", fr: "Un catalyst explique ce qui pourrait provoquer le repricing du marché." },
+        { en: "Risk management requires identifying what would invalidate the thesis.", fr: "La gestion du risque exige d’identifier ce qui invaliderait la thèse." },
+        { en: "Time horizon matters because a correct long-term view can still lose money over a short horizon.", fr: "L’horizon temporel est essentiel car une vue correcte à long terme peut tout de même perdre de l’argent à court terme." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A trade idea is not just 'I think this stock will go up.' You should explain why, what could make it happen, what could prove you wrong and how long the idea should take.",
+          fr: "Une trade idea n’est pas seulement « je pense que cette action va monter ». Il faut expliquer pourquoi, ce qui peut déclencher le mouvement, ce qui prouverait que tu as tort et sur quel horizon.",
+        },
+        Intermediate: {
+          en: "A structured pitch often includes instrument, direction, thesis, catalyst, current pricing, target, time horizon and key risks. The strongest pitches connect the view to what the market already expects.",
+          fr: "Un pitch structuré inclut souvent instrument, direction, thèse, catalyst, pricing actuel, target, horizon et risques clés. Les meilleurs pitches relient la vue à ce que le marché attend déjà.",
+        },
+        Professional: {
+          en: "Institutional trade construction also considers liquidity, sizing, convexity, carry, event risk, hedge design and asymmetry between upside and downside. A good idea can still be a poor trade if entry price or implementation is weak.",
+          fr: "La construction institutionnelle d’un trade considère aussi liquidité, sizing, convexity, carry, event risk, design du hedge et asymétrie entre upside et downside. Une bonne idée peut rester un mauvais trade si le point d’entrée ou l’implémentation est faible.",
+        },
+      },
+      vocabulary: [
+        { en: "Catalyst", fr: "catalyseur", definition: { en: "Event or information that may cause market repricing.", fr: "Événement ou information susceptible de provoquer un repricing." } },
+        { en: "Thesis", fr: "thèse", definition: { en: "Core reasoning supporting a market view.", fr: "Raisonnement central soutenant une vue de marché." } },
+        { en: "Asymmetry", fr: "asymétrie", definition: { en: "Difference between potential upside and downside outcomes.", fr: "Différence entre les résultats potentiels à la hausse et à la baisse." } },
+      ],
+    },
+    {
+      id: "interview-preparation",
+      kicker: { en: "09 · SALES & TRADING INTERVIEWS", fr: "09 · ENTRETIENS SALES & TRADING" },
+      title: { en: "Interviews test market curiosity, mental math, technical fluency and communication", fr: "Les entretiens testent curiosité marché, calcul mental, technique et communication" },
+      coreFacts: [
+        { en: "Candidates are often asked what is moving markets and why.", fr: "Les candidats doivent souvent expliquer ce qui fait bouger les marchés et pourquoi." },
+        { en: "Common questions cover bid-ask spreads, bonds, yield curves, FX, options, volatility and hedging.", fr: "Les questions classiques couvrent bid-ask spreads, obligations, yield curves, FX, options, volatilité et hedging." },
+        { en: "A stock or trade pitch should connect thesis, catalyst, valuation or pricing and risks.", fr: "Un stock ou trade pitch doit relier thèse, catalyst, valuation ou pricing et risques." },
+        { en: "Clear reasoning matters more than pretending certainty about future market direction.", fr: "Un raisonnement clair compte davantage que de prétendre être certain de la direction future du marché." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "You do not need to predict the market perfectly. You need to show that you understand what could move it and can explain your reasoning clearly.",
+          fr: "Tu n’as pas besoin de prédire parfaitement le marché. Tu dois montrer que tu comprends ce qui peut le faire bouger et expliquer clairement ton raisonnement.",
+        },
+        Intermediate: {
+          en: "For a market question, structure the answer around current driver, market expectation, surprise, transmission mechanism and key risk to the view.",
+          fr: "Pour une question de marché, structure la réponse autour du driver actuel, de l’attente du marché, de la surprise, du mécanisme de transmission et du principal risque à la vue.",
+        },
+        Professional: {
+          en: "Strong candidates separate observation from inference, know their products, acknowledge uncertainty and translate macro or company developments into concrete price, spread, curve or volatility implications.",
+          fr: "Les bons candidats séparent observation et interprétation, connaissent leurs produits, reconnaissent l’incertitude et traduisent les développements macro ou entreprise en implications concrètes de prix, spread, curve ou volatilité.",
+        },
+      },
+      comparison: {
+        title: { en: "A strong market answer", fr: "Une bonne réponse marché" },
+        headers: [{ en: "Step", fr: "Étape" }, { en: "Question", fr: "Question" }],
+        rows: [
+          { cells: [{ en: "1. State", fr: "1. Constater" }, { en: "What is happening?", fr: "Que se passe-t-il ?" }] },
+          { cells: [{ en: "2. Explain", fr: "2. Expliquer" }, { en: "Why is it happening?", fr: "Pourquoi ?" }] },
+          { cells: [{ en: "3. Price", fr: "3. Pricing" }, { en: "What is already priced in?", fr: "Qu’est-ce qui est déjà pricé ?" }] },
+          { cells: [{ en: "4. Risk", fr: "4. Risque" }, { en: "What could change the view?", fr: "Qu’est-ce qui pourrait changer la vue ?" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Market color", fr: "market color", definition: { en: "Qualitative information about flows, liquidity, positioning and current market tone.", fr: "Information qualitative sur flows, liquidité, positioning et ton actuel du marché." } },
+        { en: "Risk-reward", fr: "risk-reward", definition: { en: "Relationship between potential gain and potential loss.", fr: "Relation entre gain potentiel et perte potentielle." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "sales-trading",
+      question: { en: "What is the clearest distinction between sales and trading?", fr: "Quelle est la distinction la plus claire entre sales et trading ?" },
+      options: [
+        { id: "a", label: { en: "Sales focuses on clients; trading focuses on pricing and risk", fr: "Sales se concentre sur les clients ; trading sur pricing et risque" } },
+        { id: "b", label: { en: "Sales manages accounting; trading manages taxes", fr: "Sales gère accounting ; trading gère les taxes" } },
+        { id: "c", label: { en: "There is no difference", fr: "Il n’y a aucune différence" } },
+        { id: "d", label: { en: "Sales only trades for personal accounts", fr: "Sales trade uniquement pour des comptes personnels" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Sales owns client communication and relationships; trading prices and manages market risk.", fr: "Sales gère communication et relation client ; trading price et gère le risque de marché." },
+    },
+    {
+      id: "q2",
+      conceptKey: "spread",
+      question: { en: "If bid = 99.90 and ask = 100.10, what is the spread?", fr: "Si bid = 99,90 et ask = 100,10, quel est le spread ?" },
+      options: [
+        { id: "a", label: { en: "0.20", fr: "0,20" } },
+        { id: "b", label: { en: "100.00", fr: "100,00" } },
+        { id: "c", label: { en: "200.00", fr: "200,00" } },
+        { id: "d", label: { en: "0.02", fr: "0,02" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Spread = ask − bid = 100.10 − 99.90 = 0.20.", fr: "Spread = ask − bid = 100,10 − 99,90 = 0,20." },
+    },
+    {
+      id: "q3",
+      conceptKey: "liquidity",
+      question: { en: "Which market is generally more liquid?", fr: "Quel marché est généralement plus liquide ?" },
+      options: [
+        { id: "a", label: { en: "A market with tight spreads and deep executable interest", fr: "Un marché avec spreads serrés et forte profondeur exécutable" } },
+        { id: "b", label: { en: "A market with no buyers or sellers", fr: "Un marché sans acheteurs ni vendeurs" } },
+        { id: "c", label: { en: "A market where every trade causes a huge price move", fr: "Un marché où chaque trade provoque un énorme mouvement" } },
+        { id: "d", label: { en: "A market with permanently closed venues", fr: "Un marché avec venues fermées en permanence" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Liquidity means size can be traded quickly with limited price impact.", fr: "La liquidité signifie qu’une taille peut être tradée rapidement avec un impact limité sur le prix." },
+    },
+    {
+      id: "q4",
+      conceptKey: "market-making",
+      question: { en: "What happens when a dealer buys bonds from a client and has not yet offset them?", fr: "Que se passe-t-il lorsqu’un dealer achète des obligations à un client sans encore les offset ?" },
+      options: [
+        { id: "a", label: { en: "The dealer is warehousing inventory risk", fr: "Le dealer porte temporairement de l’inventory risk" } },
+        { id: "b", label: { en: "The risk disappears", fr: "Le risque disparaît" } },
+        { id: "c", label: { en: "The trade becomes equity automatically", fr: "Le trade devient automatiquement de l’equity" } },
+        { id: "d", label: { en: "There is no balance-sheet effect", fr: "Il n’y a aucun effet bilan" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The position remains on the dealer’s books until it is sold, offset or hedged.", fr: "La position reste dans les books du dealer jusqu’à sa revente, son offset ou son hedge." },
+    },
+    {
+      id: "q5",
+      conceptKey: "hedging",
+      question: { en: "Why does hedging not necessarily remove all risk?", fr: "Pourquoi le hedging ne supprime-t-il pas forcément tout le risque ?" },
+      options: [
+        { id: "a", label: { en: "A hedge may offset one factor while leaving basis, volatility or liquidity risk", fr: "Un hedge peut offset un facteur tout en laissant basis, volatilité ou liquidity risk" } },
+        { id: "b", label: { en: "Because hedges never change exposure", fr: "Parce que les hedges ne changent jamais l’exposition" } },
+        { id: "c", label: { en: "Because every hedge is free", fr: "Parce que chaque hedge est gratuit" } },
+        { id: "d", label: { en: "Because risk limits do not exist", fr: "Parce que les risk limits n’existent pas" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Hedging transforms the risk profile rather than eliminating every source of risk.", fr: "Le hedging transforme le profil de risque plutôt qu’il n’élimine toutes les sources de risque." },
+    },
+    {
+      id: "q6",
+      conceptKey: "macro-surprise",
+      question: { en: "Why can a strong economic release cause markets to fall?", fr: "Pourquoi une bonne donnée économique peut-elle faire baisser les marchés ?" },
+      options: [
+        { id: "a", label: { en: "It may imply tighter policy than markets had priced", fr: "Elle peut impliquer une policy plus restrictive que ce que le marché avait pricé" } },
+        { id: "b", label: { en: "Good data always lowers earnings", fr: "Une bonne donnée réduit toujours les earnings" } },
+        { id: "c", label: { en: "Markets ignore expectations", fr: "Les marchés ignorent les attentes" } },
+        { id: "d", label: { en: "Strong data eliminates volatility", fr: "Une bonne donnée élimine la volatilité" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Markets react to the surprise and its policy implications, not just the headline quality of the data.", fr: "Les marchés réagissent à la surprise et à ses implications de policy, pas seulement à la qualité apparente de la donnée." },
+    },
+    {
+      id: "q7",
+      conceptKey: "fiecq",
+      question: { en: "What does FICC stand for?", fr: "Que signifie FICC ?" },
+      options: [
+        { id: "a", label: { en: "Fixed Income, Currencies and Commodities", fr: "Fixed Income, Currencies and Commodities" } },
+        { id: "b", label: { en: "Finance, Insurance, Corporate and Cash", fr: "Finance, Insurance, Corporate and Cash" } },
+        { id: "c", label: { en: "Futures, Indexes, Credit and Capital", fr: "Futures, Indexes, Credit and Capital" } },
+        { id: "d", label: { en: "Funds, Investment, Consumer and Currency", fr: "Funds, Investment, Consumer and Currency" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "FICC means Fixed Income, Currencies and Commodities.", fr: "FICC signifie Fixed Income, Currencies and Commodities." },
+    },
+    {
+      id: "q8",
+      conceptKey: "trade-idea",
+      question: { en: "What should a strong trade idea include?", fr: "Que doit inclure une bonne trade idea ?" },
+      options: [
+        { id: "a", label: { en: "Thesis, catalyst, pricing logic, horizon and risks", fr: "Thèse, catalyst, logique de pricing, horizon et risques" } },
+        { id: "b", label: { en: "Only a direction with no reasoning", fr: "Seulement une direction sans raisonnement" } },
+        { id: "c", label: { en: "No view on downside", fr: "Aucune vue sur le downside" } },
+        { id: "d", label: { en: "Only the company name", fr: "Seulement le nom de l’entreprise" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A trade needs a reason, a trigger, implementation logic and risk framework.", fr: "Un trade a besoin d’une raison, d’un déclencheur, d’une logique d’implémentation et d’un cadre de risque." },
+    },
+    {
+      id: "q9",
+      conceptKey: "order-flow",
+      question: { en: "Why can large orders create market impact?", fr: "Pourquoi les gros ordres peuvent-ils créer du market impact ?" },
+      options: [
+        { id: "a", label: { en: "They consume available liquidity and reveal supply-demand imbalance", fr: "Ils consomment la liquidité disponible et révèlent un déséquilibre offre-demande" } },
+        { id: "b", label: { en: "Large orders never interact with the market", fr: "Les gros ordres n’interagissent jamais avec le marché" } },
+        { id: "c", label: { en: "Because prices are legally fixed", fr: "Parce que les prix sont légalement fixes" } },
+        { id: "d", label: { en: "Because all orders execute at the same price forever", fr: "Parce que tous les ordres s’exécutent toujours au même prix" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Large orders can consume depth and signal directional demand or supply.", fr: "Les gros ordres peuvent consommer la profondeur et signaler une demande ou offre directionnelle." },
+    },
+    {
+      id: "q10",
+      conceptKey: "interview",
+      question: { en: "What is the strongest way to answer a market interview question?", fr: "Quelle est la meilleure manière de répondre à une question de marché en entretien ?" },
+      options: [
+        { id: "a", label: { en: "State what is happening, explain why, discuss what is priced in, then identify risks", fr: "Dire ce qui se passe, expliquer pourquoi, discuter ce qui est pricé puis identifier les risques" } },
+        { id: "b", label: { en: "Pretend the outcome is certain", fr: "Prétendre que le résultat est certain" } },
+        { id: "c", label: { en: "Avoid discussing market expectations", fr: "Éviter de parler des attentes du marché" } },
+        { id: "d", label: { en: "Use unexplained jargon only", fr: "Utiliser uniquement du jargon non expliqué" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A structured answer shows both market awareness and disciplined reasoning.", fr: "Une réponse structurée montre à la fois connaissance du marché et raisonnement discipliné." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "A client asks you why markets moved after a central-bank decision. How would you structure your answer?",
+      fr: "Un client te demande pourquoi les marchés ont bougé après une décision de banque centrale. Comment structurerais-tu ta réponse ?",
+    },
+    framework: [
+      { en: "Start with what the market expected before the decision.", fr: "Commencer par ce que le marché attendait avant la décision." },
+      { en: "State what the central bank actually delivered and where the surprise was.", fr: "Dire ce que la banque centrale a réellement annoncé et où se trouvait la surprise." },
+      { en: "Explain the transmission into rates first, then FX, equities or credit as relevant.", fr: "Expliquer la transmission vers les taux d’abord, puis FX, equities ou crédit selon le cas." },
+      { en: "Discuss positioning and liquidity if they amplified the move.", fr: "Discuter positioning et liquidité s’ils ont amplifié le mouvement." },
+      { en: "Finish with what could change the current market interpretation.", fr: "Terminer par ce qui pourrait modifier l’interprétation actuelle du marché." },
+    ],
+    sample: {
+      en: "I would begin with the market’s prior expectation because the move depends on the surprise, not just the headline decision. I would compare the actual rate decision and guidance with what was priced into the curve. If the central bank was more hawkish than expected, front-end yields might rise first because the expected policy path shifts higher. That can support the currency through relative-rate differentials, pressure equity valuations through higher discount rates and potentially widen credit spreads if financial conditions tighten. I would then look at positioning: if investors were heavily positioned for a dovish outcome, the unwind could amplify the move. Finally, I would identify the next catalyst, such as inflation or labor-market data, that could confirm or challenge the new pricing.",
+      fr: "Je commencerais par l’attente préalable du marché car le mouvement dépend de la surprise, pas seulement de la décision headline. Je comparerais la décision de taux et la guidance réelles avec ce qui était pricé dans la curve. Si la banque centrale est plus hawkish qu’attendu, les yields courts peuvent monter d’abord car la trajectoire attendue de policy se déplace vers le haut. Cela peut soutenir la devise via les différentiels de taux relatifs, peser sur les valorisations equity via des discount rates plus élevés et potentiellement élargir les credit spreads si les conditions financières se resserrent. Je regarderais ensuite le positioning : si les investisseurs étaient fortement positionnés pour un résultat dovish, le unwind peut amplifier le mouvement. Enfin, j’identifierais le prochain catalyst, par exemple inflation ou données emploi, susceptible de confirmer ou remettre en cause le nouveau pricing.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
