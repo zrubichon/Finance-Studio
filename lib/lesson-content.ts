@@ -24590,7 +24590,487 @@ export const creditAnalysisLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson];
+
+
+export const privateEquityLesson: FinanceLesson = {
+  slug: "year-3-private-equity",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Private Equity", fr: "Private Equity" },
+  title: { en: "Private Equity", fr: "Private Equity" },
+  subtitle: {
+    en: "Understand how private equity investors source, evaluate, finance, own and exit companies, with a focus on leveraged buyouts, investment committee logic, value creation and return analysis.",
+    fr: "Comprendre comment les investisseurs private equity sourcent, évaluent, financent, détiennent et cèdent des entreprises, avec un focus sur les leveraged buyouts, la logique d’investissement, la création de valeur et l’analyse des returns.",
+  },
+  duration: { en: "155–185 min", fr: "155–185 min" },
+  prerequisites: [
+    { en: "Investment Banking", fr: "Investment Banking" },
+    { en: "Credit Analysis", fr: "Analyse crédit / Credit Analysis" },
+    { en: "DCF & Relative Valuation", fr: "DCF & valorisation relative" },
+    { en: "Financial Modeling I", fr: "Modélisation financière I / Financial Modeling I" },
+    { en: "Corporate Finance", fr: "Finance d’entreprise / Corporate Finance" },
+  ],
+  objectives: [
+    { en: "Explain the private equity business model and fund structure.", fr: "Expliquer le business model du private equity et la structure d’un fonds." },
+    { en: "Understand deal sourcing, diligence and investment committee decision-making.", fr: "Comprendre deal sourcing, due diligence et décisions d’investment committee." },
+    { en: "Build the logic of a basic leveraged buyout.", fr: "Comprendre la logique d’un leveraged buyout simple." },
+    { en: "Analyze debt capacity, cash generation and deleveraging.", fr: "Analyser debt capacity, génération de cash et deleveraging." },
+    { en: "Identify operational, strategic and financial value-creation levers.", fr: "Identifier les leviers opérationnels, stratégiques et financiers de création de valeur." },
+    { en: "Calculate and interpret MOIC and IRR under different exit scenarios.", fr: "Calculer et interpréter MOIC et IRR sous différents scénarios de sortie." },
+  ],
+  overviewFlow: {
+    title: { en: "From deal sourcing to exit", fr: "Du sourcing du deal à l’exit" },
+    steps: [
+      { title: { en: "Source", fr: "Sourcer" }, detail: { en: "Screen · thesis · access", fr: "Screen · thèse · accès" } },
+      { title: { en: "Underwrite", fr: "Underwriter" }, detail: { en: "Diligence · LBO · downside", fr: "Diligence · LBO · downside" } },
+      { title: { en: "Own", fr: "Détenir" }, detail: { en: "Operate · grow · delever", fr: "Opérer · croître · delever" } },
+      { title: { en: "Exit", fr: "Sortir" }, detail: { en: "Sale · IPO · returns", fr: "Vente · IPO · returns" } },
+    ],
+  },
+  sections: [
+    {
+      id: "pe-business-model",
+      kicker: { en: "01 · PRIVATE EQUITY MODEL", fr: "01 · MODÈLE PRIVATE EQUITY" },
+      title: { en: "Private equity buys control, improves businesses and exits for a return", fr: "Le private equity prend le contrôle, améliore les entreprises puis sort avec un rendement" },
+      coreFacts: [
+        { en: "Private equity funds raise capital from limited partners and invest it through a general partner.", fr: "Les fonds private equity lèvent du capital auprès de limited partners et l’investissent via un general partner." },
+        { en: "Buyout funds typically acquire controlling stakes in established companies.", fr: "Les buyout funds acquièrent généralement des participations de contrôle dans des entreprises établies." },
+        { en: "Returns depend on entry price, operating performance, leverage, cash generation and exit value.", fr: "Les returns dépendent du prix d’entrée, de la performance opérationnelle, du leverage, du cash flow et de la valeur de sortie." },
+        { en: "Private ownership allows concentrated governance and long-term operational intervention.", fr: "La détention privée permet une gouvernance concentrée et une intervention opérationnelle de long terme." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A private equity fund buys a company using a mix of investor equity and debt, improves the business over several years, then sells it. The goal is to make the equity investment worth much more at exit.",
+          fr: "Un fonds de private equity achète une entreprise avec un mix d’equity investisseur et de dette, améliore le business pendant plusieurs années puis le revend. L’objectif est que l’equity investi vaille beaucoup plus à la sortie.",
+        },
+        Intermediate: {
+          en: "The GP sources and executes deals while LPs provide most of the capital. The fund often uses leverage to increase equity efficiency, but debt also increases downside risk and makes cash-flow stability more important.",
+          fr: "Le GP source et exécute les deals tandis que les LPs apportent la majorité du capital. Le fonds utilise souvent du leverage pour améliorer l’efficacité de l’equity, mais la dette augmente aussi le downside risk et rend la stabilité des cash flows plus importante.",
+        },
+        Professional: {
+          en: "Private equity underwriting combines control, governance, leverage and operational transformation. Attractive deals require an explicit path to value creation that is not solely dependent on multiple expansion.",
+          fr: "L’underwriting private equity combine contrôle, gouvernance, leverage et transformation opérationnelle. Les deals attractifs exigent un chemin explicite vers la création de valeur qui ne repose pas uniquement sur une expansion du multiple.",
+        },
+      },
+      vocabulary: [
+        { en: "GP", fr: "General Partner", definition: { en: "Fund manager responsible for sourcing, investing and managing the portfolio.", fr: "Gestionnaire du fonds responsable du sourcing, des investissements et du portefeuille." } },
+        { en: "LP", fr: "Limited Partner", definition: { en: "Investor providing capital to a private equity fund.", fr: "Investisseur apportant du capital à un fonds de private equity." } },
+        { en: "Control investment", fr: "investissement de contrôle", definition: { en: "Investment giving the buyer effective decision-making control over the company.", fr: "Investissement donnant à l’acheteur un contrôle effectif sur les décisions de l’entreprise." } },
+      ],
+    },
+    {
+      id: "fund-economics",
+      kicker: { en: "02 · FUND ECONOMICS", fr: "02 · ÉCONOMIE DU FONDS" },
+      title: { en: "Fund returns and manager economics are related but not identical", fr: "Les returns du fonds et l’économie du manager sont liés mais différents" },
+      coreFacts: [
+        { en: "Private equity funds commonly charge management fees and receive carried interest on profits subject to fund terms.", fr: "Les fonds private equity facturent généralement des management fees et perçoivent du carried interest sur les profits selon les termes du fonds." },
+        { en: "Fund life is long because capital is raised, deployed, held and realized over multiple years.", fr: "La durée de vie d’un fonds est longue car le capital est levé, déployé, détenu puis réalisé sur plusieurs années." },
+        { en: "Committed capital is not necessarily invested immediately.", fr: "Le committed capital n’est pas forcément investi immédiatement." },
+        { en: "Portfolio-company returns ultimately drive fund-level value creation.", fr: "Les returns des portfolio companies déterminent in fine la création de valeur au niveau du fonds." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Investors promise capital to the fund, but the fund calls that capital when it finds investments. The manager earns fees and may receive a share of profits if returns are strong enough.",
+          fr: "Les investisseurs promettent du capital au fonds, mais celui-ci appelle le capital lorsqu’il trouve des investissements. Le manager perçoit des fees et peut recevoir une part des profits si les returns sont suffisants.",
+        },
+        Intermediate: {
+          en: "Fund economics involve committed capital, invested capital, management fees, distributions and carry. The exact waterfall varies by fund agreement and should not be simplified into one universal structure.",
+          fr: "L’économie du fonds implique committed capital, invested capital, management fees, distributions et carry. La waterfall exacte varie selon le contrat du fonds et ne doit pas être réduite à une structure universelle.",
+        },
+        Professional: {
+          en: "A GP evaluates both gross and net returns. Strong deal-level IRRs can translate into weaker net LP returns after fees, timing, unused commitments and fund expenses, so fund construction and pacing matter.",
+          fr: "Un GP évalue les returns bruts et nets. Des deal-level IRRs élevés peuvent se traduire par des returns nets LP plus faibles après fees, timing, engagements non utilisés et dépenses du fonds ; construction du fonds et pacing sont donc importants.",
+        },
+      },
+      vocabulary: [
+        { en: "Committed capital", fr: "capital engagé", definition: { en: "Capital an LP agrees to provide to the fund when called.", fr: "Capital qu’un LP s’engage à fournir au fonds lorsqu’il est appelé." } },
+        { en: "Carried interest", fr: "carried interest", definition: { en: "Share of investment profits allocated to the GP under fund terms.", fr: "Part des profits d’investissement attribuée au GP selon les termes du fonds." } },
+        { en: "Capital call", fr: "capital call", definition: { en: "Request by the fund for LPs to fund part of their commitments.", fr: "Demande du fonds aux LPs de verser une partie de leurs engagements." } },
+      ],
+    },
+    {
+      id: "sourcing-diligence",
+      kicker: { en: "03 · SOURCING & DILIGENCE", fr: "03 · SOURCING & DILIGENCE" },
+      title: { en: "A good deal starts with a differentiated reason to own the business", fr: "Un bon deal commence par une raison différenciée de vouloir posséder le business" },
+      coreFacts: [
+        { en: "Deal sourcing can come from auctions, banker relationships, proprietary outreach or sector specialization.", fr: "Le deal sourcing peut venir d’auctions, relations bancaires, outreach propriétaire ou spécialisation sectorielle." },
+        { en: "Diligence typically covers commercial, financial, legal, tax, operational and management topics.", fr: "La diligence couvre généralement commercial, financial, legal, tax, operational et management." },
+        { en: "Private equity diligence focuses on both upside opportunity and downside survivability.", fr: "La diligence private equity se concentre à la fois sur l’upside opportunity et la capacité à survivre au downside." },
+        { en: "Investment committees require a clear thesis, risks, return case and downside case.", fr: "Les investment committees exigent une thèse claire, les risques, le return case et le downside case." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Before buying a company, a PE fund tries to answer: is this a good business, can we improve it, can it support debt, and can we eventually sell it for an attractive return?",
+          fr: "Avant d’acheter une entreprise, un fonds PE cherche à répondre à : est-ce un bon business, peut-on l’améliorer, peut-il supporter de la dette, et pourra-t-on le revendre avec un return attractif ?",
+        },
+        Intermediate: {
+          en: "Commercial diligence tests market growth, competition and customers. Financial diligence tests earnings quality and cash conversion. Management diligence evaluates execution ability and alignment.",
+          fr: "La commercial diligence teste croissance du marché, concurrence et clients. La financial diligence teste quality of earnings et conversion en cash. La management diligence évalue capacité d’exécution et alignment.",
+        },
+        Professional: {
+          en: "Underwriting should isolate what must be true for target returns to be achieved. The strongest investment cases distinguish controllable value-creation levers from external assumptions such as macro growth or exit multiples.",
+          fr: "L’underwriting doit isoler ce qui doit être vrai pour atteindre les target returns. Les meilleures thèses distinguent les leviers de création de valeur contrôlables des hypothèses externes comme la croissance macro ou les exit multiples.",
+        },
+      },
+      vocabulary: [
+        { en: "Proprietary deal", fr: "deal propriétaire", definition: { en: "Opportunity sourced with limited or no broad auction process.", fr: "Opportunité sourcée avec peu ou pas de processus d’enchère large." } },
+        { en: "Quality of earnings", fr: "quality of earnings", definition: { en: "Analysis of how sustainable and cash-representative reported earnings are.", fr: "Analyse du caractère durable et représentatif en cash des earnings publiés." } },
+        { en: "Investment committee", fr: "investment committee", definition: { en: "Decision body that approves or rejects proposed investments.", fr: "Organe de décision qui approuve ou rejette les investissements proposés." } },
+      ],
+    },
+    {
+      id: "lbo-mechanics",
+      kicker: { en: "04 · LBO MECHANICS", fr: "04 · MÉCANIQUE LBO" },
+      title: { en: "An LBO is a sources-and-uses problem followed by a cash-flow problem", fr: "Un LBO est d’abord un problème de sources & uses, puis un problème de cash flow" },
+      coreFacts: [
+        { en: "Purchase price and transaction costs determine total uses of funds.", fr: "Purchase price et transaction costs déterminent les uses totaux." },
+        { en: "Debt and sponsor equity provide the sources of funds.", fr: "La dette et l’equity du sponsor fournissent les sources de financement." },
+        { en: "The sponsor’s initial equity is the residual amount after available debt financing.", fr: "L’equity initial du sponsor est le montant résiduel après financement par dette disponible." },
+        { en: "Future cash flow is used to service or repay debt before equity is realized at exit.", fr: "Les futurs cash flows servent à payer ou rembourser la dette avant la réalisation de l’equity à l’exit." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company costs $1 billion and lenders provide $600 million, the PE fund must provide roughly the remaining $400 million plus any fees or adjustments.",
+          fr: "Si une entreprise coûte 1 Md$ et que les prêteurs apportent 600 M$, le fonds PE doit apporter environ les 400 M$ restants plus les fees ou ajustements.",
+        },
+        Intermediate: {
+          en: "A basic LBO model starts with entry enterprise value, bridges to equity purchase price, adds fees, defines debt tranches, and calculates sponsor equity. It then forecasts operations, cash flow and debt paydown through exit.",
+          fr: "Un LBO model simple commence par l’entry enterprise value, bridge vers equity purchase price, ajoute les fees, définit les tranches de dette et calcule sponsor equity. Puis il forecast opérations, cash flow et debt paydown jusqu’à l’exit.",
+        },
+        Professional: {
+          en: "Transaction modeling must reconcile purchase accounting, financing fees, minimum cash, revolver mechanics and debt amortization. A credible LBO is fully linked and does not manufacture returns through inconsistent cash or leverage assumptions.",
+          fr: "La modélisation transactionnelle doit réconcilier purchase accounting, financing fees, minimum cash, mécanique du revolver et amortissement de la dette. Un LBO crédible est entièrement relié et ne fabrique pas les returns avec des hypothèses incohérentes de cash ou leverage.",
+        },
+      },
+      formula: {
+        label: { en: "Sponsor equity", fr: "Sponsor equity" },
+        expression: "Sponsor Equity = Total Uses − Debt Financing − Other Sources",
+        explanation: { en: "This is the initial equity capital the sponsor must invest.", fr: "Il s’agit de l’equity initial que le sponsor doit investir." },
+      },
+      vocabulary: [
+        { en: "Sources & uses", fr: "sources & uses", definition: { en: "Schedule showing how a transaction is funded and where funds are spent.", fr: "Tableau montrant comment une transaction est financée et comment les fonds sont utilisés." } },
+        { en: "Sponsor equity", fr: "sponsor equity", definition: { en: "Equity capital contributed by the private equity investor.", fr: "Capital equity apporté par l’investisseur private equity." } },
+      ],
+    },
+    {
+      id: "debt-and-deleveraging",
+      kicker: { en: "05 · DEBT & DELEVERAGING", fr: "05 · DETTE & DELEVERAGING" },
+      title: { en: "Debt amplifies equity returns only if the business can safely carry it", fr: "La dette amplifie les returns equity seulement si le business peut la supporter" },
+      coreFacts: [
+        { en: "Debt capacity depends on cash-flow stability, leverage tolerance, collateral and lender appetite.", fr: "La debt capacity dépend de la stabilité des cash flows, de la tolérance au leverage, du collateral et de l’appétit des prêteurs." },
+        { en: "Excess cash flow can reduce debt and increase equity value over the holding period.", fr: "L’excess cash flow peut réduire la dette et augmenter l’equity value pendant la période de détention." },
+        { en: "Higher leverage can improve equity returns but also raises default and refinancing risk.", fr: "Un leverage plus élevé peut améliorer les equity returns mais augmente aussi default et refinancing risk." },
+        { en: "Debt schedules should reflect mandatory amortization, optional paydown, interest and covenants.", fr: "Les debt schedules doivent refléter amortissement obligatoire, optional paydown, intérêts et covenants." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If the company pays down debt while its business value stays the same, more of the company’s value belongs to the equity owner at exit.",
+          fr: "Si l’entreprise rembourse sa dette alors que sa valeur d’entreprise reste la même, une plus grande part de la valeur appartient à l’actionnaire à l’exit.",
+        },
+        Intermediate: {
+          en: "PE investors like businesses with strong cash conversion because free cash flow can reduce debt quickly. Deleveraging creates equity value even without multiple expansion.",
+          fr: "Les investisseurs PE apprécient les entreprises avec une forte conversion en cash car le free cash flow peut réduire rapidement la dette. Le deleveraging crée de l’equity value même sans expansion de multiple.",
+        },
+        Professional: {
+          en: "The capital structure should be sized to survive downside cases, not merely maximize base-case IRR. Interest-rate exposure, maturities, covenant headroom and refinancing assumptions must all be stressed.",
+          fr: "La capital structure doit être dimensionnée pour survivre aux downside cases, pas seulement maximiser le base-case IRR. Exposition aux taux, maturités, covenant headroom et hypothèses de refinancement doivent toutes être stressées.",
+        },
+      },
+      vocabulary: [
+        { en: "Deleveraging", fr: "deleveraging", definition: { en: "Reduction of debt relative to company earnings or value.", fr: "Réduction de la dette par rapport aux earnings ou à la valeur de l’entreprise." } },
+        { en: "Cash sweep", fr: "cash sweep", definition: { en: "Mechanism using excess cash to repay debt.", fr: "Mécanisme utilisant l’excès de cash pour rembourser la dette." } },
+      ],
+    },
+    {
+      id: "value-creation",
+      kicker: { en: "06 · VALUE CREATION", fr: "06 · CRÉATION DE VALEUR" },
+      title: { en: "The best PE returns come from improving the business, not just financial engineering", fr: "Les meilleurs returns PE viennent de l’amélioration du business, pas seulement de l’ingénierie financière" },
+      coreFacts: [
+        { en: "Value creation can come from revenue growth, margin expansion, acquisitions, working-capital improvement and better capital allocation.", fr: "La création de valeur peut venir de croissance du revenue, expansion des marges, acquisitions, amélioration du working capital et meilleure allocation du capital." },
+        { en: "Management incentives are often redesigned to align leadership with equity value creation.", fr: "Les incentives du management sont souvent redessinés pour aligner les dirigeants avec la création de valeur equity." },
+        { en: "Buy-and-build strategies acquire smaller companies to create scale or strategic synergies.", fr: "Les stratégies buy-and-build acquièrent de plus petites entreprises pour créer de l’échelle ou des synergies stratégiques." },
+        { en: "Multiple expansion is uncertain and should generally be treated more cautiously than operational improvement.", fr: "L’expansion du multiple est incertaine et doit généralement être traitée plus prudemment que l’amélioration opérationnelle." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A PE owner may help the company grow sales, improve costs, make better acquisitions or use cash more efficiently. These changes can raise the company’s value before it is sold.",
+          fr: "Un propriétaire PE peut aider l’entreprise à développer les ventes, améliorer les coûts, réaliser de meilleures acquisitions ou utiliser le cash plus efficacement. Ces changements peuvent augmenter la valeur avant la revente.",
+        },
+        Intermediate: {
+          en: "A return bridge often separates EBITDA growth, multiple change and debt paydown. This helps investors understand whether value came from operating improvement or favorable market conditions.",
+          fr: "Un return bridge sépare souvent croissance de l’EBITDA, changement de multiple et debt paydown. Cela aide à comprendre si la valeur vient de l’amélioration opérationnelle ou de conditions de marché favorables.",
+        },
+        Professional: {
+          en: "A credible value-creation plan assigns owners, timing, investment needs and measurable KPIs to each initiative. Underwriting should discount execution risk rather than assume every operational initiative succeeds perfectly.",
+          fr: "Un value-creation plan crédible attribue responsables, timing, besoins d’investissement et KPIs mesurables à chaque initiative. L’underwriting doit intégrer execution risk plutôt que supposer que chaque initiative réussit parfaitement.",
+        },
+      },
+      vocabulary: [
+        { en: "Buy-and-build", fr: "buy-and-build", definition: { en: "Strategy of acquiring a platform and adding smaller businesses over time.", fr: "Stratégie consistant à acquérir une plateforme puis ajouter de plus petites entreprises." } },
+        { en: "Value-creation plan", fr: "plan de création de valeur", definition: { en: "Operational and strategic roadmap designed to increase equity value.", fr: "Feuille de route opérationnelle et stratégique visant à augmenter l’equity value." } },
+      ],
+    },
+    {
+      id: "returns-moic-irr",
+      kicker: { en: "07 · MOIC & IRR", fr: "07 · MOIC & IRR" },
+      title: { en: "MOIC measures how much money was made; IRR also cares how fast", fr: "Le MOIC mesure combien a été gagné ; l’IRR tient aussi compte de la vitesse" },
+      coreFacts: [
+        { en: "MOIC compares total equity proceeds with invested equity.", fr: "Le MOIC compare les proceeds equity totaux avec l’equity investi." },
+        { en: "IRR incorporates both magnitude and timing of cash flows.", fr: "L’IRR intègre à la fois le montant et le timing des cash flows." },
+        { en: "Shorter holding periods can increase IRR even when MOIC is unchanged.", fr: "Des holding periods plus courtes peuvent augmenter l’IRR même si le MOIC ne change pas." },
+        { en: "Return analysis should include base, upside and downside cases.", fr: "L’analyse des returns doit inclure base, upside et downside cases." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a fund invests $100 and receives $250 at exit, MOIC is 2.5×. If that happens in three years instead of seven, the IRR is much higher because the money came back faster.",
+          fr: "Si un fonds investit 100 $ et récupère 250 $ à l’exit, le MOIC est 2,5×. Si cela arrive en trois ans au lieu de sept, l’IRR est beaucoup plus élevé car l’argent revient plus vite.",
+        },
+        Intermediate: {
+          en: "PE investors usually examine both MOIC and IRR because each answers a different question. MOIC measures total multiple of capital; IRR measures annualized return considering timing.",
+          fr: "Les investisseurs PE regardent généralement MOIC et IRR car chacun répond à une question différente. Le MOIC mesure le multiple total de capital ; l’IRR mesure le rendement annualisé en tenant compte du timing.",
+        },
+        Professional: {
+          en: "High IRRs can be driven by short-duration exits or early distributions, while high MOICs can take many years. Investment committees should evaluate both alongside risk, cash-flow path and capital intensity.",
+          fr: "Des IRRs élevés peuvent être liés à des exits rapides ou distributions précoces, tandis que de hauts MOICs peuvent prendre de nombreuses années. Les investment committees doivent évaluer les deux avec risque, trajectoire des cash flows et capital intensity.",
+        },
+      },
+      formula: {
+        label: { en: "MOIC", fr: "MOIC" },
+        expression: "MOIC = Total Equity Proceeds / Invested Equity",
+        explanation: { en: "A 2.0× MOIC means the sponsor receives twice the equity capital invested.", fr: "Un MOIC de 2,0× signifie que le sponsor reçoit deux fois l’equity investi." },
+        workedExample: { en: "$300m proceeds / $120m invested equity = 2.5× MOIC.", fr: "300 M$ de proceeds / 120 M$ d’equity investi = 2,5× de MOIC." },
+      },
+      vocabulary: [
+        { en: "MOIC", fr: "Multiple on Invested Capital", definition: { en: "Total equity value returned relative to equity invested.", fr: "Valeur equity totale récupérée par rapport à l’equity investi." } },
+        { en: "IRR", fr: "Internal Rate of Return", definition: { en: "Annualized discount rate that sets investment cash-flow NPV to zero.", fr: "Taux annualisé qui annule la NPV des cash flows d’investissement." } },
+      ],
+    },
+    {
+      id: "exit-analysis",
+      kicker: { en: "08 · EXIT ANALYSIS", fr: "08 · ANALYSE DE SORTIE" },
+      title: { en: "Exit value converts operating performance and capital structure into sponsor proceeds", fr: "L’exit value transforme performance opérationnelle et capital structure en proceeds sponsor" },
+      coreFacts: [
+        { en: "Common exits include strategic sales, sponsor-to-sponsor sales and IPOs.", fr: "Les exits courants incluent strategic sales, sponsor-to-sponsor sales et IPOs." },
+        { en: "Exit enterprise value is often estimated using an exit EBITDA multiple.", fr: "L’exit enterprise value est souvent estimée avec un exit EBITDA multiple." },
+        { en: "Net debt at exit is subtracted from enterprise value to determine equity value.", fr: "La net debt à l’exit est soustraite de l’enterprise value pour obtenir l’equity value." },
+        { en: "Exit multiple assumptions should be sensitized because they can materially affect returns.", fr: "Les hypothèses d’exit multiple doivent être sensibilisées car elles peuvent fortement affecter les returns." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If the company is worth $1.5 billion at exit and still has $400 million of net debt, the equity value is about $1.1 billion before other adjustments.",
+          fr: "Si l’entreprise vaut 1,5 Md$ à l’exit et possède encore 400 M$ de net debt, l’equity value est d’environ 1,1 Md$ avant autres ajustements.",
+        },
+        Intermediate: {
+          en: "Returns are very sensitive to exit EBITDA, exit multiple and remaining debt. A disciplined model therefore shows a sensitivity table across multiple and operating scenarios.",
+          fr: "Les returns sont très sensibles à l’exit EBITDA, l’exit multiple et la dette restante. Un modèle discipliné montre donc une sensitivity table selon plusieurs scénarios de multiple et performance opérationnelle.",
+        },
+        Professional: {
+          en: "Exit assumptions should reflect buyer universe, market conditions, asset quality and strategic optionality. Assuming a higher exit multiple than entry requires a defensible reason rather than convenience.",
+          fr: "Les hypothèses d’exit doivent refléter univers d’acheteurs, conditions de marché, qualité de l’actif et options stratégiques. Supposer un exit multiple supérieur à l’entry exige une raison défendable plutôt qu’une simple convenance.",
+        },
+      },
+      formula: {
+        label: { en: "Exit equity value", fr: "Exit equity value" },
+        expression: "Exit Equity Value = Exit Enterprise Value − Exit Net Debt",
+        explanation: { en: "This value belongs to equity holders before fees or other transaction adjustments.", fr: "Cette valeur revient aux actionnaires avant fees ou autres ajustements de transaction." },
+      },
+      vocabulary: [
+        { en: "Sponsor-to-sponsor", fr: "sponsor-to-sponsor", definition: { en: "Sale of a portfolio company from one private equity owner to another.", fr: "Vente d’une portfolio company d’un fonds private equity à un autre." } },
+        { en: "Exit multiple", fr: "exit multiple", definition: { en: "Valuation multiple applied to financial performance at exit.", fr: "Multiple de valuation appliqué à la performance financière à l’exit." } },
+      ],
+    },
+    {
+      id: "pe-interviews",
+      kicker: { en: "09 · PE INTERVIEWS", fr: "09 · ENTRETIENS PRIVATE EQUITY" },
+      title: { en: "Private equity interviews test investment judgment, not just modeling speed", fr: "Les entretiens private equity testent le jugement d’investissement, pas seulement la vitesse de modélisation" },
+      coreFacts: [
+        { en: "Common interviews test LBO mechanics, accounting, valuation, returns and investment judgment.", fr: "Les entretiens testent souvent mécanique LBO, accounting, valuation, returns et jugement d’investissement." },
+        { en: "Candidates should explain why a company is or is not a good LBO candidate.", fr: "Les candidats doivent expliquer pourquoi une entreprise est ou non un bon candidat LBO." },
+        { en: "Case studies often require an investment thesis, model, risks and recommendation.", fr: "Les case studies exigent souvent thèse d’investissement, modèle, risques et recommandation." },
+        { en: "Strong answers focus on downside protection as well as upside.", fr: "Les bonnes réponses se concentrent sur downside protection autant que sur upside." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A good LBO candidate often has stable cash flow, manageable capex, strong margins, room for improvement and enough debt capacity.",
+          fr: "Un bon candidat LBO possède souvent des cash flows stables, un capex gérable, de bonnes marges, de la marge d’amélioration et une debt capacity suffisante.",
+        },
+        Intermediate: {
+          en: "When pitching a PE deal, explain entry valuation, business quality, value-creation plan, leverage, exit assumptions, expected returns and major risks.",
+          fr: "Lorsqu’on pitch un deal PE, il faut expliquer entry valuation, qualité du business, value-creation plan, leverage, hypothèses d’exit, returns attendus et risques majeurs.",
+        },
+        Professional: {
+          en: "The strongest candidates identify which assumptions drive returns, distinguish controllable from uncontrollable value creation and explain what protects capital if the operating plan underperforms.",
+          fr: "Les meilleurs candidats identifient les hypothèses qui déterminent les returns, distinguent création de valeur contrôlable et non contrôlable et expliquent ce qui protège le capital si le plan opérationnel sous-performe.",
+        },
+      },
+      comparison: {
+        title: { en: "Good LBO candidate characteristics", fr: "Caractéristiques d’un bon candidat LBO" },
+        headers: [{ en: "Attractive", fr: "Attractif" }, { en: "Why", fr: "Pourquoi" }],
+        rows: [
+          { cells: [{ en: "Stable cash flow", fr: "Cash flow stable" }, { en: "Supports debt service", fr: "Soutient le service de la dette" }] },
+          { cells: [{ en: "Low-to-moderate capex", fr: "Capex faible à modéré" }, { en: "Improves cash conversion", fr: "Améliore la conversion en cash" }] },
+          { cells: [{ en: "Operational upside", fr: "Upside opérationnel" }, { en: "Creates value beyond leverage", fr: "Crée de la valeur au-delà du leverage" }] },
+          { cells: [{ en: "Defensible market position", fr: "Position de marché défendable" }, { en: "Reduces downside risk", fr: "Réduit le downside risk" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "LBO candidate", fr: "candidat LBO", definition: { en: "Company whose characteristics are suitable for leveraged buyout underwriting.", fr: "Entreprise dont les caractéristiques conviennent à un leveraged buyout." } },
+        { en: "Return driver", fr: "driver de return", definition: { en: "Factor such as EBITDA growth, debt paydown or multiple change that affects sponsor returns.", fr: "Facteur comme croissance EBITDA, debt paydown ou changement de multiple affectant les sponsor returns." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "pe-model",
+      question: { en: "What is a typical private equity buyout objective?", fr: "Quel est un objectif typique d’un buyout private equity ?" },
+      options: [
+        { id: "a", label: { en: "Acquire control, improve the business and exit for an attractive return", fr: "Prendre le contrôle, améliorer le business et sortir avec un return attractif" } },
+        { id: "b", label: { en: "Hold only cash permanently", fr: "Détenir uniquement du cash en permanence" } },
+        { id: "c", label: { en: "Avoid all operational involvement", fr: "Éviter toute implication opérationnelle" } },
+        { id: "d", label: { en: "Eliminate all debt markets", fr: "Éliminer tous les marchés de dette" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Buyout funds seek control and an explicit path to equity value creation.", fr: "Les buyout funds recherchent le contrôle et un chemin explicite vers la création de valeur equity." },
+    },
+    {
+      id: "q2",
+      conceptKey: "lp-gp",
+      question: { en: "Who typically provides most of the capital to a PE fund?", fr: "Qui fournit généralement la majorité du capital à un fonds PE ?" },
+      options: [
+        { id: "a", label: { en: "Limited partners", fr: "Limited partners" } },
+        { id: "b", label: { en: "Only the portfolio company", fr: "Uniquement la portfolio company" } },
+        { id: "c", label: { en: "Only employees", fr: "Uniquement les employés" } },
+        { id: "d", label: { en: "Only lenders", fr: "Uniquement les prêteurs" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "LPs commit capital while the GP manages the fund and investments.", fr: "Les LPs engagent du capital tandis que le GP gère le fonds et les investissements." },
+    },
+    {
+      id: "q3",
+      conceptKey: "diligence",
+      question: { en: "What should PE diligence test?", fr: "Que doit tester la diligence PE ?" },
+      options: [
+        { id: "a", label: { en: "Business quality, cash flow, management, risks and downside resilience", fr: "Qualité du business, cash flow, management, risques et résilience downside" } },
+        { id: "b", label: { en: "Only the company logo", fr: "Uniquement le logo de l’entreprise" } },
+        { id: "c", label: { en: "Only historical stock price", fr: "Uniquement l’historique du cours" } },
+        { id: "d", label: { en: "No operating assumptions", fr: "Aucune hypothèse opérationnelle" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "PE underwriting combines commercial, financial and downside analysis.", fr: "L’underwriting PE combine analyse commerciale, financière et downside." },
+    },
+    {
+      id: "q4",
+      conceptKey: "sources-uses",
+      question: { en: "In an LBO, sponsor equity is approximately:", fr: "Dans un LBO, le sponsor equity est approximativement :" },
+      options: [
+        { id: "a", label: { en: "Total uses minus debt and other sources", fr: "Total uses moins dette et autres sources" } },
+        { id: "b", label: { en: "Revenue minus EBITDA", fr: "Revenue moins EBITDA" } },
+        { id: "c", label: { en: "Debt plus interest expense", fr: "Dette plus interest expense" } },
+        { id: "d", label: { en: "Exit value minus revenue", fr: "Exit value moins revenue" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Sponsor equity fills the funding gap after debt and other sources.", fr: "Le sponsor equity comble le besoin de financement après dette et autres sources." },
+    },
+    {
+      id: "q5",
+      conceptKey: "deleveraging",
+      question: { en: "Why does debt paydown increase sponsor equity value, all else equal?", fr: "Pourquoi le remboursement de dette augmente-t-il l’equity value du sponsor, toutes choses égales par ailleurs ?" },
+      options: [
+        { id: "a", label: { en: "Less net debt is subtracted from enterprise value at exit", fr: "Moins de net debt est soustraite de l’enterprise value à l’exit" } },
+        { id: "b", label: { en: "It always raises revenue", fr: "Il augmente toujours le revenue" } },
+        { id: "c", label: { en: "It guarantees multiple expansion", fr: "Il garantit une expansion du multiple" } },
+        { id: "d", label: { en: "It eliminates taxes", fr: "Il élimine les taxes" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Lower net debt leaves more enterprise value attributable to equity holders.", fr: "Une net debt plus faible laisse davantage d’enterprise value aux actionnaires." },
+    },
+    {
+      id: "q6",
+      conceptKey: "value-creation",
+      question: { en: "Which is a controllable PE value-creation lever?", fr: "Quel est un levier contrôlable de création de valeur PE ?" },
+      options: [
+        { id: "a", label: { en: "Operational margin improvement", fr: "Amélioration opérationnelle des marges" } },
+        { id: "b", label: { en: "Guaranteed market multiple expansion", fr: "Expansion garantie du multiple de marché" } },
+        { id: "c", label: { en: "Guaranteed lower interest rates", fr: "Baisse garantie des taux" } },
+        { id: "d", label: { en: "Guaranteed economic boom", fr: "Boom économique garanti" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Operational improvement is more controllable than external market assumptions.", fr: "L’amélioration opérationnelle est plus contrôlable que les hypothèses externes de marché." },
+    },
+    {
+      id: "q7",
+      conceptKey: "moic",
+      question: { en: "A sponsor invests $120m and receives $300m. What is MOIC?", fr: "Un sponsor investit 120 M$ et récupère 300 M$. Quel est le MOIC ?" },
+      options: [
+        { id: "a", label: { en: "2.5×", fr: "2,5×" } },
+        { id: "b", label: { en: "1.2×", fr: "1,2×" } },
+        { id: "c", label: { en: "3.6×", fr: "3,6×" } },
+        { id: "d", label: { en: "0.4×", fr: "0,4×" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "MOIC = 300 / 120 = 2.5×.", fr: "MOIC = 300 / 120 = 2,5×." },
+    },
+    {
+      id: "q8",
+      conceptKey: "irr",
+      question: { en: "If MOIC is unchanged, what generally increases IRR?", fr: "Si le MOIC ne change pas, qu’est-ce qui augmente généralement l’IRR ?" },
+      options: [
+        { id: "a", label: { en: "A shorter holding period", fr: "Une holding period plus courte" } },
+        { id: "b", label: { en: "A longer holding period", fr: "Une holding period plus longue" } },
+        { id: "c", label: { en: "No distributions ever", fr: "Aucune distribution" } },
+        { id: "d", label: { en: "Higher transaction fees only", fr: "Uniquement des fees plus élevés" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "IRR rewards receiving the same value sooner.", fr: "L’IRR récompense la réception de la même valeur plus rapidement." },
+    },
+    {
+      id: "q9",
+      conceptKey: "exit-equity",
+      question: { en: "Exit EV is $1.5bn and exit net debt is $0.4bn. Exit equity value is approximately:", fr: "L’exit EV est 1,5 Md$ et la net debt à l’exit 0,4 Md$. L’exit equity value est environ :" },
+      options: [
+        { id: "a", label: { en: "$1.1bn", fr: "1,1 Md$" } },
+        { id: "b", label: { en: "$1.9bn", fr: "1,9 Md$" } },
+        { id: "c", label: { en: "$0.4bn", fr: "0,4 Md$" } },
+        { id: "d", label: { en: "$3.75bn", fr: "3,75 Md$" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Equity value = enterprise value − net debt.", fr: "Equity value = enterprise value − net debt." },
+    },
+    {
+      id: "q10",
+      conceptKey: "lbo-candidate",
+      question: { en: "Which characteristic usually makes a company more attractive for an LBO?", fr: "Quelle caractéristique rend généralement une entreprise plus attractive pour un LBO ?" },
+      options: [
+        { id: "a", label: { en: "Stable cash flow and clear operational upside", fr: "Cash flow stable et upside opérationnel clair" } },
+        { id: "b", label: { en: "Highly unpredictable cash flow and no debt capacity", fr: "Cash flow très imprévisible et aucune debt capacity" } },
+        { id: "c", label: { en: "Permanent negative margins", fr: "Marges durablement négatives" } },
+        { id: "d", label: { en: "No path to exit", fr: "Aucun chemin vers l’exit" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Stable cash generation supports leverage while operational upside provides value creation beyond financial engineering.", fr: "Une génération de cash stable soutient le leverage tandis que l’upside opérationnel crée de la valeur au-delà de l’ingénierie financière." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "What makes a company a good LBO candidate, and what are the main drivers of private equity returns?",
+      fr: "Qu’est-ce qui fait d’une entreprise un bon candidat LBO, et quels sont les principaux drivers de returns en private equity ?",
+    },
+    framework: [
+      { en: "Look for stable and predictable cash flow with defensible market positioning.", fr: "Rechercher des cash flows stables et prévisibles avec une position de marché défendable." },
+      { en: "Assess leverage capacity, capex needs and cash conversion.", fr: "Évaluer leverage capacity, besoins de capex et conversion en cash." },
+      { en: "Identify operational and strategic value-creation levers.", fr: "Identifier les leviers opérationnels et stratégiques de création de valeur." },
+      { en: "Underwrite entry valuation and downside risk conservatively.", fr: "Underwriter entry valuation et downside risk de manière prudente." },
+      { en: "Model debt paydown, exit EBITDA and exit multiple.", fr: "Modéliser debt paydown, exit EBITDA et exit multiple." },
+      { en: "Evaluate MOIC and IRR across base, upside and downside cases.", fr: "Évaluer MOIC et IRR sur base, upside et downside cases." },
+    ],
+    sample: {
+      en: "A good LBO candidate usually has stable and predictable cash flow, a defensible market position, manageable capex, strong cash conversion and enough debt capacity to support leverage without making the business fragile. I also want a clear value-creation plan—such as revenue growth, margin improvement, better working capital, add-on acquisitions or stronger management execution—because relying only on multiple expansion is risky. In the model, the key return drivers are entry valuation, EBITDA growth, debt paydown and exit multiple. I would stress each of those variables and make sure the company can still service debt in a downside scenario. At exit, enterprise value minus net debt gives equity value, which drives sponsor proceeds. I would then evaluate both MOIC and IRR because MOIC shows total value creation while IRR also captures how quickly capital is returned.",
+      fr: "Un bon candidat LBO possède généralement des cash flows stables et prévisibles, une position de marché défendable, un capex gérable, une forte conversion en cash et suffisamment de debt capacity pour supporter le leverage sans rendre le business fragile. Je recherche aussi un value-creation plan clair—par exemple croissance du revenue, amélioration des marges, meilleur working capital, add-on acquisitions ou meilleure exécution du management—car dépendre uniquement d’une expansion de multiple est risqué. Dans le modèle, les principaux drivers de return sont l’entry valuation, la croissance de l’EBITDA, le debt paydown et l’exit multiple. Je stresserais chacune de ces variables et vérifierais que l’entreprise peut toujours servir sa dette dans un downside scenario. À l’exit, enterprise value moins net debt donne l’equity value, qui détermine les proceeds du sponsor. J’évaluerais ensuite MOIC et IRR car le MOIC montre la création de valeur totale tandis que l’IRR tient aussi compte de la vitesse de retour du capital.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
