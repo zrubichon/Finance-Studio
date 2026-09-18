@@ -5948,7 +5948,885 @@ export const macroeconomicsForMarketsLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson];
+
+export const financialAccountingILesson: FinanceLesson = {
+  slug: "year-1-financial-accounting-i",
+  year: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations" },
+  domain: {
+    en: "Accounting & Statements",
+    fr: "Comptabilité & états financiers / Accounting & Statements",
+  },
+  title: {
+    en: "Financial Accounting I",
+    fr: "Comptabilité financière I / Financial Accounting I",
+  },
+  subtitle: {
+    en: "Learn the language behind company financial statements: the balance sheet, income statement and cash flow statement, how accrual accounting works, and how transactions flow through all three statements.",
+    fr: "Apprendre le langage des états financiers d’une entreprise : bilan / balance sheet, compte de résultat / income statement et tableau des flux de trésorerie / cash flow statement, comprendre l’accrual accounting et suivre les transactions à travers les trois états.",
+  },
+  duration: { en: "95–120 min", fr: "95–120 min" },
+  prerequisites: [
+    {
+      en: "Basic algebra and percentages",
+      fr: "Algèbre simple et pourcentages",
+    },
+    {
+      en: "Time Value of Money",
+      fr: "Valeur temps de l’argent / Time Value of Money",
+    },
+  ],
+  objectives: [
+    {
+      en: "Explain the purpose of the balance sheet, income statement and cash flow statement.",
+      fr: "Expliquer le rôle du bilan / balance sheet, du compte de résultat / income statement et du tableau des flux de trésorerie / cash flow statement.",
+    },
+    {
+      en: "Use the accounting equation and classify common assets, liabilities and equity accounts.",
+      fr: "Utiliser l’équation comptable et classer les principaux actifs, passifs et capitaux propres / equity.",
+    },
+    {
+      en: "Explain accrual accounting and distinguish revenue, expenses, profit and cash.",
+      fr: "Expliquer la comptabilité d’engagement / accrual accounting et distinguer revenu, dépenses, bénéfice et cash.",
+    },
+    {
+      en: "Classify cash flows into operating, investing and financing activities under common reporting conventions.",
+      fr: "Classer les flux de trésorerie entre activités opérationnelles / operating, d’investissement / investing et de financement / financing selon les conventions usuelles.",
+    },
+    {
+      en: "Link net income, retained earnings, depreciation, working capital and cash across the statements.",
+      fr: "Relier net income, retained earnings, depreciation, working capital et cash entre les différents états.",
+    },
+    {
+      en: "Recognize why earnings quality and cash conversion matter to investors.",
+      fr: "Comprendre pourquoi qualité des bénéfices / earnings quality et conversion en cash comptent pour les investisseurs.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "How the three statements connect",
+      fr: "Comment les trois états financiers se connectent",
+    },
+    steps: [
+      {
+        title: { en: "Income statement", fr: "Compte de résultat / Income statement" },
+        detail: { en: "Revenue → expenses → net income", fr: "Revenu → dépenses → net income" },
+      },
+      {
+        title: { en: "Balance sheet", fr: "Bilan / Balance sheet" },
+        detail: { en: "Assets = liabilities + equity", fr: "Actifs = passifs + equity" },
+      },
+      {
+        title: { en: "Cash flow statement", fr: "Tableau des flux / Cash flow statement" },
+        detail: { en: "Operating · investing · financing", fr: "Operating · investing · financing" },
+      },
+      {
+        title: { en: "Investor analysis", fr: "Analyse investisseur" },
+        detail: { en: "Profitability · cash conversion · balance-sheet risk", fr: "Rentabilité · cash conversion · risque de bilan" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "three-statements",
+      kicker: { en: "01 · THE THREE STATEMENTS", fr: "01 · LES TROIS ÉTATS FINANCIERS" },
+      title: {
+        en: "One company, three different views",
+        fr: "Une entreprise, trois angles de lecture différents",
+      },
+      coreFacts: [
+        {
+          en: "The balance sheet is a point-in-time snapshot of assets, liabilities and equity.",
+          fr: "Le bilan / balance sheet est une photographie à une date donnée des actifs, passifs et capitaux propres / equity.",
+        },
+        {
+          en: "The income statement reports revenue and expenses over a period and arrives at profit or loss.",
+          fr: "Le compte de résultat / income statement présente revenus et dépenses sur une période et aboutit à un bénéfice ou une perte.",
+        },
+        {
+          en: "The cash flow statement explains changes in cash over a period by classifying cash flows into operating, investing and financing activities under the applicable reporting framework.",
+          fr: "Le tableau des flux de trésorerie / cash flow statement explique la variation du cash sur une période en classant les flux entre operating, investing et financing selon le référentiel comptable applicable.",
+        },
+        {
+          en: "The three statements are linked; analyzing one in isolation can hide important information about liquidity, leverage or earnings quality.",
+          fr: "Les trois états sont liés ; analyser un seul état isolément peut masquer des informations importantes sur liquidité, levier ou qualité des bénéfices.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Imagine taking three pictures of the same business. The balance sheet answers 'What does the company own and owe today?' The income statement answers 'Did the company make a profit during the period?' The cash flow statement answers 'Where did cash actually come from and where did it go?'",
+          fr: "Imagine trois photos de la même entreprise. Le balance sheet répond : « Que possède l’entreprise et que doit-elle aujourd’hui ? » L’income statement répond : « A-t-elle réalisé un bénéfice pendant la période ? » Le cash flow statement répond : « D’où vient réellement le cash et où est-il parti ? »",
+        },
+        Intermediate: {
+          en: "The statements measure different dimensions. The balance sheet stores cumulative resources and claims, the income statement measures accounting performance during the period, and the cash flow statement reconciles accounting activity with actual cash movements.",
+          fr: "Les états mesurent des dimensions différentes. Le bilan stocke les ressources et créances cumulées, l’income statement mesure la performance comptable sur la période et le cash flow statement rapproche l’activité comptable des mouvements réels de cash.",
+        },
+        Professional: {
+          en: "Financial analysis is a linked-statement exercise. Profitability, capital intensity, financing structure and liquidity all interact. A company can report strong earnings while consuming cash, or weak accounting earnings while generating strong cash because timing and non-cash charges differ.",
+          fr: "L’analyse financière est un exercice d’états liés. Rentabilité, intensité capitalistique, structure de financement et liquidité interagissent. Une entreprise peut afficher de bons bénéfices tout en consommant du cash, ou de faibles bénéfices comptables tout en générant beaucoup de cash à cause du timing et des charges non cash.",
+        },
+      },
+      comparison: {
+        title: { en: "The three statements at a glance", fr: "Les trois états en un coup d’œil" },
+        headers: [
+          { en: "Statement", fr: "État" },
+          { en: "Timing", fr: "Temporalité" },
+          { en: "Core question", fr: "Question principale" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Balance sheet", fr: "Bilan / Balance sheet" },
+            { en: "Point in time", fr: "À une date donnée" },
+            { en: "What does the company own and owe?", fr: "Que possède et doit l’entreprise ?" },
+          ]},
+          { cells: [
+            { en: "Income statement", fr: "Compte de résultat / Income statement" },
+            { en: "Over a period", fr: "Sur une période" },
+            { en: "Was the period profitable?", fr: "La période a-t-elle été rentable ?" },
+          ]},
+          { cells: [
+            { en: "Cash flow statement", fr: "Tableau des flux / Cash flow statement" },
+            { en: "Over a period", fr: "Sur une période" },
+            { en: "How did cash change?", fr: "Comment le cash a-t-il évolué ?" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Financial statements",
+          fr: "états financiers / financial statements",
+          definition: {
+            en: "Structured reports presenting financial position, performance and cash flows under an accounting framework.",
+            fr: "Rapports structurés présentant position financière, performance et flux de trésorerie selon un référentiel comptable.",
+          },
+        },
+        {
+          en: "Reporting period",
+          fr: "période de reporting / reporting period",
+          definition: {
+            en: "The span of time covered by a financial report, such as a quarter or fiscal year.",
+            fr: "Période couverte par un rapport financier, par exemple un trimestre ou un exercice fiscal.",
+          },
+        },
+      ],
+    },
+    {
+      id: "balance-sheet",
+      kicker: { en: "02 · THE BALANCE SHEET", fr: "02 · LE BILAN" },
+      title: {
+        en: "Assets are funded by liabilities and equity",
+        fr: "Les actifs sont financés par les passifs et l’equity",
+      },
+      coreFacts: [
+        {
+          en: "Assets are economic resources controlled by the company under the applicable accounting framework.",
+          fr: "Les actifs / assets sont des ressources économiques contrôlées par l’entreprise selon le référentiel comptable applicable.",
+        },
+        {
+          en: "Liabilities are present obligations that can require economic resources to be transferred.",
+          fr: "Les passifs / liabilities sont des obligations présentes pouvant nécessiter un transfert de ressources économiques.",
+        },
+        {
+          en: "Equity is the residual interest after liabilities are deducted from assets.",
+          fr: "Les capitaux propres / equity représentent l’intérêt résiduel après déduction des passifs des actifs.",
+        },
+        {
+          en: "The accounting equation must remain balanced after every recognized transaction.",
+          fr: "L’équation comptable doit rester équilibrée après chaque transaction comptabilisée.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company has $1,000 of assets and owes creditors $600, the residual equity is $400. If it borrows another $100 and keeps the cash, both assets and liabilities increase by $100, so the equation still balances.",
+          fr: "Si une entreprise possède 1 000 $ d’actifs et doit 600 $ à ses créanciers, l’equity résiduelle vaut 400 $. Si elle emprunte 100 $ supplémentaires et conserve ce cash, les actifs et les passifs augmentent chacun de 100 $ ; l’équation reste équilibrée.",
+        },
+        Intermediate: {
+          en: "Balance-sheet analysis separates liquidity, operating assets, financing obligations and shareholder capital. Current versus non-current classification can help assess near-term liquidity, but analysts also examine contractual maturities and economic substance.",
+          fr: "L’analyse du bilan distingue liquidité, actifs opérationnels, obligations de financement et capital des actionnaires. La classification courant/non courant aide à évaluer la liquidité court terme, mais les analystes regardent également maturités contractuelles et substance économique.",
+        },
+        Professional: {
+          en: "The balance sheet is the accumulated result of prior operating, investing and financing decisions. Analysts normalize items for excess cash, debt-like liabilities, off-balance-sheet commitments and non-operating assets when moving from accounting values to enterprise-value analysis.",
+          fr: "Le bilan est le résultat accumulé des décisions opérationnelles, d’investissement et de financement passées. Les analystes normalisent souvent cash excédentaire, passifs assimilables à de la dette, engagements hors bilan et actifs non opérationnels lorsqu’ils passent des valeurs comptables à l’analyse d’enterprise value.",
+        },
+      },
+      formula: {
+        label: { en: "Accounting equation", fr: "Équation comptable / Accounting equation" },
+        expression: "Assets = Liabilities + Equity",
+        explanation: {
+          en: "Equity is the residual claim: Assets − Liabilities.",
+          fr: "L’equity est la créance résiduelle : Actifs − Passifs.",
+        },
+        workedExample: {
+          en: "Assets $1,000 − liabilities $600 = equity $400.",
+          fr: "Actifs 1 000 $ − passifs 600 $ = equity 400 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Accounts receivable",
+          fr: "créances clients / accounts receivable",
+          definition: {
+            en: "Amounts owed to the company by customers for recognized sales not yet collected in cash.",
+            fr: "Montants dus à l’entreprise par les clients pour des ventes comptabilisées mais pas encore encaissées.",
+          },
+        },
+        {
+          en: "Accounts payable",
+          fr: "dettes fournisseurs / accounts payable",
+          definition: {
+            en: "Amounts the company owes suppliers for goods or services already received.",
+            fr: "Montants dus par l’entreprise à ses fournisseurs pour des biens ou services déjà reçus.",
+          },
+        },
+      ],
+    },
+    {
+      id: "income-statement",
+      kicker: { en: "03 · THE INCOME STATEMENT", fr: "03 · LE COMPTE DE RÉSULTAT" },
+      title: {
+        en: "Revenue minus expenses becomes profit — but not necessarily cash",
+        fr: "Revenu moins dépenses devient bénéfice — mais pas forcément du cash",
+      },
+      coreFacts: [
+        {
+          en: "Revenue is recognized according to accounting rules when the relevant performance conditions are satisfied, not simply whenever cash is received.",
+          fr: "Le revenu / revenue est comptabilisé selon les règles lorsque les conditions de reconnaissance pertinentes sont satisfaites, pas simplement lorsque le cash est encaissé.",
+        },
+        {
+          en: "Expenses are recognized according to the applicable accounting framework and may be recorded before or after the related cash payment.",
+          fr: "Les dépenses / expenses sont reconnues selon le référentiel applicable et peuvent être comptabilisées avant ou après le paiement correspondant.",
+        },
+        {
+          en: "Gross profit, operating income, pre-tax income and net income represent different levels of profitability.",
+          fr: "Gross profit, operating income, pre-tax income et net income représentent différents niveaux de rentabilité.",
+        },
+        {
+          en: "Net income belongs to the accounting period and includes non-cash items such as depreciation.",
+          fr: "Le net income appartient à la période comptable et inclut des éléments non cash comme la depreciation.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose a company sells a product for $100 that cost $60 to make. Gross profit is $40. If operating expenses are $20, operating income is $20 before interest and taxes. The key point is that these accounting revenues and expenses do not always happen at the same time as cash payments.",
+          fr: "Supposons qu’une entreprise vende un produit 100 $ qui lui a coûté 60 $ à produire. Le gross profit vaut 40 $. Si les dépenses opérationnelles valent 20 $, l’operating income vaut 20 $ avant intérêts et impôts. Point essentiel : ces revenus et charges comptables ne se produisent pas toujours au même moment que les encaissements et paiements.",
+        },
+        Intermediate: {
+          en: "The income statement is built on accrual accounting. Analysts decompose revenue growth, gross margin, operating expenses, operating margin, financing costs and taxes to understand the economics behind net income.",
+          fr: "L’income statement repose sur l’accrual accounting. Les analystes décomposent croissance du revenu, gross margin, dépenses opérationnelles, operating margin, coûts de financement et impôts afin de comprendre les economics derrière le net income.",
+        },
+        Professional: {
+          en: "Earnings analysis focuses on recurring versus non-recurring items, operating versus non-operating gains, stock-based compensation, impairment, restructuring and tax effects. The objective is not to ignore GAAP or IFRS earnings, but to understand their economic components and persistence.",
+          fr: "L’analyse des bénéfices distingue éléments récurrents/non récurrents, gains opérationnels/non opérationnels, stock-based compensation, impairment, restructuring et effets fiscaux. L’objectif n’est pas d’ignorer les résultats GAAP ou IFRS, mais de comprendre leur composition économique et leur persistance.",
+        },
+      },
+      formula: {
+        label: { en: "Income statement flow", fr: "Flux simplifié du compte de résultat" },
+        expression: "Revenue − COGS = Gross Profit   ·   Gross Profit − Operating Expenses = Operating Income",
+        explanation: {
+          en: "Interest, taxes and other items are then considered to arrive at net income under the reporting structure.",
+          fr: "Intérêts, impôts et autres éléments sont ensuite pris en compte pour arriver au net income selon la structure de reporting.",
+        },
+        workedExample: {
+          en: "Revenue $100 − COGS $60 = gross profit $40. Gross profit $40 − operating expenses $20 = operating income $20.",
+          fr: "Revenu 100 $ − COGS 60 $ = gross profit 40 $. Gross profit 40 $ − dépenses opérationnelles 20 $ = operating income 20 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "COGS",
+          fr: "coût des ventes / cost of goods sold",
+          definition: {
+            en: "Costs directly associated with goods or services recognized as sold under the accounting policy.",
+            fr: "Coûts directement associés aux biens ou services comptabilisés comme vendus selon la politique comptable.",
+          },
+        },
+        {
+          en: "Operating income",
+          fr: "résultat opérationnel / operating income",
+          definition: {
+            en: "Profit generated after operating costs before selected financing, tax and non-operating items.",
+            fr: "Profit généré après coûts opérationnels avant certains éléments de financement, impôts et non opérationnels.",
+          },
+        },
+      ],
+    },
+    {
+      id: "cash-flow-statement",
+      kicker: { en: "04 · THE CASH FLOW STATEMENT", fr: "04 · LE TABLEAU DES FLUX" },
+      title: {
+        en: "Cash from operations, investing and financing explains the change in cash",
+        fr: "Operating, investing et financing expliquent la variation du cash",
+      },
+      coreFacts: [
+        {
+          en: "Operating cash flow relates primarily to the cash consequences of core operating activities under the applicable accounting framework.",
+          fr: "Le cash flow from operations / CFO reflète principalement les conséquences cash de l’activité opérationnelle selon le référentiel applicable.",
+        },
+        {
+          en: "Investing cash flow commonly includes purchases and sales of long-term assets and investments, though detailed classification can differ by framework.",
+          fr: "Le cash flow from investing / CFI comprend couramment achats et ventes d’actifs long terme et investissements, même si certaines classifications diffèrent selon le référentiel.",
+        },
+        {
+          en: "Financing cash flow commonly includes borrowing, debt repayment, share issuance, buybacks and distributions to capital providers, subject to reporting rules.",
+          fr: "Le cash flow from financing / CFF comprend couramment emprunts, remboursements de dette, émissions d’actions, buybacks et distributions aux apporteurs de capitaux, sous réserve des règles de reporting.",
+        },
+        {
+          en: "Beginning cash plus total net cash flow reconciles to ending cash, subject to items such as foreign-exchange effects where separately reported.",
+          fr: "Le cash initial plus les flux nets de la période se rapproche du cash final, sous réserve d’éléments comme effets de change lorsqu’ils sont présentés séparément.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company may earn accounting profit but spend heavily on inventory or equipment. The cash flow statement shows whether operations generated cash, how much was invested and how financing filled any gap.",
+          fr: "Une entreprise peut réaliser un bénéfice comptable tout en dépensant beaucoup pour des stocks ou de nouveaux équipements. Le cash flow statement montre si l’activité a généré du cash, combien a été investi et comment le financement a éventuellement comblé l’écart.",
+        },
+        Intermediate: {
+          en: "Under the indirect method, operating cash flow typically starts from net income and adjusts for non-cash items plus changes in operating assets and liabilities. This creates the bridge from accrual earnings to cash.",
+          fr: "Avec la méthode indirecte, le CFO part généralement du net income puis ajuste les éléments non cash et les variations d’actifs et passifs opérationnels. Cela crée le pont entre accrual earnings et cash.",
+        },
+        Professional: {
+          en: "Cash-flow analysis emphasizes recurring cash conversion, capital intensity, working-capital volatility and financing dependence. Classification differences across accounting regimes mean analysts often recast cash flows into standardized internal categories.",
+          fr: "L’analyse des cash flows se concentre sur conversion récurrente en cash, intensité capitalistique, volatilité du working capital et dépendance au financement. Les différences de classification entre référentiels poussent souvent les analystes à retraiter les flux dans des catégories internes standardisées.",
+        },
+      },
+      formula: {
+        label: { en: "Cash reconciliation", fr: "Rapprochement du cash / Cash reconciliation" },
+        expression: "Ending Cash ≈ Beginning Cash + CFO + CFI + CFF",
+        explanation: {
+          en: "Additional reconciling items such as currency effects can appear depending on the reporting format.",
+          fr: "Des éléments de rapprochement supplémentaires comme effets de change peuvent apparaître selon le format de reporting.",
+        },
+        workedExample: {
+          en: "Beginning cash $50 + CFO $30 + CFI −$20 + CFF +$10 = ending cash about $70.",
+          fr: "Cash initial 50 $ + CFO 30 $ + CFI −20 $ + CFF +10 $ = cash final d’environ 70 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "CFO",
+          fr: "flux de trésorerie opérationnel / cash flow from operations",
+          definition: {
+            en: "Cash flow associated primarily with operating activities under the applicable statement format.",
+            fr: "Flux de trésorerie associé principalement aux activités opérationnelles selon le format comptable applicable.",
+          },
+        },
+        {
+          en: "Capex",
+          fr: "dépenses d’investissement / capital expenditures",
+          definition: {
+            en: "Cash expenditures for long-lived assets that are capitalized under the accounting policy.",
+            fr: "Dépenses cash consacrées à des actifs long terme capitalisés selon la politique comptable.",
+          },
+        },
+      ],
+    },
+    {
+      id: "linking-statements",
+      kicker: { en: "05 · LINKING THE STATEMENTS", fr: "05 · RELIER LES TROIS ÉTATS" },
+      title: {
+        en: "Net income, retained earnings and cash connect the system",
+        fr: "Net income, retained earnings et cash connectent le système",
+      },
+      coreFacts: [
+        {
+          en: "Net income flows into equity through retained earnings, adjusted for dividends and other equity movements.",
+          fr: "Le net income alimente l’equity via retained earnings, ajusté notamment des dividendes et autres mouvements de capitaux propres.",
+        },
+        {
+          en: "Net income is also a starting point for operating cash flow under the common indirect cash-flow method.",
+          fr: "Le net income constitue également un point de départ du CFO avec la méthode indirecte couramment utilisée.",
+        },
+        {
+          en: "Ending cash from the cash flow statement links to the cash balance on the ending balance sheet.",
+          fr: "Le cash final du cash flow statement se retrouve dans le poste cash du bilan de clôture.",
+        },
+        {
+          en: "Changes in working-capital accounts explain part of the difference between income-statement activity and operating cash flow.",
+          fr: "Les variations des comptes de working capital expliquent une partie de l’écart entre activité de l’income statement et CFO.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose a company earns $20 of net income and pays no dividend. Retained earnings generally rise by $20. If $5 of that income came from depreciation, depreciation reduced accounting profit but did not itself use cash in the current period, so it is commonly added back in the indirect cash flow statement.",
+          fr: "Supposons qu’une entreprise réalise 20 $ de net income et ne verse aucun dividende. Les retained earnings augmentent généralement de 20 $. Si 5 $ de ce résultat proviennent de depreciation, celle-ci a réduit le bénéfice comptable sans consommer directement de cash pendant la période ; elle est donc généralement ajoutée dans le CFO indirect.",
+        },
+        Intermediate: {
+          en: "A linked model has mechanical integrity. Income-statement profit affects retained earnings, cash-flow adjustments reconcile earnings to cash, investing and financing activities move balance-sheet accounts, and the resulting ending cash closes the balance sheet.",
+          fr: "Un modèle lié possède une cohérence mécanique. Le résultat de l’income statement affecte retained earnings, les ajustements du cash flow rapprochent bénéfice et cash, investing et financing déplacent les comptes du bilan, et le cash final ferme le bilan.",
+        },
+        Professional: {
+          en: "Three-statement modeling is the core infrastructure of financial modeling. Circularities can arise from debt, interest, cash sweeps and taxes, so professional models require clear schedules and controlled assumptions rather than hard-coded balancing plugs.",
+          fr: "La modélisation à trois états / three-statement modeling est l’infrastructure fondamentale du financial modeling. Des circularités peuvent apparaître via dette, intérêts, cash sweeps et impôts ; les modèles professionnels utilisent donc des schedules clairs et des hypothèses contrôlées plutôt que des plugs artificiels.",
+        },
+      },
+      formula: {
+        label: { en: "Retained earnings roll-forward", fr: "Variation des retained earnings" },
+        expression: "Ending Retained Earnings = Beginning Retained Earnings + Net Income − Dividends",
+        explanation: {
+          en: "Other equity adjustments may also affect reported retained earnings depending on circumstances.",
+          fr: "D’autres ajustements d’equity peuvent également affecter les retained earnings selon les circonstances.",
+        },
+        workedExample: {
+          en: "Beginning retained earnings $100 + net income $20 − dividends $5 = ending retained earnings $115.",
+          fr: "Retained earnings initiales 100 $ + net income 20 $ − dividendes 5 $ = retained earnings finales 115 $.",
+        },
+      },
+      marketConnection: {
+        en: "Interview questions frequently test whether a candidate can trace one transaction through the income statement, cash flow statement and balance sheet.",
+        fr: "Les entretiens finance testent fréquemment la capacité à suivre une transaction à travers income statement, cash flow statement et balance sheet.",
+      },
+    },
+    {
+      id: "depreciation-capex",
+      kicker: { en: "06 · DEPRECIATION & CAPEX", fr: "06 · DEPRECIATION & CAPEX" },
+      title: {
+        en: "Cash spending and accounting expense can happen at different times",
+        fr: "La dépense cash et la charge comptable peuvent avoir lieu à des moments différents",
+      },
+      coreFacts: [
+        {
+          en: "Capex is cash spent to acquire or improve long-lived assets that meet capitalization criteria.",
+          fr: "Le capex représente le cash dépensé pour acquérir ou améliorer des actifs long terme répondant aux critères de capitalisation.",
+        },
+        {
+          en: "Depreciation allocates the cost of a tangible asset over its useful life under an accounting method; it is a non-cash expense in the period it is recognized.",
+          fr: "La depreciation répartit le coût d’un actif tangible sur sa durée d’utilisation selon une méthode comptable ; il s’agit d’une charge non cash pendant la période où elle est comptabilisée.",
+        },
+        {
+          en: "Capex usually appears as investing cash flow, while depreciation reduces income and is commonly added back in indirect operating cash flow.",
+          fr: "Le capex apparaît généralement dans investing cash flow, tandis que la depreciation réduit le résultat et est couramment ajoutée dans le CFO indirect.",
+        },
+        {
+          en: "Depreciation affects the carrying value of property, plant and equipment on the balance sheet.",
+          fr: "La depreciation affecte la valeur comptable des immobilisations corporelles / property, plant and equipment au bilan.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company pays $100 cash for a machine expected to be used for five years, the $100 cash outflow happens when the machine is purchased. But accounting does not necessarily expense all $100 immediately. With straight-line depreciation and no residual value, it may record $20 of depreciation expense each year for five years.",
+          fr: "Si une entreprise paie 100 $ cash pour une machine utilisée pendant cinq ans, la sortie de cash de 100 $ a lieu lors de l’achat. Mais la comptabilité ne passe pas forcément les 100 $ en charge immédiatement. Avec une straight-line depreciation et aucune valeur résiduelle, elle peut comptabiliser 20 $ de depreciation par an pendant cinq ans.",
+        },
+        Intermediate: {
+          en: "Capex creates or increases a balance-sheet asset, then depreciation transfers part of that asset's carrying value into expense over time. This timing difference is one reason net income and free cash flow differ.",
+          fr: "Le capex crée ou augmente un actif au bilan, puis la depreciation transfère progressivement une partie de sa valeur comptable en charge. Ce décalage temporel explique en partie la différence entre net income et free cash flow.",
+        },
+        Professional: {
+          en: "Analysts distinguish maintenance capex from growth capex economically, even though reporting may not provide a clean split. Depreciation methods, useful-life assumptions, impairments and asset disposals all affect reported earnings and invested-capital analysis.",
+          fr: "Les analystes distinguent économiquement maintenance capex et growth capex même si le reporting ne fournit pas toujours une séparation claire. Méthodes de depreciation, durées d’utilité, impairments et cessions d’actifs influencent bénéfices publiés et analyse du capital investi.",
+        },
+      },
+      formula: {
+        label: { en: "Simple straight-line depreciation", fr: "Depreciation linéaire simple / Straight-line depreciation" },
+        expression: "Annual Depreciation = (Asset Cost − Residual Value) ÷ Useful Life",
+        explanation: {
+          en: "Actual depreciation follows the company's accounting policy and asset assumptions.",
+          fr: "La depreciation réelle suit la politique comptable et les hypothèses de l’entreprise sur l’actif.",
+        },
+        workedExample: {
+          en: "Asset cost $100, residual value $0, useful life 5 years → annual depreciation = $20.",
+          fr: "Coût de l’actif 100 $, valeur résiduelle 0 $, durée 5 ans → depreciation annuelle = 20 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "PP&E",
+          fr: "immobilisations corporelles / property, plant & equipment",
+          definition: {
+            en: "Long-lived tangible operating assets such as buildings, equipment and machinery.",
+            fr: "Actifs opérationnels tangibles long terme comme bâtiments, équipements et machines.",
+          },
+        },
+        {
+          en: "Impairment",
+          fr: "dépréciation de valeur / impairment",
+          definition: {
+            en: "A reduction in carrying value when an asset no longer supports its recorded amount under the applicable accounting rules.",
+            fr: "Réduction de la valeur comptable lorsqu’un actif ne justifie plus son montant inscrit selon les règles comptables applicables.",
+          },
+        },
+      ],
+    },
+    {
+      id: "working-capital",
+      kicker: { en: "07 · WORKING CAPITAL", fr: "07 · WORKING CAPITAL" },
+      title: {
+        en: "Growth can consume cash before it creates profit",
+        fr: "La croissance peut consommer du cash avant de créer du profit",
+      },
+      coreFacts: [
+        {
+          en: "Operating working capital commonly includes accounts receivable, inventory and accounts payable, though analyst definitions vary.",
+          fr: "Le working capital opérationnel inclut couramment accounts receivable, inventory et accounts payable, même si les définitions d’analystes varient.",
+        },
+        {
+          en: "An increase in accounts receivable means revenue may have been recognized before cash collection.",
+          fr: "Une hausse des accounts receivable signifie qu’un revenu peut avoir été comptabilisé avant son encaissement.",
+        },
+        {
+          en: "An increase in inventory generally uses cash before the related goods are sold.",
+          fr: "Une hausse des stocks / inventory utilise généralement du cash avant la vente des produits correspondants.",
+        },
+        {
+          en: "An increase in accounts payable can temporarily preserve cash because supplier payments are delayed relative to expense or inventory recognition.",
+          fr: "Une hausse des accounts payable peut temporairement préserver du cash car les paiements fournisseurs sont retardés par rapport à la reconnaissance de la charge ou du stock.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose a company records a $100 sale but the customer will pay next month. Revenue can appear today while accounts receivable rises by $100. The company looks more profitable, but it has not yet received the cash.",
+          fr: "Supposons qu’une entreprise comptabilise une vente de 100 $ mais que le client paiera le mois prochain. Le revenu peut apparaître aujourd’hui tandis que les accounts receivable augmentent de 100 $. L’entreprise semble plus rentable, mais elle n’a pas encore reçu le cash.",
+        },
+        Intermediate: {
+          en: "Working-capital changes explain a major part of cash conversion. Fast growth can increase receivables and inventory faster than payables, producing strong earnings but weak operating cash flow.",
+          fr: "Les variations de working capital expliquent une grande partie de la conversion en cash. Une croissance rapide peut faire augmenter receivables et inventory plus vite que payables, produisant de bons bénéfices mais un CFO faible.",
+        },
+        Professional: {
+          en: "Analysts normalize working capital for seasonality, factoring, supplier-finance arrangements and one-off payment timing. DSO, DIO and DPO can reveal whether cash conversion is changing because of operating performance or financing behavior.",
+          fr: "Les analystes normalisent le working capital pour saisonnalité, factoring, supplier finance et timing exceptionnel de paiements. DSO, DIO et DPO peuvent montrer si la conversion en cash change à cause de la performance opérationnelle ou d’un comportement de financement.",
+        },
+      },
+      formula: {
+        label: { en: "Simplified operating net working capital", fr: "Working capital opérationnel simplifié" },
+        expression: "Operating NWC ≈ Accounts Receivable + Inventory − Accounts Payable",
+        explanation: {
+          en: "An increase in this simplified operating NWC is generally a use of cash, all else equal.",
+          fr: "Une hausse de ce working capital simplifié représente généralement une utilisation de cash, toutes choses égales par ailleurs.",
+        },
+        workedExample: {
+          en: "AR rises $10, inventory rises $5 and AP rises $3 → operating NWC increases $12, implying about a $12 cash use.",
+          fr: "AR +10 $, inventory +5 $ et AP +3 $ → operating NWC augmente de 12 $, soit environ 12 $ d’utilisation de cash.",
+        },
+      },
+      marketConnection: {
+        en: "A company can beat earnings estimates and still disappoint investors if receivables or inventory rise sharply and cash conversion deteriorates.",
+        fr: "Une entreprise peut dépasser les attentes de bénéfices et néanmoins décevoir si receivables ou inventory montent fortement et que la conversion en cash se détériore.",
+      },
+      vocabulary: [
+        {
+          en: "DSO",
+          fr: "délai moyen de recouvrement / days sales outstanding",
+          definition: {
+            en: "A working-capital metric approximating how long receivables remain outstanding relative to sales.",
+            fr: "Mesure approximant la durée pendant laquelle les créances clients restent en cours par rapport aux ventes.",
+          },
+        },
+        {
+          en: "Cash conversion",
+          fr: "conversion en cash / cash conversion",
+          definition: {
+            en: "The extent to which reported earnings or operating activity translates into cash flow.",
+            fr: "Degré auquel les bénéfices publiés ou l’activité opérationnelle se transforment en cash flow.",
+          },
+        },
+      ],
+    },
+    {
+      id: "accrual-accounting",
+      kicker: { en: "08 · ACCRUAL ACCOUNTING", fr: "08 · ACCRUAL ACCOUNTING" },
+      title: {
+        en: "Accounting records economic activity before or after cash moves",
+        fr: "La comptabilité enregistre l’activité économique avant ou après le mouvement du cash",
+      },
+      coreFacts: [
+        {
+          en: "Accrual accounting recognizes economic events according to accounting criteria rather than only when cash changes hands.",
+          fr: "L’accrual accounting comptabilise les événements économiques selon des critères comptables plutôt qu’uniquement lorsque le cash change de mains.",
+        },
+        {
+          en: "Unearned or deferred revenue can arise when cash is received before revenue recognition criteria are satisfied.",
+          fr: "Un revenu différé / deferred revenue peut apparaître lorsque le cash est reçu avant que les critères de reconnaissance du revenu soient satisfaits.",
+        },
+        {
+          en: "Accrued expenses can arise when an expense is recognized before the related cash payment.",
+          fr: "Des charges à payer / accrued expenses peuvent apparaître lorsqu’une dépense est reconnue avant le paiement associé.",
+        },
+        {
+          en: "Accruals improve period matching but create estimates and timing differences that analysts must understand.",
+          fr: "Les accruals améliorent la représentation par période mais créent des estimations et différences de timing que les analystes doivent comprendre.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a customer prepays $120 for a 12-month service, the company may receive all $120 cash immediately but recognize revenue over time as the service is delivered. Cash receipt and revenue recognition are therefore different events.",
+          fr: "Si un client paie 120 $ à l’avance pour un service de 12 mois, l’entreprise peut recevoir les 120 $ immédiatement mais reconnaître le revenu progressivement à mesure que le service est fourni. Encaissement et reconnaissance du revenu sont donc deux événements différents.",
+        },
+        Intermediate: {
+          en: "Accrual accounting attempts to reflect economic performance in the period in which activity occurs. Receivables, payables, deferred revenue, prepaid expenses and accrual liabilities are balance-sheet accounts that bridge timing differences between economics and cash.",
+          fr: "L’accrual accounting cherche à refléter la performance économique dans la période où l’activité a lieu. Receivables, payables, deferred revenue, prepaid expenses et accrued liabilities sont des comptes de bilan qui relient le timing économique au timing du cash.",
+        },
+        Professional: {
+          en: "Accrual quality matters because management judgment can affect estimates such as reserves, useful lives, revenue timing and expected losses. Analysts compare accrual trends with cash flow, disclosures and operating reality to judge persistence and conservatism.",
+          fr: "La qualité des accruals compte car le jugement du management influence des estimations comme provisions, durées d’utilité, timing de revenue et pertes attendues. Les analystes comparent tendances des accruals, cash flow, disclosures et réalité opérationnelle pour juger persistance et prudence.",
+        },
+      },
+      example: {
+        en: "A 12-month subscription prepaid for $120 may create $120 cash and a deferred-revenue liability at collection, then revenue can be recognized over the service period as the obligation is fulfilled.",
+        fr: "Un abonnement de 12 mois payé 120 $ à l’avance peut créer 120 $ de cash et un passif de deferred revenue à l’encaissement, puis le revenu est reconnu pendant la période de service à mesure que l’obligation est satisfaite.",
+      },
+      vocabulary: [
+        {
+          en: "Deferred revenue",
+          fr: "revenu différé / deferred revenue",
+          definition: {
+            en: "A liability commonly arising when consideration is received before the related revenue is recognized.",
+            fr: "Passif apparaissant couramment lorsqu’un paiement est reçu avant reconnaissance du revenu associé.",
+          },
+        },
+        {
+          en: "Accrued expense",
+          fr: "charge à payer / accrued expense",
+          definition: {
+            en: "An expense recognized before the associated cash payment has occurred.",
+            fr: "Charge comptabilisée avant que le paiement cash correspondant n’ait eu lieu.",
+          },
+        },
+      ],
+    },
+    {
+      id: "earnings-quality",
+      kicker: { en: "09 · EARNINGS QUALITY", fr: "09 · QUALITÉ DES BÉNÉFICES" },
+      title: {
+        en: "Investors care about how repeatable and cash-backed earnings really are",
+        fr: "Les investisseurs veulent savoir si les bénéfices sont durables et réellement soutenus par le cash",
+      },
+      coreFacts: [
+        {
+          en: "High-quality earnings are generally more useful when they are recurring, economically supported and convert into cash over time.",
+          fr: "Des bénéfices de qualité sont généralement plus utiles lorsqu’ils sont récurrents, soutenus économiquement et se convertissent en cash avec le temps.",
+        },
+        {
+          en: "A large gap between net income and operating cash flow is not automatically bad, but it requires explanation.",
+          fr: "Un écart important entre net income et CFO n’est pas automatiquement mauvais, mais il doit être expliqué.",
+        },
+        {
+          en: "One-time gains, aggressive accruals, unusual working-capital movements or capitalization choices can affect reported earnings.",
+          fr: "Gains exceptionnels, accruals agressifs, mouvements inhabituels de working capital ou choix de capitalisation peuvent affecter les bénéfices publiés.",
+        },
+        {
+          en: "Financial-statement analysis combines ratios with footnotes, accounting policies and business context.",
+          fr: "L’analyse des états financiers combine ratios, notes annexes / footnotes, politiques comptables et contexte économique.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Two companies can report the same $100 of net income, but one may collect cash quickly while the other builds receivables and inventory. The accounting profit is identical, yet the cash quality is different.",
+          fr: "Deux entreprises peuvent afficher le même net income de 100 $, mais l’une encaisse rapidement tandis que l’autre accumule receivables et inventory. Le bénéfice comptable est identique, mais la qualité de conversion en cash est différente.",
+        },
+        Intermediate: {
+          en: "Earnings quality analysis reconciles profit with operating cash flow, checks working capital and non-cash adjustments, identifies recurring versus exceptional items and asks whether accounting choices are consistent with operating reality.",
+          fr: "L’analyse de qualité des bénéfices rapproche profit et CFO, vérifie working capital et ajustements non cash, distingue récurrent et exceptionnel et demande si les choix comptables sont cohérents avec la réalité opérationnelle.",
+        },
+        Professional: {
+          en: "Quality-of-earnings work is forensic. Analysts inspect revenue recognition, reserve releases, capitalized costs, stock compensation, supplier finance, acquisition accounting, tax effects and changes in estimates. The goal is to estimate sustainable economics rather than mechanically replace reported earnings.",
+          fr: "L’analyse de quality of earnings est presque forensic. Les analystes examinent revenue recognition, reprises de provisions, coûts capitalisés, stock compensation, supplier finance, acquisition accounting, fiscalité et changements d’estimations. L’objectif est d’estimer les economics soutenables plutôt que de remplacer mécaniquement les résultats publiés.",
+        },
+      },
+      formula: {
+        label: { en: "Simple operating cash conversion", fr: "Conversion opérationnelle en cash simplifiée" },
+        expression: "Cash Conversion Ratio = CFO ÷ Net Income",
+        explanation: {
+          en: "Interpret carefully: one period can be distorted by working capital, seasonality, taxes or non-recurring items.",
+          fr: "À interpréter avec prudence : une période peut être déformée par working capital, saisonnalité, impôts ou éléments non récurrents.",
+        },
+        workedExample: {
+          en: "CFO $120 ÷ net income $100 = 1.20× cash conversion.",
+          fr: "CFO 120 $ ÷ net income 100 $ = 1,20× de cash conversion.",
+        },
+      },
+      marketConnection: {
+        en: "A strong earnings headline with weak cash conversion can trigger a negative share-price reaction if investors conclude the reported profit is less sustainable than expected.",
+        fr: "Un headline de bénéfices solide accompagné d’une faible cash conversion peut provoquer une baisse de l’action si les investisseurs jugent le profit moins durable qu’attendu.",
+      },
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "three-statements-purpose",
+      question: {
+        en: "Which statement is a point-in-time snapshot?",
+        fr: "Quel état financier est une photographie à une date donnée ?",
+      },
+      options: [
+        { id: "a", label: { en: "Balance sheet", fr: "Bilan / Balance sheet" } },
+        { id: "b", label: { en: "Income statement", fr: "Compte de résultat / Income statement" } },
+        { id: "c", label: { en: "Cash flow statement", fr: "Tableau des flux / Cash flow statement" } },
+        { id: "d", label: { en: "All are point-in-time snapshots", fr: "Les trois sont uniquement des photographies à une date" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "The balance sheet presents financial position at a specific date; the income and cash flow statements cover periods.",
+        fr: "Le bilan présente la position financière à une date précise ; income statement et cash flow statement couvrent une période.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "accounting-equation",
+      question: {
+        en: "A company has $1,000 of assets and $600 of liabilities. What is equity?",
+        fr: "Une entreprise possède 1 000 $ d’actifs et 600 $ de passifs. Quelle est son equity ?",
+      },
+      options: [
+        { id: "a", label: { en: "$400", fr: "400 $" } },
+        { id: "b", label: { en: "$600", fr: "600 $" } },
+        { id: "c", label: { en: "$1,000", fr: "1 000 $" } },
+        { id: "d", label: { en: "$1,600", fr: "1 600 $" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Equity = assets − liabilities = $400.",
+        fr: "Equity = actifs − passifs = 400 $.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "gross-profit",
+      question: {
+        en: "Revenue is $100 and COGS is $60. What is gross profit?",
+        fr: "Le revenu est 100 $ et le COGS 60 $. Quel est le gross profit ?",
+      },
+      options: [
+        { id: "a", label: { en: "$20", fr: "20 $" } },
+        { id: "b", label: { en: "$40", fr: "40 $" } },
+        { id: "c", label: { en: "$60", fr: "60 $" } },
+        { id: "d", label: { en: "$160", fr: "160 $" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "$100 revenue − $60 COGS = $40 gross profit.",
+        fr: "100 $ de revenu − 60 $ de COGS = 40 $ de gross profit.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "cash-flow-classification",
+      question: {
+        en: "Under a common presentation, purchasing long-lived equipment for cash is primarily classified as:",
+        fr: "Dans une présentation courante, l’achat cash d’un équipement long terme est principalement classé comme :",
+      },
+      options: [
+        { id: "a", label: { en: "Operating cash flow", fr: "Operating cash flow" } },
+        { id: "b", label: { en: "Investing cash flow", fr: "Investing cash flow" } },
+        { id: "c", label: { en: "Financing cash flow", fr: "Financing cash flow" } },
+        { id: "d", label: { en: "Revenue", fr: "Revenue" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Purchases of long-lived assets are commonly reported as investing cash outflows.",
+        fr: "Les achats d’actifs long terme sont couramment présentés comme sorties de cash d’investissement / investing.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "depreciation",
+      question: {
+        en: "A $100 asset has zero residual value and a 5-year straight-line useful life. Annual depreciation is:",
+        fr: "Un actif de 100 $ a une valeur résiduelle nulle et une durée de vie linéaire de 5 ans. La depreciation annuelle vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "$5", fr: "5 $" } },
+        { id: "b", label: { en: "$10", fr: "10 $" } },
+        { id: "c", label: { en: "$20", fr: "20 $" } },
+        { id: "d", label: { en: "$100", fr: "100 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "($100−$0) ÷ 5 = $20 per year.",
+        fr: "(100−0) ÷ 5 = 20 $ par an.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "working-capital-cash",
+      question: {
+        en: "Accounts receivable rises $10, inventory rises $5 and accounts payable rises $3. What is the approximate increase in simplified operating NWC?",
+        fr: "Accounts receivable augmente de 10 $, inventory de 5 $ et accounts payable de 3 $. De combien augmente approximativement l’operating NWC simplifié ?",
+      },
+      options: [
+        { id: "a", label: { en: "$2", fr: "2 $" } },
+        { id: "b", label: { en: "$8", fr: "8 $" } },
+        { id: "c", label: { en: "$12", fr: "12 $" } },
+        { id: "d", label: { en: "$18", fr: "18 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "+$10 AR +$5 inventory −$3 AP = +$12 operating NWC.",
+        fr: "+10 $ AR +5 $ inventory −3 $ AP = +12 $ d’operating NWC.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "deferred-revenue",
+      question: {
+        en: "A customer prepays cash before the company has delivered the service. Before revenue recognition, this commonly creates:",
+        fr: "Un client paie à l’avance avant que le service soit fourni. Avant reconnaissance du revenu, cela crée couramment :",
+      },
+      options: [
+        { id: "a", label: { en: "Deferred revenue liability", fr: "Un passif de deferred revenue" } },
+        { id: "b", label: { en: "Accounts receivable", fr: "Des accounts receivable" } },
+        { id: "c", label: { en: "Immediate depreciation expense", fr: "Une depreciation immédiate" } },
+        { id: "d", label: { en: "No balance-sheet effect", fr: "Aucun effet au bilan" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Cash is received before the performance obligation is fully satisfied, so a liability can be recognized until revenue criteria are met.",
+        fr: "Le cash est reçu avant satisfaction complète de l’obligation de performance ; un passif peut donc être comptabilisé jusqu’à reconnaissance du revenu.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "cash-conversion",
+      question: {
+        en: "CFO is $120 and net income is $100. What is the simple cash conversion ratio?",
+        fr: "Le CFO vaut 120 $ et le net income 100 $. Quel est le cash conversion ratio simple ?",
+      },
+      options: [
+        { id: "a", label: { en: "0.20×", fr: "0,20×" } },
+        { id: "b", label: { en: "0.83×", fr: "0,83×" } },
+        { id: "c", label: { en: "1.00×", fr: "1,00×" } },
+        { id: "d", label: { en: "1.20×", fr: "1,20×" } },
+      ],
+      correctOption: "d",
+      explanation: {
+        en: "$120 ÷ $100 = 1.20×.",
+        fr: "120 $ ÷ 100 $ = 1,20×.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Walk me through how a $10 increase in depreciation affects the three financial statements, assuming a 25% tax rate and no other changes.",
+      fr: "Explique l’effet d’une hausse de 10 $ de depreciation sur les trois états financiers, en supposant un taux d’impôt de 25 % et aucun autre changement.",
+    },
+    framework: [
+      {
+        en: "Income statement: depreciation expense rises $10, pre-tax income falls $10 and taxes fall by $2.50, so net income falls $7.50.",
+        fr: "Income statement : depreciation +10 $, pre-tax income −10 $, impôts −2,50 $, donc net income −7,50 $.",
+      },
+      {
+        en: "Cash flow statement: start with net income down $7.50, add back the $10 non-cash depreciation, so operating cash flow rises $2.50 before other changes.",
+        fr: "Cash flow statement : partir du net income −7,50 $, ajouter les 10 $ de depreciation non cash ; le CFO augmente donc de 2,50 $ avant autres changements.",
+      },
+      {
+        en: "Balance sheet cash rises $2.50, net PP&E falls $10, so total assets fall $7.50.",
+        fr: "Balance sheet : cash +2,50 $, net PP&E −10 $, donc total assets −7,50 $.",
+      },
+      {
+        en: "Equity falls $7.50 through lower retained earnings, so the balance sheet still balances.",
+        fr: "L’equity baisse de 7,50 $ via retained earnings plus faibles ; le bilan reste donc équilibré.",
+      },
+      {
+        en: "Mention that this simplified interview bridge ignores deferred taxes and other complications unless asked.",
+        fr: "Préciser que ce bridge simplifié d’entretien ignore deferred taxes et autres complications sauf si la question les introduit.",
+      },
+    ],
+    sample: {
+      en: "A $10 increase in depreciation reduces operating income and pre-tax income by $10. At a 25% tax rate, taxes fall by $2.50, so net income falls by $7.50. On the cash flow statement, I start with net income down $7.50 and add back the $10 of depreciation because it is non-cash, so cash from operations increases by $2.50, assuming no other changes. On the balance sheet, cash is up $2.50 and net PP&E is down $10, so total assets are down $7.50. Retained earnings, and therefore equity, are down $7.50 through lower net income, so the balance sheet balances. That is the simplified interview version before deferred-tax or other complications.",
+      fr: "Une hausse de 10 $ de depreciation réduit operating income et pre-tax income de 10 $. Avec un taux d’impôt de 25 %, les impôts diminuent de 2,50 $, donc le net income baisse de 7,50 $. Dans le cash flow statement, je pars du net income en baisse de 7,50 $ et j’ajoute les 10 $ de depreciation car c’est une charge non cash ; le CFO augmente donc de 2,50 $, en supposant aucun autre changement. Au bilan, le cash augmente de 2,50 $ et le net PP&E diminue de 10 $, donc les actifs totaux baissent de 7,50 $. Les retained earnings, et donc l’equity, baissent de 7,50 $ via le net income plus faible ; le bilan reste équilibré. C’est la version simplifiée d’entretien avant deferred taxes ou autres complications.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
