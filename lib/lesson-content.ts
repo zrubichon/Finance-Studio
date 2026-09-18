@@ -19651,7 +19651,547 @@ export const optionsGreeksLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson];
+
+
+export const fxInternationalFinanceLesson: FinanceLesson = {
+  slug: "year-2-fx-international-finance",
+  year: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  domain: { en: "Markets & Instruments", fr: "Marchés & instruments / Markets & Instruments" },
+  title: { en: "FX & International Finance", fr: "Devises / FX & finance internationale" },
+  subtitle: {
+    en: "Master currency quotations, cross rates, spot and forward FX, covered interest parity, FX swaps, international investment returns, corporate hedging, carry and the macro forces that move currencies.",
+    fr: "Maîtriser les cotations de devises, cross rates, spot et forward FX, covered interest parity, FX swaps, rendements internationaux, couverture d’entreprise, carry et les forces macro qui font bouger les devises.",
+  },
+  duration: { en: "120–150 min", fr: "120–150 min" },
+  prerequisites: [
+    { en: "Money, Banking & Central Banks", fr: "Monnaie, banques & banques centrales / Money, Banking & Central Banks" },
+    { en: "Time Value of Money", fr: "Valeur temps de l’argent / Time Value of Money" },
+    { en: "Derivatives Foundations", fr: "Fondamentaux des produits dérivés / Derivatives Foundations" },
+  ],
+  objectives: [
+    { en: "Read base/quote currency conventions and bid-ask FX quotes.", fr: "Lire les conventions base/quote currency et les cotations bid-ask FX." },
+    { en: "Calculate appreciation, depreciation, reciprocals and cross rates.", fr: "Calculer appréciation, dépréciation, inverses et cross rates." },
+    { en: "Explain spot, forwards, forward points, FX swaps and covered interest parity.", fr: "Expliquer spot, forwards, forward points, FX swaps et covered interest parity." },
+    { en: "Measure unhedged international investment returns and currency contribution.", fr: "Mesurer les rendements internationaux non couverts et la contribution FX." },
+    { en: "Design basic corporate and portfolio currency hedges.", fr: "Construire des couvertures de change simples pour entreprises et portefeuilles." },
+    { en: "Connect rates, inflation, growth, capital flows, risk sentiment and central banks to FX.", fr: "Relier taux, inflation, croissance, flux de capitaux, sentiment de risque et banques centrales au FX." },
+  ],
+  overviewFlow: {
+    title: { en: "From currency quote to FX risk decision", fr: "De la cotation de devise à la décision de risque FX" },
+    steps: [
+      { title: { en: "Quote", fr: "Coter" }, detail: { en: "Base · quote · bid-ask · pips", fr: "Base · quote · bid-ask · pips" } },
+      { title: { en: "Price", fr: "Pricer" }, detail: { en: "Spot · forwards · rates · parity", fr: "Spot · forwards · taux · parity" } },
+      { title: { en: "Measure", fr: "Mesurer" }, detail: { en: "Cash flows · portfolio FX · return", fr: "Cash flows · portfolio FX · rendement" } },
+      { title: { en: "Manage", fr: "Gérer" }, detail: { en: "Hedge · carry · macro drivers", fr: "Hedge · carry · drivers macro" } },
+    ],
+  },
+  sections: [
+    {
+      id: "quotes",
+      kicker: { en: "01 · FX QUOTES", fr: "01 · COTATIONS FX" },
+      title: { en: "An exchange rate is the price of one currency in another", fr: "Un taux de change est le prix d’une devise exprimé dans une autre" },
+      coreFacts: [
+        { en: "In EUR/USD = 1.1000, EUR is the base currency and USD is the quote currency.", fr: "Dans EUR/USD = 1,1000, EUR est la base currency et USD la quote currency." },
+        { en: "EUR/USD = 1.1000 means one euro buys 1.10 US dollars.", fr: "EUR/USD = 1,1000 signifie qu’un euro achète 1,10 dollar américain." },
+        { en: "If EUR/USD rises, EUR appreciates versus USD; if it falls, EUR depreciates versus USD.", fr: "Si EUR/USD monte, EUR s’apprécie face à USD ; s’il baisse, EUR se déprécie face à USD." },
+        { en: "The reciprocal quote is obtained by inversion, ignoring bid-ask complications.", fr: "La cotation réciproque s’obtient par inversion, hors complications bid-ask." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Think of the first currency as the product and the second as the price tag. EUR/USD tells you how many dollars you need for one euro.",
+          fr: "Pense à la première devise comme au produit et à la seconde comme à l’étiquette de prix. EUR/USD indique combien de dollars il faut pour un euro.",
+        },
+        Intermediate: {
+          en: "Direction matters. The same economic move appears in the opposite direction in the reciprocal pair, and percentage changes are not perfectly symmetric because inversion is nonlinear.",
+          fr: "Le sens de la cotation compte. Le même mouvement économique apparaît dans le sens opposé sur la paire réciproque, et les variations en pourcentage ne sont pas parfaitement symétriques car l’inversion est non linéaire.",
+        },
+        Professional: {
+          en: "FX is predominantly an OTC dealer market with venue fragmentation, pair-specific settlement conventions, pip conventions and executable bid-ask prices. Operational details matter for real trading and hedging.",
+          fr: "Le FX est principalement un marché OTC de dealers avec fragmentation des venues, conventions de settlement propres aux paires, conventions de pip et prix bid-ask exécutables. Les détails opérationnels comptent en trading et hedging réels.",
+        },
+      },
+      formula: {
+        label: { en: "FX percentage change", fr: "Variation en pourcentage d’une paire FX" },
+        expression: "% change = (New quote / Old quote − 1) × 100",
+        explanation: { en: "The sign describes the base currency versus the quote currency.", fr: "Le signe décrit la base currency par rapport à la quote currency." },
+        workedExample: { en: "EUR/USD from 1.0800 to 1.1016: 1.1016 / 1.0800 − 1 = +2.0%.", fr: "EUR/USD de 1,0800 à 1,1016 : 1,1016 / 1,0800 − 1 = +2,0 %." },
+      },
+      vocabulary: [
+        { en: "Base currency", fr: "devise de base", definition: { en: "The first currency in an FX pair.", fr: "La première devise d’une paire FX." } },
+        { en: "Quote currency", fr: "devise de cotation", definition: { en: "The currency used to price one unit of the base currency.", fr: "La devise utilisée pour exprimer le prix d’une unité de la devise de base." } },
+        { en: "Pip", fr: "pip", definition: { en: "A standard small unit of change in an FX quote.", fr: "Une petite unité standard de variation d’une cotation FX." } },
+      ],
+    },
+    {
+      id: "bid-ask-cross",
+      kicker: { en: "02 · BID-ASK & CROSS RATES", fr: "02 · BID-ASK & CROSS RATES" },
+      title: { en: "Cross rates are built by making currency units cancel correctly", fr: "Les cross rates se construisent en faisant s’annuler correctement les unités de devise" },
+      coreFacts: [
+        { en: "A dealer bid is the price at which the dealer buys the base currency; the ask is where the dealer sells it.", fr: "Le bid dealer est le prix auquel le dealer achète la base currency ; l’ask est le prix auquel il la vend." },
+        { en: "The bid-ask spread compensates liquidity provision and reflects market conditions.", fr: "Le bid-ask spread rémunère la fourniture de liquidité et reflète les conditions de marché." },
+        { en: "Cross rates can be derived through a shared currency using dimensional analysis.", fr: "Les cross rates peuvent être dérivés via une devise commune grâce à l’analyse dimensionnelle." },
+        { en: "Executable triangular arbitrage must use bid and ask prices, not only mid prices.", fr: "Un arbitrage triangulaire exécutable doit utiliser bid et ask, pas seulement les mid prices." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If EUR/USD = 1.10 and USD/JPY = 150, multiply them to obtain EUR/JPY because the USD units cancel.",
+          fr: "Si EUR/USD = 1,10 et USD/JPY = 150, multiplie-les pour obtenir EUR/JPY car les unités USD s’annulent.",
+        },
+        Intermediate: {
+          en: "Do not memorize cross-rate formulas blindly. Write the currencies as units and multiply or divide until only the desired pair remains.",
+          fr: "Ne mémorise pas les formules de cross rate sans réfléchir. Écris les devises comme des unités puis multiplie ou divise jusqu’à ne garder que la paire souhaitée.",
+        },
+        Professional: {
+          en: "Triangular arbitrage compares simultaneously executable prices across three pairs. Mid-market inconsistencies may disappear after spreads, latency, funding and transaction costs.",
+          fr: "L’arbitrage triangulaire compare des prix exécutables simultanément sur trois paires. Une incohérence de mid peut disparaître après spreads, latence, financement et coûts de transaction.",
+        },
+      },
+      formula: {
+        label: { en: "Cross-rate example", fr: "Exemple de cross rate" },
+        expression: "EUR/JPY = (EUR/USD) × (USD/JPY)",
+        explanation: { en: "USD cancels, leaving JPY per EUR.", fr: "USD s’annule, laissant JPY par EUR." },
+        workedExample: { en: "1.10 × 150 = 165 JPY per EUR.", fr: "1,10 × 150 = 165 JPY par EUR." },
+      },
+      vocabulary: [
+        { en: "Bid", fr: "bid / prix acheteur", definition: { en: "Dealer price to buy the base currency.", fr: "Prix auquel le dealer achète la devise de base." } },
+        { en: "Ask", fr: "ask / prix vendeur", definition: { en: "Dealer price to sell the base currency.", fr: "Prix auquel le dealer vend la devise de base." } },
+        { en: "Cross rate", fr: "taux croisé", definition: { en: "An exchange rate between two currencies derived directly or through a third.", fr: "Un taux entre deux devises obtenu directement ou via une troisième." } },
+      ],
+    },
+    {
+      id: "spot-forward",
+      kicker: { en: "03 · SPOT & FORWARDS", fr: "03 · SPOT & FORWARDS" },
+      title: { en: "A forward locks a future exchange rate today", fr: "Un forward verrouille aujourd’hui un taux de change futur" },
+      coreFacts: [
+        { en: "Spot FX exchanges currencies around the standard spot settlement date.", fr: "Le spot FX échange les devises autour de la date standard de settlement spot." },
+        { en: "A forward fixes today the exchange rate for a future settlement date.", fr: "Un forward fixe aujourd’hui le taux de change pour une date future de settlement." },
+        { en: "The forward rate can differ from spot even without a directional forecast because the currencies have different funding rates.", fr: "Le forward peut différer du spot même sans prévision directionnelle car les devises ont des taux de financement différents." },
+        { en: "Forward points are the difference between forward and spot under market quotation conventions.", fr: "Les forward points sont la différence entre forward et spot selon les conventions de marché." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company that knows it must exchange currencies in three months can use a forward to remove uncertainty about the future rate.",
+          fr: "Une entreprise qui sait qu’elle devra échanger des devises dans trois mois peut utiliser un forward pour supprimer l’incertitude sur le taux futur.",
+        },
+        Intermediate: {
+          en: "Forward pricing is linked to relative interest rates. It is not simply today's spot plus a trader's opinion of where the currency will go.",
+          fr: "Le pricing forward est lié aux taux d’intérêt relatifs. Ce n’est pas simplement le spot d’aujourd’hui plus l’opinion d’un trader sur la direction future.",
+        },
+        Professional: {
+          en: "Forward pricing depends on spot, matched funding curves, day-count and settlement conventions, collateral and potentially cross-currency basis. Institutional execution therefore requires more than a textbook single-rate input.",
+          fr: "Le pricing forward dépend du spot, des courbes de financement correspondantes, conventions de jour et settlement, collatéral et parfois cross-currency basis. L’exécution institutionnelle va donc au-delà d’un simple taux théorique.",
+        },
+      },
+      comparison: {
+        title: { en: "Spot vs forward", fr: "Spot vs forward" },
+        headers: [
+          { en: "Feature", fr: "Élément" },
+          { en: "Spot", fr: "Spot" },
+          { en: "Forward", fr: "Forward" },
+        ],
+        rows: [
+          { cells: [{ en: "Settlement", fr: "Settlement" }, { en: "Near term", fr: "Court terme" }, { en: "Future date", fr: "Date future" }] },
+          { cells: [{ en: "Main use", fr: "Usage principal" }, { en: "Immediate conversion", fr: "Conversion immédiate" }, { en: "Future hedge or exposure", fr: "Hedge ou exposition future" }] },
+          { cells: [{ en: "Rate", fr: "Taux" }, { en: "Current market rate", fr: "Taux de marché actuel" }, { en: "Agreed today for future exchange", fr: "Fixé aujourd’hui pour l’échange futur" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Spot", fr: "spot", definition: { en: "Current FX transaction for standard near-term settlement.", fr: "Transaction FX actuelle avec settlement standard proche." } },
+        { en: "Forward", fr: "forward", definition: { en: "Agreement to exchange currencies later at a rate fixed today.", fr: "Accord d’échange futur de devises à un taux fixé aujourd’hui." } },
+        { en: "Forward points", fr: "points forward", definition: { en: "Difference between forward and spot exchange rates.", fr: "Différence entre le taux forward et le spot." } },
+      ],
+    },
+    {
+      id: "covered-interest-parity",
+      kicker: { en: "04 · COVERED INTEREST PARITY", fr: "04 · COVERED INTEREST PARITY" },
+      title: { en: "No-arbitrage links spot, forwards and interest rates", fr: "Le no-arbitrage relie spot, forwards et taux d’intérêt" },
+      coreFacts: [
+        { en: "Covered interest parity compares a hedged foreign investment with a domestic investment of the same horizon.", fr: "Covered interest parity compare un investissement étranger couvert à un investissement domestique de même horizon." },
+        { en: "If the relationship is materially violated after costs, a borrowing-lending-conversion strategy can create arbitrage pressure.", fr: "Si la relation est fortement violée après coûts, une stratégie emprunt-placement-conversion peut créer une pression d’arbitrage." },
+        { en: "The higher-rate currency generally trades at a forward discount under the relevant quotation convention.", fr: "La devise au taux le plus élevé se traite généralement avec une décote forward selon la convention de cotation." },
+        { en: "Real markets can show cross-currency basis because balance sheet, collateral and funding constraints matter.", fr: "Les marchés réels peuvent afficher un cross-currency basis car bilan, collatéral et contraintes de financement comptent." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If investing in dollars pays more interest than investing in euros, the forward exchange rate adjusts so that a fully hedged investor cannot earn a free extra return simply by switching currencies.",
+          fr: "Si investir en dollars rapporte plus que placer en euros, le taux forward s’ajuste afin qu’un investisseur totalement couvert ne puisse pas gagner un rendement supplémentaire gratuit simplement en changeant de devise.",
+        },
+        Intermediate: {
+          en: "Replicate the same final home-currency cash flow through two routes: invest domestically, or convert at spot, invest abroad and lock the future conversion with a forward. No-arbitrage makes the outcomes consistent.",
+          fr: "Réplique le même cash flow final domestique par deux routes : investir domestiquement, ou convertir au spot, investir à l’étranger puis verrouiller la conversion future avec un forward. Le no-arbitrage rend les résultats cohérents.",
+        },
+        Professional: {
+          en: "CIP is a benchmark, but persistent basis can arise from regulatory costs, dealer balance-sheet scarcity, collateral demand and structural currency funding imbalances. Such deviations are financing-market signals, not automatically risk-free profits.",
+          fr: "CIP est un benchmark, mais un basis persistant peut provenir de coûts réglementaires, rareté du bilan dealer, demande de collatéral et déséquilibres structurels de financement en devises. Ces écarts signalent des conditions de financement et ne sont pas automatiquement des profits sans risque.",
+        },
+      },
+      formula: {
+        label: { en: "Covered interest parity", fr: "Covered interest parity" },
+        expression: "F = S × (1 + r_quote × T) / (1 + r_base × T)",
+        explanation: {
+          en: "S and F are quote-currency units per base-currency unit, using matched rates and conventions.",
+          fr: "S et F sont des unités de quote currency par unité de base currency, avec taux et conventions cohérents.",
+        },
+        workedExample: {
+          en: "EUR/USD spot = 1.10, USD rate = 5%, EUR rate = 3%, T = 1: F ≈ 1.10 × 1.05 / 1.03 = 1.1214.",
+          fr: "EUR/USD spot = 1,10, taux USD = 5 %, taux EUR = 3 %, T = 1 : F ≈ 1,10 × 1,05 / 1,03 = 1,1214.",
+        },
+      },
+      vocabulary: [
+        { en: "Covered interest parity", fr: "parité couverte des taux d’intérêt", definition: { en: "No-arbitrage relationship linking spot, forward and matched interest rates.", fr: "Relation de no-arbitrage reliant spot, forward et taux d’intérêt comparables." } },
+        { en: "Cross-currency basis", fr: "cross-currency basis", definition: { en: "Market adjustment reflecting relative currency funding conditions.", fr: "Ajustement de marché reflétant les conditions relatives de financement en devises." } },
+      ],
+    },
+    {
+      id: "fx-swaps",
+      kicker: { en: "05 · FX SWAPS & FUNDING", fr: "05 · FX SWAPS & FINANCEMENT" },
+      title: { en: "An FX swap exchanges currencies now and reverses the exchange later", fr: "Un FX swap échange des devises aujourd’hui puis inverse l’échange plus tard" },
+      coreFacts: [
+        { en: "A standard FX swap combines a spot leg with an opposite forward leg.", fr: "Un FX swap standard combine une jambe spot avec une jambe forward opposée." },
+        { en: "FX swaps are widely used for short-term foreign-currency funding and liquidity management.", fr: "Les FX swaps sont largement utilisés pour le financement court terme en devise étrangère et la gestion de liquidité." },
+        { en: "FX swaps differ from longer-dated cross-currency interest-rate swaps that exchange streams of interest and possibly principal.", fr: "Les FX swaps diffèrent des cross-currency interest-rate swaps plus longs qui échangent des flux d’intérêts et parfois le principal." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company can exchange euros for dollars today and agree to reverse the exchange in three months. This gives it temporary dollar funding without permanently selling its euros.",
+          fr: "Une entreprise peut échanger des euros contre des dollars aujourd’hui puis convenir de l’échange inverse dans trois mois. Elle obtient ainsi temporairement des dollars sans vendre définitivement ses euros.",
+        },
+        Intermediate: {
+          en: "The two legs link current conversion and future reversal. The economics are closely connected to relative funding rates and forward points.",
+          fr: "Les deux jambes relient conversion actuelle et inversion future. L’économie du trade est étroitement liée aux taux de financement relatifs et aux forward points.",
+        },
+        Professional: {
+          en: "FX swap markets are central to global dollar funding. Stress in swap pricing and basis can reveal currency scarcity and balance-sheet constraints; central-bank swap lines can become important backstops during severe dislocations.",
+          fr: "Les marchés de FX swaps sont centraux dans le financement mondial en dollars. Des tensions sur leur pricing et le basis peuvent révéler rareté d’une devise et contraintes de bilan ; les swap lines des banques centrales peuvent devenir des filets de sécurité importants lors de fortes dislocations.",
+        },
+      },
+      marketConnection: {
+        en: "A widening basis can indicate unusually strong demand for funding in one currency relative to another.",
+        fr: "Un basis qui s’écarte peut signaler une demande inhabituellement forte de financement dans une devise par rapport à une autre.",
+      },
+      vocabulary: [
+        { en: "FX swap", fr: "FX swap", definition: { en: "A spot exchange paired with the opposite forward exchange.", fr: "Un échange spot associé à l’échange forward inverse." } },
+        { en: "Funding currency", fr: "devise de financement", definition: { en: "The currency in which financing is raised or borrowed.", fr: "La devise dans laquelle le financement est levé ou emprunté." } },
+      ],
+    },
+    {
+      id: "hedging",
+      kicker: { en: "06 · CORPORATE FX EXPOSURE & HEDGING", fr: "06 · EXPOSITION FX D’ENTREPRISE & HEDGING" },
+      title: { en: "Hedge direction comes from the future foreign-currency cash flow", fr: "La direction du hedge vient du futur cash flow en devise étrangère" },
+      coreFacts: [
+        { en: "A future foreign-currency receivable makes the firm economically long that currency.", fr: "Une future créance en devise étrangère rend l’entreprise économiquement long cette devise." },
+        { en: "A future foreign-currency payable makes the firm economically short that currency.", fr: "Une future dette en devise étrangère rend l’entreprise économiquement short cette devise." },
+        { en: "For a known amount and date, a forward can lock the home-currency value.", fr: "Pour un montant et une date connus, un forward peut verrouiller la valeur en devise domestique." },
+        { en: "Options preserve favorable upside but require a premium and introduce option sensitivities.", fr: "Les options conservent l’upside favorable mais exigent une prime et introduisent des sensibilités optionnelles." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A US exporter expecting euros fears the euro could fall before payment. Selling those euros forward locks the dollar value.",
+          fr: "Un exportateur américain qui attend des euros craint que l’euro baisse avant le paiement. Vendre ces euros forward verrouille leur valeur en dollars.",
+        },
+        Intermediate: {
+          en: "Start by defining currency, amount, timing and certainty. Match the hedge instrument to the exposure rather than hedging an approximate headline number.",
+          fr: "Commence par définir devise, montant, timing et certitude. Fais correspondre l’instrument de hedge à l’exposition plutôt que de couvrir un chiffre approximatif.",
+        },
+        Professional: {
+          en: "Treasury distinguishes transaction, translation and economic exposure. Professional programs may use layered hedges, tenor ladders, counterparty limits, collateral rules and hedge-accounting considerations.",
+          fr: "La trésorerie distingue transaction, translation et economic exposure. Les programmes professionnels peuvent utiliser layered hedges, échelonnement des maturités, limites de contrepartie, règles de collatéral et considérations de hedge accounting.",
+        },
+      },
+      comparison: {
+        title: { en: "Three FX exposure types", fr: "Trois types d’exposition FX" },
+        headers: [
+          { en: "Exposure", fr: "Exposition" },
+          { en: "Example", fr: "Exemple" },
+          { en: "Main effect", fr: "Effet principal" },
+        ],
+        rows: [
+          { cells: [{ en: "Transaction", fr: "Transaction" }, { en: "EUR receivable", fr: "Créance EUR" }, { en: "Home-currency cash flow", fr: "Cash flow en devise domestique" }] },
+          { cells: [{ en: "Translation", fr: "Translation" }, { en: "Foreign subsidiary", fr: "Filiale étrangère" }, { en: "Reported accounting values", fr: "Valeurs comptables reportées" }] },
+          { cells: [{ en: "Economic", fr: "Economic" }, { en: "Competitor gains cost advantage", fr: "Un concurrent gagne un avantage de coût" }, { en: "Long-run margins and competitiveness", fr: "Marges et compétitivité de long terme" }] },
+        ],
+      },
+      example: {
+        en: "A US exporter expects EUR 5 million in 90 days. To lock USD proceeds, it can sell EUR 5 million forward for the matching date.",
+        fr: "Un exportateur américain attend 5 M€ dans 90 jours. Pour verrouiller les recettes en USD, il peut vendre 5 M€ forward pour la date correspondante.",
+      },
+      vocabulary: [
+        { en: "Transaction exposure", fr: "exposition transactionnelle", definition: { en: "FX risk on specific future cash flows.", fr: "Risque FX sur des cash flows futurs spécifiques." } },
+        { en: "Translation exposure", fr: "exposition de conversion", definition: { en: "Accounting FX exposure when foreign operations are translated into reporting currency.", fr: "Exposition comptable lors de la conversion des activités étrangères dans la devise de reporting." } },
+        { en: "Economic exposure", fr: "exposition économique", definition: { en: "Long-run effect of FX on competitiveness and business economics.", fr: "Effet long terme du FX sur la compétitivité et l’économie du business." } },
+      ],
+    },
+    {
+      id: "international-returns",
+      kicker: { en: "07 · INTERNATIONAL INVESTMENT RETURNS", fr: "07 · RENDEMENTS INTERNATIONAUX" },
+      title: { en: "An unhedged foreign investment combines asset return and currency return", fr: "Un investissement étranger non couvert combine rendement de l’actif et rendement de la devise" },
+      coreFacts: [
+        { en: "A domestic investor in a foreign asset is exposed to both local asset performance and FX.", fr: "Un investisseur domestique dans un actif étranger est exposé à la performance locale de l’actif et au FX." },
+        { en: "The exact relationship is multiplicative, not simply additive.", fr: "La relation exacte est multiplicative, pas simplement additive." },
+        { en: "Currency hedging can reduce FX volatility but introduces hedge costs, rolling effects and basis risk.", fr: "La couverture de change peut réduire la volatilité FX mais introduit coûts de hedge, effets de roll et basis risk." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A European stock can rise in euros while a US investor earns little in dollars if the euro falls enough.",
+          fr: "Une action européenne peut monter en euros alors qu’un investisseur américain gagne peu en dollars si l’euro baisse suffisamment.",
+        },
+        Intermediate: {
+          en: "Multiply the local asset growth factor by the currency growth factor. Adding the two returns is only an approximation for small moves.",
+          fr: "Multiplie le facteur de croissance local de l’actif par le facteur de croissance de la devise. Additionner les deux rendements n’est qu’une approximation pour de petits mouvements.",
+        },
+        Professional: {
+          en: "Institutional hedge ratios depend on asset class, liabilities, portfolio base currency, correlations, carry, liquidity and risk budget. Hedging is a portfolio-design decision rather than an automatic yes/no choice.",
+          fr: "Les hedge ratios institutionnels dépendent de l’asset class, des liabilities, de la devise de référence, des corrélations, du carry, de la liquidité et du risk budget. La couverture est une décision de construction de portefeuille, pas un simple oui/non automatique.",
+        },
+      },
+      formula: {
+        label: { en: "Home-currency return", fr: "Rendement en devise domestique" },
+        expression: "1 + R_home = (1 + R_local) × (1 + R_FX)",
+        explanation: { en: "R_FX is the foreign currency return versus the investor's home currency.", fr: "R_FX est le rendement de la devise étrangère face à la devise domestique de l’investisseur." },
+        workedExample: { en: "+8% local asset and −5% FX gives 1.08 × 0.95 − 1 = +2.6%.", fr: "+8 % sur l’actif local et −5 % sur le FX donnent 1,08 × 0,95 − 1 = +2,6 %." },
+      },
+      vocabulary: [
+        { en: "Base currency", fr: "devise de référence du portefeuille", definition: { en: "Currency in which portfolio value and performance are measured.", fr: "Devise dans laquelle valeur et performance du portefeuille sont mesurées." } },
+        { en: "Hedge ratio", fr: "ratio de couverture", definition: { en: "Proportion of an FX exposure that is hedged.", fr: "Proportion d’une exposition FX qui est couverte." } },
+      ],
+    },
+    {
+      id: "drivers",
+      kicker: { en: "08 · WHAT DRIVES A CURRENCY?", fr: "08 · QU’EST-CE QUI FAIT BOUGER UNE DEVISE ?" },
+      title: { en: "Currencies trade relative expectations between two economies", fr: "Les devises tradent les anticipations relatives entre deux économies" },
+      coreFacts: [
+        { en: "FX is relative: rates, growth and inflation matter compared with the other economy in the pair.", fr: "Le FX est relatif : taux, croissance et inflation comptent par rapport à l’autre économie de la paire." },
+        { en: "Expected future policy paths often matter more than the current policy rate alone.", fr: "Les trajectoires futures de politique attendues comptent souvent plus que le taux directeur actuel seul." },
+        { en: "Capital flows, trade balances, commodity exposure, fiscal credibility and risk sentiment can all influence currencies.", fr: "Flux de capitaux, balances commerciales, exposition aux matières premières, crédibilité budgétaire et sentiment de risque peuvent tous influencer les devises." },
+        { en: "A currency can fall after strong data if the result was weaker than what markets had already priced.", fr: "Une devise peut baisser après une bonne donnée si le résultat est inférieur à ce que le marché avait déjà pricé." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Currencies move when investors and businesses change how much they want to hold, invest or transact in one currency versus another.",
+          fr: "Les devises bougent lorsque investisseurs et entreprises changent la quantité d’une devise qu’ils veulent détenir, investir ou utiliser par rapport à une autre.",
+        },
+        Intermediate: {
+          en: "The key question is often the surprise versus expectations. A rate hike can weaken a currency if traders expected an even larger hike or a more hawkish future path.",
+          fr: "La question clé est souvent la surprise par rapport aux attentes. Une hausse de taux peut affaiblir une devise si les traders attendaient une hausse encore plus forte ou une trajectoire future plus hawkish.",
+        },
+        Professional: {
+          en: "Short horizons can be dominated by positioning, liquidity and surprise components; medium horizons by real-rate differentials, terms of trade and growth; long-run valuation by productivity and relative price levels. No single factor is universally dominant.",
+          fr: "À court terme, positioning, liquidité et surprises peuvent dominer ; à moyen terme, différentiels de taux réels, terms of trade et croissance ; à long terme, productivité et niveaux de prix relatifs. Aucun facteur unique ne domine toujours.",
+        },
+      },
+      comparison: {
+        title: { en: "FX driver framework", fr: "Cadre des drivers FX" },
+        headers: [
+          { en: "Driver", fr: "Driver" },
+          { en: "Possible support", fr: "Soutien possible" },
+          { en: "Why not mechanical", fr: "Pourquoi non mécanique" },
+        ],
+        rows: [
+          { cells: [{ en: "Rates", fr: "Taux" }, { en: "Higher relative expected yields", fr: "Rendements relatifs attendus plus élevés" }, { en: "Expectations and forward pricing matter", fr: "Anticipations et forward pricing comptent" }] },
+          { cells: [{ en: "Growth", fr: "Croissance" }, { en: "Capital demand and stronger activity", fr: "Demande de capital et activité plus forte" }, { en: "Can also lift imports or inflation", fr: "Peut aussi accroître imports ou inflation" }] },
+          { cells: [{ en: "Inflation", fr: "Inflation" }, { en: "May raise expected policy rates", fr: "Peut relever les taux attendus" }, { en: "May erode real value and credibility", fr: "Peut éroder valeur réelle et crédibilité" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Rate differential", fr: "différentiel de taux", definition: { en: "Difference between interest rates across two currencies.", fr: "Différence entre les taux d’intérêt de deux devises." } },
+        { en: "Terms of trade", fr: "termes de l’échange", definition: { en: "Relative price of a country's exports versus imports.", fr: "Prix relatif des exportations d’un pays par rapport à ses importations." } },
+        { en: "Risk-off", fr: "risk-off", definition: { en: "Market regime in which investors reduce risk exposure and seek liquidity or perceived safety.", fr: "Régime où les investisseurs réduisent le risque et recherchent liquidité ou sécurité perçue." } },
+      ],
+    },
+    {
+      id: "ppp-carry",
+      kicker: { en: "09 · PPP, CARRY & POLICY", fr: "09 · PPP, CARRY & POLITIQUE" },
+      title: { en: "Long-run value, yield carry and policy interact — none is a guaranteed signal", fr: "Valeur long terme, carry et politique interagissent — aucun n’est un signal garanti" },
+      coreFacts: [
+        { en: "Relative purchasing-power parity links long-run currency moves to inflation differentials.", fr: "La purchasing-power parity relative relie les mouvements de devise long terme aux différentiels d’inflation." },
+        { en: "PPP can be a long-run valuation anchor but is a weak short-run timing tool.", fr: "PPP peut être une ancre de valorisation long terme mais un mauvais outil de timing court terme." },
+        { en: "A carry trade funds in a lower-yielding currency and invests in a higher-yielding one while bearing FX risk.", fr: "Un carry trade se finance dans une devise à faible rendement et investit dans une devise à rendement plus élevé en assumant le risque FX." },
+        { en: "Central banks affect FX through rates, expected policy, communication, liquidity and sometimes direct intervention.", fr: "Les banques centrales influencent le FX via taux, politique attendue, communication, liquidité et parfois intervention directe." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A currency with much higher inflation may lose purchasing power over time. A high interest rate can attract investors, but the currency can still fall enough to erase the extra yield.",
+          fr: "Une devise avec inflation beaucoup plus élevée peut perdre du pouvoir d’achat avec le temps. Un taux élevé peut attirer des investisseurs, mais la devise peut tout de même baisser assez pour effacer le rendement supplémentaire.",
+        },
+        Intermediate: {
+          en: "Do not confuse covered and uncovered parity. Covered parity uses a forward and is a no-arbitrage benchmark. Uncovered parity is an expectations relationship about future spot and is much less reliable over short horizons.",
+          fr: "Ne confonds pas covered et uncovered parity. Covered parity utilise un forward et constitue un benchmark de no-arbitrage. Uncovered parity est une relation d’anticipations sur le spot futur et est bien moins fiable à court terme.",
+        },
+        Professional: {
+          en: "Carry can earn rate differential but is exposed to crash risk, volatility regimes, leverage and crowded positioning. PPP and real exchange rates provide valuation context while policy reaction functions and capital flows often dominate tactical horizons.",
+          fr: "Le carry peut capter un différentiel de taux mais reste exposé au crash risk, aux régimes de volatilité, au levier et au positioning encombré. PPP et taux de change réels donnent un contexte de valorisation tandis que fonctions de réaction des banques centrales et flux de capitaux dominent souvent les horizons tactiques.",
+        },
+      },
+      formula: {
+        label: { en: "Relative PPP approximation", fr: "Approximation de relative PPP" },
+        expression: "Expected domestic-currency depreciation ≈ domestic inflation − foreign inflation",
+        explanation: { en: "Always define the quotation convention before assigning the sign.", fr: "Toujours définir la convention de cotation avant d’attribuer le signe." },
+        workedExample: { en: "5% domestic inflation versus 2% foreign inflation suggests roughly 3% long-run domestic depreciation under the chosen convention.", fr: "5 % d’inflation domestique contre 2 % à l’étranger suggèrent environ 3 % de dépréciation domestique à long terme selon la convention choisie." },
+      },
+      marketConnection: {
+        en: "Crowded carry positions can unwind violently when volatility rises, producing FX moves far larger than the interest differential alone.",
+        fr: "Des positions de carry encombrées peuvent se déboucler violemment lorsque la volatilité monte, produisant des mouvements FX bien supérieurs au seul différentiel de taux.",
+      },
+      vocabulary: [
+        { en: "Purchasing-power parity", fr: "parité de pouvoir d’achat", definition: { en: "Framework linking exchange rates to relative price levels.", fr: "Cadre reliant taux de change et niveaux de prix relatifs." } },
+        { en: "Carry trade", fr: "carry trade", definition: { en: "Strategy seeking to earn a currency yield differential while taking FX risk.", fr: "Stratégie visant à capter un différentiel de rendement en assumant le risque FX." } },
+        { en: "FX intervention", fr: "intervention de change", definition: { en: "Official currency purchases or sales intended to influence market conditions or the exchange rate.", fr: "Achats ou ventes officielles de devises visant à influencer le marché ou le taux de change." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "quote-direction",
+      question: { en: "EUR/USD rises from 1.10 to 1.12. What happened?", fr: "EUR/USD monte de 1,10 à 1,12. Que s’est-il passé ?" },
+      options: [
+        { id: "a", label: { en: "EUR appreciated versus USD", fr: "EUR s’est apprécié face à USD" } },
+        { id: "b", label: { en: "USD appreciated versus EUR", fr: "USD s’est apprécié face à EUR" } },
+        { id: "c", label: { en: "Neither currency moved", fr: "Aucune devise n’a bougé" } },
+        { id: "d", label: { en: "Both appreciated versus each other", fr: "Les deux se sont appréciées l’une contre l’autre" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "EUR is the base currency; a higher quote means one EUR buys more USD.", fr: "EUR est la base currency ; une cotation plus élevée signifie qu’un EUR achète davantage de USD." },
+    },
+    {
+      id: "q2",
+      conceptKey: "cross-rate",
+      question: { en: "EUR/USD = 1.10 and USD/JPY = 150. What is EUR/JPY?", fr: "EUR/USD = 1,10 et USD/JPY = 150. Combien vaut EUR/JPY ?" },
+      options: [
+        { id: "a", label: { en: "136.36", fr: "136,36" } },
+        { id: "b", label: { en: "165", fr: "165" } },
+        { id: "c", label: { en: "151.10", fr: "151,10" } },
+        { id: "d", label: { en: "0.0073", fr: "0,0073" } },
+      ],
+      correctOption: "b",
+      explanation: { en: "1.10 × 150 = 165 JPY per EUR.", fr: "1,10 × 150 = 165 JPY par EUR." },
+    },
+    {
+      id: "q3",
+      conceptKey: "forward-pricing",
+      question: { en: "What primarily anchors a textbook FX forward rate?", fr: "Qu’est-ce qui ancre principalement un taux forward FX théorique ?" },
+      options: [
+        { id: "a", label: { en: "Spot and matched interest rates", fr: "Spot et taux d’intérêt correspondants" } },
+        { id: "b", label: { en: "Only a trader's forecast", fr: "Uniquement la prévision d’un trader" } },
+        { id: "c", label: { en: "Only stock volatility", fr: "Uniquement la volatilité actions" } },
+        { id: "d", label: { en: "Only last year's inflation", fr: "Uniquement l’inflation de l’année passée" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Covered interest parity links spot, forward and matched funding rates.", fr: "Covered interest parity relie spot, forward et taux de financement comparables." },
+    },
+    {
+      id: "q4",
+      conceptKey: "fx-swap",
+      question: { en: "What is a standard FX swap?", fr: "Qu’est-ce qu’un FX swap standard ?" },
+      options: [
+        { id: "a", label: { en: "Spot exchange plus opposite forward exchange", fr: "Échange spot plus échange forward inverse" } },
+        { id: "b", label: { en: "A stock split", fr: "Un stock split" } },
+        { id: "c", label: { en: "A bond coupon only", fr: "Uniquement un coupon obligataire" } },
+        { id: "d", label: { en: "An option with no expiry", fr: "Une option sans échéance" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The linked spot and opposite forward legs define the standard FX swap.", fr: "Les jambes spot et forward inverse définissent le FX swap standard." },
+    },
+    {
+      id: "q5",
+      conceptKey: "receivable-hedge",
+      question: { en: "A US firm will receive EUR in three months and fears EUR weakness. A simple hedge is to:", fr: "Une entreprise US recevra des EUR dans trois mois et craint une baisse de l’EUR. Un hedge simple consiste à :" },
+      options: [
+        { id: "a", label: { en: "Sell EUR forward", fr: "Vendre EUR forward" } },
+        { id: "b", label: { en: "Buy more unhedged EUR", fr: "Acheter davantage d’EUR non couverts" } },
+        { id: "c", label: { en: "Buy a US Treasury only", fr: "Acheter uniquement un Treasury US" } },
+        { id: "d", label: { en: "Do nothing because receivables have no FX risk", fr: "Ne rien faire car une créance n’a pas de risque FX" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The firm is economically long EUR until receipt and conversion, so selling EUR forward offsets that exposure.", fr: "L’entreprise est économiquement long EUR jusqu’à l’encaissement et la conversion ; vendre EUR forward compense cette exposition." },
+    },
+    {
+      id: "q6",
+      conceptKey: "international-return",
+      question: { en: "A foreign stock returns +8% locally while its currency falls 5% versus your home currency. Exact home return is closest to:", fr: "Une action étrangère gagne +8 % localement tandis que sa devise baisse de 5 % face à ta devise domestique. Le rendement exact est proche de :" },
+      options: [
+        { id: "a", label: { en: "+3.0%", fr: "+3,0 %" } },
+        { id: "b", label: { en: "+2.6%", fr: "+2,6 %" } },
+        { id: "c", label: { en: "+13.0%", fr: "+13,0 %" } },
+        { id: "d", label: { en: "−13.0%", fr: "−13,0 %" } },
+      ],
+      correctOption: "b",
+      explanation: { en: "1.08 × 0.95 − 1 = 2.6%.", fr: "1,08 × 0,95 − 1 = 2,6 %." },
+    },
+    {
+      id: "q7",
+      conceptKey: "macro-relative",
+      question: { en: "Why can a currency fall after a seemingly strong economic release?", fr: "Pourquoi une devise peut-elle baisser après une donnée économique apparemment forte ?" },
+      options: [
+        { id: "a", label: { en: "The result may have been weaker than expectations already priced", fr: "Le résultat peut être inférieur aux attentes déjà pricées" } },
+        { id: "b", label: { en: "Currencies never react to expectations", fr: "Les devises ne réagissent jamais aux attentes" } },
+        { id: "c", label: { en: "Strong data mechanically lowers every currency", fr: "Une bonne donnée fait mécaniquement baisser toute devise" } },
+        { id: "d", label: { en: "FX ignores macro information", fr: "Le FX ignore les informations macro" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Markets react to outcomes relative to expectations and the repricing of future paths.", fr: "Les marchés réagissent aux résultats par rapport aux attentes et au repricing des trajectoires futures." },
+    },
+    {
+      id: "q8",
+      conceptKey: "ppp",
+      question: { en: "Which is the best use of PPP?", fr: "Quel est le meilleur usage de PPP ?" },
+      options: [
+        { id: "a", label: { en: "A long-run valuation anchor", fr: "Une ancre de valorisation long terme" } },
+        { id: "b", label: { en: "A guaranteed one-day FX forecast", fr: "Une prévision FX garantie à un jour" } },
+        { id: "c", label: { en: "A substitute for spot quotes", fr: "Un remplacement des cotations spot" } },
+        { id: "d", label: { en: "A bond coupon formula", fr: "Une formule de coupon obligataire" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "PPP can inform long-run valuation but is weak as a short-run timing rule.", fr: "PPP peut informer la valorisation long terme mais est faible comme règle de timing court terme." },
+    },
+    {
+      id: "q9",
+      conceptKey: "carry",
+      question: { en: "What is the main hidden danger in a carry trade?", fr: "Quel est le principal danger caché d’un carry trade ?" },
+      options: [
+        { id: "a", label: { en: "FX losses can overwhelm the yield advantage", fr: "Les pertes FX peuvent dépasser l’avantage de rendement" } },
+        { id: "b", label: { en: "Interest rates never change", fr: "Les taux ne changent jamais" } },
+        { id: "c", label: { en: "The trade has zero market risk", fr: "Le trade n’a aucun risque de marché" } },
+        { id: "d", label: { en: "Carry guarantees profit if held for one week", fr: "Le carry garantit un profit s’il est détenu une semaine" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The higher-yield currency can depreciate sharply, especially in risk-off or crowded unwind regimes.", fr: "La devise à rendement élevé peut se déprécier fortement, notamment en régime risk-off ou de débouclage de positions encombrées." },
+    },
+    {
+      id: "q10",
+      conceptKey: "cip-vs-uip",
+      question: { en: "Which statement is correct?", fr: "Quelle affirmation est correcte ?" },
+      options: [
+        { id: "a", label: { en: "Covered parity uses a forward hedge; uncovered parity leaves future spot uncertain", fr: "Covered parity utilise un hedge forward ; uncovered parity laisse le spot futur incertain" } },
+        { id: "b", label: { en: "Covered and uncovered parity are identical in implementation", fr: "Covered et uncovered parity sont identiques dans leur implémentation" } },
+        { id: "c", label: { en: "Uncovered parity removes FX risk with a forward", fr: "Uncovered parity supprime le risque FX avec un forward" } },
+        { id: "d", label: { en: "Covered parity has no relation to interest rates", fr: "Covered parity n’a aucun lien avec les taux d’intérêt" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Covered parity locks future FX with a forward; uncovered parity is an expectations relation involving future spot.", fr: "Covered parity verrouille le FX futur avec un forward ; uncovered parity est une relation d’anticipation impliquant le spot futur." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "What drives a currency, and how would you hedge a known foreign-currency receivable?",
+      fr: "Qu’est-ce qui fait bouger une devise, et comment couvrirais-tu une créance connue en devise étrangère ?",
+    },
+    framework: [
+      { en: "Start with quote convention: define the base and quote currencies.", fr: "Commencer par la convention de cotation : définir base et quote currencies." },
+      { en: "Explain that FX is relative: rates, inflation, growth, policy expectations and capital flows across two economies matter.", fr: "Expliquer que le FX est relatif : taux, inflation, croissance, anticipations de politique et flux de capitaux entre deux économies comptent." },
+      { en: "Mention expectations and positioning: markets react to surprises versus what is already priced.", fr: "Mentionner anticipations et positioning : les marchés réagissent aux surprises par rapport à ce qui est déjà pricé." },
+      { en: "For a receivable, identify the firm as long the foreign currency until conversion.", fr: "Pour une créance, identifier l’entreprise comme long la devise étrangère jusqu’à conversion." },
+      { en: "For a known amount and date, sell the foreign currency forward and buy the home currency forward.", fr: "Pour un montant et une date connus, vendre la devise étrangère forward et acheter la devise domestique forward." },
+      { en: "Explain trade-offs: certainty improves, but favorable FX upside is surrendered and basis/counterparty/forecast risks may remain.", fr: "Expliquer les compromis : la certitude augmente, mais l’upside FX favorable est abandonné et des risques basis/counterparty/forecast peuvent subsister." },
+    ],
+    sample: {
+      en: "A currency is driven by relative conditions between two economies rather than one isolated variable. I would look at expected rate differentials, inflation and growth surprises, central-bank reaction functions, capital and trade flows, risk sentiment and positioning. Importantly, FX reacts to what changes relative to expectations, not simply whether a data point is good or bad. For hedging, if a US company knows it will receive EUR 5 million in 90 days, it is economically long euros until it converts the cash. A straightforward hedge is to sell EUR 5 million forward and buy USD for the matching settlement date. That locks the USD value and removes most spot uncertainty for the contracted amount. The trade-off is that the company gives up favorable upside if the euro strengthens, and it still needs to manage counterparty, timing, basis and forecast-error risks.",
+      fr: "Une devise est déterminée par les conditions relatives entre deux économies plutôt que par une variable isolée. J’examinerais les différentiels de taux attendus, les surprises d’inflation et de croissance, les fonctions de réaction des banques centrales, les flux de capitaux et commerciaux, le sentiment de risque et le positioning. Surtout, le FX réagit à ce qui change par rapport aux attentes, pas simplement au fait qu’une donnée soit bonne ou mauvaise. Pour la couverture, si une entreprise américaine sait qu’elle recevra 5 M€ dans 90 jours, elle est économiquement long euros jusqu’à la conversion. Un hedge simple consiste à vendre 5 M€ forward et acheter des USD pour la date de settlement correspondante. Cela verrouille la valeur en USD et retire l’essentiel de l’incertitude spot sur le montant contractuel. En contrepartie, l’entreprise abandonne l’upside favorable si l’euro s’apprécie et doit encore gérer les risques de contrepartie, timing, basis et erreur de prévision.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
