@@ -25565,7 +25565,478 @@ export const ventureCapitalLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson];
+
+
+export const riskManagementLesson: FinanceLesson = {
+  slug: "year-3-risk-management",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Risk Management", fr: "Gestion des risques / Risk Management" },
+  title: { en: "Risk Management", fr: "Gestion des risques / Risk Management" },
+  subtitle: {
+    en: "Learn how financial institutions and investment teams identify, measure, limit, stress and communicate market, credit, liquidity, operational and model risk.",
+    fr: "Comprendre comment les institutions financières et équipes d’investissement identifient, mesurent, limitent, stressent et communiquent les risques de marché, crédit, liquidité, opérationnels et de modèle.",
+  },
+  duration: { en: "150–180 min", fr: "150–180 min" },
+  prerequisites: [
+    { en: "Risk, Return & Diversification", fr: "Risque, rendement & diversification" },
+    { en: "Statistics & Probability", fr: "Statistiques & probabilités" },
+    { en: "Fixed Income & Yield Curves", fr: "Fixed Income & Yield Curves" },
+    { en: "Derivatives Foundations", fr: "Fondamentaux des dérivés / Derivatives Foundations" },
+    { en: "Credit Analysis", fr: "Analyse crédit / Credit Analysis" },
+  ],
+  objectives: [
+    { en: "Distinguish market, credit, liquidity, operational and model risk.", fr: "Distinguer market, credit, liquidity, operational et model risk." },
+    { en: "Understand exposure, sensitivity, volatility, VaR and expected shortfall at an applied level.", fr: "Comprendre exposure, sensitivity, volatilité, VaR et expected shortfall à un niveau appliqué." },
+    { en: "Explain counterparty risk, concentration risk and wrong-way risk.", fr: "Expliquer counterparty risk, concentration risk et wrong-way risk." },
+    { en: "Understand liquidity stress, funding risk and margin-call dynamics.", fr: "Comprendre liquidity stress, funding risk et dynamique des margin calls." },
+    { en: "Use scenario analysis and stress testing to challenge normal-market models.", fr: "Utiliser scenario analysis et stress testing pour challenger les modèles de marché normal." },
+    { en: "Explain limits, hedging, escalation and governance in a professional risk framework.", fr: "Expliquer limits, hedging, escalation et gouvernance dans un cadre professionnel de risk management." },
+  ],
+  overviewFlow: {
+    title: { en: "From exposure to controlled risk", fr: "De l’exposition au risque contrôlé" },
+    steps: [
+      { title: { en: "Identify", fr: "Identifier" }, detail: { en: "Exposure · concentration · scenario", fr: "Exposure · concentration · scénario" } },
+      { title: { en: "Measure", fr: "Mesurer" }, detail: { en: "Sensitivity · VaR · stress", fr: "Sensitivity · VaR · stress" } },
+      { title: { en: "Control", fr: "Contrôler" }, detail: { en: "Limits · hedge · liquidity", fr: "Limits · hedge · liquidité" } },
+      { title: { en: "Govern", fr: "Gouverner" }, detail: { en: "Escalate · review · learn", fr: "Escalader · revoir · apprendre" } },
+    ],
+  },
+  sections: [
+    {
+      id: "risk-taxonomy",
+      kicker: { en: "01 · RISK TAXONOMY", fr: "01 · TYPOLOGIE DES RISQUES" },
+      title: { en: "Good risk management begins by naming the risk correctly", fr: "Une bonne gestion des risques commence par identifier correctement le risque" },
+      coreFacts: [
+        { en: "Market risk comes from changes in prices, rates, spreads, FX and volatility.", fr: "Le market risk vient des variations de prix, taux, spreads, FX et volatilité." },
+        { en: "Credit risk comes from deterioration or default of borrowers and counterparties.", fr: "Le credit risk vient de la détérioration ou du défaut des emprunteurs et contreparties." },
+        { en: "Liquidity risk includes difficulty exiting positions and difficulty funding obligations.", fr: "Le liquidity risk inclut la difficulté à sortir des positions et à financer les obligations." },
+        { en: "Operational and model risk can create losses even when the market view itself is correct.", fr: "Operational risk et model risk peuvent créer des pertes même lorsque la vue de marché est correcte." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Risk is not one thing. A portfolio can lose because prices move, a borrower defaults, a position cannot be sold, a system fails or a model gives the wrong answer.",
+          fr: "Le risque n’est pas une seule chose. Un portefeuille peut perdre parce que les prix bougent, qu’un emprunteur fait défaut, qu’une position ne peut pas être vendue, qu’un système tombe en panne ou qu’un modèle donne une mauvaise réponse.",
+        },
+        Intermediate: {
+          en: "Different risks require different tools. Delta may measure equity or derivative exposure, DV01 may measure rates exposure, credit limits constrain counterparties, and liquidity buffers address funding needs.",
+          fr: "Différents risques exigent différents outils. Delta peut mesurer une exposition equity ou dérivée, DV01 une exposition taux, les credit limits contraignent les contreparties et les liquidity buffers couvrent les besoins de financement.",
+        },
+        Professional: {
+          en: "Risk categories interact. A market shock can create margin calls, producing funding stress, forced selling, wider spreads and counterparty deterioration. Strong frameworks therefore analyze second-order effects rather than treating each risk silo independently.",
+          fr: "Les catégories de risque interagissent. Un choc de marché peut créer des margin calls, produisant funding stress, ventes forcées, spreads plus larges et détérioration des contreparties. Les bons frameworks analysent donc les effets de second ordre plutôt que chaque silo indépendamment.",
+        },
+      },
+      vocabulary: [
+        { en: "Market risk", fr: "risque de marché", definition: { en: "Risk of loss from adverse changes in market variables.", fr: "Risque de perte lié à des variations défavorables des variables de marché." } },
+        { en: "Operational risk", fr: "risque opérationnel", definition: { en: "Risk of loss from failures in processes, people, systems or external events.", fr: "Risque de perte lié aux défaillances de processus, personnes, systèmes ou événements externes." } },
+        { en: "Model risk", fr: "risque de modèle", definition: { en: "Risk that a model is wrong, misused or inappropriate for the decision.", fr: "Risque qu’un modèle soit erroné, mal utilisé ou inadapté à la décision." } },
+      ],
+    },
+    {
+      id: "market-risk-sensitivities",
+      kicker: { en: "02 · MARKET RISK & SENSITIVITIES", fr: "02 · MARKET RISK & SENSITIVITIES" },
+      title: { en: "Sensitivities explain how P&L changes when a risk factor moves", fr: "Les sensitivities expliquent comment le P&L change lorsqu’un facteur de risque bouge" },
+      coreFacts: [
+        { en: "Delta measures first-order sensitivity to an underlying price.", fr: "Delta mesure la sensibilité de premier ordre à un prix sous-jacent." },
+        { en: "DV01 measures approximate value change for a one-basis-point move in yield.", fr: "DV01 mesure la variation approximative de valeur pour un mouvement de 1 basis point du yield." },
+        { en: "Vega measures sensitivity to implied volatility for options.", fr: "Vega mesure la sensibilité à la volatilité implicite pour les options." },
+        { en: "Concentration and correlation determine how individual sensitivities combine at portfolio level.", fr: "Concentration et corrélation déterminent comment les sensitivities individuelles se combinent au niveau du portefeuille." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A sensitivity tells you what may happen if one market variable moves a little. For example, DV01 estimates how much a bond position changes if yields move by one basis point.",
+          fr: "Une sensitivity indique ce qui peut se passer si une variable de marché bouge légèrement. Par exemple, DV01 estime combien une position obligataire change si les yields bougent de 1 basis point.",
+        },
+        Intermediate: {
+          en: "Risk managers aggregate sensitivities by desk, asset class and factor. They look for concentrations that may not be obvious from gross position size alone.",
+          fr: "Les risk managers agrègent les sensitivities par desk, classe d’actifs et facteur. Ils recherchent des concentrations qui ne sont pas forcément visibles à partir de la seule taille brute des positions.",
+        },
+        Professional: {
+          en: "Linear sensitivities are local approximations. Large shocks can introduce convexity, nonlinear option effects and correlation changes, so sensitivities must be complemented by full revaluation or scenario analysis.",
+          fr: "Les sensitivities linéaires sont des approximations locales. Les gros chocs peuvent introduire convexity, effets non linéaires des options et changements de corrélation ; elles doivent donc être complétées par full revaluation ou scenario analysis.",
+        },
+      },
+      formula: {
+        label: { en: "Simple sensitivity P&L", fr: "P&L simple par sensitivity" },
+        expression: "Approximate P&L ≈ Sensitivity × Change in Risk Factor",
+        explanation: { en: "Useful for small moves; larger moves may require nonlinear terms or full repricing.", fr: "Utile pour de petits mouvements ; des mouvements plus grands peuvent exiger des termes non linéaires ou un repricing complet." },
+      },
+      vocabulary: [
+        { en: "Exposure", fr: "exposition", definition: { en: "Amount of economic risk linked to a market factor or counterparty.", fr: "Quantité de risque économique liée à un facteur de marché ou une contrepartie." } },
+        { en: "Sensitivity", fr: "sensibilité", definition: { en: "Estimated change in value for a specified change in a risk factor.", fr: "Variation estimée de valeur pour un changement donné d’un facteur de risque." } },
+      ],
+    },
+    {
+      id: "var-expected-shortfall",
+      kicker: { en: "03 · VaR & EXPECTED SHORTFALL", fr: "03 · VaR & EXPECTED SHORTFALL" },
+      title: { en: "VaR summarizes a loss threshold; expected shortfall looks beyond it", fr: "La VaR résume un seuil de perte ; l’expected shortfall regarde au-delà" },
+      coreFacts: [
+        { en: "Value at Risk estimates a loss threshold for a specified horizon and confidence level.", fr: "La Value at Risk estime un seuil de perte pour un horizon et un niveau de confiance donnés." },
+        { en: "VaR does not describe how severe losses can be beyond the threshold.", fr: "La VaR ne décrit pas la sévérité des pertes au-delà du seuil." },
+        { en: "Expected shortfall estimates the average loss in the tail beyond the VaR cutoff.", fr: "L’expected shortfall estime la perte moyenne dans la queue au-delà du cutoff de VaR." },
+        { en: "Both measures depend strongly on model assumptions, historical data and chosen horizon.", fr: "Les deux mesures dépendent fortement des hypothèses du modèle, des données historiques et de l’horizon choisi." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A one-day 99% VaR of $10 million means the model estimates that losses should exceed $10 million on roughly 1% of days under its assumptions. It does not say the worst possible loss is $10 million.",
+          fr: "Une VaR 99 % à un jour de 10 M$ signifie que le modèle estime que les pertes devraient dépasser 10 M$ environ 1 % des jours selon ses hypothèses. Cela ne signifie pas que la pire perte possible est de 10 M$.",
+        },
+        Intermediate: {
+          en: "Expected shortfall asks what the average loss looks like on the worst tail days. It therefore provides more information about tail severity than VaR alone.",
+          fr: "L’expected shortfall demande quelle est la perte moyenne lors des pires journées de la tail. Il donne donc davantage d’information sur la sévérité de la queue que la VaR seule.",
+        },
+        Professional: {
+          en: "VaR and expected shortfall are useful aggregation tools but can fail under regime shifts, nonlinear exposures, stale correlations and liquidity shocks. They should be treated as model-based summaries, not complete definitions of risk.",
+          fr: "VaR et expected shortfall sont utiles pour agréger le risque mais peuvent échouer sous regime shifts, expositions non linéaires, corrélations obsolètes et liquidity shocks. Elles doivent être traitées comme des résumés basés sur modèle, pas comme des définitions complètes du risque.",
+        },
+      },
+      vocabulary: [
+        { en: "VaR", fr: "Value at Risk", definition: { en: "Model-based loss threshold for a given confidence level and horizon.", fr: "Seuil de perte basé sur modèle pour un niveau de confiance et un horizon donnés." } },
+        { en: "Expected shortfall", fr: "expected shortfall", definition: { en: "Average loss conditional on being in the tail beyond the VaR threshold.", fr: "Perte moyenne conditionnelle aux scénarios de queue au-delà du seuil de VaR." } },
+        { en: "Tail risk", fr: "tail risk", definition: { en: "Risk of rare but unusually severe losses.", fr: "Risque de pertes rares mais exceptionnellement sévères." } },
+      ],
+    },
+    {
+      id: "credit-counterparty-risk",
+      kicker: { en: "04 · CREDIT & COUNTERPARTY RISK", fr: "04 · CREDIT & COUNTERPARTY RISK" },
+      title: { en: "Counterparty risk depends on both default probability and exposure at default", fr: "Le counterparty risk dépend à la fois de la probabilité de défaut et de l’exposition au défaut" },
+      coreFacts: [
+        { en: "Counterparty credit risk arises when a trading counterparty may fail before satisfying contractual obligations.", fr: "Le counterparty credit risk apparaît lorsqu’une contrepartie de trading peut faire défaut avant d’honorer ses obligations contractuelles." },
+        { en: "Exposure can change over time as market values move.", fr: "L’exposition peut changer dans le temps avec les mouvements de market value." },
+        { en: "Collateral, netting and margin agreements can reduce exposure.", fr: "Collateral, netting et margin agreements peuvent réduire l’exposition." },
+        { en: "Wrong-way risk occurs when exposure increases at the same time counterparty credit quality deteriorates.", fr: "Le wrong-way risk apparaît lorsque l’exposition augmente au même moment que la qualité de crédit de la contrepartie se dégrade." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a bank is owed money by another firm, it risks losing that amount if the other firm fails. The risk becomes worse if the amount owed rises exactly when the counterparty becomes weaker.",
+          fr: "Si une banque doit recevoir de l’argent d’une autre société, elle risque de perdre ce montant si cette société fait défaut. Le risque devient pire si le montant dû augmente précisément lorsque la contrepartie s’affaiblit.",
+        },
+        Intermediate: {
+          en: "Risk teams measure current exposure and potential future exposure. Collateral and legal netting reduce the amount that may be lost if a counterparty defaults.",
+          fr: "Les risk teams mesurent current exposure et potential future exposure. Le collateral et le netting juridique réduisent le montant potentiellement perdu en cas de défaut d’une contrepartie.",
+        },
+        Professional: {
+          en: "Counterparty risk is dynamic and path-dependent. Exposure profiles, collateral thresholds, margin frequency, legal enforceability and wrong-way risk all affect expected loss and capital usage.",
+          fr: "Le counterparty risk est dynamique et path-dependent. Exposure profiles, seuils de collateral, fréquence des margins, enforceability juridique et wrong-way risk affectent expected loss et usage du capital.",
+        },
+      },
+      vocabulary: [
+        { en: "Netting", fr: "netting", definition: { en: "Combining offsetting obligations to reduce gross exposure.", fr: "Combinaison d’obligations opposées afin de réduire l’exposition brute." } },
+        { en: "Potential future exposure", fr: "potential future exposure", definition: { en: "Estimate of how large counterparty exposure could become in the future.", fr: "Estimation de la taille que l’exposition contrepartie pourrait atteindre dans le futur." } },
+        { en: "Wrong-way risk", fr: "wrong-way risk", definition: { en: "Risk that exposure increases as counterparty credit quality worsens.", fr: "Risque que l’exposition augmente au moment où la qualité de crédit de la contrepartie se dégrade." } },
+      ],
+    },
+    {
+      id: "liquidity-funding-risk",
+      kicker: { en: "05 · LIQUIDITY & FUNDING RISK", fr: "05 · LIQUIDITY & FUNDING RISK" },
+      title: { en: "A position can be economically sound and still fail because liquidity disappears", fr: "Une position peut être économiquement saine et pourtant échouer parce que la liquidité disparaît" },
+      coreFacts: [
+        { en: "Market liquidity risk is the risk of being unable to trade size without large price impact.", fr: "Le market liquidity risk est le risque de ne pas pouvoir trader une taille sans fort impact sur le prix." },
+        { en: "Funding liquidity risk is the risk of being unable to meet cash obligations when due.", fr: "Le funding liquidity risk est le risque de ne pas pouvoir honorer les obligations de cash à échéance." },
+        { en: "Margin calls can create forced selling even when long-term fundamentals have not changed.", fr: "Les margin calls peuvent provoquer des ventes forcées même lorsque les fondamentaux long terme n’ont pas changé." },
+        { en: "Liquidity often deteriorates exactly when volatility and funding needs increase.", fr: "La liquidité se dégrade souvent précisément lorsque volatilité et besoins de financement augmentent." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you need cash today but cannot sell an asset without a huge discount, you have a liquidity problem. If you cannot meet a margin call, you may be forced to sell other assets too.",
+          fr: "Si tu as besoin de cash aujourd’hui mais ne peux pas vendre un actif sans forte décote, tu as un problème de liquidité. Si tu ne peux pas répondre à un margin call, tu peux aussi être forcé de vendre d’autres actifs.",
+        },
+        Intermediate: {
+          en: "Risk managers compare liquid assets and funding sources with stressed cash outflows. They also estimate how long it would take to reduce positions under normal and stressed market depth.",
+          fr: "Les risk managers comparent actifs liquides et sources de financement avec des cash outflows stressés. Ils estiment aussi combien de temps il faudrait pour réduire les positions sous profondeur de marché normale et stressée.",
+        },
+        Professional: {
+          en: "Liquidity spirals occur when losses create collateral calls, collateral calls force sales, and sales worsen prices, producing further losses. Stress frameworks should explicitly model this feedback loop.",
+          fr: "Les liquidity spirals apparaissent lorsque les pertes créent des collateral calls, les collateral calls forcent les ventes, et les ventes aggravent les prix, créant de nouvelles pertes. Les stress frameworks doivent modéliser explicitement cette boucle.",
+        },
+      },
+      vocabulary: [
+        { en: "Market liquidity", fr: "liquidité de marché", definition: { en: "Ability to transact without excessive price impact.", fr: "Capacité à effectuer une transaction sans impact excessif sur le prix." } },
+        { en: "Funding liquidity", fr: "liquidité de financement", definition: { en: "Ability to meet cash and collateral obligations when due.", fr: "Capacité à honorer les obligations de cash et collateral à échéance." } },
+        { en: "Margin call", fr: "margin call", definition: { en: "Demand for additional collateral following changes in exposure or value.", fr: "Demande de collateral supplémentaire après variation de l’exposition ou de la valeur." } },
+      ],
+    },
+    {
+      id: "stress-testing",
+      kicker: { en: "06 · STRESS TESTING & SCENARIOS", fr: "06 · STRESS TESTING & SCENARIOS" },
+      title: { en: "Stress testing asks what happens when normal assumptions stop working", fr: "Le stress testing demande ce qui se passe lorsque les hypothèses normales cessent de fonctionner" },
+      coreFacts: [
+        { en: "Historical stress tests replay past crises or market shocks.", fr: "Les historical stress tests rejouent des crises ou chocs de marché passés." },
+        { en: "Hypothetical scenarios create internally consistent shocks that may never have occurred historically.", fr: "Les hypothetical scenarios créent des chocs cohérents qui ne se sont peut-être jamais produits historiquement." },
+        { en: "Reverse stress testing asks what scenario would create an unacceptable loss or failure.", fr: "Le reverse stress testing demande quel scénario créerait une perte ou un échec inacceptable." },
+        { en: "Good stress tests include second-order effects such as volatility, liquidity and correlation changes.", fr: "Les bons stress tests incluent les effets de second ordre comme changements de volatilité, liquidité et corrélation." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A stress test asks: what if stocks fall 30%, rates jump, credit spreads widen and liquidity gets worse at the same time?",
+          fr: "Un stress test demande : que se passe-t-il si les actions chutent de 30 %, les taux montent, les credit spreads s’élargissent et la liquidité se dégrade en même temps ?",
+        },
+        Intermediate: {
+          en: "Historical scenarios are intuitive but limited to what has happened before. Hypothetical scenarios let the team test new combinations of shocks and portfolio vulnerabilities.",
+          fr: "Les scénarios historiques sont intuitifs mais limités à ce qui s’est déjà produit. Les scénarios hypothétiques permettent de tester de nouvelles combinaisons de chocs et vulnérabilités du portefeuille.",
+        },
+        Professional: {
+          en: "A useful scenario is economically coherent. If inflation shocks rates, FX, equities and credit, the scenario should reflect a plausible transmission mechanism rather than arbitrary independent shocks.",
+          fr: "Un scénario utile est économiquement cohérent. Si l’inflation choque taux, FX, equities et crédit, le scénario doit refléter un mécanisme de transmission plausible plutôt que des chocs indépendants arbitraires.",
+        },
+      },
+      vocabulary: [
+        { en: "Stress test", fr: "stress test", definition: { en: "Analysis of losses under severe but plausible adverse conditions.", fr: "Analyse des pertes sous conditions défavorables sévères mais plausibles." } },
+        { en: "Reverse stress test", fr: "reverse stress test", definition: { en: "Analysis starting from failure and working backward to identify scenarios that could cause it.", fr: "Analyse partant de l’échec et remontant aux scénarios susceptibles de le provoquer." } },
+      ],
+    },
+    {
+      id: "hedging-risk-reduction",
+      kicker: { en: "07 · HEDGING & RISK REDUCTION", fr: "07 · HEDGING & RÉDUCTION DU RISQUE" },
+      title: { en: "A hedge changes the risk profile; it rarely removes every risk", fr: "Un hedge modifie le profil de risque ; il supprime rarement tous les risques" },
+      coreFacts: [
+        { en: "Hedges can reduce directional exposure, duration, FX, volatility or credit risk.", fr: "Les hedges peuvent réduire exposition directionnelle, duration, FX, volatilité ou credit risk." },
+        { en: "Hedges create costs and may introduce basis risk.", fr: "Les hedges créent des coûts et peuvent introduire du basis risk." },
+        { en: "Dynamic hedges require rebalancing as exposures change.", fr: "Les hedges dynamiques nécessitent du rebalancing lorsque les expositions changent." },
+        { en: "The correct hedge depends on the objective: reduce P&L volatility, protect a downside threshold or neutralize a specific factor.", fr: "Le bon hedge dépend de l’objectif : réduire la volatilité du P&L, protéger un seuil downside ou neutraliser un facteur spécifique." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company will receive euros but reports in dollars, it may hedge FX risk. The hedge reduces uncertainty but can also reduce benefit if the currency moves favorably.",
+          fr: "Si une entreprise doit recevoir des euros mais publie en dollars, elle peut hedger le risque FX. Le hedge réduit l’incertitude mais peut aussi réduire le bénéfice si la devise évolue favorablement.",
+        },
+        Intermediate: {
+          en: "A trader can hedge a corporate bond’s rates duration with government-bond futures while still retaining credit spread risk. The hedge is therefore targeted, not universal.",
+          fr: "Un trader peut hedger la duration taux d’une obligation corporate avec des futures souverains tout en conservant le credit spread risk. Le hedge est donc ciblé, pas universel.",
+        },
+        Professional: {
+          en: "Hedge effectiveness should be measured under both normal and stressed conditions. Correlation breakdown, nonlinear exposure and liquidity constraints can materially reduce hedge performance exactly when protection is most needed.",
+          fr: "L’efficacité du hedge doit être mesurée sous conditions normales et stressées. Rupture de corrélation, exposition non linéaire et contraintes de liquidité peuvent réduire fortement la performance du hedge précisément lorsqu’il est le plus nécessaire.",
+        },
+      },
+      vocabulary: [
+        { en: "Basis risk", fr: "basis risk", definition: { en: "Risk that the hedge and the exposure do not move perfectly together.", fr: "Risque que le hedge et l’exposition n’évoluent pas parfaitement ensemble." } },
+        { en: "Hedge effectiveness", fr: "efficacité du hedge", definition: { en: "Degree to which a hedge offsets the targeted risk.", fr: "Degré auquel un hedge compense le risque ciblé." } },
+      ],
+    },
+    {
+      id: "limits-governance",
+      kicker: { en: "08 · LIMITS & GOVERNANCE", fr: "08 · LIMITS & GOVERNANCE" },
+      title: { en: "Risk limits only work when monitoring and escalation are credible", fr: "Les risk limits ne fonctionnent que si monitoring et escalation sont crédibles" },
+      coreFacts: [
+        { en: "Risk appetite defines how much and what types of risk an institution is willing to take.", fr: "Le risk appetite définit combien et quels types de risque une institution accepte de prendre." },
+        { en: "Limits can apply to position size, sensitivities, VaR, concentration, counterparties or stress losses.", fr: "Les limits peuvent s’appliquer à position size, sensitivities, VaR, concentration, contreparties ou stress losses." },
+        { en: "Limit breaches require clear ownership, escalation and remediation processes.", fr: "Les limit breaches exigent des processus clairs de responsabilité, escalation et remediation." },
+        { en: "Independent risk functions challenge front-office assumptions and aggregate risk across businesses.", fr: "Les fonctions risk indépendantes challengent les hypothèses du front office et agrègent le risque entre activités." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A limit is a boundary. If a desk is allowed a maximum amount of a certain risk and exceeds it, the breach must be reviewed rather than ignored.",
+          fr: "Une limit est une frontière. Si un desk dépasse le niveau maximum autorisé d’un risque, le breach doit être revu plutôt qu’ignoré.",
+        },
+        Intermediate: {
+          en: "Good governance separates risk ownership from independent challenge. Traders own their positions, while risk teams monitor limits, question assumptions and escalate material concerns.",
+          fr: "Une bonne gouvernance sépare risk ownership et challenge indépendant. Les traders possèdent leurs positions, tandis que les équipes risk suivent les limits, questionnent les hypothèses et escaladent les préoccupations importantes.",
+        },
+        Professional: {
+          en: "A mature framework links board-level risk appetite to desk-level metrics and escalation thresholds. Limits should be calibrated to liquidity, capital and stress capacity rather than copied mechanically from historical usage.",
+          fr: "Un framework mature relie le risk appetite du board aux métriques desk-level et aux seuils d’escalation. Les limits doivent être calibrées à la liquidité, au capital et à la stress capacity plutôt que copiées mécaniquement de l’usage historique.",
+        },
+      },
+      vocabulary: [
+        { en: "Risk appetite", fr: "risk appetite", definition: { en: "Amount and type of risk an organization is willing to accept to pursue objectives.", fr: "Quantité et type de risque qu’une organisation accepte pour poursuivre ses objectifs." } },
+        { en: "Limit breach", fr: "limit breach", definition: { en: "Situation where an approved risk threshold is exceeded.", fr: "Situation où un seuil de risque approuvé est dépassé." } },
+        { en: "Escalation", fr: "escalation", definition: { en: "Formal process for raising material risk issues to higher authority.", fr: "Processus formel de remontée d’un problème de risque significatif à une autorité supérieure." } },
+      ],
+    },
+    {
+      id: "risk-interviews",
+      kicker: { en: "09 · RISK INTERVIEWS", fr: "09 · ENTRETIENS RISK" },
+      title: { en: "Strong risk answers connect measurement with action", fr: "Les bonnes réponses risk relient mesure et action" },
+      coreFacts: [
+        { en: "Risk interviews often test probability, market concepts, stress thinking and judgment.", fr: "Les entretiens risk testent souvent probabilités, concepts de marché, stress thinking et jugement." },
+        { en: "A strong answer explains not just the metric but its limitations.", fr: "Une bonne réponse explique non seulement la métrique mais aussi ses limites." },
+        { en: "Candidates should distinguish exposure measurement from actual risk control.", fr: "Les candidats doivent distinguer mesure de l’exposition et contrôle réel du risque." },
+        { en: "Professional judgment requires asking what can break the model and what action follows.", fr: "Le jugement professionnel exige de demander ce qui peut casser le modèle et quelle action doit suivre." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If asked about VaR, do not stop at the definition. Explain that it is useful but does not tell you the size of extreme losses beyond the threshold.",
+          fr: "Si on te demande la VaR, ne t’arrête pas à la définition. Explique qu’elle est utile mais ne dit pas la taille des pertes extrêmes au-delà du seuil.",
+        },
+        Intermediate: {
+          en: "A structured answer can follow: identify exposure, measure it, stress it, compare with limits, choose a hedge or reduction action, then monitor the result.",
+          fr: "Une réponse structurée peut suivre : identifier l’exposition, la mesurer, la stresser, comparer aux limits, choisir un hedge ou une réduction, puis suivre le résultat.",
+        },
+        Professional: {
+          en: "Interviewers often look for skepticism toward single-number risk metrics. Strong candidates understand model uncertainty, liquidity feedback, scenario dependence and governance rather than assuming risk can be fully captured statistically.",
+          fr: "Les interviewers recherchent souvent une certaine prudence face aux métriques de risque uniques. Les bons candidats comprennent incertitude de modèle, feedback de liquidité, dépendance aux scénarios et gouvernance plutôt que supposer que le risque peut être entièrement capturé statistiquement.",
+        },
+      },
+      comparison: {
+        title: { en: "Risk answer framework", fr: "Framework de réponse risk" },
+        headers: [{ en: "Step", fr: "Étape" }, { en: "Question", fr: "Question" }],
+        rows: [
+          { cells: [{ en: "1. Identify", fr: "1. Identifier" }, { en: "What can lose money?", fr: "Qu’est-ce qui peut perdre de l’argent ?" }] },
+          { cells: [{ en: "2. Measure", fr: "2. Mesurer" }, { en: "How large is the exposure?", fr: "Quelle est la taille de l’exposition ?" }] },
+          { cells: [{ en: "3. Stress", fr: "3. Stresser" }, { en: "What happens outside normal conditions?", fr: "Que se passe-t-il hors conditions normales ?" }] },
+          { cells: [{ en: "4. Act", fr: "4. Agir" }, { en: "Reduce, hedge, limit or escalate?", fr: "Réduire, hedger, limiter ou escalader ?" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Risk control", fr: "contrôle du risque", definition: { en: "Action taken to reduce, constrain or manage an identified risk.", fr: "Action visant à réduire, contraindre ou gérer un risque identifié." } },
+        { en: "Independent challenge", fr: "challenge indépendant", definition: { en: "Objective review of assumptions and risks by a function separate from the risk-taking desk.", fr: "Revue objective des hypothèses et risques par une fonction séparée du desk preneur de risque." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "risk-types",
+      question: { en: "Which is an example of liquidity risk?", fr: "Quel est un exemple de liquidity risk ?" },
+      options: [
+        { id: "a", label: { en: "Being unable to sell a large position without severe price impact", fr: "Ne pas pouvoir vendre une grosse position sans fort impact sur le prix" } },
+        { id: "b", label: { en: "A stock dividend increase", fr: "Une hausse de dividende" } },
+        { id: "c", label: { en: "A company changing its logo", fr: "Une entreprise changeant son logo" } },
+        { id: "d", label: { en: "A fixed coupon payment received as expected", fr: "Un coupon fixe reçu comme prévu" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Liquidity risk concerns the ability to transact or fund obligations at reasonable cost.", fr: "Le liquidity risk concerne la capacité à trader ou financer des obligations à un coût raisonnable." },
+    },
+    {
+      id: "q2",
+      conceptKey: "sensitivity",
+      question: { en: "What does DV01 approximately measure?", fr: "Que mesure approximativement DV01 ?" },
+      options: [
+        { id: "a", label: { en: "Dollar value change for a 1 bp yield move", fr: "Variation de valeur en dollars pour un mouvement de yield de 1 bp" } },
+        { id: "b", label: { en: "Revenue growth", fr: "Croissance du revenue" } },
+        { id: "c", label: { en: "Customer retention", fr: "Customer retention" } },
+        { id: "d", label: { en: "Share count dilution", fr: "Dilution du nombre d’actions" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "DV01 is a fixed-income sensitivity to a one-basis-point yield move.", fr: "DV01 est une sensibilité fixed income à un mouvement de yield de 1 basis point." },
+    },
+    {
+      id: "q3",
+      conceptKey: "var",
+      question: { en: "What does a 99% one-day VaR of $10m NOT mean?", fr: "Que ne signifie PAS une VaR 99 % à un jour de 10 M$ ?" },
+      options: [
+        { id: "a", label: { en: "The maximum possible loss is $10m", fr: "La perte maximale possible est de 10 M$" } },
+        { id: "b", label: { en: "The metric uses a confidence level and horizon", fr: "La métrique utilise un niveau de confiance et un horizon" } },
+        { id: "c", label: { en: "Losses can exceed the threshold", fr: "Les pertes peuvent dépasser le seuil" } },
+        { id: "d", label: { en: "The result depends on model assumptions", fr: "Le résultat dépend des hypothèses du modèle" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "VaR is a threshold, not a maximum-loss estimate.", fr: "La VaR est un seuil, pas une estimation de perte maximale." },
+    },
+    {
+      id: "q4",
+      conceptKey: "expected-shortfall",
+      question: { en: "What does expected shortfall focus on?", fr: "Sur quoi se concentre l’expected shortfall ?" },
+      options: [
+        { id: "a", label: { en: "Average losses in the tail beyond the VaR threshold", fr: "Les pertes moyennes dans la tail au-delà du seuil de VaR" } },
+        { id: "b", label: { en: "Only average daily return", fr: "Uniquement le rendement quotidien moyen" } },
+        { id: "c", label: { en: "Only gross revenue", fr: "Uniquement le gross revenue" } },
+        { id: "d", label: { en: "Only market capitalization", fr: "Uniquement la capitalisation boursière" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Expected shortfall describes average severity beyond the VaR cutoff.", fr: "L’expected shortfall décrit la sévérité moyenne au-delà du cutoff de VaR." },
+    },
+    {
+      id: "q5",
+      conceptKey: "wrong-way-risk",
+      question: { en: "What is wrong-way risk?", fr: "Qu’est-ce que le wrong-way risk ?" },
+      options: [
+        { id: "a", label: { en: "Exposure rises as counterparty quality worsens", fr: "L’exposition augmente alors que la qualité de la contrepartie se dégrade" } },
+        { id: "b", label: { en: "Exposure falls as collateral rises", fr: "L’exposition baisse lorsque le collateral augmente" } },
+        { id: "c", label: { en: "A portfolio has no counterparties", fr: "Un portefeuille n’a aucune contrepartie" } },
+        { id: "d", label: { en: "A bond matures normally", fr: "Une obligation arrive normalement à maturité" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Wrong-way risk links higher exposure with worsening counterparty credit quality.", fr: "Le wrong-way risk relie une exposition plus élevée à une qualité de crédit plus faible de la contrepartie." },
+    },
+    {
+      id: "q6",
+      conceptKey: "funding-liquidity",
+      question: { en: "What is funding liquidity risk?", fr: "Qu’est-ce que le funding liquidity risk ?" },
+      options: [
+        { id: "a", label: { en: "Risk of being unable to meet cash or collateral obligations", fr: "Risque de ne pas pouvoir honorer des obligations de cash ou collateral" } },
+        { id: "b", label: { en: "Risk that revenue grows too fast", fr: "Risque que le revenue croisse trop vite" } },
+        { id: "c", label: { en: "Risk that a stock splits", fr: "Risque qu’une action soit split" } },
+        { id: "d", label: { en: "Risk that an index rebalances", fr: "Risque qu’un indice rebalance" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Funding liquidity risk concerns access to cash when obligations come due.", fr: "Le funding liquidity risk concerne l’accès au cash lorsque les obligations arrivent à échéance." },
+    },
+    {
+      id: "q7",
+      conceptKey: "stress-test",
+      question: { en: "What is the purpose of stress testing?", fr: "Quel est le but du stress testing ?" },
+      options: [
+        { id: "a", label: { en: "Assess losses under severe adverse scenarios", fr: "Évaluer les pertes sous scénarios défavorables sévères" } },
+        { id: "b", label: { en: "Guarantee no future loss", fr: "Garantir aucune perte future" } },
+        { id: "c", label: { en: "Replace all risk limits", fr: "Remplacer toutes les risk limits" } },
+        { id: "d", label: { en: "Ignore correlations", fr: "Ignorer les corrélations" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Stress tests challenge the portfolio outside normal-market assumptions.", fr: "Les stress tests challengent le portefeuille hors des hypothèses de marché normales." },
+    },
+    {
+      id: "q8",
+      conceptKey: "hedge",
+      question: { en: "Why can a hedge still leave risk?", fr: "Pourquoi un hedge peut-il laisser du risque ?" },
+      options: [
+        { id: "a", label: { en: "The hedge may not move perfectly with the exposure", fr: "Le hedge peut ne pas évoluer parfaitement avec l’exposition" } },
+        { id: "b", label: { en: "All hedges guarantee profit", fr: "Tous les hedges garantissent un profit" } },
+        { id: "c", label: { en: "Hedges remove all liquidity needs", fr: "Les hedges suppriment tous les besoins de liquidité" } },
+        { id: "d", label: { en: "Hedges never cost anything", fr: "Les hedges ne coûtent jamais rien" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Basis, nonlinear and liquidity risks can remain after hedging.", fr: "Basis, nonlinearity et liquidity risk peuvent subsister après hedging." },
+    },
+    {
+      id: "q9",
+      conceptKey: "limits",
+      question: { en: "What should happen after a material risk-limit breach?", fr: "Que doit-il se passer après un risk-limit breach important ?" },
+      options: [
+        { id: "a", label: { en: "Review, escalation and remediation under the governance process", fr: "Revue, escalation et remediation selon le processus de gouvernance" } },
+        { id: "b", label: { en: "Ignore it automatically", fr: "L’ignorer automatiquement" } },
+        { id: "c", label: { en: "Increase every limit immediately", fr: "Augmenter immédiatement toutes les limits" } },
+        { id: "d", label: { en: "Delete the position history", fr: "Supprimer l’historique de position" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Limits require credible monitoring and escalation to function as controls.", fr: "Les limits exigent un monitoring et une escalation crédibles pour fonctionner comme contrôles." },
+    },
+    {
+      id: "q10",
+      conceptKey: "risk-framework",
+      question: { en: "Which is the strongest risk-management sequence?", fr: "Quelle est la meilleure séquence de risk management ?" },
+      options: [
+        { id: "a", label: { en: "Identify, measure, stress, act and monitor", fr: "Identifier, mesurer, stresser, agir et monitorer" } },
+        { id: "b", label: { en: "Measure once and never review", fr: "Mesurer une fois et ne jamais revoir" } },
+        { id: "c", label: { en: "Ignore model limitations", fr: "Ignorer les limites du modèle" } },
+        { id: "d", label: { en: "Use only one risk metric", fr: "Utiliser une seule métrique de risque" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Risk management is an ongoing cycle from identification through monitoring.", fr: "La gestion des risques est un cycle continu de l’identification au monitoring." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "How would you assess and manage the risk of a trading portfolio?",
+      fr: "Comment évaluerais-tu et gérerais-tu le risque d’un portefeuille de trading ?",
+    },
+    framework: [
+      { en: "Identify major market, credit, liquidity and model exposures.", fr: "Identifier les principales expositions market, credit, liquidity et model." },
+      { en: "Measure sensitivities, concentrations, VaR and relevant counterparty exposure.", fr: "Mesurer sensitivities, concentrations, VaR et expositions contreparties pertinentes." },
+      { en: "Run historical and hypothetical stress scenarios.", fr: "Lancer des scénarios de stress historiques et hypothétiques." },
+      { en: "Compare results with risk limits, liquidity and capital capacity.", fr: "Comparer les résultats avec risk limits, liquidité et capacité de capital." },
+      { en: "Reduce, hedge or escalate exposures that exceed appetite.", fr: "Réduire, hedger ou escalader les expositions dépassant le risk appetite." },
+      { en: "Monitor changes continuously and review model limitations.", fr: "Monitorer continuellement les changements et revoir les limites des modèles." },
+    ],
+    sample: {
+      en: "I would start by mapping the portfolio’s main risk factors rather than looking only at gross position size. I would identify equity, rates, FX, credit, volatility and counterparty exposures, then measure relevant sensitivities such as delta, DV01 and vega, together with concentrations and VaR. I would not rely on those metrics alone, so I would run historical and hypothetical stress scenarios that include volatility, correlation and liquidity changes. I would also review funding needs and potential margin calls because market losses can become liquidity problems. Next I would compare exposures and stress losses with approved limits and capital or liquidity capacity. If risk exceeds appetite, I would reduce positions, hedge specific factors or escalate the breach according to governance. Finally, I would keep monitoring because exposures, correlations and counterparty quality change over time. The key idea is that risk management is not one number—it is a process connecting measurement, stress testing, action and governance.",
+      fr: "Je commencerais par cartographier les principaux facteurs de risque du portefeuille plutôt que de regarder uniquement la taille brute des positions. J’identifierais les expositions equity, taux, FX, crédit, volatilité et contreparties, puis je mesurerais les sensitivities pertinentes comme delta, DV01 et vega, ainsi que les concentrations et la VaR. Je ne me fierais pas à ces métriques seules ; je lancerais donc des scénarios historiques et hypothétiques intégrant changements de volatilité, corrélation et liquidité. J’examinerais aussi les besoins de financement et les margin calls potentiels car des pertes de marché peuvent devenir des problèmes de liquidité. Ensuite, je comparerais expositions et stress losses aux limits approuvées et à la capacité de capital ou de liquidité. Si le risque dépasse l’appetite, je réduirais les positions, hedgerais certains facteurs ou escaladerais le breach selon la gouvernance. Enfin, je continuerais à monitorer car expositions, corrélations et qualité des contreparties évoluent dans le temps. L’idée clé est que le risk management n’est pas un chiffre unique : c’est un processus reliant mesure, stress testing, action et gouvernance.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
