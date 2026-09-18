@@ -21646,7 +21646,514 @@ export const financialModelingILesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson];
+
+
+export const investmentBankingLesson: FinanceLesson = {
+  slug: "year-3-investment-banking",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Investment Banking", fr: "Banque d’investissement / Investment Banking" },
+  title: { en: "Investment Banking", fr: "Banque d’investissement / Investment Banking" },
+  subtitle: {
+    en: "Understand how investment banks advise companies on M&A, capital raising and strategic transactions, from pitch and valuation through diligence, modeling, negotiation and execution.",
+    fr: "Comprendre comment les banques d’investissement conseillent les entreprises sur les opérations de M&A, levées de capitaux et transactions stratégiques, du pitch et de la valorisation jusqu’à la due diligence, la modélisation, la négociation et l’exécution.",
+  },
+  duration: { en: "150–180 min", fr: "150–180 min" },
+  prerequisites: [
+    { en: "Corporate Finance", fr: "Finance d’entreprise / Corporate Finance" },
+    { en: "Financial Statement Analysis", fr: "Analyse des états financiers / Financial Statement Analysis" },
+    { en: "Equity Valuation", fr: "Valorisation des actions / Equity Valuation" },
+    { en: "DCF & Relative Valuation", fr: "DCF & valorisation relative" },
+    { en: "Financial Modeling I", fr: "Modélisation financière I / Financial Modeling I" },
+  ],
+  objectives: [
+    { en: "Explain what investment banks do and how coverage and product teams work together.", fr: "Expliquer le rôle des banques d’investissement et la collaboration entre coverage et product teams." },
+    { en: "Understand the end-to-end M&A and capital-raising process.", fr: "Comprendre le processus complet d’une opération de M&A ou de levée de capitaux." },
+    { en: "Apply DCF, trading comparables and precedent transactions in a deal context.", fr: "Appliquer DCF, trading comparables et precedent transactions dans un contexte transactionnel." },
+    { en: "Understand purchase price, synergies, financing and accretion/dilution.", fr: "Comprendre purchase price, synergies, financement et accretion/dilution." },
+    { en: "Recognize the purpose of pitchbooks, CIMs, management presentations, data rooms and process letters.", fr: "Reconnaître le rôle des pitchbooks, CIMs, management presentations, data rooms et process letters." },
+    { en: "Answer common investment-banking interview questions with a clear technical framework.", fr: "Répondre aux questions classiques d’entretien en investment banking avec un cadre technique clair." },
+  ],
+  overviewFlow: {
+    title: { en: "From client mandate to transaction close", fr: "Du mandat client au closing de la transaction" },
+    steps: [
+      { title: { en: "Originate", fr: "Origination" }, detail: { en: "Pitch · relationship · mandate", fr: "Pitch · relation client · mandat" } },
+      { title: { en: "Analyze", fr: "Analyser" }, detail: { en: "Valuation · model · strategy", fr: "Valuation · modèle · stratégie" } },
+      { title: { en: "Execute", fr: "Exécuter" }, detail: { en: "Diligence · financing · negotiation", fr: "Diligence · financement · négociation" } },
+      { title: { en: "Close", fr: "Closer" }, detail: { en: "Documentation · approvals · settlement", fr: "Documentation · approvals · settlement" } },
+    ],
+  },
+  sections: [
+    {
+      id: "role-of-investment-banking",
+      kicker: { en: "01 · ROLE OF INVESTMENT BANKING", fr: "01 · RÔLE DE L’INVESTMENT BANKING" },
+      title: { en: "Investment banking is advisory plus execution", fr: "L’investment banking combine conseil et exécution" },
+      coreFacts: [
+        { en: "Investment banks advise companies, sponsors and governments on M&A, capital raising and strategic transactions.", fr: "Les banques d’investissement conseillent entreprises, sponsors et gouvernements sur M&A, levées de capitaux et transactions stratégiques." },
+        { en: "Coverage teams focus on industries or client relationships; product teams specialize in transaction types such as M&A, ECM, DCM or leveraged finance.", fr: "Les coverage teams se concentrent sur des industries ou relations clients ; les product teams sont spécialisées dans M&A, ECM, DCM ou leveraged finance." },
+        { en: "Advisory work combines financial analysis, process management, negotiation support and client communication.", fr: "Le travail advisory combine analyse financière, gestion du process, support à la négociation et communication client." },
+        { en: "Junior bankers spend substantial time on analysis, materials, models and execution details.", fr: "Les junior bankers consacrent beaucoup de temps à l’analyse, aux materials, aux modèles et aux détails d’exécution." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "An investment banker helps a company make major financial decisions such as buying another company, selling a business or raising money from investors.",
+          fr: "Un investment banker aide une entreprise à prendre de grandes décisions financières, comme acheter une société, vendre une activité ou lever des capitaux auprès d’investisseurs.",
+        },
+        Intermediate: {
+          en: "Banks combine sector knowledge with transaction expertise. A technology coverage banker may know software companies deeply, while an M&A specialist focuses on deal mechanics, valuation, negotiation and execution.",
+          fr: "Les banques combinent expertise sectorielle et transactionnelle. Un banker coverage tech peut connaître très bien le software, tandis qu’un spécialiste M&A se concentre sur la mécanique du deal, la valorisation, la négociation et l’exécution.",
+        },
+        Professional: {
+          en: "The advisory value proposition goes beyond valuation. Senior bankers originate mandates and frame strategic alternatives, while execution teams coordinate modeling, buyer or investor outreach, diligence, financing workstreams, documentation and board-level decision support under tight timelines.",
+          fr: "La valeur du conseil va au-delà de la valuation. Les senior bankers génèrent les mandats et structurent les alternatives stratégiques, tandis que les équipes d’exécution coordonnent modélisation, outreach acheteurs ou investisseurs, diligence, financement, documentation et support aux décisions du board dans des délais serrés.",
+        },
+      },
+      comparison: {
+        title: { en: "Coverage vs product teams", fr: "Coverage vs product teams" },
+        headers: [
+          { en: "Team", fr: "Équipe" },
+          { en: "Primary focus", fr: "Focus principal" },
+          { en: "Examples", fr: "Exemples" },
+        ],
+        rows: [
+          { cells: [{ en: "Coverage", fr: "Coverage" }, { en: "Industry and client relationships", fr: "Industrie et relations clients" }, { en: "Technology, Healthcare, Industrials", fr: "Technology, Healthcare, Industrials" }] },
+          { cells: [{ en: "Product", fr: "Product" }, { en: "Transaction expertise", fr: "Expertise transactionnelle" }, { en: "M&A, ECM, DCM, Leveraged Finance", fr: "M&A, ECM, DCM, Leveraged Finance" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Mandate", fr: "mandat", definition: { en: "Formal appointment of a bank to advise or execute a transaction.", fr: "Nomination formelle d’une banque pour conseiller ou exécuter une transaction." } },
+        { en: "Origination", fr: "origination", definition: { en: "Winning new client business and transaction mandates.", fr: "Obtention de nouveaux clients et mandats transactionnels." } },
+        { en: "Execution", fr: "exécution", definition: { en: "The analytical and process work required to complete a transaction.", fr: "Le travail analytique et opérationnel nécessaire pour réaliser une transaction." } },
+      ],
+    },
+    {
+      id: "ma-process",
+      kicker: { en: "02 · M&A PROCESS", fr: "02 · PROCESSUS M&A" },
+      title: { en: "A transaction is a managed process with many stakeholders and deadlines", fr: "Une transaction est un processus géré avec de nombreuses parties prenantes et échéances" },
+      coreFacts: [
+        { en: "A sell-side process often progresses from preparation to buyer outreach, first-round bids, diligence, final bids, negotiation and signing.", fr: "Un sell-side process passe souvent par préparation, outreach acheteurs, first-round bids, diligence, final bids, négociation et signing." },
+        { en: "A buy-side process focuses on target evaluation, valuation, diligence, financing and negotiation.", fr: "Un buy-side process se concentre sur l’évaluation de la cible, valorisation, diligence, financement et négociation." },
+        { en: "Competitive tension can improve price and terms for a seller.", fr: "La tension concurrentielle peut améliorer le prix et les conditions pour un vendeur." },
+        { en: "Confidentiality and information control are critical throughout the process.", fr: "La confidentialité et le contrôle de l’information sont critiques pendant tout le process." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Selling a company is not just finding one buyer. The bank often organizes a controlled competition where several buyers review information and submit offers.",
+          fr: "Vendre une entreprise ne consiste pas seulement à trouver un acheteur. La banque organise souvent une compétition contrôlée où plusieurs acheteurs étudient les informations et soumettent des offres.",
+        },
+        Intermediate: {
+          en: "In a sell-side auction, bankers prepare marketing materials, build a buyer list, manage NDAs, distribute the CIM, coordinate management meetings and diligence, compare bids and help negotiate final terms.",
+          fr: "Dans une sell-side auction, les bankers préparent les marketing materials, construisent la buyer list, gèrent les NDAs, distribuent le CIM, coordonnent management meetings et diligence, comparent les offres et aident à négocier les termes finaux.",
+        },
+        Professional: {
+          en: "Process design affects outcome. Timing, information sequencing, bidder access, management exposure, financing certainty and competitive tension must be balanced against confidentiality, execution risk and the seller’s strategic objectives.",
+          fr: "Le design du process influence le résultat. Timing, séquencement de l’information, accès des bidders, exposition du management, certitude du financement et tension concurrentielle doivent être équilibrés avec confidentialité, execution risk et objectifs stratégiques du vendeur.",
+        },
+      },
+      vocabulary: [
+        { en: "CIM", fr: "Confidential Information Memorandum", definition: { en: "Detailed confidential marketing document describing the business to potential buyers.", fr: "Document marketing confidentiel détaillé présentant l’entreprise aux acheteurs potentiels." } },
+        { en: "NDA", fr: "accord de confidentialité", definition: { en: "Agreement governing use and protection of confidential information.", fr: "Accord régissant l’utilisation et la protection des informations confidentielles." } },
+        { en: "Data room", fr: "data room", definition: { en: "Secure repository containing diligence materials for authorized parties.", fr: "Espace sécurisé contenant les documents de diligence accessibles aux parties autorisées." } },
+      ],
+    },
+    {
+      id: "deal-valuation",
+      kicker: { en: "03 · DEAL VALUATION", fr: "03 · VALORISATION EN TRANSACTION" },
+      title: { en: "Bankers triangulate value rather than rely on one method", fr: "Les bankers triangulent la valeur plutôt que de dépendre d’une seule méthode" },
+      coreFacts: [
+        { en: "Common valuation methods include DCF, trading comparables and precedent transactions.", fr: "Les méthodes de valorisation courantes incluent DCF, trading comparables et precedent transactions." },
+        { en: "Precedent transactions often include a control premium and deal-specific conditions.", fr: "Les precedent transactions intègrent souvent une control premium et des conditions propres au deal." },
+        { en: "Enterprise value and equity value must be distinguished carefully.", fr: "Enterprise value et equity value doivent être distinguées avec précision." },
+        { en: "Valuation ranges are more realistic than a single point estimate.", fr: "Des ranges de valorisation sont plus réalistes qu’une estimation unique." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company does not have one exact price. Bankers compare several valuation methods to estimate a reasonable range.",
+          fr: "Une entreprise n’a pas un prix exact unique. Les bankers comparent plusieurs méthodes pour estimer une range raisonnable.",
+        },
+        Intermediate: {
+          en: "Trading comparables show how public peers are valued today. Precedent transactions show prices paid in prior control transactions. DCF estimates intrinsic value from future cash flows.",
+          fr: "Les trading comparables montrent comment les peers cotés sont valorisés aujourd’hui. Les precedent transactions montrent les prix payés dans d’anciennes transactions de contrôle. Le DCF estime la valeur intrinsèque à partir des futurs cash flows.",
+        },
+        Professional: {
+          en: "The analyst must normalize financials, select defensible peer sets, reconcile LTM and NTM metrics, understand deal premiums and synergies, and explain why different methodologies produce different valuation ranges.",
+          fr: "L’analyste doit normaliser les financials, sélectionner des peers défendables, rapprocher métriques LTM et NTM, comprendre premiums et synergies, et expliquer pourquoi les méthodes produisent des ranges de valorisation différentes.",
+        },
+      },
+      formula: {
+        label: { en: "Enterprise value bridge", fr: "Bridge vers l’enterprise value" },
+        expression: "Enterprise Value = Equity Value + Debt + Preferred Stock + Minority Interest − Cash",
+        explanation: {
+          en: "The exact bridge may include additional debt-like or non-operating items depending on the transaction.",
+          fr: "Le bridge exact peut inclure d’autres éléments debt-like ou non opérationnels selon la transaction.",
+        },
+      },
+      vocabulary: [
+        { en: "Control premium", fr: "prime de contrôle", definition: { en: "Premium paid above unaffected market value to acquire control of a company.", fr: "Prime payée au-dessus de la valeur de marché non affectée pour acquérir le contrôle d’une société." } },
+        { en: "Unaffected price", fr: "cours non affecté", definition: { en: "Share price before public deal speculation or announcement materially influenced it.", fr: "Cours avant qu’une spéculation ou annonce de deal ne l’influence significativement." } },
+      ],
+    },
+    {
+      id: "purchase-price-synergies",
+      kicker: { en: "04 · PURCHASE PRICE & SYNERGIES", fr: "04 · PURCHASE PRICE & SYNERGIES" },
+      title: { en: "Headline price is only the start of transaction economics", fr: "Le headline price n’est que le début de l’économie d’un deal" },
+      coreFacts: [
+        { en: "Purchase price may be discussed as equity value or enterprise value, so the distinction must be explicit.", fr: "Le purchase price peut être présenté en equity value ou enterprise value ; la distinction doit donc être explicite." },
+        { en: "Synergies can be cost-based, revenue-based or financial, but cost synergies are typically easier to underwrite.", fr: "Les synergies peuvent être de coûts, de revenus ou financières, mais les cost synergies sont généralement plus faciles à underwrite." },
+        { en: "Integration costs, timing and execution risk affect the present value of synergies.", fr: "Les coûts d’intégration, timing et execution risk affectent la valeur actuelle des synergies." },
+        { en: "A buyer should compare value paid with standalone value and expected synergies.", fr: "Un acheteur doit comparer la valeur payée avec la standalone value et les synergies attendues." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A buyer may pay more than the target’s standalone value if combining the two businesses creates extra value. Those extra benefits are called synergies.",
+          fr: "Un acheteur peut payer plus que la standalone value de la cible si la combinaison crée une valeur supplémentaire. Ces bénéfices additionnels sont les synergies.",
+        },
+        Intermediate: {
+          en: "Cost synergies may come from removing duplicate functions or procurement savings. Revenue synergies may come from cross-selling or broader distribution, but they are usually more uncertain.",
+          fr: "Les cost synergies peuvent venir de suppressions de fonctions dupliquées ou d’économies d’achats. Les revenue synergies peuvent venir du cross-selling ou d’une distribution élargie, mais sont généralement plus incertaines.",
+        },
+        Professional: {
+          en: "Transaction economics should incorporate run-rate synergy amount, ramp timing, one-time integration costs, tax effects and probability of realization. A nominal synergy number is not equivalent to economic value.",
+          fr: "L’économie du deal doit intégrer montant run-rate, ramp-up, coûts d’intégration one-time, effets fiscaux et probabilité de réalisation. Un chiffre nominal de synergies n’est pas équivalent à leur valeur économique.",
+        },
+      },
+      formula: {
+        label: { en: "Offer premium", fr: "Prime offerte" },
+        expression: "Offer Premium = Offer Price / Unaffected Share Price − 1",
+        explanation: { en: "This measures the premium relative to the selected unaffected trading price.", fr: "Cette formule mesure la prime par rapport au cours non affecté retenu." },
+      },
+      vocabulary: [
+        { en: "Run-rate synergy", fr: "synergie run-rate", definition: { en: "Expected recurring annual synergy once fully implemented.", fr: "Synergie annuelle récurrente attendue une fois pleinement mise en œuvre." } },
+        { en: "Integration cost", fr: "coût d’intégration", definition: { en: "One-time cost required to combine businesses and realize synergies.", fr: "Coût ponctuel nécessaire pour combiner les entreprises et réaliser les synergies." } },
+      ],
+    },
+    {
+      id: "accretion-dilution",
+      kicker: { en: "05 · ACCRETION / DILUTION", fr: "05 · ACCRETION / DILUTION" },
+      title: { en: "EPS accretion is not the same thing as value creation", fr: "L’accretion d’EPS n’est pas l’équivalent de création de valeur" },
+      coreFacts: [
+        { en: "An acquisition is accretive if pro forma EPS is higher than the buyer’s standalone EPS.", fr: "Une acquisition est accretive si le pro forma EPS est supérieur à l’EPS standalone de l’acheteur." },
+        { en: "Cash, debt and stock financing affect accretion/dilution differently.", fr: "Cash, dette et stock financing affectent différemment accretion/dilution." },
+        { en: "Synergies can increase pro forma earnings and improve accretion.", fr: "Les synergies peuvent augmenter les pro forma earnings et améliorer l’accretion." },
+        { en: "Accretive does not automatically mean value-creating, and dilutive does not automatically mean value-destructive.", fr: "Accretive ne signifie pas automatiquement créateur de valeur, et dilutive ne signifie pas automatiquement destructeur de valeur." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If the buyer earns $2.00 per share before a deal and $2.10 after the deal, the transaction is EPS-accretive. If EPS falls to $1.90, it is dilutive.",
+          fr: "Si l’acheteur gagne 2,00 $ par action avant le deal et 2,10 $ après, la transaction est EPS-accretive. Si l’EPS tombe à 1,90 $, elle est dilutive.",
+        },
+        Intermediate: {
+          en: "Debt financing creates interest expense, cash financing has an opportunity cost, and stock financing increases share count. Purchase accounting and synergies also affect pro forma earnings.",
+          fr: "Le financement par dette crée des interest expenses, le financement cash a un opportunity cost, et le financement en actions augmente le nombre d’actions. Purchase accounting et synergies affectent aussi les pro forma earnings.",
+        },
+        Professional: {
+          en: "Accretion/dilution is sensitive to buyer and target P/E, funding mix, foregone interest income, financing cost, purchase accounting, tax rates and synergy timing. It is useful but should not replace NPV or strategic analysis.",
+          fr: "Accretion/dilution est sensible aux P/E acheteur et cible, mix de financement, foregone interest income, coût de financement, purchase accounting, taux d’imposition et timing des synergies. C’est utile mais cela ne remplace pas NPV ou analyse stratégique.",
+        },
+      },
+      formula: {
+        label: { en: "Accretion / dilution", fr: "Accretion / dilution" },
+        expression: "Accretion / Dilution % = Pro Forma EPS / Buyer Standalone EPS − 1",
+        explanation: { en: "Positive means accretive; negative means dilutive.", fr: "Positif signifie accretive ; négatif signifie dilutive." },
+        workedExample: { en: "Standalone EPS = $4.00 and pro forma EPS = $4.20 → 5.0% accretion.", fr: "Standalone EPS = 4,00 $ et pro forma EPS = 4,20 $ → 5,0 % d’accretion." },
+      },
+      vocabulary: [
+        { en: "Pro forma", fr: "pro forma", definition: { en: "Financial view combining buyer and target as if the transaction had occurred.", fr: "Vue financière combinant acheteur et cible comme si la transaction avait déjà eu lieu." } },
+        { en: "Accretive", fr: "accretive", definition: { en: "Increasing the selected per-share metric, commonly EPS.", fr: "Augmentant la métrique par action sélectionnée, souvent l’EPS." } },
+        { en: "Dilutive", fr: "dilutive", definition: { en: "Reducing the selected per-share metric, commonly EPS.", fr: "Réduisant la métrique par action sélectionnée, souvent l’EPS." } },
+      ],
+    },
+    {
+      id: "capital-raising",
+      kicker: { en: "06 · CAPITAL RAISING", fr: "06 · LEVÉE DE CAPITAUX" },
+      title: { en: "The financing mix changes risk, ownership and flexibility", fr: "Le mix de financement modifie risque, ownership et flexibilité" },
+      coreFacts: [
+        { en: "Equity financing raises permanent capital but dilutes existing shareholders.", fr: "Le financement equity lève du capital permanent mais dilue les actionnaires existants." },
+        { en: "Debt financing avoids ownership dilution but creates mandatory payments and leverage.", fr: "Le financement par dette évite la dilution de l’ownership mais crée des paiements obligatoires et du leverage." },
+        { en: "ECM focuses on equity issuance; DCM focuses on debt securities; leveraged finance addresses higher-leverage financing structures.", fr: "ECM se concentre sur l’émission d’actions ; DCM sur les titres de dette ; leveraged finance sur des structures à leverage plus élevé." },
+        { en: "Market conditions can materially affect timing, pricing and investor appetite.", fr: "Les conditions de marché peuvent fortement affecter timing, pricing et appétit des investisseurs." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Companies can raise money by selling ownership through equity or by borrowing through debt. Each choice changes risk and who receives future cash flows.",
+          fr: "Les entreprises peuvent lever de l’argent en vendant une part de propriété via equity ou en empruntant via dette. Chaque choix modifie le risque et la répartition des futurs cash flows.",
+        },
+        Intermediate: {
+          en: "An equity issue can strengthen the balance sheet but dilute EPS and ownership. Debt can be cheaper and non-dilutive but increases fixed obligations, leverage and refinancing risk.",
+          fr: "Une émission equity peut renforcer le bilan mais diluer EPS et ownership. La dette peut être moins chère et non dilutive mais augmente obligations fixes, leverage et refinancing risk.",
+        },
+        Professional: {
+          en: "Capital-raising advice incorporates funding need, leverage capacity, rating implications, covenant headroom, market windows, investor demand, maturity profile, dilution and strategic flexibility.",
+          fr: "Le conseil en levée de capitaux intègre besoin de financement, leverage capacity, implications de rating, covenant headroom, market windows, demande investisseurs, maturité de la dette, dilution et flexibilité stratégique.",
+        },
+      },
+      comparison: {
+        title: { en: "Debt vs equity financing", fr: "Financement dette vs equity" },
+        headers: [{ en: "Dimension", fr: "Dimension" }, { en: "Debt", fr: "Dette" }, { en: "Equity", fr: "Equity" }],
+        rows: [
+          { cells: [{ en: "Ownership dilution", fr: "Dilution ownership" }, { en: "No", fr: "Non" }, { en: "Yes", fr: "Oui" }] },
+          { cells: [{ en: "Mandatory payments", fr: "Paiements obligatoires" }, { en: "Yes", fr: "Oui" }, { en: "No contractual coupon", fr: "Pas de coupon contractuel" }] },
+          { cells: [{ en: "Financial risk", fr: "Risque financier" }, { en: "Higher leverage", fr: "Leverage plus élevé" }, { en: "Lower leverage pressure", fr: "Pression de leverage plus faible" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "ECM", fr: "Equity Capital Markets", definition: { en: "Banking product focused on equity and equity-linked issuance.", fr: "Activité bancaire centrée sur les émissions equity et equity-linked." } },
+        { en: "DCM", fr: "Debt Capital Markets", definition: { en: "Banking product focused on bond and debt-security issuance.", fr: "Activité bancaire centrée sur l’émission d’obligations et titres de dette." } },
+        { en: "Underwriting", fr: "underwriting", definition: { en: "Process in which a bank commits to distribute or, in some structures, assume placement risk for securities.", fr: "Processus par lequel une banque organise la distribution et, selon la structure, assume un risque de placement des titres." } },
+      ],
+    },
+    {
+      id: "materials-and-pitchbooks",
+      kicker: { en: "07 · PITCHBOOKS & DEAL MATERIALS", fr: "07 · PITCHBOOKS & DEAL MATERIALS" },
+      title: { en: "Banking materials turn analysis into client decisions", fr: "Les materials bancaires transforment l’analyse en décisions client" },
+      coreFacts: [
+        { en: "Pitchbooks present strategic ideas, market context, valuation and the bank’s credentials.", fr: "Les pitchbooks présentent idées stratégiques, contexte de marché, valuation et credentials de la banque." },
+        { en: "A CIM markets a company in detail during a sell-side process.", fr: "Un CIM présente en détail une entreprise pendant un sell-side process." },
+        { en: "Management presentations allow bidders or investors to question senior management directly.", fr: "Les management presentations permettent aux bidders ou investisseurs d’interroger directement le senior management." },
+        { en: "Process letters communicate deadlines, bid requirements and transaction procedures.", fr: "Les process letters communiquent deadlines, exigences de bid et procédures transactionnelles." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A banker does not just calculate numbers. The banker must present a clear story explaining the company, the opportunity, the valuation and the recommended next step.",
+          fr: "Un banker ne fait pas seulement des calculs. Il doit présenter une histoire claire expliquant l’entreprise, l’opportunité, la valorisation et la prochaine étape recommandée.",
+        },
+        Intermediate: {
+          en: "A strong pitchbook has a clear message hierarchy: situation, strategic alternatives, relevant market evidence, valuation, transaction considerations and recommendation.",
+          fr: "Un bon pitchbook possède une hiérarchie claire : situation, alternatives stratégiques, preuves de marché pertinentes, valuation, considérations transactionnelles et recommandation.",
+        },
+        Professional: {
+          en: "Client materials must be analytically consistent, visually precise and decision-oriented. Every number should reconcile to the model or source data, and every page should have a clear purpose in the transaction narrative.",
+          fr: "Les client materials doivent être analytiquement cohérents, visuellement précis et orientés décision. Chaque chiffre doit se rapprocher du modèle ou des sources et chaque page doit avoir un rôle clair dans la transaction narrative.",
+        },
+      },
+      vocabulary: [
+        { en: "Pitchbook", fr: "pitchbook", definition: { en: "Presentation used to propose advice, ideas or transaction approaches to a client.", fr: "Présentation utilisée pour proposer conseil, idées ou approche transactionnelle à un client." } },
+        { en: "Credentials", fr: "credentials", definition: { en: "Evidence of the bank’s relevant experience and transaction record.", fr: "Éléments démontrant l’expérience pertinente et le track record de la banque." } },
+        { en: "Process letter", fr: "process letter", definition: { en: "Document specifying bidding instructions and transaction deadlines.", fr: "Document précisant instructions de bid et deadlines du process." } },
+      ],
+    },
+    {
+      id: "due-diligence-execution",
+      kicker: { en: "08 · DUE DILIGENCE & EXECUTION", fr: "08 · DUE DILIGENCE & EXÉCUTION" },
+      title: { en: "Diligence tests whether the investment story survives detailed review", fr: "La diligence teste si l’investment story résiste à une revue détaillée" },
+      coreFacts: [
+        { en: "Financial diligence tests earnings quality, working capital, cash flow and balance-sheet risks.", fr: "La financial diligence teste quality of earnings, working capital, cash flow et risques de bilan." },
+        { en: "Commercial diligence evaluates market growth, competition, customers and business-model durability.", fr: "La commercial diligence évalue croissance du marché, concurrence, clients et durabilité du business model." },
+        { en: "Legal, tax, operational, technology and regulatory diligence may also be required.", fr: "Des diligences legal, tax, operational, technology et regulatory peuvent également être nécessaires." },
+        { en: "Diligence findings can affect valuation, purchase agreement terms, financing and willingness to close.", fr: "Les résultats de diligence peuvent modifier valuation, termes du purchase agreement, financement et volonté de closer." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Before paying billions for a company, the buyer needs to verify that the numbers, contracts, customers and risks are what they appear to be.",
+          fr: "Avant de payer des milliards pour une entreprise, l’acheteur doit vérifier que les chiffres, contrats, clients et risques correspondent bien à ce qui est présenté.",
+        },
+        Intermediate: {
+          en: "Bankers coordinate information flow between management, advisers and counterparties. They track requests, update valuation for new findings and keep the process moving toward deadlines.",
+          fr: "Les bankers coordonnent le flux d’information entre management, advisers et counterparties. Ils suivent les demandes, mettent à jour la valuation selon les nouvelles informations et maintiennent le process jusqu’aux deadlines.",
+        },
+        Professional: {
+          en: "Execution quality depends on identifying issues early, escalating material findings, preserving competitive tension and ensuring that financial, legal and financing workstreams remain synchronized through signing and closing.",
+          fr: "La qualité d’exécution dépend de l’identification précoce des problèmes, de l’escalade des findings matériels, du maintien de la tension concurrentielle et de la synchronisation des workstreams financial, legal et financing jusqu’au signing et closing.",
+        },
+      },
+      vocabulary: [
+        { en: "Quality of earnings", fr: "quality of earnings", definition: { en: "Analysis of how sustainable and cash-representative reported earnings are.", fr: "Analyse du caractère durable et représentatif en cash des earnings publiés." } },
+        { en: "Signing", fr: "signing", definition: { en: "Execution of definitive transaction agreements.", fr: "Signature des accords transactionnels définitifs." } },
+        { en: "Closing", fr: "closing", definition: { en: "Completion of the transaction after required conditions are satisfied.", fr: "Réalisation finale de la transaction après satisfaction des conditions requises." } },
+      ],
+    },
+    {
+      id: "analyst-workflow-interviews",
+      kicker: { en: "09 · ANALYST WORKFLOW & INTERVIEWS", fr: "09 · ANALYST WORKFLOW & ENTRETIENS" },
+      title: { en: "Strong analysts combine technical accuracy, speed and communication", fr: "Les bons analysts combinent précision technique, rapidité et communication" },
+      coreFacts: [
+        { en: "Analysts frequently update valuation, transaction models, buyer lists, market data and presentation materials.", fr: "Les analysts mettent fréquemment à jour valuation, transaction models, buyer lists, données de marché et présentations." },
+        { en: "Attention to detail matters because small errors can flow into client decisions.", fr: "L’attention aux détails est essentielle car de petites erreurs peuvent affecter les décisions client." },
+        { en: "Technical interview questions commonly test accounting, valuation, enterprise value, DCF, M&A and accretion/dilution.", fr: "Les questions techniques d’entretien testent souvent accounting, valuation, enterprise value, DCF, M&A et accretion/dilution." },
+        { en: "A strong answer explains both the formula and the economic intuition behind it.", fr: "Une bonne réponse explique à la fois la formule et l’intuition économique qui la sous-tend." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Investment banking is demanding because the work must be both fast and accurate. The best preparation is to understand how accounting, valuation and transactions connect rather than memorize isolated formulas.",
+          fr: "L’investment banking est exigeant car le travail doit être rapide et précis. La meilleure préparation consiste à comprendre comment accounting, valuation et transactions s’enchaînent plutôt qu’à mémoriser des formules isolées.",
+        },
+        Intermediate: {
+          en: "Interview answers should follow a repeatable structure: define the concept, explain the mechanics, give the key formula or bridge, then add the practical deal implication.",
+          fr: "Les réponses d’entretien doivent suivre une structure répétable : définir le concept, expliquer la mécanique, donner la formule ou bridge clé, puis ajouter l’implication pratique dans un deal.",
+        },
+        Professional: {
+          en: "On the job, analytical credibility comes from reconciling every output, anticipating reviewer questions and understanding how each model assumption changes negotiation, financing or client recommendations.",
+          fr: "Dans le travail réel, la crédibilité analytique vient de la capacité à réconcilier chaque output, anticiper les questions des reviewers et comprendre comment chaque hypothèse de modèle modifie négociation, financement ou recommandations client.",
+        },
+      },
+      comparison: {
+        title: { en: "A strong technical answer", fr: "Une bonne réponse technique" },
+        headers: [{ en: "Step", fr: "Étape" }, { en: "Purpose", fr: "Objectif" }],
+        rows: [
+          { cells: [{ en: "1. Define", fr: "1. Définir" }, { en: "State what the concept means", fr: "Dire ce que signifie le concept" }] },
+          { cells: [{ en: "2. Mechanics", fr: "2. Mécanique" }, { en: "Explain how it works", fr: "Expliquer comment il fonctionne" }] },
+          { cells: [{ en: "3. Formula / bridge", fr: "3. Formule / bridge" }, { en: "Show the financial relationship", fr: "Montrer la relation financière" }] },
+          { cells: [{ en: "4. Implication", fr: "4. Implication" }, { en: "Connect it to a real transaction", fr: "Le relier à une transaction réelle" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Turnaround", fr: "turnaround", definition: { en: "Time between receiving work and delivering a completed revision.", fr: "Temps entre la réception d’une demande et la livraison d’une version révisée." } },
+        { en: "Comments", fr: "comments / corrections", definition: { en: "Review feedback that must be incorporated accurately into materials or models.", fr: "Feedback de review qui doit être intégré précisément dans les materials ou modèles." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "role",
+      question: { en: "Which best describes investment banking advisory?", fr: "Quelle proposition décrit le mieux l’investment banking advisory ?" },
+      options: [
+        { id: "a", label: { en: "Advising clients on strategic transactions and capital raising", fr: "Conseiller les clients sur transactions stratégiques et levées de capitaux" } },
+        { id: "b", label: { en: "Only managing retail checking accounts", fr: "Uniquement gérer des comptes courants retail" } },
+        { id: "c", label: { en: "Only trading personal portfolios", fr: "Uniquement trader des portefeuilles personnels" } },
+        { id: "d", label: { en: "Only preparing tax returns", fr: "Uniquement préparer des déclarations fiscales" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Investment banking advisory focuses on strategic and financing transactions.", fr: "L’investment banking advisory se concentre sur les transactions stratégiques et de financement." },
+    },
+    {
+      id: "q2",
+      conceptKey: "sell-side",
+      question: { en: "What is a common objective of a competitive sell-side auction?", fr: "Quel est un objectif fréquent d’une sell-side auction compétitive ?" },
+      options: [
+        { id: "a", label: { en: "Create competitive tension among buyers", fr: "Créer de la tension concurrentielle entre acheteurs" } },
+        { id: "b", label: { en: "Avoid all buyer outreach", fr: "Éviter tout outreach acheteur" } },
+        { id: "c", label: { en: "Eliminate diligence", fr: "Supprimer la diligence" } },
+        { id: "d", label: { en: "Guarantee one exact valuation", fr: "Garantir une valorisation exacte unique" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Competition can improve price, terms and execution alternatives for the seller.", fr: "La compétition peut améliorer prix, termes et alternatives d’exécution pour le vendeur." },
+    },
+    {
+      id: "q3",
+      conceptKey: "valuation",
+      question: { en: "Which method uses prices paid in previous acquisitions of comparable companies?", fr: "Quelle méthode utilise les prix payés lors d’acquisitions passées de sociétés comparables ?" },
+      options: [
+        { id: "a", label: { en: "Precedent transactions", fr: "Precedent transactions" } },
+        { id: "b", label: { en: "Inventory turnover", fr: "Inventory turnover" } },
+        { id: "c", label: { en: "Duration", fr: "Duration" } },
+        { id: "d", label: { en: "FX carry", fr: "FX carry" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Precedent transactions examine valuation multiples paid in prior comparable control transactions.", fr: "Les precedent transactions examinent les multiples payés lors de précédentes transactions de contrôle comparables." },
+    },
+    {
+      id: "q4",
+      conceptKey: "enterprise-value",
+      question: { en: "All else equal, why is cash subtracted when bridging equity value to enterprise value?", fr: "Toutes choses égales par ailleurs, pourquoi soustrait-on le cash dans le bridge equity value vers enterprise value ?" },
+      options: [
+        { id: "a", label: { en: "Because cash is a non-operating asset available to the owner", fr: "Parce que le cash est un actif non opérationnel disponible pour le propriétaire" } },
+        { id: "b", label: { en: "Because cash is always debt", fr: "Parce que le cash est toujours de la dette" } },
+        { id: "c", label: { en: "Because cash has no value", fr: "Parce que le cash n’a aucune valeur" } },
+        { id: "d", label: { en: "Because enterprise value equals revenue", fr: "Parce que l’enterprise value est égale au revenue" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Enterprise value aims to isolate the value of operations available to all capital providers.", fr: "L’enterprise value cherche à isoler la valeur des opérations disponible pour tous les financeurs." },
+    },
+    {
+      id: "q5",
+      conceptKey: "synergies",
+      question: { en: "Which synergy is generally easier to underwrite?", fr: "Quelle synergie est généralement plus facile à underwrite ?" },
+      options: [
+        { id: "a", label: { en: "Identifiable cost savings", fr: "Économies de coûts identifiables" } },
+        { id: "b", label: { en: "Unlimited future revenue growth", fr: "Croissance future illimitée du revenue" } },
+        { id: "c", label: { en: "Unspecified market optimism", fr: "Optimisme de marché non spécifié" } },
+        { id: "d", label: { en: "No operational change", fr: "Aucun changement opérationnel" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Cost synergies are often more directly identifiable and controllable than revenue synergies.", fr: "Les cost synergies sont souvent plus directement identifiables et contrôlables que les revenue synergies." },
+    },
+    {
+      id: "q6",
+      conceptKey: "accretion",
+      question: { en: "A deal is EPS-accretive when:", fr: "Un deal est EPS-accretive lorsque :" },
+      options: [
+        { id: "a", label: { en: "Pro forma EPS exceeds buyer standalone EPS", fr: "Le pro forma EPS dépasse l’EPS standalone de l’acheteur" } },
+        { id: "b", label: { en: "Debt always increases", fr: "La dette augmente toujours" } },
+        { id: "c", label: { en: "The target has no revenue", fr: "La cible n’a aucun revenue" } },
+        { id: "d", label: { en: "The buyer pays only cash", fr: "L’acheteur paie uniquement en cash" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Accretion measures whether the selected per-share metric increases on a pro forma basis.", fr: "L’accretion mesure si la métrique par action sélectionnée augmente en pro forma." },
+    },
+    {
+      id: "q7",
+      conceptKey: "financing",
+      question: { en: "Which financing source directly dilutes existing ownership?", fr: "Quelle source de financement dilue directement l’ownership existant ?" },
+      options: [
+        { id: "a", label: { en: "New equity issuance", fr: "Nouvelle émission equity" } },
+        { id: "b", label: { en: "Existing cash", fr: "Cash existant" } },
+        { id: "c", label: { en: "Term loan", fr: "Term loan" } },
+        { id: "d", label: { en: "Bond issuance", fr: "Émission obligataire" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Issuing new shares increases the ownership base and dilutes existing shareholders.", fr: "Émettre de nouvelles actions augmente la base d’ownership et dilue les actionnaires existants." },
+    },
+    {
+      id: "q8",
+      conceptKey: "cim",
+      question: { en: "What is the main purpose of a CIM in a sell-side process?", fr: "Quel est le rôle principal d’un CIM dans un sell-side process ?" },
+      options: [
+        { id: "a", label: { en: "Provide detailed confidential information to potential buyers", fr: "Fournir des informations confidentielles détaillées aux acheteurs potentiels" } },
+        { id: "b", label: { en: "Replace all legal agreements", fr: "Remplacer tous les contrats juridiques" } },
+        { id: "c", label: { en: "Set the central-bank policy rate", fr: "Fixer le taux directeur de la banque centrale" } },
+        { id: "d", label: { en: "Publish audited statements automatically", fr: "Publier automatiquement des états audités" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The CIM is a core confidential marketing and information document for qualified bidders.", fr: "Le CIM est un document central de marketing et d’information confidentielle destiné aux bidders qualifiés." },
+    },
+    {
+      id: "q9",
+      conceptKey: "diligence",
+      question: { en: "Why can due diligence change the purchase price?", fr: "Pourquoi la due diligence peut-elle modifier le purchase price ?" },
+      options: [
+        { id: "a", label: { en: "It can reveal risks or earnings adjustments not reflected in initial assumptions", fr: "Elle peut révéler des risques ou ajustements d’earnings absents des hypothèses initiales" } },
+        { id: "b", label: { en: "It guarantees higher revenue", fr: "Elle garantit un revenue plus élevé" } },
+        { id: "c", label: { en: "It eliminates all uncertainty", fr: "Elle élimine toute incertitude" } },
+        { id: "d", label: { en: "It automatically closes the transaction", fr: "Elle close automatiquement la transaction" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "New information can change normalized earnings, risk assessment and deal terms.", fr: "De nouvelles informations peuvent modifier earnings normalisés, évaluation du risque et termes du deal." },
+    },
+    {
+      id: "q10",
+      conceptKey: "interview",
+      question: { en: "What makes a strong technical interview answer?", fr: "Qu’est-ce qui rend une réponse technique d’entretien solide ?" },
+      options: [
+        { id: "a", label: { en: "Definition, mechanics, formula or bridge, and practical implication", fr: "Définition, mécanique, formule ou bridge, et implication pratique" } },
+        { id: "b", label: { en: "Only memorizing one number", fr: "Mémoriser uniquement un chiffre" } },
+        { id: "c", label: { en: "Avoiding economic intuition", fr: "Éviter toute intuition économique" } },
+        { id: "d", label: { en: "Using unexplained jargon", fr: "Utiliser du jargon non expliqué" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A structured answer demonstrates both technical knowledge and understanding.", fr: "Une réponse structurée démontre à la fois connaissance technique et compréhension." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Walk me through a typical sell-side M&A process and explain where valuation fits.",
+      fr: "Explique un sell-side M&A process typique et indique où intervient la valorisation.",
+    },
+    framework: [
+      { en: "Prepare the company, financial analysis, valuation and marketing materials.", fr: "Préparer l’entreprise, l’analyse financière, la valuation et les marketing materials." },
+      { en: "Build a buyer list, contact bidders under confidentiality and distribute process materials.", fr: "Construire la buyer list, contacter les bidders sous confidentialité et distribuer les process materials." },
+      { en: "Collect first-round bids and assess price, structure, financing and certainty.", fr: "Collecter les first-round bids et évaluer prix, structure, financement et certitude." },
+      { en: "Advance selected bidders into management meetings and due diligence.", fr: "Faire avancer les bidders sélectionnés vers management meetings et due diligence." },
+      { en: "Request final bids, negotiate economics and legal terms, then sign and close.", fr: "Demander les final bids, négocier économie et termes juridiques, puis signer et closer." },
+      { en: "Use DCF, trading comps and precedent transactions throughout to frame expectations, evaluate bids and support recommendations.", fr: "Utiliser DCF, trading comps et precedent transactions tout au long du process pour cadrer les attentes, évaluer les bids et soutenir les recommandations." },
+    ],
+    sample: {
+      en: "In a typical sell-side process, the adviser first prepares the company for market by analyzing historical and forecast financials, building valuation work and developing the equity story. The bank then creates a buyer list, contacts potential bidders under NDA and distributes materials such as a teaser and CIM. Buyers submit initial indications of interest, which are compared on price, structure, financing certainty and other conditions. Selected bidders enter deeper diligence, often including management presentations and data-room access. The bank updates valuation and transaction analysis as new information emerges, then asks for final bids and helps the seller negotiate price and legal terms. After a preferred buyer is selected, the parties negotiate definitive documentation, sign and later close once required conditions are satisfied. Valuation is not a one-time exercise: DCF, trading comparables and precedent transactions help set expectations before launch, assess incoming bids and support the board’s decision throughout the process.",
+      fr: "Dans un sell-side process typique, le conseiller prépare d’abord l’entreprise au marché en analysant historiques et forecasts, en construisant la valuation et en développant l’equity story. La banque crée ensuite une buyer list, contacte les bidders potentiels sous NDA et distribue des materials comme teaser et CIM. Les acheteurs soumettent des indications initiales d’intérêt, comparées selon prix, structure, certitude du financement et autres conditions. Les bidders sélectionnés passent en diligence approfondie, souvent avec management presentations et accès à la data room. La banque met à jour valuation et analyses transactionnelles à mesure que de nouvelles informations apparaissent, puis demande les final bids et aide le vendeur à négocier prix et termes juridiques. Après sélection d’un preferred buyer, les parties négocient la documentation définitive, signent puis closent lorsque les conditions requises sont satisfaites. La valuation n’est pas un exercice ponctuel : DCF, trading comparables et precedent transactions servent à cadrer les attentes avant le lancement, évaluer les bids et soutenir la décision du board pendant tout le process.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
