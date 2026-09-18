@@ -25070,7 +25070,502 @@ export const privateEquityLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson];
+
+
+export const ventureCapitalLesson: FinanceLesson = {
+  slug: "year-3-venture-capital",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Venture Capital", fr: "Venture Capital" },
+  title: { en: "Venture Capital", fr: "Venture Capital" },
+  subtitle: {
+    en: "Understand how venture investors evaluate early-stage companies, markets, founders, product traction, unit economics, ownership, dilution, term sheets, portfolio construction and exit outcomes under extreme uncertainty.",
+    fr: "Comprendre comment les investisseurs venture évaluent les startups, marchés, fondateurs, traction produit, unit economics, ownership, dilution, term sheets, construction de portefeuille et exits dans un environnement d’incertitude extrême.",
+  },
+  duration: { en: "150–180 min", fr: "150–180 min" },
+  prerequisites: [
+    { en: "Corporate Finance", fr: "Finance d’entreprise / Corporate Finance" },
+    { en: "Equity Valuation", fr: "Valorisation des actions / Equity Valuation" },
+    { en: "Private Equity", fr: "Private Equity" },
+    { en: "Financial Modeling I", fr: "Modélisation financière I / Financial Modeling I" },
+    { en: "Statistics & Probability", fr: "Statistiques & probabilités" },
+  ],
+  objectives: [
+    { en: "Explain how venture capital differs from private equity and public-market investing.", fr: "Expliquer la différence entre venture capital, private equity et investissement en marchés publics." },
+    { en: "Understand startup financing stages from pre-seed through growth rounds.", fr: "Comprendre les étapes de financement startup du pre-seed aux growth rounds." },
+    { en: "Evaluate founders, market size, product-market fit, traction and business model quality.", fr: "Évaluer fondateurs, taille de marché, product-market fit, traction et qualité du business model." },
+    { en: "Interpret core startup metrics such as ARR, burn, runway, CAC, LTV and retention.", fr: "Interpréter les métriques startup clés comme ARR, burn, runway, CAC, LTV et retention." },
+    { en: "Understand pre-money, post-money, ownership, dilution and basic term-sheet economics.", fr: "Comprendre pre-money, post-money, ownership, dilution et l’économie de base d’un term sheet." },
+    { en: "Explain power-law portfolio returns, follow-on reserves and exit logic.", fr: "Expliquer les power-law returns, follow-on reserves et la logique d’exit." },
+  ],
+  overviewFlow: {
+    title: { en: "From startup thesis to venture return", fr: "De la thèse startup au return venture" },
+    steps: [
+      { title: { en: "Source", fr: "Sourcer" }, detail: { en: "Founder · market · network", fr: "Fondateur · marché · réseau" } },
+      { title: { en: "Underwrite", fr: "Analyser" }, detail: { en: "Product · traction · economics", fr: "Produit · traction · economics" } },
+      { title: { en: "Own", fr: "Détenir" }, detail: { en: "Ownership · support · follow-on", fr: "Ownership · support · follow-on" } },
+      { title: { en: "Exit", fr: "Sortir" }, detail: { en: "Acquisition · IPO · power law", fr: "Acquisition · IPO · power law" } },
+    ],
+  },
+  sections: [
+    {
+      id: "vc-model",
+      kicker: { en: "01 · VENTURE CAPITAL MODEL", fr: "01 · MODÈLE VENTURE CAPITAL" },
+      title: { en: "Venture capital funds uncertain growth before cash flows are mature", fr: "Le venture capital finance une croissance incertaine avant la maturité des cash flows" },
+      coreFacts: [
+        { en: "VC funds invest equity in private companies with high growth potential and significant failure risk.", fr: "Les fonds VC investissent en equity dans des sociétés privées à fort potentiel de croissance mais à risque d’échec élevé." },
+        { en: "Unlike buyout PE, venture investments are often minority positions and usually use little or no acquisition leverage.", fr: "Contrairement au buyout PE, les investissements venture sont souvent minoritaires et utilisent généralement peu ou pas de leverage d’acquisition." },
+        { en: "Returns are highly skewed: a small number of successful companies can drive most portfolio value.", fr: "Les returns sont très asymétriques : un petit nombre de sociétés gagnantes peut générer l’essentiel de la valeur du portefeuille." },
+        { en: "The investor underwrites potential future scale rather than stable current earnings.", fr: "L’investisseur underwrite surtout le potentiel de scale futur plutôt que des earnings actuels stables." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A VC fund invests in young companies that may become very large but may also fail completely. Because many investments will not work, the winners need to be unusually valuable.",
+          fr: "Un fonds VC investit dans de jeunes entreprises qui peuvent devenir très grandes mais aussi échouer totalement. Comme beaucoup d’investissements ne fonctionneront pas, les gagnants doivent créer énormément de valeur.",
+        },
+        Intermediate: {
+          en: "VC underwriting focuses on founder quality, market size, product, adoption, business model and future financing needs. Current profits may be negative because the company is deliberately investing in growth.",
+          fr: "L’underwriting VC se concentre sur qualité des fondateurs, taille de marché, produit, adoption, business model et besoins futurs de financement. Les profits actuels peuvent être négatifs car la société investit volontairement dans la croissance.",
+        },
+        Professional: {
+          en: "The venture model is built around asymmetric outcomes and optionality. Because downside on each equity investment can approach 100%, entry ownership, portfolio construction and access to exceptional companies are as important as traditional valuation precision.",
+          fr: "Le modèle venture repose sur des résultats asymétriques et l’optionalité. Comme le downside de chaque investissement equity peut approcher 100 %, entry ownership, construction du portefeuille et accès aux sociétés exceptionnelles comptent autant que la précision de valuation traditionnelle.",
+        },
+      },
+      comparison: {
+        title: { en: "Venture capital vs buyout private equity", fr: "Venture capital vs buyout private equity" },
+        headers: [{ en: "Dimension", fr: "Dimension" }, { en: "Venture Capital", fr: "Venture Capital" }, { en: "Buyout PE", fr: "Buyout PE" }],
+        rows: [
+          { cells: [{ en: "Company stage", fr: "Stade" }, { en: "Early / growth", fr: "Early / growth" }, { en: "Established", fr: "Établie" }] },
+          { cells: [{ en: "Ownership", fr: "Ownership" }, { en: "Usually minority", fr: "Souvent minoritaire" }, { en: "Usually control", fr: "Souvent contrôle" }] },
+          { cells: [{ en: "Leverage", fr: "Leverage" }, { en: "Typically limited", fr: "Généralement limité" }, { en: "Often material", fr: "Souvent important" }] },
+          { cells: [{ en: "Return pattern", fr: "Profil de return" }, { en: "Power law", fr: "Power law" }, { en: "More concentrated underwriting", fr: "Underwriting plus concentré" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Power law", fr: "power law", definition: { en: "Return pattern in which a small number of outcomes drive a disproportionate share of total value.", fr: "Profil de returns dans lequel un petit nombre de résultats génèrent une part disproportionnée de la valeur totale." } },
+        { en: "Minority investment", fr: "investissement minoritaire", definition: { en: "Investment that does not provide full control of the company.", fr: "Investissement ne donnant pas le contrôle complet de l’entreprise." } },
+      ],
+    },
+    {
+      id: "startup-stages-rounds",
+      kicker: { en: "02 · STARTUP STAGES & ROUNDS", fr: "02 · STADES & ROUNDS" },
+      title: { en: "Each financing round should buy the company enough time to reach the next proof point", fr: "Chaque round doit donner assez de temps à la startup pour atteindre la prochaine preuve" },
+      coreFacts: [
+        { en: "Pre-seed and seed rounds often fund team formation, product development and early product-market fit.", fr: "Les rounds pre-seed et seed financent souvent formation de l’équipe, développement produit et début de product-market fit." },
+        { en: "Series A and later rounds generally require stronger evidence of repeatable growth and scalable economics.", fr: "Les Series A et rounds suivants exigent généralement davantage de preuves de croissance répétable et d’économie scalable." },
+        { en: "Growth-stage rounds may fund international expansion, sales scale, acquisitions or a path toward public markets.", fr: "Les growth-stage rounds peuvent financer expansion internationale, scale commercial, acquisitions ou préparation aux marchés publics." },
+        { en: "Every round changes ownership and creates expectations for the next valuation milestone.", fr: "Chaque round modifie l’ownership et crée des attentes pour le prochain milestone de valuation." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Startups usually raise money in stages. Early money helps build the product; later money helps prove and scale the business.",
+          fr: "Les startups lèvent généralement de l’argent par étapes. Les premiers capitaux servent à construire le produit ; les suivants à prouver et scaler le business.",
+        },
+        Intermediate: {
+          en: "A financing round should be connected to milestones. For example, seed capital may fund initial product-market fit, while Series A capital may fund a repeatable go-to-market engine.",
+          fr: "Un round doit être relié à des milestones. Par exemple, le seed peut financer l’atteinte du product-market fit initial, tandis que la Series A finance un moteur go-to-market répétable.",
+        },
+        Professional: {
+          en: "Round planning is a capital-efficiency problem. Raising too little increases financing risk; raising too much at an aggressive valuation can create a difficult next round if operating progress does not catch up.",
+          fr: "La planification des rounds est un problème d’efficacité du capital. Lever trop peu augmente le financing risk ; lever trop à une valuation agressive peut rendre le prochain round difficile si les progrès opérationnels ne suivent pas.",
+        },
+      },
+      vocabulary: [
+        { en: "Pre-seed", fr: "pre-seed", definition: { en: "Very early financing used to form the team, test the concept or build an initial product.", fr: "Financement très précoce utilisé pour former l’équipe, tester le concept ou construire un premier produit." } },
+        { en: "Series A", fr: "Series A", definition: { en: "Institutional financing round often associated with scaling an increasingly validated business model.", fr: "Round institutionnel souvent associé au scale d’un business model de plus en plus validé." } },
+        { en: "Milestone", fr: "milestone", definition: { en: "Operating or strategic proof point expected before the next financing stage.", fr: "Preuve opérationnelle ou stratégique attendue avant le prochain financement." } },
+      ],
+    },
+    {
+      id: "founders-market-product",
+      kicker: { en: "03 · FOUNDERS, MARKET & PRODUCT", fr: "03 · FONDATEURS, MARCHÉ & PRODUIT" },
+      title: { en: "Early-stage investing is partly an underwriting of people, market and speed of learning", fr: "L’investissement early-stage underwrite en partie les personnes, le marché et la vitesse d’apprentissage" },
+      coreFacts: [
+        { en: "Founder-market fit describes how well the founding team’s experience and insight match the problem being solved.", fr: "Le founder-market fit décrit l’adéquation entre expérience et insight des fondateurs et le problème à résoudre." },
+        { en: "A large market increases the ceiling on potential outcomes but does not guarantee a good company.", fr: "Un grand marché augmente le plafond potentiel des résultats mais ne garantit pas une bonne entreprise." },
+        { en: "Product-market fit means customers value the product enough for adoption and retention to become increasingly repeatable.", fr: "Le product-market fit signifie que les clients valorisent suffisamment le produit pour que adoption et retention deviennent de plus en plus répétables." },
+        { en: "Execution speed, recruiting ability and learning velocity can matter more than polished early forecasts.", fr: "La vitesse d’exécution, la capacité de recrutement et la vitesse d’apprentissage peuvent compter davantage que des forecasts précoces très raffinés." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "At an early stage, there may be little revenue and no profit. Investors therefore spend more time asking whether the founders are exceptional, the problem is important and customers truly want the product.",
+          fr: "À un stade précoce, il peut y avoir peu de revenue et aucun profit. Les investisseurs passent donc plus de temps à demander si les fondateurs sont exceptionnels, le problème important et les clients réellement intéressés par le produit.",
+        },
+        Intermediate: {
+          en: "VC diligence often combines reference checks, customer calls, product usage, competitive analysis and founder interviews. The objective is to judge both current evidence and how quickly the company can improve.",
+          fr: "La diligence VC combine souvent reference checks, appels clients, usage produit, analyse concurrentielle et entretiens fondateurs. L’objectif est de juger les preuves actuelles et la vitesse à laquelle l’entreprise peut progresser.",
+        },
+        Professional: {
+          en: "At pre-scale stages, static metrics can understate or overstate quality. Investors therefore evaluate learning loops: how quickly management identifies weak assumptions, changes product or distribution, and converts evidence into better execution.",
+          fr: "Aux stades pre-scale, les métriques statiques peuvent sous-estimer ou surestimer la qualité. Les investisseurs évaluent donc les learning loops : vitesse à laquelle le management identifie les hypothèses faibles, modifie produit ou distribution et transforme les données en meilleure exécution.",
+        },
+      },
+      vocabulary: [
+        { en: "Founder-market fit", fr: "founder-market fit", definition: { en: "Alignment between founding-team capabilities and the market problem being pursued.", fr: "Alignement entre capacités de l’équipe fondatrice et problème de marché poursuivi." } },
+        { en: "Product-market fit", fr: "product-market fit", definition: { en: "Evidence that a product satisfies a meaningful market need with sustainable customer demand.", fr: "Preuve qu’un produit répond à un besoin de marché significatif avec une demande client durable." } },
+      ],
+    },
+    {
+      id: "market-sizing",
+      kicker: { en: "04 · MARKET SIZING", fr: "04 · MARKET SIZING" },
+      title: { en: "TAM matters, but reachable market and credible path matter more", fr: "Le TAM compte, mais le marché réellement accessible et le chemin crédible comptent davantage" },
+      coreFacts: [
+        { en: "TAM estimates the total theoretical market opportunity.", fr: "Le TAM estime l’opportunité totale théorique de marché." },
+        { en: "SAM narrows the market to segments the product can serve; SOM focuses on realistically obtainable share.", fr: "Le SAM réduit le marché aux segments que le produit peut servir ; le SOM se concentre sur la part réellement atteignable." },
+        { en: "Top-down sizing starts with external market totals; bottom-up sizing builds from customers, units and pricing.", fr: "Le sizing top-down part de totaux de marché externes ; le bottom-up construit à partir des clients, unités et pricing." },
+        { en: "Bottom-up sizing is often more useful because assumptions can be tested explicitly.", fr: "Le sizing bottom-up est souvent plus utile car les hypothèses peuvent être testées explicitement." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Saying 'this is a $100 billion market' is not enough. The investor needs to know which customers the startup can actually reach and how much they may realistically spend.",
+          fr: "Dire « c’est un marché de 100 Md$ » ne suffit pas. L’investisseur doit savoir quels clients la startup peut réellement atteindre et combien ils peuvent dépenser de façon réaliste.",
+        },
+        Intermediate: {
+          en: "A bottom-up model might estimate number of target customers × expected annual spend. This forces the investor to test penetration, pricing and sales capacity.",
+          fr: "Un modèle bottom-up peut estimer nombre de clients cibles × dépense annuelle attendue. Cela force l’investisseur à tester pénétration, pricing et capacité commerciale.",
+        },
+        Professional: {
+          en: "The best market analysis distinguishes current category size from category-creation potential. Exceptional startups can expand the market itself, but underwriting that outcome requires explicit assumptions rather than inflated TAM slides.",
+          fr: "La meilleure analyse distingue taille actuelle de la catégorie et potentiel de création de catégorie. Les startups exceptionnelles peuvent agrandir le marché lui-même, mais underwriter ce résultat exige des hypothèses explicites plutôt que des slides TAM gonflées.",
+        },
+      },
+      formula: {
+        label: { en: "Bottom-up market example", fr: "Exemple de marché bottom-up" },
+        expression: "Market Opportunity ≈ Target Customers × Annual Revenue per Customer",
+        explanation: { en: "This simple framework can be refined by segment, geography and adoption rate.", fr: "Ce cadre simple peut être raffiné par segment, géographie et taux d’adoption." },
+      },
+      vocabulary: [
+        { en: "TAM", fr: "TAM", definition: { en: "Total Addressable Market: theoretical total market opportunity.", fr: "Total Addressable Market : opportunité théorique totale." } },
+        { en: "SAM", fr: "SAM", definition: { en: "Serviceable Available Market: portion of TAM the product can serve.", fr: "Serviceable Available Market : portion du TAM que le produit peut servir." } },
+        { en: "SOM", fr: "SOM", definition: { en: "Serviceable Obtainable Market: realistically achievable portion of the serviceable market.", fr: "Serviceable Obtainable Market : portion réalistement atteignable du marché accessible." } },
+      ],
+    },
+    {
+      id: "startup-metrics",
+      kicker: { en: "05 · STARTUP METRICS & UNIT ECONOMICS", fr: "05 · MÉTRIQUES STARTUP & UNIT ECONOMICS" },
+      title: { en: "Growth quality matters as much as growth speed", fr: "La qualité de la croissance compte autant que sa vitesse" },
+      coreFacts: [
+        { en: "ARR and MRR measure recurring revenue scale in subscription businesses.", fr: "ARR et MRR mesurent l’échelle du revenue récurrent dans les business d’abonnement." },
+        { en: "Burn and runway show how quickly cash is being consumed and how long the company can operate before additional funding.", fr: "Burn et runway montrent la vitesse de consommation du cash et combien de temps l’entreprise peut fonctionner avant un nouveau financement." },
+        { en: "CAC, LTV, gross margin and payback period help evaluate whether growth economics can scale.", fr: "CAC, LTV, gross margin et payback period aident à évaluer si l’économie de croissance peut scaler." },
+        { en: "Retention and net revenue retention often reveal product value more clearly than gross new bookings alone.", fr: "Retention et net revenue retention révèlent souvent mieux la valeur du produit que les nouveaux bookings bruts seuls." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A startup can grow quickly and still be unhealthy if it spends too much to acquire customers who leave soon. Investors therefore look at both growth and the economics underneath it.",
+          fr: "Une startup peut croître vite tout en étant fragile si elle dépense trop pour acquérir des clients qui partent rapidement. Les investisseurs regardent donc la croissance et l’économie qui la soutient.",
+        },
+        Intermediate: {
+          en: "For SaaS, strong retention, attractive gross margins and a reasonable CAC payback can indicate scalable growth. High burn with weak retention may mean the company is buying temporary revenue.",
+          fr: "Pour un SaaS, une forte retention, de bonnes gross margins et un CAC payback raisonnable peuvent indiquer une croissance scalable. Un burn élevé avec faible retention peut signifier que la société achète du revenue temporaire.",
+        },
+        Professional: {
+          en: "Metrics must be cohort-based where possible. Aggregate averages can hide deterioration if newer customers retain worse, cost more to acquire or generate lower expansion than older cohorts.",
+          fr: "Les métriques doivent être analysées par cohortes lorsque possible. Les moyennes globales peuvent cacher une détérioration si les nouveaux clients retiennent moins bien, coûtent plus cher à acquérir ou génèrent moins d’expansion que les anciennes cohortes.",
+        },
+      },
+      formula: {
+        label: { en: "Runway", fr: "Runway" },
+        expression: "Runway (months) = Cash Balance / Monthly Net Burn",
+        explanation: { en: "Runway is approximate because burn can change as the company grows or cuts costs.", fr: "Le runway est approximatif car le burn peut changer avec la croissance ou les réductions de coûts." },
+        workedExample: { en: "$12m cash / $1m monthly net burn = about 12 months of runway.", fr: "12 M$ de cash / 1 M$ de net burn mensuel = environ 12 mois de runway." },
+      },
+      vocabulary: [
+        { en: "ARR", fr: "ARR", definition: { en: "Annual Recurring Revenue.", fr: "Annual Recurring Revenue." } },
+        { en: "CAC", fr: "Customer Acquisition Cost", definition: { en: "Average cost to acquire a new customer.", fr: "Coût moyen d’acquisition d’un nouveau client." } },
+        { en: "LTV", fr: "Lifetime Value", definition: { en: "Estimated economic value generated by a customer over the relationship.", fr: "Valeur économique estimée générée par un client sur la durée de la relation." } },
+        { en: "Net burn", fr: "net burn", definition: { en: "Net cash consumed by the company over a period.", fr: "Cash net consommé par l’entreprise sur une période." } },
+      ],
+    },
+    {
+      id: "valuation-ownership-dilution",
+      kicker: { en: "06 · VALUATION, OWNERSHIP & DILUTION", fr: "06 · VALUATION, OWNERSHIP & DILUTION" },
+      title: { en: "Venture valuation is inseparable from ownership", fr: "La valuation venture est indissociable de l’ownership" },
+      coreFacts: [
+        { en: "Pre-money valuation is the company value immediately before new capital; post-money adds the new investment.", fr: "La pre-money valuation est la valeur de la société immédiatement avant le nouveau capital ; la post-money ajoute l’investissement." },
+        { en: "New investor ownership is approximately investment divided by post-money valuation.", fr: "L’ownership du nouvel investisseur est approximativement l’investissement divisé par la post-money valuation." },
+        { en: "Existing shareholders are diluted when new shares are issued.", fr: "Les actionnaires existants sont dilués lorsque de nouvelles actions sont émises." },
+        { en: "A high headline valuation can be unattractive if the investor receives too little ownership for the risk taken.", fr: "Une valuation headline élevée peut être peu attractive si l’investisseur reçoit trop peu d’ownership par rapport au risque pris." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a startup is worth $40 million before a $10 million investment, the post-money valuation is $50 million. The new investor owns roughly 20% after the round.",
+          fr: "Si une startup vaut 40 M$ avant un investissement de 10 M$, la post-money valuation est de 50 M$. Le nouvel investisseur possède environ 20 % après le round.",
+        },
+        Intermediate: {
+          en: "VCs think in ownership because future exit proceeds depend on the percentage of the company still owned after later dilution. Entry valuation, round size and follow-on participation all affect that outcome.",
+          fr: "Les VCs pensent en ownership car les proceeds futurs d’exit dépendent du pourcentage encore détenu après les dilutions futures. Entry valuation, taille du round et follow-on participation affectent ce résultat.",
+        },
+        Professional: {
+          en: "Effective ownership should be modeled on a fully diluted basis, including option pools, convertibles and expected future rounds. A seemingly attractive pre-money valuation can produce weaker economics if the option pool is expanded pre-close.",
+          fr: "L’ownership effectif doit être modélisé sur une base fully diluted, incluant option pools, convertibles et futurs rounds attendus. Une pre-money valuation apparemment attractive peut produire une économie moins favorable si l’option pool est élargi avant le closing.",
+        },
+      },
+      formula: {
+        label: { en: "Post-money ownership", fr: "Ownership post-money" },
+        expression: "New Investor Ownership ≈ New Investment / Post-Money Valuation",
+        explanation: { en: "Post-money valuation = pre-money valuation + new primary capital, under a simplified structure.", fr: "Post-money valuation = pre-money valuation + nouveau capital primaire, dans une structure simplifiée." },
+        workedExample: { en: "$10m investment / $50m post-money = 20% ownership.", fr: "10 M$ d’investissement / 50 M$ post-money = 20 % d’ownership." },
+      },
+      vocabulary: [
+        { en: "Pre-money valuation", fr: "pre-money valuation", definition: { en: "Company equity value immediately before a financing round.", fr: "Valeur equity de l’entreprise immédiatement avant un round." } },
+        { en: "Post-money valuation", fr: "post-money valuation", definition: { en: "Company equity value immediately after adding new financing.", fr: "Valeur equity de l’entreprise immédiatement après le nouveau financement." } },
+        { en: "Dilution", fr: "dilution", definition: { en: "Reduction in an existing shareholder’s percentage ownership after new equity issuance.", fr: "Réduction du pourcentage d’ownership d’un actionnaire existant après émission de nouvelles actions." } },
+      ],
+    },
+    {
+      id: "term-sheets-cap-table",
+      kicker: { en: "07 · TERM SHEETS & CAP TABLE", fr: "07 · TERM SHEETS & CAP TABLE" },
+      title: { en: "Price matters, but investor rights can materially change economic outcomes", fr: "Le prix compte, mais les droits investisseurs peuvent modifier fortement l’économie du deal" },
+      coreFacts: [
+        { en: "A term sheet outlines key economic and governance terms before definitive legal documents.", fr: "Un term sheet présente les principaux termes économiques et de gouvernance avant les documents juridiques définitifs." },
+        { en: "Preferred shares may include liquidation preferences, anti-dilution rights, information rights and board rights.", fr: "Les preferred shares peuvent inclure liquidation preferences, anti-dilution rights, information rights et board rights." },
+        { en: "The cap table shows who owns the company on a fully diluted basis.", fr: "La cap table montre qui détient l’entreprise sur une base fully diluted." },
+        { en: "Option pools are important because they reserve equity for employees and affect dilution.", fr: "Les option pools sont importants car ils réservent de l’equity aux employés et affectent la dilution." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Two investors can invest at the same valuation but receive different protections. Those rights can matter a lot if the company sells for less than expected.",
+          fr: "Deux investisseurs peuvent investir à la même valuation mais recevoir des protections différentes. Ces droits peuvent beaucoup compter si la société est vendue moins cher que prévu.",
+        },
+        Intermediate: {
+          en: "A liquidation preference can determine who gets paid first at exit. Board seats affect governance. Pro rata rights can allow an investor to maintain ownership in future rounds.",
+          fr: "Une liquidation preference peut déterminer qui est payé en premier à l’exit. Les board seats affectent la gouvernance. Les pro rata rights peuvent permettre à un investisseur de maintenir son ownership lors des futurs rounds.",
+        },
+        Professional: {
+          en: "Economic modeling should reflect preference stacks, conversion choices, option pools and future financing assumptions. Headline ownership alone can misstate proceeds under low or medium exit values.",
+          fr: "La modélisation économique doit refléter preference stacks, choix de conversion, option pools et hypothèses de financements futurs. L’ownership headline seul peut mal représenter les proceeds sous des exits faibles ou moyens.",
+        },
+      },
+      vocabulary: [
+        { en: "Liquidation preference", fr: "liquidation preference", definition: { en: "Contractual right giving preferred investors priority in certain exit or liquidation proceeds.", fr: "Droit contractuel donnant aux investisseurs preferred une priorité sur certains proceeds d’exit ou liquidation." } },
+        { en: "Pro rata right", fr: "pro rata right", definition: { en: "Right to invest in future rounds to preserve ownership percentage.", fr: "Droit d’investir lors des futurs rounds pour préserver son pourcentage d’ownership." } },
+        { en: "Cap table", fr: "cap table", definition: { en: "Table showing company ownership across shareholders and securities.", fr: "Tableau présentant l’ownership de l’entreprise entre actionnaires et instruments." } },
+      ],
+    },
+    {
+      id: "portfolio-construction-vc",
+      kicker: { en: "08 · PORTFOLIO CONSTRUCTION", fr: "08 · CONSTRUCTION DE PORTEFEUILLE" },
+      title: { en: "Venture portfolios are designed for many misses and a few outsized winners", fr: "Les portefeuilles venture sont conçus pour de nombreux échecs et quelques gagnants exceptionnels" },
+      coreFacts: [
+        { en: "Power-law returns make diversification and access to outlier companies central to fund construction.", fr: "Les power-law returns rendent diversification et accès aux sociétés outliers essentiels à la construction du fonds." },
+        { en: "Funds often reserve capital for follow-on investments in successful portfolio companies.", fr: "Les fonds réservent souvent du capital pour des follow-on investments dans les sociétés performantes du portefeuille." },
+        { en: "Ownership targets influence initial check size and follow-on strategy.", fr: "Les ownership targets influencent la taille du premier check et la stratégie de follow-on." },
+        { en: "Concentration can improve upside if winners are identified early but increases the cost of being wrong.", fr: "La concentration peut améliorer l’upside si les gagnants sont identifiés tôt mais augmente le coût d’une erreur." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A VC fund cannot assume every startup will work. It builds a portfolio knowing that some investments may go to zero and a few may return many times the original investment.",
+          fr: "Un fonds VC ne peut pas supposer que chaque startup réussira. Il construit un portefeuille en sachant que certains investissements peuvent aller à zéro et que quelques-uns peuvent rendre plusieurs fois l’investissement initial.",
+        },
+        Intermediate: {
+          en: "Reserves let the fund invest again in companies that continue to perform. But following on automatically can waste capital, so investors must re-underwrite the company at each round.",
+          fr: "Les reserves permettent au fonds de réinvestir dans les sociétés qui continuent à performer. Mais suivre automatiquement peut gaspiller du capital ; les investisseurs doivent donc re-underwrite la société à chaque round.",
+        },
+        Professional: {
+          en: "Fund construction links check size, target ownership, expected dilution, reserves, stage strategy and fund size. A portfolio can have excellent company selection and still generate mediocre fund returns if ownership is too small in the winners.",
+          fr: "La construction du fonds relie taille des checks, target ownership, dilution attendue, reserves, stratégie de stage et taille du fonds. Un portefeuille peut sélectionner d’excellentes sociétés mais générer des returns médiocres si l’ownership est trop faible dans les gagnants.",
+        },
+      },
+      vocabulary: [
+        { en: "Follow-on investment", fr: "follow-on investment", definition: { en: "Additional investment in an existing portfolio company in a later financing round.", fr: "Investissement supplémentaire dans une portfolio company existante lors d’un round ultérieur." } },
+        { en: "Reserve ratio", fr: "reserve ratio", definition: { en: "Share of fund capital held back for future investments in existing companies.", fr: "Part du capital du fonds réservée aux investissements futurs dans les sociétés existantes." } },
+      ],
+    },
+    {
+      id: "exits-and-vc-interviews",
+      kicker: { en: "09 · EXITS & VC INTERVIEWS", fr: "09 · EXITS & ENTRETIENS VC" },
+      title: { en: "A venture thesis must connect early evidence to a plausible large outcome", fr: "Une thèse venture doit relier les premières preuves à un grand outcome plausible" },
+      coreFacts: [
+        { en: "VC exits commonly occur through acquisitions, IPOs or secondary sales.", fr: "Les exits VC se produisent souvent via acquisitions, IPOs ou secondary sales." },
+        { en: "Large outcomes require both company success and sufficient investor ownership.", fr: "Les grands outcomes nécessitent à la fois succès de la société et ownership suffisant de l’investisseur." },
+        { en: "Interview case studies often test market sizing, startup metrics, founder judgment and investment thesis construction.", fr: "Les case studies d’entretien testent souvent market sizing, métriques startup, jugement sur les fondateurs et construction de thèse." },
+        { en: "A strong VC pitch explains why the company could become very large, why this team can win and what evidence would falsify the thesis.", fr: "Un bon pitch VC explique pourquoi la société peut devenir très grande, pourquoi cette équipe peut gagner et quelles preuves invalideraient la thèse." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "VC investors ask whether a startup could become big enough to matter to the whole fund. A good company can still be too small an opportunity for a large venture fund.",
+          fr: "Les investisseurs VC demandent si une startup peut devenir assez grande pour compter à l’échelle du fonds. Une bonne entreprise peut rester une opportunité trop petite pour un grand fonds venture.",
+        },
+        Intermediate: {
+          en: "A startup pitch should cover team, problem, product, market, traction, business model, competition, valuation, ownership and key risks. The investor should explain why now is the right time.",
+          fr: "Un pitch startup doit couvrir équipe, problème, produit, marché, traction, business model, concurrence, valuation, ownership et risques clés. L’investisseur doit expliquer pourquoi le timing est bon maintenant.",
+        },
+        Professional: {
+          en: "The best venture case connects micro evidence to macro potential: early retention or distribution advantage must plausibly scale into a large market outcome. The thesis should specify which assumptions remain unproven and what milestones would de-risk them.",
+          fr: "Le meilleur case venture relie les micro preuves au potentiel macro : une forte retention précoce ou un avantage de distribution doit pouvoir scaler vers un grand outcome de marché. La thèse doit préciser quelles hypothèses restent non prouvées et quels milestones les de-riskeraient.",
+        },
+      },
+      comparison: {
+        title: { en: "VC investment pitch structure", fr: "Structure d’un pitch d’investissement VC" },
+        headers: [{ en: "Step", fr: "Étape" }, { en: "Question", fr: "Question" }],
+        rows: [
+          { cells: [{ en: "1. Team", fr: "1. Équipe" }, { en: "Why can these founders win?", fr: "Pourquoi ces fondateurs peuvent-ils gagner ?" }] },
+          { cells: [{ en: "2. Market", fr: "2. Marché" }, { en: "Can the outcome become large enough?", fr: "L’outcome peut-il devenir assez grand ?" }] },
+          { cells: [{ en: "3. Evidence", fr: "3. Preuves" }, { en: "What shows real product demand?", fr: "Qu’est-ce qui prouve la demande réelle ?" }] },
+          { cells: [{ en: "4. Economics", fr: "4. Economics" }, { en: "Can growth become efficient?", fr: "La croissance peut-elle devenir efficace ?" }] },
+          { cells: [{ en: "5. Deal", fr: "5. Deal" }, { en: "What ownership and rights do we receive?", fr: "Quel ownership et quels droits recevons-nous ?" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Secondary sale", fr: "secondary sale", definition: { en: "Sale of existing private-company shares from one shareholder to another.", fr: "Vente d’actions existantes d’une société privée d’un actionnaire à un autre." } },
+        { en: "Exit outcome", fr: "exit outcome", definition: { en: "Value realized when the investment is sold or becomes liquid.", fr: "Valeur réalisée lorsque l’investissement est vendu ou devient liquide." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "vc-model",
+      question: { en: "Which best describes venture capital?", fr: "Quelle proposition décrit le mieux le venture capital ?" },
+      options: [
+        { id: "a", label: { en: "Equity investing in high-growth private companies with high uncertainty", fr: "Investissement equity dans des sociétés privées à forte croissance et forte incertitude" } },
+        { id: "b", label: { en: "Only lending to mature governments", fr: "Uniquement prêter à des gouvernements matures" } },
+        { id: "c", label: { en: "Only buying public index funds", fr: "Uniquement acheter des index funds publics" } },
+        { id: "d", label: { en: "Only leveraged buyouts of mature companies", fr: "Uniquement des leveraged buyouts de sociétés matures" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "VC invests in private growth companies where uncertainty and failure risk are high.", fr: "Le VC investit dans des sociétés privées de croissance où incertitude et risque d’échec sont élevés." },
+    },
+    {
+      id: "q2",
+      conceptKey: "rounds",
+      question: { en: "What should a financing round ideally accomplish?", fr: "Que doit idéalement accomplir un round de financement ?" },
+      options: [
+        { id: "a", label: { en: "Fund enough runway to reach important next milestones", fr: "Financer assez de runway pour atteindre les prochains milestones importants" } },
+        { id: "b", label: { en: "Guarantee an IPO", fr: "Garantir une IPO" } },
+        { id: "c", label: { en: "Eliminate all dilution forever", fr: "Éliminer toute dilution pour toujours" } },
+        { id: "d", label: { en: "Remove the need for customers", fr: "Supprimer le besoin de clients" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Rounds should finance progress toward milestones that support the next stage of value creation or financing.", fr: "Les rounds doivent financer les progrès vers des milestones soutenant la prochaine étape de création de valeur ou financement." },
+    },
+    {
+      id: "q3",
+      conceptKey: "product-market-fit",
+      question: { en: "What is product-market fit?", fr: "Qu’est-ce que le product-market fit ?" },
+      options: [
+        { id: "a", label: { en: "Evidence that a product satisfies a meaningful market need", fr: "Preuve qu’un produit répond à un besoin de marché significatif" } },
+        { id: "b", label: { en: "A guaranteed valuation increase", fr: "Une hausse garantie de valuation" } },
+        { id: "c", label: { en: "A legal debt covenant", fr: "Un covenant juridique de dette" } },
+        { id: "d", label: { en: "A public-market index", fr: "Un indice de marché public" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Product-market fit reflects meaningful customer demand and increasingly repeatable adoption or retention.", fr: "Le product-market fit reflète une demande client réelle et une adoption ou retention de plus en plus répétable." },
+    },
+    {
+      id: "q4",
+      conceptKey: "market-sizing",
+      question: { en: "Why is bottom-up market sizing often useful?", fr: "Pourquoi le market sizing bottom-up est-il souvent utile ?" },
+      options: [
+        { id: "a", label: { en: "Its customer, pricing and penetration assumptions can be tested explicitly", fr: "Ses hypothèses clients, pricing et pénétration peuvent être testées explicitement" } },
+        { id: "b", label: { en: "It always produces the largest TAM", fr: "Il produit toujours le plus grand TAM" } },
+        { id: "c", label: { en: "It removes all uncertainty", fr: "Il supprime toute incertitude" } },
+        { id: "d", label: { en: "It ignores customer economics", fr: "Il ignore l’économie client" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Bottom-up sizing makes the path from customers to revenue transparent and testable.", fr: "Le sizing bottom-up rend le chemin des clients au revenue transparent et testable." },
+    },
+    {
+      id: "q5",
+      conceptKey: "runway",
+      question: { en: "A startup has $12m cash and burns $1m per month. Approximate runway is:", fr: "Une startup possède 12 M$ de cash et burn 1 M$ par mois. Son runway approximatif est :" },
+      options: [
+        { id: "a", label: { en: "12 months", fr: "12 mois" } },
+        { id: "b", label: { en: "1 month", fr: "1 mois" } },
+        { id: "c", label: { en: "120 months", fr: "120 mois" } },
+        { id: "d", label: { en: "6 months", fr: "6 mois" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Runway = 12 / 1 = about 12 months.", fr: "Runway = 12 / 1 = environ 12 mois." },
+    },
+    {
+      id: "q6",
+      conceptKey: "ownership",
+      question: { en: "A startup raises $10m at a $40m pre-money valuation. Approximate post-money ownership for the new investor is:", fr: "Une startup lève 10 M$ sur une pre-money valuation de 40 M$. L’ownership post-money approximatif du nouvel investisseur est :" },
+      options: [
+        { id: "a", label: { en: "20%", fr: "20 %" } },
+        { id: "b", label: { en: "25%", fr: "25 %" } },
+        { id: "c", label: { en: "40%", fr: "40 %" } },
+        { id: "d", label: { en: "50%", fr: "50 %" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Post-money is $50m, so $10m / $50m = 20%.", fr: "La post-money est de 50 M$, donc 10 / 50 = 20 %." },
+    },
+    {
+      id: "q7",
+      conceptKey: "liquidation-preference",
+      question: { en: "What does a liquidation preference do?", fr: "Que fait une liquidation preference ?" },
+      options: [
+        { id: "a", label: { en: "Gives preferred investors priority in certain exit proceeds", fr: "Donne aux investisseurs preferred une priorité sur certains proceeds d’exit" } },
+        { id: "b", label: { en: "Guarantees unlimited upside", fr: "Garantit un upside illimité" } },
+        { id: "c", label: { en: "Eliminates all dilution", fr: "Élimine toute dilution" } },
+        { id: "d", label: { en: "Sets government interest rates", fr: "Fixe les taux gouvernementaux" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Liquidation preferences determine priority of proceeds in specified exit or liquidation scenarios.", fr: "Les liquidation preferences déterminent la priorité des proceeds dans certains scénarios d’exit ou liquidation." },
+    },
+    {
+      id: "q8",
+      conceptKey: "portfolio",
+      question: { en: "Why do VC funds often reserve capital for follow-on investments?", fr: "Pourquoi les fonds VC réservent-ils souvent du capital pour les follow-on investments ?" },
+      options: [
+        { id: "a", label: { en: "To continue backing selected portfolio companies in later rounds", fr: "Pour continuer à financer certaines portfolio companies dans les rounds suivants" } },
+        { id: "b", label: { en: "To guarantee every startup survives", fr: "Pour garantir que chaque startup survive" } },
+        { id: "c", label: { en: "To avoid all future decisions", fr: "Pour éviter toute décision future" } },
+        { id: "d", label: { en: "To eliminate ownership dilution automatically", fr: "Pour éliminer automatiquement la dilution" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Reserves provide flexibility to support attractive existing investments and maintain ownership.", fr: "Les reserves donnent de la flexibilité pour soutenir les investissements existants attractifs et maintenir l’ownership." },
+    },
+    {
+      id: "q9",
+      conceptKey: "power-law",
+      question: { en: "What does power-law behavior imply for a VC portfolio?", fr: "Que signifie le comportement power-law pour un portefeuille VC ?" },
+      options: [
+        { id: "a", label: { en: "A few winners may generate most of the fund’s value", fr: "Quelques gagnants peuvent générer l’essentiel de la valeur du fonds" } },
+        { id: "b", label: { en: "Every investment produces the same return", fr: "Chaque investissement produit le même return" } },
+        { id: "c", label: { en: "No company can fail", fr: "Aucune société ne peut échouer" } },
+        { id: "d", label: { en: "Returns are guaranteed", fr: "Les returns sont garantis" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Venture returns are often highly concentrated in a small number of exceptional outcomes.", fr: "Les returns venture sont souvent très concentrés dans un petit nombre d’outcomes exceptionnels." },
+    },
+    {
+      id: "q10",
+      conceptKey: "vc-pitch",
+      question: { en: "What should a strong VC investment pitch explain?", fr: "Que doit expliquer un bon pitch d’investissement VC ?" },
+      options: [
+        { id: "a", label: { en: "Team, market, evidence, economics, deal terms and key risks", fr: "Équipe, marché, preuves, economics, termes du deal et risques clés" } },
+        { id: "b", label: { en: "Only the company name", fr: "Uniquement le nom de l’entreprise" } },
+        { id: "c", label: { en: "Only a large TAM slide", fr: "Uniquement une slide TAM élevée" } },
+        { id: "d", label: { en: "No discussion of dilution", fr: "Aucune discussion de dilution" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A professional VC pitch connects company quality, market potential, evidence, economics and investment terms.", fr: "Un pitch VC professionnel relie qualité de la société, potentiel de marché, preuves, economics et termes d’investissement." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "How would you evaluate an early-stage startup for a venture capital investment?",
+      fr: "Comment évaluerais-tu une startup early-stage pour un investissement venture capital ?",
+    },
+    framework: [
+      { en: "Start with the founders: insight, execution ability, recruiting and founder-market fit.", fr: "Commencer par les fondateurs : insight, capacité d’exécution, recrutement et founder-market fit." },
+      { en: "Assess the problem, product and evidence of product-market fit.", fr: "Évaluer le problème, le produit et les preuves de product-market fit." },
+      { en: "Size the market using both top-down and bottom-up logic.", fr: "Dimensionner le marché avec logique top-down et bottom-up." },
+      { en: "Analyze traction, retention, growth, burn, runway and unit economics.", fr: "Analyser traction, retention, croissance, burn, runway et unit economics." },
+      { en: "Evaluate competition, defensibility and distribution advantages.", fr: "Évaluer concurrence, defensibility et avantages de distribution." },
+      { en: "Model valuation, ownership, dilution, term-sheet economics and plausible exit outcomes.", fr: "Modéliser valuation, ownership, dilution, économie du term sheet et outcomes d’exit plausibles." },
+    ],
+    sample: {
+      en: "I would start with the founding team because, at an early stage, execution quality and learning speed can matter more than mature financial history. I would assess founder-market fit, recruiting ability and whether the founders have a differentiated insight into the problem. Then I would evaluate the product and evidence of product-market fit through customer behavior, retention and usage rather than relying only on management claims. I would size the market both top-down and bottom-up and ask whether the company can realistically become large enough to matter to the fund. Next I would analyze traction, ARR or revenue growth where relevant, burn, runway, CAC, LTV and cohort retention. I would also examine competition and what could make the business defensible at scale. Finally, I would evaluate the round economics: pre-money and post-money valuation, ownership, dilution, option pool and investor rights. My final recommendation would explain what must be true for the company to become an outlier winner, which assumptions are still unproven and what future milestones would de-risk the thesis.",
+      fr: "Je commencerais par l’équipe fondatrice car, à un stade précoce, la qualité d’exécution et la vitesse d’apprentissage peuvent compter davantage qu’un historique financier mature. J’évaluerais founder-market fit, capacité de recrutement et présence d’un insight différencié sur le problème. Ensuite, j’analyserais le produit et les preuves de product-market fit via comportement client, retention et usage plutôt qu’en me fiant uniquement aux déclarations du management. Je dimensionnerais le marché en top-down et bottom-up et demanderais si l’entreprise peut réalistement devenir assez grande pour compter à l’échelle du fonds. Puis j’étudierais traction, ARR ou croissance du revenue lorsque pertinent, burn, runway, CAC, LTV et retention par cohortes. J’examinerais aussi la concurrence et ce qui peut rendre le business défendable à grande échelle. Enfin, j’évaluerais l’économie du round : pre-money et post-money valuation, ownership, dilution, option pool et droits investisseurs. Ma recommandation finale expliquerait ce qui doit être vrai pour que la société devienne un outlier winner, quelles hypothèses restent non prouvées et quels milestones futurs permettraient de de-risk la thèse.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
