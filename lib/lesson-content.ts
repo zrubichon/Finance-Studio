@@ -9960,7 +9960,1029 @@ export const financialVocabularyFrEnLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson];
+
+export const readingFinancialNewsLesson: FinanceLesson = {
+  slug: "year-1-reading-financial-news",
+  year: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations" },
+  domain: {
+    en: "Interview Readiness",
+    fr: "Préparation aux entretiens / Interview Readiness",
+  },
+  title: {
+    en: "Reading Financial News",
+    fr: "Lire et comprendre l’actualité financière / Reading Financial News",
+  },
+  subtitle: {
+    en: "Learn how to turn a headline into a structured market analysis: separate facts from interpretation, compare outcomes with expectations, identify what was already priced in, trace cross-asset transmission and build scenarios with clear invalidation conditions.",
+    fr: "Apprendre à transformer un headline en analyse de marché structurée : séparer faits et interprétation, comparer le résultat aux attentes, identifier ce qui était déjà intégré dans les prix / priced in, suivre la transmission multi-actifs et construire des scénarios avec conditions d’invalidation claires.",
+  },
+  duration: { en: "95–120 min", fr: "95–120 min" },
+  prerequisites: [
+    {
+      en: "Macroeconomics for Markets",
+      fr: "Macroéconomie pour les marchés / Macroeconomics for Markets",
+    },
+    {
+      en: "Financial Vocabulary FR ↔ EN",
+      fr: "Vocabulaire financier FR ↔ EN / Financial Vocabulary",
+    },
+  ],
+  objectives: [
+    {
+      en: "Separate reported facts, market reaction and interpretation.",
+      fr: "Séparer faits rapportés, réaction du marché / market reaction et interprétation.",
+    },
+    {
+      en: "Evaluate the reliability and relevance of primary and secondary sources.",
+      fr: "Évaluer la fiabilité et la pertinence des sources primaires / primary sources et secondaires / secondary sources.",
+    },
+    {
+      en: "Measure surprises relative to consensus, prior data and revisions.",
+      fr: "Mesurer les surprises par rapport au consensus, aux données précédentes et aux révisions / revisions.",
+    },
+    {
+      en: "Explain why a positive headline can produce a negative market reaction when expectations were already stronger.",
+      fr: "Expliquer pourquoi un headline positif peut provoquer une réaction négative lorsque les attentes étaient déjà plus fortes.",
+    },
+    {
+      en: "Map news into rates, equities, credit, FX and commodities through explicit mechanisms.",
+      fr: "Relier une news aux taux / rates, actions / equities, crédit / credit, FX et matières premières / commodities via des mécanismes explicites.",
+    },
+    {
+      en: "Build a concise market view with scenarios, risks, indicators to watch and invalidation conditions.",
+      fr: "Construire une vue de marché / market view concise avec scénarios, risques, indicateurs à surveiller et conditions d’invalidation.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "From headline to market analysis",
+      fr: "Du headline à l’analyse de marché",
+    },
+    steps: [
+      {
+        title: { en: "Facts", fr: "Faits / Facts" },
+        detail: { en: "What happened? When? Source?", fr: "Quoi ? Quand ? Quelle source ?" },
+      },
+      {
+        title: { en: "Expectations", fr: "Attentes / Expectations" },
+        detail: { en: "Consensus · prior · revisions · positioning", fr: "Consensus · précédent · révisions · positionnement" },
+      },
+      {
+        title: { en: "Transmission", fr: "Transmission" },
+        detail: { en: "Growth · inflation · policy · earnings · risk", fr: "Croissance · inflation · politique · bénéfices · risque" },
+      },
+      {
+        title: { en: "Scenarios", fr: "Scénarios" },
+        detail: { en: "Base · upside · downside · invalidation", fr: "Base · upside · downside · invalidation" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "facts-vs-interpretation",
+      kicker: { en: "01 · FACTS BEFORE NARRATIVE", fr: "01 · LES FAITS AVANT LE NARRATIF" },
+      title: {
+        en: "A headline is not yet an analysis",
+        fr: "Un headline n’est pas encore une analyse",
+      },
+      coreFacts: [
+        {
+          en: "A financial-news analysis should first identify the event, date, location, actors and measurable outcome.",
+          fr: "Une analyse d’actualité financière doit d’abord identifier l’événement, la date, le lieu, les acteurs et le résultat mesurable.",
+        },
+        {
+          en: "Facts describe what happened; interpretation explains why it matters and is more uncertain.",
+          fr: "Les faits décrivent ce qui s’est passé ; l’interprétation explique pourquoi cela compte et comporte davantage d’incertitude.",
+        },
+        {
+          en: "Market reaction is observable price behavior and should be separated from the analyst's explanation for that reaction.",
+          fr: "La réaction du marché / market reaction est un mouvement de prix observable et doit être séparée de l’explication proposée par l’analyste.",
+        },
+        {
+          en: "A causal claim should identify a mechanism rather than infer cause from timing alone.",
+          fr: "Une affirmation causale doit identifier un mécanisme plutôt que déduire une cause uniquement parce que deux événements se produisent au même moment.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose a company reports revenue of $105 when analysts expected $100, and the stock falls 4%. The facts are: revenue was $105, consensus was $100 and the stock fell 4%. Saying 'the stock fell because investors hated the revenue' is interpretation and may be wrong if guidance, margins or positioning were the real issue.",
+          fr: "Supposons qu’une entreprise publie un chiffre d’affaires / revenue de 105 $ alors que les analystes attendaient 100 $, et que l’action baisse de 4 %. Les faits sont : revenue 105 $, consensus 100 $, action −4 %. Dire « l’action a baissé parce que les investisseurs ont détesté le revenue » est une interprétation et peut être fausse si le vrai problème vient de la guidance, des marges ou du positionnement.",
+        },
+        Intermediate: {
+          en: "A useful structure is Facts → Market Reaction → Interpretation → Scenarios. This prevents narrative from contaminating the factual record and makes uncertainty visible.",
+          fr: "Une structure utile est Faits → Réaction du marché → Interprétation → Scénarios. Cela évite que le narratif contamine le registre factuel et rend l’incertitude visible.",
+        },
+        Professional: {
+          en: "Professional news analysis timestamps facts, identifies the information set available before the event and distinguishes first-order price response from later interpretation. Ex-post stories are easy to invent; a robust explanation must be consistent with cross-asset moves and the information surprise.",
+          fr: "L’analyse professionnelle horodate les faits, identifie l’information disponible avant l’événement et distingue la réaction de premier ordre du prix de l’interprétation ultérieure. Les histoires ex post sont faciles à inventer ; une explication robuste doit être cohérente avec les mouvements multi-actifs et la surprise informationnelle.",
+        },
+      },
+      comparison: {
+        title: { en: "Four layers of a news analysis", fr: "Quatre couches d’une analyse de news" },
+        headers: [
+          { en: "Layer", fr: "Couche" },
+          { en: "Question", fr: "Question" },
+          { en: "Example", fr: "Exemple" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Fact", fr: "Fait / Fact" },
+            { en: "What happened?", fr: "Que s’est-il passé ?" },
+            { en: "Revenue was 5% above consensus", fr: "Le revenue était 5 % au-dessus du consensus" },
+          ]},
+          { cells: [
+            { en: "Market reaction", fr: "Réaction de marché" },
+            { en: "What moved?", fr: "Qu’est-ce qui a bougé ?" },
+            { en: "Stock fell 4%", fr: "L’action a baissé de 4 %" },
+          ]},
+          { cells: [
+            { en: "Interpretation", fr: "Interprétation" },
+            { en: "Why may it matter?", fr: "Pourquoi cela peut-il compter ?" },
+            { en: "Margins or guidance disappointed", fr: "Marges ou guidance décevantes" },
+          ]},
+          { cells: [
+            { en: "Scenario", fr: "Scénario" },
+            { en: "What happens next?", fr: "Que peut-il se passer ensuite ?" },
+            { en: "Estimate revisions may follow", fr: "Des révisions d’estimations peuvent suivre" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Headline",
+          fr: "titre / headline",
+          definition: {
+            en: "The top-line summary of a news item or data release.",
+            fr: "Résumé principal d’une news ou d’une publication de données.",
+          },
+        },
+        {
+          en: "Narrative",
+          fr: "narratif / narrative",
+          definition: {
+            en: "An interpretive story used to connect facts, mechanisms and market behavior.",
+            fr: "Histoire interprétative utilisée pour relier faits, mécanismes et comportement du marché.",
+          },
+        },
+      ],
+    },
+    {
+      id: "source-quality",
+      kicker: { en: "02 · SOURCE QUALITY", fr: "02 · QUALITÉ DES SOURCES" },
+      title: {
+        en: "Primary sources establish facts; secondary sources add context",
+        fr: "Les sources primaires établissent les faits ; les sources secondaires ajoutent du contexte",
+      },
+      coreFacts: [
+        {
+          en: "Primary sources include official filings, company releases, central-bank statements, statistical releases and legal documents.",
+          fr: "Les sources primaires / primary sources incluent filings officiels, communiqués d’entreprise, déclarations de banques centrales, publications statistiques et documents juridiques.",
+        },
+        {
+          en: "Secondary sources include news organizations, research notes and commentary that summarize or interpret primary information.",
+          fr: "Les sources secondaires / secondary sources incluent médias, notes de recherche et commentaires résumant ou interprétant l’information primaire.",
+        },
+        {
+          en: "Source authority, recency, directness and methodology all matter.",
+          fr: "Autorité de la source, fraîcheur / recency, caractère direct et méthodologie comptent tous.",
+        },
+        {
+          en: "A fast but unverified post should not carry the same evidentiary weight as an official release.",
+          fr: "Un post rapide mais non vérifié ne doit pas avoir le même poids probatoire qu’une publication officielle.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you want to know what a central bank actually decided, start with the official statement. A news article can explain the decision, but the article is not the original source of the policy decision.",
+          fr: "Si tu veux savoir ce qu’une banque centrale a réellement décidé, commence par le communiqué officiel. Un article peut expliquer la décision, mais il n’est pas la source originale de cette décision.",
+        },
+        Intermediate: {
+          en: "Secondary reporting is valuable because it provides speed, comparisons and expert context. The discipline is to know which claims come directly from a primary document and which are interpretation or attributed commentary.",
+          fr: "Le reporting secondaire est précieux car il apporte rapidité, comparaisons et contexte expert. La discipline consiste à savoir quelles affirmations viennent directement d’un document primaire et lesquelles sont de l’interprétation ou des commentaires attribués.",
+        },
+        Professional: {
+          en: "Source triangulation matters in fast markets. Analysts compare the primary release with reputable reporting, historical series and methodology notes. Revisions, footnotes and definition changes can be more market-relevant than the headline.",
+          fr: "La triangulation des sources compte dans les marchés rapides. Les analystes comparent la publication primaire avec un reporting fiable, les séries historiques et les notes méthodologiques. Révisions, footnotes et changements de définition peuvent être plus importants pour le marché que le headline.",
+        },
+      },
+      comparison: {
+        title: { en: "Source hierarchy", fr: "Hiérarchie des sources" },
+        headers: [
+          { en: "Source", fr: "Source" },
+          { en: "Best use", fr: "Meilleur usage" },
+          { en: "Main risk", fr: "Risque principal" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Official / primary", fr: "Officielle / primaire" },
+            { en: "Establish facts and exact wording", fr: "Établir les faits et le wording exact" },
+            { en: "Can require context and methodology", fr: "Peut nécessiter contexte et méthodologie" },
+          ]},
+          { cells: [
+            { en: "Reputable news", fr: "Média fiable" },
+            { en: "Speed and synthesis", fr: "Rapidité et synthèse" },
+            { en: "Interpretation may enter the summary", fr: "L’interprétation peut entrer dans le résumé" },
+          ]},
+          { cells: [
+            { en: "Research / commentary", fr: "Recherche / commentaire" },
+            { en: "Mechanism and scenarios", fr: "Mécanismes et scénarios" },
+            { en: "Author assumptions and incentives", fr: "Hypothèses et incitations de l’auteur" },
+          ]},
+          { cells: [
+            { en: "Unverified social post", fr: "Post social non vérifié" },
+            { en: "Potential lead only", fr: "Piste potentielle uniquement" },
+            { en: "Accuracy and context", fr: "Exactitude et contexte" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Primary source",
+          fr: "source primaire / primary source",
+          definition: {
+            en: "Original authoritative source of a statement, filing, dataset or decision.",
+            fr: "Source originale faisant autorité pour une déclaration, un filing, une donnée ou une décision.",
+          },
+        },
+        {
+          en: "Triangulation",
+          fr: "triangulation des sources / triangulation",
+          definition: {
+            en: "Cross-checking information across multiple independent or complementary sources.",
+            fr: "Vérification croisée de l’information à travers plusieurs sources indépendantes ou complémentaires.",
+          },
+        },
+      ],
+    },
+    {
+      id: "expectations-surprise",
+      kicker: { en: "03 · CONSENSUS & SURPRISE", fr: "03 · CONSENSUS & SURPRISE" },
+      title: {
+        en: "Markets react to the gap between outcome and expectation",
+        fr: "Les marchés réagissent à l’écart entre résultat et attente",
+      },
+      coreFacts: [
+        {
+          en: "Consensus is a summary of market or analyst expectations before an event.",
+          fr: "Le consensus est une synthèse des attentes du marché ou des analystes avant un événement.",
+        },
+        {
+          en: "A surprise is the difference between actual outcome and prior expectation, adjusted for the metric's direction and meaning.",
+          fr: "Une surprise est l’écart entre résultat réel et attente préalable, interprété selon la direction et le sens de la métrique.",
+        },
+        {
+          en: "Prior data and revisions can materially change the information content of a release.",
+          fr: "Les données précédentes et leurs révisions / revisions peuvent fortement modifier le contenu informationnel d’une publication.",
+        },
+        {
+          en: "The same numerical surprise can have different market impact depending on positioning, policy sensitivity and market regime.",
+          fr: "Une même surprise numérique peut avoir des impacts de marché différents selon le positionnement, la sensibilité à la politique monétaire et le régime de marché.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If inflation is 3.2% but the market expected 3.0%, the surprise is +0.2 percentage point. The number is not interpreted in isolation; investors ask whether this changes the expected path of interest rates.",
+          fr: "Si l’inflation est de 3,2 % alors que le marché attendait 3,0 %, la surprise est de +0,2 point de pourcentage. Le chiffre n’est pas interprété seul ; les investisseurs demandent s’il modifie la trajectoire attendue des taux d’intérêt.",
+        },
+        Intermediate: {
+          en: "A release should be read as actual versus consensus, previous value and revised previous value. A strong current print can be partly offset by a negative prior revision.",
+          fr: "Une publication doit être lue comme réel vs consensus, valeur précédente et valeur précédente révisée. Un print actuel fort peut être partiellement compensé par une révision négative du chiffre précédent.",
+        },
+        Professional: {
+          en: "Event impact depends on standardized surprise and the marginal information content for policy, growth or earnings. When an indicator has become the market's dominant policy variable, even a modest surprise can cause disproportionate repricing.",
+          fr: "L’impact d’un événement dépend de la surprise standardisée et de l’information marginale apportée pour politique monétaire, croissance ou bénéfices. Lorsqu’un indicateur devient la variable dominante pour le marché, même une surprise modeste peut provoquer un repricing disproportionné.",
+        },
+      },
+      formula: {
+        label: { en: "Simple surprise", fr: "Surprise simple" },
+        expression: "Surprise = Actual − Consensus",
+        explanation: {
+          en: "Interpret the sign in context: a positive surprise is not automatically bullish for every asset.",
+          fr: "Le signe doit être interprété dans son contexte : une surprise positive n’est pas automatiquement bullish pour tous les actifs.",
+        },
+        workedExample: {
+          en: "Actual inflation 3.2% − consensus 3.0% = +0.2 percentage point surprise.",
+          fr: "Inflation réelle 3,2 % − consensus 3,0 % = surprise de +0,2 point de pourcentage.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Consensus",
+          fr: "consensus",
+          definition: {
+            en: "Aggregated expectation before an event or release.",
+            fr: "Attente agrégée avant un événement ou une publication.",
+          },
+        },
+        {
+          en: "Revision",
+          fr: "révision / revision",
+          definition: {
+            en: "A later adjustment to a previously reported figure.",
+            fr: "Ajustement ultérieur d’un chiffre précédemment publié.",
+          },
+        },
+      ],
+    },
+    {
+      id: "priced-in",
+      kicker: { en: "04 · WHAT IS PRICED IN?", fr: "04 · QU’EST-CE QUI EST DÉJÀ PRICÉ ?" },
+      title: {
+        en: "Good news can be bad news if the market expected more",
+        fr: "Une bonne nouvelle peut être une mauvaise nouvelle si le marché attendait encore mieux",
+      },
+      coreFacts: [
+        {
+          en: "Asset prices embed expectations about future cash flows, policy, risk and required returns.",
+          fr: "Les prix d’actifs intègrent des attentes sur cash flows futurs, politique, risque et rendements exigés.",
+        },
+        {
+          en: "A positive outcome can trigger a price decline if it is weaker than what was already priced in.",
+          fr: "Un résultat positif peut provoquer une baisse du prix s’il est inférieur à ce qui était déjà intégré dans les prix / priced in.",
+        },
+        {
+          en: "Positioning and crowded trades can amplify moves when investors are forced to unwind.",
+          fr: "Le positionnement et les trades très consensuels / crowded peuvent amplifier les mouvements lorsque les investisseurs doivent unwind leurs positions.",
+        },
+        {
+          en: "Price reaction is evidence about expectations, but not a perfect measure of them because liquidity and flows also matter.",
+          fr: "La réaction du prix fournit une information sur les attentes mais n’en est pas une mesure parfaite car liquidité et flux / flows comptent aussi.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company can grow earnings 20% and still see its stock fall if investors had already expected 30%. The business improved, but the new information was worse than the expectation embedded in the price.",
+          fr: "Une entreprise peut augmenter ses bénéfices de 20 % et voir son action baisser si les investisseurs attendaient déjà +30 %. L’entreprise s’est améliorée, mais la nouvelle information était moins bonne que l’attente intégrée dans le prix.",
+        },
+        Intermediate: {
+          en: "Think in expectations, not adjectives. 'Strong', 'weak', 'good' and 'bad' are incomplete until compared with consensus, positioning and valuation. Markets reprice the difference between the new distribution of outcomes and the old one.",
+          fr: "Il faut raisonner en attentes, pas en adjectifs. « Fort », « faible », « bon » et « mauvais » sont incomplets sans comparaison au consensus, au positionnement et à la valorisation. Les marchés repricent la différence entre la nouvelle distribution de résultats et l’ancienne.",
+        },
+        Professional: {
+          en: "What is priced in is often inferred from curves, implied probabilities, valuation, positioning surveys, options and analyst estimates. None is a perfect measure, so professionals use multiple signals and avoid claiming a single precise expectation unless directly observable.",
+          fr: "Ce qui est pricé est souvent inféré via courbes, probabilités implicites, valorisation, enquêtes de positionnement, options et estimations d’analystes. Aucune mesure n’est parfaite ; les professionnels utilisent plusieurs signaux et évitent d’affirmer une attente précise lorsqu’elle n’est pas directement observable.",
+        },
+      },
+      comparison: {
+        title: { en: "Outcome vs expectation", fr: "Résultat vs attente" },
+        headers: [
+          { en: "Outcome", fr: "Résultat" },
+          { en: "Expectation", fr: "Attente" },
+          { en: "Potential interpretation", fr: "Interprétation potentielle" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Good", fr: "Bon" },
+            { en: "Even better", fr: "Encore meilleur" },
+            { en: "Negative surprise", fr: "Surprise négative" },
+          ]},
+          { cells: [
+            { en: "Bad", fr: "Mauvais" },
+            { en: "Even worse", fr: "Encore pire" },
+            { en: "Positive surprise", fr: "Surprise positive" },
+          ]},
+          { cells: [
+            { en: "In line", fr: "Conforme" },
+            { en: "In line", fr: "Conforme" },
+            { en: "Focus shifts to details / positioning", fr: "Le marché regarde détails / positionnement" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Priced in",
+          fr: "intégré dans les prix / priced in",
+          definition: {
+            en: "Expectation already reflected to some degree in current asset prices.",
+            fr: "Attente déjà reflétée, au moins en partie, dans les prix actuels des actifs.",
+          },
+        },
+        {
+          en: "Positioning",
+          fr: "positionnement / positioning",
+          definition: {
+            en: "Existing investor exposures and trade concentrations before an event.",
+            fr: "Expositions existantes et concentration des trades avant un événement.",
+          },
+        },
+      ],
+    },
+    {
+      id: "cross-asset-transmission",
+      kicker: { en: "05 · CROSS-ASSET TRANSMISSION", fr: "05 · TRANSMISSION MULTI-ACTIFS" },
+      title: {
+        en: "Trace the mechanism before predicting the asset move",
+        fr: "Tracer le mécanisme avant de prévoir le mouvement d’un actif",
+      },
+      coreFacts: [
+        {
+          en: "News affects assets through mechanisms such as growth, inflation, policy rates, discount rates, earnings, credit quality, liquidity and risk appetite.",
+          fr: "Une news affecte les actifs via des mécanismes comme croissance, inflation, policy rates, discount rates, bénéfices, qualité du crédit, liquidité et appétit pour le risque.",
+        },
+        {
+          en: "Rates often provide an early signal of how markets interpret macro information.",
+          fr: "Les taux / rates fournissent souvent un signal précoce sur la manière dont les marchés interprètent une information macro.",
+        },
+        {
+          en: "Equity reactions combine earnings implications with discount-rate and risk-premium effects.",
+          fr: "La réaction des actions / equities combine implications sur bénéfices, discount rates et primes de risque.",
+        },
+        {
+          en: "FX and commodities depend on relative macro conditions, policy expectations, supply-demand structure and positioning.",
+          fr: "FX et matières premières / commodities dépendent des conditions macro relatives, attentes de politique, structure offre-demande et positionnement.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Imagine inflation comes in above expectations. One possible chain is: inflation surprise → market expects rates to stay higher → short-term yields rise → discount rates rise → some equity valuations face pressure. That chain is stronger than simply saying 'high inflation is bad for stocks.'",
+          fr: "Imagine que l’inflation soit supérieure aux attentes. Une chaîne possible est : surprise d’inflation → marché anticipe des taux élevés plus longtemps → yields courts montent → discount rates montent → certaines valorisations actions subissent une pression. Cette chaîne est plus solide que simplement dire « inflation élevée = mauvais pour les actions ».",
+        },
+        Intermediate: {
+          en: "Cross-asset analysis asks which channel dominates. Strong growth can help corporate earnings and credit quality while simultaneously raising yields. The net equity effect depends on sectors, valuation and how much policy reprices.",
+          fr: "L’analyse multi-actifs demande quel canal domine. Une croissance forte peut soutenir bénéfices et qualité de crédit tout en faisant monter les yields. L’effet net sur les actions dépend des secteurs, de la valorisation et de l’ampleur du repricing monétaire.",
+        },
+        Professional: {
+          en: "A robust transmission map separates first-order and second-order effects. First-order may be front-end rates repricing; second-order can be FX, financing conditions, earnings revisions and risk premia. Sequence and horizon determine which asset response dominates.",
+          fr: "Un mapping robuste sépare effets de premier et de second ordre. Le premier ordre peut être un repricing des taux courts ; le second ordre peut concerner FX, conditions de financement, révisions de bénéfices et primes de risque. La séquence et l’horizon déterminent quel effet domine.",
+        },
+      },
+      comparison: {
+        title: { en: "News transmission checklist", fr: "Checklist de transmission d’une news" },
+        headers: [
+          { en: "Asset", fr: "Actif" },
+          { en: "Main questions", fr: "Questions principales" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Rates", fr: "Taux / Rates" },
+            { en: "Does policy or inflation pricing change?", fr: "Le pricing monétaire ou d’inflation change-t-il ?" },
+          ]},
+          { cells: [
+            { en: "Equities", fr: "Actions / Equities" },
+            { en: "Earnings effect vs discount-rate effect?", fr: "Effet bénéfices vs effet discount rate ?" },
+          ]},
+          { cells: [
+            { en: "Credit", fr: "Crédit / Credit" },
+            { en: "Does default risk or financing stress change?", fr: "Le risque de défaut ou le stress de financement change-t-il ?" },
+          ]},
+          { cells: [
+            { en: "FX", fr: "FX / Devises" },
+            { en: "How do relative rates and growth change?", fr: "Comment évoluent taux relatifs et croissance relative ?" },
+          ]},
+          { cells: [
+            { en: "Commodities", fr: "Matières premières / Commodities" },
+            { en: "Demand, supply or inventory shock?", fr: "Choc de demande, d’offre ou de stocks ?" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Transmission mechanism",
+          fr: "mécanisme de transmission / transmission mechanism",
+          definition: {
+            en: "Chain linking new information to economic variables and asset prices.",
+            fr: "Chaîne reliant une nouvelle information aux variables économiques et aux prix d’actifs.",
+          },
+        },
+        {
+          en: "First-order effect",
+          fr: "effet de premier ordre / first-order effect",
+          definition: {
+            en: "Immediate direct consequence of new information.",
+            fr: "Conséquence directe et immédiate d’une nouvelle information.",
+          },
+        },
+      ],
+    },
+    {
+      id: "company-earnings-news",
+      kicker: { en: "06 · COMPANY & EARNINGS NEWS", fr: "06 · NEWS D’ENTREPRISE & RÉSULTATS" },
+      title: {
+        en: "Headline beats matter less than the quality and durability of the beat",
+        fr: "Un beat headline compte moins que sa qualité et sa durabilité",
+      },
+      coreFacts: [
+        {
+          en: "Earnings analysis compares reported metrics with consensus, prior guidance and prior-period trends.",
+          fr: "L’analyse de résultats compare les métriques publiées au consensus, à la guidance précédente et aux tendances des périodes antérieures.",
+        },
+        {
+          en: "Revenue, margins, EPS, free cash flow and guidance can send conflicting signals.",
+          fr: "Revenue, marges, EPS, free cash flow et guidance peuvent envoyer des signaux contradictoires.",
+        },
+        {
+          en: "A beat driven by one-time items may have less value than a beat driven by sustainable operating improvement.",
+          fr: "Un beat provoqué par des éléments exceptionnels peut avoir moins de valeur qu’un beat provenant d’une amélioration opérationnelle durable.",
+        },
+        {
+          en: "Management commentary about demand, pricing, costs and capital allocation can matter as much as reported numbers.",
+          fr: "Les commentaires du management sur demande, pricing, coûts et allocation du capital peuvent compter autant que les chiffres publiés.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company can beat EPS but miss revenue. Or beat both revenue and EPS while lowering next-quarter guidance. To understand the stock reaction, you must ask which part changes future expectations.",
+          fr: "Une entreprise peut battre l’EPS mais manquer le revenue. Ou battre les deux tout en abaissant la guidance du trimestre suivant. Pour comprendre la réaction de l’action, il faut identifier quelle partie modifie les attentes futures.",
+        },
+        Intermediate: {
+          en: "A good earnings read decomposes price, volume, mix, gross margin, operating expense, cash conversion and guidance. It also checks whether consensus estimates are likely to move after the report.",
+          fr: "Une bonne lecture des résultats décompose price, volume, mix, gross margin, dépenses opérationnelles, cash conversion et guidance. Elle vérifie aussi si les estimations du consensus vont probablement être révisées après la publication.",
+        },
+        Professional: {
+          en: "The highest-value question is often not 'Did the company beat?' but 'Which forward estimates change, by how much and with what confidence?' Revisions to the earnings path and terminal assumptions drive valuation more than one historical quarter.",
+          fr: "La question la plus importante n’est souvent pas « l’entreprise a-t-elle battu le consensus ? » mais « quelles estimations futures changent, de combien et avec quel degré de confiance ? ». Les révisions de trajectoire de bénéfices et d’hypothèses terminales influencent davantage la valorisation qu’un seul trimestre historique.",
+        },
+      },
+      formula: {
+        label: { en: "Simple earnings surprise", fr: "Surprise simple de résultats" },
+        expression: "Earnings Surprise % = (Actual EPS − Consensus EPS) ÷ |Consensus EPS| × 100",
+        explanation: {
+          en: "The formula quantifies the headline gap but does not measure earnings quality.",
+          fr: "La formule quantifie l’écart headline mais ne mesure pas la qualité des bénéfices.",
+        },
+        workedExample: {
+          en: "Actual EPS $2.10 vs consensus $2.00 → surprise = 5%.",
+          fr: "EPS réel 2,10 $ vs consensus 2,00 $ → surprise = 5 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Beat",
+          fr: "dépassement des attentes / beat",
+          definition: {
+            en: "Reported result above the selected expectation or consensus.",
+            fr: "Résultat publié supérieur à l’attente ou au consensus retenu.",
+          },
+        },
+        {
+          en: "Miss",
+          fr: "résultat inférieur aux attentes / miss",
+          definition: {
+            en: "Reported result below the selected expectation or consensus.",
+            fr: "Résultat publié inférieur à l’attente ou au consensus retenu.",
+          },
+        },
+        {
+          en: "Guidance",
+          fr: "prévisions du management / guidance",
+          definition: {
+            en: "Forward-looking performance information provided by management.",
+            fr: "Informations prospectives sur la performance fournies par le management.",
+          },
+        },
+      ],
+    },
+    {
+      id: "macro-central-bank-news",
+      kicker: { en: "07 · MACRO & CENTRAL-BANK NEWS", fr: "07 · NEWS MACRO & BANQUES CENTRALES" },
+      title: {
+        en: "Read the data, then read the reaction function",
+        fr: "Lire la donnée, puis la fonction de réaction / reaction function",
+      },
+      coreFacts: [
+        {
+          en: "Macro releases matter partly because they change expectations for growth, inflation and policy.",
+          fr: "Les publications macro comptent en partie parce qu’elles modifient les attentes de croissance, inflation et politique monétaire.",
+        },
+        {
+          en: "Central-bank communication should be read for decision, rationale, forward guidance and changes in emphasis.",
+          fr: "La communication d’une banque centrale doit être lue à travers la décision, le raisonnement, la forward guidance et les changements d’accent.",
+        },
+        {
+          en: "The same policy decision can produce different market reactions if the wording or expected future path changes.",
+          fr: "Une même décision de politique monétaire peut produire des réactions différentes si le wording ou la trajectoire future attendue change.",
+        },
+        {
+          en: "Markets care about the reaction function: how policymakers may respond if incoming data evolve.",
+          fr: "Les marchés s’intéressent à la fonction de réaction / reaction function : comment les décideurs peuvent répondre à l’évolution des données.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A central bank can keep rates unchanged and still move markets. If investors expected a neutral message but the statement signals rates may remain high for longer, bond yields can rise even though the current policy rate did not change.",
+          fr: "Une banque centrale peut laisser les taux inchangés et quand même faire bouger les marchés. Si les investisseurs attendaient un message neutre mais que le communiqué suggère des taux élevés plus longtemps, les yields peuvent monter même si le taux directeur actuel ne change pas.",
+        },
+        Intermediate: {
+          en: "Read central-bank events in four layers: decision, statement, forecasts and press conference. The market often reprices when one layer changes the future policy distribution.",
+          fr: "Lire un événement de banque centrale en quatre couches : décision, communiqué, projections et conférence de presse. Le marché repricen souvent lorsqu’une couche modifie la distribution de la politique future.",
+        },
+        Professional: {
+          en: "Policy news should be mapped into the expected path, not reduced to a hawkish/dovish label. The magnitude, timing and distribution of future policy moves matter more than a single adjective.",
+          fr: "Une news monétaire doit être traduite en trajectoire attendue plutôt que réduite à un label hawkish/dovish. L’ampleur, le timing et la distribution des mouvements futurs comptent davantage qu’un seul adjectif.",
+        },
+      },
+      comparison: {
+        title: { en: "Central-bank reading framework", fr: "Framework de lecture d’une banque centrale" },
+        headers: [
+          { en: "Layer", fr: "Couche" },
+          { en: "What to ask", fr: "Question à poser" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Decision", fr: "Décision" },
+            { en: "What changed today?", fr: "Qu’est-ce qui change aujourd’hui ?" },
+          ]},
+          { cells: [
+            { en: "Rationale", fr: "Justification" },
+            { en: "Why did policymakers act?", fr: "Pourquoi cette décision ?" },
+          ]},
+          { cells: [
+            { en: "Forward path", fr: "Trajectoire future" },
+            { en: "What does this imply for future policy?", fr: "Qu’est-ce que cela implique pour la suite ?" },
+          ]},
+          { cells: [
+            { en: "Reaction function", fr: "Fonction de réaction" },
+            { en: "Which data could change the path?", fr: "Quelles données pourraient changer la trajectoire ?" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Hawkish",
+          fr: "restrictif / hawkish",
+          definition: {
+            en: "Communication or policy stance interpreted as relatively more focused on containing inflation or maintaining tighter conditions.",
+            fr: "Communication ou posture interprétée comme relativement plus axée sur la maîtrise de l’inflation ou le maintien de conditions restrictives.",
+          },
+        },
+        {
+          en: "Dovish",
+          fr: "accommodant / dovish",
+          definition: {
+            en: "Communication or policy stance interpreted as relatively more supportive of easier monetary conditions.",
+            fr: "Communication ou posture interprétée comme relativement plus favorable à des conditions monétaires souples.",
+          },
+        },
+      ],
+    },
+    {
+      id: "scenarios-invalidation",
+      kicker: { en: "08 · SCENARIOS & INVALIDATION", fr: "08 · SCÉNARIOS & INVALIDATION" },
+      title: {
+        en: "A strong view includes what would prove it wrong",
+        fr: "Une bonne vue inclut ce qui pourrait la rendre fausse",
+      },
+      coreFacts: [
+        {
+          en: "A scenario is a conditional path, not a prediction stated with certainty.",
+          fr: "Un scénario est une trajectoire conditionnelle, pas une prédiction présentée avec certitude.",
+        },
+        {
+          en: "Base, upside and downside scenarios should differ through explicit assumptions and mechanisms.",
+          fr: "Les scénarios base, upside et downside doivent différer via des hypothèses et mécanismes explicites.",
+        },
+        {
+          en: "An invalidation condition identifies evidence that would materially weaken the thesis.",
+          fr: "Une condition d’invalidation identifie une preuve qui affaiblirait matériellement la thèse.",
+        },
+        {
+          en: "Indicators to watch should connect directly to the mechanism behind the view.",
+          fr: "Les indicateurs à surveiller doivent être directement reliés au mécanisme derrière la vue.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Instead of saying 'rates will fall', say: 'My base case is that inflation continues to cool, allowing policy expectations to ease. I would change that view if inflation reaccelerates across several reports.'",
+          fr: "Au lieu de dire « les taux vont baisser », dire : « Mon scénario de base est que l’inflation continue de ralentir, ce qui permet un assouplissement des anticipations monétaires. Je changerais cette vue si l’inflation réaccélérait sur plusieurs publications. »",
+        },
+        Intermediate: {
+          en: "Scenario analysis links assumptions to asset consequences. A base case should have observable indicators; upside and downside should not be arbitrary percentage changes.",
+          fr: "L’analyse de scénarios relie les hypothèses aux conséquences sur les actifs. Le base case doit avoir des indicateurs observables ; upside et downside ne doivent pas être de simples variations arbitraires en pourcentage.",
+        },
+        Professional: {
+          en: "A market thesis is a probability distribution with catalysts and stopping conditions. Explicit invalidation reduces confirmation bias and allows disciplined updates when the information set changes.",
+          fr: "Une thèse de marché est une distribution de probabilités avec catalyseurs et conditions d’arrêt. Une invalidation explicite réduit le biais de confirmation / confirmation bias et permet une mise à jour disciplinée lorsque l’information change.",
+        },
+      },
+      comparison: {
+        title: { en: "Scenario template", fr: "Template de scénarios" },
+        headers: [
+          { en: "Scenario", fr: "Scénario" },
+          { en: "Assumption", fr: "Hypothèse" },
+          { en: "What to watch", fr: "À surveiller" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Base", fr: "Base" },
+            { en: "Most likely conditional path", fr: "Trajectoire conditionnelle centrale" },
+            { en: "Core data and policy signal", fr: "Données clés et signal monétaire" },
+          ]},
+          { cells: [
+            { en: "Upside", fr: "Upside" },
+            { en: "Better growth / earnings path", fr: "Meilleure trajectoire croissance / bénéfices" },
+            { en: "Breadth and revisions", fr: "Breadth et révisions" },
+          ]},
+          { cells: [
+            { en: "Downside", fr: "Downside" },
+            { en: "Worse macro / risk path", fr: "Dégradation macro / risque" },
+            { en: "Credit stress and estimate cuts", fr: "Stress crédit et baisses d’estimations" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Invalidation",
+          fr: "condition d’invalidation / invalidation",
+          definition: {
+            en: "Evidence or condition that materially weakens the thesis.",
+            fr: "Évidence ou condition affaiblissant matériellement la thèse.",
+          },
+        },
+        {
+          en: "Catalyst",
+          fr: "catalyseur / catalyst",
+          definition: {
+            en: "Event that may cause the market to update toward the thesis.",
+            fr: "Événement susceptible d’amener le marché à mettre à jour ses attentes dans le sens de la thèse.",
+          },
+        },
+      ],
+    },
+    {
+      id: "daily-news-process",
+      kicker: { en: "09 · BUILD YOUR DAILY PROCESS", fr: "09 · CONSTRUIRE TON PROCESS QUOTIDIEN" },
+      title: {
+        en: "Read less randomly and analyze more systematically",
+        fr: "Lire moins au hasard et analyser de manière plus systématique",
+      },
+      coreFacts: [
+        {
+          en: "A repeatable process is more valuable than consuming the largest possible number of headlines.",
+          fr: "Un processus répétable est plus utile que de consommer le plus grand nombre possible de headlines.",
+        },
+        {
+          en: "A daily review should prioritize major macro events, company-specific catalysts, cross-asset moves and changes in expectations.",
+          fr: "Une revue quotidienne doit prioriser grands événements macro, catalyseurs d’entreprise, mouvements multi-actifs et changements d’attentes.",
+        },
+        {
+          en: "Each important item should be summarized with facts, cause mechanism, affected assets, short- and long-term implications, concepts linked, watch indicators and sources.",
+          fr: "Chaque item important doit être résumé avec faits, mécanisme causal, actifs touchés, implications court et long terme, concepts reliés, indicateurs à surveiller et sources.",
+        },
+        {
+          en: "A written market journal improves memory and reveals when narratives change after the fact.",
+          fr: "Un journal de marché / market journal écrit améliore la mémoire et révèle lorsque les narratifs sont modifiés après coup.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "For every important story, answer seven questions: What happened? Why? What surprised the market? Which assets moved? What could happen next? What should I watch? Which source supports the facts?",
+          fr: "Pour chaque news importante, répondre à sept questions : Que s’est-il passé ? Pourquoi ? Qu’est-ce qui a surpris le marché ? Quels actifs ont bougé ? Que peut-il se passer ensuite ? Que dois-je surveiller ? Quelle source soutient les faits ?",
+        },
+        Intermediate: {
+          en: "A 15-minute morning process can include: overnight cross-asset moves, the day's event calendar, top company catalysts, one deeper article and a short written market view. The objective is synthesis, not information overload.",
+          fr: "Un process matinal de 15 minutes peut inclure : mouvements multi-actifs overnight, calendrier des événements du jour, principaux catalyseurs d’entreprise, un article approfondi et une courte market view écrite. L’objectif est la synthèse, pas l’information overload.",
+        },
+        Professional: {
+          en: "The process should preserve timestamped expectations before catalysts occur. This makes post-event learning honest: you can compare what you expected, what happened, which mechanism was wrong and whether the mistake came from data, model, positioning or timing.",
+          fr: "Le process doit conserver des attentes horodatées avant les catalyseurs. Cela rend l’apprentissage post-event honnête : on peut comparer ce qui était attendu, ce qui s’est passé, quel mécanisme était faux et si l’erreur venait des données, du modèle, du positionnement ou du timing.",
+        },
+      },
+      comparison: {
+        title: { en: "FinanceStudio news template", fr: "Template FinanceStudio pour une news" },
+        headers: [
+          { en: "Block", fr: "Bloc" },
+          { en: "Content", fr: "Contenu" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Facts", fr: "Faits" },
+            { en: "What happened · date · actors · data", fr: "Quoi · date · acteurs · données" },
+          ]},
+          { cells: [
+            { en: "Market reaction", fr: "Réaction de marché" },
+            { en: "Which assets moved and how", fr: "Quels actifs ont bougé et comment" },
+          ]},
+          { cells: [
+            { en: "Interpretation", fr: "Interprétation" },
+            { en: "Mechanism and why it matters", fr: "Mécanisme et pourquoi cela compte" },
+          ]},
+          { cells: [
+            { en: "Scenarios", fr: "Scénarios" },
+            { en: "Base · upside · downside", fr: "Base · upside · downside" },
+          ]},
+          { cells: [
+            { en: "Watch list", fr: "À surveiller" },
+            { en: "Indicators · catalysts · invalidation", fr: "Indicateurs · catalyseurs · invalidation" },
+          ]},
+          { cells: [
+            { en: "Sources", fr: "Sources" },
+            { en: "Primary first, then reliable context", fr: "Primaire d’abord, puis contexte fiable" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "This framework is designed to feed FinanceStudio's News & Analysis product: Facts / Market Reaction / Interpretation / Possible Scenarios.",
+        fr: "Ce framework est conçu pour alimenter le produit News & Analysis de FinanceStudio : Faits / Market Reaction / Interprétation / Scénarios possibles.",
+      },
+      vocabulary: [
+        {
+          en: "Market journal",
+          fr: "journal de marché / market journal",
+          definition: {
+            en: "A timestamped record of observations, expectations, trades or theses used for review and learning.",
+            fr: "Registre horodaté d’observations, attentes, trades ou thèses utilisé pour la revue et l’apprentissage.",
+          },
+        },
+        {
+          en: "Information set",
+          fr: "ensemble d’informations disponibles / information set",
+          definition: {
+            en: "Information available to the market or analyst at a specific point in time.",
+            fr: "Information disponible pour le marché ou l’analyste à un moment précis.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "facts-interpretation",
+      question: {
+        en: "A stock falls 4% after earnings. Which statement is a fact rather than an interpretation?",
+        fr: "Une action baisse de 4 % après ses résultats. Quelle proposition est un fait plutôt qu’une interprétation ?",
+      },
+      options: [
+        { id: "a", label: { en: "The stock fell 4%", fr: "L’action a baissé de 4 %" } },
+        { id: "b", label: { en: "Investors hated the CEO", fr: "Les investisseurs ont détesté le CEO" } },
+        { id: "c", label: { en: "The market thinks the company will fail", fr: "Le marché pense que l’entreprise va échouer" } },
+        { id: "d", label: { en: "The decline proves margins caused the move", fr: "La baisse prouve que les marges ont causé le mouvement" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "The price move is directly observable. The other statements infer motives or causes.",
+        fr: "Le mouvement du prix est directement observable. Les autres propositions infèrent motivations ou causes.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "source-hierarchy",
+      question: {
+        en: "For the exact wording of a central-bank decision, which source should generally be checked first?",
+        fr: "Pour connaître le wording exact d’une décision de banque centrale, quelle source faut-il généralement vérifier en premier ?",
+      },
+      options: [
+        { id: "a", label: { en: "Official central-bank statement", fr: "Communiqué officiel de la banque centrale" } },
+        { id: "b", label: { en: "Anonymous social-media post", fr: "Post social anonyme" } },
+        { id: "c", label: { en: "A meme", fr: "Un meme" } },
+        { id: "d", label: { en: "An unrelated company filing", fr: "Un filing d’entreprise sans rapport" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "The official statement is the primary source for the decision and wording.",
+        fr: "Le communiqué officiel est la source primaire de la décision et de son wording.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "news-surprise",
+      question: {
+        en: "Actual inflation is 3.2% versus 3.0% consensus. What is the simple surprise?",
+        fr: "L’inflation réelle est 3,2 % contre un consensus de 3,0 %. Quelle est la surprise simple ?",
+      },
+      options: [
+        { id: "a", label: { en: "−0.2 percentage point", fr: "−0,2 point de pourcentage" } },
+        { id: "b", label: { en: "+0.2 percentage point", fr: "+0,2 point de pourcentage" } },
+        { id: "c", label: { en: "+3.2 percentage points", fr: "+3,2 points de pourcentage" } },
+        { id: "d", label: { en: "0", fr: "0" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "3.2%−3.0%=+0.2 percentage point.",
+        fr: "3,2 %−3,0 %=+0,2 point de pourcentage.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "priced-in",
+      question: {
+        en: "Why can strong earnings still lead to a falling stock price?",
+        fr: "Pourquoi de bons résultats peuvent-ils malgré tout entraîner une baisse de l’action ?",
+      },
+      options: [
+        { id: "a", label: { en: "Expectations may have been even stronger", fr: "Les attentes pouvaient être encore plus élevées" } },
+        { id: "b", label: { en: "Stock prices never reflect expectations", fr: "Les prix d’actions ne reflètent jamais les attentes" } },
+        { id: "c", label: { en: "Good earnings always destroy value", fr: "De bons résultats détruisent toujours de la valeur" } },
+        { id: "d", label: { en: "Consensus never matters", fr: "Le consensus ne compte jamais" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Markets react to new information relative to what was already expected and priced.",
+        fr: "Les marchés réagissent à l’information nouvelle relativement à ce qui était déjà attendu et pricé.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "cross-asset-transmission",
+      question: {
+        en: "A hotter-than-expected inflation print most directly asks investors to reassess which mechanism first?",
+        fr: "Une inflation supérieure aux attentes pousse d’abord les investisseurs à réévaluer quel mécanisme ?",
+      },
+      options: [
+        { id: "a", label: { en: "Expected policy-rate path and yields", fr: "Trajectoire attendue des policy rates et yields" } },
+        { id: "b", label: { en: "The spelling of company names", fr: "L’orthographe des noms d’entreprise" } },
+        { id: "c", label: { en: "Only historical dividends", fr: "Uniquement les dividendes historiques" } },
+        { id: "d", label: { en: "Nothing, because inflation has no market effect", fr: "Rien, car l’inflation n’a aucun effet de marché" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Inflation surprises often matter through the expected policy path and discount-rate channel.",
+        fr: "Les surprises d’inflation comptent souvent via la trajectoire monétaire attendue et le canal du discount rate.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "earnings-quality-news",
+      question: {
+        en: "Actual EPS is $2.10 versus $2.00 consensus. What is the simple EPS surprise percentage?",
+        fr: "L’EPS réel vaut 2,10 $ contre 2,00 $ de consensus. Quel est le pourcentage simple de surprise EPS ?",
+      },
+      options: [
+        { id: "a", label: { en: "2%", fr: "2 %" } },
+        { id: "b", label: { en: "5%", fr: "5 %" } },
+        { id: "c", label: { en: "10%", fr: "10 %" } },
+        { id: "d", label: { en: "105%", fr: "105 %" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "(2.10−2.00)/2.00=5%.",
+        fr: "(2,10−2,00)/2,00=5 %.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "reaction-function",
+      question: {
+        en: "A central bank leaves rates unchanged but signals they may stay high for longer. Why can markets still move?",
+        fr: "Une banque centrale laisse les taux inchangés mais signale qu’ils pourraient rester élevés plus longtemps. Pourquoi les marchés peuvent-ils quand même bouger ?",
+      },
+      options: [
+        { id: "a", label: { en: "The expected future policy path changed", fr: "La trajectoire future attendue de la politique a changé" } },
+        { id: "b", label: { en: "Only today's rate ever matters", fr: "Seul le taux d’aujourd’hui compte" } },
+        { id: "c", label: { en: "Statements cannot affect expectations", fr: "Les communiqués ne peuvent pas modifier les attentes" } },
+        { id: "d", label: { en: "Markets ignore forward guidance", fr: "Les marchés ignorent la forward guidance" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Asset prices depend on the expected path of future rates, not only the current policy setting.",
+        fr: "Les prix d’actifs dépendent de la trajectoire attendue des taux futurs, pas seulement du taux directeur actuel.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "thesis-invalidation",
+      question: {
+        en: "What makes a market thesis more disciplined?",
+        fr: "Qu’est-ce qui rend une thèse de marché plus disciplinée ?",
+      },
+      options: [
+        { id: "a", label: { en: "A clear invalidation condition", fr: "Une condition d’invalidation claire" } },
+        { id: "b", label: { en: "Never changing your mind", fr: "Ne jamais changer d’avis" } },
+        { id: "c", label: { en: "Ignoring contrary evidence", fr: "Ignorer les preuves contraires" } },
+        { id: "d", label: { en: "Only reading supportive sources", fr: "Lire uniquement les sources qui confirment la thèse" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Explicit invalidation defines what evidence would weaken or overturn the thesis.",
+        fr: "Une invalidation explicite définit quelles preuves affaibliraient ou renverseraient la thèse.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Inflation comes in hotter than expected. Walk me through how you would analyze the market reaction.",
+      fr: "L’inflation ressort au-dessus des attentes. Explique comment tu analyserais la réaction des marchés.",
+    },
+    framework: [
+      {
+        en: "Start with the facts: actual inflation, consensus, prior reading and any revisions.",
+        fr: "Commencer par les faits : inflation réelle, consensus, chiffre précédent et éventuelles révisions.",
+      },
+      {
+        en: "Identify which components drove the surprise and whether they look persistent or temporary.",
+        fr: "Identifier quelles composantes ont provoqué la surprise et si elles semblent persistantes ou temporaires.",
+      },
+      {
+        en: "Translate the surprise into the expected central-bank path and front-end rates.",
+        fr: "Traduire la surprise en trajectoire attendue de banque centrale et taux courts.",
+      },
+      {
+        en: "Map second-order effects to long rates, equities, credit and FX, explaining the mechanism rather than asserting a mechanical direction.",
+        fr: "Relier les effets de second ordre aux taux longs, actions, crédit et FX en expliquant le mécanisme plutôt qu’en affirmant une direction mécanique.",
+      },
+      {
+        en: "Finish with what was already priced, positioning, the next indicators to watch and what would invalidate the initial interpretation.",
+        fr: "Terminer par ce qui était déjà pricé, le positionnement, les prochains indicateurs à surveiller et ce qui invaliderait l’interprétation initiale.",
+      },
+    ],
+    sample: {
+      en: "I would start with the size of the inflation surprise versus consensus, then check the prior reading and any revisions. Next I would look at the composition to see whether the surprise came from volatile categories or from components that may be more persistent. The first market channel I would watch is the expected central-bank path, especially front-end yields. If markets price policy staying tighter for longer, discount rates can rise. For equities, the effect is not automatically negative because stronger nominal growth can support earnings, so I would compare the earnings channel with the valuation channel and look at sector differences. Credit could face pressure if higher rates tighten financing conditions, while FX depends on relative policy repricing. Finally, I would ask what was already priced in, whether positioning was crowded, what the next inflation and labor data show, and what evidence would invalidate the initial interpretation.",
+      fr: "Je commencerais par mesurer l’ampleur de la surprise d’inflation par rapport au consensus, puis je regarderais le chiffre précédent et les éventuelles révisions. Ensuite j’analyserais la composition afin de voir si la surprise vient de catégories volatiles ou de composantes potentiellement plus persistantes. Le premier canal de marché que je surveillerais est la trajectoire attendue de la banque centrale, en particulier les taux courts. Si le marché price une politique restrictive plus longtemps, les discount rates peuvent monter. Pour les actions, l’effet n’est pas automatiquement négatif car une croissance nominale plus forte peut soutenir les bénéfices ; je comparerais donc le canal des bénéfices avec celui de la valorisation et regarderais les différences sectorielles. Le crédit peut subir une pression si des taux plus élevés durcissent les conditions de financement, tandis que le FX dépend du repricing relatif des politiques monétaires. Enfin, je regarderais ce qui était déjà pricé, si le positionnement était crowded, ce que montrent les prochaines données d’inflation et d’emploi, et quelles preuves invalideraient l’interprétation initiale.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
