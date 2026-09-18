@@ -18647,7 +18647,1011 @@ export const derivativesFoundationsLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson];
+
+export const optionsGreeksLesson: FinanceLesson = {
+  slug: "year-2-options-option-greeks",
+  year: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  domain: { en: "Derivatives", fr: "Produits dérivés / Derivatives" },
+  title: {
+    en: "Options & Option Greeks",
+    fr: "Options & grecques / Option Greeks",
+  },
+  subtitle: {
+    en: "Move from option payoff diagrams to professional risk thinking: intrinsic and time value, moneyness, put-call parity, Black-Scholes intuition, delta, gamma, vega, theta, rho, implied volatility, volatility skew, delta hedging and option strategies.",
+    fr: "Passer des payoff diagrams à une vraie logique professionnelle du risque : intrinsic value, time value, moneyness, put-call parity, intuition Black-Scholes, delta, gamma, vega, theta, rho, implied volatility, volatility skew, delta hedging et stratégies d’options.",
+  },
+  duration: { en: "125–155 min", fr: "125–155 min" },
+  prerequisites: [
+    { en: "Derivatives Foundations", fr: "Fondamentaux des produits dérivés / Derivatives Foundations" },
+    { en: "Statistics & Probability", fr: "Statistiques & probabilités / Statistics & Probability" },
+  ],
+  objectives: [
+    {
+      en: "Distinguish moneyness, intrinsic value, time value, payoff and profit.",
+      fr: "Distinguer moneyness, intrinsic value, time value, payoff et profit.",
+    },
+    {
+      en: "Apply put-call parity and no-arbitrage logic to European options.",
+      fr: "Appliquer put-call parity et la logique de no-arbitrage aux options européennes.",
+    },
+    {
+      en: "Understand the economic intuition behind Black-Scholes inputs and assumptions.",
+      fr: "Comprendre l’intuition économique derrière les inputs et hypothèses de Black-Scholes.",
+    },
+    {
+      en: "Interpret delta and gamma as first- and second-order spot sensitivities.",
+      fr: "Interpréter delta et gamma comme sensibilités de premier et second ordre au spot.",
+    },
+    {
+      en: "Interpret vega, theta and rho and understand common quotation conventions.",
+      fr: "Interpréter vega, theta et rho et comprendre leurs conventions de quotation.",
+    },
+    {
+      en: "Read implied-volatility smiles and skews, construct delta hedges and understand residual option risk.",
+      fr: "Lire les smiles et skews d’implied volatility, construire des delta hedges et comprendre le risque résiduel d’une option.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "From option contract to option-risk book",
+      fr: "Du contrat d’option au risk book",
+    },
+    steps: [
+      {
+        title: { en: "Payoff", fr: "Payoff" },
+        detail: { en: "Strike · moneyness · intrinsic value", fr: "Strike · moneyness · intrinsic value" },
+      },
+      {
+        title: { en: "Price", fr: "Prix" },
+        detail: { en: "Time value · parity · Black-Scholes", fr: "Time value · parity · Black-Scholes" },
+      },
+      {
+        title: { en: "Greeks", fr: "Greeks" },
+        detail: { en: "Delta · gamma · vega · theta · rho", fr: "Delta · gamma · vega · theta · rho" },
+      },
+      {
+        title: { en: "Manage", fr: "Gérer" },
+        detail: { en: "IV surface · hedging · strategies", fr: "IV surface · hedging · strategies" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "moneyness-anatomy",
+      kicker: { en: "01 · MONEYNESS & OPTION ANATOMY", fr: "01 · MONEYNESS & ANATOMIE D’UNE OPTION" },
+      title: {
+        en: "Strike and spot determine intrinsic moneyness — not whether the trade is profitable",
+        fr: "Strike et spot déterminent la moneyness intrinsèque — pas si le trade est profitable",
+      },
+      coreFacts: [
+        {
+          en: "A call is in the money at expiry when spot exceeds strike; a put is in the money when strike exceeds spot.",
+          fr: "Un call est in the money à expiry lorsque spot dépasse strike ; un put est in the money lorsque strike dépasse spot.",
+        },
+        {
+          en: "At-the-money and out-of-the-money describe the relationship between underlying price and strike, not the investor's profit.",
+          fr: "At-the-money et out-of-the-money décrivent la relation entre underlying price et strike, pas le profit de l’investisseur.",
+        },
+        {
+          en: "Moneyness before expiry can be defined in several ways, including spot/strike or forward/strike conventions.",
+          fr: "La moneyness avant expiry peut être définie de plusieurs façons, notamment via spot/strike ou forward/strike.",
+        },
+        {
+          en: "Exercise style matters: European options are exercisable at expiry, while American-style options can generally be exercised earlier subject to contract terms.",
+          fr: "L’exercise style compte : les European options sont exerçables à expiry, tandis que les American-style options peuvent généralement être exercées plus tôt selon les termes du contrat.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A call with strike $100 and stock at $120 is $20 in the money because exercising lets you buy at $100 something worth $120. But if you originally paid a $25 premium, the trade is still down $5 at expiry. Moneyness and profit are different questions.",
+          fr: "Un call strike 100 $ avec action à 120 $ est in the money de 20 $ car exercer permet d’acheter à 100 $ quelque chose qui vaut 120 $. Mais si tu as payé une premium de 25 $, le trade perd encore 5 $ à expiry. Moneyness et profit sont deux questions différentes.",
+        },
+        Intermediate: {
+          en: "Calls and puts can share the same strike and expiry but express opposite directional rights. Moneyness is an intrinsic-value concept; market price additionally reflects time, volatility, rates, dividends and other model inputs.",
+          fr: "Calls et puts peuvent partager même strike et expiry mais exprimer des droits directionnels opposés. La moneyness est un concept d’intrinsic value ; le market price reflète en plus time, volatility, rates, dividendes et autres model inputs.",
+        },
+        Professional: {
+          en: "Traders often quote options by delta or implied volatility rather than strike alone, especially in FX. The economically relevant moneyness convention can depend on forward price, carry and market microstructure.",
+          fr: "Les traders cotent souvent les options par delta ou implied volatility plutôt que par strike seul, particulièrement en FX. La convention de moneyness économiquement pertinente peut dépendre du forward price, carry et market microstructure.",
+        },
+      },
+      comparison: {
+        title: { en: "Moneyness at expiry", fr: "Moneyness à expiry" },
+        headers: [
+          { en: "Option", fr: "Option" },
+          { en: "ITM when", fr: "ITM lorsque" },
+          { en: "Intrinsic value", fr: "Intrinsic value" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Call", fr: "Call" },
+            { en: "S_T > K", fr: "S_T > K" },
+            { en: "max(S_T−K,0)", fr: "max(S_T−K,0)" },
+          ]},
+          { cells: [
+            { en: "Put", fr: "Put" },
+            { en: "K > S_T", fr: "K > S_T" },
+            { en: "max(K−S_T,0)", fr: "max(K−S_T,0)" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Moneyness",
+          fr: "moneyness",
+          definition: {
+            en: "Relationship between underlying price and option strike under a stated convention.",
+            fr: "Relation entre underlying price et strike de l’option selon une convention définie.",
+          },
+        },
+        {
+          en: "Exercise style",
+          fr: "style d’exercice / exercise style",
+          definition: {
+            en: "Rules determining when the holder may exercise an option.",
+            fr: "Règles déterminant quand le holder peut exercer une option.",
+          },
+        },
+      ],
+    },
+    {
+      id: "intrinsic-time-value-profit",
+      kicker: { en: "02 · INTRINSIC VALUE, TIME VALUE & PROFIT", fr: "02 · INTRINSIC VALUE, TIME VALUE & PROFIT" },
+      title: {
+        en: "Option premium equals intrinsic value plus additional value for remaining possibilities",
+        fr: "La premium d’une option combine intrinsic value et valeur liée aux possibilités restantes",
+      },
+      coreFacts: [
+        {
+          en: "Intrinsic value is the immediate exercise value, floored at zero for a long vanilla option.",
+          fr: "L’intrinsic value est la valeur d’exercice immédiat, floored à zéro pour une long vanilla option.",
+        },
+        {
+          en: "Time value is commonly defined as option premium minus intrinsic value.",
+          fr: "La time value est couramment définie comme option premium moins intrinsic value.",
+        },
+        {
+          en: "Before expiry, an out-of-the-money option can still have positive market value because future underlying moves remain possible.",
+          fr: "Avant expiry, une option out-of-the-money peut toujours avoir une market value positive car des mouvements futurs du underlying restent possibles.",
+        },
+        {
+          en: "Payoff at expiry ignores the premium; profit includes premium paid or received and other trading costs.",
+          fr: "Le payoff à expiry ignore la premium ; le profit inclut premium payée ou reçue et autres trading costs.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose a call strike is $100, the stock is $108, and the option trades for $12. Intrinsic value is $8 and time value is $4. If you paid $12 and the stock is still $108 at expiry, payoff is $8 but your profit is −$4.",
+          fr: "Supposons un call strike 100 $, action 108 $, option cotée 12 $. L’intrinsic value vaut 8 $ et la time value 4 $. Si tu as payé 12 $ et que l’action vaut encore 108 $ à expiry, payoff = 8 $ mais profit = −4 $.",
+        },
+        Intermediate: {
+          en: "Time value tends to reflect remaining optionality. More time and more expected underlying variability generally increase the value of having a right without a symmetric obligation, all else equal.",
+          fr: "La time value reflète l’optionalité restante. Plus de temps et davantage de variabilité attendue du underlying augmentent généralement la valeur de posséder un droit sans obligation symétrique, toutes choses égales par ailleurs.",
+        },
+        Professional: {
+          en: "Time value is a residual label rather than a single risk factor. It reflects volatility, carry, rates, dividends, skew and exercise features. Traders therefore manage Greeks and implied volatility rather than 'time value' as one homogeneous exposure.",
+          fr: "La time value est un label résiduel plutôt qu’un facteur de risque unique. Elle reflète volatility, carry, rates, dividendes, skew et exercise features. Les traders gèrent donc Greeks et implied volatility plutôt que la « time value » comme une seule exposition homogène.",
+        },
+      },
+      formula: {
+        label: { en: "Option value decomposition", fr: "Décomposition de la valeur d’une option" },
+        expression: "Option Premium = Intrinsic Value + Time Value",
+        explanation: {
+          en: "At expiry, time value converges to zero because no future optionality remains.",
+          fr: "À expiry, la time value converge vers zéro car aucune optionalité future ne subsiste.",
+        },
+        workedExample: {
+          en: "Call premium=$12, S=$108, K=$100 → intrinsic=$8; time value=$4.",
+          fr: "Call premium=12 $, S=108 $, K=100 $ → intrinsic=8 $ ; time value=4 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Intrinsic value",
+          fr: "valeur intrinsèque / intrinsic value",
+          definition: {
+            en: "Immediate exercise value of the option under the contract terms.",
+            fr: "Valeur d’exercice immédiat de l’option selon les termes du contrat.",
+          },
+        },
+        {
+          en: "Time value",
+          fr: "valeur temps / time value",
+          definition: {
+            en: "Option premium in excess of intrinsic value.",
+            fr: "Part de la premium d’option au-dessus de l’intrinsic value.",
+          },
+        },
+      ],
+    },
+    {
+      id: "put-call-parity",
+      kicker: { en: "03 · PUT–CALL PARITY & NO-ARBITRAGE", fr: "03 · PUT–CALL PARITY & NO-ARBITRAGE" },
+      title: {
+        en: "Calls, puts, stock and cash are linked by replication",
+        fr: "Calls, puts, action et cash sont reliés par replication",
+      },
+      coreFacts: [
+        {
+          en: "European calls and puts with the same strike and expiry are linked through put-call parity under the relevant carry assumptions.",
+          fr: "Les European calls et puts de même strike et expiry sont reliés par put-call parity selon les carry assumptions pertinentes.",
+        },
+        {
+          en: "For a non-dividend-paying stock under a simple framework, C−P = S_0−PV(K).",
+          fr: "Pour une action sans dividende dans un framework simple, C−P = S_0−PV(K).",
+        },
+        {
+          en: "If parity is violated beyond implementation costs, replication can create an arbitrage pressure.",
+          fr: "Si la parity est violée au-delà des coûts d’implémentation, la replication peut créer une pression d’arbitrage.",
+        },
+        {
+          en: "Dividends, borrow costs, rates, collateral and exercise style modify practical parity relationships.",
+          fr: "Dividendes, borrow costs, rates, collateral et exercise style modifient les relations pratiques de parity.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A long call plus cash equal to the present value of the strike can replicate a protected ownership structure that is linked to a long stock plus long put. Because the expiry cash flows match, no-arbitrage connects their prices today.",
+          fr: "Un long call plus du cash égal à la present value du strike peut répliquer une structure de propriété protégée liée à long stock plus long put. Comme les cash flows à expiry matchent, le no-arbitrage relie leurs prix aujourd’hui.",
+        },
+        Intermediate: {
+          en: "For S=100, K=100, r=5%, T=1 with no dividends, PV(K)≈95.12, so C−P should be approximately 4.88. A Black-Scholes call around 10.45 and put around 5.57 satisfy that relation.",
+          fr: "Avec S=100, K=100, r=5 %, T=1 sans dividendes, PV(K)≈95,12 ; C−P doit donc être environ 4,88. Un call Black-Scholes autour de 10,45 et un put autour de 5,57 respectent cette relation.",
+        },
+        Professional: {
+          en: "Parity is a replication identity, not a forecasting model. In real markets, stock borrow, discrete dividends, funding curves, settlement conventions and American early-exercise rights require adjusted relationships.",
+          fr: "La parity est une identité de replication, pas un forecasting model. En marchés réels, stock borrow, dividendes discrets, funding curves, settlement conventions et early-exercise rights des options américaines exigent des relations ajustées.",
+        },
+      },
+      formula: {
+        label: { en: "Simple European put-call parity", fr: "Put-call parity européenne simplifiée" },
+        expression: "C − P = S₀ − K × e^(−rT)",
+        explanation: {
+          en: "This simplified form assumes a non-dividend-paying underlying and compatible European options.",
+          fr: "Cette forme simplifiée suppose un underlying sans dividendes et des European options compatibles.",
+        },
+        workedExample: {
+          en: "S=100, K=100, r=5%, T=1 → S−PV(K)≈4.88; 10.45−5.57≈4.88.",
+          fr: "S=100, K=100, r=5 %, T=1 → S−PV(K)≈4,88 ; 10,45−5,57≈4,88.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Put-call parity",
+          fr: "parité call-put / put-call parity",
+          definition: {
+            en: "No-arbitrage relation linking European calls, puts, underlying and discounted strike.",
+            fr: "Relation de no-arbitrage reliant European calls, puts, underlying et strike actualisé.",
+          },
+        },
+        {
+          en: "Synthetic position",
+          fr: "position synthétique / synthetic position",
+          definition: {
+            en: "Combination of instruments replicating the payoff of another instrument or position.",
+            fr: "Combinaison d’instruments répliquant le payoff d’un autre instrument ou d’une autre position.",
+          },
+        },
+      ],
+    },
+    {
+      id: "black-scholes-intuition",
+      kicker: { en: "04 · BLACK–SCHOLES INTUITION", fr: "04 · INTUITION BLACK–SCHOLES" },
+      title: {
+        en: "Option value comes from spot, strike, time, volatility, rates and carry",
+        fr: "La valeur d’une option vient de spot, strike, temps, volatility, rates et carry",
+      },
+      coreFacts: [
+        {
+          en: "The classic Black-Scholes-Merton framework values European-style options under idealized assumptions.",
+          fr: "Le framework classique Black-Scholes-Merton valorise des European-style options sous des hypothèses idéalisées.",
+        },
+        {
+          en: "Core inputs include underlying price, strike, time to expiry, volatility and interest rates; dividends or carry can also be incorporated.",
+          fr: "Les principaux inputs incluent underlying price, strike, time to expiry, volatility et interest rates ; dividendes ou carry peuvent aussi être intégrés.",
+        },
+        {
+          en: "Expected stock return is not a direct input in the standard risk-neutral Black-Scholes formula.",
+          fr: "L’expected stock return n’est pas un input direct dans la formule Black-Scholes standard en risk-neutral pricing.",
+        },
+        {
+          en: "The model's constant-volatility and continuous-hedging assumptions are idealizations; market prices are commonly summarized through implied volatility instead.",
+          fr: "Les hypothèses de constant volatility et continuous hedging sont des idéalisations ; les market prices sont couramment résumés via implied volatility.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A call becomes more valuable when the stock rises because buying at the fixed strike becomes more attractive. More volatility can also make the option more valuable because the buyer keeps favorable upside while the downside payoff is floored at zero.",
+          fr: "Un call devient plus précieux lorsque l’action monte car acheter au strike fixe devient plus intéressant. Davantage de volatility peut aussi augmenter sa valeur car l’acheteur conserve l’upside favorable tandis que le payoff downside est floored à zéro.",
+        },
+        Intermediate: {
+          en: "For S=100, K=100, one year to expiry, 5% risk-free rate, 20% volatility and no dividends, the classic Black-Scholes European call value is approximately 10.45 and the corresponding put about 5.57.",
+          fr: "Pour S=100, K=100, un an jusqu’à expiry, risk-free rate 5 %, volatility 20 % et aucun dividende, le European call Black-Scholes classique vaut environ 10,45 et le put correspondant environ 5,57.",
+        },
+        Professional: {
+          en: "Black-Scholes is best viewed as a risk-neutral replication framework and a quoting language, not a literal description of market dynamics. Real markets display stochastic volatility, jumps, transaction costs, discrete hedging and volatility surfaces inconsistent with constant sigma.",
+          fr: "Black-Scholes doit être vu comme un framework de risk-neutral replication et un langage de quotation, pas comme une description littérale de la dynamique de marché. Les marchés réels présentent stochastic volatility, jumps, transaction costs, discrete hedging et volatility surfaces incompatibles avec sigma constant.",
+        },
+      },
+      formula: {
+        label: { en: "European call, no dividends", fr: "European call, sans dividendes" },
+        expression: "C = S₀N(d₁) − K e^(−rT)N(d₂)",
+        explanation: {
+          en: "d₁=[ln(S₀/K)+(r+½σ²)T]/(σ√T), d₂=d₁−σ√T. N(.) is the standard-normal CDF.",
+          fr: "d₁=[ln(S₀/K)+(r+½σ²)T]/(σ√T), d₂=d₁−σ√T. N(.) est la CDF de la loi normale standard.",
+        },
+        workedExample: {
+          en: "S=100, K=100, r=5%, σ=20%, T=1 → d₁=0.35, d₂=0.15, call≈10.45.",
+          fr: "S=100, K=100, r=5 %, σ=20 %, T=1 → d₁=0,35, d₂=0,15, call≈10,45.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Risk-neutral pricing",
+          fr: "valorisation risque-neutre / risk-neutral pricing",
+          definition: {
+            en: "Valuation framework using risk-neutral probabilities or equivalent replication logic rather than investors' actual expected returns.",
+            fr: "Framework de valuation utilisant des probabilités risk-neutral ou une logique de replication équivalente plutôt que les expected returns réels des investisseurs.",
+          },
+        },
+        {
+          en: "Black-Scholes-Merton",
+          fr: "Black-Scholes-Merton",
+          definition: {
+            en: "Foundational continuous-time option-pricing framework for European-style claims under idealized assumptions.",
+            fr: "Framework fondamental de pricing d’options en temps continu pour des claims European-style sous hypothèses idéalisées.",
+          },
+        },
+      ],
+    },
+    {
+      id: "delta-gamma",
+      kicker: { en: "05 · DELTA & GAMMA", fr: "05 · DELTA & GAMMA" },
+      title: {
+        en: "Delta measures slope; gamma measures how that slope changes",
+        fr: "Delta mesure la pente ; gamma mesure comment cette pente change",
+      },
+      coreFacts: [
+        {
+          en: "Delta measures the first-order sensitivity of option value to a small change in underlying price.",
+          fr: "Delta mesure la sensibilité de premier ordre de la valeur de l’option à un petit changement du underlying price.",
+        },
+        {
+          en: "A long vanilla call typically has positive delta; a long vanilla put typically has negative delta.",
+          fr: "Un long vanilla call possède généralement un delta positif ; un long vanilla put un delta négatif.",
+        },
+        {
+          en: "Gamma measures how delta changes when the underlying price changes.",
+          fr: "Gamma mesure comment delta change lorsque le underlying price évolue.",
+        },
+        {
+          en: "Long vanilla calls and puts generally have positive gamma; short vanilla options generally have negative gamma.",
+          fr: "Les long vanilla calls et puts ont généralement gamma positif ; les short vanilla options gamma négatif.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a call has delta 0.64, a small $1 rise in the stock suggests roughly a $0.64 increase in option value before other factors move. Gamma tells you that delta itself will change as the stock moves.",
+          fr: "Si un call possède delta 0,64, une petite hausse de 1 $ de l’action suggère environ +0,64 $ sur la valeur de l’option avant mouvement des autres facteurs. Gamma indique que delta lui-même changera lorsque l’action bouge.",
+        },
+        Intermediate: {
+          en: "For the Black-Scholes example S=100, K=100, r=5%, σ=20%, T=1, call delta≈0.637 and gamma≈0.0188 per $1 move. A $1 spot rise therefore raises delta by roughly 0.0188 locally.",
+          fr: "Pour l’exemple Black-Scholes S=100, K=100, r=5 %, σ=20 %, T=1, call delta≈0,637 et gamma≈0,0188 par mouvement de 1 $. Une hausse de spot de 1 $ augmente donc delta d’environ 0,0188 localement.",
+        },
+        Professional: {
+          en: "Gamma is largest where delta is changing rapidly, commonly near at-the-money for shorter-dated vanilla options. High gamma means a delta hedge becomes stale quickly, creating frequent rebalancing and transaction-cost exposure.",
+          fr: "Gamma est élevé là où delta change rapidement, couramment near at-the-money pour des vanilla options plus courtes. Un gamma élevé signifie qu’un delta hedge devient rapidement obsolète, créant des rebalancings fréquents et des transaction costs.",
+        },
+      },
+      formula: {
+        label: { en: "Local spot approximation", fr: "Approximation locale au spot" },
+        expression: "ΔOption ≈ Delta × ΔS + ½ × Gamma × (ΔS)²",
+        explanation: {
+          en: "Delta is the first-order term and gamma the second-order curvature term.",
+          fr: "Delta est le terme de premier ordre et gamma le terme de courbure de second ordre.",
+        },
+        workedExample: {
+          en: "Delta=0.637, gamma=0.0188, ΔS=+$2 → estimated option change≈0.637×2 + 0.5×0.0188×4≈$1.31.",
+          fr: "Delta=0,637, gamma=0,0188, ΔS=+2 $ → variation estimée≈0,637×2 + 0,5×0,0188×4≈1,31 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Delta",
+          fr: "delta",
+          definition: {
+            en: "First-order sensitivity of option value to underlying price.",
+            fr: "Sensibilité de premier ordre de la valeur de l’option au prix du underlying.",
+          },
+        },
+        {
+          en: "Gamma",
+          fr: "gamma",
+          definition: {
+            en: "Sensitivity of delta to changes in underlying price.",
+            fr: "Sensibilité de delta aux variations du underlying price.",
+          },
+        },
+      ],
+    },
+    {
+      id: "vega-theta-rho",
+      kicker: { en: "06 · VEGA, THETA & RHO", fr: "06 · VEGA, THETA & RHO" },
+      title: {
+        en: "Options are exposed to volatility, time and rates — not only spot",
+        fr: "Les options sont exposées à volatility, time et rates — pas seulement au spot",
+      },
+      coreFacts: [
+        {
+          en: "Vega measures sensitivity to implied volatility; long vanilla options generally have positive vega.",
+          fr: "Vega mesure la sensibilité à l’implied volatility ; les long vanilla options ont généralement vega positif.",
+        },
+        {
+          en: "Theta measures sensitivity to the passage of time, holding other model inputs fixed; long vanilla options often have negative theta.",
+          fr: "Theta mesure la sensibilité au passage du temps, autres model inputs constants ; les long vanilla options ont souvent theta négatif.",
+        },
+        {
+          en: "Rho measures sensitivity to interest rates under the pricing model.",
+          fr: "Rho mesure la sensibilité aux interest rates dans le pricing model.",
+        },
+        {
+          en: "Greek quotation conventions differ: vega may be quoted per one volatility point and rho per one percentage-point rate move rather than per unit 1.00.",
+          fr: "Les conventions de quotation des Greeks diffèrent : vega peut être coté par 1 volatility point et rho par mouvement de taux de 1 point plutôt que par unité 1,00.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If implied volatility rises, the range of possible future prices becomes wider in the model. Because a long option has limited downside to the premium but favorable optionality, its value usually rises. Meanwhile, as expiry approaches, there is less time for a favorable move, so long options often lose time value.",
+          fr: "Si l’implied volatility monte, la plage de prix futurs possibles s’élargit dans le modèle. Comme une long option possède un downside limité à la premium mais conserve une optionalité favorable, sa valeur monte généralement. En parallèle, à mesure qu’expiry approche, il reste moins de temps pour un mouvement favorable ; les long options perdent donc souvent de la time value.",
+        },
+        Intermediate: {
+          en: "In the same Black-Scholes example, vega≈37.52 for a full 1.00 volatility change, equivalent to about $0.375 per one volatility point. Call rho≈53.23 per full 1.00 rate change, or about $0.532 per one percentage-point move. Scaling conventions matter.",
+          fr: "Dans le même exemple Black-Scholes, vega≈37,52 pour un changement complet de volatility de 1,00, soit environ 0,375 $ par volatility point. Le call rho≈53,23 pour un mouvement complet de taux de 1,00, soit environ 0,532 $ par point de pourcentage. Les conventions de scaling comptent.",
+        },
+        Professional: {
+          en: "Theta is not simply 'the cost of owning gamma' in every market state, but long-gamma positions often pay time decay to own convexity. Option books are managed as interacting Greeks because spot, volatility, rates and time move together.",
+          fr: "Theta n’est pas simplement « le coût de posséder gamma » dans tous les états de marché, mais les positions long-gamma paient souvent du time decay pour posséder de la convexity. Les option books sont gérés comme des Greeks interactifs car spot, volatility, rates et time bougent ensemble.",
+        },
+      },
+      comparison: {
+        title: { en: "Core Greeks", fr: "Greeks principaux" },
+        headers: [
+          { en: "Greek", fr: "Greek" },
+          { en: "Primary sensitivity", fr: "Sensibilité principale" },
+          { en: "Typical long vanilla sign", fr: "Signe typique long vanilla" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Delta", fr: "Delta" },
+            { en: "Underlying price", fr: "Underlying price" },
+            { en: "Call + / Put −", fr: "Call + / Put −" },
+          ]},
+          { cells: [
+            { en: "Gamma", fr: "Gamma" },
+            { en: "Change in delta", fr: "Variation de delta" },
+            { en: "+", fr: "+" },
+          ]},
+          { cells: [
+            { en: "Vega", fr: "Vega" },
+            { en: "Implied volatility", fr: "Implied volatility" },
+            { en: "+", fr: "+" },
+          ]},
+          { cells: [
+            { en: "Theta", fr: "Theta" },
+            { en: "Passage of time", fr: "Passage du temps" },
+            { en: "Often −", fr: "Souvent −" },
+          ]},
+          { cells: [
+            { en: "Rho", fr: "Rho" },
+            { en: "Interest rates", fr: "Interest rates" },
+            { en: "Call often + / Put often −", fr: "Call souvent + / Put souvent −" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Vega",
+          fr: "vega",
+          definition: {
+            en: "Sensitivity of option value to implied volatility.",
+            fr: "Sensibilité de la valeur de l’option à l’implied volatility.",
+          },
+        },
+        {
+          en: "Theta",
+          fr: "theta",
+          definition: {
+            en: "Sensitivity of option value to the passage of time under a stated convention.",
+            fr: "Sensibilité de la valeur de l’option au passage du temps selon une convention donnée.",
+          },
+        },
+        {
+          en: "Rho",
+          fr: "rho",
+          definition: {
+            en: "Sensitivity of option value to an interest-rate input.",
+            fr: "Sensibilité de la valeur de l’option à un input de taux d’intérêt.",
+          },
+        },
+      ],
+    },
+    {
+      id: "implied-volatility-surface",
+      kicker: { en: "07 · IMPLIED VOLATILITY, SMILE & SKEW", fr: "07 · IMPLIED VOLATILITY, SMILE & SKEW" },
+      title: {
+        en: "Implied volatility is the volatility input that makes a pricing model match the market price",
+        fr: "L’implied volatility est l’input de volatility qui fait matcher le pricing model avec le market price",
+      },
+      coreFacts: [
+        {
+          en: "Implied volatility is backed out from an observed option price using a chosen pricing model.",
+          fr: "L’implied volatility est dérivée d’un observed option price via un pricing model choisi.",
+        },
+        {
+          en: "Options with different strikes and expiries typically trade at different implied volatilities.",
+          fr: "Les options de différents strikes et expiries tradent généralement à différentes implied volatilities.",
+        },
+        {
+          en: "A volatility smile or skew describes how implied volatility varies across strike or delta.",
+          fr: "Un volatility smile ou skew décrit comment l’implied volatility varie selon strike ou delta.",
+        },
+        {
+          en: "The volatility surface extends this relationship across both moneyness and maturity.",
+          fr: "La volatility surface étend cette relation à la fois sur moneyness et maturity.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a model says a call should be worth $8 using 15% volatility but the market price is $10, you can increase the model's volatility input until model price matches $10. That matching volatility is the implied volatility.",
+          fr: "Si un modèle dit qu’un call vaut 8 $ avec volatility 15 % mais que le market price vaut 10 $, tu peux augmenter l’input volatility jusqu’à ce que le model price atteigne 10 $. Cette volatility qui fait matcher le prix est l’implied volatility.",
+        },
+        Intermediate: {
+          en: "Equity-index options often show downside skew, where lower-strike puts trade at higher implied volatility than at-the-money options. The exact shape reflects supply-demand, crash risk, leverage effects and market conventions.",
+          fr: "Les equity-index options montrent souvent un downside skew, où les lower-strike puts tradent à une implied volatility supérieure aux options at-the-money. La forme exacte reflète supply-demand, crash risk, leverage effects et market conventions.",
+        },
+        Professional: {
+          en: "An option trader manages the entire volatility surface, not one volatility number. Surface dynamics include skew, term structure, forward volatility and sticky-strike versus sticky-delta behavior; model choice determines how these risks are represented.",
+          fr: "Un option trader gère toute la volatility surface, pas un seul chiffre de volatility. Les surface dynamics incluent skew, term structure, forward volatility et comportement sticky-strike versus sticky-delta ; le choix du modèle détermine comment ces risques sont représentés.",
+        },
+      },
+      comparison: {
+        title: { en: "Volatility language", fr: "Langage de volatility" },
+        headers: [
+          { en: "Term", fr: "Terme" },
+          { en: "Meaning", fr: "Signification" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Historical / realized vol", fr: "Historical / realized vol" },
+            { en: "Measured from realized price changes", fr: "Mesurée à partir des realized price changes" },
+          ]},
+          { cells: [
+            { en: "Implied vol", fr: "Implied vol" },
+            { en: "Backed out from option market price", fr: "Dérivée du market price de l’option" },
+          ]},
+          { cells: [
+            { en: "Skew / smile", fr: "Skew / smile" },
+            { en: "IV variation across strike or delta", fr: "Variation d’IV selon strike ou delta" },
+          ]},
+          { cells: [
+            { en: "Term structure", fr: "Term structure" },
+            { en: "IV variation across expiry", fr: "Variation d’IV selon expiry" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Implied volatility",
+          fr: "volatilité implicite / implied volatility",
+          definition: {
+            en: "Volatility parameter that makes a chosen option-pricing model reproduce an observed market price.",
+            fr: "Paramètre de volatility qui fait reproduire au pricing model choisi un market price observé.",
+          },
+        },
+        {
+          en: "Volatility skew",
+          fr: "skew de volatilité / volatility skew",
+          definition: {
+            en: "Systematic difference in implied volatility across strikes or deltas.",
+            fr: "Différence systématique d’implied volatility selon strikes ou deltas.",
+          },
+        },
+      ],
+    },
+    {
+      id: "delta-hedging",
+      kicker: { en: "08 · DELTA HEDGING & GAMMA", fr: "08 · DELTA HEDGING & GAMMA" },
+      title: {
+        en: "Delta hedging neutralizes local spot exposure — not the entire option risk",
+        fr: "Le delta hedging neutralise l’exposition locale au spot — pas tout le risque de l’option",
+      },
+      coreFacts: [
+        {
+          en: "A delta hedge offsets the option's local first-order underlying-price sensitivity with the underlying or another delta exposure.",
+          fr: "Un delta hedge compense la sensibilité locale de premier ordre de l’option au underlying price via le underlying ou une autre exposition delta.",
+        },
+        {
+          en: "Because gamma changes delta as spot moves, a delta hedge must be rebalanced over time.",
+          fr: "Comme gamma change delta lorsque spot bouge, un delta hedge doit être rebalancé au fil du temps.",
+        },
+        {
+          en: "Delta-neutral does not mean risk-neutral: vega, gamma, theta, jumps, skew and basis risk remain.",
+          fr: "Delta-neutral ne signifie pas risk-neutral : vega, gamma, theta, jumps, skew et basis risk subsistent.",
+        },
+        {
+          en: "Gamma scalping is a dynamic hedging concept in which a long-gamma position is rebalanced as the underlying moves, but realized profitability depends on volatility, premium paid, transaction costs and hedge execution.",
+          fr: "Le gamma scalping est un concept de dynamic hedging dans lequel une position long-gamma est rebalancée lorsque le underlying bouge, mais sa profitabilité réalisée dépend de volatility, premium payée, transaction costs et hedge execution.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you own one call with delta +0.64 and each option unit references one share, you can short about 0.64 share to make the combined position locally delta-neutral. If the stock moves, gamma changes the option delta, so you need to update the hedge.",
+          fr: "Si tu possèdes un call avec delta +0,64 et que chaque unité d’option référence une action, tu peux shorter environ 0,64 action pour rendre la position localement delta-neutral. Si l’action bouge, gamma modifie le delta de l’option ; il faut donc ajuster le hedge.",
+        },
+        Intermediate: {
+          en: "For listed contracts, hedge size must include the contract multiplier. For example, 10 calls with delta 0.60 and a 100-share multiplier create about +600 share deltas, so a local hedge is roughly short 600 shares.",
+          fr: "Pour les listed contracts, la taille du hedge doit intégrer le contract multiplier. Par exemple, 10 calls avec delta 0,60 et multiplier 100 actions créent environ +600 share deltas ; le hedge local est donc environ short 600 actions.",
+        },
+        Professional: {
+          en: "Discrete hedging creates path dependence. Realized hedging P&L depends on realized volatility relative to implied volatility, transaction costs, jumps, liquidity and the chosen hedge frequency. A model-perfect continuous hedge is not achievable in real markets.",
+          fr: "Le discrete hedging crée une path dependence. Le realized hedging P&L dépend de realized volatility relativement à implied volatility, transaction costs, jumps, liquidity et hedge frequency. Un continuous hedge parfait de modèle n’est pas réalisable en marchés réels.",
+        },
+      },
+      formula: {
+        label: { en: "Simple delta hedge", fr: "Delta hedge simple" },
+        expression: "Underlying Hedge ≈ − Option Delta × Option Units × Contract Multiplier",
+        explanation: {
+          en: "The hedge sign is opposite the option position's aggregate delta.",
+          fr: "Le signe du hedge est opposé à l’aggregate delta de la position d’options.",
+        },
+        workedExample: {
+          en: "Long 10 calls × delta 0.60 × 100-share multiplier = +600 deltas → hedge≈short 600 shares.",
+          fr: "Long 10 calls × delta 0,60 × multiplier 100 actions = +600 deltas → hedge≈short 600 actions.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Delta-neutral",
+          fr: "delta-neutral",
+          definition: {
+            en: "Position with approximately zero net first-order sensitivity to a small underlying-price change.",
+            fr: "Position avec sensibilité nette de premier ordre approximativement nulle à un petit mouvement du underlying price.",
+          },
+        },
+        {
+          en: "Gamma scalping",
+          fr: "gamma scalping",
+          definition: {
+            en: "Dynamic rebalancing of a delta hedge around a gamma exposure to monetize underlying movement under favorable conditions.",
+            fr: "Rebalancing dynamique d’un delta hedge autour d’une exposition gamma afin de monétiser les mouvements du underlying sous conditions favorables.",
+          },
+        },
+      ],
+    },
+    {
+      id: "option-strategies-risk",
+      kicker: { en: "09 · OPTION STRATEGIES & RISK THINKING", fr: "09 · STRATÉGIES D’OPTIONS & RISK THINKING" },
+      title: {
+        en: "Every option strategy is a bundle of directional, volatility, time and tail exposures",
+        fr: "Chaque stratégie d’options combine expositions directionnelles, volatility, time et tail risk",
+      },
+      coreFacts: [
+        {
+          en: "A protective put combines a long underlying with a long put to create downside protection below the strike, at the cost of the option premium.",
+          fr: "Un protective put combine long underlying et long put pour créer une downside protection sous le strike, au coût de l’option premium.",
+        },
+        {
+          en: "A covered call combines long underlying with a short call, collecting premium while capping upside above the strike.",
+          fr: "Un covered call combine long underlying et short call, collecte une premium mais cap l’upside au-dessus du strike.",
+        },
+        {
+          en: "A long straddle buys a call and put with the same strike and expiry, creating positive convexity and volatility exposure but requiring enough movement to overcome premium and time decay.",
+          fr: "Un long straddle achète call et put de même strike et expiry, créant positive convexity et volatility exposure mais nécessitant assez de mouvement pour dépasser premium et time decay.",
+        },
+        {
+          en: "Vertical spreads combine options at different strikes to reshape payoff and reduce both premium and maximum upside or downside relative to an outright option.",
+          fr: "Les vertical spreads combinent des options à différents strikes pour remodeler le payoff et réduire à la fois premium et maximum upside/downside relativement à une option outright.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Options let you redesign a payoff. A protective put is like paying for a floor under your stock position. A covered call is like accepting a ceiling on upside in exchange for premium income.",
+          fr: "Les options permettent de redessiner un payoff. Un protective put revient à payer pour mettre un floor sous une position actions. Un covered call revient à accepter un ceiling sur l’upside en échange d’une premium.",
+        },
+        Intermediate: {
+          en: "Do not describe a strategy only by expiry payoff. Before expiry, its P&L also depends on implied volatility, time decay and changing Greeks. Two trades with identical terminal payoff can behave differently intraday if path and funding differ.",
+          fr: "Il ne faut pas décrire une stratégie uniquement par son expiry payoff. Avant expiry, son P&L dépend aussi d’implied volatility, time decay et des Greeks changeants. Deux trades avec terminal payoff identique peuvent se comporter différemment intraday si path et funding diffèrent.",
+        },
+        Professional: {
+          en: "Professional option books are managed in Greek space and scenario space. Traders monitor spot ladders, volatility-surface shocks, time decay, jump scenarios and liquidity. A strategy name is only shorthand for a multidimensional risk profile.",
+          fr: "Les option books professionnels sont gérés dans Greek space et scenario space. Les traders surveillent spot ladders, volatility-surface shocks, time decay, jump scenarios et liquidity. Le nom d’une stratégie n’est qu’un raccourci pour un multidimensional risk profile.",
+        },
+      },
+      comparison: {
+        title: { en: "Common option structures", fr: "Structures d’options courantes" },
+        headers: [
+          { en: "Strategy", fr: "Stratégie" },
+          { en: "Core position", fr: "Position centrale" },
+          { en: "Main trade-off", fr: "Trade-off principal" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Protective put", fr: "Protective put" },
+            { en: "Long stock + long put", fr: "Long stock + long put" },
+            { en: "Downside floor for premium cost", fr: "Downside floor contre coût de premium" },
+          ]},
+          { cells: [
+            { en: "Covered call", fr: "Covered call" },
+            { en: "Long stock + short call", fr: "Long stock + short call" },
+            { en: "Premium income for capped upside", fr: "Premium income contre upside capped" },
+          ]},
+          { cells: [
+            { en: "Long straddle", fr: "Long straddle" },
+            { en: "Long call + long put", fr: "Long call + long put" },
+            { en: "Long volatility / gamma, negative carry", fr: "Long volatility / gamma, carry négatif" },
+          ]},
+          { cells: [
+            { en: "Vertical spread", fr: "Vertical spread" },
+            { en: "Long one strike, short another", fr: "Long un strike, short un autre" },
+            { en: "Lower premium with capped payoff", fr: "Premium réduite avec payoff capped" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "Equity, rates, FX and commodity options are often quoted and risk-managed through implied volatility and Greeks because the same directional view can produce very different P&L depending on volatility and time.",
+        fr: "Les options equity, rates, FX et commodities sont souvent cotées et risk-managed via implied volatility et Greeks car une même directional view peut produire des P&L très différents selon volatility et time.",
+      },
+      vocabulary: [
+        {
+          en: "Protective put",
+          fr: "protective put",
+          definition: {
+            en: "Long underlying plus long put structure that limits downside below the strike, ignoring premium effects.",
+            fr: "Structure long underlying plus long put limitant le downside sous le strike, hors effets de premium.",
+          },
+        },
+        {
+          en: "Straddle",
+          fr: "straddle",
+          definition: {
+            en: "Call and put position at the same strike and expiry, commonly used to express volatility exposure.",
+            fr: "Position combinant call et put de même strike et expiry, couramment utilisée pour exprimer une volatility exposure.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "moneyness",
+      question: {
+        en: "A call has strike $100 and expires with stock at $120. Its intrinsic value is:",
+        fr: "Un call possède strike 100 $ et expire avec l’action à 120 $. Son intrinsic value vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "$0", fr: "0 $" } },
+        { id: "b", label: { en: "$10", fr: "10 $" } },
+        { id: "c", label: { en: "$20", fr: "20 $" } },
+        { id: "d", label: { en: "$120", fr: "120 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "Call intrinsic value=max(120−100,0)=$20.",
+        fr: "Call intrinsic value=max(120−100,0)=20 $.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "call-profit",
+      question: {
+        en: "A call has strike $100, premium $6 and expires at $120. Buyer profit before other costs is:",
+        fr: "Un call possède strike 100 $, premium 6 $ et expire à 120 $. Le profit de l’acheteur avant autres coûts vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "$6", fr: "6 $" } },
+        { id: "b", label: { en: "$14", fr: "14 $" } },
+        { id: "c", label: { en: "$20", fr: "20 $" } },
+        { id: "d", label: { en: "$26", fr: "26 $" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Payoff=$20 and profit=$20−$6=$14.",
+        fr: "Payoff=20 $ et profit=20 $−6 $=14 $.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "put-call-parity",
+      question: {
+        en: "In the simplified non-dividend European case, put-call parity is:",
+        fr: "Dans le cas européen simplifié sans dividende, put-call parity est :",
+      },
+      options: [
+        { id: "a", label: { en: "C−P = S₀−PV(K)", fr: "C−P = S₀−PV(K)" } },
+        { id: "b", label: { en: "C+P = 0 always", fr: "C+P = 0 toujours" } },
+        { id: "c", label: { en: "C = P for every strike", fr: "C = P pour tous les strikes" } },
+        { id: "d", label: { en: "Put-call parity uses no underlying price", fr: "Put-call parity n’utilise jamais le underlying price" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "The replication relation is C−P=S₀−K e^(−rT) under the stated assumptions.",
+        fr: "La relation de replication est C−P=S₀−K e^(−rT) sous les hypothèses indiquées.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "black-scholes-input",
+      question: {
+        en: "Which is NOT a direct input to the standard Black-Scholes European call formula?",
+        fr: "Lequel n’est PAS un input direct de la formule standard Black-Scholes pour un European call ?",
+      },
+      options: [
+        { id: "a", label: { en: "Spot price", fr: "Spot price" } },
+        { id: "b", label: { en: "Strike price", fr: "Strike price" } },
+        { id: "c", label: { en: "Volatility", fr: "Volatility" } },
+        { id: "d", label: { en: "Investor's expected stock return", fr: "Expected stock return de l’investisseur" } },
+      ],
+      correctOption: "d",
+      explanation: {
+        en: "Standard risk-neutral Black-Scholes does not use the investor's actual expected stock return as a direct input.",
+        fr: "Le Black-Scholes standard en risk-neutral pricing n’utilise pas l’actual expected stock return de l’investisseur comme input direct.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "delta",
+      question: {
+        en: "A call has delta 0.64. For a small $1 rise in the underlying, all else equal, option value changes approximately by:",
+        fr: "Un call possède delta 0,64. Pour une petite hausse de 1 $ du underlying, toutes choses égales par ailleurs, la valeur de l’option change environ de :",
+      },
+      options: [
+        { id: "a", label: { en: "−$0.64", fr: "−0,64 $" } },
+        { id: "b", label: { en: "+$0.64", fr: "+0,64 $" } },
+        { id: "c", label: { en: "+$1.64", fr: "+1,64 $" } },
+        { id: "d", label: { en: "Exactly $64", fr: "Exactement 64 $" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Delta is the local first-order price sensitivity to the underlying.",
+        fr: "Delta est la sensibilité locale de premier ordre du prix au underlying.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "gamma",
+      question: {
+        en: "What does gamma measure?",
+        fr: "Que mesure gamma ?",
+      },
+      options: [
+        { id: "a", label: { en: "Change in delta as the underlying changes", fr: "Le changement de delta lorsque le underlying change" } },
+        { id: "b", label: { en: "Only the option premium paid", fr: "Uniquement la premium payée" } },
+        { id: "c", label: { en: "Interest expense on corporate debt", fr: "L’interest expense sur corporate debt" } },
+        { id: "d", label: { en: "Bond coupon rate", fr: "Le bond coupon rate" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Gamma is the second-order spot sensitivity: the rate at which delta changes.",
+        fr: "Gamma est la sensibilité spot de second ordre : le rythme auquel delta change.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "vega",
+      question: {
+        en: "For a standard long vanilla option, all else equal, an increase in implied volatility generally:",
+        fr: "Pour une standard long vanilla option, toutes choses égales par ailleurs, une hausse de l’implied volatility :",
+      },
+      options: [
+        { id: "a", label: { en: "Raises option value", fr: "Augmente généralement la valeur de l’option" } },
+        { id: "b", label: { en: "Forces option value to zero", fr: "Force la valeur de l’option à zéro" } },
+        { id: "c", label: { en: "Has no possible effect", fr: "N’a aucun effet possible" } },
+        { id: "d", label: { en: "Always lowers intrinsic value", fr: "Réduit toujours l’intrinsic value" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Long vanilla options generally have positive vega.",
+        fr: "Les long vanilla options ont généralement vega positif.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "theta",
+      question: {
+        en: "Theta primarily measures sensitivity to:",
+        fr: "Theta mesure principalement la sensibilité :",
+      },
+      options: [
+        { id: "a", label: { en: "Passage of time", fr: "Au passage du temps" } },
+        { id: "b", label: { en: "Accounting revenue", fr: "Au revenue comptable" } },
+        { id: "c", label: { en: "Bond face value", fr: "À la bond face value" } },
+        { id: "d", label: { en: "Credit rating only", fr: "Uniquement au credit rating" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Theta measures option-value sensitivity to time passing under a stated convention.",
+        fr: "Theta mesure la sensibilité de la valeur de l’option au passage du temps selon une convention définie.",
+      },
+    },
+    {
+      id: "q9",
+      conceptKey: "implied-volatility",
+      question: {
+        en: "What is implied volatility?",
+        fr: "Qu’est-ce que l’implied volatility ?",
+      },
+      options: [
+        { id: "a", label: { en: "The volatility input that makes a pricing model match the observed option price", fr: "L’input volatility qui fait matcher un pricing model avec le prix d’option observé" } },
+        { id: "b", label: { en: "Always the exact future realized volatility", fr: "Toujours l’exacte future realized volatility" } },
+        { id: "c", label: { en: "The stock dividend yield only", fr: "Uniquement le dividend yield de l’action" } },
+        { id: "d", label: { en: "The option strike divided by spot", fr: "Le strike divisé par spot" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Implied volatility is reverse-engineered from market price through a chosen option-pricing model.",
+        fr: "L’implied volatility est reverse-engineered depuis le market price via un pricing model choisi.",
+      },
+    },
+    {
+      id: "q10",
+      conceptKey: "delta-hedge",
+      question: {
+        en: "A portfolio is delta-neutral. Which statement is most accurate?",
+        fr: "Un portefeuille est delta-neutral. Quelle affirmation est la plus exacte ?",
+      },
+      options: [
+        { id: "a", label: { en: "It has no remaining risk of any kind", fr: "Il ne possède plus aucun risque" } },
+        { id: "b", label: { en: "Its local first-order spot sensitivity is near zero, but gamma, vega, theta, jumps and basis risk may remain", fr: "Sa sensibilité locale de premier ordre au spot est proche de zéro, mais gamma, vega, theta, jumps et basis risk peuvent subsister" } },
+        { id: "c", label: { en: "It cannot lose money", fr: "Il ne peut pas perdre d’argent" } },
+        { id: "d", label: { en: "It has zero notional by definition", fr: "Il possède zéro notional par définition" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Delta-neutralization removes only one local risk dimension.",
+        fr: "La neutralisation du delta retire seulement une dimension locale du risque.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Walk me through delta, gamma, vega and theta for a long call, and explain how you would delta-hedge it.",
+      fr: "Explique delta, gamma, vega et theta pour un long call, puis explique comment tu le delta-hedgerais.",
+    },
+    framework: [
+      {
+        en: "Delta: positive first-order sensitivity to the underlying; a call value generally rises as spot rises.",
+        fr: "Delta : sensibilité positive de premier ordre au underlying ; la valeur d’un call monte généralement lorsque spot monte.",
+      },
+      {
+        en: "Gamma: positive for a long vanilla call; it measures how delta changes as spot changes.",
+        fr: "Gamma : positif pour un long vanilla call ; il mesure comment delta change lorsque spot change.",
+      },
+      {
+        en: "Vega: generally positive; higher implied volatility increases long-call value, all else equal.",
+        fr: "Vega : généralement positif ; une implied volatility supérieure augmente la valeur d’un long call, toutes choses égales par ailleurs.",
+      },
+      {
+        en: "Theta: often negative for a long vanilla call because time value decays as expiry approaches, all else equal.",
+        fr: "Theta : souvent négatif pour un long vanilla call car la time value se dégrade lorsque expiry approche, toutes choses égales par ailleurs.",
+      },
+      {
+        en: "Delta hedge by taking the opposite underlying exposure equal to aggregate option delta, including units and contract multiplier.",
+        fr: "Delta-hedger en prenant l’exposition underlying opposée égale à l’aggregate option delta, en intégrant unités et contract multiplier.",
+      },
+      {
+        en: "Explain why the hedge must be rebalanced: gamma changes delta, and vega, theta, skew, jumps and transaction costs remain.",
+        fr: "Expliquer pourquoi le hedge doit être rebalancé : gamma change delta, et vega, theta, skew, jumps et transaction costs subsistent.",
+      },
+    ],
+    sample: {
+      en: "For a long call, delta is positive and measures the local first-order change in option value for a small move in the underlying. Gamma is also positive for a standard long vanilla call and measures how delta changes as spot moves, so my hedge ratio will not remain constant. Vega is generally positive, meaning higher implied volatility increases the option's value all else equal. Theta is often negative because the long option loses time value as expiry approaches. To delta-hedge the call, I would calculate the aggregate option delta including the number of contracts and contract multiplier, then take the opposite exposure in the underlying. For example, 10 calls with delta 0.60 and a 100-share multiplier create about +600 share deltas, so I would short roughly 600 shares for a local hedge. That does not make the book risk-free. As spot moves, gamma changes delta, so I need to rebalance, and I still have vega, theta, skew, jump, liquidity and transaction-cost risk.",
+      fr: "Pour un long call, delta est positif et mesure la variation locale de premier ordre de la valeur de l’option pour un petit mouvement du underlying. Gamma est également positif pour un standard long vanilla call et mesure comment delta change lorsque spot bouge ; mon hedge ratio ne restera donc pas constant. Vega est généralement positif, ce qui signifie qu’une implied volatility plus élevée augmente la valeur de l’option toutes choses égales par ailleurs. Theta est souvent négatif car la long option perd de la time value à mesure qu’expiry approche. Pour delta-hedger le call, je calculerais l’aggregate option delta en intégrant le nombre de contrats et le contract multiplier, puis je prendrais l’exposition opposée dans le underlying. Par exemple, 10 calls avec delta 0,60 et multiplier 100 actions créent environ +600 share deltas ; je shorterais donc environ 600 actions pour un hedge local. Cela ne rend pas le book risk-free. Lorsque spot bouge, gamma change delta ; il faut donc rebalancer, et il reste vega, theta, skew, jump, liquidity et transaction-cost risk.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
