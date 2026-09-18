@@ -10982,7 +10982,904 @@ export const readingFinancialNewsLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson];
+
+export const corporateFinanceLesson: FinanceLesson = {
+  slug: "year-2-corporate-finance",
+  year: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  domain: { en: "Corporate Finance & Valuation", fr: "Finance d’entreprise & valorisation / Corporate Finance & Valuation" },
+  title: {
+    en: "Corporate Finance",
+    fr: "Finance d’entreprise / Corporate Finance",
+  },
+  subtitle: {
+    en: "Understand how companies create value by investing capital, financing the business, managing liquidity and returning capital to investors.",
+    fr: "Comprendre comment une entreprise crée de la valeur en investissant son capital, en choisissant son financement, en gérant sa liquidité et en restituant du capital aux investisseurs.",
+  },
+  duration: { en: "105–130 min", fr: "105–130 min" },
+  prerequisites: [
+    { en: "Time Value of Money", fr: "Valeur temps de l’argent / Time Value of Money" },
+    { en: "Financial Accounting I", fr: "Comptabilité financière I / Financial Accounting I" },
+  ],
+  objectives: [
+    {
+      en: "Explain value creation through return on invested capital relative to cost of capital.",
+      fr: "Expliquer la création de valeur via le rendement du capital investi / ROIC relativement au coût du capital.",
+    },
+    {
+      en: "Evaluate investment projects using NPV, IRR and payback logic.",
+      fr: "Évaluer des projets d’investissement avec NPV / VAN, IRR / TRI et payback.",
+    },
+    {
+      en: "Understand debt versus equity financing and the trade-offs of leverage.",
+      fr: "Comprendre dette / debt versus capitaux propres / equity et les compromis liés au levier / leverage.",
+    },
+    {
+      en: "Interpret WACC and how financing choices affect required returns.",
+      fr: "Interpréter le WACC et comprendre comment les choix de financement affectent les rendements exigés.",
+    },
+    {
+      en: "Analyze dividends, buybacks and reinvestment as capital-allocation decisions.",
+      fr: "Analyser dividendes, rachats d’actions / buybacks et réinvestissement comme décisions d’allocation du capital.",
+    },
+    {
+      en: "Connect working capital, liquidity and cash conversion to operating finance.",
+      fr: "Relier working capital, liquidité et conversion en cash à la finance opérationnelle.",
+    },
+  ],
+  overviewFlow: {
+    title: { en: "The corporate-finance decision loop", fr: "La boucle de décision en finance d’entreprise" },
+    steps: [
+      {
+        title: { en: "Generate cash", fr: "Générer du cash" },
+        detail: { en: "Operations · margins · working capital", fr: "Opérations · marges · working capital" },
+      },
+      {
+        title: { en: "Invest", fr: "Investir" },
+        detail: { en: "Capex · projects · acquisitions", fr: "Capex · projets · acquisitions" },
+      },
+      {
+        title: { en: "Finance", fr: "Financer" },
+        detail: { en: "Debt · equity · WACC", fr: "Dette · equity · WACC" },
+      },
+      {
+        title: { en: "Allocate", fr: "Allouer" },
+        detail: { en: "Reinvest · dividends · buybacks", fr: "Réinvestir · dividendes · buybacks" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "value-creation",
+      kicker: { en: "01 · VALUE CREATION", fr: "01 · CRÉATION DE VALEUR" },
+      title: {
+        en: "Growth creates value only when returns exceed the cost of capital",
+        fr: "La croissance ne crée de la valeur que si les rendements dépassent le coût du capital",
+      },
+      coreFacts: [
+        {
+          en: "A company creates economic value when the return earned on incremental invested capital exceeds the return required by capital providers.",
+          fr: "Une entreprise crée de la valeur économique lorsque le rendement gagné sur le capital investi supplémentaire dépasse le rendement exigé par les apporteurs de capitaux.",
+        },
+        {
+          en: "Growth can destroy value if the company reinvests at returns below its cost of capital.",
+          fr: "La croissance peut détruire de la valeur si l’entreprise réinvestit à un rendement inférieur à son coût du capital.",
+        },
+        {
+          en: "ROIC focuses on operating profit after tax relative to operating capital invested.",
+          fr: "Le ROIC se concentre sur le profit opérationnel après impôt relativement au capital opérationnel investi.",
+        },
+        {
+          en: "Value creation depends on both spread and scale: ROIC minus WACC, multiplied by capital deployed.",
+          fr: "La création de valeur dépend à la fois du spread et de l’échelle : ROIC moins WACC, appliqué au capital déployé.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company invests $100 and earns $15 after tax, the return is 15%. If investors require only 10%, the project creates value. If the company earns 7% while investors require 10%, it destroys value even if revenue grows.",
+          fr: "Si une entreprise investit 100 $ et gagne 15 $ après impôt, le rendement est de 15 %. Si les investisseurs exigent seulement 10 %, le projet crée de la valeur. Si l’entreprise gagne 7 % alors que le rendement exigé est 10 %, elle détruit de la valeur même si le chiffre d’affaires augmente.",
+        },
+        Intermediate: {
+          en: "Corporate finance distinguishes accounting growth from economic value creation. Revenue, EBITDA or EPS growth alone do not prove value creation because they do not show how much capital was required or what return investors required.",
+          fr: "La finance d’entreprise distingue croissance comptable et création de valeur économique. La croissance du revenue, EBITDA ou EPS ne prouve pas à elle seule la création de valeur car elle ne montre ni le capital nécessaire ni le rendement exigé.",
+        },
+        Professional: {
+          en: "The core corporate-finance spread is ROIC minus WACC. Persistent positive spreads usually indicate an economic moat, capital discipline or both. The durability of that spread often matters more for valuation than one year's absolute earnings growth.",
+          fr: "Le spread central de la finance d’entreprise est ROIC moins WACC. Des spreads positifs persistants indiquent souvent un avantage concurrentiel / moat, une discipline du capital ou les deux. La durabilité de ce spread compte souvent davantage pour la valorisation qu’une seule année de croissance des bénéfices.",
+        },
+      },
+      formula: {
+        label: { en: "ROIC", fr: "ROIC / rendement du capital investi" },
+        expression: "ROIC = NOPAT ÷ Invested Capital",
+        explanation: {
+          en: "NOPAT is net operating profit after tax; definitions of invested capital should remain consistent.",
+          fr: "NOPAT correspond au profit opérationnel net après impôt ; la définition du capital investi doit rester cohérente.",
+        },
+        workedExample: {
+          en: "NOPAT $15, invested capital $100 → ROIC = 15%. If WACC is 10%, the spread is +5 percentage points.",
+          fr: "NOPAT 15 $, capital investi 100 $ → ROIC = 15 %. Si le WACC vaut 10 %, le spread vaut +5 points.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "NOPAT",
+          fr: "résultat opérationnel net après impôt / NOPAT",
+          definition: {
+            en: "Operating profit after applying an operating tax rate, before financing effects.",
+            fr: "Profit opérationnel après impôt, avant effets de financement.",
+          },
+        },
+        {
+          en: "Invested capital",
+          fr: "capital investi / invested capital",
+          definition: {
+            en: "Capital committed to operating assets, defined consistently for the analysis.",
+            fr: "Capital engagé dans les actifs opérationnels, défini de façon cohérente pour l’analyse.",
+          },
+        },
+      ],
+    },
+    {
+      id: "capital-budgeting",
+      kicker: { en: "02 · CAPITAL BUDGETING", fr: "02 · BUDGET D’INVESTISSEMENT / CAPITAL BUDGETING" },
+      title: {
+        en: "Invest when the present value of benefits exceeds the cost",
+        fr: "Investir lorsque la valeur actuelle des bénéfices dépasse le coût",
+      },
+      coreFacts: [
+        {
+          en: "Capital budgeting evaluates long-term projects such as factories, software, stores, equipment and strategic investments.",
+          fr: "Le capital budgeting évalue des projets long terme comme usines, logiciels, magasins, équipements et investissements stratégiques.",
+        },
+        {
+          en: "NPV discounts expected incremental cash flows at a rate reflecting the project's risk.",
+          fr: "La NPV / VAN actualise les cash flows incrémentaux attendus à un taux reflétant le risque du projet.",
+        },
+        {
+          en: "A positive NPV means expected value exceeds the required return under the assumptions.",
+          fr: "Une NPV positive signifie que la valeur attendue dépasse le rendement exigé sous les hypothèses retenues.",
+        },
+        {
+          en: "Only incremental cash flows caused by the project should enter the decision; sunk costs should not.",
+          fr: "Seuls les cash flows incrémentaux causés par le projet doivent entrer dans la décision ; les sunk costs ne doivent pas être inclus.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose a project costs $100 today and pays $60 in one year and $60 in two years. At a 10% discount rate, the present value of those inflows is about $104.13, so NPV is about +$4.13.",
+          fr: "Supposons qu’un projet coûte 100 $ aujourd’hui et rapporte 60 $ dans un an puis 60 $ dans deux ans. Avec un taux d’actualisation de 10 %, la valeur actuelle des entrées vaut environ 104,13 $, donc la NPV vaut environ +4,13 $.",
+        },
+        Intermediate: {
+          en: "The project should be modeled using incremental free cash flow: revenue effects, operating costs, taxes, capex, working-capital needs and terminal proceeds. Financing cash flows are generally excluded from project free cash flow when the discount rate already reflects financing.",
+          fr: "Le projet doit être modélisé avec les free cash flows incrémentaux : effets sur revenue, coûts opérationnels, impôts, capex, besoins de working capital et valeur terminale. Les flux de financement sont généralement exclus lorsque le discount rate reflète déjà le financement.",
+        },
+        Professional: {
+          en: "Capital budgeting is fundamentally a counterfactual exercise: compare company cash flows with the project against cash flows without the project. Cannibalization, opportunity costs, tax effects and asset disposal values all belong when economically incremental.",
+          fr: "Le capital budgeting est fondamentalement un exercice contrefactuel : comparer les cash flows avec le projet à ceux sans le projet. Cannibalisation, opportunity costs, effets fiscaux et valeurs de cession doivent être inclus lorsqu’ils sont économiquement incrémentaux.",
+        },
+      },
+      formula: {
+        label: { en: "Net present value", fr: "Valeur actuelle nette / NPV" },
+        expression: "NPV = Σ [CFₜ ÷ (1+r)ᵗ] − Initial Investment",
+        explanation: {
+          en: "r should reflect the risk of the project's cash flows.",
+          fr: "r doit refléter le risque des cash flows du projet.",
+        },
+        workedExample: {
+          en: "−100 + 60/1.10 + 60/1.10² ≈ +4.13.",
+          fr: "−100 + 60/1,10 + 60/1,10² ≈ +4,13.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Sunk cost",
+          fr: "coût irrécupérable / sunk cost",
+          definition: {
+            en: "A cost already incurred that does not change with the current decision.",
+            fr: "Coût déjà engagé qui ne change pas avec la décision actuelle.",
+          },
+        },
+        {
+          en: "Opportunity cost",
+          fr: "coût d’opportunité / opportunity cost",
+          definition: {
+            en: "Value of the best alternative use sacrificed by choosing one option.",
+            fr: "Valeur de la meilleure alternative abandonnée en choisissant une option.",
+          },
+        },
+      ],
+    },
+    {
+      id: "irr-payback",
+      kicker: { en: "03 · IRR & PAYBACK", fr: "03 · IRR & PAYBACK" },
+      title: {
+        en: "IRR summarizes return, but NPV is the stronger value metric",
+        fr: "L’IRR résume le rendement, mais la NPV mesure plus directement la création de valeur",
+      },
+      coreFacts: [
+        {
+          en: "IRR is the discount rate that makes NPV equal zero.",
+          fr: "L’IRR / TRI est le taux d’actualisation qui rend la NPV égale à zéro.",
+        },
+        {
+          en: "For conventional projects, IRR above the required return generally indicates positive NPV.",
+          fr: "Pour des projets conventionnels, un IRR supérieur au rendement exigé indique généralement une NPV positive.",
+        },
+        {
+          en: "IRR can mislead when projects differ in scale or timing, or when cash flows change sign multiple times.",
+          fr: "L’IRR peut être trompeur lorsque les projets diffèrent en taille ou timing, ou lorsque les cash flows changent plusieurs fois de signe.",
+        },
+        {
+          en: "Payback measures how quickly initial investment is recovered but usually ignores value after the cutoff and often ignores time value of money.",
+          fr: "Le payback mesure la vitesse de récupération de l’investissement initial mais ignore généralement la valeur après le cutoff et souvent la valeur temps de l’argent.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If one project generates a 30% IRR on a $1 investment while another creates $50 million of NPV at a 15% IRR, the second project may create much more value despite the lower percentage return.",
+          fr: "Si un projet génère un IRR de 30 % sur 1 $ investi tandis qu’un autre crée 50 millions de dollars de NPV avec un IRR de 15 %, le second peut créer beaucoup plus de valeur malgré un rendement en pourcentage inférieur.",
+        },
+        Intermediate: {
+          en: "NPV measures dollar value creation, while IRR expresses a project return. For mutually exclusive projects, NPV is usually the more reliable decision rule because it captures scale and uses an explicit reinvestment rate in the discounting framework.",
+          fr: "La NPV mesure la valeur créée en dollars, tandis que l’IRR exprime un rendement de projet. Pour des projets mutuellement exclusifs, la NPV est généralement plus fiable car elle capture l’échelle et utilise un taux de réinvestissement explicite dans l’actualisation.",
+        },
+        Professional: {
+          en: "Multiple IRRs can appear with non-conventional cash flows. Analysts therefore inspect the full cash-flow profile and often use NPV profiles or modified IRR rather than relying mechanically on a single IRR output.",
+          fr: "Plusieurs IRR peuvent apparaître avec des cash flows non conventionnels. Les analystes examinent donc le profil complet des cash flows et utilisent souvent des NPV profiles ou modified IRR plutôt qu’un seul output IRR.",
+        },
+      },
+      formula: {
+        label: { en: "IRR condition", fr: "Condition de l’IRR" },
+        expression: "0 = Σ [CFₜ ÷ (1+IRR)ᵗ]",
+        explanation: {
+          en: "IRR is the rate that makes the project's discounted cash flows sum to zero.",
+          fr: "L’IRR est le taux qui rend nulle la somme actualisée des cash flows du projet.",
+        },
+        workedExample: {
+          en: "A simple project costing 100 and paying 110 one year later has IRR = 10%.",
+          fr: "Un projet coûtant 100 et rapportant 110 un an plus tard a un IRR de 10 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Mutually exclusive projects",
+          fr: "projets mutuellement exclusifs / mutually exclusive projects",
+          definition: {
+            en: "Projects where selecting one prevents selecting the other.",
+            fr: "Projets pour lesquels le choix de l’un empêche le choix de l’autre.",
+          },
+        },
+        {
+          en: "Payback period",
+          fr: "délai de récupération / payback period",
+          definition: {
+            en: "Time required to recover the initial investment from project cash flows.",
+            fr: "Temps nécessaire pour récupérer l’investissement initial grâce aux cash flows du projet.",
+          },
+        },
+      ],
+    },
+    {
+      id: "cost-of-capital",
+      kicker: { en: "04 · COST OF CAPITAL", fr: "04 · COÛT DU CAPITAL" },
+      title: {
+        en: "The discount rate should match the risk of the cash flow",
+        fr: "Le discount rate doit correspondre au risque du cash flow",
+      },
+      coreFacts: [
+        {
+          en: "The cost of capital is the return required by investors for bearing the risk of supplying capital.",
+          fr: "Le coût du capital est le rendement exigé par les investisseurs pour supporter le risque de fournir des capitaux.",
+        },
+        {
+          en: "Cost of debt and cost of equity differ because debt and equity have different claim priority and risk.",
+          fr: "Le coût de la dette et le coût des capitaux propres diffèrent car debt et equity ont une priorité de créance et un risque différents.",
+        },
+        {
+          en: "WACC weights after-tax debt cost and equity cost by market-value capital weights in the standard formulation.",
+          fr: "Le WACC pondère le coût de la dette après impôt et le coût de l’equity selon les poids de marché du capital dans la formulation standard.",
+        },
+        {
+          en: "A company's overall WACC should not automatically be used for every project if project risk differs materially.",
+          fr: "Le WACC global d’une entreprise ne doit pas être appliqué automatiquement à tous les projets si leur risque diffère sensiblement.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If lenders require 5% and shareholders require 10%, a company financed by both has a blended required return. That blended rate is not just an average: it depends on how much debt and equity the company uses and on taxes.",
+          fr: "Si les prêteurs exigent 5 % et les actionnaires 10 %, une entreprise financée par les deux possède un rendement exigé combiné. Ce taux n’est pas une simple moyenne : il dépend du poids de debt et equity et de la fiscalité.",
+        },
+        Intermediate: {
+          en: "Debt is often cheaper than equity because lenders have higher claim priority and contractual payments. Interest may also create a tax shield. But increasing leverage raises financial risk and can increase both debt and equity required returns.",
+          fr: "La dette est souvent moins coûteuse que l’equity car les prêteurs ont une priorité plus élevée et des paiements contractuels. Les intérêts peuvent aussi créer un tax shield. Mais davantage de leverage augmente le risque financier et peut faire monter les rendements exigés sur debt et equity.",
+        },
+        Professional: {
+          en: "WACC is an opportunity cost of capital, not an accounting interest rate. Its inputs should be market-based and risk-consistent. Using a stale capital structure or a project-inappropriate beta can materially distort valuation.",
+          fr: "Le WACC est un coût d’opportunité du capital, pas un taux d’intérêt comptable. Ses inputs doivent être basés sur le marché et cohérents avec le risque. Utiliser une structure de capital obsolète ou un beta inadapté au projet peut fortement fausser la valorisation.",
+        },
+      },
+      formula: {
+        label: { en: "WACC", fr: "WACC / coût moyen pondéré du capital" },
+        expression: "WACC = (E/V × Re) + (D/V × Rd × (1−T))",
+        explanation: {
+          en: "E = equity value, D = debt value, V = D+E, Re = cost of equity, Rd = pre-tax cost of debt.",
+          fr: "E = valeur de l’equity, D = valeur de la dette, V = D+E, Re = coût de l’equity, Rd = coût de la dette avant impôt.",
+        },
+        workedExample: {
+          en: "60% equity at 10%, 40% debt at 5%, tax rate 25% → WACC = 0.6×10% + 0.4×5%×0.75 = 7.5%.",
+          fr: "60 % equity à 10 %, 40 % dette à 5 %, taux d’impôt 25 % → WACC = 0,6×10 % + 0,4×5 %×0,75 = 7,5 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Cost of equity",
+          fr: "coût des capitaux propres / cost of equity",
+          definition: {
+            en: "Required return demanded by equity investors.",
+            fr: "Rendement exigé par les investisseurs en equity.",
+          },
+        },
+        {
+          en: "Tax shield",
+          fr: "bouclier fiscal / tax shield",
+          definition: {
+            en: "Tax benefit created by deductible expenses such as interest, subject to tax rules.",
+            fr: "Avantage fiscal créé par des charges déductibles comme les intérêts, selon les règles fiscales.",
+          },
+        },
+      ],
+    },
+    {
+      id: "capital-structure",
+      kicker: { en: "05 · CAPITAL STRUCTURE & LEVERAGE", fr: "05 · STRUCTURE DU CAPITAL & LEVIER" },
+      title: {
+        en: "Debt can improve returns and increase risk at the same time",
+        fr: "La dette peut améliorer certains rendements tout en augmentant le risque",
+      },
+      coreFacts: [
+        {
+          en: "Debt provides contractual financing and generally has higher claim priority than common equity.",
+          fr: "La dette fournit un financement contractuel et possède généralement une priorité de créance supérieure aux actions ordinaires.",
+        },
+        {
+          en: "Equity absorbs residual business risk and does not require fixed contractual repayment like debt.",
+          fr: "L’equity absorbe le risque résiduel de l’entreprise et n’impose pas un remboursement contractuel fixe comme la dette.",
+        },
+        {
+          en: "Leverage magnifies the sensitivity of equity returns to operating outcomes.",
+          fr: "Le leverage amplifie la sensibilité des rendements de l’equity aux résultats opérationnels.",
+        },
+        {
+          en: "Too much leverage can create refinancing risk, covenant constraints, distress costs and loss of strategic flexibility.",
+          fr: "Trop de leverage peut créer risque de refinancement, contraintes de covenants, coûts de distress et perte de flexibilité stratégique.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a business worth $100 is financed with $80 equity and $20 debt, shareholders bear less of the capital requirement. If the business value rises, equity returns can be amplified. But if value falls, losses are also amplified because debt still must be repaid.",
+          fr: "Si une entreprise valant 100 $ est financée avec 80 $ d’equity et 20 $ de debt, les actionnaires apportent moins de capital. Si la valeur de l’entreprise monte, le rendement de l’equity peut être amplifié. Mais si la valeur baisse, les pertes sont également amplifiées car la dette doit toujours être remboursée.",
+        },
+        Intermediate: {
+          en: "Capital structure balances financing cost, tax effects, flexibility and distress risk. The objective is not maximum debt; it is a financing mix that supports value creation and resilience.",
+          fr: "La structure du capital équilibre coût du financement, effets fiscaux, flexibilité et risque de distress. L’objectif n’est pas d’avoir le maximum de dette ; c’est d’obtenir un mix de financement qui soutient création de valeur et résilience.",
+        },
+        Professional: {
+          en: "Optimal leverage is firm-specific. Stable contracted cash flows can support more debt than volatile cyclical cash flows. Maturity profile, covenant headroom, liquidity and access to capital markets matter as much as headline leverage ratios.",
+          fr: "Le leverage optimal dépend de l’entreprise. Des cash flows stables et contractuels peuvent supporter davantage de dette que des cash flows cycliques et volatils. Maturity profile, covenant headroom, liquidité et accès aux marchés comptent autant que les ratios headline.",
+        },
+      },
+      formula: {
+        label: { en: "Debt-to-capital ratio", fr: "Ratio dette / capital" },
+        expression: "Debt to Capital = Debt ÷ (Debt + Equity)",
+        explanation: {
+          en: "A simple capital-structure measure; professional analysis also uses net debt and cash-flow-based leverage ratios.",
+          fr: "Mesure simple de structure du capital ; l’analyse professionnelle utilise aussi net debt et ratios de leverage basés sur cash flow.",
+        },
+        workedExample: {
+          en: "Debt $40, equity $60 → debt-to-capital = 40%.",
+          fr: "Dette 40 $, equity 60 $ → dette / capital = 40 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Refinancing risk",
+          fr: "risque de refinancement / refinancing risk",
+          definition: {
+            en: "Risk that maturing financing cannot be replaced on acceptable terms.",
+            fr: "Risque qu’un financement arrivant à maturité ne puisse être remplacé à des conditions acceptables.",
+          },
+        },
+        {
+          en: "Covenant",
+          fr: "clause financière / covenant",
+          definition: {
+            en: "Contractual condition in a financing agreement that can restrict borrower behavior or require financial tests.",
+            fr: "Condition contractuelle d’un financement pouvant limiter certains comportements ou imposer des tests financiers.",
+          },
+        },
+      ],
+    },
+    {
+      id: "working-capital-liquidity",
+      kicker: { en: "06 · WORKING CAPITAL & LIQUIDITY", fr: "06 · WORKING CAPITAL & LIQUIDITÉ" },
+      title: {
+        en: "Profitable companies can still run out of cash",
+        fr: "Une entreprise rentable peut malgré tout manquer de cash",
+      },
+      coreFacts: [
+        {
+          en: "Working capital links operating activity to cash timing through receivables, inventory and payables.",
+          fr: "Le working capital relie l’activité opérationnelle au timing du cash via receivables, inventory et payables.",
+        },
+        {
+          en: "Fast growth can consume cash when receivables and inventory grow faster than payables.",
+          fr: "Une croissance rapide peut consommer du cash lorsque receivables et inventory progressent plus vite que payables.",
+        },
+        {
+          en: "Liquidity is the ability to meet near-term obligations without disruptive financing or asset sales.",
+          fr: "La liquidité est la capacité à honorer les obligations court terme sans financement perturbateur ni ventes forcées d’actifs.",
+        },
+        {
+          en: "Corporate liquidity includes cash, committed credit lines and access to financing, not merely the cash balance.",
+          fr: "La liquidité corporate inclut cash, lignes de crédit engagées et accès au financement, pas seulement le solde de cash.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A company can sell a lot on credit and report revenue before collecting cash. If it also builds inventory, it may need significant financing even while accounting profit is positive.",
+          fr: "Une entreprise peut vendre beaucoup à crédit et comptabiliser du revenue avant d’encaisser. Si elle augmente aussi ses stocks, elle peut avoir besoin de financement important même avec un bénéfice comptable positif.",
+        },
+        Intermediate: {
+          en: "Working-capital efficiency affects free cash flow. Analysts watch DSO, DIO and DPO to understand whether cash conversion is improving because of operations or temporary payment timing.",
+          fr: "L’efficacité du working capital affecte le free cash flow. Les analystes surveillent DSO, DIO et DPO pour comprendre si la conversion en cash s’améliore grâce aux opérations ou à un timing de paiement temporaire.",
+        },
+        Professional: {
+          en: "Liquidity analysis stresses downside cash burn, debt maturities, revolver capacity and minimum cash needs. A business can be solvent in long-run value terms yet face a short-run liquidity crisis.",
+          fr: "L’analyse de liquidité teste cash burn en downside, maturités de dette, capacité du revolver et minimum cash. Une entreprise peut être solvable en valeur long terme tout en subissant une crise de liquidité court terme.",
+        },
+      },
+      formula: {
+        label: { en: "Cash conversion cycle", fr: "Cycle de conversion du cash / Cash Conversion Cycle" },
+        expression: "CCC = DSO + DIO − DPO",
+        explanation: {
+          en: "A shorter cycle generally means less cash tied up in operations, though industry structure matters.",
+          fr: "Un cycle plus court signifie généralement moins de cash immobilisé dans les opérations, mais la structure sectorielle compte.",
+        },
+        workedExample: {
+          en: "DSO 40 days + DIO 50 days − DPO 35 days = 55-day cash conversion cycle.",
+          fr: "DSO 40 jours + DIO 50 jours − DPO 35 jours = cash conversion cycle de 55 jours.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Revolver",
+          fr: "ligne de crédit renouvelable / revolver",
+          definition: {
+            en: "Committed revolving credit facility available to draw, repay and redraw subject to terms.",
+            fr: "Ligne de crédit renouvelable pouvant être tirée, remboursée puis réutilisée selon ses conditions.",
+          },
+        },
+        {
+          en: "Liquidity runway",
+          fr: "horizon de liquidité / liquidity runway",
+          definition: {
+            en: "Estimated time a company can fund obligations before needing additional capital.",
+            fr: "Durée estimée pendant laquelle l’entreprise peut financer ses obligations avant de devoir lever davantage de capital.",
+          },
+        },
+      ],
+    },
+    {
+      id: "capital-allocation",
+      kicker: { en: "07 · CAPITAL ALLOCATION", fr: "07 · ALLOCATION DU CAPITAL" },
+      title: {
+        en: "Every dollar of cash has competing uses",
+        fr: "Chaque dollar de cash a plusieurs utilisations possibles",
+      },
+      coreFacts: [
+        {
+          en: "Management can reinvest in the business, acquire companies, repay debt, pay dividends, repurchase shares or hold cash.",
+          fr: "Le management peut réinvestir dans l’entreprise, acquérir des sociétés, rembourser de la dette, verser des dividendes, racheter des actions ou conserver le cash.",
+        },
+        {
+          en: "The best use of capital depends on expected risk-adjusted return and strategic flexibility.",
+          fr: "La meilleure utilisation du capital dépend du rendement attendu ajusté du risque et de la flexibilité stratégique.",
+        },
+        {
+          en: "A buyback creates value only if repurchasing shares is attractive relative to alternative uses and does not weaken the balance sheet excessively.",
+          fr: "Un buyback crée de la valeur seulement si le rachat est attractif relativement aux alternatives et n’affaiblit pas excessivement le bilan.",
+        },
+        {
+          en: "Dividends distribute cash but do not themselves create operating value.",
+          fr: "Les dividendes distribuent du cash mais ne créent pas en eux-mêmes de valeur opérationnelle.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company has $100 of extra cash, it can build a new factory, pay down debt, acquire another company, pay a dividend or buy back shares. The right choice depends on which option creates the most value at an acceptable risk.",
+          fr: "Si une entreprise possède 100 $ de cash supplémentaire, elle peut construire une usine, rembourser de la dette, acquérir une autre entreprise, verser un dividende ou racheter ses actions. Le bon choix dépend de l’option qui crée le plus de valeur pour un risque acceptable.",
+        },
+        Intermediate: {
+          en: "Capital allocation should be compared on an opportunity-cost basis. If internal projects earn 20% ROIC, returning cash may be inferior. If reinvestment earns only 5% while shareholders require 10%, returning capital can be more rational.",
+          fr: "L’allocation du capital doit être comparée en termes d’opportunity cost. Si les projets internes gagnent 20 % de ROIC, distribuer le cash peut être inférieur. Si le réinvestissement ne rapporte que 5 % alors que les actionnaires exigent 10 %, restituer le capital peut être plus rationnel.",
+        },
+        Professional: {
+          en: "Capital allocation quality compounds over time. Persistent overpayment for acquisitions, aggressive buybacks at expensive valuations or underinvestment in high-ROIC opportunities can materially affect long-run intrinsic value.",
+          fr: "La qualité de l’allocation du capital se compose dans le temps. Surpayer régulièrement des acquisitions, effectuer des buybacks agressifs à des valorisations élevées ou sous-investir dans des opportunités à ROIC élevé peut fortement affecter la valeur intrinsèque long terme.",
+        },
+      },
+      comparison: {
+        title: { en: "Common uses of excess cash", fr: "Utilisations courantes du cash excédentaire" },
+        headers: [
+          { en: "Use", fr: "Utilisation" },
+          { en: "Primary question", fr: "Question principale" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Reinvestment", fr: "Réinvestissement" },
+            { en: "Expected ROIC versus cost of capital?", fr: "ROIC attendu vs coût du capital ?" },
+          ]},
+          { cells: [
+            { en: "Debt repayment", fr: "Remboursement de dette" },
+            { en: "Does reducing risk create enough value?", fr: "La réduction du risque crée-t-elle assez de valeur ?" },
+          ]},
+          { cells: [
+            { en: "Dividend", fr: "Dividende" },
+            { en: "Is cash truly excess and sustainable?", fr: "Le cash est-il réellement excédentaire et durable ?" },
+          ]},
+          { cells: [
+            { en: "Buyback", fr: "Rachat d’actions / buyback" },
+            { en: "Are shares attractively priced versus alternatives?", fr: "L’action est-elle attractive par rapport aux alternatives ?" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Capital allocation",
+          fr: "allocation du capital / capital allocation",
+          definition: {
+            en: "Decision process for deploying internally generated or externally raised capital.",
+            fr: "Processus de décision concernant l’utilisation du capital généré ou levé.",
+          },
+        },
+        {
+          en: "Share repurchase",
+          fr: "rachat d’actions / share repurchase",
+          definition: {
+            en: "Company purchase of its own shares, reducing shares outstanding if retired.",
+            fr: "Achat par une entreprise de ses propres actions, pouvant réduire le nombre d’actions en circulation.",
+          },
+        },
+      ],
+    },
+    {
+      id: "dividends-buybacks",
+      kicker: { en: "08 · DIVIDENDS & BUYBACKS", fr: "08 · DIVIDENDES & BUYBACKS" },
+      title: {
+        en: "Returning cash changes ownership claims, not operating economics by itself",
+        fr: "Restituer du cash modifie les créances des investisseurs, pas les economics opérationnels par lui-même",
+      },
+      coreFacts: [
+        {
+          en: "A dividend transfers cash from the company to shareholders and reduces corporate cash.",
+          fr: "Un dividende transfère du cash de l’entreprise aux actionnaires et réduit le cash corporate.",
+        },
+        {
+          en: "A buyback reduces cash and, when shares are retired, reduces shares outstanding.",
+          fr: "Un buyback réduit le cash et, lorsque les actions sont annulées, réduit le nombre d’actions en circulation.",
+        },
+        {
+          en: "Buybacks can increase EPS mechanically if share count falls, even without higher total earnings.",
+          fr: "Les buybacks peuvent augmenter mécaniquement l’EPS si le nombre d’actions baisse, même sans hausse du bénéfice total.",
+        },
+        {
+          en: "Financing distributions with excessive debt can increase risk despite improving per-share metrics.",
+          fr: "Financer des distributions avec trop de dette peut augmenter le risque malgré une amélioration des métriques par action.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company earns $100 and has 100 shares, EPS is $1. If it buys back 10 shares and earnings stay $100, EPS becomes about $1.11. EPS rose even though total profit did not.",
+          fr: "Si une entreprise gagne 100 $ avec 100 actions, l’EPS vaut 1 $. Si elle rachète 10 actions et que le bénéfice reste 100 $, l’EPS passe à environ 1,11 $. L’EPS augmente même si le profit total ne change pas.",
+        },
+        Intermediate: {
+          en: "Buyback analysis should compare repurchase price with intrinsic value and alternative uses of capital. EPS accretion alone is insufficient because it ignores price paid and balance-sheet effects.",
+          fr: "L’analyse d’un buyback doit comparer le prix de rachat à la valeur intrinsèque et aux alternatives d’allocation. L’accrétion de l’EPS seule est insuffisante car elle ignore le prix payé et les effets sur le bilan.",
+        },
+        Professional: {
+          en: "Distribution policy interacts with taxes, investor clientele, signaling, leverage targets and management incentives. A stable dividend may communicate confidence, while opportunistic buybacks can be more flexible but valuation-sensitive.",
+          fr: "La politique de distribution interagit avec fiscalité, investor clientele, signaling, objectifs de leverage et incitations du management. Un dividende stable peut signaler de la confiance, tandis que des buybacks opportunistes sont plus flexibles mais sensibles à la valorisation.",
+        },
+      },
+      formula: {
+        label: { en: "EPS after a buyback", fr: "EPS après buyback" },
+        expression: "EPS = Net Income ÷ Shares Outstanding",
+        explanation: {
+          en: "If shares outstanding fall and net income is unchanged, EPS rises mechanically.",
+          fr: "Si le nombre d’actions diminue et que le net income reste inchangé, l’EPS augmente mécaniquement.",
+        },
+        workedExample: {
+          en: "$100 net income ÷ 90 shares ≈ $1.11 EPS.",
+          fr: "100 $ de net income ÷ 90 actions ≈ 1,11 $ d’EPS.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Payout ratio",
+          fr: "taux de distribution / payout ratio",
+          definition: {
+            en: "Share of earnings or cash flow distributed to shareholders under a specified definition.",
+            fr: "Part des bénéfices ou cash flows distribuée aux actionnaires selon une définition donnée.",
+          },
+        },
+        {
+          en: "EPS accretion",
+          fr: "relution de l’EPS / EPS accretion",
+          definition: {
+            en: "Increase in earnings per share, which does not necessarily imply economic value creation.",
+            fr: "Hausse du bénéfice par action, qui ne signifie pas nécessairement création de valeur économique.",
+          },
+        },
+      ],
+    },
+    {
+      id: "corporate-finance-framework",
+      kicker: { en: "09 · INTEGRATED DECISION FRAMEWORK", fr: "09 · FRAMEWORK INTÉGRÉ DE DÉCISION" },
+      title: {
+        en: "Corporate finance is the discipline of choosing where capital earns the most",
+        fr: "La finance d’entreprise consiste à choisir où le capital crée le plus de valeur",
+      },
+      coreFacts: [
+        {
+          en: "Every major corporate-finance decision can be framed as expected cash flows, risk, timing and opportunity cost.",
+          fr: "Toute décision majeure de corporate finance peut être formulée en cash flows attendus, risque, timing et coût d’opportunité.",
+        },
+        {
+          en: "Investment, financing and payout decisions should be analyzed together because each affects liquidity and capital structure.",
+          fr: "Les décisions d’investissement, financement et distribution doivent être analysées ensemble car chacune affecte liquidité et structure du capital.",
+        },
+        {
+          en: "Per-share growth is not sufficient evidence of value creation; the cost and risk of achieving it matter.",
+          fr: "La croissance par action n’est pas une preuve suffisante de création de valeur ; le coût et le risque nécessaires comptent.",
+        },
+        {
+          en: "A strong corporate-finance process includes scenario analysis, downside liquidity and explicit capital-allocation priorities.",
+          fr: "Un bon process de finance d’entreprise inclut scénarios, liquidité en downside et priorités explicites d’allocation du capital.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "When evaluating a decision, ask four questions: How much cash goes out? How much cash comes back? When? How risky is it? Then compare the return with what investors require.",
+          fr: "Pour évaluer une décision, pose quatre questions : combien de cash sort ? Combien revient ? Quand ? Avec quel risque ? Puis compare le rendement au rendement exigé par les investisseurs.",
+        },
+        Intermediate: {
+          en: "A good corporate-finance recommendation connects project NPV, balance-sheet capacity and capital allocation. A positive-NPV project can still be inappropriate if it creates unacceptable liquidity or refinancing risk.",
+          fr: "Une bonne recommandation de corporate finance relie NPV du projet, capacité du bilan et allocation du capital. Un projet à NPV positive peut malgré tout être inapproprié s’il crée un risque de liquidité ou refinancement inacceptable.",
+        },
+        Professional: {
+          en: "The integrated objective is not maximizing one accounting metric. It is maximizing long-run risk-adjusted enterprise value while preserving financing flexibility and governance discipline.",
+          fr: "L’objectif intégré n’est pas de maximiser une seule métrique comptable. Il s’agit de maximiser la valeur long terme ajustée du risque tout en préservant flexibilité de financement et discipline de gouvernance.",
+        },
+      },
+      comparison: {
+        title: { en: "Corporate-finance decision checklist", fr: "Checklist de décision corporate finance" },
+        headers: [
+          { en: "Question", fr: "Question" },
+          { en: "Metric / tool", fr: "Métrique / outil" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Does the investment create value?", fr: "L’investissement crée-t-il de la valeur ?" },
+            { en: "NPV · ROIC vs WACC", fr: "NPV · ROIC vs WACC" },
+          ]},
+          { cells: [
+            { en: "Can the company finance it safely?", fr: "L’entreprise peut-elle le financer sans risque excessif ?" },
+            { en: "Leverage · liquidity · maturities", fr: "Leverage · liquidité · maturités" },
+          ]},
+          { cells: [
+            { en: "Is there a better use of capital?", fr: "Existe-t-il une meilleure utilisation du capital ?" },
+            { en: "Opportunity cost", fr: "Opportunity cost" },
+          ]},
+          { cells: [
+            { en: "What happens in downside?", fr: "Que se passe-t-il en downside ?" },
+            { en: "Scenario and stress analysis", fr: "Scénarios et stress analysis" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "Investors often re-rate companies when management demonstrates disciplined capital allocation, sustained ROIC above WACC and balance-sheet resilience.",
+        fr: "Les investisseurs peuvent revaloriser une entreprise lorsque le management démontre discipline d’allocation du capital, ROIC durablement supérieur au WACC et résilience du bilan.",
+      },
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "roic-wacc",
+      question: {
+        en: "A company earns 15% ROIC and has a 10% WACC. What is the economic spread?",
+        fr: "Une entreprise gagne 15 % de ROIC avec un WACC de 10 %. Quel est le spread économique ?",
+      },
+      options: [
+        { id: "a", label: { en: "−5 percentage points", fr: "−5 points" } },
+        { id: "b", label: { en: "0", fr: "0" } },
+        { id: "c", label: { en: "+5 percentage points", fr: "+5 points" } },
+        { id: "d", label: { en: "+25 percentage points", fr: "+25 points" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "ROIC−WACC = 15%−10% = +5 percentage points.",
+        fr: "ROIC−WACC = 15 %−10 % = +5 points.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "npv",
+      question: {
+        en: "A project costs 100 today and pays 60 in year 1 and 60 in year 2. At 10%, approximate NPV is:",
+        fr: "Un projet coûte 100 aujourd’hui et rapporte 60 en année 1 et 60 en année 2. À 10 %, la NPV approximative est :",
+      },
+      options: [
+        { id: "a", label: { en: "−4.13", fr: "−4,13" } },
+        { id: "b", label: { en: "0", fr: "0" } },
+        { id: "c", label: { en: "+4.13", fr: "+4,13" } },
+        { id: "d", label: { en: "+20", fr: "+20" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "−100 + 60/1.10 + 60/1.10² ≈ +4.13.",
+        fr: "−100 + 60/1,10 + 60/1,10² ≈ +4,13.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "irr",
+      question: {
+        en: "What is IRR?",
+        fr: "Qu’est-ce que l’IRR / TRI ?",
+      },
+      options: [
+        { id: "a", label: { en: "The discount rate that makes NPV zero", fr: "Le taux qui rend la NPV nulle" } },
+        { id: "b", label: { en: "Always the same as WACC", fr: "Toujours identique au WACC" } },
+        { id: "c", label: { en: "Revenue growth", fr: "La croissance du revenue" } },
+        { id: "d", label: { en: "Debt divided by EBITDA", fr: "Dette divisée par EBITDA" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "IRR is defined as the discount rate at which project NPV equals zero.",
+        fr: "L’IRR est défini comme le taux d’actualisation qui rend la NPV du projet égale à zéro.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "wacc",
+      question: {
+        en: "60% equity costs 10%, 40% debt costs 5%, and tax rate is 25%. Approximate WACC is:",
+        fr: "60 % d’equity coûtant 10 %, 40 % de dette coûtant 5 %, taux d’impôt 25 %. WACC approximatif :",
+      },
+      options: [
+        { id: "a", label: { en: "5.0%", fr: "5,0 %" } },
+        { id: "b", label: { en: "6.0%", fr: "6,0 %" } },
+        { id: "c", label: { en: "7.5%", fr: "7,5 %" } },
+        { id: "d", label: { en: "10.0%", fr: "10,0 %" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "0.6×10% + 0.4×5%×0.75 = 7.5%.",
+        fr: "0,6×10 % + 0,4×5 %×0,75 = 7,5 %.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "leverage-risk",
+      question: {
+        en: "What is a key effect of higher financial leverage?",
+        fr: "Quel est un effet majeur d’un leverage financier plus élevé ?",
+      },
+      options: [
+        { id: "a", label: { en: "It can amplify equity gains and losses", fr: "Il peut amplifier gains et pertes de l’equity" } },
+        { id: "b", label: { en: "It removes refinancing risk", fr: "Il supprime le risque de refinancement" } },
+        { id: "c", label: { en: "It guarantees lower WACC forever", fr: "Il garantit toujours un WACC plus faible" } },
+        { id: "d", label: { en: "It makes cash flow irrelevant", fr: "Il rend le cash flow sans importance" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Debt is a fixed claim, so equity becomes more sensitive to changes in business value and cash flow.",
+        fr: "La dette est une créance fixe ; l’equity devient donc plus sensible aux variations de valeur et de cash flow.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "cash-conversion-cycle",
+      question: {
+        en: "DSO=40, DIO=50 and DPO=35. What is the cash conversion cycle?",
+        fr: "DSO=40, DIO=50 et DPO=35. Quel est le cash conversion cycle ?",
+      },
+      options: [
+        { id: "a", label: { en: "25 days", fr: "25 jours" } },
+        { id: "b", label: { en: "55 days", fr: "55 jours" } },
+        { id: "c", label: { en: "90 days", fr: "90 jours" } },
+        { id: "d", label: { en: "125 days", fr: "125 jours" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "40+50−35 = 55 days.",
+        fr: "40+50−35 = 55 jours.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "buyback-eps",
+      question: {
+        en: "Net income is 100 and shares outstanding fall from 100 to 90. Approximate EPS becomes:",
+        fr: "Le net income vaut 100 et le nombre d’actions passe de 100 à 90. L’EPS approximatif devient :",
+      },
+      options: [
+        { id: "a", label: { en: "0.90", fr: "0,90" } },
+        { id: "b", label: { en: "1.00", fr: "1,00" } },
+        { id: "c", label: { en: "1.11", fr: "1,11" } },
+        { id: "d", label: { en: "1.90", fr: "1,90" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "100/90 ≈ 1.11.",
+        fr: "100/90 ≈ 1,11.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "capital-allocation",
+      question: {
+        en: "Which statement best describes strong capital allocation?",
+        fr: "Quelle proposition décrit le mieux une bonne allocation du capital ?",
+      },
+      options: [
+        { id: "a", label: { en: "Choose the use of capital with the best expected risk-adjusted value creation", fr: "Choisir l’usage du capital avec la meilleure création de valeur attendue ajustée du risque" } },
+        { id: "b", label: { en: "Always pay dividends", fr: "Toujours verser des dividendes" } },
+        { id: "c", label: { en: "Always maximize debt", fr: "Toujours maximiser la dette" } },
+        { id: "d", label: { en: "Always buy back shares regardless of price", fr: "Toujours racheter des actions quel que soit le prix" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Capital allocation compares alternative uses on expected value creation, risk and flexibility.",
+        fr: "L’allocation du capital compare les alternatives selon création de valeur attendue, risque et flexibilité.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "A company has excess cash. How would you decide whether it should reinvest, pay down debt, pay a dividend or buy back shares?",
+      fr: "Une entreprise dispose de cash excédentaire. Comment déciderais-tu entre réinvestir, rembourser de la dette, verser un dividende ou racheter des actions ?",
+    },
+    framework: [
+      {
+        en: "Start with balance-sheet safety: liquidity, leverage, maturities and downside resilience.",
+        fr: "Commencer par la sécurité du bilan : liquidité, leverage, maturités et résilience en downside.",
+      },
+      {
+        en: "Compare internal reinvestment opportunities using expected ROIC and NPV versus cost of capital.",
+        fr: "Comparer les opportunités de réinvestissement interne via ROIC attendu et NPV versus coût du capital.",
+      },
+      {
+        en: "Evaluate debt repayment based on interest cost, refinancing risk and target capital structure.",
+        fr: "Évaluer le remboursement de dette selon coût des intérêts, risque de refinancement et structure de capital cible.",
+      },
+      {
+        en: "Evaluate buybacks relative to intrinsic value and alternative uses of cash, not EPS accretion alone.",
+        fr: "Évaluer les buybacks relativement à la valeur intrinsèque et aux alternatives, pas uniquement à l’accrétion EPS.",
+      },
+      {
+        en: "Use dividends when cash is sustainably excess and reinvestment opportunities are insufficient.",
+        fr: "Utiliser les dividendes lorsque le cash est durablement excédentaire et les opportunités de réinvestissement insuffisantes.",
+      },
+    ],
+    sample: {
+      en: "I would begin with the balance sheet because excess cash is only truly excess if the company still has enough liquidity and debt capacity for a downside case. Next I would compare internal projects using NPV and expected ROIC versus WACC. If the company can reinvest at attractive returns, that may be the highest-value use of cash. If leverage is high or maturities create risk, debt repayment could be more valuable. For buybacks, I would compare the repurchase price with intrinsic value and alternative uses of capital rather than focusing only on EPS accretion. A dividend makes sense when cash generation is durable and the company lacks better risk-adjusted reinvestment opportunities. The objective is not to maximize one metric but to allocate capital where it creates the most long-term value.",
+      fr: "Je commencerais par le bilan car le cash n’est réellement excédentaire que si l’entreprise conserve suffisamment de liquidité et de capacité de dette pour un scénario downside. Ensuite je comparerais les projets internes avec leur NPV et leur ROIC attendu versus WACC. Si l’entreprise peut réinvestir à des rendements attractifs, cela peut être l’utilisation du cash créant le plus de valeur. Si le leverage est élevé ou les maturités risquées, rembourser de la dette peut être préférable. Pour les buybacks, je comparerais le prix de rachat à la valeur intrinsèque et aux autres utilisations du capital plutôt que de regarder seulement l’accrétion de l’EPS. Un dividende devient pertinent lorsque la génération de cash est durable et qu’il n’existe pas de meilleures opportunités de réinvestissement ajustées du risque. L’objectif n’est pas de maximiser une seule métrique mais d’allouer le capital là où il crée le plus de valeur long terme.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
