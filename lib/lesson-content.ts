@@ -27856,7 +27856,471 @@ export const financialModelingIILesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, advancedValuationLesson, leveragedFinanceLesson];
+
+export const realCompanyCaseStudiesLesson: FinanceLesson = {
+  slug: "year-3-real-company-case-studies",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Real-Company Case Studies", fr: "Études de cas d’entreprises réelles / Real-Company Case Studies" },
+  title: { en: "Real-Company Case Studies", fr: "Études de cas d’entreprises réelles / Real-Company Case Studies" },
+  subtitle: {
+    en: "Apply accounting, valuation, modeling, markets, credit and strategic analysis to real public-company business models through structured case studies.",
+    fr: "Appliquer comptabilité, valorisation, modélisation, marchés, crédit et analyse stratégique à de vraies entreprises cotées à travers des études de cas structurées.",
+  },
+  duration: { en: "180–220 min", fr: "180–220 min" },
+  prerequisites: [
+    { en: "Financial Statement Analysis", fr: "Analyse des états financiers" },
+    { en: "Equity Valuation", fr: "Valorisation des actions" },
+    { en: "DCF & Relative Valuation", fr: "DCF & Relative Valuation" },
+    { en: "Financial Modeling II", fr: "Financial Modeling II" },
+    { en: "Credit Analysis", fr: "Credit Analysis" },
+  ],
+  objectives: [
+    { en: "Translate a real company’s business model into financial drivers.", fr: "Traduire le business model d’une entreprise réelle en drivers financiers." },
+    { en: "Identify which metrics matter most for different industries.", fr: "Identifier les métriques les plus importantes selon les secteurs." },
+    { en: "Connect financial statements to strategic and competitive analysis.", fr: "Relier les états financiers à l’analyse stratégique et concurrentielle." },
+    { en: "Build a valuation framework appropriate to each company type.", fr: "Construire un cadre de valorisation adapté à chaque type d’entreprise." },
+    { en: "Separate company quality from stock valuation.", fr: "Séparer qualité de l’entreprise et valorisation de l’action." },
+    { en: "Develop a concise investment thesis with catalysts, risks and invalidation points.", fr: "Développer une thèse d’investissement concise avec catalysts, risques et points d’invalidation." },
+    { en: "Use case studies to prepare for finance interviews and investment discussions.", fr: "Utiliser les études de cas pour préparer les entretiens finance et discussions d’investissement." },
+  ],
+  overviewFlow: {
+    title: { en: "From business model to investment conclusion", fr: "Du business model à la conclusion d’investissement" },
+    steps: [
+      { title: { en: "Understand", fr: "Comprendre" }, detail: { en: "Business model · industry · moat", fr: "Business model · industrie · moat" } },
+      { title: { en: "Model", fr: "Modéliser" }, detail: { en: "Drivers · margins · cash flow", fr: "Drivers · marges · cash flow" } },
+      { title: { en: "Value", fr: "Valoriser" }, detail: { en: "DCF · multiples · SOTP", fr: "DCF · multiples · SOTP" } },
+      { title: { en: "Decide", fr: "Décider" }, detail: { en: "Thesis · catalysts · risks", fr: "Thèse · catalysts · risques" } },
+    ],
+  },
+  sections: [
+    {
+      id: "case-study-framework",
+      kicker: { en: "01 · CASE-STUDY FRAMEWORK", fr: "01 · MÉTHODE D’ÉTUDE DE CAS" },
+      title: { en: "Start with how the company makes money before opening the spreadsheet", fr: "Commence par comprendre comment l’entreprise gagne de l’argent avant d’ouvrir le spreadsheet" },
+      coreFacts: [
+        { en: "A good company analysis begins with customers, products, pricing, competition and unit economics.", fr: "Une bonne analyse commence par clients, produits, pricing, concurrence et unit economics." },
+        { en: "Financial statements should confirm or challenge the business story.", fr: "Les états financiers doivent confirmer ou challenger l’histoire économique." },
+        { en: "Industry structure determines which operating metrics deserve the most attention.", fr: "La structure du secteur détermine quelles métriques opérationnelles méritent le plus d’attention." },
+        { en: "A case study should end with a decision framework, not a collection of facts.", fr: "Une étude de cas doit se terminer par un cadre de décision, pas par une collection de faits." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Before asking whether a stock is cheap or expensive, first understand what the company sells, who buys it and why customers choose it.",
+          fr: "Avant de demander si une action est chère ou bon marché, comprends d’abord ce que l’entreprise vend, qui l’achète et pourquoi les clients la choisissent.",
+        },
+        Intermediate: {
+          en: "Map revenue drivers, cost structure, capital intensity and competitive advantage, then connect each one to a financial statement line and a valuation implication.",
+          fr: "Cartographie les revenue drivers, la structure de coûts, l’intensité capitalistique et l’avantage concurrentiel, puis relie chacun à une ligne financière et à une implication de valorisation.",
+        },
+        Professional: {
+          en: "The strongest case studies distinguish descriptive facts from causal drivers. The goal is to identify which variables control future cash flow and which market expectations are already embedded in valuation.",
+          fr: "Les meilleures études de cas distinguent faits descriptifs et drivers causaux. L’objectif est d’identifier quelles variables contrôlent les futurs cash flows et quelles attentes du marché sont déjà intégrées dans la valorisation.",
+        },
+      },
+      vocabulary: [
+        { en: "Unit economics", fr: "unit economics", definition: { en: "Economics generated by one customer, unit, store or transaction.", fr: "Économie générée par un client, une unité, un magasin ou une transaction." } },
+        { en: "Moat", fr: "moat", definition: { en: "Durable competitive advantage protecting returns and market position.", fr: "Avantage concurrentiel durable protégeant returns et position de marché." } },
+        { en: "Key driver", fr: "key driver", definition: { en: "Variable with a major influence on financial performance or valuation.", fr: "Variable ayant une influence majeure sur la performance financière ou la valorisation." } },
+      ],
+    },
+    {
+      id: "apple-case",
+      kicker: { en: "02 · APPLE CASE", fr: "02 · CAS APPLE" },
+      title: { en: "Apple: ecosystem economics, installed base and capital returns", fr: "Apple : économie de l’écosystème, installed base et capital returns" },
+      coreFacts: [
+        { en: "Apple combines hardware sales with a large ecosystem of services and devices.", fr: "Apple combine ventes de hardware et vaste écosystème de services et appareils." },
+        { en: "The installed base creates recurring opportunities for services, upgrades and cross-selling.", fr: "L’instal­led base crée des opportunités récurrentes de services, upgrades et cross-selling." },
+        { en: "Gross-margin mix matters because hardware and services can carry different economics.", fr: "Le mix de gross margin est important car hardware et services peuvent avoir des économies différentes." },
+        { en: "Capital-return policy matters because buybacks can materially affect per-share value.", fr: "La politique de capital return compte car les buybacks peuvent fortement influencer la valeur par action." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Apple is more than a phone manufacturer. A key analytical question is how the ecosystem keeps customers engaged and supports recurring spending.",
+          fr: "Apple est plus qu’un fabricant de téléphones. Une question clé est de comprendre comment l’écosystème maintient les clients engagés et soutient des dépenses récurrentes.",
+        },
+        Intermediate: {
+          en: "Build revenue by product and services, monitor installed-base growth, upgrade cycles, average selling prices and services monetization. Then analyze how mix changes affect margins.",
+          fr: "Construis le revenue par produit et services, suis la croissance de l’instal­led base, les upgrade cycles, average selling prices et la monétisation des services. Analyse ensuite l’effet du mix sur les marges.",
+        },
+        Professional: {
+          en: "The valuation debate often turns on durability: how sustainable are premium pricing, ecosystem retention, services growth and capital returns? A high-quality business can still be a weak investment if expectations are already too demanding.",
+          fr: "Le débat de valorisation porte souvent sur la durabilité : à quel point premium pricing, rétention de l’écosystème, croissance des services et capital returns sont-ils soutenables ? Un business de grande qualité peut rester un mauvais investissement si les attentes sont déjà trop exigeantes.",
+        },
+      },
+      vocabulary: [
+        { en: "Installed base", fr: "installed base", definition: { en: "Total active devices or customers already inside an ecosystem.", fr: "Total d’appareils ou clients actifs déjà présents dans un écosystème." } },
+        { en: "Upgrade cycle", fr: "upgrade cycle", definition: { en: "Typical period between customer purchases of replacement devices.", fr: "Période typique entre les achats de remplacement d’un client." } },
+      ],
+    },
+    {
+      id: "costco-case",
+      kicker: { en: "03 · COSTCO CASE", fr: "03 · CAS COSTCO" },
+      title: { en: "Costco: low margins, high loyalty and membership economics", fr: "Costco : faibles marges, forte fidélité et économie des abonnements" },
+      coreFacts: [
+        { en: "Costco combines retail sales with recurring membership-fee economics.", fr: "Costco combine ventes retail et économie récurrente des membership fees." },
+        { en: "Low merchandise margins can reinforce the customer-value proposition.", fr: "De faibles marges sur les marchandises peuvent renforcer la proposition de valeur client." },
+        { en: "Renewal rates, traffic, same-store sales and membership growth are key operating drivers.", fr: "Renewal rates, traffic, same-store sales et croissance des memberships sont des drivers opérationnels clés." },
+        { en: "Strong inventory turnover and supplier economics can support cash generation despite thin retail margins.", fr: "Un fort inventory turnover et une bonne économie fournisseurs peuvent soutenir la génération de cash malgré de faibles marges retail." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Costco shows that a company does not need high product margins to be attractive if customers remain loyal and the business model generates recurring membership income.",
+          fr: "Costco montre qu’une entreprise n’a pas besoin de fortes marges produits pour être attractive si les clients restent fidèles et que le business model génère des revenus récurrents d’abonnement.",
+        },
+        Intermediate: {
+          en: "Model warehouse growth, comparable sales, traffic, ticket size, membership count and fee economics separately. Then study inventory turnover and working-capital efficiency.",
+          fr: "Modélise séparément croissance des entrepôts, comparable sales, traffic, ticket size, nombre de membres et économie des fees. Étudie ensuite inventory turnover et efficacité du working capital.",
+        },
+        Professional: {
+          en: "The key question is whether customer trust and scale allow Costco to preserve a low-price moat while still increasing lifetime customer value. Valuation should reflect both quality and the market’s expectations for future store and membership growth.",
+          fr: "La question clé est de savoir si la confiance client et l’échelle permettent à Costco de préserver un moat de prix bas tout en augmentant la lifetime customer value. La valorisation doit refléter à la fois qualité et attentes du marché sur la croissance future des magasins et memberships.",
+        },
+      },
+      vocabulary: [
+        { en: "Same-store sales", fr: "same-store sales", definition: { en: "Sales growth generated by stores open for a comparable period.", fr: "Croissance des ventes générée par les magasins ouverts sur une période comparable." } },
+        { en: "Renewal rate", fr: "renewal rate", definition: { en: "Percentage of members renewing their subscription.", fr: "Pourcentage de membres renouvelant leur abonnement." } },
+      ],
+    },
+    {
+      id: "netflix-case",
+      kicker: { en: "04 · NETFLIX CASE", fr: "04 · CAS NETFLIX" },
+      title: { en: "Netflix: subscribers, pricing, engagement and content economics", fr: "Netflix : abonnés, pricing, engagement et économie du contenu" },
+      coreFacts: [
+        { en: "Netflix converts subscriber relationships into recurring subscription revenue.", fr: "Netflix transforme les relations abonnés en revenue récurrent d’abonnement." },
+        { en: "Subscriber growth, pricing, churn and engagement are central operating drivers.", fr: "Croissance des abonnés, pricing, churn et engagement sont des drivers opérationnels centraux." },
+        { en: "Content spending is economically similar to investment because content can generate value over multiple periods.", fr: "Les dépenses de contenu ressemblent économiquement à un investissement car le contenu peut générer de la valeur sur plusieurs périodes." },
+        { en: "Free cash flow can differ materially from accounting earnings because of content cash timing.", fr: "Le free cash flow peut différer fortement des earnings comptables en raison du timing cash du contenu." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Netflix is useful because accounting profit does not tell the whole story. The company may pay cash for content before the accounting expense is fully recognized.",
+          fr: "Netflix est utile car le profit comptable ne raconte pas toute l’histoire. La société peut payer du cash pour du contenu avant que la charge comptable soit entièrement reconnue.",
+        },
+        Intermediate: {
+          en: "Forecast subscribers, average revenue per membership, churn and content spending. Then reconcile content cash payments with amortization to understand earnings versus cash flow.",
+          fr: "Prévois abonnés, average revenue per membership, churn et dépenses de contenu. Réconcilie ensuite paiements cash du contenu et amortization pour comprendre earnings versus cash flow.",
+        },
+        Professional: {
+          en: "The analytical debate is whether scale improves content efficiency and pricing power faster than competition increases customer acquisition and retention costs. Reverse valuation can reveal how much long-term subscriber and margin growth the market already assumes.",
+          fr: "Le débat analytique est de savoir si l’échelle améliore l’efficacité du contenu et le pricing power plus vite que la concurrence n’augmente les coûts d’acquisition et de rétention. Une reverse valuation peut révéler combien de croissance long terme des abonnés et marges le marché suppose déjà.",
+        },
+      },
+      vocabulary: [
+        { en: "ARPU", fr: "ARPU", definition: { en: "Average revenue per user or membership.", fr: "Revenue moyen par utilisateur ou abonnement." } },
+        { en: "Content amortization", fr: "content amortization", definition: { en: "Accounting allocation of content cost across the periods benefiting from it.", fr: "Répartition comptable du coût du contenu sur les périodes qui en bénéficient." } },
+      ],
+    },
+    {
+      id: "jpmorgan-case",
+      kicker: { en: "05 · JPMORGAN CASE", fr: "05 · CAS JPMORGAN" },
+      title: { en: "JPMorgan: why banks require a different analytical framework", fr: "JPMorgan : pourquoi les banques exigent un cadre d’analyse différent" },
+      coreFacts: [
+        { en: "For banks, deposits and funding are core operating inputs rather than ordinary corporate financing.", fr: "Pour les banques, dépôts et funding sont des inputs opérationnels fondamentaux plutôt qu’un financement corporate ordinaire." },
+        { en: "Net interest income, credit losses, fee income and capital ratios are key drivers.", fr: "Net interest income, credit losses, fee income et capital ratios sont des drivers clés." },
+        { en: "Book value and return on equity are often more informative than enterprise-value multiples.", fr: "Book value et return on equity sont souvent plus informatifs que les multiples d’enterprise value." },
+        { en: "Credit quality and capital adequacy matter because losses can directly impair equity capital.", fr: "Qualité du crédit et capital adequacy comptent car les pertes peuvent directement réduire l’equity capital." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A bank borrows from depositors and other funding sources, then lends and invests that money. Because debt is part of normal operations, standard industrial-company valuation metrics can be misleading.",
+          fr: "Une banque emprunte aux déposants et autres sources de financement, puis prête et investit cet argent. Comme la dette fait partie des opérations normales, les métriques classiques d’une société industrielle peuvent être trompeuses.",
+        },
+        Intermediate: {
+          en: "Focus on net interest margin, loan growth, deposit costs, provisions, charge-offs, fee revenue, efficiency and regulatory capital. Link these drivers to ROE and book-value growth.",
+          fr: "Concentre-toi sur net interest margin, loan growth, coût des dépôts, provisions, charge-offs, fee revenue, efficiency et capital réglementaire. Relie ces drivers au ROE et à la croissance de book value.",
+        },
+        Professional: {
+          en: "A bank deserves a premium or discount to book based on sustainable ROE relative to cost of equity, asset quality, capital strength and franchise durability. Residual-income logic can therefore be more appropriate than standard FCFF.",
+          fr: "Une banque mérite une prime ou décote sur book value selon son ROE soutenable relativement au cost of equity, la qualité des actifs, la solidité du capital et la durabilité de la franchise. Une logique residual income peut donc être plus pertinente qu’un FCFF standard.",
+        },
+      },
+      vocabulary: [
+        { en: "Net interest margin", fr: "net interest margin", definition: { en: "Difference between interest earned on assets and funding cost relative to earning assets.", fr: "Différence entre intérêts gagnés sur actifs et coût du funding rapportée aux earning assets." } },
+        { en: "Charge-off", fr: "charge-off", definition: { en: "Loan amount recognized as unlikely to be collected.", fr: "Montant de prêt reconnu comme probablement irrécouvrable." } },
+        { en: "Capital ratio", fr: "capital ratio", definition: { en: "Regulatory measure comparing qualifying capital with risk-weighted assets or exposures.", fr: "Mesure réglementaire comparant le capital éligible aux actifs ou expositions pondérés du risque." } },
+      ],
+    },
+    {
+      id: "lvmh-case",
+      kicker: { en: "06 · LVMH CASE", fr: "06 · CAS LVMH" },
+      title: { en: "LVMH: brand equity, pricing power and portfolio economics", fr: "LVMH : brand equity, pricing power et économie de portefeuille" },
+      coreFacts: [
+        { en: "Luxury businesses can create value through brand scarcity, pricing power and customer aspiration.", fr: "Les entreprises de luxe peuvent créer de la valeur grâce à rareté de marque, pricing power et aspiration client." },
+        { en: "Different houses and categories can have different growth, margins and capital requirements.", fr: "Les différentes maisons et catégories peuvent avoir des profils différents de croissance, marges et besoins en capital." },
+        { en: "Geographic mix, tourism and consumer confidence can affect short-term demand.", fr: "Le mix géographique, le tourisme et la confiance des consommateurs peuvent affecter la demande à court terme." },
+        { en: "A portfolio structure can make sum-of-the-parts analysis useful as a cross-check.", fr: "Une structure de portefeuille peut rendre l’analyse sum-of-the-parts utile comme cross-check." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Luxury companies show why brands can be financial assets. Strong brands can support higher prices without immediately losing customers.",
+          fr: "Les entreprises de luxe montrent pourquoi les marques peuvent être des actifs financiers. Des marques fortes peuvent soutenir des prix plus élevés sans perdre immédiatement les clients.",
+        },
+        Intermediate: {
+          en: "Analyze organic revenue growth, price versus volume, regional mix, store productivity, gross margin and operating margin by business group where possible.",
+          fr: "Analyse organic revenue growth, prix versus volume, mix régional, store productivity, gross margin et operating margin par business group lorsque possible.",
+        },
+        Professional: {
+          en: "The central question is the durability of brand equity. A premium valuation is easier to justify when pricing power, scarcity, distribution control and reinvestment maintain high returns on capital over long periods.",
+          fr: "La question centrale est la durabilité du brand equity. Une valorisation premium est plus facile à justifier lorsque pricing power, rareté, contrôle de la distribution et réinvestissement maintiennent des returns on capital élevés sur de longues périodes.",
+        },
+      },
+      vocabulary: [
+        { en: "Brand equity", fr: "brand equity", definition: { en: "Economic value created by customer perception, loyalty and willingness to pay.", fr: "Valeur économique créée par perception client, fidélité et willingness to pay." } },
+        { en: "Organic growth", fr: "organic growth", definition: { en: "Growth excluding acquisitions, disposals and often currency effects.", fr: "Croissance excluant acquisitions, cessions et souvent effets de change." } },
+      ],
+    },
+    {
+      id: "tesla-case",
+      kicker: { en: "07 · TESLA CASE", fr: "07 · CAS TESLA" },
+      title: { en: "Tesla: growth expectations, operating leverage and valuation uncertainty", fr: "Tesla : attentes de croissance, operating leverage et incertitude de valorisation" },
+      coreFacts: [
+        { en: "Tesla is a useful case for studying businesses whose valuation depends heavily on long-duration growth expectations.", fr: "Tesla est un cas utile pour étudier les sociétés dont la valorisation dépend fortement d’attentes de croissance de longue durée." },
+        { en: "Vehicle deliveries, pricing, manufacturing cost, capacity utilization and product mix affect automotive economics.", fr: "Livraisons de véhicules, pricing, coûts de fabrication, utilisation des capacités et product mix affectent l’économie automobile." },
+        { en: "Large changes in expected long-run margins or market share can materially change valuation.", fr: "De fortes variations des marges long terme ou parts de marché attendues peuvent modifier fortement la valorisation." },
+        { en: "Scenario analysis is especially useful when the future outcome distribution is wide.", fr: "La scenario analysis est particulièrement utile lorsque la distribution des résultats futurs est large." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Tesla demonstrates why a fast-growing company can be difficult to value: small changes in assumptions far in the future can produce large changes in present value.",
+          fr: "Tesla montre pourquoi une société à forte croissance peut être difficile à valoriser : de petites variations d’hypothèses lointaines peuvent produire de grands changements de valeur actuelle.",
+        },
+        Intermediate: {
+          en: "Model deliveries, average selling price, automotive gross margin, operating expenses, capex and capacity. Then test multiple long-term margin and growth paths rather than one point estimate.",
+          fr: "Modélise deliveries, average selling price, automotive gross margin, operating expenses, capex et capacité. Teste ensuite plusieurs trajectoires de marge et croissance long terme plutôt qu’un seul point.",
+        },
+        Professional: {
+          en: "Reverse DCF is powerful in high-expectation stocks because it turns the market price into an implied operating forecast. The analyst can then ask whether the required market share, margins and reinvestment are economically plausible.",
+          fr: "Le reverse DCF est puissant pour les actions à fortes attentes car il transforme le prix de marché en forecast opérationnel implicite. L’analyste peut ensuite demander si les parts de marché, marges et réinvestissements nécessaires sont économiquement plausibles.",
+        },
+      },
+      vocabulary: [
+        { en: "Long-duration equity", fr: "long-duration equity", definition: { en: "Stock whose value depends heavily on cash flows expected far in the future.", fr: "Action dont la valeur dépend fortement de cash flows attendus loin dans le futur." } },
+        { en: "Capacity utilization", fr: "capacity utilization", definition: { en: "Share of available production capacity actually being used.", fr: "Part de la capacité de production disponible réellement utilisée." } },
+      ],
+    },
+    {
+      id: "cross-company-comparison",
+      kicker: { en: "08 · CROSS-COMPANY COMPARISON", fr: "08 · COMPARAISON ENTRE ENTREPRISES" },
+      title: { en: "Different businesses should not be judged with the same scorecard", fr: "Des business différents ne doivent pas être jugés avec la même grille" },
+      coreFacts: [
+        { en: "Retailers, subscription platforms, banks, luxury groups and manufacturers create value through different mechanisms.", fr: "Retailers, plateformes d’abonnement, banques, groupes de luxe et fabricants créent de la valeur via des mécanismes différents." },
+        { en: "The best metric is the one most closely connected to future cash economics for that business.", fr: "La meilleure métrique est celle qui est le plus directement reliée à l’économie future du cash pour ce business." },
+        { en: "High margins alone do not guarantee high returns on capital, and low margins do not automatically indicate a weak business.", fr: "De fortes marges seules ne garantissent pas de forts returns on capital, et de faibles marges n’indiquent pas automatiquement un mauvais business." },
+        { en: "Competitive advantage should ultimately appear through growth, pricing, margins, capital efficiency or customer retention.", fr: "L’avantage concurrentiel doit finalement apparaître via croissance, pricing, marges, efficacité du capital ou rétention client." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Costco and LVMH can both be strong businesses for completely different reasons. Comparing only their profit margins would miss the economics that make each model work.",
+          fr: "Costco et LVMH peuvent être de très bons businesses pour des raisons totalement différentes. Comparer seulement leurs marges manquerait l’économie propre à chaque modèle.",
+        },
+        Intermediate: {
+          en: "Create an industry-specific scorecard: subscriber businesses may emphasize retention and ARPU, banks capital and credit quality, retailers traffic and inventory, luxury brands pricing and organic growth.",
+          fr: "Crée une scorecard adaptée au secteur : les subscriptions mettent l’accent sur rétention et ARPU, les banques sur capital et qualité du crédit, les retailers sur traffic et inventory, le luxe sur pricing et organic growth.",
+        },
+        Professional: {
+          en: "Cross-company comparison is strongest when metrics are tied back to economic value creation. ROIC, reinvestment runway and competitive durability provide a common language across otherwise very different industries.",
+          fr: "La comparaison entre entreprises est plus forte lorsque les métriques sont reliées à la création de valeur économique. ROIC, runway de réinvestissement et durabilité compétitive fournissent un langage commun entre secteurs très différents.",
+        },
+      },
+      comparison: {
+        title: { en: "What to focus on by business model", fr: "Que regarder selon le business model" },
+        headers: [{ en: "Company type", fr: "Type d’entreprise" }, { en: "Key drivers", fr: "Drivers clés" }, { en: "Useful valuation lens", fr: "Approche de valorisation utile" }],
+        rows: [
+          { cells: [{ en: "Ecosystem technology", fr: "Technologie écosystème" }, { en: "Installed base · services · pricing", fr: "Installed base · services · pricing" }, { en: "DCF · P/E · FCF yield", fr: "DCF · P/E · FCF yield" }] },
+          { cells: [{ en: "Membership retail", fr: "Retail par abonnement" }, { en: "Renewal · traffic · store growth", fr: "Renewal · traffic · croissance magasins" }, { en: "P/E · EV/EBIT · DCF", fr: "P/E · EV/EBIT · DCF" }] },
+          { cells: [{ en: "Bank", fr: "Banque" }, { en: "NIM · credit · capital · ROE", fr: "NIM · crédit · capital · ROE" }, { en: "P/B · P/E · residual income", fr: "P/B · P/E · residual income" }] },
+          { cells: [{ en: "Luxury", fr: "Luxe" }, { en: "Pricing · organic growth · brand", fr: "Pricing · organic growth · marque" }, { en: "DCF · EV/EBIT · SOTP", fr: "DCF · EV/EBIT · SOTP" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Scorecard", fr: "scorecard", definition: { en: "Set of operating and financial metrics used to assess a business consistently.", fr: "Ensemble de métriques opérationnelles et financières utilisé pour évaluer un business de façon cohérente." } },
+        { en: "Reinvestment runway", fr: "reinvestment runway", definition: { en: "Length of time a business can reinvest capital at attractive incremental returns.", fr: "Durée pendant laquelle un business peut réinvestir du capital à des returns incrémentaux attractifs." } },
+      ],
+    },
+    {
+      id: "investment-thesis",
+      kicker: { en: "09 · INVESTMENT THESIS", fr: "09 · THÈSE D’INVESTISSEMENT" },
+      title: { en: "A case study should end with what the market may be missing", fr: "Une étude de cas doit finir par ce que le marché pourrait mal comprendre" },
+      coreFacts: [
+        { en: "A thesis should identify the differentiated view, valuation, catalysts, risks and invalidation conditions.", fr: "Une thèse doit identifier la vue différenciée, la valorisation, les catalysts, les risques et les conditions d’invalidation." },
+        { en: "A good company is not automatically a good stock at any price.", fr: "Une bonne entreprise n’est pas automatiquement une bonne action à n’importe quel prix." },
+        { en: "Catalysts explain what may cause the market to update expectations.", fr: "Les catalysts expliquent ce qui peut pousser le marché à mettre à jour ses attentes." },
+        { en: "An invalidation point tells you which evidence would prove the thesis wrong.", fr: "Un point d’invalidation indique quelles preuves montreraient que la thèse est fausse." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Do not end with 'I like the company.' End with why your expectations differ from the market and what could make the stock move.",
+          fr: "Ne termine pas par 'j’aime l’entreprise'. Termine par pourquoi tes attentes diffèrent du marché et ce qui pourrait faire bouger l’action.",
+        },
+        Intermediate: {
+          en: "Write the thesis in a few sentences: what the market expects, what you believe instead, why, how much value that difference creates and what events could close the gap.",
+          fr: "Écris la thèse en quelques phrases : ce que le marché attend, ce que tu crois à la place, pourquoi, combien de valeur cette différence crée et quels événements peuvent fermer l’écart.",
+        },
+        Professional: {
+          en: "The strongest thesis is falsifiable. Define measurable conditions that would force you to change your view, and distinguish temporary price volatility from evidence that the underlying economics have changed.",
+          fr: "La meilleure thèse est falsifiable. Définis des conditions mesurables qui te forceraient à changer d’avis et distingue volatilité temporaire du prix et preuve que l’économie fondamentale a changé.",
+        },
+      },
+      vocabulary: [
+        { en: "Differentiated view", fr: "vue différenciée", definition: { en: "Expectation that differs meaningfully from market consensus.", fr: "Attente qui diffère de manière significative du consensus du marché." } },
+        { en: "Invalidation point", fr: "point d’invalidation", definition: { en: "Evidence or threshold that would demonstrate the investment thesis is wrong.", fr: "Preuve ou seuil montrant que la thèse d’investissement est erronée." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "framework",
+      question: { en: "What should come first in a company case study?", fr: "Que faut-il faire en premier dans une étude de cas d’entreprise ?" },
+      options: [
+        { id: "a", label: { en: "Understand the business model and key drivers", fr: "Comprendre le business model et les key drivers" } },
+        { id: "b", label: { en: "Pick a target price immediately", fr: "Choisir immédiatement un target price" } },
+        { id: "c", label: { en: "Ignore customers and competitors", fr: "Ignorer clients et concurrents" } },
+        { id: "d", label: { en: "Use the same metrics for every industry", fr: "Utiliser les mêmes métriques pour tous les secteurs" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Business economics should determine the financial and valuation framework.", fr: "L’économie du business doit déterminer le cadre financier et de valorisation." },
+    },
+    {
+      id: "q2",
+      conceptKey: "apple",
+      question: { en: "Which factor is especially important in analyzing an ecosystem business like Apple?", fr: "Quel facteur est particulièrement important pour analyser un business d’écosystème comme Apple ?" },
+      options: [
+        { id: "a", label: { en: "Installed base and services monetization", fr: "Installed base et monétisation des services" } },
+        { id: "b", label: { en: "Only warehouse count", fr: "Uniquement le nombre d’entrepôts" } },
+        { id: "c", label: { en: "Only loan charge-offs", fr: "Uniquement les charge-offs de prêts" } },
+        { id: "d", label: { en: "Only inventory days", fr: "Uniquement inventory days" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The installed base supports retention, upgrades and recurring service opportunities.", fr: "L’instal­led base soutient rétention, upgrades et opportunités récurrentes de services." },
+    },
+    {
+      id: "q3",
+      conceptKey: "costco",
+      question: { en: "Why can a low-margin retailer still be a strong business?", fr: "Pourquoi un retailer à faibles marges peut-il rester un très bon business ?" },
+      options: [
+        { id: "a", label: { en: "High loyalty, recurring fees and efficient capital use can offset thin product margins", fr: "Forte fidélité, fees récurrents et usage efficace du capital peuvent compenser de faibles marges produits" } },
+        { id: "b", label: { en: "Margins never matter", fr: "Les marges ne comptent jamais" } },
+        { id: "c", label: { en: "Revenue is irrelevant", fr: "Le revenue est sans importance" } },
+        { id: "d", label: { en: "All retailers have identical economics", fr: "Tous les retailers ont la même économie" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Business quality depends on the full economic system, not one margin statistic.", fr: "La qualité d’un business dépend de l’ensemble du système économique, pas d’une seule statistique de marge." },
+    },
+    {
+      id: "q4",
+      conceptKey: "netflix",
+      question: { en: "Why can Netflix accounting earnings differ from free cash flow?", fr: "Pourquoi les earnings comptables de Netflix peuvent-ils différer du free cash flow ?" },
+      options: [
+        { id: "a", label: { en: "Content cash spending and amortization can occur at different times", fr: "Les dépenses cash de contenu et leur amortization peuvent intervenir à des moments différents" } },
+        { id: "b", label: { en: "Netflix has no expenses", fr: "Netflix n’a aucune dépense" } },
+        { id: "c", label: { en: "Subscribers never pay cash", fr: "Les abonnés ne paient jamais en cash" } },
+        { id: "d", label: { en: "Depreciation equals revenue", fr: "Depreciation égale revenue" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Cash payments for content and accounting recognition of content expense are not perfectly synchronized.", fr: "Les paiements cash du contenu et la reconnaissance comptable de la charge ne sont pas parfaitement synchronisés." },
+    },
+    {
+      id: "q5",
+      conceptKey: "bank-analysis",
+      question: { en: "Which metric is particularly important for a bank?", fr: "Quelle métrique est particulièrement importante pour une banque ?" },
+      options: [
+        { id: "a", label: { en: "Return on equity and capital strength", fr: "Return on equity et solidité du capital" } },
+        { id: "b", label: { en: "Only EV/EBITDA", fr: "Uniquement EV/EBITDA" } },
+        { id: "c", label: { en: "Only unit shipments", fr: "Uniquement les unités expédiées" } },
+        { id: "d", label: { en: "Only app downloads", fr: "Uniquement les téléchargements d’application" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Banks are balance-sheet-driven businesses where capital, credit quality and ROE are central.", fr: "Les banques sont des businesses guidés par le bilan où capital, qualité du crédit et ROE sont centraux." },
+    },
+    {
+      id: "q6",
+      conceptKey: "luxury",
+      question: { en: "What can support a premium valuation in luxury?", fr: "Qu’est-ce qui peut soutenir une valorisation premium dans le luxe ?" },
+      options: [
+        { id: "a", label: { en: "Durable pricing power and brand equity", fr: "Pricing power durable et brand equity" } },
+        { id: "b", label: { en: "No customer loyalty", fr: "Aucune fidélité client" } },
+        { id: "c", label: { en: "Constant discounting", fr: "Des promotions permanentes" } },
+        { id: "d", label: { en: "No control over distribution", fr: "Aucun contrôle de la distribution" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Strong brands can support pricing, margins and returns on capital over long periods.", fr: "Des marques fortes peuvent soutenir pricing, marges et returns on capital sur de longues périodes." },
+    },
+    {
+      id: "q7",
+      conceptKey: "high-growth",
+      question: { en: "Why is scenario analysis valuable for a high-growth company?", fr: "Pourquoi la scenario analysis est-elle utile pour une société à forte croissance ?" },
+      options: [
+        { id: "a", label: { en: "Because long-term outcomes can vary widely", fr: "Parce que les résultats long terme peuvent varier fortement" } },
+        { id: "b", label: { en: "Because assumptions do not matter", fr: "Parce que les hypothèses ne comptent pas" } },
+        { id: "c", label: { en: "Because growth eliminates risk", fr: "Parce que la croissance élimine le risque" } },
+        { id: "d", label: { en: "Because only historical book value matters", fr: "Parce que seule la book value historique compte" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "High-growth valuations are highly sensitive to future market share, margins and reinvestment.", fr: "Les valorisations de forte croissance sont très sensibles aux futures parts de marché, marges et réinvestissements." },
+    },
+    {
+      id: "q8",
+      conceptKey: "cross-company",
+      question: { en: "Why should different industries use different scorecards?", fr: "Pourquoi des industries différentes doivent-elles utiliser des scorecards différentes ?" },
+      options: [
+        { id: "a", label: { en: "Because value creation drivers differ by business model", fr: "Parce que les drivers de création de valeur diffèrent selon le business model" } },
+        { id: "b", label: { en: "Because accounting is optional", fr: "Parce que la comptabilité est facultative" } },
+        { id: "c", label: { en: "Because revenue never matters", fr: "Parce que le revenue ne compte jamais" } },
+        { id: "d", label: { en: "Because all companies have equal risk", fr: "Parce que toutes les sociétés ont le même risque" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Different business models generate cash flow through different operational mechanisms.", fr: "Des business models différents génèrent du cash flow via des mécanismes opérationnels différents." },
+    },
+    {
+      id: "q9",
+      conceptKey: "quality-vs-valuation",
+      question: { en: "Can a high-quality company be a poor investment?", fr: "Une entreprise de grande qualité peut-elle être un mauvais investissement ?" },
+      options: [
+        { id: "a", label: { en: "Yes, if the purchase price already embeds overly optimistic expectations", fr: "Oui, si le prix intègre déjà des attentes trop optimistes" } },
+        { id: "b", label: { en: "No, quality guarantees returns at any price", fr: "Non, la qualité garantit les returns à n’importe quel prix" } },
+        { id: "c", label: { en: "Only if revenue is zero", fr: "Seulement si le revenue est nul" } },
+        { id: "d", label: { en: "Valuation never affects returns", fr: "La valorisation n’affecte jamais les returns" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Investment returns depend on both business outcomes and the price paid relative to expectations.", fr: "Les returns d’investissement dépendent à la fois des résultats du business et du prix payé relativement aux attentes." },
+    },
+    {
+      id: "q10",
+      conceptKey: "thesis",
+      question: { en: "What makes an investment thesis strong?", fr: "Qu’est-ce qui rend une thèse d’investissement solide ?" },
+      options: [
+        { id: "a", label: { en: "A differentiated view with valuation, catalysts, risks and invalidation points", fr: "Une vue différenciée avec valuation, catalysts, risques et points d’invalidation" } },
+        { id: "b", label: { en: "Saying only that the company is famous", fr: "Dire seulement que l’entreprise est connue" } },
+        { id: "c", label: { en: "Ignoring valuation", fr: "Ignorer la valuation" } },
+        { id: "d", label: { en: "Avoiding all downside analysis", fr: "Éviter toute analyse downside" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A complete thesis explains why expectations differ from the market and what could prove the view wrong.", fr: "Une thèse complète explique pourquoi les attentes diffèrent du marché et ce qui pourrait prouver que la vue est fausse." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Pick a public company and walk me through how you would analyze it before deciding whether the stock is attractive.",
+      fr: "Choisis une société cotée et explique comment tu l’analyserais avant de décider si l’action est attractive.",
+    },
+    framework: [
+      { en: "Explain the business model, customer proposition and industry structure.", fr: "Expliquer le business model, la proposition client et la structure du secteur." },
+      { en: "Identify the two to four operating drivers that control revenue, margins and cash flow.", fr: "Identifier les deux à quatre drivers opérationnels qui contrôlent revenue, marges et cash flow." },
+      { en: "Analyze historical financial quality, capital intensity and returns on capital.", fr: "Analyser la qualité financière historique, l’intensité capitalistique et les returns on capital." },
+      { en: "Build a forecast using business-specific operating assumptions.", fr: "Construire un forecast à partir d’hypothèses opérationnelles propres au business." },
+      { en: "Value the company using methods appropriate to the industry and cross-check the result.", fr: "Valoriser la société avec des méthodes adaptées au secteur et cross-checker le résultat." },
+      { en: "Compare your expectations with the current market-implied expectations.", fr: "Comparer tes attentes avec celles implicitement intégrées par le marché." },
+      { en: "Conclude with thesis, catalysts, risks and clear invalidation conditions.", fr: "Conclure avec thèse, catalysts, risques et conditions claires d’invalidation." },
+    ],
+    sample: {
+      en: "I would start with the business model rather than the stock price. I would explain who the customers are, why they buy, how the company earns money and what protects its competitive position. Then I would identify the few operating variables that matter most, such as subscribers and ARPU for a subscription business or traffic and ticket size for a retailer. I would analyze margins, free cash flow, capital intensity and returns on capital to test whether the business quality is visible in the financial statements. Next I would build a forecast based on those operating drivers and value the company using methods appropriate to the industry, such as DCF, trading multiples or residual income. I would then compare my assumptions with what the current valuation appears to imply. Finally, I would state the differentiated view, catalysts, downside risks and the evidence that would invalidate my thesis.",
+      fr: "Je commencerais par le business model plutôt que par le cours de l’action. J’expliquerais qui sont les clients, pourquoi ils achètent, comment l’entreprise gagne de l’argent et ce qui protège sa position concurrentielle. Ensuite, j’identifierais les quelques variables opérationnelles les plus importantes, comme abonnés et ARPU pour un business d’abonnement ou traffic et ticket size pour un retailer. J’analyserais marges, free cash flow, intensité capitalistique et returns on capital pour vérifier si la qualité du business apparaît dans les états financiers. Puis je construirais un forecast basé sur ces drivers opérationnels et valoriserais la société avec les méthodes adaptées au secteur, comme DCF, trading multiples ou residual income. Je comparerais ensuite mes hypothèses avec celles que la valorisation actuelle semble impliquer. Enfin, j’exposerais la vue différenciée, les catalysts, les downside risks et les preuves qui invalideraient ma thèse.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
