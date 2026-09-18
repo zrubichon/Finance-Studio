@@ -20191,7 +20191,513 @@ export const fxInternationalFinanceLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson];
+
+
+export const econometricsFoundationsLesson: FinanceLesson = {
+  slug: "year-2-econometrics-foundations",
+  year: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  domain: { en: "Macro & Economics", fr: "Macro & économie / Macro & Economics" },
+  title: { en: "Econometrics Foundations", fr: "Fondamentaux de l’économétrie / Econometrics Foundations" },
+  subtitle: {
+    en: "Build the statistical toolkit used to study financial and economic relationships: regression, OLS, coefficients, statistical significance, confidence intervals, R², model assumptions, common diagnostic problems and the limits of causal interpretation.",
+    fr: "Construire la boîte à outils statistique utilisée pour étudier les relations financières et économiques : régression, OLS, coefficients, significativité statistique, intervalles de confiance, R², hypothèses du modèle, diagnostics courants et limites de l’interprétation causale.",
+  },
+  duration: { en: "125–155 min", fr: "125–155 min" },
+  prerequisites: [
+    { en: "Statistics & Probability", fr: "Statistiques & probabilités / Statistics & Probability" },
+    { en: "Microeconomics for Finance", fr: "Microéconomie pour la finance / Microeconomics for Finance" },
+    { en: "Macroeconomics for Markets", fr: "Macroéconomie pour les marchés / Macroeconomics for Markets" },
+  ],
+  objectives: [
+    { en: "Distinguish descriptive statistics from econometric modeling.", fr: "Distinguer statistiques descriptives et modélisation économétrique." },
+    { en: "Interpret simple and multiple linear regressions and OLS coefficients.", fr: "Interpréter régressions linéaires simples et multiples et coefficients OLS." },
+    { en: "Understand residuals, standard errors, t-statistics, p-values and confidence intervals.", fr: "Comprendre résidus, erreurs standards, t-statistics, p-values et intervalles de confiance." },
+    { en: "Interpret R² and adjusted R² without confusing fit with causality.", fr: "Interpréter R² et adjusted R² sans confondre qualité d’ajustement et causalité." },
+    { en: "Recognize omitted-variable bias, multicollinearity, heteroskedasticity and autocorrelation.", fr: "Reconnaître omitted-variable bias, multicollinearity, hétéroscédasticité et autocorrélation." },
+    { en: "Apply econometric reasoning to finance and market questions while respecting model limitations.", fr: "Appliquer le raisonnement économétrique aux questions financières et de marché tout en respectant les limites des modèles." },
+  ],
+  overviewFlow: {
+    title: { en: "From economic question to defensible empirical conclusion", fr: "De la question économique à une conclusion empirique défendable" },
+    steps: [
+      { title: { en: "Question", fr: "Question" }, detail: { en: "Hypothesis · variables · data", fr: "Hypothèse · variables · données" } },
+      { title: { en: "Estimate", fr: "Estimer" }, detail: { en: "Regression · OLS · coefficients", fr: "Régression · OLS · coefficients" } },
+      { title: { en: "Test", fr: "Tester" }, detail: { en: "SE · t-stat · p-value · CI", fr: "SE · t-stat · p-value · IC" } },
+      { title: { en: "Diagnose", fr: "Diagnostiquer" }, detail: { en: "Bias · fit · residual problems", fr: "Biais · fit · problèmes de résidus" } },
+    ],
+  },
+  sections: [
+    {
+      id: "what-is-econometrics",
+      kicker: { en: "01 · WHAT IS ECONOMETRICS?", fr: "01 · QU’EST-CE QUE L’ÉCONOMÉTRIE ?" },
+      title: { en: "Econometrics combines economic questions with statistical evidence", fr: "L’économétrie combine questions économiques et preuves statistiques" },
+      coreFacts: [
+        { en: "Econometrics uses statistical methods to quantify relationships in economic and financial data.", fr: "L’économétrie utilise des méthodes statistiques pour quantifier les relations dans les données économiques et financières." },
+        { en: "A useful empirical model begins with a clear question and a theory-driven choice of variables.", fr: "Un bon modèle empirique commence par une question claire et un choix de variables guidé par la théorie." },
+        { en: "Regression can reveal association, prediction and conditional relationships; causality requires stronger identification.", fr: "La régression peut révéler association, prédiction et relations conditionnelles ; la causalité exige une identification plus forte." },
+        { en: "A statistically significant coefficient is not automatically economically important.", fr: "Un coefficient statistiquement significatif n’est pas automatiquement économiquement important." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Econometrics is the part of economics that asks: can we use real data to measure whether two things move together, by how much, and how confident we are in that relationship?",
+          fr: "L’économétrie est la partie de l’économie qui demande : peut-on utiliser des données réelles pour mesurer si deux choses évoluent ensemble, de combien, et avec quel niveau de confiance ?",
+        },
+        Intermediate: {
+          en: "Econometrics formalizes empirical relationships through models. You define a dependent variable, explanatory variables and an error term, then estimate unknown parameters from observed data.",
+          fr: "L’économétrie formalise des relations empiriques à travers des modèles. On définit une variable dépendante, des variables explicatives et un terme d’erreur, puis on estime des paramètres inconnus à partir des données observées.",
+        },
+        Professional: {
+          en: "Professional econometrics separates the data-generating process, specification, estimation and identification problem. Predictive adequacy and causal identification are different objectives and require different validation standards.",
+          fr: "L’économétrie professionnelle distingue processus générateur des données, spécification, estimation et problème d’identification. Qualité prédictive et identification causale sont deux objectifs différents avec des standards de validation distincts.",
+        },
+      },
+      example: {
+        en: "A researcher asks whether monthly stock returns are related to market returns. A regression can estimate the conditional sensitivity, but it does not by itself prove a causal mechanism.",
+        fr: "Un chercheur demande si les rendements mensuels d’une action sont liés aux rendements du marché. Une régression peut estimer la sensibilité conditionnelle, mais ne prouve pas à elle seule un mécanisme causal.",
+      },
+      vocabulary: [
+        { en: "Dependent variable", fr: "variable dépendante", definition: { en: "The outcome the model attempts to explain.", fr: "Le résultat que le modèle cherche à expliquer." } },
+        { en: "Explanatory variable", fr: "variable explicative", definition: { en: "A variable used to explain variation in the dependent variable.", fr: "Une variable utilisée pour expliquer la variation de la variable dépendante." } },
+        { en: "Identification", fr: "identification", definition: { en: "The logic that allows a parameter or causal effect to be distinguished from alternatives.", fr: "La logique permettant de distinguer un paramètre ou effet causal d’explications alternatives." } },
+      ],
+    },
+    {
+      id: "population-sample",
+      kicker: { en: "02 · POPULATION, SAMPLE & ERROR TERM", fr: "02 · POPULATION, ÉCHANTILLON & TERME D’ERREUR" },
+      title: { en: "Observed data are a sample from a broader process", fr: "Les données observées sont un échantillon d’un processus plus large" },
+      coreFacts: [
+        { en: "A population model describes the underlying relationship of interest; a sample regression estimates it from finite data.", fr: "Un modèle de population décrit la relation sous-jacente ; une régression d’échantillon l’estime à partir de données finies." },
+        { en: "The error term captures influences on the dependent variable not explicitly included in the model.", fr: "Le terme d’erreur capture les influences sur la variable dépendante non explicitement incluses dans le modèle." },
+        { en: "Residuals are estimated sample counterparts of unobserved population errors.", fr: "Les résidus sont les contreparties estimées dans l’échantillon des erreurs de population non observées." },
+        { en: "Sampling variability means estimated coefficients change from one sample to another.", fr: "La variabilité d’échantillonnage signifie que les coefficients estimés changent d’un échantillon à l’autre." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "You almost never observe every possible company, trade or future period. You work with a sample and use it to learn about a larger process.",
+          fr: "On n’observe presque jamais toutes les entreprises, transactions ou périodes futures possibles. On travaille avec un échantillon pour apprendre quelque chose sur un processus plus large.",
+        },
+        Intermediate: {
+          en: "The model separates systematic variation explained by X from unexplained variation collected in the error term. Residual analysis then helps assess whether the fitted model leaves systematic patterns behind.",
+          fr: "Le modèle sépare la variation systématique expliquée par X de la variation non expliquée regroupée dans le terme d’erreur. L’analyse des résidus aide ensuite à voir si le modèle laisse des structures systématiques non capturées.",
+        },
+        Professional: {
+          en: "Inference depends on assumptions about the sampling process and error structure. Financial data frequently violate idealized independence and constant-variance conditions, so standard errors and model design require care.",
+          fr: "L’inférence dépend d’hypothèses sur le processus d’échantillonnage et la structure des erreurs. Les données financières violent fréquemment indépendance idéale et variance constante ; erreurs standards et design du modèle exigent donc prudence.",
+        },
+      },
+      vocabulary: [
+        { en: "Population parameter", fr: "paramètre de population", definition: { en: "An unknown characteristic of the underlying data-generating process.", fr: "Une caractéristique inconnue du processus générateur des données." } },
+        { en: "Residual", fr: "résidu", definition: { en: "Observed outcome minus the fitted model prediction.", fr: "Résultat observé moins prédiction du modèle." } },
+        { en: "Sampling variability", fr: "variabilité d’échantillonnage", definition: { en: "Variation in estimates caused by using different finite samples.", fr: "Variation des estimations due à l’utilisation d’échantillons finis différents." } },
+      ],
+    },
+    {
+      id: "simple-regression-ols",
+      kicker: { en: "03 · SIMPLE REGRESSION & OLS", fr: "03 · RÉGRESSION SIMPLE & OLS" },
+      title: { en: "OLS chooses coefficients that minimize squared residuals", fr: "OLS choisit les coefficients qui minimisent les résidus au carré" },
+      coreFacts: [
+        { en: "A simple linear regression models Y as an intercept plus slope times X plus an error term.", fr: "Une régression linéaire simple modélise Y comme un intercept plus une pente fois X plus un terme d’erreur." },
+        { en: "The OLS slope estimates how Y changes on average with a one-unit increase in X within the model.", fr: "La pente OLS estime comment Y change en moyenne pour une hausse d’une unité de X dans le modèle." },
+        { en: "The intercept is the fitted value of Y when X equals zero, though that may not always be economically meaningful.", fr: "L’intercept est la valeur ajustée de Y lorsque X vaut zéro, même si cela n’a pas toujours de sens économique." },
+        { en: "OLS minimizes the sum of squared residuals.", fr: "OLS minimise la somme des résidus au carré." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Regression draws the line that best fits the cloud of data points according to a precise rule: it tries to make the squared prediction errors as small as possible.",
+          fr: "La régression trace la ligne qui s’ajuste le mieux au nuage de points selon une règle précise : elle cherche à minimiser les erreurs de prédiction au carré.",
+        },
+        Intermediate: {
+          en: "The slope coefficient is a conditional average relationship. In a simple regression, it reflects how the fitted value of Y changes when X rises by one unit.",
+          fr: "Le coefficient de pente représente une relation moyenne conditionnelle. Dans une régression simple, il indique comment la valeur ajustée de Y change lorsque X augmente d’une unité.",
+        },
+        Professional: {
+          en: "OLS has attractive algebraic properties and, under the Gauss-Markov assumptions, is the best linear unbiased estimator among linear unbiased estimators. Those properties do not guarantee causal interpretation or robustness to misspecification.",
+          fr: "OLS possède des propriétés algébriques utiles et, sous les hypothèses de Gauss-Markov, est le meilleur estimateur linéaire sans biais parmi les estimateurs linéaires sans biais. Cela ne garantit ni causalité ni robustesse à une mauvaise spécification.",
+        },
+      },
+      formula: {
+        label: { en: "Simple linear regression", fr: "Régression linéaire simple" },
+        expression: "Yᵢ = β₀ + β₁Xᵢ + uᵢ",
+        explanation: { en: "β₀ is the intercept, β₁ the slope and uᵢ the unobserved error.", fr: "β₀ est l’intercept, β₁ la pente et uᵢ l’erreur non observée." },
+        workedExample: { en: "If estimated return = 0.2% + 1.3 × market return, a +1% market move maps to about +1.3% additional fitted stock return.", fr: "Si rendement estimé = 0,2 % + 1,3 × rendement du marché, une hausse de +1 % du marché correspond à environ +1,3 % de rendement ajusté supplémentaire de l’action." },
+      },
+      vocabulary: [
+        { en: "OLS", fr: "moindres carrés ordinaires / OLS", definition: { en: "Estimator minimizing the sum of squared residuals.", fr: "Estimateur minimisant la somme des résidus au carré." } },
+        { en: "Intercept", fr: "constante / intercept", definition: { en: "Fitted value of Y when explanatory variables equal zero.", fr: "Valeur ajustée de Y lorsque les variables explicatives valent zéro." } },
+        { en: "Slope coefficient", fr: "coefficient de pente", definition: { en: "Estimated marginal relationship between X and fitted Y.", fr: "Relation marginale estimée entre X et Y ajusté." } },
+      ],
+    },
+    {
+      id: "multiple-regression",
+      kicker: { en: "04 · MULTIPLE REGRESSION & INTERPRETATION", fr: "04 · RÉGRESSION MULTIPLE & INTERPRÉTATION" },
+      title: { en: "Multiple regression estimates conditional relationships holding other included variables fixed", fr: "La régression multiple estime des relations conditionnelles en maintenant fixes les autres variables incluses" },
+      coreFacts: [
+        { en: "Multiple regression includes several explanatory variables in the same model.", fr: "La régression multiple inclut plusieurs variables explicatives dans le même modèle." },
+        { en: "A coefficient is interpreted ceteris paribus with respect to the other included regressors.", fr: "Un coefficient s’interprète ceteris paribus par rapport aux autres régresseurs inclus." },
+        { en: "Adding controls can reduce confounding, but bad controls or omitted variables can still distort interpretation.", fr: "Ajouter des contrôles peut réduire la confusion, mais mauvais contrôles ou variables omises peuvent toujours déformer l’interprétation." },
+        { en: "Log transformations change coefficient interpretation and can help model percentage relationships.", fr: "Les transformations logarithmiques changent l’interprétation des coefficients et peuvent aider à modéliser des relations en pourcentage." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Instead of asking whether salary depends only on education, you might also control for experience, location and industry. Each coefficient then describes a relationship after accounting for the other included factors.",
+          fr: "Au lieu de demander si le salaire dépend seulement de l’éducation, on peut aussi contrôler expérience, localisation et secteur. Chaque coefficient décrit alors une relation après prise en compte des autres facteurs inclus.",
+        },
+        Intermediate: {
+          en: "The key phrase is holding other included variables constant. This is a conditional association, not automatically a causal effect, because omitted factors may still be correlated with both X and Y.",
+          fr: "La phrase clé est en maintenant constantes les autres variables incluses. Il s’agit d’une association conditionnelle, pas automatiquement d’un effet causal, car des facteurs omis peuvent encore être corrélés avec X et Y.",
+        },
+        Professional: {
+          en: "Specification choices determine the estimand. Controls should reflect a causal or structural framework rather than a mechanical desire to maximize R². Post-treatment controls, colliders and highly endogenous regressors can worsen bias.",
+          fr: "Les choix de spécification déterminent l’estimand. Les contrôles doivent refléter un cadre causal ou structurel plutôt qu’un désir mécanique de maximiser R². Contrôles post-traitement, colliders et régresseurs fortement endogènes peuvent aggraver le biais.",
+        },
+      },
+      formula: {
+        label: { en: "Multiple linear regression", fr: "Régression linéaire multiple" },
+        expression: "Yᵢ = β₀ + β₁X₁ᵢ + β₂X₂ᵢ + ... + βₖXₖᵢ + uᵢ",
+        explanation: { en: "βⱼ measures the fitted change in Y for a one-unit change in Xⱼ, holding other included X variables fixed.", fr: "βⱼ mesure le changement ajusté de Y pour une variation d’une unité de Xⱼ, en maintenant fixes les autres X inclus." },
+      },
+      vocabulary: [
+        { en: "Control variable", fr: "variable de contrôle", definition: { en: "An included variable intended to account for other systematic variation.", fr: "Une variable incluse pour tenir compte d’une autre variation systématique." } },
+        { en: "Ceteris paribus", fr: "toutes choses égales par ailleurs", definition: { en: "Holding other included factors constant.", fr: "En maintenant constants les autres facteurs inclus." } },
+        { en: "Endogeneity", fr: "endogénéité", definition: { en: "A situation where a regressor is correlated with the model error term.", fr: "Situation où un régresseur est corrélé au terme d’erreur du modèle." } },
+      ],
+    },
+    {
+      id: "inference",
+      kicker: { en: "05 · STANDARD ERRORS, T-STATS & P-VALUES", fr: "05 · ERREURS STANDARDS, T-STATS & P-VALUES" },
+      title: { en: "Inference asks how uncertain the coefficient estimate is", fr: "L’inférence demande à quel point l’estimation du coefficient est incertaine" },
+      coreFacts: [
+        { en: "A standard error estimates the sampling uncertainty of a coefficient estimate.", fr: "Une erreur standard estime l’incertitude d’échantillonnage d’un coefficient." },
+        { en: "A t-statistic compares the estimated coefficient with its standard error relative to a null hypothesis.", fr: "Une t-statistic compare le coefficient estimé à son erreur standard par rapport à une hypothèse nulle." },
+        { en: "A p-value is the probability, under the null and model assumptions, of observing a test statistic at least as extreme as the one observed.", fr: "Une p-value est la probabilité, sous l’hypothèse nulle et les hypothèses du modèle, d’observer une statistique de test au moins aussi extrême que celle observée." },
+        { en: "A p-value is not the probability that the null hypothesis is true.", fr: "Une p-value n’est pas la probabilité que l’hypothèse nulle soit vraie." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A coefficient by itself is not enough. You also want to know whether it was estimated precisely or whether it could easily have appeared because the sample is noisy.",
+          fr: "Un coefficient seul ne suffit pas. Il faut aussi savoir s’il a été estimé précisément ou s’il pourrait facilement être apparu à cause du bruit de l’échantillon.",
+        },
+        Intermediate: {
+          en: "The t-stat is roughly coefficient divided by its standard error when testing against zero. Larger absolute t-statistics generally correspond to smaller p-values under standard conditions.",
+          fr: "La t-stat est approximativement le coefficient divisé par son erreur standard lorsqu’on teste contre zéro. Des t-stats plus grandes en valeur absolue correspondent généralement à des p-values plus petites sous conditions standards.",
+        },
+        Professional: {
+          en: "Inference is only as reliable as the variance estimator and design assumptions. Robust, clustered or HAC standard errors may be required when residual variance or dependence violates classical assumptions.",
+          fr: "L’inférence n’est fiable que si l’estimateur de variance et les hypothèses de design le sont. Des erreurs standards robustes, clusterisées ou HAC peuvent être nécessaires lorsque variance ou dépendance des résidus violent les hypothèses classiques.",
+        },
+      },
+      formula: {
+        label: { en: "t-statistic for H₀: β = 0", fr: "t-statistic pour H₀ : β = 0" },
+        expression: "t = β̂ / SE(β̂)",
+        explanation: { en: "It measures how many estimated standard errors the coefficient is away from zero.", fr: "Elle mesure de combien d’erreurs standards estimées le coefficient s’éloigne de zéro." },
+        workedExample: { en: "β̂ = 0.60 and SE = 0.20 gives t = 3.0.", fr: "β̂ = 0,60 et SE = 0,20 donnent t = 3,0." },
+      },
+      vocabulary: [
+        { en: "Standard error", fr: "erreur standard", definition: { en: "Estimated sampling uncertainty of an estimator.", fr: "Incertitude d’échantillonnage estimée d’un estimateur." } },
+        { en: "Null hypothesis", fr: "hypothèse nulle", definition: { en: "Reference claim tested by a statistical procedure.", fr: "Hypothèse de référence testée par une procédure statistique." } },
+        { en: "p-value", fr: "p-value", definition: { en: "Tail probability of the observed or more extreme test statistic under the null and model assumptions.", fr: "Probabilité de queue de la statistique observée ou plus extrême sous l’hypothèse nulle et les hypothèses du modèle." } },
+      ],
+    },
+    {
+      id: "confidence-interval-fit",
+      kicker: { en: "06 · CONFIDENCE INTERVALS & MODEL FIT", fr: "06 · INTERVALLES DE CONFIANCE & QUALITÉ D’AJUSTEMENT" },
+      title: { en: "Precision and fit answer different questions", fr: "Précision et qualité d’ajustement répondent à des questions différentes" },
+      coreFacts: [
+        { en: "A confidence interval gives a range generated by a procedure with a stated long-run coverage rate under its assumptions.", fr: "Un intervalle de confiance donne une plage issue d’une procédure ayant un taux de couverture long terme donné sous ses hypothèses." },
+        { en: "R² measures the fraction of sample variation in Y explained by the fitted model.", fr: "R² mesure la fraction de la variation de Y dans l’échantillon expliquée par le modèle ajusté." },
+        { en: "A high R² does not prove a model is causal, correctly specified or useful out of sample.", fr: "Un R² élevé ne prouve pas qu’un modèle est causal, correctement spécifié ou utile hors échantillon." },
+        { en: "Adjusted R² penalizes additional regressors that do not improve fit enough.", fr: "Adjusted R² pénalise les régresseurs supplémentaires qui n’améliorent pas suffisamment l’ajustement." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A confidence interval tells you how uncertain the estimated coefficient is. R² tells you how much of the sample's movement in Y the model fits. Those are not the same thing.",
+          fr: "Un intervalle de confiance indique l’incertitude sur le coefficient estimé. R² indique quelle part des mouvements de Y dans l’échantillon le modèle ajuste. Ce ne sont pas les mêmes choses.",
+        },
+        Intermediate: {
+          en: "A narrow confidence interval means relatively precise estimation. A high R² can coexist with biased coefficients, and a low R² can still be consistent with an economically meaningful coefficient.",
+          fr: "Un intervalle étroit indique une estimation relativement précise. Un R² élevé peut coexister avec des coefficients biaisés, et un R² faible peut tout de même accompagner un coefficient économiquement important.",
+        },
+        Professional: {
+          en: "Model selection should distinguish in-sample fit, parameter inference and out-of-sample prediction. Cross-validation, information criteria and economic structure may matter more than maximizing R².",
+          fr: "La sélection de modèle doit distinguer fit in-sample, inférence sur les paramètres et prédiction out-of-sample. Cross-validation, critères d’information et structure économique peuvent être plus importants que maximiser R².",
+        },
+      },
+      formula: {
+        label: { en: "Approximate 95% confidence interval", fr: "Intervalle de confiance 95 % approximatif" },
+        expression: "β̂ ± 1.96 × SE(β̂)",
+        explanation: { en: "This approximation is common for large samples under standard conditions.", fr: "Cette approximation est courante pour de grands échantillons sous conditions standards." },
+        workedExample: { en: "β̂ = 0.60, SE = 0.20 gives about [0.208, 0.992].", fr: "β̂ = 0,60, SE = 0,20 donnent environ [0,208 ; 0,992]." },
+      },
+      vocabulary: [
+        { en: "Confidence interval", fr: "intervalle de confiance", definition: { en: "An interval estimator with a stated repeated-sampling coverage property.", fr: "Un estimateur par intervalle avec une propriété de couverture en échantillonnage répété." } },
+        { en: "R-squared", fr: "R² / coefficient de détermination", definition: { en: "Share of sample variation in Y explained by fitted values.", fr: "Part de la variation de Y dans l’échantillon expliquée par les valeurs ajustées." } },
+        { en: "Adjusted R-squared", fr: "R² ajusté", definition: { en: "Fit measure that penalizes additional regressors.", fr: "Mesure de fit qui pénalise l’ajout de régresseurs." } },
+      ],
+    },
+    {
+      id: "bias-diagnostics",
+      kicker: { en: "07 · BIAS & DIAGNOSTICS", fr: "07 · BIAIS & DIAGNOSTICS" },
+      title: { en: "A regression can look clean and still be misleading", fr: "Une régression peut sembler propre et pourtant être trompeuse" },
+      coreFacts: [
+        { en: "Omitted-variable bias can arise when an omitted factor affects Y and is correlated with an included regressor.", fr: "L’omitted-variable bias peut apparaître lorsqu’un facteur omis affecte Y et est corrélé avec un régresseur inclus." },
+        { en: "Multicollinearity makes it difficult to separately estimate effects of highly correlated regressors.", fr: "La multicolinéarité rend difficile l’estimation séparée des effets de régresseurs fortement corrélés." },
+        { en: "Heteroskedasticity means residual variance changes across observations.", fr: "L’hétéroscédasticité signifie que la variance des résidus change selon les observations." },
+        { en: "Autocorrelation means residuals are related across time or ordered observations.", fr: "L’autocorrélation signifie que les résidus sont liés entre périodes ou observations ordonnées." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A model may give the wrong answer because it left out an important factor, because two explanatory variables carry almost the same information, or because its errors behave differently than assumed.",
+          fr: "Un modèle peut donner une mauvaise réponse parce qu’il a oublié un facteur important, parce que deux variables explicatives portent presque la même information, ou parce que ses erreurs se comportent différemment de ce qui est supposé.",
+        },
+        Intermediate: {
+          en: "Multicollinearity mainly inflates uncertainty rather than automatically biasing OLS. Heteroskedasticity and autocorrelation can make classical standard errors wrong even when coefficient estimates remain centered under stronger conditions.",
+          fr: "La multicolinéarité augmente surtout l’incertitude plutôt qu’elle ne biaise automatiquement OLS. Hétéroscédasticité et autocorrélation peuvent rendre les erreurs standards classiques incorrectes même si les coefficients restent centrés sous certaines conditions.",
+        },
+        Professional: {
+          en: "Diagnostics should follow the data structure. Cross-sectional data often motivate heteroskedasticity-robust inference; panel data may require clustering; time series may require HAC errors or explicit dynamic structure. Specification tests supplement but do not replace economic reasoning.",
+          fr: "Les diagnostics doivent suivre la structure des données. Les données cross-section motivent souvent des erreurs robustes à l’hétéroscédasticité ; les panels peuvent exiger clustering ; les séries temporelles peuvent exiger HAC ou structure dynamique explicite. Les tests de spécification complètent mais ne remplacent pas le raisonnement économique.",
+        },
+      },
+      comparison: {
+        title: { en: "Common regression problems", fr: "Problèmes courants de régression" },
+        headers: [
+          { en: "Problem", fr: "Problème" },
+          { en: "What it means", fr: "Ce que cela signifie" },
+          { en: "Typical consequence", fr: "Conséquence typique" },
+        ],
+        rows: [
+          { cells: [{ en: "Omitted variable", fr: "Variable omise" }, { en: "Relevant factor excluded and correlated with X", fr: "Facteur pertinent exclu et corrélé avec X" }, { en: "Coefficient bias", fr: "Biais des coefficients" }] },
+          { cells: [{ en: "Multicollinearity", fr: "Multicolinéarité" }, { en: "Regressors highly correlated", fr: "Régresseurs fortement corrélés" }, { en: "Large standard errors", fr: "Erreurs standards élevées" }] },
+          { cells: [{ en: "Heteroskedasticity", fr: "Hétéroscédasticité" }, { en: "Residual variance is not constant", fr: "Variance des résidus non constante" }, { en: "Classical SE can be wrong", fr: "SE classiques potentiellement faux" }] },
+          { cells: [{ en: "Autocorrelation", fr: "Autocorrélation" }, { en: "Errors related across time", fr: "Erreurs liées dans le temps" }, { en: "Inference can be distorted", fr: "Inférence potentiellement faussée" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Omitted-variable bias", fr: "biais de variable omise", definition: { en: "Bias caused by excluding a relevant factor correlated with included regressors.", fr: "Biais causé par l’exclusion d’un facteur pertinent corrélé aux régresseurs inclus." } },
+        { en: "Heteroskedasticity", fr: "hétéroscédasticité", definition: { en: "Non-constant conditional variance of the error term.", fr: "Variance conditionnelle non constante du terme d’erreur." } },
+        { en: "Autocorrelation", fr: "autocorrélation", definition: { en: "Correlation of errors across ordered observations, often time.", fr: "Corrélation des erreurs entre observations ordonnées, souvent dans le temps." } },
+      ],
+    },
+    {
+      id: "causality",
+      kicker: { en: "08 · CORRELATION VS CAUSALITY", fr: "08 · CORRÉLATION VS CAUSALITÉ" },
+      title: { en: "Regression alone does not create causal identification", fr: "La régression seule ne crée pas l’identification causale" },
+      coreFacts: [
+        { en: "Correlation can reflect causality, reverse causality, common causes or coincidence.", fr: "Une corrélation peut refléter causalité, causalité inverse, causes communes ou coïncidence." },
+        { en: "Randomization, natural experiments, instrumental variables, differences-in-differences and regression discontinuity are examples of identification strategies.", fr: "Randomisation, expériences naturelles, variables instrumentales, differences-in-differences et regression discontinuity sont des exemples de stratégies d’identification." },
+        { en: "A control-rich regression is not automatically causal.", fr: "Une régression riche en contrôles n’est pas automatiquement causale." },
+        { en: "Economic significance asks whether an effect is large enough to matter, not merely whether it is statistically detectable.", fr: "La significativité économique demande si l’effet est assez grand pour compter, pas seulement s’il est statistiquement détectable." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If ice cream sales and sunburn both rise together, ice cream does not cause sunburn. Hot weather causes both. Regression needs a credible story about what creates independent variation if you want a causal conclusion.",
+          fr: "Si ventes de glaces et coups de soleil augmentent ensemble, les glaces ne causent pas les coups de soleil. La chaleur cause les deux. Pour conclure à la causalité, la régression a besoin d’une histoire crédible sur la source de variation indépendante.",
+        },
+        Intermediate: {
+          en: "Causal identification asks what would have happened to the same unit without the treatment, a counterfactual we cannot directly observe. Research design tries to approximate that missing comparison.",
+          fr: "L’identification causale demande ce qui serait arrivé à la même unité sans le traitement, un contrefactuel qu’on ne peut observer directement. Le design de recherche cherche à approximer cette comparaison manquante.",
+        },
+        Professional: {
+          en: "Credible empirical finance distinguishes structural interpretation from reduced-form association. Endogeneity, selection, measurement error and simultaneous determination can break causal interpretation even when coefficients are precisely estimated.",
+          fr: "Une analyse empirique crédible en finance distingue interprétation structurelle et association reduced-form. Endogénéité, sélection, erreur de mesure et détermination simultanée peuvent casser l’interprétation causale même avec des coefficients précisément estimés.",
+        },
+      },
+      marketConnection: {
+        en: "Many finance headlines report regressions as if they prove causes. Professional analysis should ask what the identification strategy is before turning a coefficient into a causal narrative.",
+        fr: "De nombreux titres financiers présentent des régressions comme des preuves causales. Une analyse professionnelle doit demander quelle est la stratégie d’identification avant de transformer un coefficient en récit causal.",
+      },
+      vocabulary: [
+        { en: "Reverse causality", fr: "causalité inverse", definition: { en: "When Y affects X rather than, or in addition to, X affecting Y.", fr: "Lorsque Y affecte X plutôt que, ou en plus de, X affectant Y." } },
+        { en: "Counterfactual", fr: "contrefactuel", definition: { en: "The unobserved outcome that would have occurred under an alternative treatment state.", fr: "Le résultat non observé qui se serait produit sous un autre état de traitement." } },
+        { en: "Economic significance", fr: "significativité économique", definition: { en: "Whether an estimated effect is large enough to matter economically.", fr: "Le fait qu’un effet estimé soit assez grand pour avoir une importance économique." } },
+      ],
+    },
+    {
+      id: "finance-applications",
+      kicker: { en: "09 · FINANCE APPLICATIONS & TIME SERIES", fr: "09 · APPLICATIONS FINANCE & SÉRIES TEMPORELLES" },
+      title: { en: "Financial data require special care because observations are often dependent through time", fr: "Les données financières exigent une prudence particulière car les observations sont souvent dépendantes dans le temps" },
+      coreFacts: [
+        { en: "Asset returns are commonly modeled rather than price levels because price levels often trend and can create spurious relationships.", fr: "On modélise souvent les rendements plutôt que les niveaux de prix car les prix peuvent suivre des tendances et créer des relations fallacieuses." },
+        { en: "Stationarity roughly means the statistical properties of a process are stable enough over time for a chosen model.", fr: "La stationnarité signifie approximativement que les propriétés statistiques d’un processus sont suffisamment stables dans le temps pour le modèle choisi." },
+        { en: "Volatility clustering means large moves tend to be followed by large moves and small moves by small moves, regardless of sign.", fr: "Le volatility clustering signifie que de grands mouvements tendent à être suivis de grands mouvements et de petits mouvements de petits mouvements, quel que soit le signe." },
+        { en: "Backtests are vulnerable to look-ahead bias, overfitting and data mining.", fr: "Les backtests sont vulnérables au look-ahead bias, overfitting et data mining." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Financial time series are different from a random list of people because yesterday can affect today. A model must respect that ordering.",
+          fr: "Les séries financières diffèrent d’une liste aléatoire de personnes car hier peut influencer aujourd’hui. Le modèle doit respecter cet ordre.",
+        },
+        Intermediate: {
+          en: "Regressing two trending price series can produce a high R² even without a meaningful relationship. Returns, differences or cointegration methods may be more appropriate depending on the question.",
+          fr: "Régresser deux séries de prix en tendance peut produire un R² élevé sans relation significative. Rendements, différences ou méthodes de cointégration peuvent être plus appropriés selon la question.",
+        },
+        Professional: {
+          en: "Empirical asset pricing and trading research require strict separation of in-sample estimation and out-of-sample validation. Multiple testing, regime shifts and transaction costs can turn statistically attractive backtests into poor live strategies.",
+          fr: "La recherche en asset pricing et trading exige une séparation stricte entre estimation in-sample et validation out-of-sample. Multiple testing, changements de régime et coûts de transaction peuvent transformer des backtests statistiquement séduisants en mauvaises stratégies réelles.",
+        },
+      },
+      comparison: {
+        title: { en: "Common finance-data traps", fr: "Pièges courants des données financières" },
+        headers: [
+          { en: "Trap", fr: "Piège" },
+          { en: "Meaning", fr: "Signification" },
+          { en: "Why it matters", fr: "Pourquoi c’est important" },
+        ],
+        rows: [
+          { cells: [{ en: "Look-ahead bias", fr: "Look-ahead bias" }, { en: "Using information not available at the time", fr: "Utiliser une information indisponible à l’époque" }, { en: "Inflates backtest results", fr: "Gonfle les résultats du backtest" }] },
+          { cells: [{ en: "Overfitting", fr: "Overfitting" }, { en: "Model learns noise in the sample", fr: "Le modèle apprend le bruit de l’échantillon" }, { en: "Poor out-of-sample performance", fr: "Mauvaise performance hors échantillon" }] },
+          { cells: [{ en: "Spurious regression", fr: "Régression fallacieuse" }, { en: "Trending series look related mechanically", fr: "Des séries en tendance semblent liées mécaniquement" }, { en: "Misleading significance and R²", fr: "Significativité et R² trompeurs" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Stationarity", fr: "stationnarité", definition: { en: "A property describing stability of a process's statistical behavior over time.", fr: "Propriété décrivant la stabilité du comportement statistique d’un processus dans le temps." } },
+        { en: "Overfitting", fr: "surapprentissage / overfitting", definition: { en: "Fitting sample noise rather than a generalizable pattern.", fr: "Ajuster le bruit de l’échantillon plutôt qu’une structure généralisable." } },
+        { en: "Look-ahead bias", fr: "biais d’anticipation", definition: { en: "Using future information when simulating a past decision.", fr: "Utiliser une information future lors de la simulation d’une décision passée." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1", conceptKey: "econometrics-purpose",
+      question: { en: "What is econometrics primarily used for?", fr: "À quoi sert principalement l’économétrie ?" },
+      options: [
+        { id: "a", label: { en: "Quantifying relationships in economic and financial data", fr: "Quantifier les relations dans les données économiques et financières" } },
+        { id: "b", label: { en: "Guaranteeing causal conclusions from any correlation", fr: "Garantir des conclusions causales à partir de toute corrélation" } },
+        { id: "c", label: { en: "Replacing all economic theory", fr: "Remplacer toute théorie économique" } },
+        { id: "d", label: { en: "Eliminating sampling uncertainty", fr: "Éliminer l’incertitude d’échantillonnage" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Econometrics uses statistical methods to study empirical economic and financial relationships.", fr: "L’économétrie utilise des méthodes statistiques pour étudier des relations empiriques économiques et financières." },
+    },
+    {
+      id: "q2", conceptKey: "ols",
+      question: { en: "What does OLS minimize?", fr: "Que minimise OLS ?" },
+      options: [
+        { id: "a", label: { en: "Sum of squared residuals", fr: "Somme des résidus au carré" } },
+        { id: "b", label: { en: "Number of observations", fr: "Nombre d’observations" } },
+        { id: "c", label: { en: "Every coefficient", fr: "Tous les coefficients" } },
+        { id: "d", label: { en: "The sample mean of X only", fr: "Uniquement la moyenne de X" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Ordinary least squares chooses coefficients to minimize squared residuals.", fr: "Les moindres carrés ordinaires choisissent les coefficients pour minimiser les résidus au carré." },
+    },
+    {
+      id: "q3", conceptKey: "coefficient",
+      question: { en: "In a multiple regression, β₁ is interpreted as:", fr: "Dans une régression multiple, β₁ s’interprète comme :" },
+      options: [
+        { id: "a", label: { en: "The fitted change in Y for a one-unit change in X₁, holding other included X variables fixed", fr: "Le changement ajusté de Y pour une unité de X₁, en maintenant fixes les autres X inclus" } },
+        { id: "b", label: { en: "A guaranteed causal effect", fr: "Un effet causal garanti" } },
+        { id: "c", label: { en: "The R² of the model", fr: "Le R² du modèle" } },
+        { id: "d", label: { en: "The sample size", fr: "La taille de l’échantillon" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The coefficient is a conditional fitted relationship with respect to other included regressors.", fr: "Le coefficient est une relation ajustée conditionnelle par rapport aux autres régresseurs inclus." },
+    },
+    {
+      id: "q4", conceptKey: "t-stat",
+      question: { en: "If β̂ = 0.60 and SE = 0.20, the t-stat for H₀: β = 0 is:", fr: "Si β̂ = 0,60 et SE = 0,20, la t-stat pour H₀ : β = 0 vaut :" },
+      options: [
+        { id: "a", label: { en: "0.3", fr: "0,3" } },
+        { id: "b", label: { en: "3.0", fr: "3,0" } },
+        { id: "c", label: { en: "12.0", fr: "12,0" } },
+        { id: "d", label: { en: "−3.0", fr: "−3,0" } },
+      ],
+      correctOption: "b",
+      explanation: { en: "t = 0.60 / 0.20 = 3.0.", fr: "t = 0,60 / 0,20 = 3,0." },
+    },
+    {
+      id: "q5", conceptKey: "p-value",
+      question: { en: "Which statement about a p-value is correct?", fr: "Quelle affirmation sur la p-value est correcte ?" },
+      options: [
+        { id: "a", label: { en: "It is not the probability that the null hypothesis is true", fr: "Ce n’est pas la probabilité que l’hypothèse nulle soit vraie" } },
+        { id: "b", label: { en: "It directly measures economic importance", fr: "Elle mesure directement l’importance économique" } },
+        { id: "c", label: { en: "It always proves causality when below 5%", fr: "Elle prouve toujours la causalité sous 5 %" } },
+        { id: "d", label: { en: "It equals R²", fr: "Elle est égale à R²" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The p-value is a tail probability under the null and model assumptions, not a posterior probability of the null.", fr: "La p-value est une probabilité de queue sous l’hypothèse nulle et les hypothèses du modèle, pas une probabilité a posteriori de l’hypothèse nulle." },
+    },
+    {
+      id: "q6", conceptKey: "r-squared",
+      question: { en: "A very high R² proves that:", fr: "Un R² très élevé prouve que :" },
+      options: [
+        { id: "a", label: { en: "Nothing about causality by itself", fr: "Rien sur la causalité à lui seul" } },
+        { id: "b", label: { en: "All coefficients are unbiased", fr: "Tous les coefficients sont sans biais" } },
+        { id: "c", label: { en: "The model will forecast perfectly", fr: "Le modèle prévoira parfaitement" } },
+        { id: "d", label: { en: "There are no omitted variables", fr: "Il n’existe aucune variable omise" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "R² is an in-sample fit statistic and does not establish causal validity.", fr: "R² est une statistique de fit in-sample et n’établit pas la validité causale." },
+    },
+    {
+      id: "q7", conceptKey: "ovb",
+      question: { en: "Omitted-variable bias is most concerning when the omitted factor:", fr: "Le biais de variable omise est particulièrement préoccupant lorsque le facteur omis :" },
+      options: [
+        { id: "a", label: { en: "Affects Y and is correlated with an included X", fr: "Affecte Y et est corrélé avec un X inclus" } },
+        { id: "b", label: { en: "Has no relation to Y or X", fr: "N’a aucun lien avec Y ou X" } },
+        { id: "c", label: { en: "Is measured perfectly but irrelevant", fr: "Est parfaitement mesuré mais non pertinent" } },
+        { id: "d", label: { en: "Is only the intercept", fr: "Est seulement l’intercept" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "That combination can make an included regressor absorb part of the omitted factor's effect.", fr: "Cette combinaison peut faire absorber au régresseur inclus une partie de l’effet du facteur omis." },
+    },
+    {
+      id: "q8", conceptKey: "heteroskedasticity",
+      question: { en: "Heteroskedasticity means:", fr: "L’hétéroscédasticité signifie :" },
+      options: [
+        { id: "a", label: { en: "Residual variance is not constant", fr: "La variance des résidus n’est pas constante" } },
+        { id: "b", label: { en: "All X variables are identical", fr: "Toutes les variables X sont identiques" } },
+        { id: "c", label: { en: "R² equals zero", fr: "R² vaut zéro" } },
+        { id: "d", label: { en: "The intercept is missing", fr: "L’intercept est absent" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Heteroskedasticity is non-constant conditional error variance.", fr: "L’hétéroscédasticité correspond à une variance conditionnelle non constante des erreurs." },
+    },
+    {
+      id: "q9", conceptKey: "causality",
+      question: { en: "Why does correlation not automatically imply causation?", fr: "Pourquoi corrélation n’implique-t-elle pas automatiquement causalité ?" },
+      options: [
+        { id: "a", label: { en: "Common causes or reverse causality may generate the relationship", fr: "Des causes communes ou une causalité inverse peuvent générer la relation" } },
+        { id: "b", label: { en: "Correlation is never useful", fr: "La corrélation n’est jamais utile" } },
+        { id: "c", label: { en: "Causality requires R² = 1", fr: "La causalité exige R² = 1" } },
+        { id: "d", label: { en: "Every regression coefficient is zero", fr: "Tout coefficient de régression vaut zéro" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Alternative mechanisms can generate the same observed association.", fr: "Des mécanismes alternatifs peuvent produire la même association observée." },
+    },
+    {
+      id: "q10", conceptKey: "look-ahead",
+      question: { en: "What is look-ahead bias in a backtest?", fr: "Qu’est-ce que le look-ahead bias dans un backtest ?" },
+      options: [
+        { id: "a", label: { en: "Using information that would not have been available at the decision date", fr: "Utiliser une information qui n’aurait pas été disponible à la date de décision" } },
+        { id: "b", label: { en: "Using too few decimal places", fr: "Utiliser trop peu de décimales" } },
+        { id: "c", label: { en: "Calculating returns correctly", fr: "Calculer correctement les rendements" } },
+        { id: "d", label: { en: "Using a confidence interval", fr: "Utiliser un intervalle de confiance" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Look-ahead bias leaks future information into a simulated past decision and inflates apparent performance.", fr: "Le look-ahead bias introduit une information future dans une décision passée simulée et gonfle la performance apparente." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Walk me through how you would interpret a regression coefficient, t-stat, p-value and R², and explain why none of them alone proves causality.",
+      fr: "Explique comment interpréter un coefficient de régression, une t-stat, une p-value et R², puis pourquoi aucun ne prouve à lui seul la causalité.",
+    },
+    framework: [
+      { en: "Define the coefficient as the fitted conditional relationship between X and Y, holding other included variables fixed.", fr: "Définir le coefficient comme la relation conditionnelle ajustée entre X et Y en maintenant fixes les autres variables incluses." },
+      { en: "Use the standard error to describe sampling uncertainty around that estimate.", fr: "Utiliser l’erreur standard pour décrire l’incertitude d’échantillonnage autour de l’estimation." },
+      { en: "Explain the t-stat as coefficient relative to standard error under a null hypothesis.", fr: "Expliquer la t-stat comme coefficient rapporté à son erreur standard sous une hypothèse nulle." },
+      { en: "Explain that the p-value is a tail probability under the null, not the probability that the null is true.", fr: "Expliquer que la p-value est une probabilité de queue sous l’hypothèse nulle, pas la probabilité que l’hypothèse nulle soit vraie." },
+      { en: "Describe R² as an in-sample fit measure, not a validity or causality score.", fr: "Décrire R² comme une mesure de fit in-sample, pas comme un score de validité ou de causalité." },
+      { en: "Finish with identification: omitted variables, reverse causality or selection can invalidate causal interpretation.", fr: "Terminer avec l’identification : variables omises, causalité inverse ou sélection peuvent invalider l’interprétation causale." },
+    ],
+    sample: {
+      en: "A regression coefficient tells me the fitted change in the dependent variable associated with a one-unit change in the regressor, holding other included variables constant. I then look at the standard error to understand estimation uncertainty. For a null of zero, the t-stat is the coefficient divided by its standard error, and the p-value tells me how extreme that statistic would be under the null and the model assumptions. A small p-value is evidence against the null, but it is not the probability that the null is true and it does not tell me whether the effect is economically large. R² tells me how much sample variation in Y is explained by fitted values, but a high R² does not prove correct specification, predictive stability or causality. For causal interpretation I need a credible identification strategy because omitted variables, reverse causality, selection or simultaneity can generate biased coefficients even when the regression looks statistically strong.",
+      fr: "Un coefficient de régression m’indique le changement ajusté de la variable dépendante associé à une variation d’une unité du régresseur, en maintenant constantes les autres variables incluses. J’examine ensuite l’erreur standard pour comprendre l’incertitude d’estimation. Pour une hypothèse nulle de zéro, la t-stat est le coefficient divisé par son erreur standard, et la p-value indique à quel point cette statistique serait extrême sous l’hypothèse nulle et les hypothèses du modèle. Une petite p-value constitue une preuve contre l’hypothèse nulle, mais ce n’est pas la probabilité que l’hypothèse nulle soit vraie et cela ne dit pas si l’effet est économiquement important. R² indique quelle part de la variation de Y dans l’échantillon est expliquée par les valeurs ajustées, mais un R² élevé ne prouve ni bonne spécification, ni stabilité prédictive, ni causalité. Pour une interprétation causale, il faut une stratégie d’identification crédible car variables omises, causalité inverse, sélection ou simultanéité peuvent biaiser les coefficients même si la régression paraît statistiquement forte.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
