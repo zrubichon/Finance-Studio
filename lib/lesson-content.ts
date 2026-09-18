@@ -4136,7 +4136,897 @@ export const riskReturnDiversificationLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson];
+
+export const microeconomicsForFinanceLesson: FinanceLesson = {
+  slug: "year-1-microeconomics-for-finance",
+  year: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations" },
+  domain: { en: "Macro & Economics", fr: "Macro & économie / Macro & Economics" },
+  title: {
+    en: "Microeconomics for Finance",
+    fr: "Microéconomie pour la finance / Microeconomics for Finance",
+  },
+  subtitle: {
+    en: "Understand how prices, quantities, competition, costs and incentives shape company economics — and turn those ideas into better analysis of margins, pricing power, industry structure and valuation.",
+    fr: "Comprendre comment prix, quantités, concurrence, coûts et incitations façonnent l’économie d’une entreprise — puis transformer ces idées en meilleure analyse des marges, du pricing power, de la structure sectorielle et de la valorisation.",
+  },
+  duration: { en: "85–105 min", fr: "85–105 min" },
+  prerequisites: [
+    {
+      en: "Basic algebra and percentages",
+      fr: "Algèbre simple et pourcentages",
+    },
+    {
+      en: "Risk, Return & Diversification",
+      fr: "Risque, rendement & diversification / Risk, Return & Diversification",
+    },
+  ],
+  objectives: [
+    {
+      en: "Explain supply, demand and market equilibrium and distinguish a movement along a curve from a shift of the curve.",
+      fr: "Expliquer offre / supply, demande / demand et équilibre de marché / market equilibrium, et distinguer déplacement le long d’une courbe d’un déplacement de la courbe.",
+    },
+    {
+      en: "Calculate and interpret price elasticity of demand and connect elasticity to pricing power and revenue.",
+      fr: "Calculer et interpréter l’élasticité-prix de la demande / price elasticity of demand et la relier au pricing power et au chiffre d’affaires.",
+    },
+    {
+      en: "Distinguish fixed, variable, average and marginal costs.",
+      fr: "Distinguer coûts fixes / fixed costs, variables / variable costs, moyens / average costs et marginaux / marginal costs.",
+    },
+    {
+      en: "Explain why firms compare marginal revenue and marginal cost when choosing output.",
+      fr: "Expliquer pourquoi les entreprises comparent revenu marginal / marginal revenue et coût marginal / marginal cost pour choisir leur niveau de production.",
+    },
+    {
+      en: "Compare perfect competition, monopolistic competition, oligopoly and monopoly.",
+      fr: "Comparer concurrence parfaite / perfect competition, concurrence monopolistique / monopolistic competition, oligopole et monopole.",
+    },
+    {
+      en: "Translate microeconomic concepts into company analysis: pricing power, margins, market share, barriers to entry and operating leverage.",
+      fr: "Transformer les concepts microéconomiques en analyse d’entreprise : pricing power, marges, part de marché, barrières à l’entrée / barriers to entry et levier opérationnel / operating leverage.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "From customer behavior to company value",
+      fr: "Du comportement du client à la valeur de l’entreprise",
+    },
+    steps: [
+      {
+        title: { en: "Demand", fr: "Demande / Demand" },
+        detail: { en: "Willingness to pay · elasticity", fr: "Disposition à payer · élasticité" },
+      },
+      {
+        title: { en: "Competition", fr: "Concurrence / Competition" },
+        detail: { en: "Substitutes · market structure · entry", fr: "Substituts · structure · entrée" },
+      },
+      {
+        title: { en: "Company economics", fr: "Économie de l’entreprise" },
+        detail: { en: "Price · volume · costs · margins", fr: "Prix · volume · coûts · marges" },
+      },
+      {
+        title: { en: "Finance outcome", fr: "Conséquence financière" },
+        detail: { en: "Cash flow · risk · valuation", fr: "Cash flow · risque · valorisation" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "supply-demand",
+      kicker: { en: "01 · SUPPLY & DEMAND", fr: "01 · OFFRE & DEMANDE" },
+      title: {
+        en: "Prices coordinate buyers and sellers",
+        fr: "Les prix coordonnent acheteurs et vendeurs",
+      },
+      coreFacts: [
+        {
+          en: "A demand curve shows the quantity buyers are willing and able to purchase at different prices, holding other relevant factors constant.",
+          fr: "Une courbe de demande / demand curve montre la quantité que les acheteurs souhaitent et peuvent acheter à différents prix, toutes choses pertinentes égales par ailleurs.",
+        },
+        {
+          en: "A supply curve shows the quantity sellers are willing and able to offer at different prices, holding other factors constant.",
+          fr: "Une courbe d’offre / supply curve montre la quantité que les vendeurs souhaitent et peuvent proposer à différents prix, toutes choses égales par ailleurs.",
+        },
+        {
+          en: "Market equilibrium occurs where quantity demanded equals quantity supplied.",
+          fr: "L’équilibre de marché / market equilibrium se situe lorsque quantité demandée et quantité offerte sont égales.",
+        },
+        {
+          en: "A change in the good's own price creates a movement along a curve; changes in income, input costs, technology, preferences or expectations can shift a curve.",
+          fr: "Un changement du prix du bien provoque un déplacement le long de la courbe ; revenus, coûts des inputs, technologie, préférences ou anticipations peuvent déplacer la courbe elle-même.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Think about concert tickets. At a very high price, fewer people want to buy. At a higher price, organizers may be more willing to release seats or add dates. The market price moves toward a point where the number of tickets buyers want matches the number sellers offer.",
+          fr: "Pense à des billets de concert. À un prix très élevé, moins de personnes veulent acheter. À un prix plus élevé, l’organisateur peut être davantage incité à proposer des places ou ajouter des dates. Le prix de marché se dirige vers un point où la quantité demandée correspond à la quantité offerte.",
+        },
+        Intermediate: {
+          en: "Supply-demand analysis separates endogenous price adjustment from exogenous curve shifts. A demand increase raises equilibrium price and quantity under an upward-sloping supply curve, while an adverse supply shock can raise price and lower quantity.",
+          fr: "L’analyse offre-demande sépare l’ajustement endogène du prix des déplacements exogènes des courbes. Une hausse de demande augmente prix et quantité d’équilibre si l’offre est croissante, tandis qu’un choc négatif d’offre peut augmenter le prix et réduire la quantité.",
+        },
+        Professional: {
+          en: "Micro analysis asks which curve moved, why, and how slope determines incidence. In finance, this is the foundation for analyzing commodity shocks, capacity constraints, inventory cycles, wage pressure and demand-driven versus cost-driven changes in company revenue.",
+          fr: "L’analyse micro demande quelle courbe s’est déplacée, pourquoi et comment la pente détermine l’incidence. En finance, c’est la base pour analyser chocs de matières premières, contraintes de capacité, cycles de stocks, pression salariale et variations de revenu liées à la demande ou aux coûts.",
+        },
+      },
+      formula: {
+        label: { en: "Simple linear equilibrium", fr: "Équilibre linéaire simple" },
+        expression: "Demand: Qd = 100 − 2P   ·   Supply: Qs = 20 + 2P   ·   Equilibrium: Qd = Qs",
+        explanation: {
+          en: "Set quantity demanded equal to quantity supplied and solve for price.",
+          fr: "Égaliser quantité demandée et quantité offerte puis résoudre pour le prix.",
+        },
+        workedExample: {
+          en: "100 − 2P = 20 + 2P → 80 = 4P → P = 20; then Q = 60.",
+          fr: "100 − 2P = 20 + 2P → 80 = 4P → P = 20 ; puis Q = 60.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Equilibrium",
+          fr: "équilibre / equilibrium",
+          definition: {
+            en: "A market-clearing point where planned quantity demanded equals planned quantity supplied.",
+            fr: "Point d’équilibre où quantité demandée prévue et quantité offerte prévue sont égales.",
+          },
+        },
+        {
+          en: "Supply shock",
+          fr: "choc d’offre / supply shock",
+          definition: {
+            en: "A change in production conditions that shifts the supply relationship.",
+            fr: "Modification des conditions de production qui déplace la relation d’offre.",
+          },
+        },
+      ],
+    },
+    {
+      id: "elasticity",
+      kicker: { en: "02 · ELASTICITY", fr: "02 · ÉLASTICITÉ" },
+      title: {
+        en: "Elasticity measures how strongly quantity reacts to price",
+        fr: "L’élasticité mesure la force de réaction de la quantité au prix",
+      },
+      coreFacts: [
+        {
+          en: "Price elasticity of demand measures the percentage change in quantity demanded relative to the percentage change in price.",
+          fr: "L’élasticité-prix de la demande / price elasticity of demand mesure la variation en pourcentage de la quantité demandée par rapport à la variation en pourcentage du prix.",
+        },
+        {
+          en: "Demand is called elastic when the absolute elasticity is greater than 1 and inelastic when it is below 1.",
+          fr: "La demande est dite élastique lorsque la valeur absolue de l’élasticité est supérieure à 1 et inélastique lorsqu’elle est inférieure à 1.",
+        },
+        {
+          en: "Availability of substitutes, necessity, time horizon and share of customer budget can influence elasticity.",
+          fr: "Disponibilité de substituts, caractère essentiel, horizon temporel et poids dans le budget du client peuvent influencer l’élasticité.",
+        },
+        {
+          en: "Elasticity is central to pricing power because a company can raise price more successfully when customers are less price-sensitive, all else equal.",
+          fr: "L’élasticité est centrale pour le pricing power car une entreprise peut augmenter son prix plus facilement lorsque les clients sont moins sensibles au prix, toutes choses égales par ailleurs.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company raises price by 10% and quantity sold falls only 2%, demand is relatively inelastic. Customers did not change behavior much. If quantity falls 20%, demand is much more elastic and the price increase may hurt revenue.",
+          fr: "Si une entreprise augmente son prix de 10 % et que la quantité vendue baisse seulement de 2 %, la demande est relativement inélastique. Les clients ont peu changé leur comportement. Si les volumes baissent de 20 %, la demande est beaucoup plus élastique et la hausse de prix peut pénaliser le chiffre d’affaires.",
+        },
+        Intermediate: {
+          en: "For a small price change, total revenue tends to rise when demand is inelastic and fall when demand is elastic, because the price effect dominates in the first case and the volume effect in the second.",
+          fr: "Pour une petite variation de prix, le chiffre d’affaires tend à augmenter lorsque la demande est inélastique et à baisser lorsqu’elle est élastique, car l’effet prix domine dans le premier cas et l’effet volume dans le second.",
+        },
+        Professional: {
+          en: "Observed elasticity can be segmented by customer cohort, geography, product tier and time horizon. In company analysis, strong pricing power is more credible when price increases persist without abnormal churn, market-share loss or promotional intensity.",
+          fr: "L’élasticité observée peut varier par cohorte client, géographie, gamme et horizon. En analyse d’entreprise, un fort pricing power est plus crédible lorsque les hausses de prix persistent sans churn anormal, perte de part de marché ni hausse excessive des promotions.",
+        },
+      },
+      formula: {
+        label: { en: "Price elasticity of demand", fr: "Élasticité-prix de la demande / Price elasticity of demand" },
+        expression: "Elasticity = %Δ Quantity Demanded ÷ %Δ Price",
+        explanation: {
+          en: "Demand elasticity is often negative because price and quantity demanded move in opposite directions; analysts frequently discuss its absolute value.",
+          fr: "L’élasticité de demande est souvent négative car prix et quantité demandée évoluent en sens opposé ; les analystes discutent souvent sa valeur absolue.",
+        },
+        workedExample: {
+          en: "Price +10%, quantity −5% → elasticity = −5% ÷ 10% = −0.5, so demand is inelastic in absolute value.",
+          fr: "Prix +10 %, quantité −5 % → élasticité = −5 % ÷ 10 % = −0,5 ; la demande est donc inélastique en valeur absolue.",
+        },
+      },
+      marketConnection: {
+        en: "Investors often watch price/mix versus volume in earnings reports to judge whether revenue growth reflects genuine pricing power or temporary inflation pass-through.",
+        fr: "Les investisseurs suivent souvent price/mix et volumes dans les résultats afin de déterminer si la croissance du chiffre d’affaires reflète un vrai pricing power ou seulement un pass-through temporaire de l’inflation.",
+      },
+      vocabulary: [
+        {
+          en: "Pricing power",
+          fr: "pouvoir de fixation des prix / pricing power",
+          definition: {
+            en: "The ability to raise prices without losing an economically damaging amount of demand.",
+            fr: "Capacité à augmenter les prix sans perdre une quantité économiquement dommageable de demande.",
+          },
+        },
+        {
+          en: "Substitute",
+          fr: "substitut / substitute",
+          definition: {
+            en: "A product customers may switch to when relative price or quality changes.",
+            fr: "Produit vers lequel les clients peuvent se tourner lorsque prix relatif ou qualité change.",
+          },
+        },
+      ],
+    },
+    {
+      id: "surplus-incidence",
+      kicker: { en: "03 · SURPLUS & WELFARE", fr: "03 · SURPLUS & BIEN-ÊTRE" },
+      title: {
+        en: "Willingness to pay, producer economics and who bears a tax",
+        fr: "Disposition à payer, économie du producteur et incidence d’une taxe",
+      },
+      coreFacts: [
+        {
+          en: "Consumer surplus is the difference between willingness to pay and the price actually paid.",
+          fr: "Le surplus du consommateur / consumer surplus est la différence entre disposition à payer et prix effectivement payé.",
+        },
+        {
+          en: "Producer surplus is related to the difference between market price and the minimum amount required to supply units, under the model.",
+          fr: "Le surplus du producteur / producer surplus est lié à l’écart entre prix de marché et montant minimum requis pour fournir les unités, dans le modèle.",
+        },
+        {
+          en: "Taxes or other wedges can reduce traded quantity and create deadweight loss relative to the competitive benchmark.",
+          fr: "Taxes ou autres wedges peuvent réduire la quantité échangée et créer une perte sèche / deadweight loss par rapport au benchmark concurrentiel.",
+        },
+        {
+          en: "Economic incidence depends on relative elasticities, not simply on who legally sends the tax payment.",
+          fr: "L’incidence économique dépend des élasticités relatives, pas seulement de l’acteur qui verse légalement la taxe.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you would have paid $15 for a product but the market price is $10, you receive $5 of consumer surplus. If a tax raises the effective cost, buyers and sellers may share the burden depending on how easily each side can change behavior.",
+          fr: "Si tu étais prêt à payer 15 $ pour un produit mais que son prix de marché est 10 $, tu obtiens 5 $ de consumer surplus. Si une taxe augmente le coût effectif, acheteurs et vendeurs peuvent partager la charge selon la facilité avec laquelle chacun peut changer son comportement.",
+        },
+        Intermediate: {
+          en: "Tax incidence falls more heavily on the less elastic side of the market. If customers have few substitutes, producers may pass more of a tax or cost increase through to price; if demand is highly elastic, pass-through can be more difficult.",
+          fr: "L’incidence d’une taxe pèse davantage sur le côté le moins élastique du marché. Si les clients disposent de peu de substituts, les producteurs peuvent davantage répercuter une taxe ou une hausse de coûts ; si la demande est très élastique, le pass-through peut être plus difficile.",
+        },
+        Professional: {
+          en: "Incidence analysis is directly relevant to regulation, tariffs, excise taxes, payment fees and input-cost shocks. Equity analysts care about who ultimately absorbs the wedge: customers through price, suppliers through concessions, labor through wages or shareholders through margin compression.",
+          fr: "L’analyse d’incidence s’applique directement à réglementation, tarifs douaniers, taxes spécifiques, frais de paiement et chocs de coûts d’inputs. Les analystes actions cherchent à savoir qui absorbe finalement le wedge : clients via le prix, fournisseurs via concessions, salariés via salaires ou actionnaires via compression des marges.",
+        },
+      },
+      example: {
+        en: "If customers are very insensitive to price but suppliers can easily redirect production elsewhere, a tax is more likely to be reflected in a higher customer price than in a large reduction in supplier net proceeds.",
+        fr: "Si les clients sont très peu sensibles au prix mais que les fournisseurs peuvent facilement réorienter leur production, une taxe a davantage de chances de se traduire par un prix client plus élevé que par une forte baisse du revenu net du fournisseur.",
+      },
+      vocabulary: [
+        {
+          en: "Consumer surplus",
+          fr: "surplus du consommateur / consumer surplus",
+          definition: {
+            en: "The difference between willingness to pay and price paid.",
+            fr: "Différence entre disposition à payer et prix payé.",
+          },
+        },
+        {
+          en: "Deadweight loss",
+          fr: "perte sèche / deadweight loss",
+          definition: {
+            en: "Lost total surplus from trades that no longer occur because of a distortion.",
+            fr: "Perte de surplus total liée à des échanges qui n’ont plus lieu en raison d’une distorsion.",
+          },
+        },
+      ],
+    },
+    {
+      id: "cost-structure",
+      kicker: { en: "04 · COST STRUCTURE", fr: "04 · STRUCTURE DE COÛTS" },
+      title: {
+        en: "Fixed, variable, average and marginal costs tell different stories",
+        fr: "Coûts fixes, variables, moyens et marginaux racontent des histoires différentes",
+      },
+      coreFacts: [
+        {
+          en: "Fixed costs do not change directly with short-run output over the relevant range; variable costs change with activity.",
+          fr: "Les coûts fixes / fixed costs ne changent pas directement avec le niveau de production à court terme sur la plage pertinente ; les coûts variables évoluent avec l’activité.",
+        },
+        {
+          en: "Average cost equals total cost divided by quantity, while marginal cost is the cost of producing one additional unit.",
+          fr: "Le coût moyen / average cost est le coût total divisé par la quantité, tandis que le coût marginal / marginal cost représente le coût de produire une unité supplémentaire.",
+        },
+        {
+          en: "High fixed-cost businesses can experience strong operating leverage because incremental revenue may add disproportionately to profit once fixed costs are covered.",
+          fr: "Les entreprises à coûts fixes élevés peuvent présenter un fort levier opérationnel / operating leverage car le revenu supplémentaire peut contribuer de manière disproportionnée au profit une fois les coûts fixes couverts.",
+        },
+        {
+          en: "Economies of scale can reduce average cost as output grows, but diseconomies can appear when complexity or constraints increase.",
+          fr: "Les économies d’échelle / economies of scale peuvent réduire le coût moyen lorsque la production augmente, mais des déséconomies peuvent apparaître lorsque complexité ou contraintes augmentent.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A software company may spend heavily to build a product before serving customers. Once the platform exists, the cost of serving one extra user may be relatively small. A restaurant, in contrast, needs more food and often more labor as it serves more meals. Their cost structures are different.",
+          fr: "Une entreprise de logiciel peut dépenser beaucoup pour construire le produit avant d’avoir des clients. Une fois la plateforme créée, le coût d’un utilisateur supplémentaire peut être relativement faible. Un restaurant, au contraire, a besoin de davantage de nourriture et souvent de main-d’œuvre lorsqu’il sert plus de repas. Leurs structures de coûts sont différentes.",
+        },
+        Intermediate: {
+          en: "Cost structure determines margin sensitivity to volume. When fixed costs are large, weak volume can depress margins quickly, while strong volume can expand margins. Marginal-cost behavior also affects optimal pricing and capacity decisions.",
+          fr: "La structure de coûts détermine la sensibilité des marges au volume. Lorsque les coûts fixes sont élevés, une faiblesse des volumes peut rapidement compresser les marges, tandis qu’une forte croissance des volumes peut les faire progresser. Le comportement du marginal cost influence aussi pricing et capacité.",
+        },
+        Professional: {
+          en: "Analysts separate fixed, semi-fixed and variable costs, then model incremental margins and capacity thresholds. Reported accounting categories do not always map cleanly to economic cost behavior, so historical margin response to volume is often more informative than labels alone.",
+          fr: "Les analystes distinguent coûts fixes, semi-fixes et variables, puis modélisent marges incrémentales et seuils de capacité. Les catégories comptables ne correspondent pas toujours parfaitement au comportement économique des coûts ; la réponse historique des marges aux volumes est donc souvent plus informative que les labels seuls.",
+        },
+      },
+      formula: {
+        label: { en: "Average and marginal cost", fr: "Coût moyen et coût marginal" },
+        expression: "Average Cost = Total Cost ÷ Quantity   ·   Marginal Cost ≈ ΔTotal Cost ÷ ΔQuantity",
+        explanation: {
+          en: "Average cost describes the cost per unit across all units; marginal cost focuses on the next units.",
+          fr: "Le coût moyen décrit le coût par unité sur l’ensemble de la production ; le marginal cost se concentre sur les unités supplémentaires.",
+        },
+        workedExample: {
+          en: "Total cost rises from $1,000 at 100 units to $1,080 at 110 units. Marginal cost over that interval ≈ $80 ÷ 10 = $8 per additional unit.",
+          fr: "Le coût total passe de 1 000 $ pour 100 unités à 1 080 $ pour 110 unités. Le marginal cost sur cet intervalle ≈ 80 $ ÷ 10 = 8 $ par unité supplémentaire.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Operating leverage",
+          fr: "levier opérationnel / operating leverage",
+          definition: {
+            en: "The sensitivity of operating profit to changes in revenue or volume caused by cost structure.",
+            fr: "Sensibilité du profit opérationnel aux variations de revenu ou volume liée à la structure de coûts.",
+          },
+        },
+        {
+          en: "Economies of scale",
+          fr: "économies d’échelle / economies of scale",
+          definition: {
+            en: "Declining average cost as output expands over a relevant range.",
+            fr: "Baisse du coût moyen lorsque la production augmente sur une plage pertinente.",
+          },
+        },
+      ],
+    },
+    {
+      id: "marginal-decision",
+      kicker: { en: "05 · MARGINAL DECISIONS", fr: "05 · DÉCISIONS MARGINALES" },
+      title: {
+        en: "Firms compare marginal revenue with marginal cost",
+        fr: "Les entreprises comparent revenu marginal et coût marginal",
+      },
+      coreFacts: [
+        {
+          en: "Marginal revenue is the additional revenue generated by selling an additional unit.",
+          fr: "Le revenu marginal / marginal revenue est le revenu supplémentaire généré par la vente d’une unité supplémentaire.",
+        },
+        {
+          en: "Marginal cost is the additional cost of producing an additional unit.",
+          fr: "Le coût marginal / marginal cost est le coût supplémentaire de production d’une unité supplémentaire.",
+        },
+        {
+          en: "In a standard profit-maximization framework, a firm expands output while marginal revenue exceeds marginal cost and stops around MR = MC, subject to constraints.",
+          fr: "Dans un cadre standard de maximisation du profit, une entreprise augmente la production tant que marginal revenue dépasse marginal cost et s’arrête autour de MR = MC, sous réserve de contraintes.",
+        },
+        {
+          en: "This is a marginal rule, not a statement that accounting profit is zero or that every real company can perfectly optimize.",
+          fr: "Il s’agit d’une règle marginale, pas d’une affirmation selon laquelle le bénéfice comptable serait nul ou qu’une entreprise réelle pourrait optimiser parfaitement.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If making one more unit brings in $12 of extra revenue but costs only $8 to produce, that extra unit adds about $4 before other effects. If the next unit brings only $7 but costs $8, producing it destroys about $1 of incremental profit.",
+          fr: "Si produire une unité supplémentaire apporte 12 $ de revenu additionnel mais coûte seulement 8 $, cette unité ajoute environ 4 $ avant autres effets. Si l’unité suivante rapporte seulement 7 $ mais coûte 8 $, la produire détruit environ 1 $ de profit incrémental.",
+        },
+        Intermediate: {
+          en: "For a price-taking firm, marginal revenue equals market price. A firm with market power faces a downward-sloping demand curve, so selling more usually requires a lower effective price and marginal revenue can sit below price.",
+          fr: "Pour une entreprise price taker, marginal revenue est égal au prix de marché. Une entreprise disposant de market power fait face à une demande décroissante ; vendre davantage exige généralement un prix effectif plus faible et le marginal revenue peut être inférieur au prix.",
+        },
+        Professional: {
+          en: "Marginal economics underpins capacity utilization, promotional decisions, customer acquisition and product mix. Real firms optimize under dynamic constraints — retention, channel conflict, brand effects, fixed capacity and strategic responses from competitors — so static MR=MC is a starting framework, not the end of analysis.",
+          fr: "L’économie marginale sous-tend utilisation de capacité, promotions, acquisition clients et product mix. Les entreprises réelles optimisent sous contraintes dynamiques — rétention, conflit de distribution, effet de marque, capacité fixe et réaction stratégique des concurrents — donc MR=MC est un point de départ, pas la fin de l’analyse.",
+        },
+      },
+      formula: {
+        label: { en: "Profit and marginal rule", fr: "Profit et règle marginale" },
+        expression: "Profit = Total Revenue − Total Cost   ·   Profit-maximizing condition: MR ≈ MC",
+        explanation: {
+          en: "The equality is a standard interior optimum condition under the model, not a universal operational rule.",
+          fr: "L’égalité est une condition standard d’optimum intérieur dans le modèle, pas une règle opérationnelle universelle.",
+        },
+        workedExample: {
+          en: "If the next unit adds $12 revenue and $8 cost, incremental profit is +$4. If the following unit adds $7 revenue and $8 cost, incremental profit is −$1.",
+          fr: "Si l’unité suivante ajoute 12 $ de revenu et 8 $ de coût, le profit incrémental vaut +4 $. Si la suivante ajoute 7 $ de revenu et 8 $ de coût, le profit incrémental vaut −1 $.",
+        },
+      },
+    },
+    {
+      id: "market-structures",
+      kicker: { en: "06 · MARKET STRUCTURE", fr: "06 · STRUCTURE DE MARCHÉ" },
+      title: {
+        en: "Competition determines how much pricing freedom a firm has",
+        fr: "La concurrence détermine la liberté de fixation des prix d’une entreprise",
+      },
+      coreFacts: [
+        {
+          en: "Perfect competition is a benchmark with many firms, homogeneous products and little individual pricing power.",
+          fr: "La concurrence parfaite / perfect competition est un benchmark avec de nombreuses entreprises, produits homogènes et peu de pricing power individuel.",
+        },
+        {
+          en: "Monopolistic competition combines many firms with differentiated products.",
+          fr: "La concurrence monopolistique / monopolistic competition combine de nombreuses entreprises et des produits différenciés.",
+        },
+        {
+          en: "Oligopoly contains a small number of strategically interdependent competitors.",
+          fr: "Un oligopole comporte un petit nombre de concurrents stratégiquement interdépendants.",
+        },
+        {
+          en: "A monopoly faces no close direct competitor in the defined market, but can still face demand constraints, regulation, substitutes or entry threats.",
+          fr: "Un monopole n’a pas de concurrent direct proche dans le marché défini, mais reste soumis à la demande, la réglementation, aux substituts ou à la menace d’entrée.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A wheat farmer usually has little ability to charge twice the market price because buyers can purchase similar wheat elsewhere. A company with a unique patented medicine may have far more pricing power for a time. Industry structure changes business economics.",
+          fr: "Un producteur de blé peut difficilement facturer deux fois le prix du marché car les acheteurs trouvent un produit similaire ailleurs. Une entreprise avec un médicament unique protégé par brevet peut disposer de bien plus de pricing power pendant un temps. La structure sectorielle modifie l’économie de l’entreprise.",
+        },
+        Intermediate: {
+          en: "Market structure shapes margins, returns on capital and strategic behavior. In oligopolies, each firm's decision depends on expected competitor response; in differentiated markets, brand, switching costs and product quality can soften direct price competition.",
+          fr: "La structure de marché façonne marges, rendements du capital et comportement stratégique. Dans un oligopole, chaque décision dépend de la réaction anticipée des concurrents ; dans les marchés différenciés, marque, switching costs et qualité peuvent réduire la concurrence directe par les prix.",
+        },
+        Professional: {
+          en: "Industry analysis should define the economically relevant market, concentration, capacity discipline, entry barriers, substitution and bargaining power. Headline market share can be misleading if geographic or product segmentation is wrong.",
+          fr: "L’analyse sectorielle doit définir le marché économiquement pertinent, concentration, discipline de capacité, barrières à l’entrée, substitution et pouvoir de négociation. Une market share headline peut être trompeuse si la segmentation géographique ou produit est incorrecte.",
+        },
+      },
+      comparison: {
+        title: { en: "Four common market structures", fr: "Quatre structures de marché courantes" },
+        headers: [
+          { en: "Structure", fr: "Structure" },
+          { en: "Typical competitors", fr: "Concurrents typiques" },
+          { en: "Product", fr: "Produit" },
+          { en: "Pricing power", fr: "Pricing power" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Perfect competition", fr: "Concurrence parfaite / perfect competition" },
+            { en: "Many", fr: "Nombreux" },
+            { en: "Highly similar", fr: "Très similaire" },
+            { en: "Very limited", fr: "Très limité" },
+          ]},
+          { cells: [
+            { en: "Monopolistic competition", fr: "Concurrence monopolistique" },
+            { en: "Many", fr: "Nombreux" },
+            { en: "Differentiated", fr: "Différencié" },
+            { en: "Some", fr: "Modéré" },
+          ]},
+          { cells: [
+            { en: "Oligopoly", fr: "Oligopole" },
+            { en: "Few", fr: "Peu nombreux" },
+            { en: "Similar or differentiated", fr: "Similaire ou différencié" },
+            { en: "Potentially meaningful", fr: "Potentiellement important" },
+          ]},
+          { cells: [
+            { en: "Monopoly", fr: "Monopole" },
+            { en: "One dominant supplier in defined market", fr: "Un fournisseur dominant dans le marché défini" },
+            { en: "No close direct substitute", fr: "Pas de substitut direct proche" },
+            { en: "High, but not unlimited", fr: "Élevé, mais non illimité" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Barrier to entry",
+          fr: "barrière à l’entrée / barrier to entry",
+          definition: {
+            en: "An economic, legal, technological or strategic obstacle that makes entry difficult.",
+            fr: "Obstacle économique, juridique, technologique ou stratégique rendant l’entrée difficile.",
+          },
+        },
+        {
+          en: "Switching cost",
+          fr: "coût de changement / switching cost",
+          definition: {
+            en: "A financial or non-financial cost borne by a customer when changing provider.",
+            fr: "Coût financier ou non financier supporté par le client lorsqu’il change de fournisseur.",
+          },
+        },
+      ],
+    },
+    {
+      id: "pricing-power-margins",
+      kicker: { en: "07 · PRICING POWER & MARGINS", fr: "07 · PRICING POWER & MARGES" },
+      title: {
+        en: "Great businesses often combine willingness to pay with cost advantage",
+        fr: "Les meilleures économies d’entreprise combinent souvent disposition à payer et avantage de coûts",
+      },
+      coreFacts: [
+        {
+          en: "Pricing power comes from customer value, differentiation, scarcity, switching costs, brand, network effects or limited substitutes.",
+          fr: "Le pricing power peut venir de la valeur client, différenciation, rareté, switching costs, marque, effets de réseau / network effects ou faible nombre de substituts.",
+        },
+        {
+          en: "High gross margins can signal attractive economics but must be interpreted with operating expenses, capital intensity and competitive durability.",
+          fr: "Des marges brutes élevées peuvent signaler une économie attractive mais doivent être interprétées avec dépenses opérationnelles, intensité capitalistique et durabilité concurrentielle.",
+        },
+        {
+          en: "A price increase does not automatically improve profit if volume, mix or customer retention deteriorate sharply.",
+          fr: "Une hausse de prix n’améliore pas automatiquement le profit si volumes, mix ou rétention client se détériorent fortement.",
+        },
+        {
+          en: "Sustainable margin expansion is stronger when supported by real productivity, scale or differentiation rather than temporary underinvestment.",
+          fr: "Une expansion durable des marges est plus solide lorsqu’elle repose sur productivité, échelle ou différenciation plutôt que sur un sous-investissement temporaire.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose a product costs $60 to make and sells for $100. Gross profit is $40. If the company can raise price to $105 without losing customers and cost stays $60, gross profit rises to $45. But if customers leave, the total business result may be worse.",
+          fr: "Supposons qu’un produit coûte 60 $ à fabriquer et soit vendu 100 $. Le gross profit vaut 40 $. Si l’entreprise peut augmenter le prix à 105 $ sans perdre de clients et que le coût reste 60 $, le gross profit passe à 45 $. Mais si les clients partent, le résultat total peut se détériorer.",
+        },
+        Intermediate: {
+          en: "Pricing analysis decomposes revenue into price, volume and mix. Margin analysis then asks how input costs, labor, utilization and fixed-cost absorption respond. Strong pricing power is most valuable when price increases persist without destroying unit economics or share.",
+          fr: "L’analyse du pricing décompose le revenu entre prix, volume et mix. L’analyse de marge observe ensuite coûts d’inputs, travail, utilisation et absorption des coûts fixes. Un pricing power fort est particulièrement précieux lorsque les hausses de prix persistent sans dégrader unit economics ni part de marché.",
+        },
+        Professional: {
+          en: "A durable moat should be visible in economics: stable retention, attractive incremental margins, rational competitive response and returns on invested capital above the cost of capital. Margin quality matters as much as margin level.",
+          fr: "Un moat durable doit apparaître dans les economics : rétention stable, marges incrémentales attractives, réaction concurrentielle rationnelle et rendement du capital investi supérieur au coût du capital. La qualité de la marge compte autant que son niveau.",
+        },
+      },
+      formula: {
+        label: { en: "Gross margin", fr: "Marge brute / Gross margin" },
+        expression: "Gross Margin = (Revenue − Cost of Goods Sold) ÷ Revenue",
+        explanation: {
+          en: "Gross margin measures how much revenue remains after direct product or service cost under the accounting definition used.",
+          fr: "La gross margin mesure la part du revenu restant après coûts directs du produit ou service selon la définition comptable utilisée.",
+        },
+        workedExample: {
+          en: "Revenue $100, COGS $60 → gross margin = $40 ÷ $100 = 40%.",
+          fr: "Revenu 100 $, COGS 60 $ → gross margin = 40 ÷ 100 = 40 %.",
+        },
+      },
+      marketConnection: {
+        en: "Earnings calls often reveal microeconomics through management commentary on price realization, promotional activity, churn, input inflation, utilization and competitor behavior.",
+        fr: "Les earnings calls révèlent souvent la microéconomie via commentaires de management sur price realization, promotions, churn, inflation des inputs, utilisation de capacité et comportement des concurrents.",
+      },
+      vocabulary: [
+        {
+          en: "Network effect",
+          fr: "effet de réseau / network effect",
+          definition: {
+            en: "A situation where a product can become more valuable as more users or counterparties join.",
+            fr: "Situation dans laquelle un produit peut devenir plus utile ou précieux à mesure que davantage d’utilisateurs ou contreparties rejoignent le réseau.",
+          },
+        },
+        {
+          en: "Economic moat",
+          fr: "avantage concurrentiel durable / economic moat",
+          definition: {
+            en: "A durable competitive advantage that protects attractive economics from erosion.",
+            fr: "Avantage concurrentiel durable protégeant des economics attractives contre l’érosion.",
+          },
+        },
+      ],
+    },
+    {
+      id: "strategic-interaction",
+      kicker: { en: "08 · STRATEGIC INTERACTION", fr: "08 · INTERACTION STRATÉGIQUE" },
+      title: {
+        en: "Competitors react — which makes oligopolies different",
+        fr: "Les concurrents réagissent — ce qui rend les oligopoles particuliers",
+      },
+      coreFacts: [
+        {
+          en: "In concentrated markets, one firm's pricing, capacity or product decision can change the incentives of competitors.",
+          fr: "Dans les marchés concentrés, une décision de prix, capacité ou produit d’une entreprise peut modifier les incitations de ses concurrents.",
+        },
+        {
+          en: "Price wars can destroy industry profitability even when total demand is healthy.",
+          fr: "Les guerres de prix / price wars peuvent détruire la rentabilité sectorielle même lorsque la demande totale reste solide.",
+        },
+        {
+          en: "Capacity discipline can support industry economics when firms avoid persistent oversupply, while aggressive expansion can pressure prices.",
+          fr: "La discipline de capacité / capacity discipline peut soutenir l’économie du secteur lorsque les entreprises évitent une surcapacité persistante, tandis qu’une expansion agressive peut peser sur les prix.",
+        },
+        {
+          en: "Strategic behavior must still operate within competition law and regulation; analysts should not assume or endorse unlawful coordination.",
+          fr: "Le comportement stratégique doit respecter le droit de la concurrence et la réglementation ; l’analyse ne doit pas supposer ni encourager une coordination illégale.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If two airlines serve the same route, one airline's price cut may cause the other to cut prices too. The first airline cannot analyze its decision as if the competitor will do nothing. That strategic reaction is central to oligopoly.",
+          fr: "Si deux compagnies aériennes desservent la même route, une baisse de prix de l’une peut pousser l’autre à baisser aussi. La première ne peut pas analyser sa décision comme si le concurrent restait immobile. Cette réaction stratégique est centrale dans un oligopole.",
+        },
+        Intermediate: {
+          en: "Oligopoly analysis focuses on reaction functions, capacity, product differentiation and repeated interaction. Industry profitability can depend on whether competition occurs through price, quantity, quality, innovation or distribution.",
+          fr: "L’analyse d’un oligopole se concentre sur fonctions de réaction, capacité, différenciation produit et interactions répétées. La rentabilité sectorielle dépend de la dimension de concurrence : prix, quantité, qualité, innovation ou distribution.",
+        },
+        Professional: {
+          en: "Financial models often need a competitive-response layer. A market-share assumption that ignores competitor capacity, retaliation or substitution can overstate revenue durability. Scenario analysis should include rational adverse responses from competitors.",
+          fr: "Les modèles financiers doivent souvent intégrer une couche de réaction concurrentielle. Une hypothèse de market share ignorant capacité, riposte ou substitution peut surestimer la durabilité du revenu. Les scénarios doivent intégrer des réactions concurrentielles adverses mais rationnelles.",
+        },
+      },
+      marketConnection: {
+        en: "A new capacity announcement, aggressive promotion or entrant can move an entire industry's stocks because investors update expected future margins, not just one company's near-term sales.",
+        fr: "Une annonce de nouvelle capacité, une promotion agressive ou un nouvel entrant peut faire bouger toutes les actions d’un secteur car les investisseurs révisent les marges futures attendues, pas seulement les ventes court terme d’une seule entreprise.",
+      },
+      vocabulary: [
+        {
+          en: "Oligopoly",
+          fr: "oligopole / oligopoly",
+          definition: {
+            en: "A market with a small number of strategically interdependent major firms.",
+            fr: "Marché comportant un petit nombre d’acteurs majeurs stratégiquement interdépendants.",
+          },
+        },
+        {
+          en: "Capacity discipline",
+          fr: "discipline de capacité / capacity discipline",
+          definition: {
+            en: "Restraint in adding supply capacity relative to demand growth and industry economics.",
+            fr: "Modération dans l’ajout de capacité d’offre relativement à la croissance de la demande et à l’économie du secteur.",
+          },
+        },
+      ],
+    },
+    {
+      id: "micro-to-valuation",
+      kicker: { en: "09 · FROM MICRO TO VALUATION", fr: "09 · DE LA MICRO À LA VALORISATION" },
+      title: {
+        en: "Microeconomics becomes revenue, margins, cash flow and valuation",
+        fr: "La microéconomie devient revenu, marges, cash flow et valorisation",
+      },
+      coreFacts: [
+        {
+          en: "Revenue forecasts can be decomposed into price, volume, market growth and market share.",
+          fr: "Les prévisions de revenu peuvent être décomposées en prix, volume, croissance du marché et part de marché.",
+        },
+        {
+          en: "Margins depend on pricing, cost structure, utilization, scale, bargaining power and competitive intensity.",
+          fr: "Les marges dépendent du pricing, de la structure de coûts, de l’utilisation, de l’échelle, du pouvoir de négociation et de l’intensité concurrentielle.",
+        },
+        {
+          en: "Barriers to entry and customer switching costs affect how long excess returns may persist.",
+          fr: "Les barrières à l’entrée et switching costs influencent la durée pendant laquelle des rendements économiques supérieurs peuvent persister.",
+        },
+        {
+          en: "A valuation is more credible when its financial assumptions are supported by an explicit economic story.",
+          fr: "Une valorisation est plus crédible lorsque ses hypothèses financières reposent sur une histoire économique explicite.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you forecast a company's sales growing 15%, ask why. Is the whole market growing? Is the company gaining share? Is it raising price? Is volume rising? Microeconomics forces you to explain the numbers rather than simply extending a trend.",
+          fr: "Si tu prévois +15 % de ventes pour une entreprise, demande pourquoi. Le marché entier grandit-il ? L’entreprise gagne-t-elle des parts ? Augmente-t-elle ses prix ? Les volumes montent-ils ? La microéconomie oblige à expliquer les chiffres plutôt qu’à prolonger une tendance.",
+        },
+        Intermediate: {
+          en: "An earnings model should connect industry demand, price elasticity, competitive response and cost behavior to revenue and margins. This helps distinguish cyclical margin expansion from structural improvement.",
+          fr: "Un modèle de résultats doit relier demande sectorielle, élasticité-prix, réaction concurrentielle et comportement des coûts au revenu et aux marges. Cela aide à distinguer expansion cyclique des marges et amélioration structurelle.",
+        },
+        Professional: {
+          en: "Long-duration valuation is especially sensitive to assumptions about competitive advantage period. Microeconomics provides the discipline for terminal margins, reinvestment needs, market-share ceilings and fade in excess returns. A DCF without industry economics is only arithmetic.",
+          fr: "Les valorisations longue duration sont particulièrement sensibles à la durée de l’avantage concurrentiel. La microéconomie impose une discipline sur marges terminales, besoins de réinvestissement, plafond de market share et convergence des rendements excédentaires. Un DCF sans économie sectorielle n’est que de l’arithmétique.",
+        },
+      },
+      comparison: {
+        title: { en: "Micro driver → financial statement effect", fr: "Driver micro → effet financier" },
+        headers: [
+          { en: "Micro driver", fr: "Driver micro" },
+          { en: "Possible financial effect", fr: "Effet financier possible" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Lower demand elasticity", fr: "Demande moins élastique" },
+            { en: "Stronger pricing / revenue resilience", fr: "Pricing plus fort / revenu plus résilient" },
+          ]},
+          { cells: [
+            { en: "Economies of scale", fr: "Économies d’échelle" },
+            { en: "Lower unit cost / margin expansion", fr: "Coût unitaire plus faible / expansion de marge" },
+          ]},
+          { cells: [
+            { en: "New competitor", fr: "Nouveau concurrent" },
+            { en: "Share pressure / higher selling cost / lower price", fr: "Pression sur la part / coûts commerciaux plus élevés / prix plus faible" },
+          ]},
+          { cells: [
+            { en: "High fixed-cost base", fr: "Base de coûts fixes élevée" },
+            { en: "High operating leverage", fr: "Fort levier opérationnel" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "This framework is what turns macro headlines and industry news into company-level earnings revisions and ultimately valuation changes.",
+        fr: "Ce cadre permet de transformer actualité macro et nouvelles sectorielles en révisions de bénéfices au niveau de l’entreprise puis en changements de valorisation.",
+      },
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "supply-demand-equilibrium",
+      question: {
+        en: "Demand is Qd = 100 − 2P and supply is Qs = 20 + 2P. What is the equilibrium price?",
+        fr: "La demande est Qd = 100 − 2P et l’offre Qs = 20 + 2P. Quel est le prix d’équilibre ?",
+      },
+      options: [
+        { id: "a", label: { en: "10", fr: "10" } },
+        { id: "b", label: { en: "20", fr: "20" } },
+        { id: "c", label: { en: "40", fr: "40" } },
+        { id: "d", label: { en: "60", fr: "60" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Set Qd=Qs: 100−2P = 20+2P → 80=4P → P=20.",
+        fr: "Égaliser Qd et Qs : 100−2P = 20+2P → 80=4P → P=20.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "demand-elasticity",
+      question: {
+        en: "Price rises 10% and quantity demanded falls 5%. The approximate price elasticity of demand is:",
+        fr: "Le prix augmente de 10 % et la quantité demandée baisse de 5 %. L’élasticité-prix approximative vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "−0.5", fr: "−0,5" } },
+        { id: "b", label: { en: "−2.0", fr: "−2,0" } },
+        { id: "c", label: { en: "+0.5", fr: "+0,5" } },
+        { id: "d", label: { en: "+2.0", fr: "+2,0" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "−5% ÷ 10% = −0.5. In absolute value, demand is inelastic.",
+        fr: "−5 % ÷ 10 % = −0,5. En valeur absolue, la demande est inélastique.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "tax-incidence",
+      question: {
+        en: "Economic tax incidence tends to fall more heavily on which side of the market?",
+        fr: "L’incidence économique d’une taxe tend à peser davantage sur quel côté du marché ?",
+      },
+      options: [
+        { id: "a", label: { en: "The more elastic side", fr: "Le côté le plus élastique" } },
+        { id: "b", label: { en: "The less elastic side", fr: "Le côté le moins élastique" } },
+        { id: "c", label: { en: "Always the seller", fr: "Toujours le vendeur" } },
+        { id: "d", label: { en: "Always the buyer", fr: "Toujours l’acheteur" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "The less elastic side has less ability to change behavior and therefore tends to bear more of the economic burden.",
+        fr: "Le côté le moins élastique a moins de capacité à modifier son comportement et supporte donc généralement davantage de la charge économique.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "marginal-cost",
+      question: {
+        en: "Total cost rises from $1,000 at 100 units to $1,080 at 110 units. Approximate marginal cost over the interval is:",
+        fr: "Le coût total passe de 1 000 $ pour 100 unités à 1 080 $ pour 110 unités. Le marginal cost approximatif sur l’intervalle vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "$8 per unit", fr: "8 $ par unité" } },
+        { id: "b", label: { en: "$10 per unit", fr: "10 $ par unité" } },
+        { id: "c", label: { en: "$80 per unit", fr: "80 $ par unité" } },
+        { id: "d", label: { en: "$108 per unit", fr: "108 $ par unité" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "ΔCost=$80 and ΔQuantity=10, so MC≈$8 per additional unit.",
+        fr: "ΔCoût=80 $ et ΔQuantité=10, donc MC≈8 $ par unité supplémentaire.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "profit-maximization",
+      question: {
+        en: "In the standard marginal framework, a firm generally expands output while:",
+        fr: "Dans le cadre marginal standard, une entreprise augmente généralement sa production tant que :",
+      },
+      options: [
+        { id: "a", label: { en: "MR > MC", fr: "MR > MC" } },
+        { id: "b", label: { en: "MR < MC", fr: "MR < MC" } },
+        { id: "c", label: { en: "Fixed cost = 0", fr: "Coût fixe = 0" } },
+        { id: "d", label: { en: "Price = 0", fr: "Prix = 0" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "If marginal revenue exceeds marginal cost, another unit adds positive incremental profit under the model.",
+        fr: "Si marginal revenue dépasse marginal cost, une unité supplémentaire ajoute un profit incrémental positif dans le modèle.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "market-structure",
+      question: {
+        en: "Which market structure has a few strategically interdependent major firms?",
+        fr: "Quelle structure de marché comporte quelques grandes entreprises stratégiquement interdépendantes ?",
+      },
+      options: [
+        { id: "a", label: { en: "Perfect competition", fr: "Concurrence parfaite" } },
+        { id: "b", label: { en: "Oligopoly", fr: "Oligopole" } },
+        { id: "c", label: { en: "Pure monopsony only", fr: "Monopsone pur uniquement" } },
+        { id: "d", label: { en: "No market", fr: "Aucun marché" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Oligopoly is characterized by a small number of important firms whose actions affect one another.",
+        fr: "Un oligopole se caractérise par un petit nombre d’entreprises importantes dont les décisions s’influencent mutuellement.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "gross-margin",
+      question: {
+        en: "Revenue is $100 and cost of goods sold is $60. Gross margin is:",
+        fr: "Le revenu est 100 $ et le coût des ventes / COGS est 60 $. La gross margin vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "20%", fr: "20 %" } },
+        { id: "b", label: { en: "40%", fr: "40 %" } },
+        { id: "c", label: { en: "60%", fr: "60 %" } },
+        { id: "d", label: { en: "160%", fr: "160 %" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "($100−$60) ÷ $100 = 40%.",
+        fr: "(100−60) ÷ 100 = 40 %.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "micro-to-valuation",
+      question: {
+        en: "Which revenue forecast is most economically grounded?",
+        fr: "Quelle prévision de revenu est la plus solidement fondée économiquement ?",
+      },
+      options: [
+        { id: "a", label: { en: "Revenue grows 15% because it did last year", fr: "Le revenu augmente de 15 % parce qu’il l’a fait l’an dernier" } },
+        { id: "b", label: { en: "Revenue grows from explicit assumptions on market growth, share, price and volume", fr: "Le revenu croît à partir d’hypothèses explicites de croissance du marché, part, prix et volume" } },
+        { id: "c", label: { en: "Revenue always grows faster than GDP", fr: "Le revenu croît toujours plus vite que le PIB" } },
+        { id: "d", label: { en: "Revenue growth is unrelated to customers or competition", fr: "La croissance du revenu n’a aucun lien avec clients ou concurrence" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "A finance forecast is stronger when its revenue assumptions are tied to observable economic drivers.",
+        fr: "Une prévision financière est plus solide lorsque les hypothèses de revenu sont reliées à des drivers économiques observables.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "How would you determine whether a company truly has pricing power?",
+      fr: "Comment déterminerais-tu si une entreprise possède réellement du pricing power ?",
+    },
+    framework: [
+      {
+        en: "Start with demand elasticity and availability of substitutes.",
+        fr: "Commencer par l’élasticité de la demande et la disponibilité des substituts.",
+      },
+      {
+        en: "Look for evidence: price increases versus volume, churn, market share and promotional activity.",
+        fr: "Chercher les preuves : hausses de prix vs volumes, churn, market share et activité promotionnelle.",
+      },
+      {
+        en: "Identify the source: brand, switching costs, network effects, scarcity, product differentiation or regulation.",
+        fr: "Identifier la source : marque, switching costs, network effects, rareté, différenciation produit ou réglementation.",
+      },
+      {
+        en: "Check margin realization: did higher pricing actually improve gross or operating economics?",
+        fr: "Vérifier la réalisation dans les marges : le pricing plus élevé a-t-il réellement amélioré gross margin ou economics opérationnels ?",
+      },
+      {
+        en: "Test durability against competitor response and potential new entry.",
+        fr: "Tester la durabilité face à la réaction des concurrents et à l’entrée potentielle de nouveaux acteurs.",
+      },
+    ],
+    sample: {
+      en: "I would not define pricing power simply as the ability to raise a list price. I would look at what happens after the increase. If price rises while volume, retention and market share remain resilient, that suggests demand is relatively inelastic. I would then identify why customers are willing to stay — for example brand, switching costs, network effects or a lack of substitutes. Finally, I would check whether the price increase actually improves margins and whether competitors or new entrants can erode the advantage. Sustainable pricing power should show up in both customer behavior and long-term economics.",
+      fr: "Je ne définirais pas le pricing power simplement comme la capacité à relever un prix catalogue. Je regarderais ce qui se passe après la hausse. Si le prix augmente tandis que volumes, rétention et part de marché restent résilients, cela suggère une demande relativement inélastique. J’identifierais ensuite pourquoi les clients restent — par exemple marque, switching costs, network effects ou manque de substituts. Enfin, je vérifierais si la hausse améliore réellement les marges et si concurrents ou nouveaux entrants peuvent éroder cet avantage. Un pricing power durable doit apparaître à la fois dans le comportement des clients et dans les economics long terme.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
