@@ -12817,7 +12817,988 @@ export const financialStatementAnalysisLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson];
+
+export const equityValuationLesson: FinanceLesson = {
+  slug: "year-2-equity-valuation",
+  year: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  domain: {
+    en: "Corporate Finance & Valuation",
+    fr: "Finance d’entreprise & valorisation / Corporate Finance & Valuation",
+  },
+  title: {
+    en: "Equity Valuation",
+    fr: "Valorisation des actions / Equity Valuation",
+  },
+  subtitle: {
+    en: "Understand what an equity claim is worth, why price and value differ, how growth and required return interact, and how investors use dividends, earnings, book value and market multiples to build a valuation thesis.",
+    fr: "Comprendre ce que vaut une créance actionnariale / equity claim, pourquoi prix et valeur peuvent différer, comment croissance et rendement exigé interagissent, et comment les investisseurs utilisent dividendes, bénéfices, book value et multiples pour construire une thèse de valorisation.",
+  },
+  duration: { en: "110–135 min", fr: "110–135 min" },
+  prerequisites: [
+    { en: "Corporate Finance", fr: "Finance d’entreprise / Corporate Finance" },
+    { en: "Financial Statement Analysis", fr: "Analyse des états financiers / Financial Statement Analysis" },
+  ],
+  objectives: [
+    {
+      en: "Distinguish market price, equity value and intrinsic value.",
+      fr: "Distinguer prix de marché / market price, equity value et valeur intrinsèque / intrinsic value.",
+    },
+    {
+      en: "Explain how earnings, payout, reinvestment and ROE drive sustainable growth.",
+      fr: "Expliquer comment earnings, payout, réinvestissement et ROE déterminent la croissance soutenable.",
+    },
+    {
+      en: "Apply a dividend discount model and the Gordon Growth Model.",
+      fr: "Appliquer un dividend discount model et le Gordon Growth Model.",
+    },
+    {
+      en: "Understand how required return and growth assumptions affect value.",
+      fr: "Comprendre comment required return et hypothèses de croissance affectent la valeur.",
+    },
+    {
+      en: "Interpret P/E, P/B and selected enterprise-value multiples without using them mechanically.",
+      fr: "Interpréter P/E, P/B et certains multiples d’enterprise value sans les utiliser mécaniquement.",
+    },
+    {
+      en: "Build a valuation thesis using business quality, catalysts, scenarios and risk.",
+      fr: "Construire une thèse de valorisation avec qualité du business, catalyseurs, scénarios et risques.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "From business economics to equity value",
+      fr: "Des economics du business à la valeur de l’equity",
+    },
+    steps: [
+      {
+        title: { en: "Economics", fr: "Economics" },
+        detail: { en: "Earnings · ROE · reinvestment", fr: "Earnings · ROE · réinvestissement" },
+      },
+      {
+        title: { en: "Cash to equity", fr: "Cash vers l’equity" },
+        detail: { en: "Dividends · buybacks · FCFE", fr: "Dividendes · buybacks · FCFE" },
+      },
+      {
+        title: { en: "Required return", fr: "Rendement exigé" },
+        detail: { en: "Risk · growth · discounting", fr: "Risque · croissance · actualisation" },
+      },
+      {
+        title: { en: "Valuation", fr: "Valorisation" },
+        detail: { en: "Intrinsic value · multiples · scenarios", fr: "Valeur intrinsèque · multiples · scénarios" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "price-vs-value",
+      kicker: { en: "01 · PRICE VS VALUE", fr: "01 · PRIX VS VALEUR" },
+      title: {
+        en: "A stock price is observable; intrinsic value is an estimate",
+        fr: "Le prix d’une action est observable ; la valeur intrinsèque est une estimation",
+      },
+      coreFacts: [
+        {
+          en: "Market price is the price at which the stock currently trades; intrinsic value is an analyst's estimate of the present value of the equity claim.",
+          fr: "Le market price est le prix auquel l’action se négocie actuellement ; l’intrinsic value est l’estimation de la valeur actuelle de la créance actionnariale.",
+        },
+        {
+          en: "Equity holders are residual claimants after contractual obligations such as debt.",
+          fr: "Les actionnaires / equity holders sont des créanciers résiduels après les obligations contractuelles comme la dette.",
+        },
+        {
+          en: "Intrinsic value depends on expected future cash generation, growth, risk and capital allocation.",
+          fr: "La valeur intrinsèque dépend de la génération future de cash attendue, de la croissance, du risque et de l’allocation du capital.",
+        },
+        {
+          en: "Valuation is a range of conditional estimates rather than a perfectly observable fact.",
+          fr: "La valorisation est une fourchette d’estimations conditionnelles plutôt qu’un fait parfaitement observable.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a stock trades at $50, $50 is its market price. You may estimate that the underlying equity is worth $60 based on future cash flows, or only $40 if your assumptions are weaker. The market gives you the price; valuation asks what you think the claim is worth.",
+          fr: "Si une action cote 50 $, 50 $ est son market price. Tu peux estimer que l’equity vaut 60 $ selon les futurs cash flows, ou seulement 40 $ avec des hypothèses plus faibles. Le marché donne le prix ; la valorisation demande ce que vaut réellement la créance selon tes hypothèses.",
+        },
+        Intermediate: {
+          en: "Price and value can differ because investors disagree about future earnings, competitive advantage, capital needs, discount rates and terminal economics. The analyst's task is to identify which assumptions the current price appears to require.",
+          fr: "Prix et valeur peuvent différer car les investisseurs ne partagent pas les mêmes attentes sur earnings futurs, avantage concurrentiel, besoins de capital, discount rates et economics terminales. Le travail de l’analyste consiste à identifier quelles hypothèses semblent nécessaires pour justifier le prix actuel.",
+        },
+        Professional: {
+          en: "Valuation is an expectations problem. Rather than asking only 'What is my target value?', professionals also reverse-engineer the price to ask which growth, margin, return-on-capital or discount-rate assumptions are already embedded.",
+          fr: "La valorisation est un problème d’attentes. Au lieu de demander seulement « quelle est ma target value ? », les professionnels reverse-engineer le prix pour identifier quelles hypothèses de croissance, marge, return on capital ou discount rate semblent déjà intégrées.",
+        },
+      },
+      comparison: {
+        title: { en: "Price and value", fr: "Prix et valeur" },
+        headers: [
+          { en: "Concept", fr: "Concept" },
+          { en: "Meaning", fr: "Signification" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Market price", fr: "Prix de marché / market price" },
+            { en: "Observable transaction price", fr: "Prix de transaction observable" },
+          ]},
+          { cells: [
+            { en: "Market capitalization", fr: "Capitalisation boursière / market cap" },
+            { en: "Share price × relevant shares outstanding", fr: "Prix de l’action × nombre pertinent d’actions en circulation" },
+          ]},
+          { cells: [
+            { en: "Intrinsic value", fr: "Valeur intrinsèque / intrinsic value" },
+            { en: "Estimated economic value under stated assumptions", fr: "Valeur économique estimée selon des hypothèses définies" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Residual claim",
+          fr: "créance résiduelle / residual claim",
+          definition: {
+            en: "Claim on value remaining after higher-priority contractual claims are satisfied.",
+            fr: "Créance sur la valeur restante après satisfaction des créances contractuelles prioritaires.",
+          },
+        },
+        {
+          en: "Intrinsic value",
+          fr: "valeur intrinsèque / intrinsic value",
+          definition: {
+            en: "Estimated economic value of an asset based on expected future benefits and risk.",
+            fr: "Valeur économique estimée d’un actif selon ses bénéfices futurs attendus et son risque.",
+          },
+        },
+      ],
+    },
+    {
+      id: "earnings-reinvestment-growth",
+      kicker: { en: "02 · EARNINGS, PAYOUT & GROWTH", fr: "02 · EARNINGS, PAYOUT & CROISSANCE" },
+      title: {
+        en: "Growth comes from reinvesting capital at a return",
+        fr: "La croissance vient du réinvestissement de capital à un certain rendement",
+      },
+      coreFacts: [
+        {
+          en: "A company can retain earnings for reinvestment or distribute capital through dividends and buybacks.",
+          fr: "Une entreprise peut conserver ses earnings pour les réinvestir ou distribuer du capital via dividendes et buybacks.",
+        },
+        {
+          en: "Retention ratio is one minus the payout ratio under a simple earnings-based framework.",
+          fr: "Le retention ratio correspond à un moins le payout ratio dans un framework simple basé sur les earnings.",
+        },
+        {
+          en: "A common sustainable-growth approximation is ROE multiplied by the retention ratio.",
+          fr: "Une approximation courante de sustainable growth est ROE multiplié par retention ratio.",
+        },
+        {
+          en: "Retaining more earnings creates value only if incremental returns justify the reinvestment.",
+          fr: "Conserver davantage de bénéfices ne crée de la valeur que si les rendements incrémentaux justifient le réinvestissement.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company earns $10 per share, pays $4 as dividends and keeps $6, it retains 60% of earnings. If it can earn a 15% ROE on reinvested equity, a simple sustainable-growth estimate is 15% × 60% = 9%.",
+          fr: "Si une entreprise gagne 10 $ par action, verse 4 $ de dividende et conserve 6 $, elle retient 60 % de ses earnings. Si elle peut gagner 15 % de ROE sur l’equity réinvestie, une estimation simple de sustainable growth est 15 % × 60 % = 9 %.",
+        },
+        Intermediate: {
+          en: "Growth quality depends on reinvestment economics. A company with high ROE and a large reinvestment runway can compound value rapidly. A low-ROE company can destroy value by retaining too much capital.",
+          fr: "La qualité de la croissance dépend des economics du réinvestissement. Une entreprise avec ROE élevé et longue reinvestment runway peut composer la valeur rapidement. Une entreprise à faible ROE peut détruire de la valeur en conservant trop de capital.",
+        },
+        Professional: {
+          en: "The ROE × retention identity is a useful steady-state approximation, not a law. Buybacks, leverage changes, acquisitions, changing margins and incremental ROIC can make realized growth diverge materially from the formula.",
+          fr: "L’identité ROE × retention est une approximation utile de steady state, pas une loi. Buybacks, changements de leverage, acquisitions, évolution des marges et incremental ROIC peuvent faire fortement diverger la croissance réalisée.",
+        },
+      },
+      formula: {
+        label: { en: "Sustainable growth approximation", fr: "Approximation de croissance soutenable" },
+        expression: "g ≈ ROE × Retention Ratio   ·   Retention Ratio = 1 − Payout Ratio",
+        explanation: {
+          en: "Use as a simplified steady-state framework when ROE and capital structure are reasonably stable.",
+          fr: "À utiliser comme framework simplifié de steady state lorsque ROE et structure du capital sont raisonnablement stables.",
+        },
+        workedExample: {
+          en: "ROE 15%, payout 40% → retention 60% → sustainable growth ≈ 15%×60%=9%.",
+          fr: "ROE 15 %, payout 40 % → retention 60 % → sustainable growth ≈ 15 %×60 %=9 %.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Retention ratio",
+          fr: "taux de rétention / retention ratio",
+          definition: {
+            en: "Share of earnings retained rather than distributed under a stated payout definition.",
+            fr: "Part des earnings conservée plutôt que distribuée selon la définition du payout.",
+          },
+        },
+        {
+          en: "Reinvestment runway",
+          fr: "capacité de réinvestissement / reinvestment runway",
+          definition: {
+            en: "Length and scale of opportunities to reinvest capital at attractive returns.",
+            fr: "Durée et ampleur des opportunités permettant de réinvestir du capital à des rendements attractifs.",
+          },
+        },
+      ],
+    },
+    {
+      id: "dividend-discount-model",
+      kicker: { en: "03 · DIVIDEND DISCOUNT MODEL", fr: "03 · DIVIDEND DISCOUNT MODEL" },
+      title: {
+        en: "An equity claim can be valued from the cash distributed to shareholders",
+        fr: "Une action peut être valorisée à partir du cash distribué aux actionnaires",
+      },
+      coreFacts: [
+        {
+          en: "A dividend discount model values equity as the present value of expected future dividends.",
+          fr: "Un dividend discount model valorise l’equity comme la valeur actuelle des dividendes futurs attendus.",
+        },
+        {
+          en: "The model is most natural for businesses with meaningful, reasonably forecastable dividend policies.",
+          fr: "Le modèle est particulièrement naturel pour les entreprises avec une politique de dividendes significative et raisonnablement prévisible.",
+        },
+        {
+          en: "The value depends on the timing and size of dividends and the required return on equity.",
+          fr: "La valeur dépend du timing et du montant des dividendes ainsi que du required return on equity.",
+        },
+        {
+          en: "Low current dividends do not imply low economic value when the firm can reinvest retained cash at attractive returns.",
+          fr: "De faibles dividendes actuels n’impliquent pas une faible valeur économique lorsque l’entreprise peut réinvestir le cash retenu à des rendements attractifs.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a stock is expected to pay $2 one year from now and you require a 10% return, that one dividend is worth $2/1.10 ≈ $1.82 today. A full dividend model repeats that logic for all expected future dividends.",
+          fr: "Si une action doit verser 2 $ dans un an et que tu exiges 10 % de rendement, ce dividende vaut aujourd’hui 2/1,10 ≈ 1,82 $. Un dividend model complet répète cette logique pour tous les dividendes futurs attendus.",
+        },
+        Intermediate: {
+          en: "The dividend approach focuses directly on cash received by shareholders but can understate economic flexibility when payout policy changes. Buybacks and reinvestment decisions can shift value without appearing immediately as dividends.",
+          fr: "L’approche par dividendes se concentre directement sur le cash reçu par les actionnaires mais peut sous-représenter la flexibilité économique lorsque la politique de payout change. Buybacks et décisions de réinvestissement peuvent déplacer la valeur sans apparaître immédiatement sous forme de dividendes.",
+        },
+        Professional: {
+          en: "DDM is conceptually clean because dividends are equity cash flows, but implementation requires forecasting payout behavior. For firms where dividends are disconnected from capacity to distribute cash, FCFE or broader cash-flow approaches may be more informative.",
+          fr: "Le DDM est conceptuellement propre car les dividendes sont des cash flows d’equity, mais son implémentation nécessite de prévoir le payout behavior. Pour les entreprises où dividendes et capacité réelle de distribution sont déconnectés, FCFE ou d’autres approches de cash flow peuvent être plus informatives.",
+        },
+      },
+      formula: {
+        label: { en: "Dividend discount model", fr: "Dividend Discount Model" },
+        expression: "Equity Value = Σ [Dividendₜ ÷ (1 + rₑ)ᵗ]",
+        explanation: {
+          en: "rₑ is the required return on equity appropriate for the risk of the dividends.",
+          fr: "rₑ est le rendement exigé sur equity adapté au risque des dividendes.",
+        },
+        workedExample: {
+          en: "A $2 dividend one year from now discounted at 10% has present value ≈ $1.82.",
+          fr: "Un dividende de 2 $ dans un an actualisé à 10 % vaut aujourd’hui ≈ 1,82 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Required return on equity",
+          fr: "rendement exigé des actionnaires / required return on equity",
+          definition: {
+            en: "Return investors require for holding the equity risk.",
+            fr: "Rendement exigé par les investisseurs pour supporter le risque de l’equity.",
+          },
+        },
+        {
+          en: "FCFE",
+          fr: "free cash flow to equity / FCFE",
+          definition: {
+            en: "Cash flow concept intended to measure cash available to equity holders after operating, investment and financing needs under a stated definition.",
+            fr: "Concept de cash flow visant à mesurer le cash disponible pour les actionnaires après besoins opérationnels, d’investissement et de financement selon une définition donnée.",
+          },
+        },
+      ],
+    },
+    {
+      id: "gordon-growth",
+      kicker: { en: "04 · GORDON GROWTH MODEL", fr: "04 · GORDON GROWTH MODEL" },
+      title: {
+        en: "Stable-growth valuation is powerful — and extremely assumption-sensitive",
+        fr: "La valorisation en croissance stable est puissante — et extrêmement sensible aux hypothèses",
+      },
+      coreFacts: [
+        {
+          en: "The Gordon Growth Model values a perpetually growing dividend stream under stable-growth assumptions.",
+          fr: "Le Gordon Growth Model valorise une série de dividendes croissant perpétuellement sous des hypothèses de croissance stable.",
+        },
+        {
+          en: "The required return must exceed the perpetual growth rate for the standard formula to be economically and mathematically meaningful.",
+          fr: "Le required return doit être supérieur au taux de croissance perpétuel pour que la formule standard soit économiquement et mathématiquement pertinente.",
+        },
+        {
+          en: "Value is highly sensitive when required return and growth become close.",
+          fr: "La valeur devient très sensible lorsque required return et croissance deviennent proches.",
+        },
+        {
+          en: "Long-run perpetual growth should be consistent with sustainable economic scale rather than short-term hypergrowth.",
+          fr: "La croissance perpétuelle long terme doit être cohérente avec une échelle économique soutenable plutôt qu’avec une hypercroissance court terme.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If next year's dividend is $2, required return is 10% and perpetual growth is 4%, the Gordon value is $2/(10%−4%) ≈ $33.33.",
+          fr: "Si le dividende de l’année prochaine vaut 2 $, le required return 10 % et la croissance perpétuelle 4 %, la valeur Gordon vaut 2/(10 %−4 %) ≈ 33,33 $.",
+        },
+        Intermediate: {
+          en: "If growth rises from 4% to 5% while required return stays 10%, value moves from about $33.33 to $40.00. One percentage point changes value materially because the denominator narrows.",
+          fr: "Si la croissance passe de 4 % à 5 % avec required return toujours à 10 %, la valeur passe d’environ 33,33 $ à 40,00 $. Un seul point modifie fortement la valeur car le dénominateur se resserre.",
+        },
+        Professional: {
+          en: "The Gordon model is a steady-state identity. Analysts should test whether payout, ROE and growth assumptions are mutually consistent. A high perpetual growth rate generally requires continuing reinvestment, which may constrain payout.",
+          fr: "Le modèle Gordon est une identité de steady state. Les analystes doivent vérifier que payout, ROE et croissance sont cohérents entre eux. Une croissance perpétuelle élevée nécessite généralement du réinvestissement continu, ce qui peut limiter le payout.",
+        },
+      },
+      formula: {
+        label: { en: "Gordon Growth Model", fr: "Gordon Growth Model" },
+        expression: "P₀ = D₁ ÷ (rₑ − g)",
+        explanation: {
+          en: "D₁ is next-period dividend, rₑ the required return on equity and g the perpetual growth rate, with rₑ > g.",
+          fr: "D₁ est le dividende de la prochaine période, rₑ le required return on equity et g le taux de croissance perpétuelle, avec rₑ > g.",
+        },
+        workedExample: {
+          en: "$2 ÷ (10%−4%) = $33.33.",
+          fr: "2 $ ÷ (10 %−4 %) = 33,33 $.",
+        },
+      },
+      marketConnection: {
+        en: "Long-duration growth stocks can be especially sensitive to changes in required return because more of their expected value comes from distant cash flows.",
+        fr: "Les growth stocks de longue duration peuvent être particulièrement sensibles aux variations du required return car une plus grande part de leur valeur attendue vient de cash flows lointains.",
+      },
+      vocabulary: [
+        {
+          en: "Perpetual growth",
+          fr: "croissance perpétuelle / perpetual growth",
+          definition: {
+            en: "Long-run growth assumption extending indefinitely in a terminal-value framework.",
+            fr: "Hypothèse de croissance long terme se prolongeant indéfiniment dans un framework de terminal value.",
+          },
+        },
+        {
+          en: "Steady state",
+          fr: "régime stable / steady state",
+          definition: {
+            en: "Long-run condition where growth, returns and payout assumptions become relatively stable.",
+            fr: "Condition long terme où croissance, rendements et payout deviennent relativement stables.",
+          },
+        },
+      ],
+    },
+    {
+      id: "required-return-sensitivity",
+      kicker: { en: "05 · REQUIRED RETURN & SENSITIVITY", fr: "05 · RENDEMENT EXIGÉ & SENSIBILITÉ" },
+      title: {
+        en: "Higher required returns reduce present value, all else equal",
+        fr: "Un required return plus élevé réduit la valeur actuelle, toutes choses égales par ailleurs",
+      },
+      coreFacts: [
+        {
+          en: "Equity required return compensates investors for time value and risk under the chosen framework.",
+          fr: "Le required return de l’equity rémunère valeur temps et risque selon le framework retenu.",
+        },
+        {
+          en: "When the required return rises, the present value of future equity cash flows falls, all else equal.",
+          fr: "Lorsque le required return augmente, la valeur actuelle des futurs cash flows d’equity diminue, toutes choses égales par ailleurs.",
+        },
+        {
+          en: "Valuation sensitivity is greatest when a large share of value comes from distant cash flows.",
+          fr: "La sensibilité de la valorisation est plus forte lorsqu’une grande part de la valeur provient de cash flows lointains.",
+        },
+        {
+          en: "A valuation should test multiple required-return and growth assumptions rather than rely on one point estimate.",
+          fr: "Une valorisation doit tester plusieurs hypothèses de required return et croissance plutôt que dépendre d’un seul point estimate.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Receiving $100 in ten years is worth less today when investors require 12% instead of 8%. A higher required return means future money is discounted more heavily.",
+          fr: "Recevoir 100 $ dans dix ans vaut moins aujourd’hui lorsque les investisseurs exigent 12 % au lieu de 8 %. Un required return plus élevé signifie que le cash futur est davantage actualisé.",
+        },
+        Intermediate: {
+          en: "Required return can change because risk-free rates, equity risk premium, business risk or leverage change. This is why a company can deliver unchanged earnings while its valuation multiple compresses.",
+          fr: "Le required return peut changer à cause des risk-free rates, equity risk premium, business risk ou leverage. C’est pourquoi une entreprise peut publier des earnings inchangés tout en subissant une compression de multiple.",
+        },
+        Professional: {
+          en: "Discount-rate sensitivity and earnings sensitivity interact. A macro shock can lower expected earnings and raise the required return simultaneously, creating a nonlinear valuation response.",
+          fr: "La sensibilité au discount rate et celle aux earnings interagissent. Un choc macro peut réduire les earnings attendus et augmenter simultanément le required return, créant une réponse de valorisation non linéaire.",
+        },
+      },
+      formula: {
+        label: { en: "Present-value sensitivity", fr: "Sensibilité de valeur actuelle" },
+        expression: "PV = Future Cash Flow ÷ (1 + Required Return)ⁿ",
+        explanation: {
+          en: "Holding the cash flow fixed, a higher required return lowers present value.",
+          fr: "En maintenant le cash flow constant, un required return plus élevé réduit la valeur actuelle.",
+        },
+        workedExample: {
+          en: "$100 in 5 years: at 8% PV≈$68.06; at 12% PV≈$56.74.",
+          fr: "100 $ dans 5 ans : à 8 % PV≈68,06 $ ; à 12 % PV≈56,74 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Multiple compression",
+          fr: "compression de multiple / multiple compression",
+          definition: {
+            en: "Decline in the valuation multiple investors assign to a financial metric.",
+            fr: "Baisse du multiple de valorisation que les investisseurs attribuent à une métrique financière.",
+          },
+        },
+        {
+          en: "Equity risk premium",
+          fr: "prime de risque actions / equity risk premium",
+          definition: {
+            en: "Additional expected return required for equity risk relative to a risk-free reference under a chosen framework.",
+            fr: "Rendement supplémentaire exigé pour le risque actions par rapport à une référence sans risque selon le framework retenu.",
+          },
+        },
+      ],
+    },
+    {
+      id: "pe-multiple",
+      kicker: { en: "06 · P/E & EARNINGS MULTIPLES", fr: "06 · P/E & MULTIPLES DE BÉNÉFICES" },
+      title: {
+        en: "A high P/E can reflect growth, quality, low risk — or over-optimism",
+        fr: "Un P/E élevé peut refléter croissance, qualité, faible risque — ou optimisme excessif",
+      },
+      coreFacts: [
+        {
+          en: "P/E compares equity price or market capitalization with earnings attributable to equity holders.",
+          fr: "Le P/E compare prix de l’equity ou market cap avec les earnings attribuables aux actionnaires.",
+        },
+        {
+          en: "Forward P/E uses forecast earnings; trailing P/E uses historical earnings.",
+          fr: "Le forward P/E utilise des earnings prévisionnels ; le trailing P/E utilise des earnings historiques.",
+        },
+        {
+          en: "Higher growth, stronger returns on capital, better earnings quality or lower perceived risk can support a higher P/E.",
+          fr: "Croissance plus élevée, meilleurs returns on capital, meilleure qualité des earnings ou risque perçu plus faible peuvent soutenir un P/E supérieur.",
+        },
+        {
+          en: "P/E can be meaningless when earnings are negative or temporarily distorted.",
+          fr: "Le P/E peut perdre son sens lorsque les earnings sont négatifs ou temporairement déformés.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a stock trades at $40 and EPS is $2, P/E is 20×. That does not automatically mean the stock is expensive. A fast-growing, high-quality company may deserve a higher multiple than a shrinking, risky business.",
+          fr: "Si une action cote 40 $ avec EPS de 2 $, son P/E vaut 20×. Cela ne signifie pas automatiquement qu’elle est chère. Une entreprise à forte croissance et grande qualité peut mériter un multiple supérieur à un business en déclin et risqué.",
+        },
+        Intermediate: {
+          en: "P/E is an equity multiple, so it should be matched with equity earnings. Comparing P/E across companies requires normalizing cyclicality, accounting differences, share dilution and one-time items.",
+          fr: "Le P/E est un equity multiple ; il doit donc être associé à des earnings d’equity. Comparer des P/E exige de normaliser cyclicité, différences comptables, dilution et one-offs.",
+        },
+        Professional: {
+          en: "A multiple is a compressed DCF. P/E implicitly reflects growth, reinvestment economics and required return. Analysts should explain why the multiple deserves to differ from peers rather than treating the peer median as intrinsic truth.",
+          fr: "Un multiple est un DCF compressé. Le P/E reflète implicitement croissance, economics du réinvestissement et required return. Les analystes doivent expliquer pourquoi le multiple mérite de différer des pairs plutôt que de traiter la médiane du peer group comme une vérité intrinsèque.",
+        },
+      },
+      formula: {
+        label: { en: "Price-to-earnings ratio", fr: "Price-to-Earnings / P/E" },
+        expression: "P/E = Share Price ÷ EPS   =   Market Cap ÷ Net Income",
+        explanation: {
+          en: "Use consistent diluted or basic share-count conventions and earnings definitions.",
+          fr: "Utiliser des conventions cohérentes de nombre d’actions diluted/basic et de définition des earnings.",
+        },
+        workedExample: {
+          en: "Share price $40 / EPS $2 = 20× P/E.",
+          fr: "Prix 40 $ / EPS 2 $ = P/E 20×.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Forward P/E",
+          fr: "P/E prévisionnel / forward P/E",
+          definition: {
+            en: "Price-to-earnings ratio based on forecast earnings.",
+            fr: "Ratio P/E basé sur des earnings prévisionnels.",
+          },
+        },
+        {
+          en: "Trailing P/E",
+          fr: "P/E historique / trailing P/E",
+          definition: {
+            en: "Price-to-earnings ratio based on historical earnings.",
+            fr: "Ratio P/E basé sur des earnings historiques.",
+          },
+        },
+      ],
+    },
+    {
+      id: "book-value-pb",
+      kicker: { en: "07 · BOOK VALUE & P/B", fr: "07 · BOOK VALUE & P/B" },
+      title: {
+        en: "Book value matters most when accounting capital is economically meaningful",
+        fr: "La book value est surtout utile lorsque le capital comptable est économiquement pertinent",
+      },
+      coreFacts: [
+        {
+          en: "Book value of equity is the accounting residual of assets minus liabilities.",
+          fr: "La book value of equity est le résiduel comptable des actifs moins les passifs.",
+        },
+        {
+          en: "P/B compares market equity value with accounting book equity.",
+          fr: "Le P/B compare la valeur de marché de l’equity avec sa book equity comptable.",
+        },
+        {
+          en: "P/B is often more informative for businesses where balance-sheet assets and capital are central to earnings generation.",
+          fr: "Le P/B est souvent plus informatif pour les business où actifs de bilan et capital sont centraux dans la génération des earnings.",
+        },
+        {
+          en: "Intangible-intensive firms can have low book equity relative to economic value because many internally generated assets are not fully recognized on the balance sheet.",
+          fr: "Les entreprises intensives en intangibles peuvent avoir une book equity faible relativement à leur valeur économique car de nombreux actifs créés en interne ne sont pas entièrement reconnus au bilan.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a company has $10 of book value per share and trades at $15, P/B is 1.5×. But a low P/B is not automatically cheap if the company earns poor returns on that book equity.",
+          fr: "Si une entreprise possède 10 $ de book value par action et cote 15 $, son P/B vaut 1,5×. Mais un P/B faible n’est pas automatiquement bon marché si l’entreprise gagne de faibles returns sur cette book equity.",
+        },
+        Intermediate: {
+          en: "P/B and ROE should often be read together. A business earning sustainably high ROE can justify a P/B above 1× because each dollar of book equity is expected to generate attractive earnings.",
+          fr: "P/B et ROE doivent souvent être lus ensemble. Un business générant durablement un ROE élevé peut justifier un P/B supérieur à 1× car chaque dollar de book equity devrait produire des earnings attractifs.",
+        },
+        Professional: {
+          en: "Book-value multiples require careful normalization for goodwill, accumulated OCI, loan-loss reserves, regulatory capital and buybacks. The economic meaning varies substantially across banks, insurers, industrial firms and software companies.",
+          fr: "Les multiples de book value exigent une normalisation attentive du goodwill, accumulated OCI, loan-loss reserves, regulatory capital et buybacks. Leur sens économique varie fortement entre banques, assureurs, industriels et sociétés software.",
+        },
+      },
+      formula: {
+        label: { en: "Price-to-book", fr: "Price-to-Book / P/B" },
+        expression: "P/B = Market Value of Equity ÷ Book Value of Equity",
+        explanation: {
+          en: "P/B is most useful when book equity is a meaningful economic base.",
+          fr: "Le P/B est surtout utile lorsque la book equity constitue une base économique pertinente.",
+        },
+        workedExample: {
+          en: "Market equity $150 / book equity $100 = 1.5× P/B.",
+          fr: "Market equity 150 $ / book equity 100 $ = P/B 1,5×.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Book value",
+          fr: "valeur comptable / book value",
+          definition: {
+            en: "Accounting carrying value of an asset, liability or equity account.",
+            fr: "Valeur comptable inscrite pour un actif, passif ou compte d’equity.",
+          },
+        },
+        {
+          en: "Tangible book value",
+          fr: "valeur comptable tangible / tangible book value",
+          definition: {
+            en: "Book equity after removing selected intangible assets under a stated definition.",
+            fr: "Book equity après retrait de certains actifs intangibles selon la définition choisie.",
+          },
+        },
+      ],
+    },
+    {
+      id: "ev-vs-equity-multiples",
+      kicker: { en: "08 · EQUITY VS ENTERPRISE MULTIPLES", fr: "08 · MULTIPLES D’EQUITY VS D’ENTREPRISE" },
+      title: {
+        en: "Match the value numerator with the correct financial denominator",
+        fr: "Associer le bon numérateur de valeur au bon dénominateur financier",
+      },
+      coreFacts: [
+        {
+          en: "P/E and P/B are equity-value multiples because their denominators belong primarily to common equity holders.",
+          fr: "P/E et P/B sont des multiples d’equity car leurs dénominateurs appartiennent principalement aux common equity holders.",
+        },
+        {
+          en: "EV/EBITDA and EV/EBIT are enterprise-value multiples because their denominators are measured before interest allocated to debt holders.",
+          fr: "EV/EBITDA et EV/EBIT sont des multiples d’enterprise value car leurs dénominateurs sont mesurés avant intérêts revenant aux debt holders.",
+        },
+        {
+          en: "Mixing an enterprise numerator with an equity denominator creates an inconsistent multiple.",
+          fr: "Mélanger un numérateur enterprise avec un dénominateur equity produit un multiple incohérent.",
+        },
+        {
+          en: "Enterprise multiples can improve comparisons across different financing structures, but still require normalization.",
+          fr: "Les enterprise multiples peuvent améliorer les comparaisons entre structures de financement différentes, mais nécessitent toujours une normalisation.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Think of EV as value available to both debt and equity capital providers. EBITDA is measured before interest, so EV/EBITDA is logically matched. Net income comes after interest, so it is more naturally matched with equity value in P/E.",
+          fr: "Pense à l’EV comme à une valeur revenant à la fois aux apporteurs de debt et equity. EBITDA est avant intérêts, donc EV/EBITDA est cohérent. Net income est après intérêts, donc il est naturellement associé à equity value dans le P/E.",
+        },
+        Intermediate: {
+          en: "EV/EBITDA can reduce distortions from capital structure but can hide capital intensity because depreciation and capex are excluded. EV/EBIT may be more informative when depreciation reflects meaningful recurring asset consumption.",
+          fr: "EV/EBITDA peut réduire les distorsions dues à la structure du capital mais masquer l’intensité capitalistique car depreciation et capex sont exclus. EV/EBIT peut être plus informatif lorsque depreciation reflète une consommation récurrente significative des actifs.",
+        },
+        Professional: {
+          en: "Multiple selection should reflect business economics. Banks are difficult to analyze with EV/EBITDA because debt functions differently in financial institutions, while P/B and P/E may be more meaningful. No single multiple is universally superior.",
+          fr: "Le choix du multiple doit refléter les economics du business. Les banques sont difficiles à analyser avec EV/EBITDA car la dette fonctionne différemment dans les institutions financières, tandis que P/B et P/E peuvent être plus pertinents. Aucun multiple n’est universellement supérieur.",
+        },
+      },
+      comparison: {
+        title: { en: "Common valuation multiples", fr: "Multiples de valorisation courants" },
+        headers: [
+          { en: "Multiple", fr: "Multiple" },
+          { en: "Value level", fr: "Niveau de valeur" },
+          { en: "Typical denominator", fr: "Dénominateur typique" },
+        ],
+        rows: [
+          { cells: [
+            { en: "P/E", fr: "P/E" },
+            { en: "Equity", fr: "Equity" },
+            { en: "Net income / EPS", fr: "Net income / EPS" },
+          ]},
+          { cells: [
+            { en: "P/B", fr: "P/B" },
+            { en: "Equity", fr: "Equity" },
+            { en: "Book equity", fr: "Book equity" },
+          ]},
+          { cells: [
+            { en: "EV/EBITDA", fr: "EV/EBITDA" },
+            { en: "Enterprise", fr: "Enterprise" },
+            { en: "EBITDA", fr: "EBITDA" },
+          ]},
+          { cells: [
+            { en: "EV/EBIT", fr: "EV/EBIT" },
+            { en: "Enterprise", fr: "Enterprise" },
+            { en: "EBIT", fr: "EBIT" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Enterprise multiple",
+          fr: "multiple d’entreprise / enterprise multiple",
+          definition: {
+            en: "Valuation ratio using enterprise value as the numerator.",
+            fr: "Ratio de valorisation utilisant enterprise value au numérateur.",
+          },
+        },
+        {
+          en: "Equity multiple",
+          fr: "multiple d’equity / equity multiple",
+          definition: {
+            en: "Valuation ratio using equity value or share price as the numerator.",
+            fr: "Ratio de valorisation utilisant equity value ou prix de l’action au numérateur.",
+          },
+        },
+      ],
+    },
+    {
+      id: "valuation-thesis",
+      kicker: { en: "09 · BUILDING A VALUATION THESIS", fr: "09 · CONSTRUIRE UNE THÈSE DE VALORISATION" },
+      title: {
+        en: "A valuation thesis combines numbers, business quality and expectations",
+        fr: "Une thèse de valorisation combine chiffres, qualité du business et attentes",
+      },
+      coreFacts: [
+        {
+          en: "A valuation thesis should explain what the market appears to expect and where the analyst disagrees.",
+          fr: "Une thèse de valorisation doit expliquer ce que le marché semble attendre et où l’analyste est en désaccord.",
+        },
+        {
+          en: "Catalysts can cause expectations to update, but value can exist without an immediate catalyst.",
+          fr: "Les catalysts peuvent amener les attentes à se mettre à jour, mais une différence de valeur peut exister sans catalyseur immédiat.",
+        },
+        {
+          en: "A valuation range should include base, upside and downside scenarios with explicit assumptions.",
+          fr: "Une fourchette de valorisation doit inclure scénarios base, upside et downside avec hypothèses explicites.",
+        },
+        {
+          en: "Risk analysis should identify what could make the business or valuation assumptions wrong.",
+          fr: "L’analyse des risques doit identifier ce qui pourrait rendre fausses les hypothèses de business ou de valorisation.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A complete thesis is more than 'the stock is cheap'. You should be able to say: earnings can grow because of X, the current multiple assumes Y, my base value is Z under these assumptions, and I would change my view if this risk occurs.",
+          fr: "Une thèse complète va au-delà de « l’action est cheap ». Il faut pouvoir dire : les earnings peuvent croître grâce à X, le multiple actuel semble intégrer Y, ma valeur de base est Z sous ces hypothèses, et je changerais d’avis si ce risque se réalise.",
+        },
+        Intermediate: {
+          en: "Triangulation improves robustness. A dividend model, earnings multiple and book-value framework may point to different ranges. The analyst should explain why one method deserves more weight for the business being analyzed.",
+          fr: "La triangulation améliore la robustesse. Un dividend model, un earnings multiple et une approche book value peuvent produire différentes fourchettes. L’analyste doit expliquer pourquoi une méthode mérite davantage de poids selon le business analysé.",
+        },
+        Professional: {
+          en: "A professional valuation thesis is an expectations gap. It identifies the market-implied case, the analyst's variant perception, evidence supporting that difference, catalysts that may close the gap and invalidation conditions.",
+          fr: "Une thèse professionnelle de valorisation est un expectations gap. Elle identifie le scénario implicite du marché, la variant perception de l’analyste, les preuves soutenant cette différence, les catalysts susceptibles de réduire l’écart et les conditions d’invalidation.",
+        },
+      },
+      comparison: {
+        title: { en: "Valuation thesis template", fr: "Template de thèse de valorisation" },
+        headers: [
+          { en: "Block", fr: "Bloc" },
+          { en: "Question", fr: "Question" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Business quality", fr: "Qualité du business" },
+            { en: "Growth, margins, ROIC, balance sheet?", fr: "Croissance, marges, ROIC, bilan ?" },
+          ]},
+          { cells: [
+            { en: "Expectations", fr: "Attentes" },
+            { en: "What is already priced in?", fr: "Qu’est-ce qui est déjà pricé ?" },
+          ]},
+          { cells: [
+            { en: "Valuation", fr: "Valorisation" },
+            { en: "What range is supported by multiple methods?", fr: "Quelle fourchette est soutenue par plusieurs méthodes ?" },
+          ]},
+          { cells: [
+            { en: "Catalysts", fr: "Catalyseurs" },
+            { en: "What could change expectations?", fr: "Qu’est-ce qui pourrait modifier les attentes ?" },
+          ]},
+          { cells: [
+            { en: "Risks", fr: "Risques" },
+            { en: "What would invalidate the thesis?", fr: "Qu’est-ce qui invaliderait la thèse ?" },
+          ]},
+        ],
+      },
+      marketConnection: {
+        en: "Equity prices move when expected cash flows, required returns or the market's confidence in those assumptions change.",
+        fr: "Les prix actions bougent lorsque les cash flows attendus, required returns ou la confiance du marché dans ces hypothèses changent.",
+      },
+      vocabulary: [
+        {
+          en: "Variant perception",
+          fr: "vue différenciante / variant perception",
+          definition: {
+            en: "An investment view that differs materially from the market's prevailing expectations and is supported by evidence.",
+            fr: "Vue d’investissement différant sensiblement des attentes dominantes du marché et soutenue par des preuves.",
+          },
+        },
+        {
+          en: "Valuation range",
+          fr: "fourchette de valorisation / valuation range",
+          definition: {
+            en: "Range of estimated values across plausible assumptions or methods.",
+            fr: "Fourchette de valeurs estimées selon des hypothèses ou méthodes plausibles.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "price-value",
+      question: {
+        en: "Which statement is correct?",
+        fr: "Quelle affirmation est correcte ?",
+      },
+      options: [
+        { id: "a", label: { en: "Market price is observable; intrinsic value is estimated", fr: "Le market price est observable ; l’intrinsic value est estimée" } },
+        { id: "b", label: { en: "Intrinsic value is always equal to market price", fr: "L’intrinsic value est toujours égale au market price" } },
+        { id: "c", label: { en: "Market price never changes", fr: "Le market price ne change jamais" } },
+        { id: "d", label: { en: "Equity holders are paid before all creditors", fr: "Les actionnaires sont payés avant tous les créanciers" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Market price is observed in the market, while intrinsic value depends on assumptions and analysis.",
+        fr: "Le market price est observé sur le marché, tandis que l’intrinsic value dépend d’hypothèses et d’une analyse.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "sustainable-growth",
+      question: {
+        en: "ROE is 15% and payout ratio is 40%. Approximate sustainable growth is:",
+        fr: "Le ROE vaut 15 % et le payout ratio 40 %. La sustainable growth approximative est :",
+      },
+      options: [
+        { id: "a", label: { en: "4%", fr: "4 %" } },
+        { id: "b", label: { en: "6%", fr: "6 %" } },
+        { id: "c", label: { en: "9%", fr: "9 %" } },
+        { id: "d", label: { en: "15%", fr: "15 %" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "Retention is 60%; 15%×60%=9%.",
+        fr: "Retention = 60 % ; 15 %×60 %=9 %.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "dividend-discount",
+      question: {
+        en: "A $2 dividend arrives in one year and required return is 10%. Present value is approximately:",
+        fr: "Un dividende de 2 $ arrive dans un an et le required return est 10 %. Sa valeur actuelle est environ :",
+      },
+      options: [
+        { id: "a", label: { en: "$1.82", fr: "1,82 $" } },
+        { id: "b", label: { en: "$2.00", fr: "2,00 $" } },
+        { id: "c", label: { en: "$2.20", fr: "2,20 $" } },
+        { id: "d", label: { en: "$20.00", fr: "20,00 $" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "2/1.10≈1.82.",
+        fr: "2/1,10≈1,82.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "gordon-growth",
+      question: {
+        en: "Next dividend is $2, required return 10% and perpetual growth 4%. Gordon value is approximately:",
+        fr: "Le prochain dividende vaut 2 $, required return 10 % et croissance perpétuelle 4 %. La valeur Gordon est environ :",
+      },
+      options: [
+        { id: "a", label: { en: "$20.00", fr: "20,00 $" } },
+        { id: "b", label: { en: "$25.00", fr: "25,00 $" } },
+        { id: "c", label: { en: "$33.33", fr: "33,33 $" } },
+        { id: "d", label: { en: "$50.00", fr: "50,00 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "2/(0.10−0.04)=33.33.",
+        fr: "2/(0,10−0,04)=33,33.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "required-return",
+      question: {
+        en: "All else equal, what happens to present value when required return rises?",
+        fr: "Toutes choses égales par ailleurs, que devient la valeur actuelle lorsque le required return augmente ?",
+      },
+      options: [
+        { id: "a", label: { en: "It rises", fr: "Elle augmente" } },
+        { id: "b", label: { en: "It falls", fr: "Elle baisse" } },
+        { id: "c", label: { en: "It always stays identical", fr: "Elle reste toujours identique" } },
+        { id: "d", label: { en: "It becomes negative automatically", fr: "Elle devient automatiquement négative" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "A higher discount rate lowers the present value of fixed future cash flows.",
+        fr: "Un discount rate plus élevé réduit la valeur actuelle de cash flows futurs constants.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "pe",
+      question: {
+        en: "A share price is $40 and EPS is $2. P/E equals:",
+        fr: "Le prix de l’action est 40 $ et l’EPS 2 $. Le P/E vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "5×", fr: "5×" } },
+        { id: "b", label: { en: "10×", fr: "10×" } },
+        { id: "c", label: { en: "20×", fr: "20×" } },
+        { id: "d", label: { en: "80×", fr: "80×" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "40/2=20×.",
+        fr: "40/2=20×.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "pb",
+      question: {
+        en: "Market equity is 150 and book equity is 100. P/B equals:",
+        fr: "Market equity vaut 150 et book equity 100. Le P/B vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "0.67×", fr: "0,67×" } },
+        { id: "b", label: { en: "1.0×", fr: "1,0×" } },
+        { id: "c", label: { en: "1.5×", fr: "1,5×" } },
+        { id: "d", label: { en: "2.5×", fr: "2,5×" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "150/100=1.5×.",
+        fr: "150/100=1,5×.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "multiple-matching",
+      question: {
+        en: "Which multiple is conceptually matched correctly?",
+        fr: "Quel multiple est conceptuellement correctement associé ?",
+      },
+      options: [
+        { id: "a", label: { en: "EV / Net Income", fr: "EV / Net Income" } },
+        { id: "b", label: { en: "P/E", fr: "P/E" } },
+        { id: "c", label: { en: "Market Cap / EBITDA as the standard enterprise multiple", fr: "Market Cap / EBITDA comme multiple enterprise standard" } },
+        { id: "d", label: { en: "P/B using enterprise value in the numerator", fr: "P/B avec enterprise value au numérateur" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "P/E matches an equity-value numerator with equity earnings.",
+        fr: "P/E associe un numérateur d’equity value à des equity earnings.",
+      },
+    },
+    {
+      id: "q9",
+      conceptKey: "multiple-interpretation",
+      question: {
+        en: "A company trades at 25× P/E while a peer trades at 15×. What is the best conclusion?",
+        fr: "Une entreprise cote à 25× P/E tandis qu’un pair cote à 15×. Quelle est la meilleure conclusion ?",
+      },
+      options: [
+        { id: "a", label: { en: "The 25× stock is definitely overvalued", fr: "L’action à 25× est définitivement surévaluée" } },
+        { id: "b", label: { en: "The multiple difference must be explained by growth, quality, risk and expectations before judging value", fr: "Il faut expliquer la différence par croissance, qualité, risque et attentes avant de juger la valeur" } },
+        { id: "c", label: { en: "The 15× stock is always better", fr: "L’action à 15× est toujours meilleure" } },
+        { id: "d", label: { en: "P/E never contains information", fr: "Le P/E ne contient jamais d’information" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Different businesses can rationally deserve different multiples because their growth, returns, risk and earnings quality differ.",
+        fr: "Des business différents peuvent rationnellement mériter des multiples différents selon croissance, returns, risque et qualité des earnings.",
+      },
+    },
+    {
+      id: "q10",
+      conceptKey: "valuation-thesis",
+      question: {
+        en: "Which element makes a valuation thesis more complete?",
+        fr: "Quel élément rend une thèse de valorisation plus complète ?",
+      },
+      options: [
+        { id: "a", label: { en: "A valuation range with catalysts and invalidation risks", fr: "Une valuation range avec catalysts et risques d’invalidation" } },
+        { id: "b", label: { en: "One multiple with no explanation", fr: "Un seul multiple sans explication" } },
+        { id: "c", label: { en: "Ignoring what is already priced in", fr: "Ignorer ce qui est déjà pricé" } },
+        { id: "d", label: { en: "Assuming growth never changes", fr: "Supposer que la croissance ne change jamais" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "A robust thesis combines valuation, expectations, catalysts, scenarios and risks.",
+        fr: "Une thèse robuste combine valorisation, attentes, catalysts, scénarios et risques.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Company A trades at 25× P/E and Company B at 15×. Is Company A necessarily more expensive?",
+      fr: "L’entreprise A cote à 25× P/E et l’entreprise B à 15×. A est-elle nécessairement plus chère ?",
+    },
+    framework: [
+      {
+        en: "Say no: a multiple is not a valuation conclusion by itself.",
+        fr: "Répondre non : un multiple n’est pas une conclusion de valorisation à lui seul.",
+      },
+      {
+        en: "Compare growth, ROIC/ROE, margins, earnings quality and balance-sheet risk.",
+        fr: "Comparer croissance, ROIC/ROE, marges, qualité des earnings et risque de bilan.",
+      },
+      {
+        en: "Check whether the earnings denominator is normalized and comparable.",
+        fr: "Vérifier si le dénominateur earnings est normalisé et comparable.",
+      },
+      {
+        en: "Assess required return and durability of competitive advantage.",
+        fr: "Évaluer required return et durabilité de l’avantage concurrentiel.",
+      },
+      {
+        en: "Ask what expectations are already embedded in each price and what catalysts or risks could change them.",
+        fr: "Demander quelles attentes sont déjà intégrées dans chaque prix et quels catalysts ou risques pourraient les modifier.",
+      },
+    ],
+    sample: {
+      en: "No. A 25× P/E stock is not automatically more expensive in an economic sense than a 15× stock. I would first make sure the earnings are normalized and comparable. Then I would compare growth, ROIC or ROE, margins, cash conversion, leverage and the durability of each company's competitive advantage. A company with higher sustainable growth, stronger returns on capital, cleaner earnings and lower risk can rationally trade at a higher P/E. I would also ask what growth and margin assumptions are already priced into each stock. The valuation question is whether the expected fundamentals justify the price, not simply which multiple is numerically lower.",
+      fr: "Non. Une action à 25× P/E n’est pas automatiquement plus chère économiquement qu’une action à 15×. Je vérifierais d’abord que les earnings sont normalisés et comparables. Ensuite je comparerais croissance, ROIC ou ROE, marges, cash conversion, leverage et durabilité de l’avantage concurrentiel. Une entreprise avec croissance soutenable supérieure, meilleurs returns on capital, earnings plus propres et risque inférieur peut rationnellement coter avec un P/E plus élevé. Je demanderais aussi quelles hypothèses de croissance et de marge sont déjà pricées dans chaque action. La vraie question est de savoir si les fondamentaux attendus justifient le prix, pas simplement quel multiple est numériquement plus faible.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
