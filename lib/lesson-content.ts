@@ -7754,7 +7754,962 @@ export const statisticsProbabilityLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson];
+
+export const excelFoundationsForFinanceLesson: FinanceLesson = {
+  slug: "year-1-excel-foundations-for-finance",
+  year: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations" },
+  domain: {
+    en: "Corporate Finance & Valuation",
+    fr: "Finance d’entreprise & valorisation / Corporate Finance & Valuation",
+  },
+  title: {
+    en: "Excel Foundations for Finance",
+    fr: "Fondamentaux Excel pour la finance / Excel Foundations for Finance",
+  },
+  subtitle: {
+    en: "Build the spreadsheet habits used in finance: clean model architecture, reliable formulas, logical tests, lookups, date handling, financial functions, sensitivities, charts and error checks.",
+    fr: "Construire les habitudes Excel utilisées en finance : architecture propre du modèle, formules fiables, tests logiques, lookups, gestion des dates, fonctions financières, sensitivities, graphiques et contrôles d’erreurs.",
+  },
+  duration: { en: "100–125 min", fr: "100–125 min" },
+  prerequisites: [
+    {
+      en: "Time Value of Money",
+      fr: "Valeur temps de l’argent / Time Value of Money",
+    },
+    {
+      en: "Financial Accounting I",
+      fr: "Comptabilité financière I / Financial Accounting I",
+    },
+  ],
+  objectives: [
+    {
+      en: "Build a clean finance workbook with separated inputs, calculations and outputs.",
+      fr: "Construire un workbook financier propre séparant inputs, calculs et outputs.",
+    },
+    {
+      en: "Use relative, absolute and mixed cell references correctly.",
+      fr: "Utiliser correctement références relatives, absolues et mixtes.",
+    },
+    {
+      en: "Apply logical, conditional aggregation and lookup functions to financial datasets.",
+      fr: "Appliquer fonctions logiques, agrégations conditionnelles et lookups à des données financières.",
+    },
+    {
+      en: "Work safely with dates, time periods and common finance functions such as NPV, XNPV, IRR and XIRR.",
+      fr: "Travailler proprement avec dates, périodes et fonctions financières courantes comme NPV, XNPV, IRR et XIRR.",
+    },
+    {
+      en: "Create scenario and sensitivity analysis without hard-coding outputs.",
+      fr: "Créer des analyses de scénarios et de sensibilité sans hard-coder les outputs.",
+    },
+    {
+      en: "Audit a spreadsheet for formula consistency, data quality and presentation risk.",
+      fr: "Auditer un spreadsheet pour cohérence des formules, qualité des données et risque de présentation.",
+    },
+  ],
+  overviewFlow: {
+    title: {
+      en: "A professional spreadsheet workflow",
+      fr: "Workflow d’un spreadsheet professionnel",
+    },
+    steps: [
+      {
+        title: { en: "Inputs", fr: "Inputs / Hypothèses" },
+        detail: { en: "Source · clean · label", fr: "Source · nettoyage · labels" },
+      },
+      {
+        title: { en: "Calculations", fr: "Calculs" },
+        detail: { en: "References · logic · schedules", fr: "Références · logique · schedules" },
+      },
+      {
+        title: { en: "Outputs", fr: "Outputs / Résultats" },
+        detail: { en: "KPIs · valuation · charts", fr: "KPIs · valuation · graphiques" },
+      },
+      {
+        title: { en: "Controls", fr: "Contrôles" },
+        detail: { en: "Checks · sensitivities · audit", fr: "Checks · sensitivities · audit" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "workbook-architecture",
+      kicker: { en: "01 · MODEL ARCHITECTURE", fr: "01 · ARCHITECTURE DU MODÈLE" },
+      title: {
+        en: "A good finance model is designed before formulas are written",
+        fr: "Un bon modèle financier se structure avant d’écrire les formules",
+      },
+      coreFacts: [
+        {
+          en: "Professional spreadsheets separate source data, assumptions, calculations and outputs so users can trace logic.",
+          fr: "Les spreadsheets professionnels séparent données sources, hypothèses / assumptions, calculs et outputs afin que la logique soit traçable.",
+        },
+        {
+          en: "Inputs should be clearly labeled with units, dates and source context.",
+          fr: "Les inputs doivent être clairement identifiés avec unités, dates et contexte de source.",
+        },
+        {
+          en: "Hard-coded assumptions embedded inside long formulas are harder to review and update.",
+          fr: "Les hypothèses hard-codées à l’intérieur de longues formules sont plus difficiles à relire et à mettre à jour.",
+        },
+        {
+          en: "Consistency of time direction, signs and units matters as much as formula syntax.",
+          fr: "La cohérence de la direction temporelle, des signes et des unités compte autant que la syntaxe des formules.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Instead of typing growth of 5% directly into twenty formulas, place the 5% assumption in one labeled cell and reference it everywhere. Then when the assumption changes, the whole model updates from one place.",
+          fr: "Au lieu de taper une croissance de 5 % directement dans vingt formules, place l’hypothèse de 5 % dans une cellule clairement nommée et référence-la partout. Lorsque l’hypothèse change, tout le modèle se met à jour depuis un seul endroit.",
+        },
+        Intermediate: {
+          en: "A clean workbook usually separates historical data from forecasts and distinguishes imported data from analyst assumptions. Rows should have consistent units and columns should follow a logical period structure.",
+          fr: "Un workbook propre sépare généralement données historiques et forecasts et distingue données importées des hypothèses analyste. Les lignes doivent utiliser des unités cohérentes et les colonnes suivre une structure temporelle logique.",
+        },
+        Professional: {
+          en: "Spreadsheet architecture is model governance. A reviewer should be able to identify source data, assumption ownership, calculation dependencies and key outputs without reverse-engineering every formula. Good structure reduces key-person risk and makes model changes safer.",
+          fr: "L’architecture Excel est une forme de gouvernance du modèle. Un reviewer doit pouvoir identifier données sources, ownership des hypothèses, dépendances de calcul et outputs clés sans reverse-engineer chaque formule. Une bonne structure réduit le key-person risk et sécurise les modifications.",
+        },
+      },
+      comparison: {
+        title: { en: "Weak vs strong model design", fr: "Design faible vs design solide" },
+        headers: [
+          { en: "Weak practice", fr: "Mauvaise pratique" },
+          { en: "Better practice", fr: "Meilleure pratique" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Assumption hidden inside formula", fr: "Hypothèse cachée dans une formule" },
+            { en: "Dedicated labeled input cell", fr: "Cellule input dédiée et clairement nommée" },
+          ]},
+          { cells: [
+            { en: "Mixed units without labels", fr: "Unités mélangées sans labels" },
+            { en: "Explicit units on every schedule", fr: "Unités explicites sur chaque schedule" },
+          ]},
+          { cells: [
+            { en: "Manual output edits", fr: "Outputs modifiés manuellement" },
+            { en: "Outputs driven by formulas", fr: "Outputs alimentés par formules" },
+          ]},
+          { cells: [
+            { en: "No error checks", fr: "Aucun contrôle d’erreur" },
+            { en: "Visible control checks", fr: "Checks visibles" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Hard-code",
+          fr: "valeur saisie en dur / hard-code",
+          definition: {
+            en: "A manually typed value rather than a formula-linked or source-linked value.",
+            fr: "Valeur saisie manuellement plutôt que reliée par formule ou à une source.",
+          },
+        },
+        {
+          en: "Schedule",
+          fr: "tableau de calcul / schedule",
+          definition: {
+            en: "A structured supporting calculation block used by a financial model.",
+            fr: "Bloc de calcul structuré servant de support à un modèle financier.",
+          },
+        },
+      ],
+    },
+    {
+      id: "cell-references",
+      kicker: { en: "02 · CELL REFERENCES", fr: "02 · RÉFÉRENCES DE CELLULES" },
+      title: {
+        en: "Relative, absolute and mixed references control how formulas copy",
+        fr: "Références relatives, absolues et mixtes contrôlent la copie des formules",
+      },
+      coreFacts: [
+        {
+          en: "A relative reference such as B2 changes when a formula is copied to another location.",
+          fr: "Une référence relative comme B2 change lorsqu’une formule est copiée ailleurs.",
+        },
+        {
+          en: "An absolute reference such as $B$2 locks both row and column.",
+          fr: "Une référence absolue comme $B$2 verrouille à la fois la ligne et la colonne.",
+        },
+        {
+          en: "Mixed references such as $B2 or B$2 lock only one dimension.",
+          fr: "Les références mixtes comme $B2 ou B$2 verrouillent une seule dimension.",
+        },
+        {
+          en: "Reference design is essential for scalable forecasting, sensitivity tables and repeated calculations.",
+          fr: "Le design des références est essentiel pour les forecasts scalables, sensitivity tables et calculs répétés.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose revenue is in B5 and a tax rate assumption is in B2. If you copy a tax formula across years, you may want the revenue reference to move while the tax-rate cell stays fixed. That is why absolute references exist.",
+          fr: "Supposons que le revenu soit en B5 et le taux d’impôt en B2. Si tu copies une formule de taxe sur plusieurs années, tu veux peut-être que la référence au revenu se déplace mais que la cellule du taux reste fixe. C’est précisément le rôle des références absolues.",
+        },
+        Intermediate: {
+          en: "Mixed references are especially useful in two-dimensional tables. Locking a row but not a column, or vice versa, lets one formula adapt correctly across a matrix.",
+          fr: "Les références mixtes sont particulièrement utiles dans les tableaux à deux dimensions. Verrouiller une ligne mais pas une colonne, ou l’inverse, permet à une formule de s’adapter correctement dans une matrice.",
+        },
+        Professional: {
+          en: "Reference discipline prevents silent model corruption. When copying formulas through long schedules, every anchor should be intentional. Analysts often inspect formulas across a row to confirm references move consistently rather than merely checking displayed values.",
+          fr: "La discipline des références évite les corruptions silencieuses du modèle. Lorsqu’une formule est copiée dans de longs schedules, chaque ancrage doit être intentionnel. Les analystes inspectent souvent les formules sur toute une ligne pour vérifier le déplacement cohérent des références plutôt que seulement les valeurs affichées.",
+        },
+      },
+      formula: {
+        label: { en: "Example of an anchored assumption", fr: "Exemple d’hypothèse ancrée" },
+        expression: "= B5 × $B$2",
+        explanation: {
+          en: "B5 can move when copied; $B$2 remains fixed.",
+          fr: "B5 peut se déplacer lors de la copie ; $B$2 reste fixe.",
+        },
+        workedExample: {
+          en: "If B5=100 and $B$2=25%, the result is 25. Copying the formula to C5 can reference C5 while retaining the same tax assumption.",
+          fr: "Si B5=100 et $B$2=25 %, le résultat vaut 25. En copiant vers C5, la formule peut utiliser C5 tout en gardant le même taux d’impôt.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Absolute reference",
+          fr: "référence absolue / absolute reference",
+          definition: {
+            en: "A cell reference that remains fixed when a formula is copied.",
+            fr: "Référence de cellule qui reste fixe lors de la copie d’une formule.",
+          },
+        },
+        {
+          en: "Mixed reference",
+          fr: "référence mixte / mixed reference",
+          definition: {
+            en: "A reference locking only a row or only a column.",
+            fr: "Référence verrouillant uniquement la ligne ou uniquement la colonne.",
+          },
+        },
+      ],
+    },
+    {
+      id: "core-formulas",
+      kicker: { en: "03 · CORE FORMULAS", fr: "03 · FORMULES FONDAMENTALES" },
+      title: {
+        en: "Simple formulas become powerful when they are consistent and auditable",
+        fr: "Les formules simples deviennent puissantes lorsqu’elles sont cohérentes et auditables",
+      },
+      coreFacts: [
+        {
+          en: "SUM, AVERAGE, MIN, MAX and ROUND are simple but heavily used in finance models.",
+          fr: "SUM, AVERAGE, MIN, MAX et ROUND sont simples mais très utilisés dans les modèles financiers.",
+        },
+        {
+          en: "Parentheses determine calculation order and should be used explicitly when formula intent could be ambiguous.",
+          fr: "Les parenthèses déterminent l’ordre des calculs et doivent être utilisées explicitement lorsque l’intention pourrait être ambiguë.",
+        },
+        {
+          en: "Percentages are stored numerically, so 5% equals 0.05 in calculations.",
+          fr: "Les pourcentages sont stockés numériquement ; 5 % équivaut donc à 0,05 dans les calculs.",
+        },
+        {
+          en: "Rounding displayed values is different from rounding values inside calculations.",
+          fr: "Arrondir l’affichage est différent d’arrondir les valeurs réellement utilisées dans les calculs.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If quarterly revenue is 20, 25, 30 and 35, SUM gives annual revenue of 110. AVERAGE gives 27.5. These are basic functions, but most financial models are built from many simple formulas connected correctly.",
+          fr: "Si les revenus trimestriels valent 20, 25, 30 et 35, SUM donne un revenu annuel de 110. AVERAGE donne 27,5. Ce sont des fonctions simples, mais la majorité des modèles financiers reposent sur de nombreuses formules simples correctement connectées.",
+        },
+        Intermediate: {
+          en: "Use formulas that express economic logic directly. For example, revenue forecast can be prior-year revenue multiplied by one plus growth, instead of manually typing each forecast year.",
+          fr: "Les formules doivent exprimer directement la logique économique. Par exemple, un forecast de revenu peut être revenu de l’année précédente multiplié par un plus la croissance plutôt que d’être saisi manuellement chaque année.",
+        },
+        Professional: {
+          en: "Model quality comes from consistent formula patterns, explicit assumptions and transparent checks rather than clever formula complexity. A formula that is easy to audit is often preferable to a shorter but opaque alternative.",
+          fr: "La qualité du modèle vient de patterns de formules cohérents, hypothèses explicites et checks transparents plutôt que de formules complexes. Une formule facile à auditer est souvent préférable à une formule plus courte mais opaque.",
+        },
+      },
+      formula: {
+        label: { en: "Basic revenue forecast", fr: "Forecast simple de revenu" },
+        expression: "= Prior Revenue × (1 + Growth Rate)",
+        explanation: {
+          en: "The forecast should reference a separate growth assumption rather than hard-coding the rate repeatedly.",
+          fr: "Le forecast doit référencer une hypothèse de croissance séparée plutôt que hard-coder le taux à répétition.",
+        },
+        workedExample: {
+          en: "Revenue 100 and growth 5% → next-period revenue = 100×1.05 = 105.",
+          fr: "Revenu 100 et croissance 5 % → revenu période suivante = 100×1,05 = 105.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Formula consistency",
+          fr: "cohérence des formules / formula consistency",
+          definition: {
+            en: "Using the same logical formula pattern across comparable periods or entities.",
+            fr: "Utilisation du même pattern logique de formule entre périodes ou entités comparables.",
+          },
+        },
+        {
+          en: "Calculation order",
+          fr: "ordre des opérations / calculation order",
+          definition: {
+            en: "The sequence in which spreadsheet arithmetic is evaluated.",
+            fr: "Séquence selon laquelle les opérations arithmétiques sont évaluées.",
+          },
+        },
+      ],
+    },
+    {
+      id: "logical-functions",
+      kicker: { en: "04 · LOGIC & ERROR HANDLING", fr: "04 · LOGIQUE & GESTION DES ERREURS" },
+      title: {
+        en: "IF, AND, OR and IFERROR turn rules into model logic",
+        fr: "IF, AND, OR et IFERROR transforment des règles en logique de modèle",
+      },
+      coreFacts: [
+        {
+          en: "IF returns different outputs depending on whether a logical test is true or false.",
+          fr: "IF renvoie différents outputs selon qu’un test logique est vrai ou faux.",
+        },
+        {
+          en: "AND requires all included conditions to be true; OR requires at least one.",
+          fr: "AND exige que toutes les conditions soient vraies ; OR qu’au moins une le soit.",
+        },
+        {
+          en: "IFERROR can improve presentation but should not be used to hide unexplained model errors.",
+          fr: "IFERROR peut améliorer la présentation mais ne doit pas servir à masquer des erreurs de modèle non comprises.",
+        },
+        {
+          en: "Nested logic should remain readable; complex business rules may be clearer when broken into helper rows.",
+          fr: "Les logiques imbriquées doivent rester lisibles ; des règles complexes sont souvent plus claires lorsqu’elles sont décomposées en helper rows.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A simple IF can classify leverage. If Debt/EBITDA is above 4.0×, return 'High'; otherwise return 'Normal'. Excel is simply applying a rule you define.",
+          fr: "Un IF simple peut classer le levier. Si Debt/EBITDA dépasse 4,0×, renvoyer « High » ; sinon « Normal ». Excel applique simplement la règle que tu définis.",
+        },
+        Intermediate: {
+          en: "Logical formulas are useful for scenario switches, covenant tests, rating buckets and data flags. Separating the test from the output can make the model easier to audit.",
+          fr: "Les formules logiques servent aux scenario switches, tests de covenant, rating buckets et data flags. Séparer le test de l’output peut rendre le modèle plus facile à auditer.",
+        },
+        Professional: {
+          en: "Error-handling functions should be defensive, not cosmetic. Suppressing every #N/A or #DIV/0! can conceal broken links or missing data. Professional models distinguish expected missing values from true calculation failures.",
+          fr: "Les fonctions de gestion d’erreur doivent être défensives et non cosmétiques. Supprimer tous les #N/A ou #DIV/0! peut masquer liens cassés ou données manquantes. Les modèles professionnels distinguent valeurs manquantes attendues et vraies erreurs de calcul.",
+        },
+      },
+      formula: {
+        label: { en: "Simple covenant flag", fr: "Flag simple de covenant" },
+        expression: "= IF(Debt_EBITDA > 4, \"High\", \"Normal\")",
+        explanation: {
+          en: "The logical test evaluates leverage and returns a label.",
+          fr: "Le test logique évalue le levier et renvoie un label.",
+        },
+        workedExample: {
+          en: "Debt/EBITDA 4.6× → High. Debt/EBITDA 3.2× → Normal.",
+          fr: "Debt/EBITDA 4,6× → High. Debt/EBITDA 3,2× → Normal.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Boolean",
+          fr: "booléen / Boolean",
+          definition: {
+            en: "A logical value such as TRUE or FALSE.",
+            fr: "Valeur logique comme TRUE ou FALSE.",
+          },
+        },
+        {
+          en: "Helper row",
+          fr: "ligne auxiliaire / helper row",
+          definition: {
+            en: "An intermediate calculation row used to make logic more transparent.",
+            fr: "Ligne de calcul intermédiaire utilisée pour rendre la logique plus transparente.",
+          },
+        },
+      ],
+    },
+    {
+      id: "conditional-aggregation",
+      kicker: { en: "05 · SUMIFS & CONDITIONAL ANALYSIS", fr: "05 · SUMIFS & ANALYSE CONDITIONNELLE" },
+      title: {
+        en: "Aggregate financial data by company, period, region or category",
+        fr: "Agréger des données financières par entreprise, période, région ou catégorie",
+      },
+      coreFacts: [
+        {
+          en: "SUMIFS sums values meeting multiple criteria.",
+          fr: "SUMIFS additionne les valeurs répondant à plusieurs critères.",
+        },
+        {
+          en: "COUNTIFS counts rows meeting multiple criteria, while AVERAGEIFS calculates conditional averages.",
+          fr: "COUNTIFS compte les lignes répondant à plusieurs critères, tandis qu’AVERAGEIFS calcule des moyennes conditionnelles.",
+        },
+        {
+          en: "Criteria ranges should align in size and structure with the sum or average range.",
+          fr: "Les plages de critères doivent être alignées en taille et structure avec la plage à sommer ou moyenner.",
+        },
+        {
+          en: "Conditional aggregation is useful for transaction data, portfolio holdings, expenses and segment analysis.",
+          fr: "L’agrégation conditionnelle est utile pour données de transactions, holdings de portefeuille, dépenses et analyses par segment.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Imagine a table containing 1,000 transactions with company, region and revenue columns. SUMIFS can add only the revenue rows where company equals A and region equals Europe without manually filtering each row.",
+          fr: "Imagine un tableau de 1 000 transactions avec colonnes entreprise, région et revenu. SUMIFS peut additionner uniquement les lignes où l’entreprise vaut A et la région Europe sans filtrer manuellement chaque ligne.",
+        },
+        Intermediate: {
+          en: "Conditional functions are robust building blocks for management reporting and portfolio dashboards. Criteria can reference cells, making the same output update dynamically when the selected company or period changes.",
+          fr: "Les fonctions conditionnelles sont des briques solides pour management reporting et dashboards de portefeuille. Les critères peuvent référencer des cellules afin que l’output se mette à jour dynamiquement lorsque l’entreprise ou la période sélectionnée change.",
+        },
+        Professional: {
+          en: "SUMIFS-style models are transparent and auditable for moderate datasets. For larger or more complex workflows, structured tables, PivotTables, Power Query or data models may be more appropriate, but the economic aggregation logic remains the same.",
+          fr: "Les modèles basés sur SUMIFS sont transparents et auditables pour des datasets modérés. Pour des workflows plus larges ou complexes, tables structurées, PivotTables, Power Query ou data models peuvent être plus adaptés, mais la logique économique d’agrégation reste la même.",
+        },
+      },
+      formula: {
+        label: { en: "Conditional revenue sum", fr: "Somme conditionnelle du revenu" },
+        expression: "= SUMIFS(RevenueRange, CompanyRange, SelectedCompany, RegionRange, SelectedRegion)",
+        explanation: {
+          en: "SUMIFS applies every supplied criterion before summing the revenue range.",
+          fr: "SUMIFS applique tous les critères fournis avant de sommer la plage de revenu.",
+        },
+        workedExample: {
+          en: "If matching transactions are 20, 35 and 45, the conditional sum is 100.",
+          fr: "Si les transactions correspondantes valent 20, 35 et 45, la somme conditionnelle vaut 100.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Criteria range",
+          fr: "plage de critères / criteria range",
+          definition: {
+            en: "A range evaluated against a condition in a conditional function.",
+            fr: "Plage évaluée par rapport à une condition dans une fonction conditionnelle.",
+          },
+        },
+        {
+          en: "Aggregation",
+          fr: "agrégation / aggregation",
+          definition: {
+            en: "Combining detailed observations into a summarized metric.",
+            fr: "Combinaison d’observations détaillées en une métrique résumée.",
+          },
+        },
+      ],
+    },
+    {
+      id: "lookups",
+      kicker: { en: "06 · LOOKUPS", fr: "06 · LOOKUPS / RECHERCHE" },
+      title: {
+        en: "XLOOKUP and INDEX-MATCH connect data tables reliably",
+        fr: "XLOOKUP et INDEX-MATCH relient les tables de données de manière fiable",
+      },
+      coreFacts: [
+        {
+          en: "XLOOKUP searches for a key and returns a corresponding value from another range.",
+          fr: "XLOOKUP recherche une clé et renvoie la valeur correspondante dans une autre plage.",
+        },
+        {
+          en: "INDEX-MATCH separates the location step from the return step and remains useful in flexible models.",
+          fr: "INDEX-MATCH sépare l’étape de localisation de l’étape de retour et reste utile dans les modèles flexibles.",
+        },
+        {
+          en: "Exact matching is usually safer for identifiers such as tickers, account codes or company IDs.",
+          fr: "L’exact match est généralement plus sûr pour les identifiants comme tickers, codes comptables ou company IDs.",
+        },
+        {
+          en: "Duplicate keys, inconsistent text and missing values can produce incorrect or ambiguous lookup results.",
+          fr: "Des clés dupliquées, textes incohérents ou valeurs manquantes peuvent produire des résultats de lookup incorrects ou ambigus.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose one table has ticker and company name, while another sheet only has the ticker. XLOOKUP can find the ticker and return the company name automatically.",
+          fr: "Supposons qu’une table contienne ticker et nom d’entreprise, tandis qu’une autre feuille ne contient que le ticker. XLOOKUP peut trouver le ticker et renvoyer automatiquement le nom de l’entreprise.",
+        },
+        Intermediate: {
+          en: "Lookups are essential for mapping reference data such as sector, currency, tax rate or credit rating into transaction or valuation datasets. The lookup key must be clean and consistently formatted.",
+          fr: "Les lookups sont essentiels pour mapper des données de référence comme secteur, devise, taux d’impôt ou rating vers des datasets de transactions ou de valuation. La clé doit être propre et formatée de manière cohérente.",
+        },
+        Professional: {
+          en: "A lookup is only as reliable as its key architecture. Analysts should test uniqueness, use explicit not-found handling and avoid approximate matching unless the data are intentionally designed for ranges or bands.",
+          fr: "Un lookup n’est fiable que si son architecture de clés l’est. Les analystes testent l’unicité, gèrent explicitement les not-found et évitent les approximate matches sauf lorsque les données sont volontairement conçues sous forme de bandes ou intervalles.",
+        },
+      },
+      formula: {
+        label: { en: "Exact lookup", fr: "Lookup exact" },
+        expression: "= XLOOKUP(A2, TickerRange, CompanyNameRange, \"Not Found\")",
+        explanation: {
+          en: "The value in A2 is searched in TickerRange and the corresponding company name is returned.",
+          fr: "La valeur de A2 est recherchée dans TickerRange et le nom d’entreprise correspondant est renvoyé.",
+        },
+        workedExample: {
+          en: "A2 contains MSFT and the reference table maps MSFT to Microsoft → output Microsoft.",
+          fr: "A2 contient MSFT et la table de référence associe MSFT à Microsoft → output Microsoft.",
+        },
+      },
+      comparison: {
+        title: { en: "XLOOKUP vs INDEX-MATCH", fr: "XLOOKUP vs INDEX-MATCH" },
+        headers: [
+          { en: "Method", fr: "Méthode" },
+          { en: "Strength", fr: "Avantage" },
+          { en: "Typical use", fr: "Usage typique" },
+        ],
+        rows: [
+          { cells: [
+            { en: "XLOOKUP", fr: "XLOOKUP" },
+            { en: "Readable and direct", fr: "Lisible et direct" },
+            { en: "Modern exact lookups", fr: "Lookups exacts modernes" },
+          ]},
+          { cells: [
+            { en: "INDEX-MATCH", fr: "INDEX-MATCH" },
+            { en: "Flexible component approach", fr: "Approche modulaire flexible" },
+            { en: "Legacy compatibility or complex setups", fr: "Compatibilité legacy ou setups complexes" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Lookup key",
+          fr: "clé de recherche / lookup key",
+          definition: {
+            en: "The identifier used to find a matching record.",
+            fr: "Identifiant utilisé pour trouver un enregistrement correspondant.",
+          },
+        },
+        {
+          en: "Exact match",
+          fr: "correspondance exacte / exact match",
+          definition: {
+            en: "A lookup requiring the key to match the target value exactly.",
+            fr: "Lookup exigeant une correspondance exacte entre la clé et la valeur cible.",
+          },
+        },
+      ],
+    },
+    {
+      id: "dates-financial-functions",
+      kicker: { en: "07 · DATES & FINANCIAL FUNCTIONS", fr: "07 · DATES & FONCTIONS FINANCIÈRES" },
+      title: {
+        en: "Timing conventions determine whether a valuation formula is correct",
+        fr: "Les conventions de timing déterminent si une formule de valorisation est correcte",
+      },
+      coreFacts: [
+        {
+          en: "Excel stores dates as serial values, allowing arithmetic and date functions to calculate periods.",
+          fr: "Excel stocke les dates sous forme de valeurs sérielles, permettant l’arithmétique et l’utilisation de fonctions de dates.",
+        },
+        {
+          en: "EOMONTH and YEARFRAC are useful for period logic, but exact day-count conventions depend on the application.",
+          fr: "EOMONTH et YEARFRAC sont utiles pour la logique temporelle, mais les conventions exactes de day count dépendent de l’application.",
+        },
+        {
+          en: "NPV assumes equally spaced periodic cash flows under its standard use; XNPV uses actual dates.",
+          fr: "NPV suppose des cash flows périodiques régulièrement espacés dans son usage standard ; XNPV utilise les dates réelles.",
+        },
+        {
+          en: "IRR is a periodic internal rate of return; XIRR uses irregularly dated cash flows.",
+          fr: "IRR est un internal rate of return périodique ; XIRR utilise des cash flows datés de manière irrégulière.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If cash flows arrive exactly once per year, NPV can be appropriate when used with the correct periodic rate and timing. If cash flows happen on irregular dates, XNPV is often the safer choice because it uses the actual dates.",
+          fr: "Si les cash flows arrivent exactement une fois par an, NPV peut être approprié avec le bon taux périodique et le bon timing. Si les cash flows arrivent à des dates irrégulières, XNPV est souvent plus sûr car il utilise les dates réelles.",
+        },
+        Intermediate: {
+          en: "Excel's NPV function discounts future values in the supplied range as period-one onward values. A time-zero investment is commonly added separately rather than included as if it occurred one period later.",
+          fr: "La fonction Excel NPV actualise les valeurs de la plage comme des flux à partir de la période 1. Un investissement à t=0 est généralement ajouté séparément plutôt qu’inclus comme s’il avait lieu une période plus tard.",
+        },
+        Professional: {
+          en: "Finance functions are convention-sensitive. Analysts must align rate frequency, date basis, sign convention and cash-flow timing. XIRR can also produce misleading outputs when cash-flow patterns are unusual or contain multiple sign changes, so the economic result should always be sanity-checked.",
+          fr: "Les fonctions financières sont sensibles aux conventions. Les analystes doivent aligner fréquence du taux, date basis, convention de signe et timing des cash flows. XIRR peut aussi produire des outputs trompeurs avec des patterns inhabituels ou plusieurs changements de signe ; le résultat économique doit toujours être sanity-checked.",
+        },
+      },
+      formula: {
+        label: { en: "Periodic NPV setup", fr: "Setup de NPV périodique" },
+        expression: "= NPV(DiscountRate, FutureCashFlows) + InitialCashFlow",
+        explanation: {
+          en: "The initial cash flow at time zero is commonly added separately because Excel's NPV function treats the range as future periodic flows.",
+          fr: "Le cash flow initial à t=0 est généralement ajouté séparément car la fonction NPV d’Excel traite la plage comme des flux futurs périodiques.",
+        },
+        workedExample: {
+          en: "Initial investment −100, then 60 and 60 one year apart at 10% → NPV ≈ −100 + 60/1.10 + 60/1.10² ≈ 4.13.",
+          fr: "Investissement initial −100, puis 60 et 60 espacés d’un an à 10 % → NPV ≈ −100 + 60/1,10 + 60/1,10² ≈ 4,13.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "XNPV",
+          fr: "XNPV / valeur actuelle nette datée",
+          definition: {
+            en: "An Excel function discounting cash flows using their actual dates.",
+            fr: "Fonction Excel actualisant des cash flows à partir de leurs dates réelles.",
+          },
+        },
+        {
+          en: "XIRR",
+          fr: "XIRR / taux de rendement interne daté",
+          definition: {
+            en: "An Excel function estimating an annualized internal rate of return for irregularly dated cash flows.",
+            fr: "Fonction Excel estimant un taux de rendement interne annualisé pour des cash flows à dates irrégulières.",
+          },
+        },
+      ],
+    },
+    {
+      id: "sensitivity-analysis",
+      kicker: { en: "08 · SCENARIOS & SENSITIVITIES", fr: "08 · SCÉNARIOS & SENSITIVITIES" },
+      title: {
+        en: "A model should show what changes when assumptions change",
+        fr: "Un modèle doit montrer ce qui change lorsque les hypothèses changent",
+      },
+      coreFacts: [
+        {
+          en: "Scenario analysis changes a coherent set of assumptions together, while sensitivity analysis typically isolates the effect of selected variables.",
+          fr: "L’analyse de scénario modifie un ensemble cohérent d’hypothèses, tandis que la sensitivity analysis isole généralement l’effet de certaines variables.",
+        },
+        {
+          en: "Base, upside and downside cases should be driven by explicit inputs, not manual output overrides.",
+          fr: "Les scénarios base, upside et downside doivent être pilotés par des inputs explicites et non par des modifications manuelles des outputs.",
+        },
+        {
+          en: "Two-variable sensitivity tables are common in valuation for combinations such as WACC and terminal growth.",
+          fr: "Les sensitivity tables à deux variables sont courantes en valuation pour des combinaisons comme WACC et terminal growth.",
+        },
+        {
+          en: "Sensitivity outputs should be sanity-checked for monotonic relationships where economics imply them.",
+          fr: "Les outputs de sensitivity doivent être sanity-checked pour vérifier les relations monotones lorsque l’économie les implique.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If your valuation depends on growth and discount rate, do not calculate only one answer. Show what happens if growth is lower or higher and if the discount rate changes. This tells you how fragile the valuation is.",
+          fr: "Si ta valorisation dépend de la croissance et du discount rate, ne calcule pas une seule réponse. Montre ce qui se passe si la croissance baisse ou monte et si le discount rate change. Cela révèle la fragilité de la valorisation.",
+        },
+        Intermediate: {
+          en: "A scenario should be economically coherent. An upside case might combine stronger volume, better margins and lower credit losses only if those assumptions make sense together. Sensitivity tables, by contrast, intentionally vary selected drivers mechanically.",
+          fr: "Un scénario doit être économiquement cohérent. Un upside case peut combiner volumes plus forts, meilleures marges et pertes de crédit plus faibles seulement si ces hypothèses sont cohérentes ensemble. Une sensitivity table fait au contraire varier mécaniquement certains drivers.",
+        },
+        Professional: {
+          en: "Sensitivity analysis is model-risk analysis. If a small change in one uncertain input drives a very large change in valuation, that input deserves more diligence, wider scenario ranges and clearer communication.",
+          fr: "La sensitivity analysis est une analyse du model risk. Si une petite variation d’un input incertain produit une forte variation de valuation, cet input mérite davantage de diligence, des plages de scénarios plus larges et une communication plus claire.",
+        },
+      },
+      formula: {
+        label: { en: "Scenario switch concept", fr: "Concept de scenario switch" },
+        expression: "= CHOOSE(ScenarioNumber, DownsideInput, BaseInput, UpsideInput)",
+        explanation: {
+          en: "A scenario selector can drive assumptions consistently from one control cell.",
+          fr: "Un sélecteur de scénario peut piloter les hypothèses de manière cohérente depuis une seule cellule de contrôle.",
+        },
+        workedExample: {
+          en: "ScenarioNumber=2 returns the base-case input; changing the selector can update all linked assumptions.",
+          fr: "ScenarioNumber=2 renvoie l’input du base case ; modifier le sélecteur peut mettre à jour toutes les hypothèses liées.",
+        },
+      },
+      marketConnection: {
+        en: "Valuation ranges are often more informative than a single target because market prices respond to uncertainty in growth, margins, rates and terminal assumptions.",
+        fr: "Les fourchettes de valorisation sont souvent plus informatives qu’un target unique car les prix de marché réagissent à l’incertitude sur croissance, marges, taux et hypothèses terminales.",
+      },
+      vocabulary: [
+        {
+          en: "Sensitivity table",
+          fr: "table de sensibilité / sensitivity table",
+          definition: {
+            en: "A grid showing how an output changes as one or more inputs vary.",
+            fr: "Grille montrant comment un output change lorsque certains inputs varient.",
+          },
+        },
+        {
+          en: "Scenario switch",
+          fr: "sélecteur de scénario / scenario switch",
+          definition: {
+            en: "A control used to activate a chosen set of model assumptions.",
+            fr: "Contrôle utilisé pour activer un ensemble choisi d’hypothèses du modèle.",
+          },
+        },
+      ],
+    },
+    {
+      id: "data-quality-audit",
+      kicker: { en: "09 · DATA QUALITY, CHARTS & AUDIT", fr: "09 · QUALITÉ DES DONNÉES, GRAPHIQUES & AUDIT" },
+      title: {
+        en: "A spreadsheet is only useful if the data and logic can be trusted",
+        fr: "Un spreadsheet n’est utile que si les données et la logique sont fiables",
+      },
+      coreFacts: [
+        {
+          en: "Common data problems include numbers stored as text, duplicate records, hidden spaces, inconsistent dates and mixed units.",
+          fr: "Les problèmes de données courants incluent nombres stockés comme texte, doublons, espaces cachés, dates incohérentes et unités mélangées.",
+        },
+        {
+          en: "Excel Tables can create structured ranges that expand with new data and improve readability.",
+          fr: "Les Excel Tables peuvent créer des plages structurées qui s’étendent avec les nouvelles données et améliorent la lisibilité.",
+        },
+        {
+          en: "Charts should communicate one analytical message rather than add decoration.",
+          fr: "Les graphiques doivent communiquer un message analytique plutôt qu’ajouter de la décoration.",
+        },
+        {
+          en: "Audit checks should verify balance, sign consistency, formula continuity, source completeness and expected relationships.",
+          fr: "Les audit checks doivent vérifier équilibre, cohérence des signes, continuité des formules, complétude des sources et relations attendues.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Before trusting a spreadsheet, check whether values really are numbers, whether dates are recognized as dates and whether formulas were copied consistently. A beautiful chart cannot fix bad source data.",
+          fr: "Avant de faire confiance à un spreadsheet, vérifie que les valeurs sont réellement numériques, que les dates sont reconnues comme dates et que les formules ont été copiées correctement. Un beau graphique ne corrige pas de mauvaises données sources.",
+        },
+        Intermediate: {
+          en: "Useful controls include a balance-sheet check, source-row counts, duplicate-key checks, missing-value flags and trend reasonableness tests. These controls should be visible rather than buried.",
+          fr: "Les contrôles utiles incluent balance-sheet check, comptage des lignes source, tests de clés dupliquées, flags de valeurs manquantes et tests de cohérence des tendances. Ces contrôles doivent rester visibles plutôt qu’être cachés.",
+        },
+        Professional: {
+          en: "Spreadsheet risk combines data lineage, formula risk, manual override risk and presentation risk. A strong analyst documents sources, protects critical logic where appropriate, minimizes unnecessary manual intervention and makes review exceptions obvious.",
+          fr: "Le spreadsheet risk combine data lineage, risque de formule, risque d’override manuel et risque de présentation. Un bon analyste documente les sources, protège la logique critique lorsque pertinent, minimise les interventions manuelles inutiles et rend les exceptions de review évidentes.",
+        },
+      },
+      formula: {
+        label: { en: "Simple model control", fr: "Contrôle simple du modèle" },
+        expression: "= Assets − Liabilities − Equity",
+        explanation: {
+          en: "For a correctly linked balance sheet, the control should equal zero subject to rounding conventions.",
+          fr: "Pour un bilan correctement lié, le contrôle doit être égal à zéro sous réserve des conventions d’arrondi.",
+        },
+        workedExample: {
+          en: "Assets 1,000 − liabilities 600 − equity 400 = 0 → balance check passes.",
+          fr: "Actifs 1 000 − passifs 600 − equity 400 = 0 → le balance check passe.",
+        },
+      },
+      comparison: {
+        title: { en: "Useful chart choices", fr: "Choix de graphiques utiles" },
+        headers: [
+          { en: "Question", fr: "Question" },
+          { en: "Typical chart", fr: "Graphique typique" },
+        ],
+        rows: [
+          { cells: [
+            { en: "How has a metric changed over time?", fr: "Comment une métrique évolue-t-elle dans le temps ?" },
+            { en: "Line chart", fr: "Graphique en ligne / line chart" },
+          ]},
+          { cells: [
+            { en: "How do categories compare?", fr: "Comment comparer des catégories ?" },
+            { en: "Bar or column chart", fr: "Barres / colonnes" },
+          ]},
+          { cells: [
+            { en: "How do two variables relate?", fr: "Comment deux variables sont-elles liées ?" },
+            { en: "Scatter plot", fr: "Nuage de points / scatter plot" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Data lineage",
+          fr: "traçabilité des données / data lineage",
+          definition: {
+            en: "The documented path from original source through transformations to final output.",
+            fr: "Chemin documenté depuis la source originale à travers les transformations jusqu’à l’output final.",
+          },
+        },
+        {
+          en: "Sanity check",
+          fr: "contrôle de vraisemblance / sanity check",
+          definition: {
+            en: "A reasonableness test used to identify results that may be mathematically possible but economically implausible.",
+            fr: "Test de vraisemblance permettant d’identifier des résultats mathématiquement possibles mais économiquement peu plausibles.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "absolute-reference",
+      question: {
+        en: "Which Excel reference locks both row and column when copied?",
+        fr: "Quelle référence Excel verrouille à la fois la ligne et la colonne lors d’une copie ?",
+      },
+      options: [
+        { id: "a", label: { en: "B2", fr: "B2" } },
+        { id: "b", label: { en: "$B2", fr: "$B2" } },
+        { id: "c", label: { en: "B$2", fr: "B$2" } },
+        { id: "d", label: { en: "$B$2", fr: "$B$2" } },
+      ],
+      correctOption: "d",
+      explanation: {
+        en: "$B$2 locks both the B column and row 2.",
+        fr: "$B$2 verrouille la colonne B et la ligne 2.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "forecast-formula",
+      question: {
+        en: "Revenue is 100 and growth is 5%. What is next-period revenue using Revenue×(1+Growth)?",
+        fr: "Le revenu vaut 100 et la croissance 5 %. Quel est le revenu de la période suivante avec Revenue×(1+Growth) ?",
+      },
+      options: [
+        { id: "a", label: { en: "100", fr: "100" } },
+        { id: "b", label: { en: "105", fr: "105" } },
+        { id: "c", label: { en: "150", fr: "150" } },
+        { id: "d", label: { en: "500", fr: "500" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "100×1.05=105.",
+        fr: "100×1,05=105.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "if-logic",
+      question: {
+        en: "What does IF primarily do in Excel?",
+        fr: "Que fait principalement la fonction IF dans Excel ?",
+      },
+      options: [
+        { id: "a", label: { en: "Returns one result if a test is true and another if false", fr: "Renvoie un résultat si le test est vrai et un autre s’il est faux" } },
+        { id: "b", label: { en: "Always deletes errors", fr: "Supprime toujours les erreurs" } },
+        { id: "c", label: { en: "Creates a chart automatically", fr: "Crée automatiquement un graphique" } },
+        { id: "d", label: { en: "Locks all references", fr: "Verrouille toutes les références" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "IF evaluates a logical test and selects between two outputs.",
+        fr: "IF évalue un test logique et choisit entre deux outputs.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "sumifs",
+      question: {
+        en: "Which function is designed to sum values that meet multiple criteria?",
+        fr: "Quelle fonction est conçue pour sommer des valeurs répondant à plusieurs critères ?",
+      },
+      options: [
+        { id: "a", label: { en: "SUM", fr: "SUM" } },
+        { id: "b", label: { en: "SUMIFS", fr: "SUMIFS" } },
+        { id: "c", label: { en: "ROUND", fr: "ROUND" } },
+        { id: "d", label: { en: "MAX", fr: "MAX" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "SUMIFS filters by multiple criteria before summing the target range.",
+        fr: "SUMIFS applique plusieurs critères avant de sommer la plage cible.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "xlookup",
+      question: {
+        en: "What is the main purpose of XLOOKUP?",
+        fr: "Quel est l’objectif principal de XLOOKUP ?",
+      },
+      options: [
+        { id: "a", label: { en: "Find a key and return a corresponding value", fr: "Trouver une clé et renvoyer la valeur correspondante" } },
+        { id: "b", label: { en: "Calculate volatility", fr: "Calculer la volatilité" } },
+        { id: "c", label: { en: "Format every cell", fr: "Formater toutes les cellules" } },
+        { id: "d", label: { en: "Create a macro automatically", fr: "Créer automatiquement une macro" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "XLOOKUP searches for a lookup value and returns the corresponding value from another range.",
+        fr: "XLOOKUP recherche une valeur clé et renvoie la valeur correspondante depuis une autre plage.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "npv-timing",
+      question: {
+        en: "Why is a time-zero investment commonly added separately to Excel's NPV function?",
+        fr: "Pourquoi l’investissement à t=0 est-il généralement ajouté séparément à la fonction NPV d’Excel ?",
+      },
+      options: [
+        { id: "a", label: { en: "Because Excel NPV treats the supplied range as future periodic cash flows", fr: "Parce qu’Excel NPV traite la plage fournie comme des cash flows futurs périodiques" } },
+        { id: "b", label: { en: "Because NPV cannot use negative numbers", fr: "Parce que NPV ne peut pas utiliser de nombres négatifs" } },
+        { id: "c", label: { en: "Because time zero is always ignored in finance", fr: "Parce que t=0 est toujours ignoré en finance" } },
+        { id: "d", label: { en: "Because Excel cannot calculate discounting", fr: "Parce qu’Excel ne peut pas calculer l’actualisation" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Excel's NPV function discounts the range from period one onward, so a time-zero flow is commonly added separately.",
+        fr: "La fonction NPV d’Excel actualise la plage à partir de la période 1 ; un flux à t=0 est donc généralement ajouté séparément.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "sensitivity",
+      question: {
+        en: "What is the main purpose of a sensitivity table in valuation?",
+        fr: "Quel est l’objectif principal d’une sensitivity table en valuation ?",
+      },
+      options: [
+        { id: "a", label: { en: "Show how an output changes when key inputs vary", fr: "Montrer comment un output change lorsque les inputs clés varient" } },
+        { id: "b", label: { en: "Hide uncertainty", fr: "Masquer l’incertitude" } },
+        { id: "c", label: { en: "Replace all assumptions with one number", fr: "Remplacer toutes les hypothèses par un seul nombre" } },
+        { id: "d", label: { en: "Prevent formulas from recalculating", fr: "Empêcher les formules de se recalculer" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Sensitivity analysis exposes model dependence on uncertain assumptions.",
+        fr: "La sensitivity analysis montre la dépendance du modèle aux hypothèses incertaines.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "model-check",
+      question: {
+        en: "Assets are 1,000, liabilities 600 and equity 400. What should Assets−Liabilities−Equity equal?",
+        fr: "Actifs=1 000, passifs=600 et equity=400. Que doit donner Actifs−Passifs−Equity ?",
+      },
+      options: [
+        { id: "a", label: { en: "0", fr: "0" } },
+        { id: "b", label: { en: "400", fr: "400" } },
+        { id: "c", label: { en: "600", fr: "600" } },
+        { id: "d", label: { en: "1,000", fr: "1 000" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "1,000−600−400=0, so the balance check passes.",
+        fr: "1 000−600−400=0 ; le balance check passe.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "You receive a messy Excel model from another analyst. How would you review it before relying on the outputs?",
+      fr: "Tu reçois un modèle Excel désordonné construit par un autre analyste. Comment le vérifierais-tu avant de faire confiance aux outputs ?",
+    },
+    framework: [
+      {
+        en: "Start with model architecture: identify source data, assumptions, calculations and outputs.",
+        fr: "Commencer par l’architecture : identifier données sources, assumptions, calculs et outputs.",
+      },
+      {
+        en: "Check units, dates, signs and historical-to-forecast transition.",
+        fr: "Vérifier unités, dates, signes et transition historique → forecast.",
+      },
+      {
+        en: "Inspect formula consistency across rows and columns and identify hard-coded values inside calculation blocks.",
+        fr: "Inspecter la cohérence des formules entre lignes/colonnes et identifier les hard-codes dans les blocs de calcul.",
+      },
+      {
+        en: "Test key reconciliations such as balance-sheet balance, cash roll-forward and subtotal logic.",
+        fr: "Tester les rapprochements clés comme équilibre du bilan, cash roll-forward et logique des sous-totaux.",
+      },
+      {
+        en: "Run sensitivities and sanity checks to see whether outputs move economically when assumptions change.",
+        fr: "Faire des sensitivities et sanity checks afin de vérifier que les outputs bougent économiquement lorsque les hypothèses changent.",
+      },
+    ],
+    sample: {
+      en: "I would first map the model into inputs, calculations and outputs so I understand the flow before changing anything. Then I would check units, dates, signs and the transition from historical data into forecasts. I would inspect formulas across comparable periods to make sure references move consistently and look for hard-coded values inside calculation areas. Next I would test control checks such as whether the balance sheet balances, whether cash rolls correctly and whether important subtotals reconcile. Finally, I would change a few key assumptions and confirm the outputs respond in the expected economic direction. I would not rely on the headline valuation until both the mechanics and the economic logic pass those checks.",
+      fr: "Je commencerais par cartographier le modèle entre inputs, calculs et outputs afin de comprendre son fonctionnement avant de modifier quoi que ce soit. Ensuite je vérifierais unités, dates, signes et transition des données historiques vers les forecasts. J’inspecterais les formules sur des périodes comparables pour vérifier que les références se déplacent de manière cohérente et je chercherais les hard-codes dans les zones de calcul. Puis je testerais les contrôles : équilibre du bilan, cash roll-forward et rapprochement des sous-totaux importants. Enfin, je modifierais quelques hypothèses clés pour vérifier que les outputs réagissent dans le sens économique attendu. Je ne me fierais pas à la valuation headline tant que la mécanique et la logique économique n’ont pas passé ces checks.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
