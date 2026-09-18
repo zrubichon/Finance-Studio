@@ -17711,7 +17711,943 @@ export const portfolioTheoryCapmLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson];
+
+export const derivativesFoundationsLesson: FinanceLesson = {
+  slug: "year-2-derivatives-foundations",
+  year: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  domain: { en: "Derivatives", fr: "Produits dérivés / Derivatives" },
+  title: {
+    en: "Derivatives Foundations",
+    fr: "Fondamentaux des produits dérivés / Derivatives Foundations",
+  },
+  subtitle: {
+    en: "Understand how forwards, futures, swaps and options transfer market risk; distinguish payoff from profit; use long and short positions for hedging or speculation; and understand margin, clearing, counterparty risk, basis risk and no-arbitrage pricing.",
+    fr: "Comprendre comment forwards, futures, swaps et options transfèrent le risque de marché ; distinguer payoff et profit ; utiliser positions long et short pour hedging ou speculation ; et comprendre margin, clearing, counterparty risk, basis risk et pricing par absence d’arbitrage.",
+  },
+  duration: { en: "115–140 min", fr: "115–140 min" },
+  prerequisites: [
+    { en: "Time Value of Money", fr: "Valeur temps de l’argent / Time Value of Money" },
+    { en: "Portfolio Theory & CAPM", fr: "Théorie de portefeuille / Portfolio Theory & CAPM" },
+  ],
+  objectives: [
+    {
+      en: "Explain what a derivative is and distinguish the main contract families.",
+      fr: "Expliquer ce qu’est un produit dérivé et distinguer les principales familles de contrats.",
+    },
+    {
+      en: "Calculate basic forward, futures and option payoffs.",
+      fr: "Calculer les payoffs de base des forwards, futures et options.",
+    },
+    {
+      en: "Distinguish payoff, profit, notional exposure and initial cash outlay.",
+      fr: "Distinguer payoff, profit, notional exposure et initial cash outlay.",
+    },
+    {
+      en: "Explain how swaps exchange cash-flow profiles rather than principal ownership.",
+      fr: "Expliquer comment les swaps échangent des profils de cash flows plutôt que la propriété du principal.",
+    },
+    {
+      en: "Understand margin, daily settlement, clearing and counterparty-risk controls.",
+      fr: "Comprendre margin, daily settlement, clearing et contrôles du counterparty risk.",
+    },
+    {
+      en: "Apply no-arbitrage logic, identify basis risk and distinguish hedging from speculation.",
+      fr: "Appliquer la logique de no-arbitrage, identifier basis risk et distinguer hedging de speculation.",
+    },
+  ],
+  overviewFlow: {
+    title: { en: "The derivative workflow", fr: "Le workflow d’un derivative" },
+    steps: [
+      {
+        title: { en: "Underlying", fr: "Underlying" },
+        detail: { en: "Equity · rates · FX · commodities · credit", fr: "Equity · rates · FX · commodities · credit" },
+      },
+      {
+        title: { en: "Contract", fr: "Contrat" },
+        detail: { en: "Forward · future · swap · option", fr: "Forward · future · swap · option" },
+      },
+      {
+        title: { en: "Exposure", fr: "Exposition" },
+        detail: { en: "Long · short · payoff · notional", fr: "Long · short · payoff · notional" },
+      },
+      {
+        title: { en: "Risk control", fr: "Contrôle du risque" },
+        detail: { en: "Margin · clearing · hedge · basis", fr: "Margin · clearing · hedge · basis" },
+      },
+    ],
+  },
+  sections: [
+    {
+      id: "what-is-a-derivative",
+      kicker: { en: "01 · WHAT IS A DERIVATIVE?", fr: "01 · QU’EST-CE QU’UN DERIVATIVE ?" },
+      title: {
+        en: "A derivative derives its value from another price, rate or event",
+        fr: "Un derivative tire sa valeur d’un autre prix, taux ou événement",
+      },
+      coreFacts: [
+        {
+          en: "A derivative is a contract whose value depends on an underlying asset, rate, index, spread, currency, commodity, credit event or other reference.",
+          fr: "Un derivative est un contrat dont la valeur dépend d’un underlying asset, rate, index, spread, currency, commodity, credit event ou autre référence.",
+        },
+        {
+          en: "Common derivative families include forwards, futures, swaps and options.",
+          fr: "Les principales familles de derivatives comprennent forwards, futures, swaps et options.",
+        },
+        {
+          en: "Derivatives can create large economic exposure relative to initial cash exchanged, so notional and market value are different concepts.",
+          fr: "Les derivatives peuvent créer une grande exposition économique relativement au cash initial échangé ; notional et market value sont donc des concepts différents.",
+        },
+        {
+          en: "Derivatives are used for hedging, risk transfer, market access, relative-value trading, price discovery and speculation.",
+          fr: "Les derivatives sont utilisés pour hedging, transfert de risque, accès marché, relative-value trading, price discovery et speculation.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A derivative does not need to mean 'complicated bet.' Imagine an airline agreeing today on the price it will pay for fuel in the future. The contract's value changes when fuel prices change. That contract transfers price risk between two parties.",
+          fr: "Un derivative ne signifie pas forcément « pari compliqué ». Imagine une compagnie aérienne qui fixe aujourd’hui le prix auquel elle achètera du carburant plus tard. La valeur du contrat change lorsque le prix du carburant change. Le contrat transfère le risque de prix entre deux parties.",
+        },
+        Intermediate: {
+          en: "Derivatives separate economic exposure from physical ownership. An investor can obtain equity-index exposure with futures without buying every underlying stock, or convert fixed-rate exposure into floating-rate exposure through a swap.",
+          fr: "Les derivatives séparent economic exposure et propriété physique. Un investisseur peut obtenir une exposition à un equity index via futures sans acheter toutes les actions sous-jacentes, ou transformer une exposition fixed-rate en floating-rate via un swap.",
+        },
+        Professional: {
+          en: "The key analytical questions are: what is the underlying risk factor, what cash flows are contractually exchanged, how is the contract collateralized or cleared, how is it valued, and what nonlinear or basis exposures remain after the intended hedge?",
+          fr: "Les questions analytiques clés sont : quel est le underlying risk factor, quels cash flows sont contractuellement échangés, comment le contrat est collateralized ou cleared, comment est-il valorisé, et quelles expositions non linéaires ou de basis subsistent après le hedge voulu ?",
+        },
+      },
+      comparison: {
+        title: { en: "Four foundational derivative families", fr: "Quatre familles fondamentales de derivatives" },
+        headers: [
+          { en: "Contract", fr: "Contrat" },
+          { en: "Core idea", fr: "Idée centrale" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Forward", fr: "Forward" },
+            { en: "Trade later at a price agreed today", fr: "Trader plus tard à un prix fixé aujourd’hui" },
+          ]},
+          { cells: [
+            { en: "Future", fr: "Future" },
+            { en: "Standardized, margined forward-like contract", fr: "Contrat standardisé de type forward avec margin" },
+          ]},
+          { cells: [
+            { en: "Swap", fr: "Swap" },
+            { en: "Exchange streams of cash flows", fr: "Échanger des séries de cash flows" },
+          ]},
+          { cells: [
+            { en: "Option", fr: "Option" },
+            { en: "Right without symmetric obligation for the buyer", fr: "Droit sans obligation symétrique pour l’acheteur" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Underlying",
+          fr: "sous-jacent / underlying",
+          definition: {
+            en: "Reference asset, rate, index or event that drives derivative value.",
+            fr: "Actif, taux, index ou événement de référence qui détermine la valeur du derivative.",
+          },
+        },
+        {
+          en: "Notional",
+          fr: "notionnel / notional",
+          definition: {
+            en: "Reference amount used to determine derivative cash flows or exposure; not necessarily cash exchanged.",
+            fr: "Montant de référence utilisé pour déterminer les cash flows ou l’exposition d’un derivative ; il n’est pas nécessairement échangé.",
+          },
+        },
+      ],
+    },
+    {
+      id: "forwards",
+      kicker: { en: "02 · FORWARDS", fr: "02 · FORWARDS" },
+      title: {
+        en: "A forward locks a future transaction price today",
+        fr: "Un forward fixe aujourd’hui le prix d’une transaction future",
+      },
+      coreFacts: [
+        {
+          en: "A forward is a bilateral agreement to buy or sell an underlying at a specified future date for an agreed delivery price.",
+          fr: "Un forward est un accord bilatéral pour acheter ou vendre un underlying à une date future précise à un delivery price convenu.",
+        },
+        {
+          en: "The long forward benefits when the underlying settlement price is above the contractual delivery price.",
+          fr: "La position long forward bénéficie lorsque le settlement price du underlying dépasse le delivery price contractuel.",
+        },
+        {
+          en: "The short forward has the opposite payoff.",
+          fr: "La position short forward possède le payoff opposé.",
+        },
+        {
+          en: "A newly initiated standard forward can be structured with approximately zero initial market value, though collateral and credit terms can still create cash requirements.",
+          fr: "Un standard forward nouvellement initié peut être structuré avec une market value initiale proche de zéro, même si collateral et credit terms peuvent créer des besoins de cash.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "You agree today to buy an asset in one year for $105. If the asset is worth $120 at settlement, the long forward gains $15. If it is worth $90, the long loses $15.",
+          fr: "Tu acceptes aujourd’hui d’acheter un actif dans un an pour 105 $. S’il vaut 120 $ au settlement, le long forward gagne 15 $. S’il vaut 90 $, le long perd 15 $.",
+        },
+        Intermediate: {
+          en: "Forward payoff is linear. The long payoff is S_T−K and the short payoff is K−S_T. Because the positions are opposite sides of the same contract, before costs and credit effects their terminal payoffs sum to zero.",
+          fr: "Le payoff d’un forward est linéaire. Le long payoff vaut S_T−K et le short payoff K−S_T. Comme les positions sont les deux côtés du même contrat, leurs terminal payoffs somment à zéro avant coûts et effets de crédit.",
+        },
+        Professional: {
+          en: "OTC forwards can be customized for date, quantity and underlying but expose counterparties to bilateral credit and documentation risk. Valuation after inception depends on the difference between the contracted delivery price and the current fair forward level, discounted appropriately.",
+          fr: "Les OTC forwards peuvent être personnalisés en date, quantité et underlying mais exposent les parties au bilateral credit risk et au documentation risk. Après initiation, la valuation dépend de l’écart entre le delivery price contractuel et le current fair forward level, actualisé correctement.",
+        },
+      },
+      formula: {
+        label: { en: "Forward payoff at maturity", fr: "Payoff d’un forward à maturité" },
+        expression: "Long Payoff = S_T − K   ·   Short Payoff = K − S_T",
+        explanation: {
+          en: "S_T is the underlying settlement price and K the contractual delivery price.",
+          fr: "S_T est le settlement price du underlying et K le delivery price contractuel.",
+        },
+        workedExample: {
+          en: "Long forward with K=$105 and S_T=$120 → payoff=$15.",
+          fr: "Long forward avec K=105 $ et S_T=120 $ → payoff=15 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Delivery price",
+          fr: "prix de livraison / delivery price",
+          definition: {
+            en: "Contractual price at which the underlying is exchanged or cash-settled at maturity.",
+            fr: "Prix contractuel auquel le underlying est échangé ou cash-settled à maturity.",
+          },
+        },
+        {
+          en: "OTC",
+          fr: "de gré à gré / over-the-counter / OTC",
+          definition: {
+            en: "Bilateral market structure outside a centralized exchange order book.",
+            fr: "Structure bilatérale de marché en dehors d’un carnet d’ordres centralisé d’exchange.",
+          },
+        },
+      ],
+    },
+    {
+      id: "futures",
+      kicker: { en: "03 · FUTURES", fr: "03 · FUTURES" },
+      title: {
+        en: "Futures standardize forward-like exposure and settle gains and losses through margin",
+        fr: "Les futures standardisent une exposition de type forward et règlent gains et pertes via margin",
+      },
+      coreFacts: [
+        {
+          en: "Futures are standardized contracts commonly traded on exchanges and supported by central clearing.",
+          fr: "Les futures sont des contrats standardisés couramment tradés sur exchanges et soutenus par central clearing.",
+        },
+        {
+          en: "Futures positions are generally marked to market, with gains and losses reflected through variation margin.",
+          fr: "Les positions futures sont généralement marked to market, avec gains et pertes reflétés via variation margin.",
+        },
+        {
+          en: "Initial margin is collateral rather than the purchase price of the full notional exposure.",
+          fr: "L’initial margin est du collateral plutôt que le prix d’achat de toute l’exposition notionnelle.",
+        },
+        {
+          en: "Contract multiplier converts quoted price movements into monetary profit and loss.",
+          fr: "Le contract multiplier transforme les mouvements de prix cotés en profit and loss monétaire.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you are long 50 futures contracts with a $50 multiplier and the futures price rises by 4 points, your gain is 50×$50×4=$10,000. You did not need to pay the full notional amount upfront; you posted margin.",
+          fr: "Si tu es long 50 futures contracts avec un multiplier de 50 $ et que le futures price monte de 4 points, ton gain vaut 50×50 $×4=10 000 $. Tu n’as pas payé tout le notional upfront ; tu as posté du margin.",
+        },
+        Intermediate: {
+          en: "Daily mark-to-market changes the cash-flow timing relative to a forward. This can make futures and forward values differ when interest rates are stochastic and gains or losses are reinvested or funded at changing rates.",
+          fr: "Le daily mark-to-market modifie le timing des cash flows relativement à un forward. Cela peut créer des différences entre futures et forwards lorsque les taux sont stochastiques et que gains ou pertes sont réinvestis ou financés à des taux variables.",
+        },
+        Professional: {
+          en: "Cleared futures reduce bilateral counterparty exposure through a clearinghouse, margin and default-management framework, but they do not eliminate liquidity, gap, model or clearing-member risk.",
+          fr: "Les cleared futures réduisent l’exposition bilatérale via clearinghouse, margin et default-management framework, mais n’éliminent pas liquidity risk, gap risk, model risk ou clearing-member risk.",
+        },
+      },
+      formula: {
+        label: { en: "Basic futures P&L", fr: "P&L simple d’un future" },
+        expression: "Long P&L = Number of Contracts × Multiplier × (F_End − F_Start)",
+        explanation: {
+          en: "For a short position, reverse the sign.",
+          fr: "Pour une position short, inverser le signe.",
+        },
+        workedExample: {
+          en: "50 contracts × $50 multiplier × 4-point rise = $10,000 gain for the long.",
+          fr: "50 contracts × multiplier 50 $ × hausse de 4 points = gain de 10 000 $ pour le long.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Initial margin",
+          fr: "marge initiale / initial margin",
+          definition: {
+            en: "Collateral posted to support potential future losses on a margined position.",
+            fr: "Collateral posté pour couvrir de potentielles pertes futures sur une position margined.",
+          },
+        },
+        {
+          en: "Variation margin",
+          fr: "marge de variation / variation margin",
+          definition: {
+            en: "Cash or collateral transfer reflecting mark-to-market gains and losses.",
+            fr: "Transfert de cash ou collateral reflétant les mark-to-market gains and losses.",
+          },
+        },
+      ],
+    },
+    {
+      id: "swaps",
+      kicker: { en: "04 · SWAPS", fr: "04 · SWAPS" },
+      title: {
+        en: "A swap exchanges one cash-flow profile for another",
+        fr: "Un swap échange un profil de cash flows contre un autre",
+      },
+      coreFacts: [
+        {
+          en: "An interest-rate swap commonly exchanges fixed-rate payments for floating-rate payments on a notional amount.",
+          fr: "Un interest-rate swap échange couramment des paiements fixed-rate contre floating-rate sur un notional.",
+        },
+        {
+          en: "The notional principal is often used only to calculate payments and may not itself be exchanged in a plain interest-rate swap.",
+          fr: "Le notional principal sert souvent uniquement à calculer les paiements et n’est pas nécessairement échangé dans un plain interest-rate swap.",
+        },
+        {
+          en: "Swap payments are generally netted when both legs are in the same currency and payable on the same date under the contract.",
+          fr: "Les paiements de swap sont généralement netted lorsque les deux legs sont dans la même currency et payables à la même date selon le contrat.",
+        },
+        {
+          en: "Swaps can transform risk exposures without refinancing the underlying asset or liability.",
+          fr: "Les swaps peuvent transformer les expositions au risque sans refinancer l’asset ou liability sous-jacent.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose a company pays fixed 4% and receives floating 5% for a quarter on $10 million notional. The net receipt for that quarter is approximately $10m×(5%−4%)×0.25=$25,000.",
+          fr: "Supposons qu’une entreprise paie fixed 4 % et reçoive floating 5 % pendant un trimestre sur 10 M$ de notional. Le net receipt du trimestre vaut environ 10 M$×(5 %−4 %)×0,25=25 000 $.",
+        },
+        Intermediate: {
+          en: "A fixed-rate borrower can use a receive-fixed/pay-floating swap to offset part of its fixed exposure economically, while a floating-rate borrower can pay fixed and receive floating to lock a more stable rate profile.",
+          fr: "Un fixed-rate borrower peut utiliser un swap receive-fixed/pay-floating pour compenser économiquement une partie de son exposition fixe, tandis qu’un floating-rate borrower peut pay fixed/receive floating pour stabiliser son profil de taux.",
+        },
+        Professional: {
+          en: "Swap valuation is the present value difference between the two legs under relevant discount and projection curves. Collateral, benchmark conventions, reset timing and day-count conventions are central to real-world pricing.",
+          fr: "La valuation d’un swap est la différence de present value entre les deux legs selon les discount et projection curves pertinentes. Collateral, benchmark conventions, reset timing et day-count conventions sont centraux dans le real-world pricing.",
+        },
+      },
+      formula: {
+        label: { en: "Simplified swap net payment", fr: "Net payment simplifié d’un swap" },
+        expression: "Net Payment ≈ Notional × (Floating Rate − Fixed Rate) × Year Fraction",
+        explanation: {
+          en: "The sign depends on which leg the party receives and pays.",
+          fr: "Le signe dépend du leg reçu et du leg payé par la partie.",
+        },
+        workedExample: {
+          en: "$10m × (5%−4%) × 0.25 = $25,000 received by receive-floating/pay-fixed.",
+          fr: "10 M$ × (5 %−4 %) × 0,25 = 25 000 $ reçus par receive-floating/pay-fixed.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Fixed leg",
+          fr: "jambe fixe / fixed leg",
+          definition: {
+            en: "Swap cash-flow stream calculated using a fixed contractual rate.",
+            fr: "Série de cash flows d’un swap calculée avec un taux contractuel fixe.",
+          },
+        },
+        {
+          en: "Floating leg",
+          fr: "jambe variable / floating leg",
+          definition: {
+            en: "Swap cash-flow stream reset using a specified floating benchmark.",
+            fr: "Série de cash flows d’un swap reset selon un benchmark floating défini.",
+          },
+        },
+      ],
+    },
+    {
+      id: "options-payoff-profit",
+      kicker: { en: "05 · OPTIONS: PAYOFF VS PROFIT", fr: "05 · OPTIONS : PAYOFF VS PROFIT" },
+      title: {
+        en: "Options create asymmetric rights — and the premium makes payoff different from profit",
+        fr: "Les options créent des droits asymétriques — et la premium distingue payoff et profit",
+      },
+      coreFacts: [
+        {
+          en: "A call gives the buyer the right, but not the obligation, to buy at the strike price under the contract terms.",
+          fr: "Un call donne à l’acheteur le droit, mais pas l’obligation, d’acheter au strike price selon les termes du contrat.",
+        },
+        {
+          en: "A put gives the buyer the right, but not the obligation, to sell at the strike price under the contract terms.",
+          fr: "Un put donne à l’acheteur le droit, mais pas l’obligation, de vendre au strike price selon les termes du contrat.",
+        },
+        {
+          en: "Option payoff at expiry excludes the upfront premium; option profit includes the premium and any other costs.",
+          fr: "Le payoff d’une option à expiry exclut la premium payée upfront ; le profit inclut la premium et les autres coûts.",
+        },
+        {
+          en: "The buyer has asymmetric payoff; the option seller receives premium and assumes the corresponding contingent obligation.",
+          fr: "L’acheteur possède un payoff asymétrique ; le vendeur reçoit la premium et assume l’obligation contingente correspondante.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "You buy a call with strike $100 for a $6 premium. If the stock ends at $120, call payoff is $20 but profit before other costs is only $14 because you paid $6 upfront. If the stock ends at $90, payoff is zero and the buyer's loss is the $6 premium.",
+          fr: "Tu achètes un call strike 100 $ pour une premium de 6 $. Si l’action termine à 120 $, le call payoff vaut 20 $ mais le profit avant autres coûts seulement 14 $ car tu as payé 6 $ upfront. Si l’action termine à 90 $, payoff = 0 et la perte de l’acheteur correspond à la premium de 6 $.",
+        },
+        Intermediate: {
+          en: "At expiry, long-call payoff is max(S_T−K,0) and long-put payoff is max(K−S_T,0). Profit subtracts the premium paid. This distinction becomes essential when comparing strategies with different upfront costs.",
+          fr: "À expiry, le payoff d’un long call vaut max(S_T−K,0) et celui d’un long put max(K−S_T,0). Le profit retire la premium payée. Cette distinction devient essentielle pour comparer des stratégies avec différents coûts upfront.",
+        },
+        Professional: {
+          en: "Option value before expiry contains intrinsic and time-related components and responds nonlinearly to spot, volatility, time and rates. The next course develops delta, gamma, vega, theta and option-pricing intuition in depth.",
+          fr: "Avant expiry, la valeur d’une option contient des composantes intrinsic et time-related et répond non linéairement à spot, volatility, time et rates. Le prochain cours développera delta, gamma, vega, theta et l’intuition du pricing en profondeur.",
+        },
+      },
+      formula: {
+        label: { en: "Option payoff at expiry", fr: "Payoff d’option à expiry" },
+        expression: "Long Call = max(S_T − K, 0)   ·   Long Put = max(K − S_T, 0)",
+        explanation: {
+          en: "Profit for the buyer equals payoff minus the premium paid, ignoring other costs.",
+          fr: "Le profit de l’acheteur vaut payoff moins premium payée, hors autres coûts.",
+        },
+        workedExample: {
+          en: "Call K=$100, premium=$6, S_T=$120 → payoff=$20; profit=$14.",
+          fr: "Call K=100 $, premium=6 $, S_T=120 $ → payoff=20 $ ; profit=14 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Strike price",
+          fr: "prix d’exercice / strike price",
+          definition: {
+            en: "Contractual price at which the option holder may transact in the underlying.",
+            fr: "Prix contractuel auquel le holder de l’option peut transacter le underlying.",
+          },
+        },
+        {
+          en: "Premium",
+          fr: "prime / premium",
+          definition: {
+            en: "Price paid by the option buyer to the option seller.",
+            fr: "Prix payé par l’option buyer au seller.",
+          },
+        },
+      ],
+    },
+    {
+      id: "hedging-speculation",
+      kicker: { en: "06 · HEDGING VS SPECULATION", fr: "06 · HEDGING VS SPECULATION" },
+      title: {
+        en: "The same derivative can reduce risk for one user and create risk for another",
+        fr: "Le même derivative peut réduire le risque pour un utilisateur et en créer pour un autre",
+      },
+      coreFacts: [
+        {
+          en: "Hedging uses a derivative to offset an existing or anticipated economic exposure.",
+          fr: "Le hedging utilise un derivative pour compenser une exposition économique existante ou anticipée.",
+        },
+        {
+          en: "Speculation uses a derivative primarily to express a market view or seek return from price movement.",
+          fr: "La speculation utilise principalement un derivative pour exprimer une market view ou rechercher du return via un mouvement de prix.",
+        },
+        {
+          en: "A hedge does not need to eliminate all risk; partial hedges can intentionally retain selected exposures.",
+          fr: "Un hedge n’a pas besoin d’éliminer tout le risque ; un partial hedge peut volontairement conserver certaines expositions.",
+        },
+        {
+          en: "Leverage can magnify both gains and losses when derivative exposure is large relative to capital posted.",
+          fr: "Le leverage peut amplifier gains et pertes lorsque l’exposition derivative est grande relativement au capital posté.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A wheat farmer who will sell wheat in three months can short wheat futures to reduce the risk of a price fall. A trader with no wheat exposure who shorts the same future because she expects prices to fall is speculating.",
+          fr: "Un producteur de blé qui vendra sa récolte dans trois mois peut shorter des wheat futures pour réduire le risque d’une baisse du prix. Un trader sans exposition au blé qui shorte le même future parce qu’il anticipe une baisse spécule.",
+        },
+        Intermediate: {
+          en: "The classification depends on the total economic position, not the derivative in isolation. A short future may look bearish alone but be risk-reducing when paired with a long physical inventory.",
+          fr: "La classification dépend de la position économique totale, pas du derivative isolément. Un short future peut sembler bearish seul mais réduire le risque lorsqu’il accompagne un long physical inventory.",
+        },
+        Professional: {
+          en: "Risk managers evaluate hedge objective, hedge ratio, horizon, basis behavior, liquidity and accounting or collateral consequences. An imperfect but liquid hedge can be preferable to a theoretically exact but illiquid one.",
+          fr: "Les risk managers évaluent hedge objective, hedge ratio, horizon, basis behavior, liquidité et conséquences accounting ou collateral. Un hedge imparfait mais liquide peut être préférable à un hedge théoriquement exact mais illiquide.",
+        },
+      },
+      comparison: {
+        title: { en: "Same contract, different purpose", fr: "Même contrat, objectif différent" },
+        headers: [
+          { en: "Use", fr: "Usage" },
+          { en: "Existing exposure?", fr: "Exposition existante ?" },
+          { en: "Primary objective", fr: "Objectif principal" },
+        ],
+        rows: [
+          { cells: [
+            { en: "Hedge", fr: "Hedge" },
+            { en: "Usually yes", fr: "Généralement oui" },
+            { en: "Reduce or reshape risk", fr: "Réduire ou transformer le risque" },
+          ]},
+          { cells: [
+            { en: "Speculation", fr: "Speculation" },
+            { en: "Not required", fr: "Pas nécessaire" },
+            { en: "Profit from a market view", fr: "Profiter d’une market view" },
+          ]},
+        ],
+      },
+      vocabulary: [
+        {
+          en: "Hedge ratio",
+          fr: "ratio de couverture / hedge ratio",
+          definition: {
+            en: "Size of a hedge position relative to the exposure being hedged.",
+            fr: "Taille d’une position de hedge relativement à l’exposition couverte.",
+          },
+        },
+        {
+          en: "Leverage",
+          fr: "effet de levier / leverage",
+          definition: {
+            en: "Economic exposure larger than the capital or cash initially committed.",
+            fr: "Exposition économique supérieure au capital ou cash initialement engagé.",
+          },
+        },
+      ],
+    },
+    {
+      id: "margin-clearing-counterparty",
+      kicker: { en: "07 · MARGIN, CLEARING & COUNTERPARTY RISK", fr: "07 · MARGIN, CLEARING & COUNTERPARTY RISK" },
+      title: {
+        en: "Derivative risk management depends on collateral and who stands between the parties",
+        fr: "La gestion du risque derivative dépend du collateral et de l’intermédiaire entre les parties",
+      },
+      coreFacts: [
+        {
+          en: "Counterparty risk is the risk that the other party fails to perform on its contractual obligations.",
+          fr: "Le counterparty risk est le risque que l’autre partie ne remplisse pas ses obligations contractuelles.",
+        },
+        {
+          en: "Collateral and variation margin reduce unsecured exposure by transferring value as positions move.",
+          fr: "Collateral et variation margin réduisent l’unsecured exposure en transférant de la valeur lorsque les positions bougent.",
+        },
+        {
+          en: "Central clearing interposes a clearinghouse between members and uses margin plus default-management resources.",
+          fr: "Le central clearing interpose une clearinghouse entre membres et utilise margin plus default-management resources.",
+        },
+        {
+          en: "Clearing changes the structure of counterparty risk rather than making all credit and liquidity risk disappear.",
+          fr: "Le clearing transforme la structure du counterparty risk plutôt que de faire disparaître tout credit et liquidity risk.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a derivative has a positive market value to you, you may lose that value if the counterparty defaults. Margin helps by moving collateral before the exposure becomes very large.",
+          fr: "Si un derivative possède une positive market value pour toi, tu peux perdre cette valeur si la counterparty default. Le margin aide en transférant du collateral avant que l’exposition ne devienne très grande.",
+        },
+        Intermediate: {
+          en: "Exchange-traded and cleared products generally replace direct bilateral exposure with exposure mediated through clearing members and the clearinghouse. OTC contracts may also be collateralized under bilateral agreements.",
+          fr: "Les produits exchange-traded et cleared remplacent généralement l’exposition bilatérale directe par une exposition médiée via clearing members et clearinghouse. Les OTC contracts peuvent aussi être collateralized sous accords bilatéraux.",
+        },
+        Professional: {
+          en: "Counterparty valuation incorporates expected exposure, collateral terms, netting, wrong-way risk, funding and default probabilities. Market participants also monitor liquidity stress because margin calls can create cash needs precisely when markets are volatile.",
+          fr: "La counterparty valuation incorpore expected exposure, collateral terms, netting, wrong-way risk, funding et default probabilities. Les participants surveillent aussi liquidity stress car les margin calls peuvent créer des besoins de cash précisément lorsque les marchés deviennent volatils.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Clearinghouse / CCP",
+          fr: "chambre de compensation / clearinghouse / CCP",
+          definition: {
+            en: "Central counterparty that interposes itself between clearing members for eligible transactions.",
+            fr: "Central counterparty qui s’interpose entre clearing members pour des transactions éligibles.",
+          },
+        },
+        {
+          en: "Wrong-way risk",
+          fr: "wrong-way risk",
+          definition: {
+            en: "Risk that counterparty credit quality deteriorates as exposure to that counterparty increases.",
+            fr: "Risque que la qualité de crédit d’une counterparty se détériore au moment où l’exposition envers elle augmente.",
+          },
+        },
+      ],
+    },
+    {
+      id: "basis-risk",
+      kicker: { en: "08 · BASIS RISK", fr: "08 · BASIS RISK" },
+      title: {
+        en: "A hedge can fail because the derivative and the exposure do not move perfectly together",
+        fr: "Un hedge peut être imparfait car le derivative et l’exposition ne bougent pas parfaitement ensemble",
+      },
+      coreFacts: [
+        {
+          en: "Basis is a price difference between related cash and derivative instruments under a stated convention.",
+          fr: "La basis est une différence de prix entre instruments cash et derivatives liés selon une convention définie.",
+        },
+        {
+          en: "Basis risk is the risk that the basis changes unexpectedly while the hedge is open.",
+          fr: "Le basis risk est le risque que la basis évolue de façon inattendue pendant que le hedge est ouvert.",
+        },
+        {
+          en: "Cross-hedging uses a derivative on a different but related underlying and can create additional basis risk.",
+          fr: "Le cross-hedging utilise un derivative sur un underlying différent mais lié et peut créer davantage de basis risk.",
+        },
+        {
+          en: "Contract maturity, quality grade, location, index methodology and timing can all create basis differences.",
+          fr: "Contract maturity, quality grade, location, index methodology et timing peuvent tous créer des différences de basis.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A coffee producer may hedge with a futures contract that is similar but not identical to the exact coffee quality and delivery location being sold. If the producer's local price falls by 8% while the futures price falls only 5%, the hedge does not fully offset the loss.",
+          fr: "Un producteur de café peut hedger avec un futures contract similaire mais pas identique à la qualité exacte et au lieu de livraison vendus. Si son prix local baisse de 8 % tandis que le future baisse seulement de 5 %, le hedge ne compense pas totalement la perte.",
+        },
+        Intermediate: {
+          en: "A common simple convention is basis = spot price − futures price. A hedge outcome depends not only on the directional move in the underlying but also on how this difference evolves between hedge initiation and close.",
+          fr: "Une convention simple courante est basis = spot price − futures price. Le résultat du hedge dépend non seulement du directional move du underlying mais aussi de l’évolution de cette différence entre initiation et clôture du hedge.",
+        },
+        Professional: {
+          en: "Basis risk appears across markets: Treasury cash-versus-futures, swap spreads, cross-currency basis, commodity location basis and index-tracking basis. A hedge book can be delta- or DV01-neutral yet retain material basis exposure.",
+          fr: "Le basis risk apparaît dans de nombreux marchés : Treasury cash-versus-futures, swap spreads, cross-currency basis, commodity location basis et index-tracking basis. Un hedge book peut être delta- ou DV01-neutral tout en conservant une forte basis exposure.",
+        },
+      },
+      formula: {
+        label: { en: "Simple futures basis convention", fr: "Convention simple de futures basis" },
+        expression: "Basis = Spot Price − Futures Price",
+        explanation: {
+          en: "Market conventions can differ, so always verify how a specific basis is quoted.",
+          fr: "Les market conventions peuvent différer ; il faut toujours vérifier comment une basis spécifique est cotée.",
+        },
+        workedExample: {
+          en: "Spot=$102 and futures=$100 → basis=$2. If spot later=$104 and futures=$103.5 → basis=$0.5.",
+          fr: "Spot=102 $ et futures=100 $ → basis=2 $. Plus tard spot=104 $ et futures=103,5 $ → basis=0,5 $.",
+        },
+      },
+      vocabulary: [
+        {
+          en: "Basis risk",
+          fr: "risque de base / basis risk",
+          definition: {
+            en: "Risk that the relationship between a hedge instrument and the hedged exposure changes.",
+            fr: "Risque que la relation entre l’instrument de hedge et l’exposition couverte change.",
+          },
+        },
+        {
+          en: "Cross-hedge",
+          fr: "couverture croisée / cross-hedge",
+          definition: {
+            en: "Hedge using a derivative on a related but non-identical underlying.",
+            fr: "Hedge utilisant un derivative sur un underlying lié mais non identique.",
+          },
+        },
+      ],
+    },
+    {
+      id: "no-arbitrage-carry",
+      kicker: { en: "09 · NO-ARBITRAGE & COST OF CARRY", fr: "09 · NO-ARBITRAGE & COST OF CARRY" },
+      title: {
+        en: "Derivative pricing begins with replication and the absence of free profit",
+        fr: "Le pricing des derivatives commence par replication et absence de profit gratuit",
+      },
+      coreFacts: [
+        {
+          en: "No-arbitrage pricing compares a derivative with a replicating strategy that generates equivalent future cash flows.",
+          fr: "Le no-arbitrage pricing compare un derivative avec une stratégie de replication générant des cash flows futurs équivalents.",
+        },
+        {
+          en: "For a non-income asset with no storage or other carry effects, a simple forward price equals spot compounded at the financing rate.",
+          fr: "Pour un actif sans income, storage ni autres carry effects, un simple forward price est égal au spot capitalisé au financing rate.",
+        },
+        {
+          en: "Income, dividends, storage costs, convenience yield, funding and collateral terms can modify the fair forward relationship.",
+          fr: "Income, dividendes, storage costs, convenience yield, funding et collateral terms peuvent modifier la relation de fair forward.",
+        },
+        {
+          en: "If market price departs sufficiently from the replicating cost after transaction and financing costs, arbitrage pressure can push prices back toward consistency.",
+          fr: "Si le market price s’écarte suffisamment du replication cost après transaction et financing costs, l’arbitrage peut pousser les prix vers une relation plus cohérente.",
+        },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Suppose an asset costs $100 today, pays no income and one-year financing is 5%. Buying the asset today with borrowed money costs $105 in one year. A fair one-year forward should therefore be about $105 in this simplified world.",
+          fr: "Supposons qu’un actif coûte 100 $ aujourd’hui, ne paie aucun income et que le financement un an soit 5 %. Acheter l’actif aujourd’hui avec de l’argent emprunté coûte 105 $ dans un an. Le fair one-year forward doit donc être environ 105 $ dans ce monde simplifié.",
+        },
+        Intermediate: {
+          en: "If the one-year forward trades materially above $105, a cash-and-carry arbitrage can buy the asset, finance it, and short the expensive forward, subject to real-world costs and constraints.",
+          fr: "Si le one-year forward cote matériellement au-dessus de 105 $, un cash-and-carry arbitrage peut acheter l’actif, le financer et shorter le forward trop cher, sous réserve des coûts et contraintes réels.",
+        },
+        Professional: {
+          en: "Modern derivative pricing is replication plus funding and collateral economics. What looks like arbitrage under one funding assumption may disappear after balance-sheet cost, bid-ask, haircuts, borrow constraints or collateral remuneration.",
+          fr: "Le pricing moderne des derivatives est replication plus funding et collateral economics. Ce qui ressemble à un arbitrage sous une hypothèse de financement peut disparaître après balance-sheet cost, bid-ask, haircuts, borrow constraints ou collateral remuneration.",
+        },
+      },
+      formula: {
+        label: { en: "Simplified fair forward price", fr: "Fair forward price simplifié" },
+        expression: "F₀,T = S₀ × (1 + r)^T",
+        explanation: {
+          en: "This simplified discrete-compounding relation assumes no income, storage cost or other carry effects.",
+          fr: "Cette relation simplifiée en discrete compounding suppose aucun income, storage cost ni autre carry effect.",
+        },
+        workedExample: {
+          en: "S₀=$100, r=5%, T=1 → fair forward≈$105.",
+          fr: "S₀=100 $, r=5 %, T=1 → fair forward≈105 $.",
+        },
+      },
+      marketConnection: {
+        en: "Derivative traders constantly compare market prices with replication, carry and funding economics. Relative-value opportunities often arise from small inconsistencies rather than outright directional forecasts.",
+        fr: "Les derivative traders comparent constamment market prices avec replication, carry et funding economics. Les relative-value opportunities proviennent souvent de petites incohérences plutôt que de simples directional forecasts.",
+      },
+      vocabulary: [
+        {
+          en: "Arbitrage",
+          fr: "arbitrage",
+          definition: {
+            en: "Strategy designed to exploit inconsistent prices of economically equivalent or closely linked cash flows, subject to implementation constraints.",
+            fr: "Stratégie visant à exploiter des prix incohérents de cash flows économiquement équivalents ou très liés, sous contraintes d’implémentation.",
+          },
+        },
+        {
+          en: "Cost of carry",
+          fr: "coût de portage / cost of carry",
+          definition: {
+            en: "Net cost or benefit of holding an underlying through time, including relevant financing, income and storage effects.",
+            fr: "Coût ou bénéfice net lié à la détention d’un underlying dans le temps, incluant financement, income et storage pertinents.",
+          },
+        },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "derivative-definition",
+      question: {
+        en: "What best defines a derivative?",
+        fr: "Quelle définition décrit le mieux un derivative ?",
+      },
+      options: [
+        { id: "a", label: { en: "A contract whose value depends on an underlying reference", fr: "Un contrat dont la valeur dépend d’une référence sous-jacente" } },
+        { id: "b", label: { en: "Only a common stock", fr: "Uniquement une common stock" } },
+        { id: "c", label: { en: "Always a physical commodity", fr: "Toujours une physical commodity" } },
+        { id: "d", label: { en: "A contract with no market risk", fr: "Un contrat sans market risk" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Derivative value is linked to an underlying asset, rate, index, spread, event or other reference.",
+        fr: "La valeur d’un derivative est liée à un asset, rate, index, spread, événement ou autre référence underlying.",
+      },
+    },
+    {
+      id: "q2",
+      conceptKey: "forward-payoff",
+      question: {
+        en: "A long forward has delivery price $105 and settlement price $120. Payoff is:",
+        fr: "Un long forward possède delivery price 105 $ et settlement price 120 $. Son payoff vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "−$15", fr: "−15 $" } },
+        { id: "b", label: { en: "$0", fr: "0 $" } },
+        { id: "c", label: { en: "+$15", fr: "+15 $" } },
+        { id: "d", label: { en: "+$105", fr: "+105 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "Long payoff = 120−105=$15.",
+        fr: "Long payoff = 120−105=15 $.",
+      },
+    },
+    {
+      id: "q3",
+      conceptKey: "futures-pnl",
+      question: {
+        en: "You are long 50 futures with a $50 multiplier. Futures price rises 4 points. P&L is:",
+        fr: "Tu es long 50 futures avec multiplier 50 $. Le futures price monte de 4 points. Le P&L vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "$200", fr: "200 $" } },
+        { id: "b", label: { en: "$2,500", fr: "2 500 $" } },
+        { id: "c", label: { en: "$10,000", fr: "10 000 $" } },
+        { id: "d", label: { en: "$50,000", fr: "50 000 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "50×$50×4=$10,000.",
+        fr: "50×50 $×4=10 000 $.",
+      },
+    },
+    {
+      id: "q4",
+      conceptKey: "swap-net-payment",
+      question: {
+        en: "Receive floating 5%, pay fixed 4%, notional $10m, quarterly year fraction 0.25. Approximate net receipt is:",
+        fr: "Receive floating 5 %, pay fixed 4 %, notional 10 M$, year fraction trimestrielle 0,25. Le net receipt approximatif vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "$2,500", fr: "2 500 $" } },
+        { id: "b", label: { en: "$25,000", fr: "25 000 $" } },
+        { id: "c", label: { en: "$100,000", fr: "100 000 $" } },
+        { id: "d", label: { en: "$250,000", fr: "250 000 $" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "$10m×1%×0.25=$25,000.",
+        fr: "10 M$×1 %×0,25=25 000 $.",
+      },
+    },
+    {
+      id: "q5",
+      conceptKey: "call-profit",
+      question: {
+        en: "A call has strike $100, premium $6 and expires with spot at $120. Buyer profit before other costs is:",
+        fr: "Un call possède strike 100 $, premium 6 $ et expire avec spot à 120 $. Le profit de l’acheteur avant autres coûts vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "$6", fr: "6 $" } },
+        { id: "b", label: { en: "$14", fr: "14 $" } },
+        { id: "c", label: { en: "$20", fr: "20 $" } },
+        { id: "d", label: { en: "$26", fr: "26 $" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Payoff=max(120−100,0)=20; profit=20−6=14.",
+        fr: "Payoff=max(120−100,0)=20 ; profit=20−6=14.",
+      },
+    },
+    {
+      id: "q6",
+      conceptKey: "hedge-vs-speculation",
+      question: {
+        en: "A farmer shorts futures against crops that will be sold later. The primary purpose is:",
+        fr: "Un agriculteur short des futures contre une récolte qu’il vendra plus tard. L’objectif principal est :",
+      },
+      options: [
+        { id: "a", label: { en: "Hedging", fr: "Hedging" } },
+        { id: "b", label: { en: "Accounting consolidation", fr: "Accounting consolidation" } },
+        { id: "c", label: { en: "Equity issuance", fr: "Equity issuance" } },
+        { id: "d", label: { en: "Dividend capture", fr: "Dividend capture" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "The futures position offsets an existing price exposure in the physical crop.",
+        fr: "La position futures compense une exposition de prix existante dans la récolte physique.",
+      },
+    },
+    {
+      id: "q7",
+      conceptKey: "margin",
+      question: {
+        en: "What is initial margin on a futures position?",
+        fr: "Qu’est-ce que l’initial margin sur une position futures ?",
+      },
+      options: [
+        { id: "a", label: { en: "The full notional purchase price", fr: "Le prix d’achat du full notional" } },
+        { id: "b", label: { en: "Collateral supporting potential losses", fr: "Du collateral couvrant de potentielles pertes" } },
+        { id: "c", label: { en: "A guaranteed profit", fr: "Un profit garanti" } },
+        { id: "d", label: { en: "The option strike", fr: "Le strike d’une option" } },
+      ],
+      correctOption: "b",
+      explanation: {
+        en: "Margin is collateral, not payment for the entire notional exposure.",
+        fr: "Le margin est du collateral, pas le paiement de toute l’exposition notionnelle.",
+      },
+    },
+    {
+      id: "q8",
+      conceptKey: "basis",
+      question: {
+        en: "Using basis = spot − futures, spot is $102 and futures is $100. Basis is:",
+        fr: "Avec basis = spot − futures, spot vaut 102 $ et futures 100 $. La basis vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "−$2", fr: "−2 $" } },
+        { id: "b", label: { en: "$0", fr: "0 $" } },
+        { id: "c", label: { en: "+$2", fr: "+2 $" } },
+        { id: "d", label: { en: "+$202", fr: "+202 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "102−100=$2.",
+        fr: "102−100=2 $.",
+      },
+    },
+    {
+      id: "q9",
+      conceptKey: "fair-forward",
+      question: {
+        en: "Spot is $100, one-year financing rate is 5%, and there is no income or storage cost. Simplified fair one-year forward price is:",
+        fr: "Spot vaut 100 $, financing rate un an 5 %, sans income ni storage cost. Le fair one-year forward price simplifié vaut :",
+      },
+      options: [
+        { id: "a", label: { en: "$95", fr: "95 $" } },
+        { id: "b", label: { en: "$100", fr: "100 $" } },
+        { id: "c", label: { en: "$105", fr: "105 $" } },
+        { id: "d", label: { en: "$150", fr: "150 $" } },
+      ],
+      correctOption: "c",
+      explanation: {
+        en: "100×1.05=$105.",
+        fr: "100×1,05=105 $.",
+      },
+    },
+    {
+      id: "q10",
+      conceptKey: "counterparty-risk",
+      question: {
+        en: "What is counterparty risk?",
+        fr: "Qu’est-ce que le counterparty risk ?",
+      },
+      options: [
+        { id: "a", label: { en: "Risk that the other contractual party fails to perform", fr: "Risque que l’autre partie contractuelle ne remplisse pas ses obligations" } },
+        { id: "b", label: { en: "Only the risk that stock prices rise", fr: "Uniquement le risque que les actions montent" } },
+        { id: "c", label: { en: "A guaranteed clearinghouse loss", fr: "Une perte garantie de la clearinghouse" } },
+        { id: "d", label: { en: "The same thing as option premium", fr: "La même chose que l’option premium" } },
+      ],
+      correctOption: "a",
+      explanation: {
+        en: "Counterparty risk is the risk that the other party defaults or otherwise fails to meet contractual obligations.",
+        fr: "Le counterparty risk est le risque que l’autre partie default ou ne respecte pas ses obligations contractuelles.",
+      },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Explain the difference between a forward and a future, and give me one reason a company would use either contract.",
+      fr: "Explique la différence entre un forward et un future, puis donne une raison pour laquelle une entreprise utiliserait l’un de ces contrats.",
+    },
+    framework: [
+      {
+        en: "Start with the common economic purpose: both lock or transfer future price exposure.",
+        fr: "Commencer par l’objectif économique commun : les deux fixent ou transfèrent une future price exposure.",
+      },
+      {
+        en: "Explain that forwards are typically bilateral and customizable, while futures are standardized and commonly exchange-traded and centrally cleared.",
+        fr: "Expliquer que les forwards sont généralement bilatéraux et personnalisables, tandis que les futures sont standardisés, couramment exchange-traded et centrally cleared.",
+      },
+      {
+        en: "Mention settlement timing: futures are commonly marked to market with variation margin, while a basic forward settles mainly at maturity.",
+        fr: "Mentionner le settlement timing : les futures sont généralement marked to market avec variation margin, tandis qu’un basic forward settle principalement à maturity.",
+      },
+      {
+        en: "Discuss risk trade-offs: customization and bilateral counterparty risk for forwards versus standardization, margin and basis risk for futures.",
+        fr: "Présenter les trade-offs : personnalisation et bilateral counterparty risk pour forwards versus standardisation, margin et basis risk pour futures.",
+      },
+      {
+        en: "Give a hedge example such as an exporter locking FX or a producer hedging commodity prices.",
+        fr: "Donner un exemple de hedge comme un exportateur verrouillant FX ou un producteur hedgant le prix d’une commodity.",
+      },
+    ],
+    sample: {
+      en: "A forward and a future both create an obligation to transact based on a future price, so economically they can provide similar directional exposure. The main difference is market structure. A forward is typically an OTC bilateral contract that can be customized for quantity, date and other terms, which creates direct counterparty and documentation considerations. A future is standardized, commonly traded on an exchange and centrally cleared. Futures are also generally marked to market through variation margin, so gains and losses are settled through time rather than only at final maturity. A company might use either contract to hedge an existing business exposure. For example, an exporter expecting to receive foreign currency in three months could use a forward to lock the exchange rate, while a producer with a standardized commodity exposure might use liquid futures. The best instrument depends on customization needs, liquidity, margin, basis risk and counterparty considerations.",
+      fr: "Un forward et un future créent tous deux une obligation liée à un prix futur ; économiquement ils peuvent donc fournir une exposition directionnelle similaire. La principale différence concerne la structure de marché. Un forward est généralement un OTC bilateral contract personnalisable en quantité, date et autres termes, ce qui crée des considérations directes de counterparty risk et documentation. Un future est standardisé, couramment tradé sur exchange et centrally cleared. Les futures sont aussi généralement marked to market via variation margin ; gains et pertes sont donc réglés au fil du temps plutôt qu’uniquement à la maturity finale. Une entreprise peut utiliser l’un ou l’autre pour hedger une exposition réelle. Par exemple, un exportateur devant recevoir une devise dans trois mois peut utiliser un forward pour verrouiller le taux de change, tandis qu’un producteur ayant une exposition standardisée à une commodity peut utiliser des futures liquides. Le meilleur instrument dépend des besoins de personnalisation, de la liquidité, du margin, du basis risk et du counterparty risk.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
