@@ -29277,7 +29277,473 @@ export const advancedDerivativesLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson];
+
+export const macroTradingFrameworksLesson: FinanceLesson = {
+  slug: "year-3-macro-trading-frameworks",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Macro Trading Frameworks", fr: "Macro Trading Frameworks / Cadres de trading macro" },
+  title: { en: "Macro Trading Frameworks", fr: "Macro Trading Frameworks / Cadres de trading macro" },
+  subtitle: {
+    en: "Build professional macro views by linking growth, inflation, policy, liquidity and positioning to rates, FX, equities, commodities and cross-asset trade construction.",
+    fr: "Construire des vues macro professionnelles en reliant croissance, inflation, politique monétaire, liquidité et positioning aux taux, FX, actions, matières premières et trades cross-asset.",
+  },
+  duration: { en: "170–210 min", fr: "170–210 min" },
+  prerequisites: [
+    { en: "Macroeconomics for Markets", fr: "Macroeconomics for Markets" },
+    { en: "Advanced Fixed Income", fr: "Advanced Fixed Income" },
+    { en: "Advanced Derivatives", fr: "Advanced Derivatives" },
+    { en: "FX & International Finance", fr: "FX & International Finance" },
+    { en: "Risk Management", fr: "Risk Management" },
+  ],
+  objectives: [
+    { en: "Translate macroeconomic data into market-relevant narratives.", fr: "Traduire les données macroéconomiques en narratifs pertinents pour les marchés." },
+    { en: "Separate growth, inflation, policy and liquidity impulses.", fr: "Séparer les impulsions de croissance, inflation, politique monétaire et liquidité." },
+    { en: "Understand how macro surprises transmit into rates, FX, equities and commodities.", fr: "Comprendre comment les surprises macro se transmettent aux taux, FX, actions et matières premières." },
+    { en: "Build scenario trees around central-bank reactions and economic regimes.", fr: "Construire des arbres de scénarios autour des réactions des banques centrales et des régimes économiques." },
+    { en: "Use relative-value and cross-asset trades to isolate macro views.", fr: "Utiliser des trades de relative value et cross-asset pour isoler des vues macro." },
+    { en: "Incorporate positioning, carry, valuation and catalysts into trade selection.", fr: "Intégrer positioning, carry, valuation et catalysts dans la sélection des trades." },
+    { en: "Define entry, stop, target and invalidation logic before trade execution.", fr: "Définir entrée, stop, target et logique d’invalidation avant exécution du trade." },
+  ],
+  overviewFlow: {
+    title: { en: "From macro data to trade expression", fr: "Des données macro à l’expression du trade" },
+    steps: [
+      { title: { en: "Diagnose", fr: "Diagnostiquer" }, detail: { en: "Growth · inflation · liquidity", fr: "Croissance · inflation · liquidité" } },
+      { title: { en: "Anticipate", fr: "Anticiper" }, detail: { en: "Policy · expectations · surprises", fr: "Politique · attentes · surprises" } },
+      { title: { en: "Express", fr: "Exprimer" }, detail: { en: "Rates · FX · equities · commodities", fr: "Taux · FX · actions · commodities" } },
+      { title: { en: "Risk-manage", fr: "Gérer le risque" }, detail: { en: "Scenario · sizing · stops · catalysts", fr: "Scénario · sizing · stops · catalysts" } },
+    ],
+  },
+  sections: [
+    {
+      id: "macro-regime-framework",
+      kicker: { en: "01 · MACRO REGIME FRAMEWORK", fr: "01 · CADRE DE RÉGIME MACRO" },
+      title: { en: "Start with growth and inflation before choosing the asset class", fr: "Commence par croissance et inflation avant de choisir l’asset class" },
+      coreFacts: [
+        { en: "Growth and inflation are the two most useful first-order axes for macro regime analysis.", fr: "Croissance et inflation sont les deux axes de premier ordre les plus utiles pour analyser un régime macro." },
+        { en: "Markets respond to changes in the direction of growth and inflation, not only to their absolute level.", fr: "Les marchés réagissent aux changements de direction de la croissance et de l’inflation, pas seulement à leur niveau absolu." },
+        { en: "Liquidity and financial conditions can reinforce or offset the underlying economic regime.", fr: "La liquidité et les financial conditions peuvent renforcer ou compenser le régime économique sous-jacent." },
+        { en: "Macro regimes should be treated probabilistically rather than as permanent labels.", fr: "Les régimes macro doivent être traités de manière probabiliste plutôt que comme des étiquettes permanentes." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A simple macro map asks two questions: is growth accelerating or slowing, and is inflation accelerating or slowing? Different combinations tend to create different market environments.",
+          fr: "Une carte macro simple pose deux questions : la croissance accélère-t-elle ou ralentit-elle, et l’inflation accélère-t-elle ou ralentit-elle ? Les différentes combinaisons créent souvent des environnements de marché différents.",
+        },
+        Intermediate: {
+          en: "A growth-up, inflation-down environment often supports risk assets and duration differently from a growth-down, inflation-up environment. The point is not to memorize a fixed table, but to understand the transmission mechanism.",
+          fr: "Un environnement croissance en hausse, inflation en baisse soutient souvent différemment les risk assets et la duration qu’un environnement croissance en baisse, inflation en hausse. L’objectif n’est pas de mémoriser un tableau fixe mais de comprendre le mécanisme de transmission.",
+        },
+        Professional: {
+          en: "Regime analysis should combine coincident data, leading indicators, market-implied expectations and policy constraints. The best macro trades arise when the market price is inconsistent with the probability-weighted distribution of future regimes.",
+          fr: "L’analyse de régime doit combiner données contemporaines, leading indicators, attentes implicites de marché et contraintes de politique. Les meilleurs macro trades apparaissent lorsque le prix de marché est incohérent avec la distribution probabilisée des régimes futurs.",
+        },
+      },
+      comparison: {
+        title: { en: "Simplified regime map", fr: "Carte simplifiée des régimes" },
+        headers: [{ en: "Growth", fr: "Croissance" }, { en: "Inflation", fr: "Inflation" }, { en: "Typical debate", fr: "Débat typique" }],
+        rows: [
+          { cells: [{ en: "Rising", fr: "Hausse" }, { en: "Falling", fr: "Baisse" }, { en: "Soft landing / disinflationary growth", fr: "Soft landing / croissance désinflationniste" }] },
+          { cells: [{ en: "Rising", fr: "Hausse" }, { en: "Rising", fr: "Hausse" }, { en: "Reflation / overheating", fr: "Reflation / surchauffe" }] },
+          { cells: [{ en: "Falling", fr: "Baisse" }, { en: "Falling", fr: "Baisse" }, { en: "Disinflationary slowdown", fr: "Ralentissement désinflationniste" }] },
+          { cells: [{ en: "Falling", fr: "Baisse" }, { en: "Rising", fr: "Hausse" }, { en: "Stagflation risk", fr: "Risque de stagflation" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Macro regime", fr: "régime macro", definition: { en: "Recurring combination of growth, inflation, liquidity and policy conditions.", fr: "Combinaison récurrente de croissance, inflation, liquidité et politique." } },
+        { en: "Financial conditions", fr: "financial conditions", definition: { en: "Combined state of interest rates, credit, equity prices, FX and financing availability.", fr: "État combiné des taux, du crédit, des actions, du FX et de la disponibilité du financement." } },
+      ],
+    },
+    {
+      id: "data-and-surprises",
+      kicker: { en: "02 · DATA & SURPRISES", fr: "02 · DONNÉES & SURPRISES" },
+      title: { en: "Markets trade the difference between reality and expectations", fr: "Les marchés tradent l’écart entre la réalité et les attentes" },
+      coreFacts: [
+        { en: "A strong economic number can produce a weak market reaction if investors already expected an even stronger outcome.", fr: "Une donnée économique forte peut produire une réaction de marché faible si les investisseurs attendaient encore mieux." },
+        { en: "Consensus expectations matter because asset prices discount future outcomes before data are released.", fr: "Le consensus compte car les prix intègrent les résultats futurs avant la publication des données." },
+        { en: "Revisions can be as important as the headline release.", fr: "Les révisions peuvent être aussi importantes que le chiffre headline." },
+        { en: "Data quality differs by indicator, frequency and sensitivity to seasonal adjustment.", fr: "La qualité des données diffère selon l’indicateur, la fréquence et la sensibilité aux seasonal adjustments." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Markets do not ask only whether a number is good or bad. They ask whether it is better or worse than what was already expected.",
+          fr: "Les marchés ne demandent pas seulement si un chiffre est bon ou mauvais. Ils demandent s’il est meilleur ou pire que ce qui était déjà attendu.",
+        },
+        Intermediate: {
+          en: "Track consensus, whisper expectations, prior revisions and the components of each release. A headline payroll number, for example, can mean something different if wages, hours worked or prior months are weak.",
+          fr: "Suis consensus, attentes implicites, révisions précédentes et composantes de chaque publication. Un headline payroll peut signifier autre chose si salaires, heures travaillées ou mois précédents sont faibles.",
+        },
+        Professional: {
+          en: "Macro trading is about the mapping from data surprise to policy repricing and then to asset prices. The same surprise can create opposite market moves depending on starting valuation, positioning and central-bank reaction function.",
+          fr: "Le macro trading consiste à relier surprise de données, repricing de politique puis prix d’actifs. La même surprise peut créer des mouvements opposés selon la valorisation initiale, le positioning et la fonction de réaction de la banque centrale.",
+        },
+      },
+      vocabulary: [
+        { en: "Consensus", fr: "consensus", definition: { en: "Median or average market expectation before an economic release.", fr: "Attente médiane ou moyenne du marché avant une publication économique." } },
+        { en: "Data surprise", fr: "data surprise", definition: { en: "Difference between released data and prior expectation.", fr: "Différence entre la donnée publiée et l’attente préalable." } },
+        { en: "Revision", fr: "révision", definition: { en: "Change to a previously reported economic statistic.", fr: "Modification d’une statistique économique publiée précédemment." } },
+      ],
+    },
+    {
+      id: "central-bank-reaction-function",
+      kicker: { en: "03 · CENTRAL-BANK REACTION FUNCTION", fr: "03 · FONCTION DE RÉACTION DES BANQUES CENTRALES" },
+      title: { en: "The key question is not only the data — it is how policymakers respond", fr: "La question clé n’est pas seulement la donnée — c’est la réaction des policymakers" },
+      coreFacts: [
+        { en: "Central banks balance inflation, employment or growth mandates subject to financial-stability constraints.", fr: "Les banques centrales arbitrent inflation, emploi ou croissance sous contraintes de stabilité financière." },
+        { en: "Market pricing reflects the expected path of policy, not just the current policy rate.", fr: "Le market pricing reflète le chemin attendu de la politique, pas seulement le taux directeur actuel." },
+        { en: "Forward guidance can move markets even when the current policy rate is unchanged.", fr: "La forward guidance peut faire bouger les marchés même lorsque le taux directeur reste inchangé." },
+        { en: "A central bank can be hawkish or dovish relative to market expectations even if the absolute action looks unchanged.", fr: "Une banque centrale peut être hawkish ou dovish relativement aux attentes du marché même si l’action absolue semble inchangée." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If markets expect three rate cuts and a central bank signals only one, policy has become more hawkish relative to expectations even if no rate changed that day.",
+          fr: "Si les marchés attendent trois baisses de taux et que la banque centrale n’en signale qu’une, la politique est devenue plus hawkish relativement aux attentes même si aucun taux ne change ce jour-là.",
+        },
+        Intermediate: {
+          en: "Map inflation, labor-market slack, growth and financial conditions into the likely policy reaction. Then compare your expected path with the path already priced into rates markets.",
+          fr: "Relie inflation, slack du marché du travail, croissance et financial conditions à la réaction probable de politique. Compare ensuite ton chemin attendu à celui déjà pricé dans les marchés de taux.",
+        },
+        Professional: {
+          en: "Reaction functions are state-dependent and can change after structural shocks. Macro traders therefore distinguish the central bank’s stated framework from the empirically observed sensitivity of policy to inflation, labor and financial-market stress.",
+          fr: "Les fonctions de réaction sont dépendantes de l’état de l’économie et peuvent changer après des chocs structurels. Les macro traders distinguent donc le cadre déclaré de la banque centrale de la sensibilité réellement observée de la politique à l’inflation, l’emploi et au stress financier.",
+        },
+      },
+      vocabulary: [
+        { en: "Hawkish", fr: "hawkish", definition: { en: "Relatively more focused on inflation control and tighter policy.", fr: "Relativement plus orienté vers le contrôle de l’inflation et une politique plus restrictive." } },
+        { en: "Dovish", fr: "dovish", definition: { en: "Relatively more supportive of easier monetary policy.", fr: "Relativement plus favorable à une politique monétaire accommodante." } },
+        { en: "Reaction function", fr: "reaction function", definition: { en: "Framework describing how policymakers respond to economic conditions.", fr: "Cadre décrivant comment les policymakers réagissent aux conditions économiques." } },
+      ],
+    },
+    {
+      id: "rates-framework",
+      kicker: { en: "04 · RATES FRAMEWORK", fr: "04 · CADRE TAUX" },
+      title: { en: "Rates markets price policy, inflation, growth and term premium together", fr: "Les marchés de taux pricent ensemble politique, inflation, croissance et term premium" },
+      coreFacts: [
+        { en: "Front-end rates are generally more sensitive to expected central-bank policy.", fr: "Les taux courts sont généralement plus sensibles au chemin attendu de la banque centrale." },
+        { en: "Long-end yields reflect expected future short rates plus term premium and structural demand-supply forces.", fr: "Les taux longs reflètent les futurs taux courts attendus plus term premium et forces structurelles d’offre-demande." },
+        { en: "Curve steepening or flattening can originate from either the front end or the long end.", fr: "Un steepening ou flattening peut provenir soit du front end soit du long end." },
+        { en: "Breakevens and real yields help separate inflation pricing from real-rate repricing.", fr: "Breakevens et real yields aident à séparer pricing de l’inflation et repricing des real rates." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Short-term yields often move when investors change their view of central-bank policy. Long-term yields also reflect longer-run growth, inflation and compensation for holding duration risk.",
+          fr: "Les yields courts bougent souvent lorsque les investisseurs changent leur vue sur la politique monétaire. Les yields longs reflètent aussi croissance et inflation long terme ainsi que la compensation pour porter du duration risk.",
+        },
+        Intermediate: {
+          en: "If inflation falls faster than expected but growth remains resilient, real yields and breakevens may move differently. Separating those components helps identify what the market is actually repricing.",
+          fr: "Si l’inflation baisse plus vite que prévu mais que la croissance reste résiliente, real yields et breakevens peuvent évoluer différemment. Séparer ces composantes aide à identifier ce que le marché reprice réellement.",
+        },
+        Professional: {
+          en: "Rate trades should distinguish expected policy path, term premium, supply, positioning and convexity flows. An apparently macro-driven move can be amplified by Treasury supply, mortgage hedging or dealer balance-sheet constraints.",
+          fr: "Les trades de taux doivent distinguer chemin attendu de politique, term premium, supply, positioning et convexity flows. Un mouvement apparemment macro peut être amplifié par Treasury supply, mortgage hedging ou contraintes de bilan des dealers.",
+        },
+      },
+      vocabulary: [
+        { en: "Front end", fr: "front end", definition: { en: "Short-maturity part of the yield curve.", fr: "Partie courte de la yield curve." } },
+        { en: "Term premium", fr: "term premium", definition: { en: "Compensation investors may require for holding long-duration bonds rather than rolling short maturities.", fr: "Compensation demandée pour détenir des obligations longues plutôt que de renouveler des maturités courtes." } },
+      ],
+    },
+    {
+      id: "fx-framework",
+      kicker: { en: "05 · FX FRAMEWORK", fr: "05 · CADRE FX" },
+      title: { en: "Currencies trade relative fundamentals, not isolated economics", fr: "Les devises tradent des fondamentaux relatifs, pas une économie isolée" },
+      coreFacts: [
+        { en: "FX is always a relative price between two currencies.", fr: "Le FX est toujours un prix relatif entre deux devises." },
+        { en: "Interest-rate differentials and expected policy paths are important drivers of currency valuation.", fr: "Les différentiels de taux et chemins attendus de politique sont des drivers importants des devises." },
+        { en: "Growth differentials, current-account dynamics, commodity exposure and risk sentiment can also matter.", fr: "Différentiels de croissance, dynamique du current account, exposition aux matières premières et risk sentiment comptent aussi." },
+        { en: "Carry trades can perform while volatility is low but suffer sharply when funding conditions change.", fr: "Les carry trades peuvent bien fonctionner lorsque la volatilité est faible mais souffrir fortement lorsque les conditions de funding changent." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A currency can strengthen not because its economy is strong in absolute terms, but because it looks stronger than the economy on the other side of the currency pair.",
+          fr: "Une devise peut se renforcer non parce que son économie est forte dans l’absolu, mais parce qu’elle paraît plus forte que l’économie de l’autre côté de la paire de devises.",
+        },
+        Intermediate: {
+          en: "Build an FX view by comparing relative growth, inflation, real rates and central-bank paths, then adjust for valuation, carry, positioning and balance-of-payments dynamics.",
+          fr: "Construis une vue FX en comparant croissance relative, inflation, real rates et chemins de banques centrales, puis ajuste pour valorisation, carry, positioning et dynamique de balance of payments.",
+        },
+        Professional: {
+          en: "FX trades often behave differently across horizons. Short-term moves may be dominated by rate repricing and positioning, while medium-term valuation can depend more on real-rate differentials, external balances and terms of trade.",
+          fr: "Les trades FX peuvent se comporter différemment selon l’horizon. À court terme, les mouvements peuvent être dominés par repricing des taux et positioning, tandis qu’à moyen terme la valorisation dépend davantage des différentiels de real rates, external balances et terms of trade.",
+        },
+      },
+      vocabulary: [
+        { en: "Carry trade", fr: "carry trade", definition: { en: "Strategy earning the yield differential between currencies while bearing FX risk.", fr: "Stratégie capturant le différentiel de yield entre devises tout en portant le risque FX." } },
+        { en: "Terms of trade", fr: "terms of trade", definition: { en: "Relative price of a country’s exports versus imports.", fr: "Prix relatif des exportations d’un pays par rapport à ses importations." } },
+        { en: "Current account", fr: "current account", definition: { en: "Measure of trade, income and transfer flows between an economy and the rest of the world.", fr: "Mesure des flux de commerce, revenus et transferts entre une économie et le reste du monde." } },
+      ],
+    },
+    {
+      id: "equity-macro-framework",
+      kicker: { en: "06 · EQUITY MACRO FRAMEWORK", fr: "06 · CADRE MACRO ACTIONS" },
+      title: { en: "Equities discount both earnings and the rate applied to those earnings", fr: "Les actions actualisent à la fois les earnings et le taux appliqué à ces earnings" },
+      coreFacts: [
+        { en: "Growth expectations influence corporate revenues and earnings.", fr: "Les attentes de croissance influencent revenues et earnings des entreprises." },
+        { en: "Interest rates influence discount rates, financing costs and relative asset attractiveness.", fr: "Les taux influencent discount rates, coûts de financement et attractivité relative des actifs." },
+        { en: "Inflation can support nominal revenue while simultaneously pressuring margins and valuation multiples.", fr: "L’inflation peut soutenir le revenue nominal tout en comprimant marges et valuation multiples." },
+        { en: "Sector leadership can change materially across macro regimes.", fr: "Le leadership sectoriel peut changer fortement selon les régimes macro." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Stocks can fall even when the economy is growing if rates rise enough to reduce valuation multiples. They can also rise during weak growth if investors expect policy easing and future recovery.",
+          fr: "Les actions peuvent baisser même lorsque l’économie croît si les taux montent suffisamment pour réduire les multiples. Elles peuvent aussi monter pendant une croissance faible si les investisseurs anticipent un easing et une reprise future.",
+        },
+        Intermediate: {
+          en: "Decompose equity returns into earnings revisions, valuation multiple changes and dividends or buybacks. Then map each component to the macro regime and policy path.",
+          fr: "Décompose les returns actions en révisions d’earnings, changements de multiples et dividendes ou buybacks. Relie ensuite chaque composante au régime macro et au chemin de politique.",
+        },
+        Professional: {
+          en: "Macro-equity analysis should distinguish index-level duration, sector composition, operating leverage and balance-sheet sensitivity. The same macro shock can benefit one sector while damaging another through different transmission channels.",
+          fr: "L’analyse macro actions doit distinguer duration de l’indice, composition sectorielle, operating leverage et sensibilité du bilan. Le même choc macro peut bénéficier à un secteur tout en pénalisant un autre via des canaux de transmission différents.",
+        },
+      },
+      vocabulary: [
+        { en: "Earnings revision", fr: "earnings revision", definition: { en: "Change in analyst expectations for future company profits.", fr: "Modification des attentes des analystes concernant les profits futurs." } },
+        { en: "Equity duration", fr: "equity duration", definition: { en: "Sensitivity of equity value to discount-rate changes, especially for long-dated cash-flow businesses.", fr: "Sensibilité de la valeur equity aux changements de discount rate, notamment pour les businesses à cash flows lointains." } },
+      ],
+    },
+    {
+      id: "commodities-framework",
+      kicker: { en: "07 · COMMODITIES FRAMEWORK", fr: "07 · CADRE COMMODITIES" },
+      title: { en: "Commodity prices are driven by physical balances as much as macro narratives", fr: "Les prix des matières premières dépendent autant des balances physiques que des narratifs macro" },
+      coreFacts: [
+        { en: "Supply, demand, inventories and spare capacity are central commodity drivers.", fr: "Supply, demand, inventories et spare capacity sont des drivers centraux des commodities." },
+        { en: "The futures curve contains information about scarcity, storage economics and inventory conditions.", fr: "La futures curve contient de l’information sur rareté, économie du stockage et conditions d’inventaire." },
+        { en: "Backwardation often appears when near-term physical supply is tight.", fr: "La backwardation apparaît souvent lorsque l’offre physique court terme est tendue." },
+        { en: "Commodity currencies and producer equities can express related but not identical macro views.", fr: "Les commodity currencies et producer equities peuvent exprimer des vues macro liées mais non identiques." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Oil can rise even in a weak economy if supply falls more than demand. Commodity analysis therefore needs both macro demand and physical supply.",
+          fr: "Le pétrole peut monter même dans une économie faible si l’offre baisse plus que la demande. L’analyse commodity doit donc intégrer à la fois demande macro et offre physique.",
+        },
+        Intermediate: {
+          en: "Track production, inventories, utilization, transport constraints and demand indicators. Then examine whether the futures curve confirms tightness or oversupply.",
+          fr: "Suis production, inventories, utilization, contraintes de transport et indicateurs de demande. Examine ensuite si la futures curve confirme tension ou excès d’offre.",
+        },
+        Professional: {
+          en: "Commodity trades combine macro, micro and geopolitical inputs. Forward-curve structure, storage economics, hedging activity and producer behavior can dominate spot narratives over certain horizons.",
+          fr: "Les trades commodity combinent inputs macro, micro et géopolitiques. Structure de la forward curve, économie du stockage, activité de hedging et comportement des producteurs peuvent dominer les narratifs spot sur certains horizons.",
+        },
+      },
+      vocabulary: [
+        { en: "Backwardation", fr: "backwardation", definition: { en: "Futures curve in which near-term prices exceed longer-dated prices.", fr: "Futures curve où les prix court terme sont supérieurs aux prix plus lointains." } },
+        { en: "Contango", fr: "contango", definition: { en: "Futures curve in which longer-dated prices exceed near-term prices.", fr: "Futures curve où les prix lointains sont supérieurs aux prix court terme." } },
+        { en: "Spare capacity", fr: "spare capacity", definition: { en: "Unused production capacity that can be brought online relatively quickly.", fr: "Capacité de production inutilisée pouvant être remise en service relativement rapidement." } },
+      ],
+    },
+    {
+      id: "cross-asset-and-positioning",
+      kicker: { en: "08 · CROSS-ASSET & POSITIONING", fr: "08 · CROSS-ASSET & POSITIONING" },
+      title: { en: "A macro view is strongest when it appears consistently across multiple markets", fr: "Une vue macro est plus solide lorsqu’elle apparaît de manière cohérente sur plusieurs marchés" },
+      coreFacts: [
+        { en: "Cross-asset confirmation can improve confidence that a macro narrative is being priced broadly.", fr: "La confirmation cross-asset peut renforcer la confiance qu’un narratif macro est pricé largement." },
+        { en: "Positioning can amplify market moves when crowded trades unwind.", fr: "Le positioning peut amplifier les mouvements lorsque des trades crowded se débouclent." },
+        { en: "Valuation and carry affect whether a fundamentally correct view is attractive to express now.", fr: "Valuation et carry déterminent si une vue fondamentalement correcte est attractive à exprimer maintenant." },
+        { en: "Correlations can change sharply across stress regimes.", fr: "Les corrélations peuvent changer fortement selon les régimes de stress." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If bond yields, the currency and bank stocks all react in a way consistent with stronger growth, that can reinforce the macro interpretation. But if markets disagree, the signal may be weaker.",
+          fr: "Si yields obligataires, devise et actions bancaires réagissent tous de manière cohérente avec une croissance plus forte, cela peut renforcer l’interprétation macro. Si les marchés divergent, le signal peut être plus faible.",
+        },
+        Intermediate: {
+          en: "Check rates, FX, equities, credit and commodities for confirmation or contradiction. Then assess whether the intended trade is already crowded and whether carry works for or against you.",
+          fr: "Vérifie taux, FX, actions, crédit et commodities pour confirmation ou contradiction. Évalue ensuite si le trade est déjà crowded et si le carry travaille pour ou contre toi.",
+        },
+        Professional: {
+          en: "Cross-asset analysis helps distinguish a genuine regime repricing from an isolated technical move. However, correlation instability means a hedge that worked in one regime may fail in another, so stress testing is essential.",
+          fr: "L’analyse cross-asset aide à distinguer un vrai repricing de régime d’un mouvement technique isolé. Cependant, l’instabilité des corrélations signifie qu’un hedge ayant fonctionné dans un régime peut échouer dans un autre, donc les stress tests sont essentiels.",
+        },
+      },
+      vocabulary: [
+        { en: "Crowded trade", fr: "crowded trade", definition: { en: "Position held by many investors in the same direction, creating unwind risk.", fr: "Position détenue par de nombreux investisseurs dans la même direction, créant un risque de débouclement." } },
+        { en: "Cross-asset confirmation", fr: "cross-asset confirmation", definition: { en: "Consistent pricing signal across multiple asset classes.", fr: "Signal de pricing cohérent entre plusieurs classes d’actifs." } },
+      ],
+    },
+    {
+      id: "trade-construction-and-risk",
+      kicker: { en: "09 · TRADE CONSTRUCTION & RISK", fr: "09 · CONSTRUCTION DU TRADE & RISQUE" },
+      title: { en: "A macro view is not a trade until it has an instrument, catalyst and risk plan", fr: "Une vue macro n’est pas un trade tant qu’elle n’a pas d’instrument, catalyst et plan de risque" },
+      coreFacts: [
+        { en: "A trade thesis should specify the macro view, market mispricing and expected catalyst.", fr: "Une trade thesis doit préciser la vue macro, le mispricing de marché et le catalyst attendu." },
+        { en: "Trade expression matters because different instruments carry different convexity, carry and basis risks.", fr: "L’expression du trade compte car les instruments portent différents risques de convexity, carry et basis." },
+        { en: "Position sizing should reflect scenario loss, volatility, liquidity and correlation with the existing portfolio.", fr: "Le position sizing doit refléter scenario loss, volatilité, liquidité et corrélation avec le portefeuille existant." },
+        { en: "An invalidation point should be economic, not merely emotional or based on temporary mark-to-market pain.", fr: "Un point d’invalidation doit être économique, pas simplement émotionnel ou basé sur une perte mark-to-market temporaire." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Saying 'I think inflation will fall' is not enough. You must decide what to buy or sell, why that instrument expresses the view, what could make the thesis work and what would prove it wrong.",
+          fr: "Dire 'je pense que l’inflation va baisser' ne suffit pas. Il faut décider quoi acheter ou vendre, pourquoi cet instrument exprime la vue, ce qui peut faire fonctionner la thèse et ce qui prouverait qu’elle est fausse.",
+        },
+        Intermediate: {
+          en: "Compare several expressions of the same macro view. A rates trade, FX trade or equity-sector trade can all reflect the same thesis but with different carry, volatility and path dependency.",
+          fr: "Compare plusieurs expressions de la même vue macro. Un trade de taux, FX ou secteur actions peut refléter la même thèse mais avec différents carry, volatilité et path dependency.",
+        },
+        Professional: {
+          en: "Professional macro trading is an optimization problem: maximize expected return relative to scenario risk while minimizing unwanted exposures. The cleanest expression is often a relative-value trade that isolates the intended macro factor.",
+          fr: "Le macro trading professionnel est un problème d’optimisation : maximiser l’expected return relativement au scenario risk tout en minimisant les expositions non souhaitées. L’expression la plus propre est souvent un trade de relative value qui isole le facteur macro recherché.",
+        },
+      },
+      vocabulary: [
+        { en: "Trade expression", fr: "trade expression", definition: { en: "Specific instrument or structure used to implement an investment view.", fr: "Instrument ou structure spécifique utilisé pour mettre en œuvre une vue d’investissement." } },
+        { en: "Catalyst", fr: "catalyst", definition: { en: "Event or development expected to cause the market to reprice.", fr: "Événement ou développement attendu pour provoquer un repricing du marché." } },
+        { en: "Invalidation", fr: "invalidation", definition: { en: "Evidence demonstrating that the original thesis is no longer valid.", fr: "Preuve montrant que la thèse initiale n’est plus valide." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "macro-regime",
+      question: { en: "What are the two most useful first-order dimensions of a macro regime?", fr: "Quels sont les deux axes de premier ordre les plus utiles d’un régime macro ?" },
+      options: [
+        { id: "a", label: { en: "Growth and inflation", fr: "Croissance et inflation" } },
+        { id: "b", label: { en: "Only stock prices and dividends", fr: "Uniquement cours actions et dividendes" } },
+        { id: "c", label: { en: "Only FX and commodities", fr: "Uniquement FX et commodities" } },
+        { id: "d", label: { en: "Only GDP level", fr: "Uniquement niveau du PIB" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Growth and inflation provide a powerful first-pass framework for macro regime analysis.", fr: "Croissance et inflation fournissent un cadre de première lecture puissant pour analyser les régimes macro." },
+    },
+    {
+      id: "q2",
+      conceptKey: "surprise",
+      question: { en: "Why can a strong economic release cause markets to fall?", fr: "Pourquoi une forte publication économique peut-elle faire baisser les marchés ?" },
+      options: [
+        { id: "a", label: { en: "Because it may be weaker than expectations or trigger tighter policy pricing", fr: "Parce qu’elle peut être inférieure aux attentes ou provoquer un repricing plus restrictif de la politique" } },
+        { id: "b", label: { en: "Because strong data always reduce earnings", fr: "Parce que de fortes données réduisent toujours les earnings" } },
+        { id: "c", label: { en: "Because markets ignore expectations", fr: "Parce que les marchés ignorent les attentes" } },
+        { id: "d", label: { en: "Because central banks never matter", fr: "Parce que les banques centrales ne comptent jamais" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Market reaction depends on the surprise relative to expectations and its effect on policy pricing.", fr: "La réaction du marché dépend de la surprise relativement aux attentes et de son effet sur le pricing de politique." },
+    },
+    {
+      id: "q3",
+      conceptKey: "reaction-function",
+      question: { en: "What is a central-bank reaction function?", fr: "Qu’est-ce qu’une central-bank reaction function ?" },
+      options: [
+        { id: "a", label: { en: "A framework describing how policy responds to economic conditions", fr: "Un cadre décrivant comment la politique répond aux conditions économiques" } },
+        { id: "b", label: { en: "A corporate dividend formula", fr: "Une formule de dividende corporate" } },
+        { id: "c", label: { en: "A commodity inventory rule", fr: "Une règle d’inventaire commodity" } },
+        { id: "d", label: { en: "A stock split mechanism", fr: "Un mécanisme de stock split" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The reaction function links inflation, employment, growth and financial conditions to policy decisions.", fr: "La reaction function relie inflation, emploi, croissance et financial conditions aux décisions de politique." },
+    },
+    {
+      id: "q4",
+      conceptKey: "rates",
+      question: { en: "Which part of the yield curve is generally most sensitive to near-term policy expectations?", fr: "Quelle partie de la yield curve est généralement la plus sensible aux attentes de politique court terme ?" },
+      options: [
+        { id: "a", label: { en: "The front end", fr: "Le front end" } },
+        { id: "b", label: { en: "Only the 30-year point", fr: "Uniquement le point 30 ans" } },
+        { id: "c", label: { en: "Equity volatility", fr: "Equity volatility" } },
+        { id: "d", label: { en: "Commodity inventories", fr: "Commodity inventories" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Short-maturity rates are closely linked to expected central-bank policy over the near horizon.", fr: "Les taux courts sont étroitement liés au chemin attendu de politique de la banque centrale à court horizon." },
+    },
+    {
+      id: "q5",
+      conceptKey: "fx",
+      question: { en: "Why must FX analysis be relative?", fr: "Pourquoi l’analyse FX doit-elle être relative ?" },
+      options: [
+        { id: "a", label: { en: "Because every currency price compares two currencies", fr: "Parce que chaque prix de devise compare deux devises" } },
+        { id: "b", label: { en: "Because currencies have no interest rates", fr: "Parce que les devises n’ont pas de taux d’intérêt" } },
+        { id: "c", label: { en: "Because growth never matters", fr: "Parce que la croissance ne compte jamais" } },
+        { id: "d", label: { en: "Because FX has no valuation", fr: "Parce que le FX n’a pas de valorisation" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A currency pair is the relative price of one currency versus another.", fr: "Une paire de devises est le prix relatif d’une devise contre une autre." },
+    },
+    {
+      id: "q6",
+      conceptKey: "equity-macro",
+      question: { en: "Why can rising rates hurt equities even if earnings remain strong?", fr: "Pourquoi une hausse des taux peut-elle pénaliser les actions même si les earnings restent solides ?" },
+      options: [
+        { id: "a", label: { en: "Because higher discount rates can compress valuation multiples", fr: "Parce que des discount rates plus élevés peuvent comprimer les multiples" } },
+        { id: "b", label: { en: "Because rates never affect valuation", fr: "Parce que les taux n’affectent jamais la valorisation" } },
+        { id: "c", label: { en: "Because higher rates guarantee lower revenue", fr: "Parce que des taux plus élevés garantissent un revenue plus faible" } },
+        { id: "d", label: { en: "Because equities have no cash flows", fr: "Parce que les actions n’ont pas de cash flows" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Equity value depends on both cash-flow expectations and the discount rate applied to those cash flows.", fr: "La valeur equity dépend à la fois des attentes de cash flow et du discount rate appliqué à ces cash flows." },
+    },
+    {
+      id: "q7",
+      conceptKey: "commodities",
+      question: { en: "What does backwardation often indicate?", fr: "Qu’indique souvent la backwardation ?" },
+      options: [
+        { id: "a", label: { en: "Near-term physical tightness", fr: "Une tension physique court terme" } },
+        { id: "b", label: { en: "Guaranteed oversupply", fr: "Un excès d’offre garanti" } },
+        { id: "c", label: { en: "Zero storage costs", fr: "Des coûts de stockage nuls" } },
+        { id: "d", label: { en: "No spot demand", fr: "Aucune demande spot" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "When near-term supply is scarce relative to demand, spot and front futures can trade above later maturities.", fr: "Lorsque l’offre court terme est rare relativement à la demande, spot et futures proches peuvent trader au-dessus des maturités plus lointaines." },
+    },
+    {
+      id: "q8",
+      conceptKey: "positioning",
+      question: { en: "Why does crowded positioning matter?", fr: "Pourquoi le crowded positioning compte-t-il ?" },
+      options: [
+        { id: "a", label: { en: "Because many investors exiting the same trade can amplify price moves", fr: "Parce que de nombreux investisseurs sortant du même trade peuvent amplifier les mouvements" } },
+        { id: "b", label: { en: "Because crowded trades cannot lose", fr: "Parce que les crowded trades ne peuvent pas perdre" } },
+        { id: "c", label: { en: "Because positioning replaces fundamentals", fr: "Parce que le positioning remplace les fondamentaux" } },
+        { id: "d", label: { en: "Because liquidity becomes infinite", fr: "Parce que la liquidité devient infinie" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Crowded trades can unwind violently when many investors try to reduce similar positions at once.", fr: "Les crowded trades peuvent se déboucler violemment lorsque de nombreux investisseurs réduisent simultanément des positions similaires." },
+    },
+    {
+      id: "q9",
+      conceptKey: "cross-asset",
+      question: { en: "What is cross-asset confirmation?", fr: "Qu’est-ce que la cross-asset confirmation ?" },
+      options: [
+        { id: "a", label: { en: "Consistent signals across several asset classes", fr: "Des signaux cohérents entre plusieurs classes d’actifs" } },
+        { id: "b", label: { en: "Only one stock moving", fr: "Une seule action qui bouge" } },
+        { id: "c", label: { en: "Ignoring rates and FX", fr: "Ignorer taux et FX" } },
+        { id: "d", label: { en: "A guaranteed macro forecast", fr: "Une prévision macro garantie" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "When rates, FX, credit, equities and commodities point in a similar direction, the macro interpretation may be more robust.", fr: "Lorsque taux, FX, crédit, actions et commodities pointent dans une direction cohérente, l’interprétation macro peut être plus robuste." },
+    },
+    {
+      id: "q10",
+      conceptKey: "trade-construction",
+      question: { en: "What turns a macro opinion into a trade plan?", fr: "Qu’est-ce qui transforme une opinion macro en plan de trade ?" },
+      options: [
+        { id: "a", label: { en: "Instrument, catalyst, sizing, stop and invalidation logic", fr: "Instrument, catalyst, sizing, stop et logique d’invalidation" } },
+        { id: "b", label: { en: "Only a directional opinion", fr: "Uniquement une opinion directionnelle" } },
+        { id: "c", label: { en: "Only a chart pattern", fr: "Uniquement un chart pattern" } },
+        { id: "d", label: { en: "No risk limits", fr: "Aucune limite de risque" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A professional trade requires implementation and risk-management rules, not only a view.", fr: "Un trade professionnel exige des règles d’implémentation et de risk management, pas seulement une vue." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "You believe inflation will fall faster than the market expects while growth remains resilient. How would you translate that macro view into a trade?",
+      fr: "Tu penses que l’inflation va baisser plus vite que le marché ne l’anticipe tandis que la croissance reste résiliente. Comment transformerais-tu cette vue macro en trade ?",
+    },
+    framework: [
+      { en: "State the macro thesis and identify which part differs from market consensus.", fr: "Énoncer la thèse macro et identifier ce qui diffère du consensus de marché." },
+      { en: "Map the thesis into expected central-bank repricing, nominal yields, real yields and breakevens.", fr: "Relier la thèse au repricing attendu de la banque centrale, aux nominal yields, real yields et breakevens." },
+      { en: "Check implications for FX, equity sectors and credit to see whether the view has cross-asset confirmation.", fr: "Vérifier les implications pour FX, secteurs actions et crédit afin de voir si la vue possède une cross-asset confirmation." },
+      { en: "Compare several trade expressions and choose the one with the cleanest exposure and acceptable carry.", fr: "Comparer plusieurs expressions de trade et choisir celle offrant l’exposition la plus propre avec un carry acceptable." },
+      { en: "Define catalyst timing, entry level, target, stop and economic invalidation conditions.", fr: "Définir timing du catalyst, niveau d’entrée, target, stop et conditions économiques d’invalidation." },
+      { en: "Stress the alternative outcomes: growth rolls over, inflation reaccelerates or policy stays tighter than expected.", fr: "Stresser les scénarios alternatifs : croissance qui décroche, inflation qui réaccélère ou politique qui reste plus restrictive qu’attendu." },
+    ],
+    sample: {
+      en: "I would first separate the two elements of the thesis: faster disinflation and resilient growth. Then I would compare that with what the rates market is already pricing for the central-bank path. If the market is still pricing persistent inflation and relatively tight policy, faster disinflation could support lower front-end yields, while resilient growth may limit how far long-end yields fall. That could make a curve expression more attractive than a simple outright duration trade. I would also look at breakevens and real yields to understand whether the opportunity is primarily in inflation pricing or real-rate pricing. Then I would check FX, equity-sector and credit implications for cross-asset confirmation. Finally, I would choose the instrument with the cleanest exposure, calculate carry and scenario P&L, define the catalyst, target and stop, and specify what data would invalidate the view, such as renewed inflation acceleration or a clear deterioration in growth.",
+      fr: "Je séparerais d’abord les deux éléments de la thèse : désinflation plus rapide et croissance résiliente. Je comparerais ensuite cette vue à ce que le marché de taux price déjà pour le chemin de la banque centrale. Si le marché price encore une inflation persistante et une politique relativement restrictive, une désinflation plus rapide pourrait faire baisser les yields courts, tandis qu’une croissance résiliente pourrait limiter la baisse des yields longs. Une expression de courbe pourrait alors être plus attractive qu’un simple trade directionnel de duration. J’examinerais aussi breakevens et real yields pour déterminer si l’opportunité se situe surtout dans le pricing de l’inflation ou des real rates. Puis je vérifierais les implications FX, sectorielles actions et crédit pour obtenir une confirmation cross-asset. Enfin, je choisirais l’instrument offrant l’exposition la plus propre, calculerais carry et scenario P&L, définirais catalyst, target et stop, et préciserais quelles données invalideraient la vue, comme une réaccélération de l’inflation ou une détérioration claire de la croissance.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
