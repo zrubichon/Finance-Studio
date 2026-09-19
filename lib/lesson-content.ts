@@ -32066,7 +32066,457 @@ export const regulationEthicsLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson, hedgeFundsAlternativesLesson, portfolioConstructionLesson, behavioralFinanceLesson, structuredProductsLesson, regulationEthicsLesson];
+
+export const professionalMarketCommunicationLesson: FinanceLesson = {
+  slug: "year-3-professional-market-communication",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Professional Market Communication", fr: "Communication professionnelle des marchés" },
+  title: { en: "Professional Market Communication", fr: "Communication professionnelle des marchés" },
+  subtitle: {
+    en: "Communicate investment ideas, market moves, risks and recommendations with the clarity, structure and precision expected on professional finance desks.",
+    fr: "Communiquer idées d’investissement, mouvements de marché, risques et recommandations avec la clarté, la structure et la précision attendues dans les métiers de la finance.",
+  },
+  duration: { en: "150–185 min", fr: "150–185 min" },
+  prerequisites: [
+    { en: "Reading Financial News", fr: "Reading Financial News" },
+    { en: "Equity Research", fr: "Equity Research" },
+    { en: "Sales & Trading", fr: "Sales & Trading" },
+    { en: "Macro Trading Frameworks", fr: "Macro Trading Frameworks" },
+    { en: "Regulation & Ethics", fr: "Regulation & Ethics" },
+  ],
+  objectives: [
+    { en: "Structure market commentary around what happened, why it happened and what matters next.", fr: "Structurer un commentaire de marché autour de ce qui s’est passé, pourquoi et ce qui compte ensuite." },
+    { en: "Present an investment thesis in a concise and decision-useful format.", fr: "Présenter une investment thesis de façon concise et utile à la décision." },
+    { en: "Separate facts, interpretation, assumptions and recommendations.", fr: "Séparer faits, interprétation, hypothèses et recommandations." },
+    { en: "Adapt communication to traders, portfolio managers, clients, senior management and interviews.", fr: "Adapter la communication aux traders, portfolio managers, clients, dirigeants et entretiens." },
+    { en: "Use numbers, charts and catalysts without overwhelming the audience.", fr: "Utiliser chiffres, graphiques et catalysts sans surcharger l’audience." },
+    { en: "Communicate uncertainty, risk and confidence levels professionally.", fr: "Communiquer incertitude, risque et niveau de confiance de manière professionnelle." },
+    { en: "Write and speak with compliance-aware discipline.", fr: "Écrire et parler avec une discipline compatible avec les exigences de compliance." },
+  ],
+  overviewFlow: {
+    title: { en: "From information to decision-ready communication", fr: "De l’information à une communication utile à la décision" },
+    steps: [
+      { title: { en: "Filter", fr: "Filtrer" }, detail: { en: "Facts · signal · relevance", fr: "Faits · signal · pertinence" } },
+      { title: { en: "Structure", fr: "Structurer" }, detail: { en: "Headline · drivers · implications", fr: "Headline · drivers · implications" } },
+      { title: { en: "Support", fr: "Soutenir" }, detail: { en: "Data · valuation · catalysts", fr: "Données · valorisation · catalysts" } },
+      { title: { en: "Conclude", fr: "Conclure" }, detail: { en: "Action · risk · next watchpoints", fr: "Action · risque · prochains watchpoints" } },
+    ],
+  },
+  sections: [
+    {
+      id: "decision-useful-communication",
+      kicker: { en: "01 · DECISION-USEFUL COMMUNICATION", fr: "01 · COMMUNICATION UTILE À LA DÉCISION" },
+      title: { en: "Professional communication starts with the decision the audience needs to make", fr: "La communication professionnelle commence par la décision que l’audience doit prendre" },
+      coreFacts: [
+        { en: "Good market communication prioritizes relevance over completeness.", fr: "Une bonne communication de marché privilégie la pertinence à l’exhaustivité." },
+        { en: "The same facts should be framed differently for a trader, client or investment committee.", fr: "Les mêmes faits doivent être présentés différemment à un trader, un client ou un investment committee." },
+        { en: "A clear headline should communicate the core message before supporting detail.", fr: "Un headline clair doit transmettre le message principal avant les détails." },
+        { en: "Decision-useful communication links information to implication and action.", fr: "Une communication utile à la décision relie information, implication et action." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Do not begin by repeating everything you know. Start with the one thing the listener needs to understand, then explain why it matters.",
+          fr: "Ne commence pas par répéter tout ce que tu sais. Commence par l’élément principal que l’auditeur doit comprendre, puis explique pourquoi il compte.",
+        },
+        Intermediate: {
+          en: "A useful structure is headline, evidence, implication and next step. This keeps communication focused on decisions rather than information accumulation.",
+          fr: "Une structure utile est headline, preuves, implication et prochaine étape. Cela garde la communication centrée sur la décision plutôt que sur l’accumulation d’informations.",
+        },
+        Professional: {
+          en: "Senior audiences value compression. The communicator should preserve the economics while removing detail that does not change the decision, risk assessment or timing.",
+          fr: "Les audiences senior valorisent la capacité de synthèse. Le communicant doit préserver l’économie du sujet tout en retirant les détails qui ne changent ni la décision, ni le risque, ni le timing.",
+        },
+      },
+      vocabulary: [
+        { en: "Headline", fr: "headline", definition: { en: "One-line statement of the most important message.", fr: "Phrase résumant le message le plus important." } },
+        { en: "Decision-useful", fr: "utile à la décision", definition: { en: "Information framed to improve an actual financial decision.", fr: "Information structurée pour améliorer une décision financière réelle." } },
+      ],
+    },
+    {
+      id: "market-recap",
+      kicker: { en: "02 · MARKET RECAP", fr: "02 · MARKET RECAP" },
+      title: { en: "A strong market recap answers: what moved, why, and what to watch next", fr: "Un bon market recap répond à trois questions : qu’est-ce qui a bougé, pourquoi, et que surveiller ensuite" },
+      coreFacts: [
+        { en: "Price action should be summarized before interpretation.", fr: "Le price action doit être résumé avant l’interprétation." },
+        { en: "Drivers should be ranked by importance rather than listed equally.", fr: "Les drivers doivent être classés par importance plutôt que listés au même niveau." },
+        { en: "Cross-asset confirmation can strengthen or weaken the proposed explanation.", fr: "La confirmation cross-asset peut renforcer ou affaiblir l’explication proposée." },
+        { en: "A recap should end with forward-looking watchpoints, not only backward-looking description.", fr: "Un recap doit finir par des watchpoints prospectifs, pas seulement une description du passé." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A market recap should say what happened in stocks, bonds, currencies or commodities, then explain the main reason and what event matters next.",
+          fr: "Un market recap doit dire ce qui s’est passé sur actions, obligations, devises ou matières premières, puis expliquer la raison principale et le prochain événement important.",
+        },
+        Intermediate: {
+          en: "Avoid claiming causality too quickly. Distinguish a confirmed catalyst from a plausible interpretation, especially when several events occur together.",
+          fr: "Évite d’affirmer une causalité trop rapidement. Distingue un catalyst confirmé d’une interprétation plausible, surtout lorsque plusieurs événements se produisent simultanément.",
+        },
+        Professional: {
+          en: "A desk-quality recap combines price action, positioning, macro catalysts and market expectations. It identifies not only the event, but what the market had already priced before the event.",
+          fr: "Un recap de niveau professionnel combine price action, positioning, catalysts macro et attentes du marché. Il identifie non seulement l’événement, mais aussi ce que le marché avait déjà pricé auparavant.",
+        },
+      },
+      vocabulary: [
+        { en: "Price action", fr: "price action", definition: { en: "Observed movement and behavior of market prices.", fr: "Mouvement et comportement observés des prix de marché." } },
+        { en: "Watchpoint", fr: "watchpoint", definition: { en: "Future event or variable that may change the market view.", fr: "Événement ou variable future susceptible de modifier la vue de marché." } },
+      ],
+    },
+    {
+      id: "investment-pitch",
+      kicker: { en: "03 · INVESTMENT PITCH", fr: "03 · INVESTMENT PITCH" },
+      title: { en: "A pitch needs a differentiated view, evidence, catalyst and risk", fr: "Un pitch exige une vue différenciée, des preuves, un catalyst et un risque" },
+      coreFacts: [
+        { en: "A thesis should explain what the market may be mispricing.", fr: "Une thèse doit expliquer ce que le marché pourrait mal pricer." },
+        { en: "Evidence should focus on the few variables that drive the outcome.", fr: "Les preuves doivent se concentrer sur les quelques variables qui déterminent le résultat." },
+        { en: "Catalysts explain how and when the market might recognize the thesis.", fr: "Les catalysts expliquent comment et quand le marché pourrait reconnaître la thèse." },
+        { en: "Risks and invalidation conditions should be stated explicitly.", fr: "Les risques et conditions d’invalidation doivent être explicitement formulés." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A pitch is not a company description. It should explain why the security is attractive or unattractive now.",
+          fr: "Un pitch n’est pas une description d’entreprise. Il doit expliquer pourquoi le titre est attractif ou non maintenant.",
+        },
+        Intermediate: {
+          en: "Use a structure such as thesis, evidence, valuation, catalyst and risk. Keep each section linked to the same core investment question.",
+          fr: "Utilise une structure du type thesis, evidence, valuation, catalyst et risk. Chaque partie doit répondre à la même question d’investissement.",
+        },
+        Professional: {
+          en: "The best pitches identify a variant perception: a specific belief where your analysis differs from the market and where the payoff is attractive if you are right.",
+          fr: "Les meilleurs pitches identifient une variant perception : une croyance précise où ton analyse diffère de celle du marché et où le payoff est attractif si tu as raison.",
+        },
+      },
+      vocabulary: [
+        { en: "Variant perception", fr: "variant perception", definition: { en: "Investment view that differs meaningfully from market consensus.", fr: "Vue d’investissement différant significativement du consensus de marché." } },
+        { en: "Invalidation", fr: "invalidation", definition: { en: "Evidence showing that the original thesis is no longer valid.", fr: "Élément montrant que la thèse originale n’est plus valide." } },
+      ],
+    },
+    {
+      id: "numbers-and-charts",
+      kicker: { en: "04 · NUMBERS & CHARTS", fr: "04 · CHIFFRES & GRAPHIQUES" },
+      title: { en: "Use numbers to clarify the thesis, not to decorate the slide", fr: "Utilise les chiffres pour clarifier la thèse, pas pour décorer la slide" },
+      coreFacts: [
+        { en: "Every chart should answer one identifiable question.", fr: "Chaque graphique doit répondre à une question identifiable." },
+        { en: "The most decision-relevant number should be visually or verbally prioritized.", fr: "Le chiffre le plus utile à la décision doit être priorisé visuellement ou verbalement." },
+        { en: "Percentages, basis points, multiples and absolute values should not be mixed carelessly.", fr: "Pourcentages, basis points, multiples et valeurs absolues ne doivent pas être mélangés sans précaution." },
+        { en: "Charts should show enough history and context to avoid misleading conclusions.", fr: "Les graphiques doivent montrer suffisamment d’historique et de contexte pour éviter des conclusions trompeuses." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Do not show ten numbers if two explain the story. Say what the audience should notice in the chart.",
+          fr: "Ne montre pas dix chiffres si deux suffisent à expliquer l’histoire. Dis clairement ce que l’audience doit remarquer dans le graphique.",
+        },
+        Intermediate: {
+          en: "Choose the metric that matches the claim. If discussing valuation, show the relevant multiple relative to history or peers rather than an unrelated operating KPI.",
+          fr: "Choisis la métrique qui correspond à l’affirmation. Si tu parles de valuation, montre le multiple pertinent par rapport à l’historique ou aux peers plutôt qu’un KPI opérationnel sans rapport.",
+        },
+        Professional: {
+          en: "A chart should communicate both signal and uncertainty. Axis choice, sample period, denominator and normalization can materially alter interpretation, so presentation discipline is part of analytical integrity.",
+          fr: "Un graphique doit communiquer à la fois signal et incertitude. Choix des axes, période, dénominateur et normalisation peuvent modifier fortement l’interprétation ; la discipline de présentation fait donc partie de l’intégrité analytique.",
+        },
+      },
+      vocabulary: [
+        { en: "Basis point", fr: "basis point", definition: { en: "One hundredth of one percentage point.", fr: "Un centième de point de pourcentage." } },
+        { en: "Normalization", fr: "normalisation", definition: { en: "Adjustment making data more comparable across time, companies or scales.", fr: "Ajustement rendant les données plus comparables dans le temps, entre entreprises ou échelles." } },
+      ],
+    },
+    {
+      id: "uncertainty-and-risk",
+      kicker: { en: "05 · UNCERTAINTY & RISK", fr: "05 · INCERTITUDE & RISQUE" },
+      title: { en: "Strong communication separates conviction from certainty", fr: "Une communication solide sépare conviction et certitude" },
+      coreFacts: [
+        { en: "Financial outcomes are probabilistic, so language should reflect uncertainty.", fr: "Les résultats financiers sont probabilistes, donc le langage doit refléter l’incertitude." },
+        { en: "Base, bull and bear cases can communicate a range of outcomes more clearly than one target.", fr: "Les scénarios base, bull et bear communiquent mieux une plage de résultats qu’un seul target." },
+        { en: "Risk should be explained as a mechanism, not merely listed as a label.", fr: "Le risque doit être expliqué comme un mécanisme, pas simplement listé comme une étiquette." },
+        { en: "Confidence should increase with evidence quality, not speaking intensity.", fr: "La confiance doit augmenter avec la qualité des preuves, pas avec l’intensité du discours." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Instead of saying an outcome will definitely happen, explain what you expect, how confident you are and what could change your view.",
+          fr: "Au lieu de dire qu’un résultat va forcément arriver, explique ce que tu attends, ton niveau de confiance et ce qui pourrait changer ta vue.",
+        },
+        Intermediate: {
+          en: "Use scenario probabilities where useful and identify the variables that move the result from base case to bull or bear case.",
+          fr: "Utilise des probabilités de scénarios lorsque c’est utile et identifie les variables qui font passer du base case au bull ou bear case.",
+        },
+        Professional: {
+          en: "Professional credibility improves when uncertainty is quantified honestly. A precise but unjustified forecast is weaker than a calibrated range supported by explicit assumptions.",
+          fr: "La crédibilité professionnelle augmente lorsque l’incertitude est quantifiée honnêtement. Une prévision précise mais injustifiée est plus faible qu’une plage calibrée soutenue par des hypothèses explicites.",
+        },
+      },
+      vocabulary: [
+        { en: "Base case", fr: "base case", definition: { en: "Most central scenario under current assumptions.", fr: "Scénario central selon les hypothèses actuelles." } },
+        { en: "Scenario probability", fr: "probabilité de scénario", definition: { en: "Estimated likelihood assigned to a possible future outcome.", fr: "Probabilité estimée attribuée à un résultat futur possible." } },
+      ],
+    },
+    {
+      id: "audience-adaptation",
+      kicker: { en: "06 · AUDIENCE ADAPTATION", fr: "06 · ADAPTATION À L’AUDIENCE" },
+      title: { en: "The same analysis should sound different to a trader, PM, client and CEO", fr: "La même analyse doit être présentée différemment à un trader, un PM, un client ou un CEO" },
+      coreFacts: [
+        { en: "Traders usually prioritize timing, catalyst, liquidity and immediate market impact.", fr: "Les traders priorisent généralement timing, catalyst, liquidité et impact de marché immédiat." },
+        { en: "Portfolio managers care about expected return, downside, sizing and portfolio fit.", fr: "Les portfolio managers s’intéressent à expected return, downside, sizing et place dans le portefeuille." },
+        { en: "Clients often need context, objectives, risks and plain-language implications.", fr: "Les clients ont souvent besoin de contexte, objectifs, risques et implications en langage clair." },
+        { en: "Senior executives value concise conclusions and the decision required.", fr: "Les dirigeants valorisent les conclusions concises et la décision à prendre." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Do not give everyone the same presentation. Keep the analysis consistent but change the emphasis depending on what the listener needs.",
+          fr: "Ne donne pas exactement la même présentation à tout le monde. Garde la même analyse mais change l’accent selon les besoins de l’auditeur.",
+        },
+        Intermediate: {
+          en: "Before speaking, ask: what does this person already know, what decision are they making and what level of detail is useful?",
+          fr: "Avant de parler, demande-toi : que sait déjà cette personne, quelle décision doit-elle prendre et quel niveau de détail est utile ?",
+        },
+        Professional: {
+          en: "Audience adaptation is not simplification of truth. It is prioritization of the same facts according to decision context, time available and fiduciary responsibility.",
+          fr: "Adapter à l’audience ne signifie pas simplifier la vérité. Il s’agit de prioriser les mêmes faits selon le contexte décisionnel, le temps disponible et la responsabilité fiduciaire.",
+        },
+      },
+      vocabulary: [
+        { en: "Portfolio fit", fr: "portfolio fit", definition: { en: "How an idea affects the existing portfolio’s return, risk and exposures.", fr: "Façon dont une idée affecte return, risque et expositions du portefeuille existant." } },
+        { en: "Plain language", fr: "langage clair", definition: { en: "Clear communication avoiding unnecessary technical jargon.", fr: "Communication claire évitant le jargon technique inutile." } },
+      ],
+    },
+    {
+      id: "written-communication",
+      kicker: { en: "07 · WRITTEN COMMUNICATION", fr: "07 · COMMUNICATION ÉCRITE" },
+      title: { en: "Finance writing should be front-loaded, concise and evidence-based", fr: "L’écriture financière doit être front-loaded, concise et fondée sur des preuves" },
+      coreFacts: [
+        { en: "The first sentence should usually contain the main conclusion.", fr: "La première phrase doit généralement contenir la conclusion principale." },
+        { en: "Paragraphs should separate distinct ideas rather than mix several arguments.", fr: "Les paragraphes doivent séparer les idées distinctes plutôt que mélanger plusieurs arguments." },
+        { en: "Numbers should be sourced and assumptions clearly identified.", fr: "Les chiffres doivent être sourcés et les hypothèses clairement identifiées." },
+        { en: "Emails and notes should make the requested action explicit.", fr: "Les emails et notes doivent rendre l’action demandée explicite." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Put the answer first. Then support it. Do not make the reader search for your conclusion at the end.",
+          fr: "Mets la réponse en premier. Puis justifie-la. Ne force pas le lecteur à chercher ta conclusion à la fin.",
+        },
+        Intermediate: {
+          en: "Use short sections with informative headings, keep sentences focused and remove repeated background that does not change the conclusion.",
+          fr: "Utilise de courtes sections avec des titres informatifs, garde des phrases ciblées et supprime le contexte répété qui ne change pas la conclusion.",
+        },
+        Professional: {
+          en: "Written communication creates a permanent record. Precision of attribution, source, assumption and wording is therefore essential for both analytical quality and compliance.",
+          fr: "La communication écrite crée une trace permanente. La précision de l’attribution, des sources, hypothèses et formulations est donc essentielle pour la qualité analytique comme pour la compliance.",
+        },
+      },
+      vocabulary: [
+        { en: "Front-loading", fr: "front-loading", definition: { en: "Placing the main conclusion or request at the beginning.", fr: "Placer la conclusion ou la demande principale au début." } },
+        { en: "Attribution", fr: "attribution", definition: { en: "Clear identification of the source of a fact, estimate or opinion.", fr: "Identification claire de la source d’un fait, estimate ou opinion." } },
+      ],
+    },
+    {
+      id: "spoken-communication",
+      kicker: { en: "08 · SPOKEN COMMUNICATION", fr: "08 · COMMUNICATION ORALE" },
+      title: { en: "A strong verbal answer is structured enough to follow but natural enough to trust", fr: "Une bonne réponse orale est assez structurée pour être suivie et assez naturelle pour inspirer confiance" },
+      coreFacts: [
+        { en: "Verbal answers benefit from signposting such as first, second and finally.", fr: "Les réponses orales bénéficient de signposts comme premièrement, deuxièmement et enfin." },
+        { en: "A concise opening answer should come before detail.", fr: "Une réponse concise doit venir avant le détail." },
+        { en: "Pausing briefly is preferable to filling uncertainty with unsupported claims.", fr: "Une courte pause vaut mieux que combler l’incertitude avec des affirmations non fondées." },
+        { en: "Questions should be answered directly before adding nuance.", fr: "Il faut répondre directement à la question avant d’ajouter de la nuance." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Answer the question first, then explain. If asked why yields rose, do not begin with five minutes of background.",
+          fr: "Réponds d’abord à la question, puis explique. Si on te demande pourquoi les yields ont monté, ne commence pas par cinq minutes de contexte.",
+        },
+        Intermediate: {
+          en: "Use a three-part structure when possible: direct answer, two or three supporting reasons, and a conclusion or implication.",
+          fr: "Utilise si possible une structure en trois parties : réponse directe, deux ou trois raisons, puis conclusion ou implication.",
+        },
+        Professional: {
+          en: "Senior communication requires intellectual flexibility. If challenged, distinguish between defending the evidence and defending your ego; update the answer when the counterargument is stronger.",
+          fr: "La communication senior exige de la flexibilité intellectuelle. En cas de challenge, distingue défense des preuves et défense de l’ego ; mets à jour ta réponse lorsque le contre-argument est meilleur.",
+        },
+      },
+      vocabulary: [
+        { en: "Signposting", fr: "signposting", definition: { en: "Verbal structure helping the listener follow the logic.", fr: "Structure verbale aidant l’auditeur à suivre le raisonnement." } },
+        { en: "Executive summary", fr: "executive summary", definition: { en: "Concise summary of conclusion, evidence and implications.", fr: "Résumé concis de la conclusion, des preuves et des implications." } },
+      ],
+    },
+    {
+      id: "compliance-and-credibility",
+      kicker: { en: "09 · COMPLIANCE & CREDIBILITY", fr: "09 · COMPLIANCE & CRÉDIBILITÉ" },
+      title: { en: "Credibility depends on what you refuse to overstate", fr: "La crédibilité dépend aussi de ce que tu refuses d’exagérer" },
+      coreFacts: [
+        { en: "Facts, forecasts and opinions should be clearly distinguished.", fr: "Faits, forecasts et opinions doivent être clairement distingués." },
+        { en: "Material non-public information must not be used or improperly communicated.", fr: "La material non-public information ne doit pas être utilisée ni communiquée de manière inappropriée." },
+        { en: "Performance claims should include relevant context and avoid misleading cherry-picking.", fr: "Les affirmations de performance doivent inclure le contexte pertinent et éviter le cherry-picking trompeur." },
+        { en: "Corrections should be made quickly when an error is identified.", fr: "Les corrections doivent être effectuées rapidement lorsqu’une erreur est identifiée." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Professional communication is not about sounding certain. It is about being accurate, clear and honest about what you know and do not know.",
+          fr: "La communication professionnelle ne consiste pas à paraître certain. Elle consiste à être précis, clair et honnête sur ce que tu sais et ne sais pas.",
+        },
+        Intermediate: {
+          en: "Label estimates, forecasts and assumptions. Do not present them as historical facts, and do not omit a major risk simply because it weakens the recommendation.",
+          fr: "Identifie estimates, forecasts et hypothèses. Ne les présente pas comme des faits historiques et n’omets pas un risque majeur simplement parce qu’il affaiblit la recommandation.",
+        },
+        Professional: {
+          en: "Trust compounds over time. Analysts who distinguish evidence from opinion, correct mistakes transparently and respect information boundaries create more durable professional credibility.",
+          fr: "La confiance se construit dans le temps. Les analystes qui distinguent preuves et opinions, corrigent leurs erreurs avec transparence et respectent les limites d’information créent une crédibilité professionnelle plus durable.",
+        },
+      },
+      vocabulary: [
+        { en: "MNPI", fr: "MNPI", definition: { en: "Material non-public information.", fr: "Material non-public information / information importante non publique." } },
+        { en: "Cherry-picking", fr: "cherry-picking", definition: { en: "Selective presentation of favorable evidence while omitting relevant contrary information.", fr: "Présentation sélective de preuves favorables en omettant des informations contraires pertinentes." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "decision-useful",
+      question: { en: "What should professional financial communication prioritize?", fr: "Que doit prioriser une communication financière professionnelle ?" },
+      options: [
+        { id: "a", label: { en: "Information that changes or improves a decision", fr: "L’information qui améliore ou change une décision" } },
+        { id: "b", label: { en: "Maximum detail regardless of relevance", fr: "Le maximum de détails quelle que soit leur pertinence" } },
+        { id: "c", label: { en: "Technical jargon only", fr: "Uniquement du jargon technique" } },
+        { id: "d", label: { en: "The longest possible explanation", fr: "L’explication la plus longue possible" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Professional communication should prioritize information that matters to the audience’s decision.", fr: "La communication professionnelle doit prioriser l’information qui compte pour la décision de l’audience." },
+    },
+    {
+      id: "q2",
+      conceptKey: "market-recap",
+      question: { en: "What are the three core questions of a strong market recap?", fr: "Quelles sont les trois questions clés d’un bon market recap ?" },
+      options: [
+        { id: "a", label: { en: "What moved, why, and what matters next", fr: "Qu’est-ce qui a bougé, pourquoi, et que surveiller ensuite" } },
+        { id: "b", label: { en: "Who traded, where, and for how long", fr: "Qui a tradé, où et pendant combien de temps" } },
+        { id: "c", label: { en: "Only price, only volume, only headlines", fr: "Uniquement prix, volume et headlines" } },
+        { id: "d", label: { en: "No forward-looking information", fr: "Aucune information prospective" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A recap should combine price action, drivers and forward watchpoints.", fr: "Un recap doit combiner price action, drivers et watchpoints futurs." },
+    },
+    {
+      id: "q3",
+      conceptKey: "investment-pitch",
+      question: { en: "What distinguishes an investment pitch from a company description?", fr: "Qu’est-ce qui distingue un investment pitch d’une simple description d’entreprise ?" },
+      options: [
+        { id: "a", label: { en: "It explains mispricing, catalyst, valuation and risk", fr: "Il explique mispricing, catalyst, valuation et risque" } },
+        { id: "b", label: { en: "It only summarizes history", fr: "Il résume uniquement l’historique" } },
+        { id: "c", label: { en: "It avoids making a thesis", fr: "Il évite de formuler une thèse" } },
+        { id: "d", label: { en: "It contains no downside case", fr: "Il ne contient aucun downside case" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A pitch must explain why the security is attractive or unattractive now.", fr: "Un pitch doit expliquer pourquoi le titre est attractif ou non maintenant." },
+    },
+    {
+      id: "q4",
+      conceptKey: "charts",
+      question: { en: "What should every chart in a professional presentation do?", fr: "Que doit faire chaque graphique dans une présentation professionnelle ?" },
+      options: [
+        { id: "a", label: { en: "Answer a clear analytical question", fr: "Répondre à une question analytique claire" } },
+        { id: "b", label: { en: "Show as many variables as possible", fr: "Montrer le plus de variables possible" } },
+        { id: "c", label: { en: "Use the shortest history available", fr: "Utiliser l’historique le plus court possible" } },
+        { id: "d", label: { en: "Avoid labels and units", fr: "Éviter labels et unités" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Charts should support a specific analytical point rather than add visual noise.", fr: "Les graphiques doivent soutenir un point analytique précis plutôt qu’ajouter du bruit visuel." },
+    },
+    {
+      id: "q5",
+      conceptKey: "uncertainty",
+      question: { en: "How should uncertainty be communicated?", fr: "Comment faut-il communiquer l’incertitude ?" },
+      options: [
+        { id: "a", label: { en: "With scenarios, assumptions and calibrated confidence", fr: "Avec scénarios, hypothèses et confiance calibrée" } },
+        { id: "b", label: { en: "By pretending the forecast is certain", fr: "En prétendant que la prévision est certaine" } },
+        { id: "c", label: { en: "By hiding downside cases", fr: "En cachant les downside cases" } },
+        { id: "d", label: { en: "By avoiding any conclusion", fr: "En évitant toute conclusion" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Professional confidence should be proportional to evidence and uncertainty.", fr: "La confiance professionnelle doit être proportionnelle aux preuves et à l’incertitude." },
+    },
+    {
+      id: "q6",
+      conceptKey: "audience",
+      question: { en: "Why adapt a message to the audience?", fr: "Pourquoi adapter un message à l’audience ?" },
+      options: [
+        { id: "a", label: { en: "Different audiences make different decisions and need different emphasis", fr: "Différentes audiences prennent différentes décisions et ont besoin d’accents différents" } },
+        { id: "b", label: { en: "To change the underlying facts", fr: "Pour changer les faits sous-jacents" } },
+        { id: "c", label: { en: "To remove all risk information", fr: "Pour retirer toute information sur les risques" } },
+        { id: "d", label: { en: "To make every message longer", fr: "Pour rendre chaque message plus long" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The analysis remains consistent while the decision-relevant emphasis changes.", fr: "L’analyse reste cohérente tandis que l’accent utile à la décision change." },
+    },
+    {
+      id: "q7",
+      conceptKey: "front-loading",
+      question: { en: "What does front-loading mean in finance writing?", fr: "Que signifie front-loading dans l’écriture financière ?" },
+      options: [
+        { id: "a", label: { en: "Put the main conclusion or request first", fr: "Mettre la conclusion ou la demande principale en premier" } },
+        { id: "b", label: { en: "Hide the conclusion at the end", fr: "Cacher la conclusion à la fin" } },
+        { id: "c", label: { en: "Start with unrelated background", fr: "Commencer par un contexte sans rapport" } },
+        { id: "d", label: { en: "Avoid recommendations", fr: "Éviter les recommandations" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Front-loading makes the key message immediately visible.", fr: "Le front-loading rend le message clé immédiatement visible." },
+    },
+    {
+      id: "q8",
+      conceptKey: "spoken-structure",
+      question: { en: "What is a useful structure for a verbal finance answer?", fr: "Quelle est une structure utile pour une réponse orale en finance ?" },
+      options: [
+        { id: "a", label: { en: "Direct answer, supporting reasons, implication", fr: "Réponse directe, raisons, implication" } },
+        { id: "b", label: { en: "Long background, no answer", fr: "Long contexte, sans réponse" } },
+        { id: "c", label: { en: "Only technical definitions", fr: "Uniquement des définitions techniques" } },
+        { id: "d", label: { en: "Answer a different question", fr: "Répondre à une autre question" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A direct answer followed by a small number of supporting points is easy to follow and decision-useful.", fr: "Une réponse directe suivie de quelques points de soutien est facile à suivre et utile à la décision." },
+    },
+    {
+      id: "q9",
+      conceptKey: "fact-opinion",
+      question: { en: "Why distinguish facts, forecasts and opinions?", fr: "Pourquoi distinguer faits, forecasts et opinions ?" },
+      options: [
+        { id: "a", label: { en: "To preserve analytical clarity and compliance", fr: "Pour préserver clarté analytique et compliance" } },
+        { id: "b", label: { en: "Because forecasts are always facts", fr: "Parce que les forecasts sont toujours des faits" } },
+        { id: "c", label: { en: "Because opinions need no evidence", fr: "Parce que les opinions n’ont besoin d’aucune preuve" } },
+        { id: "d", label: { en: "To make communication more vague", fr: "Pour rendre la communication plus vague" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Clear labeling prevents assumptions or views from being mistaken for established facts.", fr: "Une distinction claire évite que des hypothèses ou vues soient prises pour des faits établis." },
+    },
+    {
+      id: "q10",
+      conceptKey: "credibility",
+      question: { en: "What strengthens long-term professional credibility?", fr: "Qu’est-ce qui renforce la crédibilité professionnelle à long terme ?" },
+      options: [
+        { id: "a", label: { en: "Accurate sourcing, calibrated claims and transparent corrections", fr: "Sources précises, affirmations calibrées et corrections transparentes" } },
+        { id: "b", label: { en: "Never admitting uncertainty", fr: "Ne jamais admettre d’incertitude" } },
+        { id: "c", label: { en: "Hiding mistakes", fr: "Cacher les erreurs" } },
+        { id: "d", label: { en: "Overstating every recommendation", fr: "Exagérer chaque recommandation" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Credibility compounds when communication remains accurate, transparent and disciplined.", fr: "La crédibilité se construit lorsque la communication reste précise, transparente et disciplinée." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Give me a 90-second market update after a major economic data release.",
+      fr: "Donne-moi un market update de 90 secondes après une importante publication économique.",
+    },
+    framework: [
+      { en: "Open with the market-moving headline and whether the release beat or missed expectations.", fr: "Commencer par le headline qui fait bouger le marché et préciser si la donnée dépasse ou manque les attentes." },
+      { en: "Summarize the immediate moves in rates, FX and equities.", fr: "Résumer les mouvements immédiats sur taux, FX et actions." },
+      { en: "Explain the main transmission channel through policy expectations or growth/inflation pricing.", fr: "Expliquer le principal canal via attentes de politique ou pricing croissance/inflation." },
+      { en: "Distinguish confirmed facts from your interpretation.", fr: "Distinguer les faits confirmés de ton interprétation." },
+      { en: "End with the next catalyst or risk that could change the view.", fr: "Finir par le prochain catalyst ou risque susceptible de changer la vue." },
+    ],
+    sample: {
+      en: "The key takeaway is that the data came in stronger than expected, which pushed markets to price a slightly tighter policy path. Front-end yields moved higher first because they are most sensitive to near-term central-bank expectations, the currency strengthened, and equities initially weakened as discount rates rose. The important point is that the market reaction reflects the surprise relative to consensus rather than the absolute level of the data alone. My interpretation is that the release reduces the urgency for policy easing, but I would not treat one number as a full regime change. The next things I would watch are follow-up inflation data, labor-market revisions and central-bank communication to see whether this repricing is confirmed.",
+      fr: "Le point principal est que la donnée est sortie plus forte que prévu, ce qui a poussé le marché à pricer un chemin de politique légèrement plus restrictif. Les yields courts ont d’abord monté car ils sont les plus sensibles aux attentes de banque centrale à court terme, la devise s’est renforcée et les actions ont initialement reculé avec la hausse des discount rates. Le point important est que la réaction vient de la surprise par rapport au consensus, pas seulement du niveau absolu de la donnée. Mon interprétation est que cette publication réduit l’urgence d’un easing, mais je ne considérerais pas une seule donnée comme un changement complet de régime. Je surveillerais ensuite les prochaines données d’inflation, les révisions du marché du travail et la communication de la banque centrale pour voir si ce repricing est confirmé.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson, hedgeFundsAlternativesLesson, portfolioConstructionLesson, behavioralFinanceLesson, structuredProductsLesson, regulationEthicsLesson, professionalMarketCommunicationLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
