@@ -29743,7 +29743,488 @@ export const macroTradingFrameworksLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson];
+
+export const hedgeFundsAlternativesLesson: FinanceLesson = {
+  slug: "year-3-hedge-funds-alternatives",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Hedge Funds & Alternatives", fr: "Hedge Funds & Alternatives / Investissements alternatifs" },
+  title: { en: "Hedge Funds & Alternatives", fr: "Hedge Funds & Alternatives / Investissements alternatifs" },
+  subtitle: {
+    en: "Understand hedge-fund strategies, private markets, real assets and alternative risk premia through return drivers, liquidity, leverage, fees, due diligence and portfolio construction.",
+    fr: "Comprendre les stratégies hedge funds, marchés privés, real assets et alternative risk premia à travers drivers de return, liquidité, leverage, fees, due diligence et construction de portefeuille.",
+  },
+  duration: { en: "170–210 min", fr: "170–210 min" },
+  prerequisites: [
+    { en: "Portfolio Theory & CAPM", fr: "Portfolio Theory & CAPM" },
+    { en: "Asset Management", fr: "Asset Management" },
+    { en: "Private Equity", fr: "Private Equity" },
+    { en: "Risk Management", fr: "Risk Management" },
+    { en: "Macro Trading Frameworks", fr: "Macro Trading Frameworks" },
+  ],
+  objectives: [
+    { en: "Distinguish major hedge-fund strategy families and their return drivers.", fr: "Distinguer les principales familles de stratégies hedge funds et leurs drivers de return." },
+    { en: "Understand how leverage, shorting and derivatives change hedge-fund risk.", fr: "Comprendre comment leverage, shorting et dérivés modifient le risque des hedge funds." },
+    { en: "Compare private equity, private credit, real estate, infrastructure and commodities.", fr: "Comparer private equity, private credit, immobilier, infrastructure et commodities." },
+    { en: "Analyze alternative investments using liquidity, valuation and cash-flow characteristics.", fr: "Analyser les investissements alternatifs via liquidité, valorisation et caractéristiques de cash flow." },
+    { en: "Evaluate performance using alpha, beta, Sharpe, drawdown and downside metrics.", fr: "Évaluer la performance avec alpha, beta, Sharpe, drawdown et métriques downside." },
+    { en: "Understand management fees, performance fees, hurdle rates and high-water marks.", fr: "Comprendre management fees, performance fees, hurdle rates et high-water marks." },
+    { en: "Conduct qualitative and quantitative manager due diligence.", fr: "Conduire une due diligence qualitative et quantitative d’un manager." },
+  ],
+  overviewFlow: {
+    title: { en: "From strategy identification to allocation decision", fr: "De l’identification de stratégie à la décision d’allocation" },
+    steps: [
+      { title: { en: "Classify", fr: "Classifier" }, detail: { en: "Strategy · exposure · liquidity", fr: "Stratégie · exposition · liquidité" } },
+      { title: { en: "Measure", fr: "Mesurer" }, detail: { en: "Return · drawdown · leverage · beta", fr: "Return · drawdown · leverage · beta" } },
+      { title: { en: "Diligence", fr: "Diligenter" }, detail: { en: "Process · controls · incentives", fr: "Process · contrôles · incentives" } },
+      { title: { en: "Allocate", fr: "Allouer" }, detail: { en: "Diversification · liquidity · sizing", fr: "Diversification · liquidité · sizing" } },
+    ],
+  },
+  sections: [
+    {
+      id: "what-are-alternatives",
+      kicker: { en: "01 · WHAT ARE ALTERNATIVES?", fr: "01 · QUE SONT LES ALTERNATIFS ?" },
+      title: { en: "Alternatives are defined more by structure and return source than by a single asset class", fr: "Les alternatifs se définissent davantage par leur structure et leurs sources de return que par une seule asset class" },
+      coreFacts: [
+        { en: "Alternative investments include hedge funds, private equity, private credit, real estate, infrastructure, commodities and other non-traditional exposures.", fr: "Les investissements alternatifs incluent hedge funds, private equity, private credit, immobilier, infrastructure, commodities et autres expositions non traditionnelles." },
+        { en: "Many alternatives trade liquidity for the possibility of differentiated return streams or illiquidity premia.", fr: "De nombreux alternatifs échangent de la liquidité contre la possibilité de returns différenciés ou d’illiquidity premia." },
+        { en: "Alternative strategies can use leverage, short selling and derivatives more extensively than traditional long-only portfolios.", fr: "Les stratégies alternatives peuvent utiliser davantage leverage, short selling et dérivés que les portefeuilles long-only traditionnels." },
+        { en: "Diversification benefits depend on true economic exposures, not the label 'alternative'.", fr: "Les bénéfices de diversification dépendent des vraies expositions économiques, pas de l’étiquette 'alternative'." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Traditional portfolios usually focus on public stocks and bonds. Alternatives include investments or strategies that behave differently, such as private companies, private loans, real estate or hedge funds.",
+          fr: "Les portefeuilles traditionnels se concentrent surtout sur actions et obligations cotées. Les alternatifs incluent des investissements ou stratégies différents comme entreprises privées, prêts privés, immobilier ou hedge funds.",
+        },
+        Intermediate: {
+          en: "The key is to identify the underlying exposure. A hedge fund may look different from a mutual fund operationally but still carry equity beta, credit beta or duration risk.",
+          fr: "La clé est d’identifier l’exposition sous-jacente. Un hedge fund peut sembler différent d’un mutual fund opérationnellement tout en portant equity beta, credit beta ou duration risk.",
+        },
+        Professional: {
+          en: "Institutional allocation should decompose alternative returns into market beta, alternative risk premia, illiquidity premia, leverage and manager alpha. This prevents paying hedge-fund-like fees for exposures that can be replicated cheaply.",
+          fr: "L’allocation institutionnelle doit décomposer les returns alternatifs en market beta, alternative risk premia, illiquidity premia, leverage et manager alpha. Cela évite de payer des fees de hedge fund pour des expositions réplicables à faible coût.",
+        },
+      },
+      vocabulary: [
+        { en: "Illiquidity premium", fr: "illiquidity premium", definition: { en: "Potential extra return demanded for holding assets that are difficult to sell quickly.", fr: "Return supplémentaire potentiel exigé pour détenir des actifs difficiles à vendre rapidement." } },
+        { en: "Alternative risk premium", fr: "alternative risk premium", definition: { en: "Systematic return source outside traditional long-only equity and bond beta.", fr: "Source systématique de return en dehors du beta traditionnel actions et obligations." } },
+      ],
+    },
+    {
+      id: "hedge-fund-strategies",
+      kicker: { en: "02 · HEDGE-FUND STRATEGIES", fr: "02 · STRATÉGIES HEDGE FUNDS" },
+      title: { en: "Different hedge-fund strategies earn returns from very different sources", fr: "Les stratégies hedge funds génèrent leurs returns à partir de sources très différentes" },
+      coreFacts: [
+        { en: "Equity long/short combines long positions with short positions and may target lower net market exposure than long-only investing.", fr: "L’equity long/short combine positions longues et shorts et peut viser une exposition nette plus faible qu’un portefeuille long-only." },
+        { en: "Global macro expresses views across rates, FX, equities and commodities.", fr: "Le global macro exprime des vues sur taux, FX, actions et commodities." },
+        { en: "Event-driven strategies focus on mergers, restructurings, spin-offs and other corporate events.", fr: "Les stratégies event-driven se concentrent sur fusions, restructurations, spin-offs et autres événements corporate." },
+        { en: "Relative-value strategies seek pricing discrepancies between related securities rather than broad market direction.", fr: "Les stratégies relative-value cherchent des écarts de pricing entre titres liés plutôt qu’une direction générale du marché." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A hedge fund is not one strategy. One fund may buy cheap stocks and short expensive ones, another may trade central-bank policy, and another may focus on merger situations.",
+          fr: "Un hedge fund n’est pas une stratégie unique. Un fonds peut acheter des actions bon marché et shorter des actions chères, un autre trader les banques centrales, un autre se concentrer sur les fusions.",
+        },
+        Intermediate: {
+          en: "When evaluating a fund, ask what actually drives P&L: market direction, security selection, spread convergence, volatility, carry, event resolution or leverage.",
+          fr: "Lorsqu’on évalue un fonds, demande ce qui génère réellement le P&L : direction du marché, security selection, convergence de spread, volatilité, carry, résolution d’événement ou leverage.",
+        },
+        Professional: {
+          en: "Strategy labels can hide large differences in implementation. Two equity long/short funds can differ materially in gross exposure, net exposure, factor tilts, concentration, liquidity and short-book quality.",
+          fr: "Les labels de stratégie peuvent cacher de fortes différences d’implémentation. Deux fonds equity long/short peuvent différer fortement en gross exposure, net exposure, factor tilts, concentration, liquidité et qualité du short book.",
+        },
+      },
+      comparison: {
+        title: { en: "Selected hedge-fund strategies", fr: "Quelques stratégies hedge funds" },
+        headers: [{ en: "Strategy", fr: "Stratégie" }, { en: "Primary return source", fr: "Source principale de return" }, { en: "Main risk", fr: "Risque principal" }],
+        rows: [
+          { cells: [{ en: "Equity long/short", fr: "Equity long/short" }, { en: "Stock selection + net market exposure", fr: "Stock selection + exposition nette marché" }, { en: "Factor / short squeeze / beta", fr: "Factor / short squeeze / beta" }] },
+          { cells: [{ en: "Global macro", fr: "Global macro" }, { en: "Macro views across assets", fr: "Vues macro cross-asset" }, { en: "Timing / leverage / regime shift", fr: "Timing / leverage / changement de régime" }] },
+          { cells: [{ en: "Event-driven", fr: "Event-driven" }, { en: "Event resolution", fr: "Résolution d’événement" }, { en: "Deal break / legal risk", fr: "Échec du deal / risque juridique" }] },
+          { cells: [{ en: "Relative value", fr: "Relative value" }, { en: "Spread convergence", fr: "Convergence de spread" }, { en: "Basis widening / leverage", fr: "Élargissement du basis / leverage" }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Gross exposure", fr: "gross exposure", definition: { en: "Sum of absolute long and short exposures.", fr: "Somme des expositions longues et shorts en valeur absolue." } },
+        { en: "Net exposure", fr: "net exposure", definition: { en: "Long exposure minus short exposure.", fr: "Exposition longue moins exposition short." } },
+        { en: "Event-driven", fr: "event-driven", definition: { en: "Strategy focused on securities affected by corporate events.", fr: "Stratégie centrée sur des titres affectés par des événements corporate." } },
+      ],
+    },
+    {
+      id: "leverage-shorting-and-liquidity",
+      kicker: { en: "03 · LEVERAGE, SHORTING & LIQUIDITY", fr: "03 · LEVERAGE, SHORTING & LIQUIDITÉ" },
+      title: { en: "Leverage can turn small mispricings into large profits — or large losses", fr: "Le leverage peut transformer de petits mispricings en gros profits — ou grosses pertes" },
+      coreFacts: [
+        { en: "Leverage magnifies both gains and losses.", fr: "Le leverage amplifie gains et pertes." },
+        { en: "Short positions face asymmetric risk because potential losses can exceed the initial short-sale proceeds.", fr: "Les positions short portent un risque asymétrique car les pertes potentielles peuvent dépasser le produit initial de la vente." },
+        { en: "Prime brokers provide financing, securities lending, custody and operational services to hedge funds.", fr: "Les prime brokers fournissent financement, securities lending, custody et services opérationnels aux hedge funds." },
+        { en: "Liquidity mismatch can become dangerous when a fund offers investors frequent redemptions while holding hard-to-sell assets.", fr: "Un liquidity mismatch peut devenir dangereux lorsqu’un fonds offre des redemptions fréquentes tout en détenant des actifs difficiles à vendre." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a fund borrows money to invest, a 5% asset move can become a much larger percentage change in the fund’s equity. That works both ways.",
+          fr: "Si un fonds emprunte pour investir, un mouvement de 5 % de l’actif peut devenir une variation beaucoup plus grande de l’equity du fonds. Cela fonctionne dans les deux sens.",
+        },
+        Intermediate: {
+          en: "Shorting adds borrow cost, recall risk and squeeze risk. Leverage also creates margin-call risk when asset values move against the portfolio.",
+          fr: "Shorter ajoute borrow cost, recall risk et squeeze risk. Le leverage crée aussi un margin-call risk lorsque les actifs évoluent contre le portefeuille.",
+        },
+        Professional: {
+          en: "Risk should be measured using gross and net exposures, financing terms, liquidity horizons, margin requirements and stress scenarios. Apparent diversification can disappear if multiple positions require liquidation under the same funding shock.",
+          fr: "Le risque doit être mesuré via gross et net exposures, conditions de financement, horizons de liquidité, margin requirements et scénarios de stress. Une diversification apparente peut disparaître si plusieurs positions doivent être liquidées lors du même funding shock.",
+        },
+      },
+      formula: {
+        label: { en: "Simple leverage ratio", fr: "Ratio simple de leverage" },
+        expression: "Leverage ≈ Gross Asset Exposure / Fund Equity",
+        explanation: { en: "Higher leverage increases sensitivity of fund equity to changes in asset value.", fr: "Un leverage plus élevé augmente la sensibilité de l’equity du fonds aux variations de valeur des actifs." },
+      },
+      vocabulary: [
+        { en: "Prime broker", fr: "prime broker", definition: { en: "Institution providing financing, securities lending, execution and operational services to hedge funds.", fr: "Institution fournissant financement, securities lending, exécution et services opérationnels aux hedge funds." } },
+        { en: "Short squeeze", fr: "short squeeze", definition: { en: "Rapid price rise forcing short sellers to cover positions, amplifying the move.", fr: "Hausse rapide du prix forçant les shorts à racheter leurs positions et amplifiant le mouvement." } },
+        { en: "Liquidity mismatch", fr: "liquidity mismatch", definition: { en: "Mismatch between investor redemption terms and liquidity of portfolio assets.", fr: "Décalage entre conditions de redemption des investisseurs et liquidité des actifs du portefeuille." } },
+      ],
+    },
+    {
+      id: "private-markets",
+      kicker: { en: "04 · PRIVATE MARKETS", fr: "04 · MARCHÉS PRIVÉS" },
+      title: { en: "Private markets exchange public-market liquidity for control, structure and long-term capital", fr: "Les marchés privés échangent la liquidité publique contre contrôle, structuration et capital long terme" },
+      coreFacts: [
+        { en: "Private equity seeks value creation through operational improvement, growth, leverage and exit valuation.", fr: "Le private equity cherche la création de valeur via amélioration opérationnelle, croissance, leverage et exit valuation." },
+        { en: "Private credit provides negotiated debt financing outside traditional public bond markets.", fr: "Le private credit fournit des financements de dette négociés hors marchés obligataires publics traditionnels." },
+        { en: "Private assets are valued less frequently and often using appraisal or model-based marks.", fr: "Les actifs privés sont valorisés moins fréquemment et souvent via appraisal ou modèles." },
+        { en: "Illiquidity can create return opportunities but also reduces flexibility during stress.", fr: "L’illiquidité peut créer des opportunités de return mais réduit aussi la flexibilité en période de stress." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Private investments are not traded every second on an exchange. Investors usually commit money for years and accept limited ability to exit early.",
+          fr: "Les investissements privés ne tradent pas chaque seconde en bourse. Les investisseurs engagent généralement leur capital pendant plusieurs années et acceptent une faible possibilité de sortie anticipée.",
+        },
+        Intermediate: {
+          en: "Evaluate private investments through entry valuation, cash-flow generation, leverage, manager execution, exit assumptions and timing of capital calls and distributions.",
+          fr: "Évalue les investissements privés via entry valuation, génération de cash flow, leverage, exécution du manager, hypothèses d’exit et timing des capital calls et distributions.",
+        },
+        Professional: {
+          en: "Private-market return analysis should distinguish true economic alpha from leverage, sector selection, stale marks and public-market beta. PME-style benchmarking can be more informative than comparing IRRs mechanically.",
+          fr: "L’analyse des returns private markets doit distinguer vrai alpha économique, leverage, sélection sectorielle, marks lissés et public-market beta. Les benchmarks de type PME peuvent être plus informatifs qu’une simple comparaison mécanique des IRR.",
+        },
+      },
+      vocabulary: [
+        { en: "Capital call", fr: "capital call", definition: { en: "Request by a private fund for investors to contribute committed capital.", fr: "Demande d’un fonds privé aux investisseurs de verser une partie du capital engagé." } },
+        { en: "Distribution", fr: "distribution", definition: { en: "Cash or assets returned by a private fund to investors.", fr: "Cash ou actifs retournés par un fonds privé aux investisseurs." } },
+        { en: "PME", fr: "PME", definition: { en: "Public Market Equivalent framework comparing private-investment cash flows with public-market performance.", fr: "Cadre Public Market Equivalent comparant cash flows privés et performance des marchés publics." } },
+      ],
+    },
+    {
+      id: "real-assets",
+      kicker: { en: "05 · REAL ASSETS", fr: "05 · REAL ASSETS" },
+      title: { en: "Real estate and infrastructure are driven by cash yield, inflation linkage and asset-specific economics", fr: "Immobilier et infrastructure dépendent du cash yield, du lien à l’inflation et de l’économie propre aux actifs" },
+      coreFacts: [
+        { en: "Real estate value depends on rents, occupancy, operating costs, cap rates and financing conditions.", fr: "La valeur immobilière dépend des loyers, occupancy, coûts opérationnels, cap rates et conditions de financement." },
+        { en: "Infrastructure assets can offer long-duration contracted or regulated cash flows.", fr: "Les actifs infrastructure peuvent offrir des cash flows long terme contractuels ou régulés." },
+        { en: "Inflation linkage varies materially by asset, contract and regulatory framework.", fr: "Le lien à l’inflation varie fortement selon l’actif, le contrat et le cadre réglementaire." },
+        { en: "Real assets can be sensitive to interest rates because long-duration cash flows are discounted at market rates.", fr: "Les real assets peuvent être sensibles aux taux car les cash flows long terme sont actualisés aux taux de marché." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A building is valuable because of the cash rent it can generate. An infrastructure asset is valuable because it can generate long-term usage or contracted cash flows.",
+          fr: "Un immeuble vaut par le cash rent qu’il peut générer. Un actif infrastructure vaut par ses cash flows d’usage ou contractuels de long terme.",
+        },
+        Intermediate: {
+          en: "For real estate, analyze net operating income, occupancy, rent growth, capex and capitalization rates. For infrastructure, focus on contract duration, pricing mechanisms, utilization and regulatory exposure.",
+          fr: "Pour l’immobilier, analyse net operating income, occupancy, croissance des loyers, capex et capitalization rates. Pour l’infrastructure, concentre-toi sur durée des contrats, mécanismes de pricing, utilisation et exposition réglementaire.",
+        },
+        Professional: {
+          en: "Real-asset valuation should integrate asset-level cash flows with capital structure, refinancing risk and terminal capitalization assumptions. Inflation protection is only as strong as the contractual ability to reprice revenues.",
+          fr: "La valorisation des real assets doit intégrer cash flows au niveau de l’actif, structure du capital, refinancing risk et hypothèses de terminal capitalization. La protection inflation n’est aussi forte que la capacité contractuelle à repricer les revenues.",
+        },
+      },
+      formula: {
+        label: { en: "Capitalization rate", fr: "Capitalization rate" },
+        expression: "Cap Rate = Net Operating Income / Property Value",
+        explanation: { en: "A higher cap rate generally implies a lower value for the same level of NOI.", fr: "Un cap rate plus élevé implique généralement une valeur plus faible pour le même niveau de NOI." },
+      },
+      vocabulary: [
+        { en: "NOI", fr: "NOI", definition: { en: "Net operating income generated by a property before financing costs.", fr: "Net operating income généré par un bien avant coûts de financement." } },
+        { en: "Cap rate", fr: "cap rate", definition: { en: "Property income yield calculated as NOI divided by value.", fr: "Yield immobilier calculé comme NOI divisé par la valeur." } },
+      ],
+    },
+    {
+      id: "performance-analysis",
+      kicker: { en: "06 · PERFORMANCE & RISK", fr: "06 · PERFORMANCE & RISQUE" },
+      title: { en: "High returns are not impressive if they come from hidden beta or extreme drawdown risk", fr: "De forts returns sont peu impressionnants s’ils viennent d’un beta caché ou d’un risque de drawdown extrême" },
+      coreFacts: [
+        { en: "Sharpe ratio evaluates excess return relative to total volatility.", fr: "Le Sharpe ratio évalue l’excess return relativement à la volatilité totale." },
+        { en: "Maximum drawdown captures peak-to-trough loss and can reveal tail behavior hidden by standard deviation.", fr: "Le maximum drawdown capture la perte peak-to-trough et peut révéler un tail behavior caché par la standard deviation." },
+        { en: "Alpha estimates return beyond what can be explained by specified risk factors.", fr: "L’alpha estime le return au-delà de ce qui peut être expliqué par certains facteurs de risque." },
+        { en: "Alternative strategies can exhibit nonlinear returns, stale pricing and non-normal distributions.", fr: "Les stratégies alternatives peuvent présenter returns non linéaires, stale pricing et distributions non normales." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A fund that returns 10% with small fluctuations may be preferable to a fund that returns 11% but regularly loses 30%. Return must be judged together with risk.",
+          fr: "Un fonds qui fait 10 % avec de faibles fluctuations peut être préférable à un fonds qui fait 11 % mais perd régulièrement 30 %. Le return doit être jugé avec le risque.",
+        },
+        Intermediate: {
+          en: "Compare volatility, drawdown, downside deviation, beta and alpha. Examine returns during stressed markets rather than relying only on full-period averages.",
+          fr: "Compare volatilité, drawdown, downside deviation, beta et alpha. Analyse les returns pendant les marchés stressés plutôt que seulement les moyennes sur période complète.",
+        },
+        Professional: {
+          en: "For alternatives, factor regressions and nonlinear stress tests are essential. Smoothed private-market marks can artificially reduce reported volatility and inflate Sharpe ratios.",
+          fr: "Pour les alternatifs, factor regressions et stress tests non linéaires sont essentiels. Les marks lissés des marchés privés peuvent réduire artificiellement la volatilité publiée et gonfler les Sharpe ratios.",
+        },
+      },
+      formula: {
+        label: { en: "Sharpe ratio", fr: "Sharpe ratio" },
+        expression: "Sharpe = (Portfolio Return − Risk-Free Rate) / Portfolio Volatility",
+        explanation: { en: "The ratio is useful but incomplete when returns are illiquid, skewed or nonlinear.", fr: "Le ratio est utile mais incomplet lorsque les returns sont illiquides, asymétriques ou non linéaires." },
+      },
+      vocabulary: [
+        { en: "Maximum drawdown", fr: "maximum drawdown", definition: { en: "Largest peak-to-trough decline over a measurement period.", fr: "Plus forte baisse peak-to-trough sur une période de mesure." } },
+        { en: "Alpha", fr: "alpha", definition: { en: "Return unexplained by the chosen set of systematic risk factors.", fr: "Return non expliqué par l’ensemble choisi de facteurs de risque systématiques." } },
+      ],
+    },
+    {
+      id: "fees-and-incentives",
+      kicker: { en: "07 · FEES & INCENTIVES", fr: "07 · FEES & INCENTIVES" },
+      title: { en: "Fees change the economics of alternative investing materially", fr: "Les fees modifient fortement l’économie des investissements alternatifs" },
+      coreFacts: [
+        { en: "Management fees are usually charged on assets, commitments or invested capital depending on structure.", fr: "Les management fees sont généralement facturés sur assets, commitments ou invested capital selon la structure." },
+        { en: "Performance fees allocate part of investment gains to the manager.", fr: "Les performance fees attribuent une partie des gains au manager." },
+        { en: "High-water marks can prevent performance fees from being charged twice on recovery of previous losses.", fr: "Les high-water marks peuvent empêcher de facturer deux fois des performance fees sur la récupération de pertes antérieures." },
+        { en: "Hurdle rates require a minimum return before incentive fees apply.", fr: "Les hurdle rates exigent un return minimum avant application des incentive fees." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a fund earns 10%, investors may receive less than 10% because fees are deducted. In alternatives, those fees can be much larger than in passive funds.",
+          fr: "Si un fonds gagne 10 %, les investisseurs peuvent recevoir moins de 10 % car les fees sont déduits. Dans les alternatifs, ces fees peuvent être bien plus élevés que dans les fonds passifs.",
+        },
+        Intermediate: {
+          en: "Evaluate fees on a net-of-fee basis and understand the exact base on which they are charged. Performance-fee structures can strongly affect manager incentives.",
+          fr: "Évalue les fees sur une base net-of-fee et comprends précisément l’assiette sur laquelle ils sont calculés. Les structures de performance fees peuvent fortement modifier les incentives du manager.",
+        },
+        Professional: {
+          en: "Fee analysis should include management fee step-downs, transaction fees, monitoring fees, offsets, carried interest, clawbacks and whether gross-to-net value creation justifies the economics.",
+          fr: "L’analyse des fees doit inclure step-downs de management fee, transaction fees, monitoring fees, offsets, carried interest, clawbacks et vérifier si la création de valeur gross-to-net justifie l’économie.",
+        },
+      },
+      vocabulary: [
+        { en: "High-water mark", fr: "high-water mark", definition: { en: "Highest prior fund value that must be exceeded before new performance fees are charged.", fr: "Plus haute valeur antérieure du fonds qui doit être dépassée avant de nouveaux performance fees." } },
+        { en: "Hurdle rate", fr: "hurdle rate", definition: { en: "Minimum return threshold before incentive compensation applies.", fr: "Seuil minimal de return avant application de la rémunération incitative." } },
+        { en: "Carried interest", fr: "carried interest", definition: { en: "Share of private-fund investment profits allocated to the manager.", fr: "Part des profits d’un fonds privé attribuée au manager." } },
+      ],
+    },
+    {
+      id: "manager-due-diligence",
+      kicker: { en: "08 · MANAGER DUE DILIGENCE", fr: "08 · DUE DILIGENCE DU MANAGER" },
+      title: { en: "A good track record is not enough — process, people and controls matter", fr: "Un bon track record ne suffit pas — process, équipe et contrôles comptent" },
+      coreFacts: [
+        { en: "Investment due diligence evaluates strategy, edge, repeatability and portfolio construction.", fr: "L’investment due diligence évalue stratégie, edge, répétabilité et construction de portefeuille." },
+        { en: "Operational due diligence evaluates valuation, custody, compliance, service providers and internal controls.", fr: "L’operational due diligence évalue valorisation, custody, compliance, prestataires et contrôles internes." },
+        { en: "Key-person risk matters when performance depends heavily on one individual.", fr: "Le key-person risk compte lorsque la performance dépend fortement d’un individu." },
+        { en: "Capacity constraints can reduce future alpha if a successful strategy becomes too large.", fr: "Les capacity constraints peuvent réduire l’alpha futur si une stratégie à succès devient trop grande." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Before investing in a fund, you should understand who makes decisions, how those decisions are made, how risks are controlled and who verifies the assets.",
+          fr: "Avant d’investir dans un fonds, il faut comprendre qui prend les décisions, comment elles sont prises, comment les risques sont contrôlés et qui vérifie les actifs.",
+        },
+        Intermediate: {
+          en: "Separate investment skill from operational quality. A talented manager with poor controls can still create unacceptable risk.",
+          fr: "Sépare compétence d’investissement et qualité opérationnelle. Un manager talentueux avec de mauvais contrôles peut tout de même créer un risque inacceptable.",
+        },
+        Professional: {
+          en: "Manager due diligence should test whether historical alpha is attributable to a repeatable process and whether the organization is built to preserve that edge under growth, turnover, market stress and succession.",
+          fr: "La due diligence manager doit tester si l’alpha historique provient d’un process répétable et si l’organisation peut préserver cet edge malgré croissance des actifs, turnover, stress de marché et succession.",
+        },
+      },
+      vocabulary: [
+        { en: "Operational due diligence", fr: "operational due diligence", definition: { en: "Assessment of non-investment risks such as controls, valuation, custody and compliance.", fr: "Évaluation des risques non liés à l’investissement tels que contrôles, valorisation, custody et compliance." } },
+        { en: "Capacity", fr: "capacity", definition: { en: "Amount of capital a strategy can deploy before expected returns deteriorate materially.", fr: "Montant de capital qu’une stratégie peut déployer avant détérioration significative des returns attendus." } },
+      ],
+    },
+    {
+      id: "portfolio-allocation",
+      kicker: { en: "09 · PORTFOLIO ALLOCATION", fr: "09 · ALLOCATION DE PORTEFEUILLE" },
+      title: { en: "Alternatives should earn their place through portfolio-level benefits", fr: "Les alternatifs doivent justifier leur place par des bénéfices au niveau du portefeuille" },
+      coreFacts: [
+        { en: "Allocation should consider expected return, diversification, liquidity, drawdown and cash-flow commitments.", fr: "L’allocation doit considérer expected return, diversification, liquidité, drawdown et engagements de cash flow." },
+        { en: "Illiquid funds require liquidity planning because capital calls can arrive during stressed markets.", fr: "Les fonds illiquides exigent une planification de liquidité car les capital calls peuvent arriver pendant des marchés stressés." },
+        { en: "Diversification is strongest when underlying economic risk drivers differ, not merely fund names.", fr: "La diversification est plus forte lorsque les drivers économiques sous-jacents diffèrent, pas simplement les noms des fonds." },
+        { en: "Portfolio sizing should reflect both standalone risk and correlation with the rest of the portfolio.", fr: "Le sizing doit refléter à la fois le risque standalone et la corrélation avec le reste du portefeuille." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "You should not add an alternative investment just because it is different. It should improve the portfolio through better returns, diversification or protection relative to the risks and fees it adds.",
+          fr: "Il ne faut pas ajouter un investissement alternatif simplement parce qu’il est différent. Il doit améliorer le portefeuille via meilleurs returns, diversification ou protection relativement aux risques et fees ajoutés.",
+        },
+        Intermediate: {
+          en: "Model liquidity needs, expected capital calls, drawdowns and correlations before setting allocation size. A strong return asset can still be a poor fit if it creates unacceptable liquidity risk.",
+          fr: "Modélise besoins de liquidité, capital calls attendus, drawdowns et corrélations avant de fixer la taille d’allocation. Un actif à fort return peut être mal adapté s’il crée un risque de liquidité inacceptable.",
+        },
+        Professional: {
+          en: "Institutional allocation should incorporate scenario-dependent correlations, unfunded commitments, pacing models, denominator effects and the possibility that reported private-market volatility understates economic risk.",
+          fr: "L’allocation institutionnelle doit intégrer corrélations dépendantes des scénarios, unfunded commitments, pacing models, denominator effects et possibilité que la volatilité publiée des marchés privés sous-estime le risque économique.",
+        },
+      },
+      vocabulary: [
+        { en: "Unfunded commitment", fr: "unfunded commitment", definition: { en: "Capital committed to a private fund but not yet called.", fr: "Capital engagé dans un fonds privé mais pas encore appelé." } },
+        { en: "Denominator effect", fr: "denominator effect", definition: { en: "Apparent rise in illiquid-asset portfolio weight when public assets fall faster in value.", fr: "Hausse apparente du poids des actifs illiquides lorsque les actifs publics chutent plus rapidement." } },
+        { en: "Pacing", fr: "pacing", definition: { en: "Planning of private-market commitments over time to manage exposure and liquidity.", fr: "Planification des engagements private markets dans le temps pour gérer exposition et liquidité." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "alternatives-definition",
+      question: { en: "Which is an example of an alternative investment?", fr: "Quel est un exemple d’investissement alternatif ?" },
+      options: [
+        { id: "a", label: { en: "Private credit", fr: "Private credit" } },
+        { id: "b", label: { en: "Only cash in a checking account", fr: "Uniquement du cash sur un compte courant" } },
+        { id: "c", label: { en: "Only a government bond index", fr: "Uniquement un indice d’obligations gouvernementales" } },
+        { id: "d", label: { en: "Only a broad passive equity index", fr: "Uniquement un large indice actions passif" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Private credit is a major alternative asset class.", fr: "Le private credit est une importante classe d’actifs alternative." },
+    },
+    {
+      id: "q2",
+      conceptKey: "long-short",
+      question: { en: "What does net exposure equal in a long/short portfolio?", fr: "À quoi correspond la net exposure dans un portefeuille long/short ?" },
+      options: [
+        { id: "a", label: { en: "Long exposure minus short exposure", fr: "Exposition longue moins exposition short" } },
+        { id: "b", label: { en: "Long exposure plus short exposure", fr: "Exposition longue plus exposition short" } },
+        { id: "c", label: { en: "Only cash", fr: "Uniquement le cash" } },
+        { id: "d", label: { en: "Only management fees", fr: "Uniquement les management fees" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Net exposure captures directional market exposure after offsetting shorts.", fr: "La net exposure capture l’exposition directionnelle après compensation des shorts." },
+    },
+    {
+      id: "q3",
+      conceptKey: "leverage",
+      question: { en: "What does leverage do?", fr: "Que fait le leverage ?" },
+      options: [
+        { id: "a", label: { en: "Magnifies gains and losses", fr: "Amplifie gains et pertes" } },
+        { id: "b", label: { en: "Eliminates all risk", fr: "Élimine tout risque" } },
+        { id: "c", label: { en: "Guarantees alpha", fr: "Garantit l’alpha" } },
+        { id: "d", label: { en: "Removes margin calls", fr: "Supprime les margin calls" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Leverage increases sensitivity of fund equity to changes in asset values.", fr: "Le leverage augmente la sensibilité de l’equity du fonds aux variations de valeur des actifs." },
+    },
+    {
+      id: "q4",
+      conceptKey: "private-markets",
+      question: { en: "What is a capital call?", fr: "Qu’est-ce qu’un capital call ?" },
+      options: [
+        { id: "a", label: { en: "A request for investors to fund committed capital", fr: "Une demande aux investisseurs de verser du capital engagé" } },
+        { id: "b", label: { en: "A public-company dividend", fr: "Un dividende d’une société cotée" } },
+        { id: "c", label: { en: "A bond coupon", fr: "Un coupon obligataire" } },
+        { id: "d", label: { en: "A short squeeze", fr: "Un short squeeze" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Private funds call committed capital as investments are made.", fr: "Les fonds privés appellent le capital engagé au fur et à mesure des investissements." },
+    },
+    {
+      id: "q5",
+      conceptKey: "real-estate",
+      question: { en: "If NOI stays constant and the cap rate rises, what generally happens to property value?", fr: "Si le NOI reste constant et que le cap rate augmente, qu’arrive-t-il généralement à la valeur du bien ?" },
+      options: [
+        { id: "a", label: { en: "It falls", fr: "Elle baisse" } },
+        { id: "b", label: { en: "It rises automatically", fr: "Elle monte automatiquement" } },
+        { id: "c", label: { en: "It becomes zero by definition", fr: "Elle devient zéro par définition" } },
+        { id: "d", label: { en: "It is unaffected", fr: "Elle n’est pas affectée" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Value equals NOI divided by cap rate, so a higher cap rate lowers value all else equal.", fr: "La valeur est égale au NOI divisé par le cap rate, donc un cap rate plus élevé réduit la valeur toutes choses égales par ailleurs." },
+    },
+    {
+      id: "q6",
+      conceptKey: "drawdown",
+      question: { en: "What does maximum drawdown measure?", fr: "Que mesure le maximum drawdown ?" },
+      options: [
+        { id: "a", label: { en: "Largest peak-to-trough decline", fr: "La plus forte baisse peak-to-trough" } },
+        { id: "b", label: { en: "Average annual fee", fr: "La fee annuelle moyenne" } },
+        { id: "c", label: { en: "Only upside volatility", fr: "Uniquement la volatilité upside" } },
+        { id: "d", label: { en: "Only beta", fr: "Uniquement le beta" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Maximum drawdown captures the worst cumulative decline from a prior peak.", fr: "Le maximum drawdown capture la pire baisse cumulée depuis un pic précédent." },
+    },
+    {
+      id: "q7",
+      conceptKey: "high-water-mark",
+      question: { en: "What is the purpose of a high-water mark?", fr: "À quoi sert un high-water mark ?" },
+      options: [
+        { id: "a", label: { en: "To avoid charging performance fees twice on recovered losses", fr: "À éviter de facturer deux fois des performance fees sur des pertes récupérées" } },
+        { id: "b", label: { en: "To guarantee positive returns", fr: "À garantir des returns positifs" } },
+        { id: "c", label: { en: "To eliminate management fees", fr: "À éliminer les management fees" } },
+        { id: "d", label: { en: "To remove liquidity risk", fr: "À supprimer le liquidity risk" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The fund generally must exceed its prior peak before earning new incentive fees.", fr: "Le fonds doit généralement dépasser son précédent pic avant de gagner de nouvelles incentive fees." },
+    },
+    {
+      id: "q8",
+      conceptKey: "operational-due-diligence",
+      question: { en: "What does operational due diligence focus on?", fr: "Sur quoi porte l’operational due diligence ?" },
+      options: [
+        { id: "a", label: { en: "Controls, valuation, custody, compliance and service providers", fr: "Contrôles, valorisation, custody, compliance et prestataires" } },
+        { id: "b", label: { en: "Only return forecasts", fr: "Uniquement les forecasts de return" } },
+        { id: "c", label: { en: "Only macro views", fr: "Uniquement les vues macro" } },
+        { id: "d", label: { en: "Only stock picking", fr: "Uniquement le stock picking" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Operational due diligence assesses non-investment risks that can still threaten investor capital.", fr: "L’operational due diligence évalue les risques non liés à l’investissement qui peuvent tout de même menacer le capital." },
+    },
+    {
+      id: "q9",
+      conceptKey: "capacity",
+      question: { en: "Why can too much capital hurt a strategy?", fr: "Pourquoi trop de capital peut-il nuire à une stratégie ?" },
+      options: [
+        { id: "a", label: { en: "Because opportunities may not scale without reducing expected returns", fr: "Parce que les opportunités peuvent ne pas scaler sans réduire les returns attendus" } },
+        { id: "b", label: { en: "Because more capital always increases alpha", fr: "Parce que plus de capital augmente toujours l’alpha" } },
+        { id: "c", label: { en: "Because liquidity becomes infinite", fr: "Parce que la liquidité devient infinie" } },
+        { id: "d", label: { en: "Because fees disappear", fr: "Parce que les fees disparaissent" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Many strategies face capacity limits where additional capital dilutes the opportunity set.", fr: "De nombreuses stratégies ont des limites de capacity où du capital supplémentaire dilue les opportunités." },
+    },
+    {
+      id: "q10",
+      conceptKey: "allocation",
+      question: { en: "What should justify an alternative investment’s place in a portfolio?", fr: "Qu’est-ce qui doit justifier la place d’un alternatif dans un portefeuille ?" },
+      options: [
+        { id: "a", label: { en: "Portfolio-level return, diversification or protection benefits relative to risks and fees", fr: "Des bénéfices de return, diversification ou protection au niveau portefeuille relativement aux risques et fees" } },
+        { id: "b", label: { en: "Only the fact that it is called alternative", fr: "Uniquement le fait qu’il soit appelé alternatif" } },
+        { id: "c", label: { en: "Only a high headline return", fr: "Uniquement un headline return élevé" } },
+        { id: "d", label: { en: "No liquidity analysis", fr: "Aucune analyse de liquidité" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Alternatives should improve the overall portfolio after accounting for risk, liquidity and fees.", fr: "Les alternatifs doivent améliorer le portefeuille global après prise en compte du risque, de la liquidité et des fees." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "How would you evaluate whether a hedge fund deserves an allocation in an institutional portfolio?",
+      fr: "Comment évaluerais-tu si un hedge fund mérite une allocation dans un portefeuille institutionnel ?",
+    },
+    framework: [
+      { en: "Understand the strategy and identify the true sources of return and risk.", fr: "Comprendre la stratégie et identifier les vraies sources de return et de risque." },
+      { en: "Decompose historical performance into beta, factor exposures, leverage and alpha.", fr: "Décomposer la performance historique en beta, factor exposures, leverage et alpha." },
+      { en: "Evaluate drawdowns, liquidity, gross/net exposure and stress behavior.", fr: "Évaluer drawdowns, liquidité, gross/net exposure et comportement en stress." },
+      { en: "Assess team quality, investment process, risk controls and operational infrastructure.", fr: "Évaluer qualité de l’équipe, investment process, risk controls et infrastructure opérationnelle." },
+      { en: "Review fee structure, high-water marks, liquidity terms and alignment of incentives.", fr: "Revoir structure de fees, high-water marks, conditions de liquidité et alignement des incentives." },
+      { en: "Measure how the fund changes portfolio-level risk, correlation and liquidity needs.", fr: "Mesurer comment le fonds modifie risque, corrélation et besoins de liquidité du portefeuille global." },
+    ],
+    sample: {
+      en: "I would begin by understanding exactly how the fund makes money rather than relying on the strategy label. I would identify whether returns come from market beta, security selection, carry, leverage, volatility or event risk. Then I would analyze historical performance using drawdowns, Sharpe, factor exposures, gross and net exposure and behavior during stress periods. I would also test whether reported alpha looks repeatable or whether it can be explained by hidden beta or illiquidity. Next, I would conduct qualitative and operational due diligence on the team, process, risk controls, valuation, custody and service providers. I would review management and performance fees, high-water marks and redemption terms because these affect the investor’s net economics. Finally, I would evaluate the fund in portfolio context: whether it improves diversification and expected return enough to justify its liquidity, fee and operational risks.",
+      fr: "Je commencerais par comprendre précisément comment le fonds gagne de l’argent plutôt que de me fier au label de stratégie. J’identifierais si les returns viennent du market beta, de la security selection, du carry, du leverage, de la volatilité ou de l’event risk. Ensuite, j’analyserais la performance historique via drawdowns, Sharpe, factor exposures, gross et net exposure et comportement en périodes de stress. Je testerais également si l’alpha publié semble répétable ou s’il peut être expliqué par un beta caché ou de l’illiquidité. Puis je mènerais une due diligence qualitative et opérationnelle sur l’équipe, le process, les risk controls, la valorisation, la custody et les prestataires. Je reverrais management fees, performance fees, high-water marks et conditions de redemption car ils affectent l’économie nette pour l’investisseur. Enfin, j’évaluerais le fonds dans le contexte du portefeuille : améliore-t-il suffisamment diversification et expected return pour justifier ses risques de liquidité, fees et opérationnels ?",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson, hedgeFundsAlternativesLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
