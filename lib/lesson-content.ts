@@ -31140,7 +31140,469 @@ export const behavioralFinanceLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson, hedgeFundsAlternativesLesson, portfolioConstructionLesson, behavioralFinanceLesson];
+
+export const structuredProductsLesson: FinanceLesson = {
+  slug: "year-3-structured-products",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Structured Products", fr: "Produits structurés / Structured Products" },
+  title: { en: "Structured Products", fr: "Produits structurés / Structured Products" },
+  subtitle: {
+    en: "Understand how notes combine bonds, options and credit exposure to create customized payoffs — and how to analyze pricing, barriers, autocalls, issuer risk, liquidity and suitability.",
+    fr: "Comprendre comment les notes combinent obligations, options et exposition crédit pour créer des payoffs personnalisés — et comment analyser pricing, barrières, autocalls, issuer risk, liquidité et suitability.",
+  },
+  duration: { en: "165–205 min", fr: "165–205 min" },
+  prerequisites: [
+    { en: "Derivatives Foundations", fr: "Derivatives Foundations" },
+    { en: "Options & Greeks", fr: "Options & Greeks" },
+    { en: "Advanced Derivatives", fr: "Advanced Derivatives" },
+    { en: "Fixed Income & Yield Curves", fr: "Fixed Income & Yield Curves" },
+    { en: "Credit Analysis", fr: "Credit Analysis" },
+  ],
+  objectives: [
+    { en: "Decompose structured notes into fixed-income and derivative building blocks.", fr: "Décomposer les notes structurées en briques fixed income et dérivées." },
+    { en: "Understand principal-protected, yield-enhancement and participation structures.", fr: "Comprendre les structures principal-protected, yield-enhancement et participation." },
+    { en: "Analyze autocallables, barriers, coupons and path dependency.", fr: "Analyser autocallables, barrières, coupons et path dependency." },
+    { en: "Distinguish investor payoff risk from issuer credit and liquidity risk.", fr: "Distinguer le risque de payoff investisseur du risque crédit émetteur et du risque de liquidité." },
+    { en: "Use option decomposition to evaluate whether a structured product is economically attractive.", fr: "Utiliser la décomposition optionnelle pour évaluer si un produit structuré est économiquement attractif." },
+    { en: "Recognize when headline yield is compensation for selling convexity or downside protection.", fr: "Reconnaître lorsqu’un headline yield rémunère la vente de convexity ou de protection downside." },
+    { en: "Communicate structured-product risks clearly in client or interview settings.", fr: "Communiquer clairement les risques des produits structurés dans un contexte client ou entretien." },
+  ],
+  overviewFlow: {
+    title: { en: "From payoff engineering to suitability", fr: "De l’ingénierie du payoff à la suitability" },
+    steps: [
+      { title: { en: "Decompose", fr: "Décomposer" }, detail: { en: "Bond · options · credit", fr: "Obligation · options · crédit" } },
+      { title: { en: "Map", fr: "Cartographier" }, detail: { en: "Coupons · barriers · autocalls", fr: "Coupons · barrières · autocalls" } },
+      { title: { en: "Price", fr: "Pricer" }, detail: { en: "Volatility · rates · issuer spread", fr: "Volatilité · taux · issuer spread" } },
+      { title: { en: "Assess", fr: "Évaluer" }, detail: { en: "Liquidity · downside · suitability", fr: "Liquidité · downside · suitability" } },
+    ],
+  },
+  sections: [
+    {
+      id: "structured-product-anatomy",
+      kicker: { en: "01 · PRODUCT ANATOMY", fr: "01 · ANATOMIE DU PRODUIT" },
+      title: { en: "A structured product is usually a financing instrument plus one or more derivatives", fr: "Un produit structuré est généralement un instrument de financement plus un ou plusieurs dérivés" },
+      coreFacts: [
+        { en: "Many structured notes are unsecured obligations of the issuing bank.", fr: "De nombreuses notes structurées sont des obligations non sécurisées de la banque émettrice." },
+        { en: "The payoff is engineered using options, forwards, swaps or other derivatives.", fr: "Le payoff est construit avec options, forwards, swaps ou autres dérivés." },
+        { en: "The same economic exposure can often be decomposed into simpler building blocks.", fr: "La même exposition économique peut souvent être décomposée en briques plus simples." },
+        { en: "Headline coupon is not the same thing as expected return.", fr: "Le coupon headline n’est pas la même chose que l’expected return." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A structured note may look like one product, but economically it is often a bond from the issuer combined with options on a stock, index, rate or other underlying.",
+          fr: "Une note structurée peut sembler être un seul produit, mais économiquement c’est souvent une obligation de l’émetteur combinée à des options sur une action, un indice, un taux ou un autre sous-jacent.",
+        },
+        Intermediate: {
+          en: "Decomposition tells you what the investor is really buying and selling. A high-coupon note can be understood as a bond plus the sale of downside optionality, which explains why the coupon is high.",
+          fr: "La décomposition montre ce que l’investisseur achète et vend réellement. Une note à coupon élevé peut être vue comme une obligation plus la vente d’optionalité downside, ce qui explique pourquoi le coupon est élevé.",
+        },
+        Professional: {
+          en: "Economic analysis should separate issuer funding value, embedded derivative value, distribution margin and secondary-market liquidity. A product can be fairly priced mechanically yet still be unattractive after fees or unsuitable for the investor’s risk budget.",
+          fr: "L’analyse économique doit séparer valeur du funding émetteur, valeur des dérivés intégrés, marge de distribution et liquidité secondaire. Un produit peut être correctement pricé mécaniquement tout en restant peu attractif après fees ou inadapté au risk budget de l’investisseur.",
+        },
+      },
+      vocabulary: [
+        { en: "Structured note", fr: "note structurée", definition: { en: "Debt instrument with a payoff linked to one or more underlying assets or market variables.", fr: "Instrument de dette dont le payoff est lié à un ou plusieurs actifs ou variables de marché." } },
+        { en: "Embedded option", fr: "option intégrée", definition: { en: "Derivative feature included inside another financial instrument.", fr: "Caractéristique dérivée intégrée à un autre instrument financier." } },
+      ],
+    },
+    {
+      id: "principal-protected-notes",
+      kicker: { en: "02 · PRINCIPAL PROTECTION", fr: "02 · PROTECTION DU PRINCIPAL" },
+      title: { en: "Principal protection is usually created by combining a zero-coupon bond with upside optionality", fr: "La protection du principal est généralement créée en combinant une obligation zéro-coupon avec une optionalité upside" },
+      coreFacts: [
+        { en: "A principal-protected note can allocate part of investor capital to a bond that grows toward par at maturity.", fr: "Une note principal-protected peut allouer une partie du capital à une obligation qui croît vers le pair à maturité." },
+        { en: "The remaining budget purchases options that create participation in upside.", fr: "Le budget restant achète des options créant une participation à l’upside." },
+        { en: "Higher interest rates can make principal protection cheaper because less present value is needed to fund maturity value.", fr: "Des taux plus élevés peuvent rendre la protection du principal moins coûteuse car moins de present value est nécessaire pour financer la valeur à maturité." },
+        { en: "Principal protection generally depends on issuer solvency and applies only under specified holding conditions.", fr: "La protection du principal dépend généralement de la solvabilité de l’émetteur et ne s’applique que sous certaines conditions de détention." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If an investor puts in 100, the issuer can invest enough in a bond so that it becomes 100 at maturity, then use the remaining money to buy a call option for upside.",
+          fr: "Si un investisseur verse 100, l’émetteur peut investir suffisamment dans une obligation pour qu’elle devienne 100 à maturité, puis utiliser le reste pour acheter un call et créer de l’upside.",
+        },
+        Intermediate: {
+          en: "The participation rate depends on option cost, rates, maturity, volatility and dividends. Stronger upside participation usually requires giving up something elsewhere, such as protection level or coupon.",
+          fr: "Le participation rate dépend du coût de l’option, des taux, de la maturité, de la volatilité et des dividendes. Une meilleure participation upside exige généralement d’abandonner quelque chose ailleurs, comme le niveau de protection ou le coupon.",
+        },
+        Professional: {
+          en: "Protection should be analyzed as issuer-contingent rather than risk-free. Mark-to-market value before maturity can fall below par because of rates, issuer spreads, volatility or option repricing even if final contractual protection remains intact.",
+          fr: "La protection doit être analysée comme dépendante de l’émetteur plutôt que risk-free. La valeur mark-to-market avant maturité peut tomber sous le pair à cause des taux, issuer spreads, volatilité ou repricing optionnel même si la protection contractuelle finale reste intacte.",
+        },
+      },
+      formula: {
+        label: { en: "Simplified protected-note decomposition", fr: "Décomposition simplifiée d’une note protégée" },
+        expression: "Investment ≈ Zero-Coupon Bond + Call Option",
+        explanation: { en: "The bond funds the protected maturity value while the call creates upside participation.", fr: "L’obligation finance la valeur protégée à maturité tandis que le call crée la participation upside." },
+      },
+      vocabulary: [
+        { en: "Participation rate", fr: "participation rate", definition: { en: "Percentage of underlying upside passed through to the investor.", fr: "Pourcentage de l’upside du sous-jacent transmis à l’investisseur." } },
+        { en: "Capital protection", fr: "capital protection", definition: { en: "Contractual promise to repay some or all principal under specified conditions.", fr: "Promesse contractuelle de rembourser tout ou partie du principal sous certaines conditions." } },
+      ],
+    },
+    {
+      id: "yield-enhancement",
+      kicker: { en: "03 · YIELD ENHANCEMENT", fr: "03 · YIELD ENHANCEMENT" },
+      title: { en: "High coupons often mean the investor is selling downside convexity", fr: "Les coupons élevés signifient souvent que l’investisseur vend de la convexity downside" },
+      coreFacts: [
+        { en: "Reverse convertibles and similar notes can offer high coupons in exchange for downside equity exposure.", fr: "Les reverse convertibles et notes similaires peuvent offrir des coupons élevés en échange d’une exposition downside aux actions." },
+        { en: "The investor may be economically short a put option.", fr: "L’investisseur peut être économiquement short d’un put." },
+        { en: "A high coupon can compensate for substantial tail risk rather than represent free yield.", fr: "Un coupon élevé peut rémunérer un tail risk important plutôt que constituer un yield gratuit." },
+        { en: "Strike, barrier, maturity and implied volatility determine much of the economics.", fr: "Strike, barrière, maturité et implied volatility déterminent une grande partie de l’économie." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If a note pays much more than a normal bond, ask what risk you are taking in return. Often you are agreeing to absorb losses if the underlying falls far enough.",
+          fr: "Si une note paie beaucoup plus qu’une obligation normale, demande quel risque tu prends en échange. Souvent tu acceptes d’absorber des pertes si le sous-jacent baisse suffisamment.",
+        },
+        Intermediate: {
+          en: "A reverse convertible can be viewed as a bond plus a short put. The premium earned from selling the put helps finance the high coupon.",
+          fr: "Une reverse convertible peut être vue comme une obligation plus un short put. La prime reçue en vendant le put aide à financer le coupon élevé.",
+        },
+        Professional: {
+          en: "Yield-enhancement products should be evaluated in volatility terms. The key question is whether the investor is being adequately compensated for short convexity, downside skew, gap risk and issuer exposure after fees.",
+          fr: "Les produits de yield enhancement doivent être évalués en termes de volatilité. La question clé est de savoir si l’investisseur est correctement rémunéré pour short convexity, downside skew, gap risk et exposition émetteur après fees.",
+        },
+      },
+      formula: {
+        label: { en: "Simplified reverse-convertible decomposition", fr: "Décomposition simplifiée d’une reverse convertible" },
+        expression: "Reverse Convertible ≈ Bond − Put Option",
+        explanation: { en: "Selling the put helps finance the enhanced coupon but creates downside exposure.", fr: "La vente du put aide à financer le coupon amélioré mais crée une exposition downside." },
+      },
+      vocabulary: [
+        { en: "Reverse convertible", fr: "reverse convertible", definition: { en: "Structured note paying enhanced coupon while exposing the investor to downside in the underlying.", fr: "Note structurée offrant un coupon amélioré tout en exposant l’investisseur au downside du sous-jacent." } },
+        { en: "Short convexity", fr: "short convexity", definition: { en: "Exposure that becomes increasingly unfavorable as the underlying moves strongly against the position.", fr: "Exposition devenant de plus en plus défavorable lorsque le sous-jacent évolue fortement contre la position." } },
+      ],
+    },
+    {
+      id: "autocallables",
+      kicker: { en: "04 · AUTOCALLABLES", fr: "04 · AUTOCALLABLES" },
+      title: { en: "Autocallables exchange uncertain maturity for enhanced income", fr: "Les autocallables échangent une maturité incertaine contre un revenu amélioré" },
+      coreFacts: [
+        { en: "Autocallables redeem early if predefined observation conditions are met.", fr: "Les autocallables sont remboursés par anticipation si certaines conditions d’observation sont remplies." },
+        { en: "Coupon payments can be unconditional, conditional or memory-based depending on structure.", fr: "Les coupons peuvent être inconditionnels, conditionnels ou memory selon la structure." },
+        { en: "Investors are often short volatility and short downside protection.", fr: "Les investisseurs sont souvent short volatilité et short protection downside." },
+        { en: "Early redemption creates reinvestment risk because attractive coupons can disappear sooner than expected.", fr: "Le remboursement anticipé crée un reinvestment risk car les coupons attractifs peuvent disparaître plus tôt que prévu." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "An autocallable may pay a high coupon while the underlying stays above certain levels. If the market performs well enough, the product can end early and return principal.",
+          fr: "Un autocallable peut payer un coupon élevé tant que le sous-jacent reste au-dessus de certains niveaux. Si le marché performe suffisamment, le produit peut se terminer plus tôt et rembourser le principal.",
+        },
+        Intermediate: {
+          en: "The investor gives up some upside because the product can be called away when markets rise, while still retaining meaningful downside risk if the underlying falls through protection barriers.",
+          fr: "L’investisseur abandonne une partie de l’upside car le produit peut être callé lorsque les marchés montent, tout en conservant un risque downside significatif si le sous-jacent passe sous les barrières de protection.",
+        },
+        Professional: {
+          en: "Autocall pricing is strongly path-dependent. Volatility level, skew, correlation in worst-of baskets, observation frequency and issuer call mechanics all influence fair value and risk.",
+          fr: "Le pricing d’un autocall est fortement path-dependent. Niveau de volatilité, skew, corrélation dans les worst-of baskets, fréquence d’observation et mécanique de call influencent tous fair value et risque.",
+        },
+      },
+      vocabulary: [
+        { en: "Autocall", fr: "autocall", definition: { en: "Feature causing automatic early redemption when specified conditions are met.", fr: "Caractéristique provoquant un remboursement anticipé automatique lorsque certaines conditions sont remplies." } },
+        { en: "Memory coupon", fr: "memory coupon", definition: { en: "Coupon feature allowing missed coupons to be paid later if future conditions are satisfied.", fr: "Mécanisme permettant de récupérer plus tard des coupons non payés si des conditions futures sont satisfaites." } },
+        { en: "Worst-of basket", fr: "worst-of basket", definition: { en: "Multi-asset structure whose payoff depends on the worst-performing underlying.", fr: "Structure multi-actifs dont le payoff dépend du sous-jacent le moins performant." } },
+      ],
+    },
+    {
+      id: "barriers-and-path-dependency",
+      kicker: { en: "05 · BARRIERS & PATH DEPENDENCY", fr: "05 · BARRIÈRES & PATH DEPENDENCY" },
+      title: { en: "Two products with the same final underlying price can produce different outcomes", fr: "Deux produits avec le même prix final du sous-jacent peuvent produire des résultats différents" },
+      coreFacts: [
+        { en: "European barriers are observed only at specified dates, often maturity.", fr: "Les barrières européennes sont observées uniquement à certaines dates, souvent à maturité." },
+        { en: "American or continuous barriers can be triggered at any time during the observation period.", fr: "Les barrières américaines ou continues peuvent être déclenchées à tout moment pendant la période d’observation." },
+        { en: "Barrier monitoring frequency changes both investor risk and product value.", fr: "La fréquence d’observation de la barrière modifie à la fois le risque investisseur et la valeur du produit." },
+        { en: "Path-dependent products require scenario analysis beyond terminal-price analysis.", fr: "Les produits path-dependent exigent une scenario analysis allant au-delà du seul prix terminal." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A product may lose its protection if the market touches a barrier during its life, even if the market later recovers. The path matters, not just the final price.",
+          fr: "Un produit peut perdre sa protection si le marché touche une barrière pendant sa vie, même s’il se reprend ensuite. Le chemin compte, pas seulement le prix final.",
+        },
+        Intermediate: {
+          en: "A continuous barrier is more likely to be triggered than a maturity-only barrier at the same level, so the two structures should not be compared using barrier percentage alone.",
+          fr: "Une barrière continue est plus susceptible d’être déclenchée qu’une barrière observée uniquement à maturité au même niveau, donc les deux structures ne doivent pas être comparées uniquement via le pourcentage de barrière.",
+        },
+        Professional: {
+          en: "Barrier products exhibit discontinuous Greeks near trigger levels. Gap risk means delta hedging can fail around sharp overnight moves, making barrier risk expensive even when current distance-to-barrier looks comfortable.",
+          fr: "Les produits à barrière présentent des Greeks discontinus près des niveaux de trigger. Le gap risk signifie que le delta hedging peut échouer lors de mouvements brusques overnight, rendant le barrier risk coûteux même lorsque la distance actuelle à la barrière semble confortable.",
+        },
+      },
+      vocabulary: [
+        { en: "Barrier", fr: "barrière", definition: { en: "Predefined underlying level that changes product payoff if reached or observed.", fr: "Niveau prédéfini du sous-jacent qui modifie le payoff s’il est atteint ou observé." } },
+        { en: "Path dependency", fr: "path dependency", definition: { en: "Dependence of payoff on the route followed by the underlying, not only its final value.", fr: "Dépendance du payoff au chemin suivi par le sous-jacent et pas seulement à sa valeur finale." } },
+      ],
+    },
+    {
+      id: "credit-linked-notes",
+      kicker: { en: "06 · CREDIT-LINKED NOTES", fr: "06 · CREDIT-LINKED NOTES" },
+      title: { en: "Structured products can transfer credit risk as well as market risk", fr: "Les produits structurés peuvent transférer du risque crédit autant que du risque de marché" },
+      coreFacts: [
+        { en: "Credit-linked notes combine debt issued by one entity with exposure to a reference credit.", fr: "Les credit-linked notes combinent une dette émise par une entité avec une exposition à un reference credit." },
+        { en: "Investor principal can be reduced if a defined credit event occurs.", fr: "Le principal de l’investisseur peut être réduit si un credit event défini se produit." },
+        { en: "The investor may bear both issuer credit risk and reference-entity credit risk.", fr: "L’investisseur peut porter à la fois le risque crédit de l’émetteur et celui de la reference entity." },
+        { en: "Documentation matters because credit-event definitions and settlement mechanics determine loss.", fr: "La documentation compte car les définitions de credit event et les mécanismes de settlement déterminent la perte." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A credit-linked note may pay extra income because the investor agrees to absorb losses if a specified company or borrower experiences a defined credit event.",
+          fr: "Une credit-linked note peut payer un revenu supplémentaire car l’investisseur accepte d’absorber des pertes si une entreprise ou un emprunteur spécifié subit un credit event défini.",
+        },
+        Intermediate: {
+          en: "Economically, the investor is often providing credit protection through the note. The extra coupon compensates for taking reference-credit exposure.",
+          fr: "Économiquement, l’investisseur fournit souvent une protection crédit via la note. Le coupon supplémentaire rémunère l’exposition au reference credit.",
+        },
+        Professional: {
+          en: "Analyze issuer risk, reference credit, recovery assumptions, trigger language, settlement method and correlation between issuer and reference entity. Wrong-way risk can arise if both deteriorate together.",
+          fr: "Analyse issuer risk, reference credit, hypothèses de recovery, langage des triggers, méthode de settlement et corrélation entre émetteur et reference entity. Du wrong-way risk peut apparaître si les deux se détériorent ensemble.",
+        },
+      },
+      vocabulary: [
+        { en: "Credit event", fr: "credit event", definition: { en: "Contractually defined event such as bankruptcy, failure to pay or restructuring that triggers credit settlement.", fr: "Événement contractuellement défini comme faillite, défaut de paiement ou restructuring déclenchant le settlement crédit." } },
+        { en: "Reference entity", fr: "reference entity", definition: { en: "Borrower or issuer whose credit risk determines the linked payoff.", fr: "Emprunteur ou émetteur dont le risque crédit détermine le payoff lié." } },
+      ],
+    },
+    {
+      id: "pricing-and-decomposition",
+      kicker: { en: "07 · PRICING & DECOMPOSITION", fr: "07 · PRICING & DÉCOMPOSITION" },
+      title: { en: "Fair value depends on rates, volatility, correlation, dividends and issuer funding", fr: "La fair value dépend des taux, de la volatilité, de la corrélation, des dividendes et du funding émetteur" },
+      coreFacts: [
+        { en: "Embedded option value changes with implied volatility and skew.", fr: "La valeur des options intégrées change avec implied volatility et skew." },
+        { en: "Interest rates and issuer credit spreads affect the debt component.", fr: "Les taux et issuer credit spreads affectent la composante dette." },
+        { en: "Correlation is critical for multi-asset and worst-of structures.", fr: "La corrélation est critique pour les structures multi-actifs et worst-of." },
+        { en: "Issue price can exceed estimated fair value because of structuring, distribution and hedging costs.", fr: "Le prix d’émission peut dépasser l’estimated fair value à cause des coûts de structuring, distribution et hedging." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A structured note should not be judged only by its coupon. You need to ask what the bond part and the option part are each worth.",
+          fr: "Une note structurée ne doit pas être jugée uniquement par son coupon. Il faut demander ce que valent séparément la partie obligation et la partie option.",
+        },
+        Intermediate: {
+          en: "Compare the product with a do-it-yourself portfolio of simpler instruments when possible. This helps reveal the economic cost of packaging and the risks hidden inside the payoff.",
+          fr: "Compare le produit avec un portefeuille fait de briques plus simples lorsque possible. Cela aide à révéler le coût économique du packaging et les risques cachés dans le payoff.",
+        },
+        Professional: {
+          en: "Model-based fair value depends on calibration choices and executable hedging costs. For complex path-dependent notes, model risk can be material, so pricing should include sensitivity to volatility surface, correlation and issuer spread assumptions.",
+          fr: "La fair value basée sur modèle dépend des choix de calibration et coûts de hedge exécutables. Pour les notes path-dependent complexes, le model risk peut être significatif, donc le pricing doit inclure des sensibilités à la volatility surface, corrélation et issuer spread.",
+        },
+      },
+      vocabulary: [
+        { en: "Issue price", fr: "issue price", definition: { en: "Price paid by the investor when the structured note is issued.", fr: "Prix payé par l’investisseur lors de l’émission de la note structurée." } },
+        { en: "Estimated fair value", fr: "estimated fair value", definition: { en: "Model-based value of the note’s component cash flows and derivatives.", fr: "Valeur basée sur modèle des cash flows et dérivés composant la note." } },
+      ],
+    },
+    {
+      id: "issuer-liquidity-and-secondary-market",
+      kicker: { en: "08 · ISSUER & LIQUIDITY RISK", fr: "08 · RISQUE ÉMETTEUR & LIQUIDITÉ" },
+      title: { en: "A payoff can be attractive and still be a poor investment if issuer or liquidity risk is ignored", fr: "Un payoff peut être attractif tout en restant un mauvais investissement si issuer risk ou liquidité sont ignorés" },
+      coreFacts: [
+        { en: "Structured notes are often unsecured obligations of the issuing financial institution.", fr: "Les structured notes sont souvent des obligations non sécurisées de l’institution financière émettrice." },
+        { en: "Secondary-market liquidity may be limited and dealer quotes can include wide spreads.", fr: "La liquidité secondaire peut être limitée et les quotes des dealers peuvent inclure de larges spreads." },
+        { en: "Selling before maturity can produce losses even when the underlying has not breached a protection feature.", fr: "Vendre avant maturité peut produire des pertes même lorsque le sous-jacent n’a pas franchi une protection." },
+        { en: "Issuer spread widening can reduce note value independently of the underlying asset.", fr: "Un élargissement de l’issuer spread peut réduire la valeur de la note indépendamment du sous-jacent." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Even if the stock index performs well, you still depend on the bank that issued the note to make the promised payments.",
+          fr: "Même si l’indice actions performe bien, tu dépends toujours de la banque émettrice pour effectuer les paiements promis.",
+        },
+        Intermediate: {
+          en: "Before investing, distinguish hold-to-maturity payoff from exit value. A note can have an appealing maturity profile but poor secondary-market economics.",
+          fr: "Avant d’investir, distingue payoff à maturité et exit value. Une note peut avoir un profil attractif à maturité mais une mauvaise économie sur le marché secondaire.",
+        },
+        Professional: {
+          en: "Liquidity valuation should incorporate dealer inventory, hedge unwind costs, bid-ask, issuer funding and model uncertainty. Secondary-market marks can be especially weak during volatility spikes when investors most want to exit.",
+          fr: "La valorisation de liquidité doit intégrer inventory des dealers, coûts de unwind du hedge, bid-ask, funding émetteur et incertitude du modèle. Les marks secondaires peuvent être particulièrement faibles lors des pics de volatilité, précisément quand les investisseurs veulent sortir.",
+        },
+      },
+      vocabulary: [
+        { en: "Issuer risk", fr: "issuer risk", definition: { en: "Risk that the issuer cannot meet its contractual obligations.", fr: "Risque que l’émetteur ne puisse pas honorer ses obligations contractuelles." } },
+        { en: "Secondary-market liquidity", fr: "secondary-market liquidity", definition: { en: "Ability to sell a note before maturity at a reasonable price.", fr: "Capacité à vendre une note avant maturité à un prix raisonnable." } },
+      ],
+    },
+    {
+      id: "suitability-and-communication",
+      kicker: { en: "09 · SUITABILITY & COMMUNICATION", fr: "09 · SUITABILITY & COMMUNICATION" },
+      title: { en: "The correct product is the one whose risks match the investor — not the one with the highest coupon", fr: "Le bon produit est celui dont les risques correspondent à l’investisseur — pas celui avec le coupon le plus élevé" },
+      coreFacts: [
+        { en: "Suitability depends on objectives, risk tolerance, liquidity needs, horizon and understanding.", fr: "La suitability dépend des objectifs, de la risk tolerance, des besoins de liquidité, de l’horizon et de la compréhension." },
+        { en: "Complexity can make scenario communication more important than a single expected-return number.", fr: "La complexité peut rendre la communication par scénarios plus importante qu’un seul expected-return number." },
+        { en: "Investors should understand best case, base case, downside case and path-dependent triggers.", fr: "Les investisseurs doivent comprendre best case, base case, downside case et triggers path-dependent." },
+        { en: "Structured products should be compared with simpler alternatives that target the same objective.", fr: "Les produits structurés doivent être comparés à des alternatives plus simples visant le même objectif." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Before buying a structured note, an investor should be able to explain how they make money, how they lose money and what happens if they need cash early.",
+          fr: "Avant d’acheter une note structurée, un investisseur doit pouvoir expliquer comment il gagne de l’argent, comment il en perd et ce qui se passe s’il a besoin de cash plus tôt.",
+        },
+        Intermediate: {
+          en: "Use scenario tables instead of marketing headlines. Show outcomes if the underlying rises, stays flat, falls moderately, falls sharply, touches a barrier or the issuer’s credit spread widens.",
+          fr: "Utilise des tableaux de scénarios plutôt que des slogans marketing. Montre les résultats si le sous-jacent monte, reste stable, baisse modérément, chute fortement, touche une barrière ou si le credit spread de l’émetteur s’élargit.",
+        },
+        Professional: {
+          en: "Suitability analysis should compare expected payoff distribution, tail loss, liquidity, opportunity cost and complexity against simpler instruments. Client communication should describe economic exposure rather than rely on product labels.",
+          fr: "L’analyse de suitability doit comparer distribution attendue des payoffs, tail loss, liquidité, opportunity cost et complexité avec des instruments plus simples. La communication client doit décrire l’exposition économique plutôt que s’appuyer sur des labels produits.",
+        },
+      },
+      vocabulary: [
+        { en: "Suitability", fr: "suitability", definition: { en: "Assessment of whether a product’s characteristics fit an investor’s objectives and constraints.", fr: "Évaluation de l’adéquation des caractéristiques d’un produit avec objectifs et contraintes d’un investisseur." } },
+        { en: "Scenario analysis", fr: "scenario analysis", definition: { en: "Evaluation of product outcomes under multiple possible market paths.", fr: "Évaluation des résultats du produit sous plusieurs trajectoires de marché possibles." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "decomposition",
+      question: { en: "What is a structured note usually composed of economically?", fr: "De quoi une structured note est-elle généralement composée économiquement ?" },
+      options: [
+        { id: "a", label: { en: "A debt instrument plus embedded derivatives", fr: "Un instrument de dette plus des dérivés intégrés" } },
+        { id: "b", label: { en: "Only cash", fr: "Uniquement du cash" } },
+        { id: "c", label: { en: "Only common equity", fr: "Uniquement des actions ordinaires" } },
+        { id: "d", label: { en: "Only accounting entries", fr: "Uniquement des écritures comptables" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Most structured notes combine issuer debt with one or more derivative payoffs.", fr: "La plupart des structured notes combinent dette de l’émetteur et un ou plusieurs payoffs dérivés." },
+    },
+    {
+      id: "q2",
+      conceptKey: "principal-protection",
+      question: { en: "How can principal protection be created?", fr: "Comment peut-on créer une protection du principal ?" },
+      options: [
+        { id: "a", label: { en: "By combining a bond that grows to par with an option budget", fr: "En combinant une obligation qui croît vers le pair avec un budget d’options" } },
+        { id: "b", label: { en: "By eliminating issuer risk", fr: "En éliminant l’issuer risk" } },
+        { id: "c", label: { en: "By guaranteeing daily liquidity", fr: "En garantissant une liquidité quotidienne" } },
+        { id: "d", label: { en: "By removing all market risk", fr: "En supprimant tout market risk" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The debt component can fund protected value while options provide market participation.", fr: "La composante dette peut financer la valeur protégée tandis que les options fournissent la participation au marché." },
+    },
+    {
+      id: "q3",
+      conceptKey: "reverse-convertible",
+      question: { en: "What hidden exposure often finances a reverse convertible’s high coupon?", fr: "Quelle exposition cachée finance souvent le coupon élevé d’une reverse convertible ?" },
+      options: [
+        { id: "a", label: { en: "A short put exposure", fr: "Une exposition short put" } },
+        { id: "b", label: { en: "A long risk-free bond only", fr: "Uniquement une obligation risk-free longue" } },
+        { id: "c", label: { en: "A guaranteed arbitrage", fr: "Un arbitrage garanti" } },
+        { id: "d", label: { en: "No downside exposure", fr: "Aucune exposition downside" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Selling downside optionality helps fund the enhanced coupon.", fr: "La vente d’optionalité downside aide à financer le coupon amélioré." },
+    },
+    {
+      id: "q4",
+      conceptKey: "autocall",
+      question: { en: "What does an autocall feature do?", fr: "Que fait une fonction autocall ?" },
+      options: [
+        { id: "a", label: { en: "Automatically redeems the note early if specified conditions are met", fr: "Rembourse automatiquement la note plus tôt si certaines conditions sont remplies" } },
+        { id: "b", label: { en: "Guarantees the highest market return", fr: "Garantit le meilleur return de marché" } },
+        { id: "c", label: { en: "Removes issuer credit risk", fr: "Supprime l’issuer credit risk" } },
+        { id: "d", label: { en: "Eliminates reinvestment risk", fr: "Élimine le reinvestment risk" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "An autocall triggers early redemption when predefined observation conditions are satisfied.", fr: "Un autocall déclenche un remboursement anticipé lorsque certaines conditions d’observation sont satisfaites." },
+    },
+    {
+      id: "q5",
+      conceptKey: "barrier",
+      question: { en: "Why does barrier monitoring frequency matter?", fr: "Pourquoi la fréquence d’observation d’une barrière compte-t-elle ?" },
+      options: [
+        { id: "a", label: { en: "More frequent monitoring can increase the probability of a trigger", fr: "Une observation plus fréquente peut augmenter la probabilité de trigger" } },
+        { id: "b", label: { en: "It never changes risk", fr: "Elle ne change jamais le risque" } },
+        { id: "c", label: { en: "It determines issuer solvency", fr: "Elle détermine la solvabilité de l’émetteur" } },
+        { id: "d", label: { en: "It removes path dependency", fr: "Elle supprime la path dependency" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A continuously monitored barrier has more opportunities to be touched than a maturity-only barrier.", fr: "Une barrière observée en continu a davantage d’occasions d’être touchée qu’une barrière observée uniquement à maturité." },
+    },
+    {
+      id: "q6",
+      conceptKey: "credit-linked-note",
+      question: { en: "What risk can a credit-linked note transfer to the investor?", fr: "Quel risque une credit-linked note peut-elle transférer à l’investisseur ?" },
+      options: [
+        { id: "a", label: { en: "Reference-entity credit risk", fr: "Le risque crédit d’une reference entity" } },
+        { id: "b", label: { en: "Only equity dividend risk", fr: "Uniquement le risque de dividende equity" } },
+        { id: "c", label: { en: "No credit risk at all", fr: "Aucun risque crédit" } },
+        { id: "d", label: { en: "Only accounting risk", fr: "Uniquement un risque comptable" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The investor may absorb losses if a defined credit event occurs for the reference entity.", fr: "L’investisseur peut absorber des pertes si un credit event défini survient pour la reference entity." },
+    },
+    {
+      id: "q7",
+      conceptKey: "pricing",
+      question: { en: "Which input can be especially important for a worst-of multi-asset note?", fr: "Quel input peut être particulièrement important pour une note multi-actifs worst-of ?" },
+      options: [
+        { id: "a", label: { en: "Correlation between underlyings", fr: "La corrélation entre les sous-jacents" } },
+        { id: "b", label: { en: "Only accounting depreciation", fr: "Uniquement la depreciation comptable" } },
+        { id: "c", label: { en: "Only dividend payout ratio", fr: "Uniquement le dividend payout ratio" } },
+        { id: "d", label: { en: "Only book value", fr: "Uniquement la book value" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Correlation materially changes the probability that one underlying becomes the worst performer.", fr: "La corrélation modifie fortement la probabilité qu’un sous-jacent devienne le moins performant." },
+    },
+    {
+      id: "q8",
+      conceptKey: "issuer-risk",
+      question: { en: "Why does issuer credit quality matter even if the underlying performs well?", fr: "Pourquoi la qualité de crédit de l’émetteur compte-t-elle même si le sous-jacent performe bien ?" },
+      options: [
+        { id: "a", label: { en: "Because the note is often an unsecured obligation of the issuer", fr: "Parce que la note est souvent une obligation non sécurisée de l’émetteur" } },
+        { id: "b", label: { en: "Because the underlying guarantees repayment", fr: "Parce que le sous-jacent garantit le remboursement" } },
+        { id: "c", label: { en: "Because issuer spreads never move", fr: "Parce que les issuer spreads ne bougent jamais" } },
+        { id: "d", label: { en: "Because all notes are government guaranteed", fr: "Parce que toutes les notes sont garanties par l’État" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Payment depends on the issuer’s ability to honor its contractual debt obligation.", fr: "Le paiement dépend de la capacité de l’émetteur à honorer son obligation de dette contractuelle." },
+    },
+    {
+      id: "q9",
+      conceptKey: "secondary-market",
+      question: { en: "What can happen if an investor sells a structured note before maturity?", fr: "Que peut-il se passer si un investisseur vend une structured note avant maturité ?" },
+      options: [
+        { id: "a", label: { en: "The exit price can be below principal because of market, issuer and liquidity effects", fr: "Le prix de sortie peut être inférieur au principal à cause des effets de marché, émetteur et liquidité" } },
+        { id: "b", label: { en: "The investor always receives par", fr: "L’investisseur reçoit toujours le pair" } },
+        { id: "c", label: { en: "There is never a bid-ask spread", fr: "Il n’y a jamais de bid-ask spread" } },
+        { id: "d", label: { en: "Volatility no longer matters", fr: "La volatilité ne compte plus" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Secondary-market value reflects many variables and is not the same as contractual maturity payoff.", fr: "La valeur sur le marché secondaire reflète de nombreuses variables et diffère du payoff contractuel à maturité." },
+    },
+    {
+      id: "q10",
+      conceptKey: "suitability",
+      question: { en: "What is the best way to evaluate suitability of a structured product?", fr: "Quelle est la meilleure façon d’évaluer la suitability d’un produit structuré ?" },
+      options: [
+        { id: "a", label: { en: "Match payoff, downside, liquidity and complexity to investor objectives and constraints", fr: "Faire correspondre payoff, downside, liquidité et complexité aux objectifs et contraintes de l’investisseur" } },
+        { id: "b", label: { en: "Choose the highest coupon", fr: "Choisir le coupon le plus élevé" } },
+        { id: "c", label: { en: "Ignore issuer risk", fr: "Ignorer l’issuer risk" } },
+        { id: "d", label: { en: "Ignore early-exit needs", fr: "Ignorer les besoins de sortie anticipée" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Suitability requires matching the full economic risk profile to the investor, not maximizing headline yield.", fr: "La suitability exige d’adapter tout le profil de risque économique à l’investisseur, pas de maximiser le headline yield." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "A client is offered a 12% coupon autocallable linked to three equities. How would you evaluate whether the product is attractive?",
+      fr: "Un client se voit proposer un autocallable à coupon de 12 % lié à trois actions. Comment évaluerais-tu si le produit est attractif ?",
+    },
+    framework: [
+      { en: "Start by decomposing the product into issuer debt and embedded option exposures.", fr: "Commencer par décomposer le produit en dette émetteur et expositions optionnelles intégrées." },
+      { en: "Identify autocall levels, coupon conditions, barriers, observation frequency and whether the basket is worst-of.", fr: "Identifier niveaux d’autocall, conditions de coupon, barrières, fréquence d’observation et présence éventuelle d’un worst-of basket." },
+      { en: "Explain what downside optionality the investor is effectively selling to earn the 12% coupon.", fr: "Expliquer quelle optionalité downside l’investisseur vend effectivement pour gagner le coupon de 12 %." },
+      { en: "Analyze implied volatility, skew and correlation because they influence the value of the embedded options.", fr: "Analyser implied volatility, skew et corrélation car ils influencent la valeur des options intégrées." },
+      { en: "Assess issuer credit, secondary-market liquidity and early-redemption reinvestment risk.", fr: "Évaluer issuer credit, liquidité secondaire et reinvestment risk lié au remboursement anticipé." },
+      { en: "Compare the note with simpler alternatives and test multiple payoff scenarios before deciding suitability.", fr: "Comparer la note avec des alternatives plus simples et tester plusieurs scénarios de payoff avant d’évaluer la suitability." },
+    ],
+    sample: {
+      en: "I would not begin with the 12% coupon because the coupon is compensation for risks embedded in the structure. I would first decompose the note into the issuer’s debt component and the option package. Then I would identify whether the three-stock basket is worst-of, the autocall observation dates, coupon barriers, capital-protection barrier and whether barrier monitoring is continuous or only at maturity. I would then analyze what downside optionality the investor is effectively short and whether the 12% coupon provides enough compensation given current implied volatility, skew and correlation. I would also assess issuer credit risk and secondary-market liquidity because the investor may need to exit before maturity. Finally, I would compare the structured note with a simpler bond-plus-option alternative and show the client scenario outcomes for strong markets, flat markets, moderate declines and a severe downside case before deciding whether the product fits the client’s objective and risk tolerance.",
+      fr: "Je ne commencerais pas par le coupon de 12 %, car ce coupon rémunère les risques intégrés dans la structure. Je décomposerais d’abord la note entre sa composante dette émetteur et son package d’options. Puis j’identifierais si le panier de trois actions est worst-of, les dates d’observation de l’autocall, les barrières de coupon, la barrière de protection du capital et si l’observation est continue ou seulement à maturité. J’analyserais ensuite quelle optionalité downside l’investisseur vend effectivement et si le coupon de 12 % rémunère suffisamment ce risque compte tenu de l’implied volatility, du skew et de la corrélation. J’évaluerais aussi l’issuer credit risk et la liquidité secondaire car l’investisseur peut avoir besoin de sortir avant maturité. Enfin, je comparerais la note avec une alternative plus simple obligation-plus-option et présenterais les résultats sous plusieurs scénarios — marché fort, marché stable, baisse modérée et scénario downside sévère — avant de décider si le produit correspond à l’objectif et à la risk tolerance du client.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson, hedgeFundsAlternativesLesson, portfolioConstructionLesson, behavioralFinanceLesson, structuredProductsLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
