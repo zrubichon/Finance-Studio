@@ -30683,7 +30683,464 @@ export const portfolioConstructionLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson, hedgeFundsAlternativesLesson, portfolioConstructionLesson];
+
+export const behavioralFinanceLesson: FinanceLesson = {
+  slug: "year-3-behavioral-finance",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Behavioral Finance", fr: "Finance comportementale / Behavioral Finance" },
+  title: { en: "Behavioral Finance", fr: "Finance comportementale / Behavioral Finance" },
+  subtitle: {
+    en: "Understand how cognitive biases, emotions, social behavior and market structure influence investor decisions, asset prices, anomalies and portfolio outcomes.",
+    fr: "Comprendre comment biais cognitifs, émotions, comportements sociaux et structure de marché influencent décisions d’investissement, prix des actifs, anomalies et résultats de portefeuille.",
+  },
+  duration: { en: "155–190 min", fr: "155–190 min" },
+  prerequisites: [
+    { en: "Portfolio Theory & CAPM", fr: "Portfolio Theory & CAPM" },
+    { en: "Asset Management", fr: "Asset Management" },
+    { en: "Portfolio Construction", fr: "Portfolio Construction" },
+    { en: "Statistics & Probability", fr: "Statistiques & Probabilités" },
+    { en: "Reading Financial News", fr: "Reading Financial News" },
+  ],
+  objectives: [
+    { en: "Explain why real investor behavior can differ from fully rational models.", fr: "Expliquer pourquoi le comportement réel des investisseurs peut différer des modèles pleinement rationnels." },
+    { en: "Recognize major cognitive and emotional biases in investment decisions.", fr: "Reconnaître les principaux biais cognitifs et émotionnels dans les décisions d’investissement." },
+    { en: "Use prospect theory to understand asymmetric reactions to gains and losses.", fr: "Utiliser prospect theory pour comprendre les réactions asymétriques aux gains et pertes." },
+    { en: "Analyze overconfidence, anchoring, confirmation bias, recency and disposition effects.", fr: "Analyser overconfidence, anchoring, confirmation bias, recency et disposition effects." },
+    { en: "Understand herding, narratives, feedback loops and market sentiment.", fr: "Comprendre herding, narratives, boucles de feedback et market sentiment." },
+    { en: "Connect behavioral biases to market anomalies while recognizing limits to arbitrage.", fr: "Relier les biais comportementaux aux market anomalies tout en comprenant les limits to arbitrage." },
+    { en: "Build a repeatable investment process designed to reduce behavioral errors.", fr: "Construire un investment process répétable conçu pour réduire les erreurs comportementales." },
+  ],
+  overviewFlow: {
+    title: { en: "From human bias to better investment process", fr: "Du biais humain à un meilleur investment process" },
+    steps: [
+      { title: { en: "Recognize", fr: "Reconnaître" }, detail: { en: "Biases · emotions · heuristics", fr: "Biais · émotions · heuristics" } },
+      { title: { en: "Understand", fr: "Comprendre" }, detail: { en: "Prospect theory · narratives · herding", fr: "Prospect theory · narratives · herding" } },
+      { title: { en: "Connect", fr: "Relier" }, detail: { en: "Anomalies · prices · limits to arbitrage", fr: "Anomalies · prix · limits to arbitrage" } },
+      { title: { en: "Debias", fr: "Corriger" }, detail: { en: "Rules · checklists · decision journals", fr: "Règles · checklists · decision journals" } },
+    ],
+  },
+  sections: [
+    {
+      id: "rational-vs-behavioral",
+      kicker: { en: "01 · RATIONAL VS BEHAVIORAL", fr: "01 · RATIONNEL VS COMPORTEMENTAL" },
+      title: { en: "Investors are not perfectly rational — and markets do not instantly eliminate every mistake", fr: "Les investisseurs ne sont pas parfaitement rationnels — et les marchés n’éliminent pas instantanément toutes les erreurs" },
+      coreFacts: [
+        { en: "Traditional finance often assumes rational agents, consistent preferences and efficient use of information.", fr: "La finance traditionnelle suppose souvent des agents rationnels, des préférences cohérentes et une utilisation efficace de l’information." },
+        { en: "Behavioral finance studies systematic departures from those assumptions.", fr: "La finance comportementale étudie les écarts systématiques par rapport à ces hypothèses." },
+        { en: "Biases matter most when they are persistent, shared by many investors and difficult to arbitrage away.", fr: "Les biais comptent surtout lorsqu’ils sont persistants, partagés par de nombreux investisseurs et difficiles à arbitrer." },
+        { en: "Behavioral explanations should complement, not automatically replace, risk-based explanations.", fr: "Les explications comportementales doivent compléter, et non automatiquement remplacer, les explications fondées sur le risque." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "People do not always make investment decisions like perfect calculators. Fear, greed, shortcuts and stories can influence how they react to information.",
+          fr: "Les investisseurs ne prennent pas toujours leurs décisions comme des calculateurs parfaits. Peur, avidité, raccourcis mentaux et histoires peuvent influencer leur réaction à l’information.",
+        },
+        Intermediate: {
+          en: "Behavioral finance asks whether repeated psychological patterns can affect prices, trading and portfolio choices. A bias matters economically only if it changes decisions in a systematic way.",
+          fr: "La finance comportementale demande si des schémas psychologiques répétés peuvent affecter prix, trading et choix de portefeuille. Un biais n’a d’importance économique que s’il modifie les décisions de manière systématique.",
+        },
+        Professional: {
+          en: "A rigorous behavioral explanation needs three components: a documented bias, a mechanism linking that bias to demand or pricing, and a reason arbitrage does not immediately eliminate the mispricing.",
+          fr: "Une explication comportementale rigoureuse exige trois éléments : un biais documenté, un mécanisme reliant ce biais à la demande ou au pricing, et une raison pour laquelle l’arbitrage n’élimine pas immédiatement le mispricing.",
+        },
+      },
+      vocabulary: [
+        { en: "Heuristic", fr: "heuristic", definition: { en: "Mental shortcut used to make decisions quickly under uncertainty.", fr: "Raccourci mental utilisé pour décider rapidement sous incertitude." } },
+        { en: "Behavioral bias", fr: "biais comportemental", definition: { en: "Systematic tendency to make decisions that depart from fully rational benchmarks.", fr: "Tendance systématique à prendre des décisions s’écartant d’un benchmark pleinement rationnel." } },
+      ],
+    },
+    {
+      id: "prospect-theory",
+      kicker: { en: "02 · PROSPECT THEORY", fr: "02 · PROSPECT THEORY" },
+      title: { en: "Investors often feel losses more strongly than equivalent gains", fr: "Les investisseurs ressentent souvent les pertes plus fortement que des gains équivalents" },
+      coreFacts: [
+        { en: "Prospect theory evaluates outcomes relative to a reference point rather than only total wealth.", fr: "Prospect theory évalue les résultats relativement à un point de référence plutôt qu’uniquement à la richesse totale." },
+        { en: "Loss aversion means losses can create more psychological pain than equal gains create pleasure.", fr: "La loss aversion signifie que les pertes peuvent créer plus de douleur psychologique que des gains équivalents ne créent de plaisir." },
+        { en: "People can become risk-averse in gains but risk-seeking when trying to avoid realizing losses.", fr: "Les individus peuvent être risk-averse dans les gains mais risk-seeking lorsqu’ils cherchent à éviter de réaliser des pertes." },
+        { en: "Reference points can be purchase price, prior portfolio high, benchmark or expected return.", fr: "Les points de référence peuvent être prix d’achat, ancien plus haut du portefeuille, benchmark ou expected return." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "An investor may sell a winning stock quickly because the gain feels satisfying, but keep a losing stock too long because realizing the loss feels painful.",
+          fr: "Un investisseur peut vendre rapidement une action gagnante car le gain est satisfaisant, mais garder trop longtemps une action perdante car réaliser la perte est douloureux.",
+        },
+        Intermediate: {
+          en: "This behavior can create the disposition effect: investors are too willing to realize gains and too reluctant to realize losses. The purchase price becomes an emotional reference point even when fundamentals have changed.",
+          fr: "Ce comportement peut créer le disposition effect : les investisseurs réalisent trop facilement les gains et trop difficilement les pertes. Le prix d’achat devient un point de référence émotionnel même lorsque les fondamentaux ont changé.",
+        },
+        Professional: {
+          en: "Prospect theory also includes nonlinear probability weighting. Investors may overweight small probabilities, which can help explain demand for lottery-like payoffs and expensive tail insurance in some settings.",
+          fr: "Prospect theory inclut aussi une pondération non linéaire des probabilités. Les investisseurs peuvent surpondérer les faibles probabilités, ce qui peut aider à expliquer la demande pour des payoffs de type loterie ou certaines protections de tail coûteuses.",
+        },
+      },
+      vocabulary: [
+        { en: "Loss aversion", fr: "loss aversion", definition: { en: "Tendency to experience losses more intensely than equivalent gains.", fr: "Tendance à ressentir les pertes plus intensément que des gains équivalents." } },
+        { en: "Reference point", fr: "point de référence", definition: { en: "Benchmark against which an outcome is mentally evaluated as a gain or loss.", fr: "Benchmark par rapport auquel un résultat est mentalement évalué comme gain ou perte." } },
+        { en: "Disposition effect", fr: "disposition effect", definition: { en: "Tendency to sell winners too early and hold losers too long.", fr: "Tendance à vendre les gagnants trop tôt et garder les perdants trop longtemps." } },
+      ],
+    },
+    {
+      id: "overconfidence",
+      kicker: { en: "03 · OVERCONFIDENCE", fr: "03 · OVERCONFIDENCE" },
+      title: { en: "Confidence can improve decisiveness but destroy calibration", fr: "La confiance peut améliorer la décision mais détruire la calibration" },
+      coreFacts: [
+        { en: "Overconfidence can cause investors to overestimate forecasting skill and underestimate uncertainty.", fr: "L’overconfidence peut pousser les investisseurs à surestimer leur capacité de forecast et sous-estimer l’incertitude." },
+        { en: "Excessive trading can result when investors believe their information advantage is larger than it truly is.", fr: "Un trading excessif peut apparaître lorsque les investisseurs surestiment leur information advantage." },
+        { en: "Self-attribution bias can cause people to credit success to skill and blame failure on external forces.", fr: "Le self-attribution bias peut pousser à attribuer les succès à son talent et les échecs à des facteurs externes." },
+        { en: "Good decision-making requires confidence intervals, base rates and explicit uncertainty.", fr: "Une bonne décision exige confidence intervals, base rates et incertitude explicite." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Being certain does not mean being correct. Investors can mistake a strong opinion for a high-probability outcome.",
+          fr: "Être certain ne signifie pas avoir raison. Les investisseurs peuvent confondre opinion forte et résultat très probable.",
+        },
+        Intermediate: {
+          en: "Track forecasts and assign probabilities before outcomes occur. This creates a record that shows whether your confidence is well calibrated or systematically too high.",
+          fr: "Suis tes forecasts et attribue des probabilités avant que les résultats n’arrivent. Cela crée un historique permettant de voir si ta confiance est bien calibrée ou systématiquement trop élevée.",
+        },
+        Professional: {
+          en: "Overconfidence is especially dangerous in concentrated portfolios and leveraged trades because position sizing compounds estimation error. A robust process separates conviction from uncertainty and ties size to expected value plus downside risk.",
+          fr: "L’overconfidence est particulièrement dangereuse dans les portefeuilles concentrés et trades leveragés car le position sizing amplifie l’erreur d’estimation. Un process robuste sépare conviction et incertitude et relie la taille à l’expected value plus downside risk.",
+        },
+      },
+      vocabulary: [
+        { en: "Calibration", fr: "calibration", definition: { en: "Degree to which stated probabilities match actual outcome frequencies.", fr: "Degré auquel les probabilités annoncées correspondent aux fréquences réellement observées." } },
+        { en: "Self-attribution bias", fr: "self-attribution bias", definition: { en: "Tendency to attribute successes internally and failures externally.", fr: "Tendance à attribuer les succès à soi-même et les échecs à des facteurs externes." } },
+      ],
+    },
+    {
+      id: "anchoring-confirmation-recency",
+      kicker: { en: "04 · ANCHORING, CONFIRMATION & RECENCY", fr: "04 · ANCHORING, CONFIRMATION & RECENCY" },
+      title: { en: "Investors often update beliefs too slowly, selectively or from the wrong reference point", fr: "Les investisseurs mettent souvent à jour leurs croyances trop lentement, sélectivement ou depuis le mauvais point de référence" },
+      coreFacts: [
+        { en: "Anchoring causes investors to rely too heavily on an initial number or belief.", fr: "L’anchoring pousse les investisseurs à dépendre excessivement d’un chiffre ou d’une croyance initiale." },
+        { en: "Confirmation bias makes investors seek information that supports existing views and discount conflicting evidence.", fr: "Le confirmation bias pousse à chercher les informations confirmant une vue existante et à minimiser les preuves contraires." },
+        { en: "Recency bias gives disproportionate weight to recent events.", fr: "Le recency bias accorde un poids disproportionné aux événements récents." },
+        { en: "Base-rate neglect can cause investors to ignore historical frequencies when focusing on a compelling story.", fr: "Le base-rate neglect peut conduire à ignorer les fréquences historiques lorsqu’une histoire paraît convaincante." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you bought a stock at $100, you may keep thinking $100 is its 'normal' value even after the business changes. That purchase price can become an anchor.",
+          fr: "Si tu achètes une action à 100 $, tu peux continuer à penser que 100 $ est sa valeur 'normale' même après un changement du business. Le prix d’achat devient un anchor.",
+        },
+        Intermediate: {
+          en: "A disciplined analyst actively searches for disconfirming evidence and compares the current case with historical base rates. This reduces the risk of turning a thesis into an identity.",
+          fr: "Un analyste discipliné cherche activement des preuves contraires et compare le cas actuel aux base rates historiques. Cela réduit le risque de transformer une thèse en identité.",
+        },
+        Professional: {
+          en: "Belief updating should approximate Bayesian logic: prior probabilities are revised using new evidence according to its quality and likelihood, rather than replaced by the most vivid recent observation.",
+          fr: "La mise à jour des croyances doit se rapprocher d’une logique bayésienne : les probabilités initiales sont révisées avec les nouvelles preuves selon leur qualité et vraisemblance, plutôt que remplacées par l’observation récente la plus marquante.",
+        },
+      },
+      vocabulary: [
+        { en: "Anchoring", fr: "anchoring", definition: { en: "Excessive dependence on an initial reference value or belief.", fr: "Dépendance excessive à une valeur ou croyance de référence initiale." } },
+        { en: "Confirmation bias", fr: "confirmation bias", definition: { en: "Preference for information that supports an existing belief.", fr: "Préférence pour les informations qui soutiennent une croyance existante." } },
+        { en: "Base rate", fr: "base rate", definition: { en: "Historical or population-level frequency of an outcome before case-specific evidence.", fr: "Fréquence historique ou populationnelle d’un résultat avant prise en compte d’éléments spécifiques au cas." } },
+      ],
+    },
+    {
+      id: "herding-and-narratives",
+      kicker: { en: "05 · HERDING & NARRATIVES", fr: "05 · HERDING & NARRATIVES" },
+      title: { en: "Markets are social systems, so stories and crowd behavior can move capital", fr: "Les marchés sont des systèmes sociaux, donc histoires et comportements de foule peuvent déplacer le capital" },
+      coreFacts: [
+        { en: "Herding occurs when investors follow others rather than rely solely on independent analysis.", fr: "Le herding apparaît lorsque les investisseurs suivent les autres plutôt que de s’appuyer uniquement sur leur analyse indépendante." },
+        { en: "Information cascades can develop when people infer information from prior actions of others.", fr: "Des information cascades peuvent se développer lorsque les individus déduisent de l’information à partir des actions précédentes des autres." },
+        { en: "Narratives can coordinate expectations and influence flows even before fundamentals fully change.", fr: "Les narratives peuvent coordonner les attentes et influencer les flows avant même que les fondamentaux ne changent complètement." },
+        { en: "Crowded trades can become unstable when the same narrative reverses.", fr: "Les crowded trades peuvent devenir instables lorsque le même narrative se retourne." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If everyone around you is buying an asset and prices keep rising, it becomes psychologically difficult to stay out even if your analysis says the price is too high.",
+          fr: "Si tout le monde autour de toi achète un actif et que son prix continue de monter, il devient psychologiquement difficile de rester à l’écart même si ton analyse dit qu’il est trop cher.",
+        },
+        Intermediate: {
+          en: "Herding can be rational in some settings because investors may believe others possess better information. The problem is that imitation can create feedback loops that push prices far from fundamentals.",
+          fr: "Le herding peut être rationnel dans certains contextes car les investisseurs peuvent penser que les autres ont une meilleure information. Le problème est que l’imitation peut créer des boucles de feedback poussant les prix loin des fondamentaux.",
+        },
+        Professional: {
+          en: "Narrative-driven markets require separating fundamental adoption from reflexive price-flow dynamics. Positioning, leverage and liquidity determine whether a narrative reversal becomes gradual repricing or forced liquidation.",
+          fr: "Les marchés guidés par narratives exigent de distinguer adoption fondamentale et dynamiques réflexives prix-flows. Positioning, leverage et liquidité déterminent si un retournement de narrative devient un repricing progressif ou une liquidation forcée.",
+        },
+      },
+      vocabulary: [
+        { en: "Herding", fr: "herding", definition: { en: "Tendency to follow the actions of a group or market consensus.", fr: "Tendance à suivre les actions d’un groupe ou le consensus du marché." } },
+        { en: "Information cascade", fr: "information cascade", definition: { en: "Sequence in which people follow prior actions because they infer those actions contain information.", fr: "Séquence dans laquelle les individus suivent les actions précédentes car ils pensent qu’elles contiennent de l’information." } },
+        { en: "Reflexivity", fr: "reflexivity", definition: { en: "Feedback process in which beliefs influence prices and prices then influence beliefs or fundamentals.", fr: "Processus de feedback où les croyances influencent les prix, puis les prix influencent les croyances ou les fondamentaux." } },
+      ],
+    },
+    {
+      id: "market-anomalies",
+      kicker: { en: "06 · MARKET ANOMALIES", fr: "06 · MARKET ANOMALIES" },
+      title: { en: "An anomaly is interesting only after asking whether it is risk, behavior or data mining", fr: "Une anomalie n’est intéressante qu’après avoir demandé si elle vient du risque, du comportement ou du data mining" },
+      coreFacts: [
+        { en: "Momentum describes persistence in relative asset performance over intermediate horizons.", fr: "Le momentum décrit la persistance de performance relative des actifs sur des horizons intermédiaires." },
+        { en: "Value effects can arise from risk, behavioral overreaction or both.", fr: "Les effets value peuvent provenir du risque, d’une sur-réaction comportementale ou des deux." },
+        { en: "Post-earnings-announcement drift describes delayed price adjustment after earnings surprises.", fr: "Le post-earnings-announcement drift décrit un ajustement retardé des prix après des earnings surprises." },
+        { en: "Many reported anomalies weaken after publication because of arbitrage, crowding or data-mining bias.", fr: "De nombreuses anomalies publiées s’affaiblissent après publication à cause de l’arbitrage, du crowding ou du data-mining bias." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A market anomaly is a return pattern that seems difficult to explain with a simple efficient-market model. But not every pattern is a free profit opportunity.",
+          fr: "Une market anomaly est un pattern de return difficile à expliquer avec un simple modèle de marché efficient. Mais tout pattern n’est pas une opportunité gratuite.",
+        },
+        Intermediate: {
+          en: "Before accepting a behavioral explanation, test whether the anomaly survives transaction costs, different samples, risk adjustment and out-of-sample periods.",
+          fr: "Avant d’accepter une explication comportementale, teste si l’anomalie survit aux transaction costs, différents échantillons, risk adjustment et périodes out-of-sample.",
+        },
+        Professional: {
+          en: "Persistent anomalies usually require an equilibrium story: investors may be compensated for hidden risk, constrained from arbitraging the pattern, or systematically biased in a way that persists after costs.",
+          fr: "Les anomalies persistantes exigent généralement une histoire d’équilibre : les investisseurs peuvent être rémunérés pour un risque caché, empêchés d’arbitrer le pattern ou systématiquement biaisés d’une façon qui persiste après coûts.",
+        },
+      },
+      vocabulary: [
+        { en: "Momentum", fr: "momentum", definition: { en: "Tendency for recent relative winners and losers to continue performing similarly over some horizon.", fr: "Tendance des gagnants et perdants récents à poursuivre leur performance relative sur un certain horizon." } },
+        { en: "Post-earnings-announcement drift", fr: "post-earnings-announcement drift", definition: { en: "Gradual continuation of price reaction after an earnings surprise.", fr: "Poursuite progressive de la réaction du prix après une surprise d’earnings." } },
+        { en: "Data mining", fr: "data mining", definition: { en: "Finding apparent patterns by testing many hypotheses until some look statistically significant by chance.", fr: "Trouver des patterns apparents en testant de nombreuses hypothèses jusqu’à obtenir par hasard des résultats statistiquement significatifs." } },
+      ],
+    },
+    {
+      id: "limits-to-arbitrage",
+      kicker: { en: "07 · LIMITS TO ARBITRAGE", fr: "07 · LIMITS TO ARBITRAGE" },
+      title: { en: "Knowing an asset is mispriced is not the same as being able to profit from it safely", fr: "Savoir qu’un actif est mal pricé n’est pas la même chose que pouvoir en profiter sans risque" },
+      coreFacts: [
+        { en: "Arbitrageurs face funding, shorting, liquidity, timing and model risks.", fr: "Les arbitrageurs font face à funding risk, shorting risk, liquidity risk, timing risk et model risk." },
+        { en: "Mispricing can become larger before converging, creating mark-to-market losses.", fr: "Un mispricing peut s’aggraver avant de converger, créant des pertes mark-to-market." },
+        { en: "Career and client-redemption risk can force professional investors to close correct but losing positions early.", fr: "Career risk et client-redemption risk peuvent forcer des investisseurs professionnels à fermer trop tôt des positions correctes mais temporairement perdantes." },
+        { en: "Short-sale constraints can make overvaluation harder to arbitrage than undervaluation.", fr: "Les short-sale constraints peuvent rendre la survalorisation plus difficile à arbitrer que la sous-valorisation." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "You can be right that a stock is overpriced and still lose money if it becomes even more overpriced before falling.",
+          fr: "Tu peux avoir raison qu’une action est trop chère et quand même perdre de l’argent si elle devient encore plus chère avant de baisser.",
+        },
+        Intermediate: {
+          en: "Arbitrage requires capital, patience and financing. If investors withdraw capital during losses, the arbitrageur may be forced to exit before the mispricing corrects.",
+          fr: "L’arbitrage exige capital, patience et financement. Si les investisseurs retirent leur capital pendant les pertes, l’arbitrageur peut être forcé de sortir avant la correction du mispricing.",
+        },
+        Professional: {
+          en: "Limits to arbitrage create a bridge between behavioral demand and persistent mispricing. The stronger the implementation frictions, the longer a bias-driven price distortion can survive.",
+          fr: "Les limits to arbitrage créent un pont entre demande comportementale et mispricing persistant. Plus les frictions d’implémentation sont fortes, plus une distorsion de prix due aux biais peut survivre.",
+        },
+      },
+      vocabulary: [
+        { en: "Limits to arbitrage", fr: "limits to arbitrage", definition: { en: "Constraints preventing rational traders from fully correcting mispricing.", fr: "Contraintes empêchant les traders rationnels de corriger complètement un mispricing." } },
+        { en: "Noise-trader risk", fr: "noise-trader risk", definition: { en: "Risk that irrational trading pushes prices further away from fundamentals before convergence.", fr: "Risque que le trading irrationnel éloigne davantage les prix des fondamentaux avant convergence." } },
+      ],
+    },
+    {
+      id: "behavior-in-portfolios",
+      kicker: { en: "08 · BEHAVIOR IN PORTFOLIOS", fr: "08 · COMPORTEMENT DANS LES PORTEFEUILLES" },
+      title: { en: "Behavioral mistakes often appear through sizing, turnover and failure to follow process", fr: "Les erreurs comportementales apparaissent souvent via sizing, turnover et non-respect du process" },
+      coreFacts: [
+        { en: "Home bias can cause investors to over-allocate to familiar domestic assets.", fr: "Le home bias peut pousser les investisseurs à surpondérer les actifs domestiques familiers." },
+        { en: "Mental accounting can cause investors to treat economically identical money differently depending on its label or source.", fr: "Le mental accounting peut pousser à traiter différemment des sommes économiquement identiques selon leur étiquette ou origine." },
+        { en: "Performance chasing can lead investors to buy after strong returns and sell after weak returns.", fr: "Le performance chasing peut pousser à acheter après de forts returns et vendre après de mauvais returns." },
+        { en: "Behavioral risk can be reduced through portfolio rules, automation and pre-commitment.", fr: "Le risque comportemental peut être réduit par des règles de portefeuille, automatisation et pre-commitment." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Investors often buy what feels familiar, chase what recently performed well and panic after losses. These behaviors can damage long-term returns even when the original portfolio plan was good.",
+          fr: "Les investisseurs achètent souvent ce qui leur semble familier, poursuivent les actifs récemment performants et paniquent après des pertes. Ces comportements peuvent nuire aux returns long terme même si le plan initial était bon.",
+        },
+        Intermediate: {
+          en: "Use target allocations, rebalancing bands and written rules to reduce the influence of emotion. A strong process should make good behavior easier before a stressful market arrives.",
+          fr: "Utilise allocations cibles, rebalancing bands et règles écrites pour réduire l’influence de l’émotion. Un bon process doit rendre le bon comportement plus facile avant l’arrivée d’un marché stressé.",
+        },
+        Professional: {
+          en: "Behavioral portfolio design recognizes that implementation matters as much as theoretical optimality. A slightly less efficient portfolio that an investor can actually maintain through drawdowns may produce better realized outcomes than a fragile optimal portfolio.",
+          fr: "La construction comportementale reconnaît que l’implémentation compte autant que l’optimalité théorique. Un portefeuille légèrement moins efficient mais que l’investisseur peut réellement maintenir pendant les drawdowns peut produire de meilleurs résultats réalisés qu’un portefeuille optimal mais fragile.",
+        },
+      },
+      vocabulary: [
+        { en: "Home bias", fr: "home bias", definition: { en: "Tendency to overweight domestic or familiar assets.", fr: "Tendance à surpondérer les actifs domestiques ou familiers." } },
+        { en: "Mental accounting", fr: "mental accounting", definition: { en: "Tendency to separate money into mental categories that affect decisions.", fr: "Tendance à séparer l’argent en catégories mentales qui influencent les décisions." } },
+        { en: "Pre-commitment", fr: "pre-commitment", definition: { en: "Rule decided in advance to reduce emotional decision-making later.", fr: "Règle décidée à l’avance pour réduire les décisions émotionnelles futures." } },
+      ],
+    },
+    {
+      id: "debiasing-process",
+      kicker: { en: "09 · DEBIASING & DECISION PROCESS", fr: "09 · DEBIASING & PROCESS DE DÉCISION" },
+      title: { en: "The goal is not to eliminate emotion — it is to build systems that limit predictable errors", fr: "L’objectif n’est pas d’éliminer l’émotion — mais de construire des systèmes limitant les erreurs prévisibles" },
+      coreFacts: [
+        { en: "Decision journals create a record of thesis, probabilities, assumptions and expected catalysts before outcomes occur.", fr: "Les decision journals créent un historique de la thèse, probabilités, hypothèses et catalysts attendus avant les résultats." },
+        { en: "Pre-mortems ask what could make a decision fail before capital is committed.", fr: "Les pre-mortems demandent ce qui pourrait faire échouer une décision avant d’engager le capital." },
+        { en: "Checklists reduce omission errors in repetitive high-stakes decisions.", fr: "Les checklists réduisent les erreurs d’omission dans les décisions répétitives à fort enjeu." },
+        { en: "Separating process quality from outcome quality helps avoid hindsight bias.", fr: "Séparer qualité du process et qualité du résultat aide à éviter le hindsight bias." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A good investment can lose money and a bad investment can make money. Judge whether the decision process was sound, not only whether the outcome was favorable.",
+          fr: "Un bon investissement peut perdre de l’argent et un mauvais investissement peut en gagner. Juge si le process de décision était solide, pas seulement si le résultat a été favorable.",
+        },
+        Intermediate: {
+          en: "Write the thesis, probabilities, key assumptions, risks and invalidation points before entering a position. Review them later without rewriting history.",
+          fr: "Écris la thèse, probabilités, hypothèses clés, risques et points d’invalidation avant d’entrer une position. Revois-les ensuite sans réécrire l’histoire.",
+        },
+        Professional: {
+          en: "A mature decision process includes base rates, independent challenge, scenario probabilities, red-team review and post-mortems. The objective is not perfect prediction but better calibration and repeatability.",
+          fr: "Un process mature inclut base rates, challenge indépendant, probabilités de scénarios, red-team review et post-mortems. L’objectif n’est pas la prédiction parfaite mais une meilleure calibration et répétabilité.",
+        },
+      },
+      vocabulary: [
+        { en: "Decision journal", fr: "decision journal", definition: { en: "Written record of reasoning, assumptions and probabilities before an outcome is known.", fr: "Historique écrit du raisonnement, des hypothèses et probabilités avant de connaître le résultat." } },
+        { en: "Pre-mortem", fr: "pre-mortem", definition: { en: "Exercise imagining that a decision failed and identifying plausible causes in advance.", fr: "Exercice consistant à imaginer l’échec d’une décision et identifier à l’avance ses causes plausibles." } },
+        { en: "Hindsight bias", fr: "hindsight bias", definition: { en: "Tendency to view an outcome as more predictable after it has occurred.", fr: "Tendance à considérer un résultat comme plus prévisible après qu’il s’est produit." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "behavioral-finance",
+      question: { en: "What does behavioral finance primarily study?", fr: "Qu’étudie principalement la finance comportementale ?" },
+      options: [
+        { id: "a", label: { en: "Systematic ways real decisions depart from fully rational models", fr: "Les écarts systématiques entre décisions réelles et modèles pleinement rationnels" } },
+        { id: "b", label: { en: "Only accounting rules", fr: "Uniquement les règles comptables" } },
+        { id: "c", label: { en: "Only central-bank policy", fr: "Uniquement la politique des banques centrales" } },
+        { id: "d", label: { en: "Only bond duration", fr: "Uniquement la duration obligataire" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Behavioral finance focuses on systematic psychological and decision-making patterns affecting financial outcomes.", fr: "La finance comportementale étudie les schémas psychologiques et décisionnels systématiques affectant les résultats financiers." },
+    },
+    {
+      id: "q2",
+      conceptKey: "loss-aversion",
+      question: { en: "What is loss aversion?", fr: "Qu’est-ce que la loss aversion ?" },
+      options: [
+        { id: "a", label: { en: "Losses feel more painful than equal gains feel rewarding", fr: "Les pertes sont ressenties plus fortement que des gains équivalents" } },
+        { id: "b", label: { en: "Investors never take risk", fr: "Les investisseurs ne prennent jamais de risque" } },
+        { id: "c", label: { en: "All losses are permanent", fr: "Toutes les pertes sont permanentes" } },
+        { id: "d", label: { en: "Gains and losses feel identical", fr: "Gains et pertes sont ressentis de la même façon" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Prospect theory suggests asymmetric psychological value around gains and losses.", fr: "Prospect theory suggère une valeur psychologique asymétrique entre gains et pertes." },
+    },
+    {
+      id: "q3",
+      conceptKey: "overconfidence",
+      question: { en: "What can overconfidence cause?", fr: "Que peut provoquer l’overconfidence ?" },
+      options: [
+        { id: "a", label: { en: "Excessive trading and underestimated uncertainty", fr: "Trading excessif et incertitude sous-estimée" } },
+        { id: "b", label: { en: "Perfect forecasting", fr: "Des forecasts parfaits" } },
+        { id: "c", label: { en: "Guaranteed diversification", fr: "Une diversification garantie" } },
+        { id: "d", label: { en: "Zero turnover", fr: "Un turnover nul" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Overconfident investors may believe their information or skill is more reliable than it truly is.", fr: "Les investisseurs overconfident peuvent croire leur information ou leur compétence plus fiable qu’elle ne l’est réellement." },
+    },
+    {
+      id: "q4",
+      conceptKey: "confirmation-bias",
+      question: { en: "What is confirmation bias?", fr: "Qu’est-ce que le confirmation bias ?" },
+      options: [
+        { id: "a", label: { en: "Seeking evidence that supports an existing view", fr: "Chercher surtout les preuves qui soutiennent une vue existante" } },
+        { id: "b", label: { en: "Always changing your mind", fr: "Toujours changer d’avis" } },
+        { id: "c", label: { en: "Ignoring all information", fr: "Ignorer toute information" } },
+        { id: "d", label: { en: "Using only historical prices", fr: "Utiliser uniquement les prix historiques" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Confirmation bias causes selective attention toward supportive evidence.", fr: "Le confirmation bias pousse à sélectionner les preuves favorables à la croyance existante." },
+    },
+    {
+      id: "q5",
+      conceptKey: "herding",
+      question: { en: "What is herding?", fr: "Qu’est-ce que le herding ?" },
+      options: [
+        { id: "a", label: { en: "Following the crowd rather than relying only on independent analysis", fr: "Suivre le groupe plutôt que s’appuyer uniquement sur une analyse indépendante" } },
+        { id: "b", label: { en: "Always taking contrarian positions", fr: "Toujours prendre des positions contrarian" } },
+        { id: "c", label: { en: "Eliminating market cycles", fr: "Éliminer les cycles de marché" } },
+        { id: "d", label: { en: "Avoiding all social information", fr: "Éviter toute information sociale" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Herding describes decisions influenced strongly by the actions of others.", fr: "Le herding décrit des décisions fortement influencées par les actions des autres." },
+    },
+    {
+      id: "q6",
+      conceptKey: "momentum",
+      question: { en: "What is momentum in market-anomaly research?", fr: "Qu’est-ce que le momentum dans la recherche sur les market anomalies ?" },
+      options: [
+        { id: "a", label: { en: "Recent relative winners and losers tending to continue for some horizon", fr: "La tendance des gagnants et perdants récents à poursuivre leur performance relative sur un certain horizon" } },
+        { id: "b", label: { en: "All prices reverting immediately", fr: "Tous les prix revenant immédiatement à la moyenne" } },
+        { id: "c", label: { en: "Only dividend growth", fr: "Uniquement la croissance du dividende" } },
+        { id: "d", label: { en: "Only bond carry", fr: "Uniquement le bond carry" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Momentum refers to persistence in relative returns over intermediate horizons.", fr: "Le momentum désigne une persistance des returns relatifs sur des horizons intermédiaires." },
+    },
+    {
+      id: "q7",
+      conceptKey: "limits-to-arbitrage",
+      question: { en: "Why can mispricing persist?", fr: "Pourquoi un mispricing peut-il persister ?" },
+      options: [
+        { id: "a", label: { en: "Because arbitrageurs face funding, shorting, liquidity and timing risk", fr: "Parce que les arbitrageurs font face à funding, shorting, liquidité et timing risk" } },
+        { id: "b", label: { en: "Because arbitrage has no risk", fr: "Parce que l’arbitrage n’a aucun risque" } },
+        { id: "c", label: { en: "Because prices never move", fr: "Parce que les prix ne bougent jamais" } },
+        { id: "d", label: { en: "Because information is always perfect", fr: "Parce que l’information est toujours parfaite" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Implementation constraints can prevent rational investors from correcting mispricing immediately.", fr: "Les contraintes d’implémentation peuvent empêcher les investisseurs rationnels de corriger immédiatement un mispricing." },
+    },
+    {
+      id: "q8",
+      conceptKey: "home-bias",
+      question: { en: "What is home bias?", fr: "Qu’est-ce que le home bias ?" },
+      options: [
+        { id: "a", label: { en: "Overweighting familiar domestic assets", fr: "Surpondérer les actifs domestiques familiers" } },
+        { id: "b", label: { en: "Holding no domestic assets", fr: "Ne détenir aucun actif domestique" } },
+        { id: "c", label: { en: "Only investing in bonds", fr: "Investir uniquement en obligations" } },
+        { id: "d", label: { en: "Ignoring familiarity", fr: "Ignorer la familiarité" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Investors often allocate too much to markets or companies they know well.", fr: "Les investisseurs allouent souvent trop aux marchés ou entreprises qu’ils connaissent bien." },
+    },
+    {
+      id: "q9",
+      conceptKey: "decision-journal",
+      question: { en: "Why is a decision journal useful?", fr: "Pourquoi un decision journal est-il utile ?" },
+      options: [
+        { id: "a", label: { en: "It records reasoning before outcomes are known and reduces hindsight rewriting", fr: "Il enregistre le raisonnement avant les résultats et réduit la réécriture a posteriori" } },
+        { id: "b", label: { en: "It guarantees positive returns", fr: "Il garantit des returns positifs" } },
+        { id: "c", label: { en: "It replaces valuation", fr: "Il remplace la valuation" } },
+        { id: "d", label: { en: "It removes uncertainty", fr: "Il supprime l’incertitude" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A decision journal preserves the original thesis, assumptions and probabilities for later review.", fr: "Un decision journal conserve la thèse, les hypothèses et probabilités initiales pour une revue future." },
+    },
+    {
+      id: "q10",
+      conceptKey: "debiasing",
+      question: { en: "What is the best goal of a debiasing process?", fr: "Quel est le meilleur objectif d’un process de debiasing ?" },
+      options: [
+        { id: "a", label: { en: "Reduce predictable decision errors through rules and process", fr: "Réduire les erreurs prévisibles grâce à des règles et un process" } },
+        { id: "b", label: { en: "Eliminate all emotion permanently", fr: "Éliminer définitivement toute émotion" } },
+        { id: "c", label: { en: "Predict every market move", fr: "Prédire chaque mouvement de marché" } },
+        { id: "d", label: { en: "Avoid reviewing mistakes", fr: "Éviter de revoir les erreurs" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Good systems reduce the impact of recurring behavioral errors even though human emotion cannot be eliminated.", fr: "De bons systèmes réduisent l’impact des erreurs comportementales récurrentes même si l’émotion humaine ne peut pas être éliminée." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "Tell me about a behavioral bias that can hurt investors and how you would design a process to reduce it.",
+      fr: "Parle-moi d’un biais comportemental qui peut nuire aux investisseurs et explique comment tu construirais un process pour le réduire.",
+    },
+    framework: [
+      { en: "Name the bias and define it precisely.", fr: "Nommer le biais et le définir précisément." },
+      { en: "Explain the mechanism by which it changes investment decisions.", fr: "Expliquer le mécanisme par lequel il modifie les décisions d’investissement." },
+      { en: "Give a concrete portfolio or market example.", fr: "Donner un exemple concret de portefeuille ou de marché." },
+      { en: "Describe the financial cost or risk created by the bias.", fr: "Décrire le coût financier ou le risque créé par le biais." },
+      { en: "Propose a rule, checklist, journal or independent review process that reduces the bias.", fr: "Proposer une règle, checklist, journal ou revue indépendante réduisant le biais." },
+      { en: "Explain how you would measure whether the debiasing process actually improves decisions.", fr: "Expliquer comment mesurer si le process de debiasing améliore réellement les décisions." },
+    ],
+    sample: {
+      en: "A bias I would focus on is confirmation bias, where investors selectively search for information that supports an existing thesis while discounting evidence against it. This can be dangerous because once an investor owns a position, the thesis can become emotionally attached to the decision. For example, an analyst may keep focusing on strong revenue growth while ignoring deteriorating margins and balance-sheet risk. I would reduce the bias by requiring a written pre-investment thesis with explicit invalidation points, a section listing the strongest arguments against the position, and periodic reviews led by someone who did not originate the idea. I would also keep a decision journal so the original assumptions cannot be rewritten after the outcome. Over time, I would compare forecast probabilities with realized outcomes to test whether the process improves calibration and reduces repeated mistakes.",
+      fr: "Un biais sur lequel je me concentrerais est le confirmation bias, où les investisseurs recherchent sélectivement les informations qui soutiennent une thèse existante tout en minimisant les preuves contraires. Cela peut être dangereux car une fois qu’un investisseur possède une position, la thèse peut devenir émotionnellement liée à la décision. Par exemple, un analyste peut continuer à se concentrer sur une forte croissance du revenue tout en ignorant la détérioration des marges et le risque de bilan. Je réduirais ce biais en exigeant une thèse écrite avant investissement avec des points d’invalidation explicites, une section listant les meilleurs arguments contre la position et des revues périodiques dirigées par quelqu’un qui n’a pas initié l’idée. Je tiendrais aussi un decision journal afin que les hypothèses initiales ne puissent pas être réécrites après le résultat. Avec le temps, je comparerais les probabilités forecastées aux résultats réalisés pour vérifier si le process améliore la calibration et réduit les erreurs répétées.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson, hedgeFundsAlternativesLesson, portfolioConstructionLesson, behavioralFinanceLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
