@@ -31602,7 +31602,471 @@ export const structuredProductsLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson, hedgeFundsAlternativesLesson, portfolioConstructionLesson, behavioralFinanceLesson, structuredProductsLesson];
+
+export const regulationEthicsLesson: FinanceLesson = {
+  slug: "year-3-regulation-ethics",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Regulation & Ethics", fr: "Réglementation & Éthique / Regulation & Ethics" },
+  title: { en: "Regulation & Ethics", fr: "Réglementation & Éthique / Regulation & Ethics" },
+  subtitle: {
+    en: "Understand the regulatory and ethical foundations of professional finance: market integrity, MNPI, conflicts, fiduciary duties, client protection, AML/KYC, communications and emerging technology risks.",
+    fr: "Comprendre les fondements réglementaires et éthiques de la finance professionnelle : intégrité des marchés, MNPI, conflits, devoirs fiduciaires, protection client, AML/KYC, communications et risques liés aux nouvelles technologies.",
+  },
+  duration: { en: "160–195 min", fr: "160–195 min" },
+  prerequisites: [
+    { en: "Financial Vocabulary FR/EN", fr: "Financial Vocabulary FR/EN" },
+    { en: "Asset Management", fr: "Asset Management" },
+    { en: "Wealth Management", fr: "Wealth Management" },
+    { en: "Risk Management", fr: "Risk Management" },
+    { en: "Behavioral Finance", fr: "Behavioral Finance" },
+  ],
+  objectives: [
+    { en: "Explain why regulation exists and which risks it seeks to reduce.", fr: "Expliquer pourquoi la réglementation existe et quels risques elle cherche à réduire." },
+    { en: "Recognize market abuse, insider trading and misuse of material nonpublic information.", fr: "Reconnaître les abus de marché, insider trading et mauvais usage de material nonpublic information." },
+    { en: "Identify conflicts of interest and appropriate controls or disclosures.", fr: "Identifier les conflits d’intérêts et les contrôles ou disclosures appropriés." },
+    { en: "Distinguish fiduciary duty, suitability, best-interest and disclosure obligations conceptually.", fr: "Distinguer conceptuellement devoir fiduciaire, suitability, best-interest et obligations de disclosure." },
+    { en: "Understand core AML, KYC and sanctions-control principles.", fr: "Comprendre les principes fondamentaux AML, KYC et sanctions." },
+    { en: "Apply ethical judgment when rules are incomplete or ambiguous.", fr: "Appliquer un jugement éthique lorsque les règles sont incomplètes ou ambiguës." },
+    { en: "Evaluate conduct risks in research, sales, trading, communications, data and AI-enabled workflows.", fr: "Évaluer les conduct risks dans research, sales, trading, communications, données et workflows utilisant l’IA." },
+  ],
+  overviewFlow: {
+    title: { en: "From rulebook to professional judgment", fr: "Du rulebook au jugement professionnel" },
+    steps: [
+      { title: { en: "Know", fr: "Connaître" }, detail: { en: "Rules · duties · prohibited conduct", fr: "Règles · devoirs · conduites interdites" } },
+      { title: { en: "Identify", fr: "Identifier" }, detail: { en: "Conflicts · MNPI · client risk", fr: "Conflits · MNPI · risque client" } },
+      { title: { en: "Control", fr: "Contrôler" }, detail: { en: "Policies · disclosures · supervision", fr: "Policies · disclosures · supervision" } },
+      { title: { en: "Escalate", fr: "Escalader" }, detail: { en: "Document · seek guidance · protect integrity", fr: "Documenter · demander conseil · protéger l’intégrité" } },
+    ],
+  },
+  sections: [
+    {
+      id: "why-regulation-exists",
+      kicker: { en: "01 · WHY REGULATION EXISTS", fr: "01 · POURQUOI LA RÉGLEMENTATION EXISTE" },
+      title: { en: "Financial regulation protects trust, market integrity and vulnerable participants", fr: "La réglementation financière protège la confiance, l’intégrité des marchés et les participants vulnérables" },
+      coreFacts: [
+        { en: "Regulation seeks to reduce fraud, market abuse, information asymmetry, systemic risk and misconduct.", fr: "La réglementation cherche à réduire fraude, abus de marché, asymétrie d’information, systemic risk et misconduct." },
+        { en: "Different financial activities create different obligations for issuers, brokers, advisers, banks, asset managers and exchanges.", fr: "Les différentes activités financières créent différentes obligations pour issuers, brokers, advisers, banques, asset managers et exchanges." },
+        { en: "Rules often combine prescriptive requirements with principles-based standards.", fr: "Les règles combinent souvent exigences prescriptives et standards fondés sur des principes." },
+        { en: "Compliance is a minimum standard; ethical conduct can require more than literal rule-following.", fr: "La compliance est un standard minimum ; une conduite éthique peut exiger davantage qu’un respect littéral des règles." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Finance works only if people trust that markets are reasonably fair and that professionals follow rules. Regulation creates minimum standards for behavior, disclosure and risk control.",
+          fr: "La finance fonctionne seulement si les participants ont confiance dans l’équité raisonnable des marchés et le respect des règles par les professionnels. La réglementation crée des standards minimaux de comportement, disclosure et contrôle du risque.",
+        },
+        Intermediate: {
+          en: "Regulation targets problems such as asymmetric information, conflicts of interest and externalities. The exact rule depends on the activity, product, client and jurisdiction.",
+          fr: "La réglementation cible des problèmes comme asymétrie d’information, conflits d’intérêts et externalités. La règle exacte dépend de l’activité, du produit, du client et de la juridiction.",
+        },
+        Professional: {
+          en: "Strong compliance frameworks convert legal obligations into governance, surveillance, escalation and evidence. Institutions must demonstrate not only that policies exist, but that controls operate effectively.",
+          fr: "Les cadres de compliance robustes transforment les obligations légales en gouvernance, surveillance, escalation et preuves. Les institutions doivent démontrer non seulement que les policies existent, mais qu’elles fonctionnent réellement.",
+        },
+      },
+      vocabulary: [
+        { en: "Market integrity", fr: "intégrité de marché", definition: { en: "Condition in which markets function fairly, transparently and without prohibited manipulation.", fr: "État dans lequel les marchés fonctionnent de manière équitable, transparente et sans manipulation interdite." } },
+        { en: "Compliance", fr: "compliance", definition: { en: "Processes designed to ensure conduct aligns with applicable laws, rules and internal policies.", fr: "Processus visant à garantir que la conduite respecte lois, règles et policies internes applicables." } },
+        { en: "Conduct risk", fr: "conduct risk", definition: { en: "Risk of harm arising from inappropriate behavior toward clients, markets or counterparties.", fr: "Risque de dommage résultant d’un comportement inapproprié envers clients, marchés ou contreparties." } },
+      ],
+    },
+    {
+      id: "mnpi-and-insider-trading",
+      kicker: { en: "02 · MNPI & INSIDER TRADING", fr: "02 · MNPI & INSIDER TRADING" },
+      title: { en: "Material nonpublic information must not become a trading advantage", fr: "Une material nonpublic information ne doit pas devenir un avantage de trading" },
+      coreFacts: [
+        { en: "Information is material when a reasonable investor would consider it important to an investment decision.", fr: "Une information est material lorsqu’un investisseur raisonnable la considérerait importante pour une décision d’investissement." },
+        { en: "Information is nonpublic when it has not been broadly disseminated to the market.", fr: "Une information est nonpublic lorsqu’elle n’a pas été largement diffusée au marché." },
+        { en: "Trading or tipping on MNPI can create serious legal and professional consequences.", fr: "Trader ou transmettre du MNPI peut entraîner de graves conséquences légales et professionnelles." },
+        { en: "Information barriers, restricted lists and pre-clearance processes are common institutional controls.", fr: "Information barriers, restricted lists et pre-clearance sont des contrôles institutionnels courants." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If you learn confidential information that could significantly affect a company’s stock price, you should not trade on it or pass it to someone else so they can trade.",
+          fr: "Si tu apprends une information confidentielle pouvant affecter significativement le cours d’une entreprise, tu ne dois pas trader dessus ni la transmettre à quelqu’un pour qu’il trade.",
+        },
+        Intermediate: {
+          en: "A professional should ask two questions: is the information material, and is it public? If there is uncertainty, trading should be paused and the matter escalated to compliance.",
+          fr: "Un professionnel doit se poser deux questions : l’information est-elle material et est-elle publique ? En cas de doute, le trading doit être suspendu et le sujet escaladé à compliance.",
+        },
+        Professional: {
+          en: "MNPI controls are process-driven. Firms use need-to-know access, wall-crossing procedures, surveillance and documentation to reduce the risk that legitimate advisory information contaminates trading or research activity.",
+          fr: "Les contrôles MNPI reposent sur des process. Les firms utilisent need-to-know access, wall-crossing, surveillance et documentation pour réduire le risque qu’une information advisory légitime contamine trading ou research.",
+        },
+      },
+      vocabulary: [
+        { en: "MNPI", fr: "MNPI", definition: { en: "Material nonpublic information.", fr: "Material nonpublic information / information importante non publique." } },
+        { en: "Wall crossing", fr: "wall crossing", definition: { en: "Controlled process by which a person agrees to receive potentially confidential information and accepts resulting restrictions.", fr: "Process contrôlé par lequel une personne accepte de recevoir une information potentiellement confidentielle et les restrictions associées." } },
+        { en: "Restricted list", fr: "restricted list", definition: { en: "List of securities subject to trading or research restrictions.", fr: "Liste de titres soumis à des restrictions de trading ou research." } },
+      ],
+    },
+    {
+      id: "market-manipulation",
+      kicker: { en: "03 · MARKET ABUSE & MANIPULATION", fr: "03 · ABUS DE MARCHÉ & MANIPULATION" },
+      title: { en: "Trades and communications must reflect genuine economic intent", fr: "Les trades et communications doivent refléter une intention économique réelle" },
+      coreFacts: [
+        { en: "Market manipulation seeks to create a false or misleading impression of supply, demand or price.", fr: "La manipulation de marché cherche à créer une impression fausse ou trompeuse de l’offre, de la demande ou du prix." },
+        { en: "Spoofing involves entering orders without genuine intent to execute in order to influence market behavior.", fr: "Le spoofing consiste à placer des ordres sans réelle intention d’exécution afin d’influencer le marché." },
+        { en: "Wash trading creates artificial activity without meaningful change in economic ownership.", fr: "Le wash trading crée une activité artificielle sans véritable changement de propriété économique." },
+        { en: "False rumors or misleading communications can also constitute market abuse.", fr: "Les fausses rumeurs ou communications trompeuses peuvent aussi constituer un abus de marché." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "You cannot create fake buying or selling pressure to trick other investors. Orders should represent genuine trading intent.",
+          fr: "Tu ne peux pas créer une fausse pression acheteuse ou vendeuse pour tromper les autres investisseurs. Les ordres doivent représenter une véritable intention de trading.",
+        },
+        Intermediate: {
+          en: "Market abuse can occur through orders, executed trades or communications. Surveillance systems therefore monitor unusual order behavior as well as messaging and trading patterns.",
+          fr: "Les abus de marché peuvent survenir via ordres, trades exécutés ou communications. Les systèmes de surveillance suivent donc les comportements d’ordres inhabituels ainsi que les messages et patterns de trading.",
+        },
+        Professional: {
+          en: "Intent, pattern and market impact all matter. Firms require controls capable of distinguishing legitimate liquidity provision, hedging and order management from manipulative conduct.",
+          fr: "Intention, pattern et impact de marché comptent tous. Les firms doivent disposer de contrôles capables de distinguer liquidity provision, hedging et order management légitimes d’une conduite manipulatrice.",
+        },
+      },
+      vocabulary: [
+        { en: "Spoofing", fr: "spoofing", definition: { en: "Submitting deceptive orders intended to be canceled before execution to influence price or other traders.", fr: "Placement d’ordres trompeurs destinés à être annulés avant exécution afin d’influencer le prix ou les autres traders." } },
+        { en: "Wash trade", fr: "wash trade", definition: { en: "Transaction creating artificial activity without meaningful change in beneficial ownership.", fr: "Transaction créant une activité artificielle sans véritable changement de beneficial ownership." } },
+      ],
+    },
+    {
+      id: "conflicts-of-interest",
+      kicker: { en: "04 · CONFLICTS OF INTEREST", fr: "04 · CONFLITS D’INTÉRÊTS" },
+      title: { en: "A conflict does not always require avoidance — but it requires identification and control", fr: "Un conflit n’exige pas toujours d’être évité — mais il doit être identifié et contrôlé" },
+      coreFacts: [
+        { en: "Conflicts arise when personal, firm or client interests can compete.", fr: "Les conflits apparaissent lorsque intérêts personnels, de la firm ou du client peuvent entrer en concurrence." },
+        { en: "Common controls include avoidance, disclosure, information barriers, recusal and independent review.", fr: "Les contrôles courants incluent avoidance, disclosure, information barriers, recusal et independent review." },
+        { en: "Compensation structures can create incentives that influence recommendations or product selection.", fr: "Les structures de rémunération peuvent créer des incentives influençant recommandations ou sélection de produits." },
+        { en: "Disclosure alone may be insufficient if the conflict cannot be effectively managed.", fr: "La disclosure seule peut être insuffisante si le conflit ne peut pas être géré efficacement." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If an adviser earns more money by recommending one product over another, that creates a conflict. The client should not unknowingly bear the cost of that incentive.",
+          fr: "Si un adviser gagne davantage en recommandant un produit plutôt qu’un autre, cela crée un conflit. Le client ne doit pas supporter sans le savoir le coût de cet incentive.",
+        },
+        Intermediate: {
+          en: "A useful framework is identify, assess, control, disclose and monitor. Some conflicts can be managed; others should be avoided entirely.",
+          fr: "Un cadre utile est : identifier, évaluer, contrôler, disclose et monitorer. Certains conflits peuvent être gérés ; d’autres doivent être évités complètement.",
+        },
+        Professional: {
+          en: "Conflict governance should focus on incentives and decision rights, not merely written disclosures. The strongest controls change the process so conflicted individuals cannot unilaterally determine the outcome.",
+          fr: "La gouvernance des conflits doit se concentrer sur les incentives et decision rights, pas seulement sur des disclosures écrites. Les meilleurs contrôles modifient le process afin qu’une personne en conflit ne puisse pas décider seule du résultat.",
+        },
+      },
+      vocabulary: [
+        { en: "Conflict of interest", fr: "conflit d’intérêts", definition: { en: "Situation in which competing interests could compromise objective judgment.", fr: "Situation dans laquelle des intérêts concurrents peuvent compromettre un jugement objectif." } },
+        { en: "Recusal", fr: "recusal", definition: { en: "Removal of a conflicted person from a decision or process.", fr: "Retrait d’une personne en conflit d’une décision ou d’un process." } },
+      ],
+    },
+    {
+      id: "client-duty-and-suitability",
+      kicker: { en: "05 · CLIENT DUTY & SUITABILITY", fr: "05 · DEVOIR ENVERS LE CLIENT & SUITABILITY" },
+      title: { en: "The right product depends on the client, not only on the product", fr: "Le bon produit dépend du client, pas seulement du produit" },
+      coreFacts: [
+        { en: "Client recommendations should reflect objectives, risk tolerance, horizon, liquidity and financial circumstances.", fr: "Les recommandations clients doivent refléter objectifs, tolérance au risque, horizon, liquidité et situation financière." },
+        { en: "Complexity, leverage and illiquidity can make an otherwise legitimate product inappropriate for some clients.", fr: "Complexité, leverage et illiquidité peuvent rendre un produit pourtant légitime inadapté à certains clients." },
+        { en: "Different legal standards may apply depending on the role and jurisdiction, including fiduciary, suitability or best-interest concepts.", fr: "Différents standards juridiques peuvent s’appliquer selon rôle et juridiction, notamment concepts de fiduciary duty, suitability ou best interest." },
+        { en: "Documentation should show how a recommendation relates to known client facts.", fr: "La documentation doit montrer comment une recommandation se relie aux informations connues sur le client." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A product can be good in general but wrong for a specific person. A highly leveraged investment may not fit someone who needs stable cash in six months.",
+          fr: "Un produit peut être bon en général mais mauvais pour une personne précise. Un investissement très leveragé peut ne pas convenir à quelqu’un ayant besoin de cash stable dans six mois.",
+        },
+        Intermediate: {
+          en: "Professional client assessment uses KYC information to connect recommendation risk with objective, horizon, liquidity and capacity for loss.",
+          fr: "L’évaluation professionnelle du client utilise les informations KYC pour relier le risque de la recommandation à l’objectif, l’horizon, la liquidité et la capacity for loss.",
+        },
+        Professional: {
+          en: "Suitability and best-interest processes should consider product alternatives, costs, conflicts and reasonably foreseeable downside. Good documentation demonstrates the decision process rather than relying on generic disclaimers.",
+          fr: "Les process de suitability et best interest doivent considérer alternatives, coûts, conflits et downside raisonnablement prévisible. Une bonne documentation démontre le process de décision plutôt que de reposer sur des disclaimers génériques.",
+        },
+      },
+      vocabulary: [
+        { en: "Suitability", fr: "suitability", definition: { en: "Assessment of whether a product or recommendation fits a client’s profile and objectives.", fr: "Évaluation de l’adéquation d’un produit ou d’une recommandation au profil et aux objectifs du client." } },
+        { en: "Fiduciary duty", fr: "fiduciary duty", definition: { en: "Duty to act loyally and carefully in the interests of a beneficiary or client when applicable.", fr: "Devoir d’agir avec loyauté et diligence dans l’intérêt d’un bénéficiaire ou client lorsqu’il s’applique." } },
+      ],
+    },
+    {
+      id: "aml-kyc-sanctions",
+      kicker: { en: "06 · AML, KYC & SANCTIONS", fr: "06 · AML, KYC & SANCTIONS" },
+      title: { en: "Know the client, understand the source of funds and monitor unusual activity", fr: "Connaître le client, comprendre la source des fonds et surveiller les activités inhabituelles" },
+      coreFacts: [
+        { en: "KYC establishes customer identity, expected activity and risk profile.", fr: "Le KYC établit identité du client, activité attendue et profil de risque." },
+        { en: "AML controls seek to detect and deter money laundering and related financial crime.", fr: "Les contrôles AML cherchent à détecter et empêcher money laundering et criminalité financière associée." },
+        { en: "Enhanced due diligence may be required for higher-risk customers or structures.", fr: "Une enhanced due diligence peut être nécessaire pour des clients ou structures à risque plus élevé." },
+        { en: "Sanctions screening and transaction monitoring are distinct but complementary controls.", fr: "Sanctions screening et transaction monitoring sont des contrôles distincts mais complémentaires." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Financial institutions need to know who their clients are and whether money movements make sense for the client’s stated activity.",
+          fr: "Les institutions financières doivent savoir qui sont leurs clients et si les mouvements de fonds sont cohérents avec leur activité déclarée.",
+        },
+        Intermediate: {
+          en: "Risk-based AML means higher-risk relationships receive more scrutiny. Red flags should be investigated and escalated according to policy rather than explained away informally.",
+          fr: "Une approche AML risk-based signifie que les relations plus risquées reçoivent plus de contrôle. Les red flags doivent être investigués et escaladés selon les policies plutôt qu’expliqués informellement.",
+        },
+        Professional: {
+          en: "Effective financial-crime controls combine onboarding, beneficial-ownership analysis, sanctions screening, transaction monitoring, alert investigation and governance. No single control is sufficient on its own.",
+          fr: "Des contrôles efficaces contre la criminalité financière combinent onboarding, analyse du beneficial ownership, sanctions screening, transaction monitoring, investigation des alertes et gouvernance. Aucun contrôle unique ne suffit.",
+        },
+      },
+      vocabulary: [
+        { en: "KYC", fr: "KYC", definition: { en: "Know Your Customer process used to identify and understand clients.", fr: "Process Know Your Customer utilisé pour identifier et comprendre les clients." } },
+        { en: "AML", fr: "AML", definition: { en: "Anti-Money Laundering controls designed to detect and prevent illicit use of the financial system.", fr: "Contrôles Anti-Money Laundering visant à détecter et empêcher l’utilisation illicite du système financier." } },
+        { en: "Beneficial owner", fr: "beneficial owner", definition: { en: "Natural person who ultimately owns or controls an entity or account.", fr: "Personne physique qui possède ou contrôle finalement une entité ou un compte." } },
+      ],
+    },
+    {
+      id: "research-sales-and-communications",
+      kicker: { en: "07 · RESEARCH, SALES & COMMUNICATIONS", fr: "07 · RESEARCH, SALES & COMMUNICATIONS" },
+      title: { en: "Professional communication must be fair, supportable and appropriately disclosed", fr: "La communication professionnelle doit être équitable, justifiable et correctement disclosed" },
+      coreFacts: [
+        { en: "Research opinions should be separated from known facts and supported by reasonable analysis.", fr: "Les opinions de research doivent être séparées des faits connus et soutenues par une analyse raisonnable." },
+        { en: "Performance presentation should avoid cherry-picking, misleading benchmarks and unsupported claims.", fr: "La présentation de performance doit éviter cherry-picking, benchmarks trompeurs et affirmations non supportées." },
+        { en: "Sales communications should present material risks and costs, not only potential upside.", fr: "Les communications commerciales doivent présenter risques et coûts material, pas seulement l’upside potentiel." },
+        { en: "Electronic messages, social media and informal channels can still be subject to recordkeeping and conduct rules.", fr: "Messages électroniques, réseaux sociaux et canaux informels peuvent tout de même être soumis aux règles de recordkeeping et de conduite." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "You cannot present an investment as 'safe' if meaningful risk exists, or show only the best historical periods to make performance look stronger.",
+          fr: "Tu ne peux pas présenter un investissement comme 'sûr' s’il existe un risque material, ni montrer uniquement les meilleures périodes historiques pour embellir la performance.",
+        },
+        Intermediate: {
+          en: "Good financial communication distinguishes facts, forecasts and opinions. It also discloses important assumptions, limitations, conflicts and risks.",
+          fr: "Une bonne communication financière distingue faits, forecasts et opinions. Elle disclose également hypothèses, limites, conflits et risques importants.",
+        },
+        Professional: {
+          en: "Supervision should cover both content and channel. A technically accurate statement can still be misleading if important context is omitted or if selective disclosure creates an unfair informational advantage.",
+          fr: "La supervision doit couvrir contenu et canal. Une déclaration techniquement exacte peut rester trompeuse si un contexte important est omis ou si une selective disclosure crée un avantage informationnel injuste.",
+        },
+      },
+      vocabulary: [
+        { en: "Cherry-picking", fr: "cherry-picking", definition: { en: "Selecting only favorable data or periods while omitting relevant unfavorable evidence.", fr: "Sélection uniquement des données ou périodes favorables en omettant les éléments défavorables pertinents." } },
+        { en: "Recordkeeping", fr: "recordkeeping", definition: { en: "Retention of required communications and records for supervision and audit.", fr: "Conservation des communications et documents requis pour supervision et audit." } },
+      ],
+    },
+    {
+      id: "technology-data-and-ai-ethics",
+      kicker: { en: "08 · TECHNOLOGY, DATA & AI ETHICS", fr: "08 · TECHNOLOGIE, DONNÉES & ÉTHIQUE IA" },
+      title: { en: "Automation changes the scale of errors — not the obligation to supervise them", fr: "L’automatisation change l’échelle des erreurs — pas l’obligation de les superviser" },
+      coreFacts: [
+        { en: "Models can create harm through biased data, flawed assumptions, leakage or inappropriate use.", fr: "Les modèles peuvent créer des dommages via données biaisées, hypothèses erronées, leakage ou usage inapproprié." },
+        { en: "Confidential client or firm information should not be exposed through unauthorized tools or workflows.", fr: "Les informations confidentielles client ou firm ne doivent pas être exposées via des outils ou workflows non autorisés." },
+        { en: "Automated outputs still require accountability, validation and human oversight.", fr: "Les outputs automatisés exigent toujours accountability, validation et supervision humaine." },
+        { en: "Explainability and auditability matter when models influence client, risk or trading decisions.", fr: "Explainability et auditability comptent lorsque les modèles influencent décisions client, risk ou trading." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Using AI does not remove responsibility. If a model gives a wrong recommendation, a professional cannot simply say 'the computer decided.'",
+          fr: "Utiliser l’IA ne supprime pas la responsabilité. Si un modèle donne une mauvaise recommandation, un professionnel ne peut pas simplement dire 'l’ordinateur a décidé'.",
+        },
+        Intermediate: {
+          en: "Before using an automated tool, understand its data, purpose, limitations and approval status. Sensitive information should stay within authorized systems.",
+          fr: "Avant d’utiliser un outil automatisé, comprends ses données, son objectif, ses limites et son statut d’approbation. Les informations sensibles doivent rester dans des systèmes autorisés.",
+        },
+        Professional: {
+          en: "Technology governance should address model inventory, validation, access control, privacy, data lineage, monitoring and override procedures. Ethical use also requires asking whether automation changes client outcomes in unfair or opaque ways.",
+          fr: "La gouvernance technologique doit couvrir model inventory, validation, access control, privacy, data lineage, monitoring et override procedures. L’usage éthique exige aussi de vérifier si l’automatisation modifie les résultats clients de manière injuste ou opaque.",
+        },
+      },
+      vocabulary: [
+        { en: "Model risk", fr: "model risk", definition: { en: "Risk of adverse outcomes from incorrect or misused models.", fr: "Risque de résultats défavorables liés à des modèles incorrects ou mal utilisés." } },
+        { en: "Data lineage", fr: "data lineage", definition: { en: "Traceable history of where data came from and how it was transformed.", fr: "Historique traçable de l’origine des données et de leurs transformations." } },
+        { en: "Human oversight", fr: "human oversight", definition: { en: "Accountable human review of automated decisions and outputs.", fr: "Revue humaine responsable des décisions et outputs automatisés." } },
+      ],
+    },
+    {
+      id: "ethical-decision-framework",
+      kicker: { en: "09 · ETHICAL DECISION FRAMEWORK", fr: "09 · CADRE DE DÉCISION ÉTHIQUE" },
+      title: { en: "When the rulebook is unclear, use a structured escalation process", fr: "Lorsque le rulebook est flou, utilise un process structuré d’escalade" },
+      coreFacts: [
+        { en: "Ethical judgment begins by identifying stakeholders, duties, conflicts and potential harm.", fr: "Le jugement éthique commence par l’identification des stakeholders, devoirs, conflits et dommages potentiels." },
+        { en: "A professional should distinguish what is legal, what is permitted internally and what is ethically defensible.", fr: "Un professionnel doit distinguer ce qui est légal, ce qui est permis en interne et ce qui est éthiquement défendable." },
+        { en: "Difficult cases should be documented and escalated rather than solved through informal intuition alone.", fr: "Les cas difficiles doivent être documentés et escaladés plutôt que résolus uniquement par intuition informelle." },
+        { en: "Reputation and trust are economic assets that can be damaged by conduct that technically avoids a narrow rule.", fr: "Réputation et confiance sont des actifs économiques pouvant être endommagés par une conduite qui contourne techniquement une règle étroite." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If something feels questionable, do not hide it or improvise. Stop, document the facts and ask the right supervisor or compliance contact.",
+          fr: "Si quelque chose semble douteux, ne le cache pas et n’improvise pas. Arrête-toi, documente les faits et demande conseil au bon superviseur ou contact compliance.",
+        },
+        Intermediate: {
+          en: "A practical ethical test is: who could be harmed, what duty do I owe, what conflict exists, what information would I be comfortable disclosing, and what control or escalation is appropriate?",
+          fr: "Un test éthique pratique est : qui pourrait être lésé, quel devoir ai-je, quel conflit existe, quelle information serais-je prêt à disclose, et quel contrôle ou escalation est approprié ?",
+        },
+        Professional: {
+          en: "Strong culture makes escalation safe and expected. Ethical systems fail when commercial pressure, unclear accountability or incentives make employees afraid to challenge a questionable decision.",
+          fr: "Une culture forte rend l’escalade sûre et attendue. Les systèmes éthiques échouent lorsque pression commerciale, responsabilité floue ou incentives empêchent les employés de remettre en question une décision douteuse.",
+        },
+      },
+      comparison: {
+        title: { en: "Three questions before acting", fr: "Trois questions avant d’agir" },
+        headers: [{ en: "Question", fr: "Question" }, { en: "Purpose", fr: "Objectif" }],
+        rows: [
+          { cells: [{ en: "Is it legal and permitted?", fr: "Est-ce légal et permis ?" }, { en: "Identify the minimum formal boundary.", fr: "Identifier la limite formelle minimale." }] },
+          { cells: [{ en: "Is it fair to the affected parties?", fr: "Est-ce équitable pour les parties affectées ?" }, { en: "Identify conflicts and foreseeable harm.", fr: "Identifier conflits et dommages prévisibles." }] },
+          { cells: [{ en: "Would I defend it transparently?", fr: "Pourrais-je le défendre de manière transparente ?" }, { en: "Test professional integrity and reputation risk.", fr: "Tester l’intégrité professionnelle et le reputation risk." }] },
+        ],
+      },
+      vocabulary: [
+        { en: "Escalation", fr: "escalation", definition: { en: "Referral of a concern to an appropriate supervisor, control function or authority.", fr: "Transmission d’un problème à un superviseur, une fonction de contrôle ou une autorité appropriée." } },
+        { en: "Speak-up culture", fr: "speak-up culture", definition: { en: "Environment in which employees can raise concerns without inappropriate retaliation.", fr: "Environnement où les employés peuvent signaler des problèmes sans représailles inappropriées." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "regulation-purpose",
+      question: { en: "What is a core purpose of financial regulation?", fr: "Quel est un objectif fondamental de la réglementation financière ?" },
+      options: [
+        { id: "a", label: { en: "Protect market integrity and reduce misconduct", fr: "Protéger l’intégrité des marchés et réduire le misconduct" } },
+        { id: "b", label: { en: "Guarantee investor profits", fr: "Garantir les profits des investisseurs" } },
+        { id: "c", label: { en: "Eliminate all market volatility", fr: "Éliminer toute volatilité de marché" } },
+        { id: "d", label: { en: "Set every asset price", fr: "Fixer tous les prix d’actifs" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Regulation seeks fairer markets, client protection and control of harmful conduct and risk.", fr: "La réglementation vise des marchés plus équitables, la protection des clients et le contrôle des conduites et risques dommageables." },
+    },
+    {
+      id: "q2",
+      conceptKey: "mnpi",
+      question: { en: "What should you do if you may possess MNPI?", fr: "Que dois-tu faire si tu penses détenir du MNPI ?" },
+      options: [
+        { id: "a", label: { en: "Do not trade and escalate according to policy", fr: "Ne pas trader et escalader selon la policy" } },
+        { id: "b", label: { en: "Trade before anyone else notices", fr: "Trader avant que les autres ne le remarquent" } },
+        { id: "c", label: { en: "Send it to a friend", fr: "L’envoyer à un ami" } },
+        { id: "d", label: { en: "Post it online anonymously", fr: "Le poster anonymement en ligne" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Potential MNPI should trigger trading restrictions and compliance escalation.", fr: "Un potentiel MNPI doit déclencher restrictions de trading et escalation compliance." },
+    },
+    {
+      id: "q3",
+      conceptKey: "manipulation",
+      question: { en: "What is spoofing?", fr: "Qu’est-ce que le spoofing ?" },
+      options: [
+        { id: "a", label: { en: "Placing deceptive orders without genuine intent to execute", fr: "Placer des ordres trompeurs sans réelle intention d’exécution" } },
+        { id: "b", label: { en: "Legitimate long-term investing", fr: "Un investissement long terme légitime" } },
+        { id: "c", label: { en: "Receiving a bond coupon", fr: "Recevoir un coupon obligataire" } },
+        { id: "d", label: { en: "Diversifying a portfolio", fr: "Diversifier un portefeuille" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Spoofing uses non-genuine orders to mislead other market participants.", fr: "Le spoofing utilise des ordres non sincères pour tromper les autres participants de marché." },
+    },
+    {
+      id: "q4",
+      conceptKey: "conflict",
+      question: { en: "What is a good first step when a conflict of interest appears?", fr: "Quelle est une bonne première étape lorsqu’un conflit d’intérêts apparaît ?" },
+      options: [
+        { id: "a", label: { en: "Identify and assess the conflict", fr: "Identifier et évaluer le conflit" } },
+        { id: "b", label: { en: "Hide it from the client", fr: "Le cacher au client" } },
+        { id: "c", label: { en: "Assume disclosure always solves it", fr: "Supposer qu’une disclosure le résout toujours" } },
+        { id: "d", label: { en: "Ignore compensation incentives", fr: "Ignorer les incentives de rémunération" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Conflicts must first be identified and assessed before the right control can be chosen.", fr: "Les conflits doivent d’abord être identifiés et évalués avant de choisir le contrôle approprié." },
+    },
+    {
+      id: "q5",
+      conceptKey: "suitability",
+      question: { en: "What should a client recommendation reflect?", fr: "Que doit refléter une recommandation client ?" },
+      options: [
+        { id: "a", label: { en: "Objectives, risk tolerance, horizon and liquidity needs", fr: "Objectifs, tolérance au risque, horizon et besoins de liquidité" } },
+        { id: "b", label: { en: "Only the product’s highest possible return", fr: "Uniquement le return maximum possible du produit" } },
+        { id: "c", label: { en: "Only adviser compensation", fr: "Uniquement la rémunération de l’adviser" } },
+        { id: "d", label: { en: "No client information", fr: "Aucune information client" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Recommendations should be evaluated in the context of the client’s real profile and constraints.", fr: "Les recommandations doivent être évaluées dans le contexte réel du profil et des contraintes du client." },
+    },
+    {
+      id: "q6",
+      conceptKey: "kyc",
+      question: { en: "What is KYC designed to do?", fr: "À quoi sert le KYC ?" },
+      options: [
+        { id: "a", label: { en: "Identify and understand the customer", fr: "Identifier et comprendre le client" } },
+        { id: "b", label: { en: "Forecast stock prices", fr: "Prévoir les cours actions" } },
+        { id: "c", label: { en: "Eliminate interest-rate risk", fr: "Éliminer le risque de taux" } },
+        { id: "d", label: { en: "Set option volatility", fr: "Fixer la volatilité des options" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "KYC establishes identity, expected activity and risk profile.", fr: "Le KYC établit identité, activité attendue et profil de risque." },
+    },
+    {
+      id: "q7",
+      conceptKey: "communication",
+      question: { en: "What makes a financial communication potentially misleading?", fr: "Qu’est-ce qui peut rendre une communication financière trompeuse ?" },
+      options: [
+        { id: "a", label: { en: "Omitting material risks while highlighting upside", fr: "Omettre des risques material tout en mettant en avant l’upside" } },
+        { id: "b", label: { en: "Clearly separating facts from forecasts", fr: "Séparer clairement les faits des forecasts" } },
+        { id: "c", label: { en: "Disclosing relevant assumptions", fr: "Disclosure des hypothèses pertinentes" } },
+        { id: "d", label: { en: "Using a fair benchmark", fr: "Utiliser un benchmark équitable" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "A statement can be technically true but misleading if important context or risk is omitted.", fr: "Une déclaration peut être techniquement vraie mais trompeuse si un contexte ou un risque important est omis." },
+    },
+    {
+      id: "q8",
+      conceptKey: "ai-governance",
+      question: { en: "Who remains accountable when AI supports a financial decision?", fr: "Qui reste responsable lorsqu’une IA soutient une décision financière ?" },
+      options: [
+        { id: "a", label: { en: "The responsible professionals and institution", fr: "Les professionnels responsables et l’institution" } },
+        { id: "b", label: { en: "Nobody because the model decided", fr: "Personne car le modèle a décidé" } },
+        { id: "c", label: { en: "Only the client", fr: "Uniquement le client" } },
+        { id: "d", label: { en: "Only the software vendor in every case", fr: "Uniquement le software vendor dans tous les cas" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Automation does not eliminate professional responsibility, validation or supervision.", fr: "L’automatisation ne supprime pas la responsabilité professionnelle, la validation ou la supervision." },
+    },
+    {
+      id: "q9",
+      conceptKey: "ethics-vs-law",
+      question: { en: "Why can ethical analysis go beyond legal compliance?", fr: "Pourquoi l’analyse éthique peut-elle aller au-delà de la compliance légale ?" },
+      options: [
+        { id: "a", label: { en: "A technically legal action can still be unfair or damaging", fr: "Une action techniquement légale peut rester injuste ou dommageable" } },
+        { id: "b", label: { en: "Ethics makes laws irrelevant", fr: "L’éthique rend les lois inutiles" } },
+        { id: "c", label: { en: "Rules never matter", fr: "Les règles ne comptent jamais" } },
+        { id: "d", label: { en: "Ethics guarantees profits", fr: "L’éthique garantit les profits" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Professional integrity includes fairness, duties and foreseeable harm beyond narrow rule interpretation.", fr: "L’intégrité professionnelle inclut équité, devoirs et dommages prévisibles au-delà d’une interprétation étroite des règles." },
+    },
+    {
+      id: "q10",
+      conceptKey: "escalation",
+      question: { en: "What is the best response to an unclear high-risk compliance issue?", fr: "Quelle est la meilleure réponse à un problème de compliance à haut risque mais ambigu ?" },
+      options: [
+        { id: "a", label: { en: "Pause, document and escalate", fr: "Suspendre, documenter et escalader" } },
+        { id: "b", label: { en: "Act quickly before anyone asks", fr: "Agir vite avant que quelqu’un ne demande" } },
+        { id: "c", label: { en: "Delete relevant records", fr: "Supprimer les documents pertinents" } },
+        { id: "d", label: { en: "Rely only on intuition", fr: "S’appuyer uniquement sur l’intuition" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Ambiguous high-risk situations should be documented and referred to the appropriate control function.", fr: "Les situations ambiguës à haut risque doivent être documentées et référées à la fonction de contrôle appropriée." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "You receive information from a corporate contact that could move the company’s stock, but you are not sure whether it is public. What do you do?",
+      fr: "Tu reçois d’un contact corporate une information susceptible de faire bouger l’action, mais tu ne sais pas si elle est publique. Que fais-tu ?",
+    },
+    framework: [
+      { en: "Stop before trading, recommending or sharing the information.", fr: "S’arrêter avant de trader, recommander ou partager l’information." },
+      { en: "Assess whether the information may be material and nonpublic.", fr: "Évaluer si l’information peut être material et nonpublic." },
+      { en: "Do not independently try to exploit uncertainty or selectively disclose it.", fr: "Ne pas exploiter l’incertitude ni faire de selective disclosure." },
+      { en: "Escalate to compliance or the appropriate control function.", fr: "Escalader à compliance ou à la fonction de contrôle appropriée." },
+      { en: "Follow any resulting restricted-list, wall-crossing or trading-control instructions.", fr: "Suivre toute instruction résultante de restricted list, wall-crossing ou contrôle du trading." },
+      { en: "Document the facts and preserve relevant communications.", fr: "Documenter les faits et conserver les communications pertinentes." },
+    ],
+    sample: {
+      en: "I would not trade, recommend the stock or share the information until the issue is resolved. I would first recognize that the information could be material if a reasonable investor would consider it important, and it may be nonpublic if it has not been broadly disseminated. Because I am uncertain, I would not make the determination alone. I would preserve the relevant communication and escalate immediately to compliance or the appropriate control function. I would then follow any restrictions they impose, such as adding the security to a restricted list or limiting further discussion. The key principle is that uncertainty around MNPI should reduce activity, not encourage me to act before the status is clarified.",
+      fr: "Je ne traderais pas, ne recommanderais pas l’action et ne partagerais pas l’information tant que la situation n’est pas clarifiée. Je reconnaîtrais d’abord que l’information peut être material si un investisseur raisonnable la considérerait importante, et potentiellement nonpublic si elle n’a pas été largement diffusée. Comme je suis incertain, je ne prendrais pas cette décision seul. Je conserverais la communication pertinente et escaladerais immédiatement à compliance ou à la fonction de contrôle appropriée. Je suivrais ensuite toutes les restrictions imposées, par exemple l’ajout du titre à une restricted list ou la limitation des discussions. Le principe clé est que l’incertitude autour du MNPI doit réduire l’activité, pas m’encourager à agir avant clarification.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson, hedgeFundsAlternativesLesson, portfolioConstructionLesson, behavioralFinanceLesson, structuredProductsLesson, regulationEthicsLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
