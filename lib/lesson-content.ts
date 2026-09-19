@@ -30224,7 +30224,466 @@ export const hedgeFundsAlternativesLesson: FinanceLesson = {
   },
 };
 
-export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson, hedgeFundsAlternativesLesson];
+
+export const portfolioConstructionLesson: FinanceLesson = {
+  slug: "year-3-portfolio-construction",
+  year: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  domain: { en: "Portfolio Construction", fr: "Construction de portefeuille / Portfolio Construction" },
+  title: { en: "Portfolio Construction", fr: "Construction de portefeuille / Portfolio Construction" },
+  subtitle: {
+    en: "Turn investment views into a coherent portfolio by combining expected return, risk, correlations, factors, liquidity, constraints, rebalancing and scenario analysis.",
+    fr: "Transformer des vues d’investissement en portefeuille cohérent en combinant expected return, risque, corrélations, facteurs, liquidité, contraintes, rebalancing et scenario analysis.",
+  },
+  duration: { en: "170–210 min", fr: "170–210 min" },
+  prerequisites: [
+    { en: "Portfolio Theory & CAPM", fr: "Portfolio Theory & CAPM" },
+    { en: "Asset Management", fr: "Asset Management" },
+    { en: "Risk Management", fr: "Risk Management" },
+    { en: "Hedge Funds & Alternatives", fr: "Hedge Funds & Alternatives" },
+    { en: "Statistics & Probability", fr: "Statistiques & Probabilités" },
+  ],
+  objectives: [
+    { en: "Translate investment objectives into portfolio constraints and risk budgets.", fr: "Traduire les objectifs d’investissement en contraintes de portefeuille et risk budgets." },
+    { en: "Use expected return, volatility and correlation to understand diversification.", fr: "Utiliser expected return, volatilité et corrélation pour comprendre la diversification." },
+    { en: "Interpret efficient-frontier and mean-variance optimization outputs critically.", fr: "Interpréter de façon critique efficient frontier et mean-variance optimization." },
+    { en: "Measure marginal and component contributions to portfolio risk.", fr: "Mesurer les contributions marginales et composantes au risque du portefeuille." },
+    { en: "Manage factor, sector, duration, credit and liquidity exposures.", fr: "Gérer les expositions facteurs, secteurs, duration, crédit et liquidité." },
+    { en: "Design rebalancing rules and evaluate transaction-cost trade-offs.", fr: "Concevoir des règles de rebalancing et évaluer les compromis de transaction costs." },
+    { en: "Use scenario analysis, stress testing and drawdown controls in allocation decisions.", fr: "Utiliser scenario analysis, stress testing et contrôles de drawdown dans les décisions d’allocation." },
+  ],
+  overviewFlow: {
+    title: { en: "From investment objective to resilient portfolio", fr: "De l’objectif d’investissement au portefeuille résilient" },
+    steps: [
+      { title: { en: "Define", fr: "Définir" }, detail: { en: "Objectives · constraints · horizon", fr: "Objectifs · contraintes · horizon" } },
+      { title: { en: "Allocate", fr: "Allouer" }, detail: { en: "Returns · risk · correlations", fr: "Returns · risque · corrélations" } },
+      { title: { en: "Balance", fr: "Équilibrer" }, detail: { en: "Factors · risk budgets · liquidity", fr: "Facteurs · risk budgets · liquidité" } },
+      { title: { en: "Monitor", fr: "Surveiller" }, detail: { en: "Rebalance · stress · attribution", fr: "Rebalance · stress · attribution" } },
+    ],
+  },
+  sections: [
+    {
+      id: "investment-objective",
+      kicker: { en: "01 · OBJECTIVES & CONSTRAINTS", fr: "01 · OBJECTIFS & CONTRAINTES" },
+      title: { en: "Portfolio construction starts with what the capital must achieve", fr: "La construction de portefeuille commence par ce que le capital doit accomplir" },
+      coreFacts: [
+        { en: "Return objectives should be defined together with tolerance for volatility, drawdown and loss.", fr: "Les objectifs de return doivent être définis avec la tolérance à la volatilité, au drawdown et à la perte." },
+        { en: "Time horizon, liquidity needs and liabilities materially affect feasible allocation.", fr: "L’horizon, les besoins de liquidité et les liabilities influencent fortement l’allocation possible." },
+        { en: "Legal, tax, concentration and mandate constraints can override purely mathematical optimization.", fr: "Les contraintes juridiques, fiscales, de concentration et de mandat peuvent primer sur une optimisation purement mathématique." },
+        { en: "A portfolio should be judged relative to its objective, not by return alone.", fr: "Un portefeuille doit être jugé relativement à son objectif, pas uniquement à son return." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Before choosing investments, decide what the portfolio is for. A pension fund, a university endowment and a student saving for tuition should not use the same portfolio.",
+          fr: "Avant de choisir les investissements, il faut décider à quoi sert le portefeuille. Un pension fund, un endowment universitaire et un étudiant épargnant pour ses frais de scolarité ne devraient pas avoir le même portefeuille.",
+        },
+        Intermediate: {
+          en: "Translate the objective into measurable constraints: minimum liquidity, maximum drawdown tolerance, acceptable volatility, income needs, investment horizon and concentration limits.",
+          fr: "Traduis l’objectif en contraintes mesurables : minimum de liquidité, tolérance au drawdown, volatilité acceptable, besoins de revenu, horizon et limites de concentration.",
+        },
+        Professional: {
+          en: "Institutional portfolio design often begins with liabilities and governance. The theoretically optimal portfolio may be unusable if it creates funding risk, governance complexity, leverage constraints or liquidity demands the investor cannot tolerate.",
+          fr: "La construction institutionnelle commence souvent par les liabilities et la gouvernance. Le portefeuille théoriquement optimal peut être inutilisable s’il crée funding risk, complexité de gouvernance, contraintes de leverage ou besoins de liquidité impossibles à supporter.",
+        },
+      },
+      vocabulary: [
+        { en: "Investment policy statement", fr: "investment policy statement", definition: { en: "Formal document defining objectives, constraints and governance for a portfolio.", fr: "Document formel définissant objectifs, contraintes et gouvernance d’un portefeuille." } },
+        { en: "Liability", fr: "liability", definition: { en: "Future financial obligation the portfolio may need to fund.", fr: "Obligation financière future que le portefeuille devra potentiellement financer." } },
+      ],
+    },
+    {
+      id: "diversification",
+      kicker: { en: "02 · DIVERSIFICATION", fr: "02 · DIVERSIFICATION" },
+      title: { en: "Diversification depends on correlation, not the number of holdings", fr: "La diversification dépend des corrélations, pas du nombre de positions" },
+      coreFacts: [
+        { en: "Portfolio risk depends on individual volatilities and the correlations between assets.", fr: "Le risque du portefeuille dépend des volatilités individuelles et des corrélations entre actifs." },
+        { en: "Adding highly correlated assets may add little diversification even if the security count increases.", fr: "Ajouter des actifs fortement corrélés peut apporter peu de diversification même si le nombre de titres augmente." },
+        { en: "Correlations are unstable and often rise during market stress.", fr: "Les corrélations sont instables et augmentent souvent pendant les périodes de stress." },
+        { en: "True diversification requires different economic drivers, not only different tickers.", fr: "La vraie diversification exige des drivers économiques différents, pas seulement des tickers différents." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Owning ten technology stocks is not the same as owning ten investments exposed to different risks. If they all fall together, the portfolio is not very diversified.",
+          fr: "Détenir dix actions technologiques n’est pas la même chose que détenir dix investissements exposés à des risques différents. S’ils baissent tous ensemble, le portefeuille est peu diversifié.",
+        },
+        Intermediate: {
+          en: "Use covariance or correlation matrices to estimate how assets interact. Diversification is strongest when assets have attractive expected returns but less-than-perfectly-positive correlations.",
+          fr: "Utilise des matrices de covariance ou corrélation pour estimer comment les actifs interagissent. La diversification est plus forte lorsque les actifs ont des expected returns attractifs mais des corrélations inférieures à +1.",
+        },
+        Professional: {
+          en: "Diversification analysis should be regime-aware. Historical correlations can understate joint downside risk if several assets depend on the same hidden factor, such as liquidity, real rates or credit conditions.",
+          fr: "L’analyse de diversification doit tenir compte des régimes. Les corrélations historiques peuvent sous-estimer le downside conjoint si plusieurs actifs dépendent du même facteur caché, comme liquidité, real rates ou conditions de crédit.",
+        },
+      },
+      formula: {
+        label: { en: "Two-asset portfolio variance", fr: "Variance d’un portefeuille à deux actifs" },
+        expression: "σp² = w₁²σ₁² + w₂²σ₂² + 2w₁w₂σ₁σ₂ρ₁₂",
+        explanation: { en: "Correlation determines how much the two assets diversify each other.", fr: "La corrélation détermine dans quelle mesure les deux actifs se diversifient." },
+      },
+      vocabulary: [
+        { en: "Correlation", fr: "corrélation", definition: { en: "Measure of how two return series move together.", fr: "Mesure de la manière dont deux séries de returns évoluent ensemble." } },
+        { en: "Covariance", fr: "covariance", definition: { en: "Joint variability of two return series.", fr: "Variabilité conjointe de deux séries de returns." } },
+      ],
+    },
+    {
+      id: "efficient-frontier",
+      kicker: { en: "03 · EFFICIENT FRONTIER", fr: "03 · EFFICIENT FRONTIER" },
+      title: { en: "Optimization is a useful framework, not an oracle", fr: "L’optimisation est un cadre utile, pas un oracle" },
+      coreFacts: [
+        { en: "The efficient frontier contains portfolios with the highest expected return for a given estimated risk level.", fr: "L’efficient frontier contient les portefeuilles offrant le plus haut expected return pour un niveau de risque estimé." },
+        { en: "Mean-variance optimization is highly sensitive to expected-return assumptions.", fr: "La mean-variance optimization est très sensible aux hypothèses d’expected return." },
+        { en: "Small input changes can produce large changes in optimized weights.", fr: "De petites variations des inputs peuvent produire de grands changements dans les poids optimisés." },
+        { en: "Constraints and robust assumptions can make optimization more usable in practice.", fr: "Les contraintes et hypothèses robustes peuvent rendre l’optimisation plus utilisable en pratique." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Optimization tries to combine assets so the portfolio gives the best expected return for the risk taken. But if your forecasts are wrong, the optimized portfolio can also be wrong.",
+          fr: "L’optimisation cherche à combiner les actifs pour obtenir le meilleur expected return pour le risque pris. Mais si les forecasts sont faux, le portefeuille optimisé peut l’être aussi.",
+        },
+        Intermediate: {
+          en: "Expected returns are usually the noisiest input, so unconstrained optimization can create extreme allocations. Weight limits, shrinkage and scenario-based assumptions can improve stability.",
+          fr: "Les expected returns sont généralement l’input le plus bruité, donc une optimisation sans contraintes peut créer des allocations extrêmes. Limites de poids, shrinkage et hypothèses par scénarios peuvent améliorer la stabilité.",
+        },
+        Professional: {
+          en: "Institutional optimizers often incorporate transaction costs, turnover penalties, factor limits, tracking error, liquidity and robust covariance estimates. The output should be treated as decision support rather than a mechanically correct answer.",
+          fr: "Les optimizers institutionnels intègrent souvent transaction costs, turnover penalties, limites de facteurs, tracking error, liquidité et estimations robustes de covariance. L’output doit être traité comme aide à la décision plutôt que comme réponse mécaniquement correcte.",
+        },
+      },
+      vocabulary: [
+        { en: "Efficient frontier", fr: "efficient frontier", definition: { en: "Set of portfolios maximizing expected return for each estimated level of risk.", fr: "Ensemble de portefeuilles maximisant l’expected return pour chaque niveau de risque estimé." } },
+        { en: "Mean-variance optimization", fr: "mean-variance optimization", definition: { en: "Allocation framework using expected returns, variances and covariances.", fr: "Cadre d’allocation utilisant expected returns, variances et covariances." } },
+        { en: "Shrinkage", fr: "shrinkage", definition: { en: "Statistical technique pulling unstable estimates toward more robust central values.", fr: "Technique statistique rapprochant des estimations instables de valeurs centrales plus robustes." } },
+      ],
+    },
+    {
+      id: "risk-budgeting",
+      kicker: { en: "04 · RISK BUDGETING", fr: "04 · RISK BUDGETING" },
+      title: { en: "Capital weights and risk weights are not the same thing", fr: "Les poids en capital et les poids en risque ne sont pas la même chose" },
+      coreFacts: [
+        { en: "A small capital allocation to a volatile asset can contribute more risk than a large allocation to a stable asset.", fr: "Une petite allocation de capital vers un actif volatil peut contribuer plus de risque qu’une grande allocation vers un actif stable." },
+        { en: "Marginal contribution to risk measures how total portfolio risk changes when one position changes slightly.", fr: "La marginal contribution to risk mesure comment le risque total change lorsqu’une position varie légèrement." },
+        { en: "Component risk contribution allocates total portfolio risk across holdings or factors.", fr: "La component risk contribution répartit le risque total du portefeuille entre holdings ou facteurs." },
+        { en: "Risk parity aims for more balanced risk contributions rather than equal capital weights.", fr: "Le risk parity vise des contributions de risque plus équilibrées plutôt que des poids de capital égaux." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A 10% position in a very volatile asset can dominate portfolio risk more than a 40% position in a low-volatility bond fund.",
+          fr: "Une position de 10 % dans un actif très volatil peut dominer le risque plus qu’une position de 40 % dans un fonds obligataire peu volatil.",
+        },
+        Intermediate: {
+          en: "Risk budgeting asks how much of total risk each position contributes. This gives a more useful view than capital weights alone when assets have very different volatility and correlation.",
+          fr: "Le risk budgeting demande quelle part du risque total est apportée par chaque position. C’est plus utile que les poids en capital seuls lorsque volatilités et corrélations diffèrent fortement.",
+        },
+        Professional: {
+          en: "Risk budgets can be allocated across assets, factors or strategies. They should be monitored through time because changing volatility and correlation can cause actual risk contributions to drift materially from target.",
+          fr: "Les risk budgets peuvent être alloués entre actifs, facteurs ou stratégies. Ils doivent être suivis dans le temps car les changements de volatilité et corrélation peuvent faire fortement dériver les contributions réelles par rapport aux targets.",
+        },
+      },
+      vocabulary: [
+        { en: "Marginal contribution to risk", fr: "marginal contribution to risk", definition: { en: "Change in total portfolio risk caused by a small increase in one position.", fr: "Variation du risque total causée par une petite augmentation d’une position." } },
+        { en: "Risk parity", fr: "risk parity", definition: { en: "Portfolio approach targeting balanced risk contributions across assets or risk sources.", fr: "Approche de portefeuille visant des contributions de risque équilibrées entre actifs ou sources de risque." } },
+      ],
+    },
+    {
+      id: "factor-exposures",
+      kicker: { en: "05 · FACTOR EXPOSURES", fr: "05 · EXPOSITIONS FACTEURS" },
+      title: { en: "Portfolio risk often comes from factors that cut across individual securities", fr: "Le risque du portefeuille vient souvent de facteurs qui traversent les titres individuels" },
+      coreFacts: [
+        { en: "Equity portfolios can load on factors such as market, value, growth, size, quality and momentum.", fr: "Les portefeuilles actions peuvent charger sur des facteurs comme market, value, growth, size, quality et momentum." },
+        { en: "Fixed-income portfolios carry duration, curve, inflation, credit and liquidity factors.", fr: "Les portefeuilles obligataires portent duration, curve, inflation, crédit et liquidity factors." },
+        { en: "Apparent diversification across securities can hide concentrated factor exposure.", fr: "Une diversification apparente entre titres peut cacher une forte concentration factorielle." },
+        { en: "Factor-neutralization can isolate security-selection alpha but may reduce expected return from intentional factor views.", fr: "La neutralisation des facteurs peut isoler le security-selection alpha mais réduire l’expected return provenant de vues factorielles intentionnelles." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Owning many different companies does not guarantee diversification if they all behave like the same type of stock, for example high-growth technology.",
+          fr: "Détenir de nombreuses entreprises différentes ne garantit pas la diversification si elles se comportent toutes comme le même type d’action, par exemple des technologies à forte croissance.",
+        },
+        Intermediate: {
+          en: "Run factor analysis to understand whether portfolio returns come from broad market beta, style factors, duration, credit or genuine idiosyncratic selection.",
+          fr: "Réalise une factor analysis pour comprendre si les returns viennent du market beta, des style factors, de la duration, du crédit ou d’une vraie sélection idiosyncratique.",
+        },
+        Professional: {
+          en: "Factor risk should be monitored both ex ante and ex post. Correlated positions can create hidden crowding, especially when several managers express the same factor through different securities.",
+          fr: "Le factor risk doit être suivi ex ante et ex post. Des positions corrélées peuvent créer un crowding caché, notamment lorsque plusieurs managers expriment le même facteur via des titres différents.",
+        },
+      },
+      vocabulary: [
+        { en: "Factor exposure", fr: "factor exposure", definition: { en: "Sensitivity of a portfolio to a systematic driver of returns.", fr: "Sensibilité d’un portefeuille à un driver systématique de returns." } },
+        { en: "Idiosyncratic risk", fr: "idiosyncratic risk", definition: { en: "Security-specific risk not explained by common market factors.", fr: "Risque propre à un titre non expliqué par des facteurs de marché communs." } },
+      ],
+    },
+    {
+      id: "liquidity-and-capacity",
+      kicker: { en: "06 · LIQUIDITY & CAPACITY", fr: "06 · LIQUIDITÉ & CAPACITY" },
+      title: { en: "A portfolio can be solvent and still fail from liquidity pressure", fr: "Un portefeuille peut être solvable et pourtant échouer par manque de liquidité" },
+      coreFacts: [
+        { en: "Liquidity should be evaluated under stressed, not only normal, market conditions.", fr: "La liquidité doit être évaluée sous conditions stressées, pas seulement normales." },
+        { en: "Large positions can take longer and cost more to exit than small positions.", fr: "Les grosses positions peuvent prendre plus de temps et coûter plus cher à liquider que les petites." },
+        { en: "Private assets and alternatives can create capital-call and redemption-management challenges.", fr: "Les actifs privés et alternatifs peuvent créer des défis de capital calls et de gestion des redemptions." },
+        { en: "Portfolio capacity depends on market depth, turnover, strategy edge and transaction costs.", fr: "La capacity du portefeuille dépend de la profondeur du marché, du turnover, de l’edge de la stratégie et des transaction costs." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "An investment can look valuable on paper but be difficult to sell quickly. If the portfolio needs cash at the wrong time, that illiquidity can become a real problem.",
+          fr: "Un investissement peut sembler précieux sur le papier mais être difficile à vendre rapidement. Si le portefeuille a besoin de cash au mauvais moment, cette illiquidité peut devenir un vrai problème.",
+        },
+        Intermediate: {
+          en: "Estimate liquidation time, bid-ask spread, market depth and stressed transaction cost. Maintain enough liquid assets to meet withdrawals, collateral and capital calls.",
+          fr: "Estime liquidation time, bid-ask spread, market depth et transaction cost en stress. Maintiens assez d’actifs liquides pour répondre aux withdrawals, collateral et capital calls.",
+        },
+        Professional: {
+          en: "Liquidity stress testing should incorporate endogenous market impact: as position size rises relative to market depth, the portfolio can move the price against itself during liquidation.",
+          fr: "Les liquidity stress tests doivent intégrer l’impact de marché endogène : lorsque la taille de position augmente relativement à la profondeur, le portefeuille peut déplacer le prix contre lui-même pendant la liquidation.",
+        },
+      },
+      vocabulary: [
+        { en: "Market depth", fr: "market depth", definition: { en: "Amount of executable volume available near current market prices.", fr: "Volume exécutable disponible près des prix de marché actuels." } },
+        { en: "Market impact", fr: "market impact", definition: { en: "Price movement caused by executing a trade.", fr: "Mouvement de prix causé par l’exécution d’un trade." } },
+      ],
+    },
+    {
+      id: "rebalancing",
+      kicker: { en: "07 · REBALANCING", fr: "07 · REBALANCING" },
+      title: { en: "Rebalancing restores the intended portfolio — but trading is not free", fr: "Le rebalancing restaure le portefeuille cible — mais le trading n’est pas gratuit" },
+      coreFacts: [
+        { en: "Market movements cause portfolio weights and risk contributions to drift over time.", fr: "Les mouvements de marché font dériver les poids et contributions de risque au fil du temps." },
+        { en: "Calendar rebalancing trades at fixed intervals, while threshold rebalancing trades only when deviations become large enough.", fr: "Le calendar rebalancing trade à intervalles fixes, tandis que le threshold rebalancing trade lorsque les écarts deviennent suffisamment importants." },
+        { en: "Frequent rebalancing reduces drift but increases transaction costs and taxes.", fr: "Un rebalancing fréquent réduit le drift mais augmente transaction costs et taxes." },
+        { en: "Rebalancing can create a disciplined buy-low/sell-high mechanism in mean-reverting exposures.", fr: "Le rebalancing peut créer un mécanisme discipliné buy-low/sell-high dans les expositions mean-reverting." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "If stocks rise a lot, a 60/40 portfolio might become 70/30. Rebalancing sells some stocks and buys bonds to return toward the intended risk level.",
+          fr: "Si les actions montent fortement, un portefeuille 60/40 peut devenir 70/30. Le rebalancing vend alors une partie des actions et rachète des obligations pour revenir vers le risque prévu.",
+        },
+        Intermediate: {
+          en: "Choose between calendar and threshold rules based on volatility, transaction costs, taxes and governance. Threshold rules often trade only when the portfolio drifts enough to justify the cost.",
+          fr: "Choisis entre règles calendar et threshold selon volatilité, transaction costs, fiscalité et gouvernance. Les threshold rules tradent souvent seulement lorsque le drift justifie le coût.",
+        },
+        Professional: {
+          en: "Optimal rebalancing should consider no-trade regions, turnover budgets, expected alpha decay and market impact. In multi-asset portfolios, rebalancing can be coordinated with cash flows to reduce unnecessary transactions.",
+          fr: "Le rebalancing optimal doit intégrer no-trade regions, turnover budgets, decay de l’alpha attendu et market impact. Dans un portefeuille multi-asset, le rebalancing peut être coordonné avec les cash flows pour réduire les transactions inutiles.",
+        },
+      },
+      vocabulary: [
+        { en: "Drift", fr: "drift", definition: { en: "Movement of portfolio weights away from target due to market changes.", fr: "Écart progressif des poids du portefeuille par rapport aux targets à cause des marchés." } },
+        { en: "No-trade region", fr: "no-trade region", definition: { en: "Range around target weights within which trading is avoided because costs exceed benefits.", fr: "Zone autour des poids cibles dans laquelle le trading est évité car ses coûts dépassent ses bénéfices." } },
+      ],
+    },
+    {
+      id: "stress-testing",
+      kicker: { en: "08 · SCENARIO & STRESS TESTING", fr: "08 · SCENARIO & STRESS TESTING" },
+      title: { en: "Portfolio risk is best understood through scenarios, not one volatility number", fr: "Le risque d’un portefeuille se comprend mieux par scénarios qu’avec un seul chiffre de volatilité" },
+      coreFacts: [
+        { en: "Historical stress tests replay known market shocks on the current portfolio.", fr: "Les historical stress tests rejouent des chocs de marché connus sur le portefeuille actuel." },
+        { en: "Hypothetical scenarios test combinations of rates, spreads, equities, FX and volatility.", fr: "Les scénarios hypothétiques testent des combinaisons de taux, spreads, actions, FX et volatilité." },
+        { en: "Correlation breakdown and liquidity shocks should be included in severe scenarios.", fr: "Les ruptures de corrélation et liquidity shocks doivent être incluses dans les scénarios sévères." },
+        { en: "Stress results should inform sizing and contingency planning, not merely reporting.", fr: "Les résultats de stress doivent informer sizing et contingency planning, pas seulement le reporting." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "Instead of asking only how volatile the portfolio was in the past, ask what would happen if stocks fell 25%, credit spreads widened and liquidity disappeared at the same time.",
+          fr: "Au lieu de demander seulement quelle a été la volatilité historique, demande ce qui se passerait si les actions baissaient de 25 %, les credit spreads s’élargissaient et la liquidité disparaissait en même temps.",
+        },
+        Intermediate: {
+          en: "Build scenarios around the portfolio’s actual vulnerabilities. A portfolio with heavy duration, credit and growth exposure should stress those factors jointly rather than independently.",
+          fr: "Construis des scénarios autour des vraies vulnérabilités du portefeuille. Un portefeuille chargé en duration, crédit et growth doit stresser ces facteurs conjointement plutôt qu’indépendamment.",
+        },
+        Professional: {
+          en: "Stress testing should capture nonlinear derivatives, margin calls, liquidity haircuts and second-order feedback. The portfolio response can be much worse than the sum of isolated shocks when forced deleveraging begins.",
+          fr: "Le stress testing doit capturer dérivés non linéaires, margin calls, haircuts de liquidité et feedbacks de second ordre. La réaction du portefeuille peut être bien pire que la somme de chocs isolés lorsque le deleveraging forcé commence.",
+        },
+      },
+      vocabulary: [
+        { en: "Historical stress test", fr: "historical stress test", definition: { en: "Application of a past market shock to the current portfolio.", fr: "Application d’un choc de marché passé au portefeuille actuel." } },
+        { en: "Hypothetical scenario", fr: "scénario hypothétique", definition: { en: "Constructed combination of market shocks used to test portfolio resilience.", fr: "Combinaison construite de chocs de marché utilisée pour tester la résilience du portefeuille." } },
+      ],
+    },
+    {
+      id: "portfolio-governance",
+      kicker: { en: "09 · IMPLEMENTATION & GOVERNANCE", fr: "09 · IMPLÉMENTATION & GOUVERNANCE" },
+      title: { en: "Good portfolio construction includes a process for changing your mind", fr: "Une bonne construction de portefeuille inclut un processus pour changer d’avis" },
+      coreFacts: [
+        { en: "Portfolio decisions should distinguish strategic allocation from tactical tilts.", fr: "Les décisions de portefeuille doivent distinguer allocation stratégique et tactical tilts." },
+        { en: "Performance attribution helps separate allocation, selection and factor effects.", fr: "La performance attribution aide à séparer allocation, sélection et effets de facteurs." },
+        { en: "Governance rules reduce emotional decision-making during market stress.", fr: "Les règles de gouvernance réduisent les décisions émotionnelles pendant les périodes de stress." },
+        { en: "A portfolio process should define what evidence triggers re-underwriting of a position or strategy.", fr: "Un process de portefeuille doit définir quelles preuves déclenchent une nouvelle analyse d’une position ou stratégie." },
+      ],
+      explanation: {
+        Beginner: {
+          en: "A portfolio needs rules for monitoring and changing positions. Otherwise every market move can trigger an emotional decision.",
+          fr: "Un portefeuille a besoin de règles pour surveiller et modifier les positions. Sinon chaque mouvement de marché peut provoquer une décision émotionnelle.",
+        },
+        Intermediate: {
+          en: "Separate long-term strategic weights from shorter-term active views. Review whether performance came from intended decisions or from unintended risk exposures.",
+          fr: "Sépare les poids stratégiques long terme des vues actives court terme. Vérifie si la performance vient des décisions prévues ou d’expositions au risque non intentionnelles.",
+        },
+        Professional: {
+          en: "Institutional governance defines decision rights, review frequency, escalation triggers and risk limits. Good governance is a portfolio-construction tool because it determines whether the strategy can survive drawdowns without abandoning its process at the worst time.",
+          fr: "La gouvernance institutionnelle définit droits de décision, fréquence de revue, triggers d’escalade et limites de risque. Une bonne gouvernance est un outil de construction de portefeuille car elle détermine si la stratégie peut survivre aux drawdowns sans abandonner son process au pire moment.",
+        },
+      },
+      vocabulary: [
+        { en: "Strategic asset allocation", fr: "strategic asset allocation", definition: { en: "Long-term target allocation aligned with objectives and liabilities.", fr: "Allocation cible long terme alignée avec objectifs et liabilities." } },
+        { en: "Tactical allocation", fr: "tactical allocation", definition: { en: "Temporary deviation from strategic weights based on shorter-term views.", fr: "Déviation temporaire des poids stratégiques basée sur des vues plus court terme." } },
+        { en: "Performance attribution", fr: "performance attribution", definition: { en: "Analysis explaining which decisions or exposures generated portfolio return.", fr: "Analyse expliquant quelles décisions ou expositions ont généré le return du portefeuille." } },
+      ],
+    },
+  ],
+  quiz: [
+    {
+      id: "q1",
+      conceptKey: "objectives",
+      question: { en: "What should portfolio construction begin with?", fr: "Par quoi doit commencer la construction de portefeuille ?" },
+      options: [
+        { id: "a", label: { en: "Objectives, horizon and constraints", fr: "Objectifs, horizon et contraintes" } },
+        { id: "b", label: { en: "The highest-return asset only", fr: "Uniquement l’actif au plus fort return" } },
+        { id: "c", label: { en: "A random benchmark", fr: "Un benchmark aléatoire" } },
+        { id: "d", label: { en: "Ignoring liquidity needs", fr: "Ignorer les besoins de liquidité" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "The portfolio must be designed around the investor’s real objective and constraints.", fr: "Le portefeuille doit être construit autour de l’objectif réel et des contraintes de l’investisseur." },
+    },
+    {
+      id: "q2",
+      conceptKey: "diversification",
+      question: { en: "What most directly drives diversification benefit?", fr: "Qu’est-ce qui détermine le plus directement le bénéfice de diversification ?" },
+      options: [
+        { id: "a", label: { en: "Correlation between assets", fr: "La corrélation entre actifs" } },
+        { id: "b", label: { en: "Number of tickers alone", fr: "Le nombre de tickers seulement" } },
+        { id: "c", label: { en: "The asset names", fr: "Le nom des actifs" } },
+        { id: "d", label: { en: "Only dividend yield", fr: "Uniquement le dividend yield" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Diversification depends on how asset returns co-move, not simply how many holdings exist.", fr: "La diversification dépend de la manière dont les returns évoluent ensemble, pas simplement du nombre de positions." },
+    },
+    {
+      id: "q3",
+      conceptKey: "optimization",
+      question: { en: "Why can mean-variance optimization produce unstable portfolios?", fr: "Pourquoi la mean-variance optimization peut-elle produire des portefeuilles instables ?" },
+      options: [
+        { id: "a", label: { en: "Because small changes in expected-return inputs can cause large weight changes", fr: "Parce que de petites variations des expected returns peuvent créer de grands changements de poids" } },
+        { id: "b", label: { en: "Because correlations never matter", fr: "Parce que les corrélations ne comptent jamais" } },
+        { id: "c", label: { en: "Because volatility is always zero", fr: "Parce que la volatilité est toujours nulle" } },
+        { id: "d", label: { en: "Because constraints are impossible", fr: "Parce que les contraintes sont impossibles" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Optimization is particularly sensitive to noisy expected-return estimates.", fr: "L’optimisation est particulièrement sensible aux estimations bruitées d’expected return." },
+    },
+    {
+      id: "q4",
+      conceptKey: "risk-budgeting",
+      question: { en: "Why can a small position contribute a lot of portfolio risk?", fr: "Pourquoi une petite position peut-elle contribuer beaucoup au risque du portefeuille ?" },
+      options: [
+        { id: "a", label: { en: "Because it may have high volatility and strong correlation with other risks", fr: "Parce qu’elle peut avoir une forte volatilité et corrélation avec d’autres risques" } },
+        { id: "b", label: { en: "Because small positions always dominate", fr: "Parce que les petites positions dominent toujours" } },
+        { id: "c", label: { en: "Because capital weights equal risk weights", fr: "Parce que les poids en capital égalent les poids en risque" } },
+        { id: "d", label: { en: "Because volatility is irrelevant", fr: "Parce que la volatilité est sans importance" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Risk contribution depends on volatility and covariance, not capital weight alone.", fr: "La contribution au risque dépend de la volatilité et de la covariance, pas seulement du poids en capital." },
+    },
+    {
+      id: "q5",
+      conceptKey: "factor-risk",
+      question: { en: "What can make a diversified-looking portfolio secretly concentrated?", fr: "Qu’est-ce qui peut rendre un portefeuille apparemment diversifié en réalité concentré ?" },
+      options: [
+        { id: "a", label: { en: "Shared factor exposures", fr: "Des expositions factorielles communes" } },
+        { id: "b", label: { en: "Different ticker symbols", fr: "Des tickers différents" } },
+        { id: "c", label: { en: "Low transaction costs", fr: "De faibles transaction costs" } },
+        { id: "d", label: { en: "Multiple custodians", fr: "Plusieurs custodians" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Different securities can still depend on the same market, duration, growth or liquidity factor.", fr: "Des titres différents peuvent tout de même dépendre du même facteur market, duration, growth ou liquidity." },
+    },
+    {
+      id: "q6",
+      conceptKey: "liquidity",
+      question: { en: "Why should liquidity be stress-tested?", fr: "Pourquoi faut-il stresser la liquidité ?" },
+      options: [
+        { id: "a", label: { en: "Because assets often become harder and more expensive to sell during stress", fr: "Parce que les actifs deviennent souvent plus difficiles et coûteux à vendre en stress" } },
+        { id: "b", label: { en: "Because liquidity always improves in crises", fr: "Parce que la liquidité s’améliore toujours en crise" } },
+        { id: "c", label: { en: "Because bid-ask spreads disappear", fr: "Parce que les bid-ask spreads disparaissent" } },
+        { id: "d", label: { en: "Because market depth becomes infinite", fr: "Parce que la market depth devient infinie" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Normal-market liquidity can overstate how easily positions can be exited during stressed conditions.", fr: "La liquidité en conditions normales peut surestimer la facilité de sortie pendant les périodes stressées." },
+    },
+    {
+      id: "q7",
+      conceptKey: "rebalancing",
+      question: { en: "What is a key trade-off in rebalancing?", fr: "Quel est un compromis clé du rebalancing ?" },
+      options: [
+        { id: "a", label: { en: "Reducing portfolio drift versus incurring transaction costs", fr: "Réduire le drift versus supporter des transaction costs" } },
+        { id: "b", label: { en: "Increasing drift and reducing control", fr: "Augmenter le drift et réduire le contrôle" } },
+        { id: "c", label: { en: "Eliminating all volatility", fr: "Éliminer toute volatilité" } },
+        { id: "d", label: { en: "Guaranteeing alpha", fr: "Garantir l’alpha" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Frequent rebalancing improves target control but creates more trading cost.", fr: "Un rebalancing fréquent améliore le contrôle des targets mais crée davantage de coûts de trading." },
+    },
+    {
+      id: "q8",
+      conceptKey: "stress-testing",
+      question: { en: "Why are stress tests useful beyond volatility?", fr: "Pourquoi les stress tests sont-ils utiles au-delà de la volatilité ?" },
+      options: [
+        { id: "a", label: { en: "They test nonlinear and joint market shocks", fr: "Ils testent des chocs non linéaires et simultanés" } },
+        { id: "b", label: { en: "They guarantee future returns", fr: "Ils garantissent les returns futurs" } },
+        { id: "c", label: { en: "They eliminate correlation risk", fr: "Ils éliminent le risque de corrélation" } },
+        { id: "d", label: { en: "They replace all portfolio analysis", fr: "Ils remplacent toute analyse de portefeuille" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Stress tests can capture combinations of shocks and nonlinear losses that standard volatility may miss.", fr: "Les stress tests peuvent capturer des combinaisons de chocs et pertes non linéaires que la volatilité standard peut manquer." },
+    },
+    {
+      id: "q9",
+      conceptKey: "strategic-vs-tactical",
+      question: { en: "What is tactical allocation?", fr: "Qu’est-ce qu’une tactical allocation ?" },
+      options: [
+        { id: "a", label: { en: "A temporary deviation from long-term strategic weights", fr: "Une déviation temporaire des poids stratégiques long terme" } },
+        { id: "b", label: { en: "A permanent liability", fr: "Une liability permanente" } },
+        { id: "c", label: { en: "A fixed accounting rule", fr: "Une règle comptable fixe" } },
+        { id: "d", label: { en: "A guarantee against loss", fr: "Une garantie contre les pertes" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Tactical tilts reflect shorter-term active views around a strategic allocation.", fr: "Les tactical tilts reflètent des vues actives plus court terme autour d’une allocation stratégique." },
+    },
+    {
+      id: "q10",
+      conceptKey: "governance",
+      question: { en: "Why does governance matter in portfolio construction?", fr: "Pourquoi la gouvernance compte-t-elle dans la construction de portefeuille ?" },
+      options: [
+        { id: "a", label: { en: "It defines decision rules and helps prevent emotional changes during stress", fr: "Elle définit les règles de décision et aide à éviter les changements émotionnels en stress" } },
+        { id: "b", label: { en: "It eliminates market risk", fr: "Elle élimine le risque de marché" } },
+        { id: "c", label: { en: "It guarantees outperformance", fr: "Elle garantit l’outperformance" } },
+        { id: "d", label: { en: "It replaces risk management", fr: "Elle remplace le risk management" } },
+      ],
+      correctOption: "a",
+      explanation: { en: "Governance creates discipline around how and when portfolio decisions are changed.", fr: "La gouvernance crée de la discipline sur la manière et le moment où les décisions de portefeuille sont modifiées." },
+    },
+  ],
+  interviewPrompt: {
+    question: {
+      en: "How would you build a diversified portfolio for an investor who wants growth but cannot tolerate a large drawdown?",
+      fr: "Comment construirais-tu un portefeuille diversifié pour un investisseur qui recherche de la croissance mais ne peut pas tolérer un drawdown important ?",
+    },
+    framework: [
+      { en: "Define the return objective, drawdown tolerance, horizon and liquidity needs.", fr: "Définir objectif de return, tolérance au drawdown, horizon et besoins de liquidité." },
+      { en: "Estimate expected returns, volatility and correlations across candidate assets.", fr: "Estimer expected returns, volatilité et corrélations entre actifs candidats." },
+      { en: "Build a strategic allocation with diversified economic drivers rather than equal security counts.", fr: "Construire une allocation stratégique avec des drivers économiques diversifiés plutôt qu’un simple nombre de titres." },
+      { en: "Analyze capital weights and risk contributions separately.", fr: "Analyser séparément poids en capital et contributions au risque." },
+      { en: "Add explicit liquidity, concentration and factor constraints.", fr: "Ajouter des contraintes explicites de liquidité, concentration et facteurs." },
+      { en: "Stress the portfolio under recession, inflation, rate-shock and liquidity scenarios.", fr: "Stresser le portefeuille sous scénarios de récession, inflation, choc de taux et liquidité." },
+      { en: "Define rebalancing and governance rules before implementation.", fr: "Définir les règles de rebalancing et gouvernance avant implémentation." },
+    ],
+    sample: {
+      en: "I would start with the investor’s objective and define the maximum drawdown, volatility and liquidity constraints before choosing assets. Then I would estimate expected returns, volatilities and correlations for a diversified set of equity, fixed-income and possibly alternative exposures. I would not focus only on capital weights because a small volatile position can dominate risk, so I would also measure contribution to risk and factor exposures. I would use optimization only as a decision-support tool and impose realistic limits on concentration, turnover and illiquidity. Then I would stress the portfolio under scenarios such as recession, inflation reacceleration, higher real rates and a credit/liquidity shock. Finally, I would set rebalancing thresholds and governance rules so the investor does not abandon the strategy emotionally during a drawdown. The objective would be to preserve enough growth exposure while keeping total risk and drawdown consistent with the investor’s ability to stay invested.",
+      fr: "Je commencerais par l’objectif de l’investisseur et définirais le maximum drawdown, la volatilité et les contraintes de liquidité avant de choisir les actifs. J’estimerais ensuite expected returns, volatilités et corrélations pour un ensemble diversifié d’expositions actions, fixed income et éventuellement alternatives. Je ne regarderais pas uniquement les poids en capital car une petite position volatile peut dominer le risque ; je mesurerais donc aussi les contributions au risque et les factor exposures. J’utiliserais l’optimisation comme outil d’aide à la décision avec des limites réalistes sur concentration, turnover et illiquidité. Puis je stresserais le portefeuille sous des scénarios de récession, réaccélération de l’inflation, hausse des real rates et choc crédit/liquidité. Enfin, je définirais des seuils de rebalancing et des règles de gouvernance afin que l’investisseur n’abandonne pas la stratégie émotionnellement pendant un drawdown. L’objectif serait de conserver assez d’exposition à la croissance tout en maintenant le risque total et le drawdown compatibles avec sa capacité à rester investi.",
+    },
+  },
+};
+
+export const lessons: FinanceLesson[] = [financialSystemLesson, stocksBondsFundsLesson, moneyBankingCentralBanksLesson, timeValueOfMoneyLesson, riskReturnDiversificationLesson, microeconomicsForFinanceLesson, macroeconomicsForMarketsLesson, financialAccountingILesson, statisticsProbabilityLesson, excelFoundationsForFinanceLesson, financialVocabularyFrEnLesson, readingFinancialNewsLesson, corporateFinanceLesson, financialStatementAnalysisLesson, equityValuationLesson, dcfRelativeValuationLesson, fixedIncomeYieldCurvesLesson, durationConvexityLesson, portfolioTheoryCapmLesson, derivativesFoundationsLesson, optionsGreeksLesson, fxInternationalFinanceLesson, econometricsFoundationsLesson, financialModelingILesson, investmentBankingLesson, salesTradingLesson, assetManagementLesson, wealthManagementLesson, equityResearchLesson, creditAnalysisLesson, privateEquityLesson, ventureCapitalLesson, riskManagementLesson, maAnalysisLesson, financialModelingIILesson, realCompanyCaseStudiesLesson, advancedValuationLesson, leveragedFinanceLesson, advancedFixedIncomeLesson, advancedDerivativesLesson, macroTradingFrameworksLesson, hedgeFundsAlternativesLesson, portfolioConstructionLesson];
 
 export function getLessonBySlug(slug: string) {
   return lessons.find((lesson) => lesson.slug === slug);
