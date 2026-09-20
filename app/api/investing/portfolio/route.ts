@@ -77,7 +77,29 @@ export async function GET(request: NextRequest) {
           quote: null,
           current_value: null,
           unrealized_pnl: null,
+          valuation_status: "unpriced" as const,
           provider: pricing.provider,
+        };
+      }
+
+      if (
+        pricing.quote.currency &&
+        pricing.quote.currency !== portfolio.base_currency
+      ) {
+        return {
+          ...position,
+          quantity,
+          average_cost: averageCost,
+          quote: pricing.quote,
+          current_value: null,
+          unrealized_pnl: null,
+          valuation_status: "currency_mismatch" as const,
+          provider: {
+            ...pricing.provider,
+            status: "unsupported",
+            message:
+              `Quote currency ${pricing.quote.currency} does not match portfolio base currency ${portfolio.base_currency}.`,
+          },
         };
       }
 
@@ -91,13 +113,14 @@ export async function GET(request: NextRequest) {
         quote: pricing.quote,
         current_value: currentValue,
         unrealized_pnl: unrealizedPnl,
+        valuation_status: "priced" as const,
         provider: pricing.provider,
       };
     }),
   );
 
   const fullCoverage = pricedPositions.every(
-    (position) => position.quote !== null,
+    (position) => position.valuation_status === "priced",
   );
 
   const marketValue = fullCoverage
@@ -131,7 +154,9 @@ export async function GET(request: NextRequest) {
     transactions: transactionsResult.data ?? [],
     metrics: {
       fullCoverage,
-      pricedPositions: pricedPositions.filter((position) => position.quote).length,
+      pricedPositions: pricedPositions.filter(
+        (position) => position.valuation_status === "priced",
+      ).length,
       totalPositions: pricedPositions.length,
       marketValue,
       totalEquity,
@@ -139,5 +164,67 @@ export async function GET(request: NextRequest) {
       returnPercent,
       realizedPnl,
     },
+    attribution: (() => {
+      const bySymbol = new Map<
+        string,
+        {
+          symbol: string;
+          assetClass: string;
+          realizedPnl: number;
+          unrealizedPnl: number;
+          currentValue: number | null;
+          contributionPercent: number | null;
+          valuationStatus: string;
+        }
+      >();
+
+      for (const transaction of transactionsResult.data ?? []) {
+        const key = `${transaction.symbol}::${transaction.asset_class}`;
+        const current = bySymbol.get(key) ?? {
+          symbol: transaction.symbol,
+          assetClass: transaction.asset_class,
+          realizedPnl: 0,
+          unrealizedPnl: 0,
+          currentValue: null,
+          contributionPercent: null,
+          valuationStatus: "closed",
+        };
+        current.realizedPnl += Number(transaction.realized_pnl ?? 0);
+        bySymbol.set(key, current);
+      }
+
+      for (const position of pricedPositions) {
+        const key = `${position.symbol}::${position.asset_class}`;
+        const current = bySymbol.get(key) ?? {
+          symbol: position.symbol,
+          assetClass: position.asset_class,
+          realizedPnl: 0,
+          unrealizedPnl: 0,
+          currentValue: null,
+          contributionPercent: null,
+          valuationStatus: position.valuation_status,
+        };
+
+        current.unrealizedPnl = Number(position.unrealized_pnl ?? 0);
+        current.currentValue =
+          position.current_value === null
+            ? null
+            : Number(position.current_value);
+        current.valuationStatus = position.valuation_status;
+        bySymbol.set(key, current);
+      }
+
+      return [...bySymbol.values()]
+        .map((item) => {
+          const pnl = item.realizedPnl + item.unrealizedPnl;
+          return {
+            ...item,
+            totalPnl: pnl,
+            contributionPercent:
+              startingCash === 0 ? null : (pnl / startingCash) * 100,
+          };
+        })
+        .sort((a, b) => Math.abs(b.totalPnl) - Math.abs(a.totalPnl));
+    })(),
   });
 }
