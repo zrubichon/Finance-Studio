@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import SectionLayout from "@/components/section-layout";
 import { createClient } from "@/lib/supabase/server";
 import { allCurriculumModules, domainDescriptions, domainDescriptionsFr, domainLabelsFr, type CurriculumDomain } from "@/lib/curriculum";
-import { hasLessonContent } from "@/lib/lesson-content";
+import { hasLessonContent } from "@/lib/lesson-registry";
 
 function calculateStreak(dates: string[]) {
   if (!dates.length) return 0;
@@ -63,6 +63,7 @@ export default async function ProgressPage() {
 
   const nextModule = modules.find((module) => hasLessonContent(module.slug) && !completedSlugs.has(module.slug));
   const firstPlannedModule = modules.find((module) => !hasLessonContent(module.slug));
+  const curriculumComplete = modules.length > 0 && completedLessons === modules.length;
   const metrics = [
     { label: t("Lessons completed", "Cours terminés"), value: String(completedLessons), note: t(`${modules.length} modules in the full curriculum`, `${modules.length} modules dans le programme complet`) },
     { label: t("Concepts mastered", "Concepts maîtrisés"), value: String(conceptsMastered), note: t("Mastery requires a score of 70 or above", "La maîtrise / mastery nécessite un score de 70 ou plus") },
@@ -93,24 +94,39 @@ export default async function ProgressPage() {
             <h2>
               {nextModule
                 ? (isFrench ? `${nextModule.year.replace("Year", "Année")} · ${nextModule.titleFr}` : `${nextModule.year} · ${nextModule.title}`)
-                : t(
-                    `Next course in build · ${firstPlannedModule?.title ?? "Year 1 curriculum"}`,
-                    `Prochain cours en construction · ${firstPlannedModule?.titleFr ?? "Programme Année 1"}`,
-                  )}
+                : curriculumComplete
+                  ? t(
+                      `Curriculum complete · ${modules.length}/${modules.length}`,
+                      `Programme terminé · ${modules.length}/${modules.length}`,
+                    )
+                  : t(
+                      `Next course in build · ${firstPlannedModule?.title ?? "Finance University"}`,
+                      `Prochain cours en construction · ${firstPlannedModule?.titleFr ?? "Université de Finance"}`,
+                    )}
             </h2>
           </div>
-          <p>{nextModule
-            ? t(
-                "This recommendation follows real available course content and curriculum prerequisites.",
-                "Cette recommandation suit les vrais cours disponibles et les prérequis du programme.",
-              )
-            : t(
-                "You have completed every full lesson currently published. New Year 1 lessons are being added next.",
-                "Tu as terminé tous les cours complets actuellement publiés. Les prochains cours de l’Année 1 arrivent ensuite.",
-              )}
+          <p>
+            {nextModule
+              ? t(
+                  "This recommendation follows real available course content and curriculum prerequisites.",
+                  "Cette recommandation suit les vrais cours disponibles et les prérequis du programme.",
+                )
+              : curriculumComplete
+                ? t(
+                    "You have completed all 48 FinanceStudio lessons. Use Interview Studio, AI Professor and weak-concept reviews to turn completion into durable mastery.",
+                    "Tu as terminé les 48 cours FinanceStudio. Utilise Interview Studio, le Professeur IA et la révision des concepts faibles pour transformer la complétion en maîtrise durable.",
+                  )
+                : t(
+                    "You have completed every lesson currently available. The next planned module will appear here when published.",
+                    "Tu as terminé tous les cours actuellement disponibles. Le prochain module prévu apparaîtra ici lorsqu’il sera publié.",
+                  )}
           </p>
-          <Link href={nextModule ? `/university/${nextModule.slug}` : "/university"}>
-            {nextModule ? t("Open lesson", "Ouvrir le cours") : t("Open Finance University", "Ouvrir l’Université de Finance")} →
+          <Link href={nextModule ? `/university/${nextModule.slug}` : curriculumComplete ? "/interview" : "/university"}>
+            {nextModule
+              ? t("Open lesson", "Ouvrir le cours")
+              : curriculumComplete
+                ? t("Practice in Interview Studio", "S’entraîner dans Interview Studio")
+                : t("Open Finance University", "Ouvrir l’Université de Finance")} →
           </Link>
         </section>
       </div>
