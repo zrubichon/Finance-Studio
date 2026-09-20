@@ -318,3 +318,135 @@
   .account-stat-grid { grid-template-columns: 1fr; }
   .account-security-card { align-items: flex-start; flex-direction: column; }
 }
+
+
+.account-settings-card {
+  max-width: 1400px;
+  margin: 14px auto 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.account-settings-heading {
+  max-width: 860px;
+}
+
+.account-settings-heading h2 {
+  margin: 12px 0 6px;
+  font: 500 24px/1.12 Georgia, "Times New Roman", serif;
+}
+
+.account-settings-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.account-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.account-settings-form label {
+  display: grid;
+  gap: 6px;
+}
+
+.account-settings-form label > span,
+.account-region-fieldset legend {
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.account-settings-form input,
+.account-settings-form select {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 11px 12px;
+  outline: none;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 10px;
+}
+
+.account-settings-form input:focus,
+.account-settings-form select:focus {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 45%, transparent);
+}
+
+.account-region-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.account-region-fieldset legend {
+  margin-bottom: 9px;
+}
+
+.account-region-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.account-region-option {
+  display: inline-flex !important;
+  grid-template-columns: none !important;
+  align-items: center;
+  gap: 7px !important;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.account-region-option.active {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  color: var(--ink);
+  background: color-mix(in srgb, var(--accent-2) 55%, var(--surface));
+}
+
+.account-region-option input {
+  width: auto;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.account-region-option span {
+  color: inherit !important;
+  font-size: 8px !important;
+  font-weight: 850 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.account-settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.account-settings-actions .auth-message {
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .account-settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
