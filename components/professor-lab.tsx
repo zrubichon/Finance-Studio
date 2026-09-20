@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
+import { recordDailyActivity } from "@/lib/record-activity";
 import { curriculumYears, moduleSlug } from "@/lib/curriculum";
 
 type Mode = "Beginner" | "Intermediate" | "Professional";
@@ -274,6 +275,7 @@ export default function ProfessorLab() {
       setPersonalized(Boolean(payload.personalized));
       setSessionId(payload.sessionId ?? sessionId);
       setConnection("live");
+      if (authenticated) await recordDailyActivity();
       void refreshSessions();
     } catch (cause) {
       setConnection("error");
