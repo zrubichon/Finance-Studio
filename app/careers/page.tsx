@@ -1,7 +1,10 @@
 "use client";
 
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import SectionLayout from "@/components/section-layout";
 import { useLanguage } from "@/components/language-provider";
+import { createClient } from "@/lib/supabase/client";
 
 type Localized = { en: string; fr: string };
 
@@ -45,6 +48,63 @@ const recruitingStack: Localized[] = [
 export default function CareersPage() {
   const { isFrench, text } = useLanguage();
   const local = (value: Localized) => isFrench ? value.fr : value.en;
+  const [userId, setUserId] = useState<string | null>(null);
+  const [targetRole, setTargetRole] = useState("");
+  const [savingTarget, setSavingTarget] = useState(false);
+  const [targetStatus, setTargetStatus] = useState("");
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadTarget() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!mounted || !user) return;
+
+      setUserId(user.id);
+      const { data } = await supabase
+        .from("profiles")
+        .select("target_role")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+      if (mounted) setTargetRole(data?.target_role ?? "");
+    }
+
+    void loadTarget();
+    return () => { mounted = false; };
+  }, []);
+
+  async function saveTargetRole(role: string) {
+    if (!userId || savingTarget) return;
+
+    setSavingTarget(true);
+    setTargetStatus("");
+
+    const supabase = createClient();
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        target_role: role,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("user_id", userId);
+
+    if (error) {
+      setTargetStatus(text(
+        "Your target role could not be saved.",
+        "Ton métier cible n’a pas pu être enregistré.",
+      ));
+    } else {
+      setTargetRole(role);
+      setTargetStatus(text(
+        `${role} is now your FinanceStudio target role.`,
+        `${role} est maintenant ton métier cible FinanceStudio.`,
+      ));
+    }
+
+    setSavingTarget(false);
+  }
 
   return (
     <SectionLayout
@@ -56,10 +116,72 @@ export default function CareersPage() {
       <div className="workspace-stack">
         <section className="career-intro-grid">
           <article className="career-principle-card"><span className="mini-label">{text("ROLE MAP", "CARTE DES MÉTIERS")}</span><h2>{text("Markets, deals, investing, clients and control functions", "Marchés, transactions / deals, investissement, clients et fonctions de contrôle")}</h2><p>{text("FinanceStudio separates careers by the decisions you make, the clients you serve and the risks you own so that similar-sounding roles do not blur together.", "FinanceStudio distingue les métiers selon les décisions prises, les clients servis et les risques gérés afin que des postes aux noms proches ne soient pas confondus.")}</p></article>
-          <article className="career-principle-card"><span className="mini-label">{text("LEARNING PATH", "PARCOURS D’APPRENTISSAGE")}</span><h2>{text("Every role links back to the curriculum", "Chaque métier est relié au programme")}</h2><p>{text("Your career target will prioritize the courses, quizzes, news and interview questions that matter most for that path.", "Ton métier cible permettra de prioriser les cours, quiz, actualités et questions d’entretien les plus utiles pour ce parcours.")}</p></article>
+          <article className="career-principle-card"><span className="mini-label">{text("LEARNING PATH", "PARCOURS D’APPRENTISSAGE")}</span><h2>{text("Every role links back to the curriculum", "Chaque métier est relié au programme")}</h2><p>{text("Choose a target role below. FinanceStudio will reuse it in the AI Professor and supported Interview Studio tracks.", "Choisis un métier cible ci-dessous. FinanceStudio le réutilisera dans le Professeur IA et les parcours compatibles d’Interview Studio.")}</p></article>
         </section>
 
-        {careerGroups.map((group) => <section className="career-group" key={group.group.en}><div className="panel-heading"><div><span className="mini-label">{text("CAREER FAMILY", "FAMILLE DE MÉTIERS")}</span><h2>{local(group.group)}</h2></div><span className="connection-badge">{isFrench ? `${group.roles.length} parcours` : `${group.roles.length} paths`}</span></div><div className="role-grid">{group.roles.map((item) => <article className="role-card" key={item.role.en}><h3>{local(item.role)}</h3><p>{local(item.mission)}</p><span className="control-label">{text("KNOWLEDGE TO MASTER", "CONNAISSANCES À MAÎTRISER")}</span><div className="skill-chip-row">{item.knowledge.map((skill) => <span key={skill.en}>{local(skill)}</span>)}</div></article>)}</div></section>)}
+        <section className="learning-account-strip">
+          <div>
+            <span className="mini-label">{text("YOUR TARGET ROLE", "TON MÉTIER CIBLE")}</span>
+            <h2>{targetRole || text("No target role selected yet", "Aucun métier cible sélectionné")}</h2>
+            <p>{userId
+              ? text(
+                  "This preference is stored in your account and can personalize tutoring and interview preparation.",
+                  "Cette préférence est enregistrée dans ton compte et peut personnaliser le tutorat et la préparation aux entretiens.",
+                )
+              : text(
+                  "Sign in to save one target role across FinanceStudio.",
+                  "Connecte-toi pour enregistrer un métier cible dans tout FinanceStudio.",
+                )}
+            </p>
+            {targetStatus && <p className="inline-status" role="status">{targetStatus}</p>}
+          </div>
+          {!userId && <Link className="full-button" href="/login">{text("Sign in", "Se connecter")} →</Link>}
+        </section>
+
+        {careerGroups.map((group) => (
+          <section className="career-group" key={group.group.en}>
+            <div className="panel-heading">
+              <div>
+                <span className="mini-label">{text("CAREER FAMILY", "FAMILLE DE MÉTIERS")}</span>
+                <h2>{local(group.group)}</h2>
+              </div>
+              <span className="connection-badge">{isFrench ? `${group.roles.length} parcours` : `${group.roles.length} paths`}</span>
+            </div>
+
+            <div className="role-grid">
+              {group.roles.map((item) => {
+                const selected = targetRole === item.role.en;
+                return (
+                  <article className="role-card" key={item.role.en}>
+                    <div className="panel-heading">
+                      <h3>{local(item.role)}</h3>
+                      {selected && <span className="pill accent">{text("TARGET", "CIBLE")}</span>}
+                    </div>
+                    <p>{local(item.mission)}</p>
+                    <span className="control-label">{text("KNOWLEDGE TO MASTER", "CONNAISSANCES À MAÎTRISER")}</span>
+                    <div className="skill-chip-row">
+                      {item.knowledge.map((skill) => <span key={skill.en}>{local(skill)}</span>)}
+                    </div>
+                    {userId ? (
+                      <button
+                        type="button"
+                        className={selected ? "chip active" : "chip"}
+                        disabled={savingTarget || selected}
+                        onClick={() => void saveTargetRole(item.role.en)}
+                      >
+                        {selected
+                          ? text("Current target", "Métier cible actuel")
+                          : text("Set as target role", "Choisir comme métier cible")}
+                      </button>
+                    ) : (
+                      <Link className="chip" href="/login">{text("Sign in to select", "Se connecter pour choisir")}</Link>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        ))}
 
         <section className="career-recruiting-panel"><div><span className="mini-label">{text("RECRUITING SYSTEM", "SYSTÈME DE PRÉPARATION AU RECRUTEMENT")}</span><h2>{text("From “I want a finance job” to interview-ready", "De « je veux travailler en finance » à prêt pour l’entretien / interview-ready")}</h2><p>{text("The platform turns a target role into a concrete preparation sequence rather than a random list of concepts.", "La plateforme transforme un métier cible en séquence de préparation concrète plutôt qu’en liste aléatoire de concepts.")}</p></div><div className="numbered-checklist">{recruitingStack.map((item, index) => <div key={item.en}><span>{String(index + 1).padStart(2, "0")}</span><strong>{local(item)}</strong></div>)}</div></section>
       </div>
