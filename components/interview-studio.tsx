@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/components/language-provider";
+import { recordDailyActivity } from "@/lib/record-activity";
 import {
   interviewQuestionKey,
   interviewQuestions,
@@ -91,6 +92,7 @@ export default function InterviewStudio() {
       ));
     } else {
       setAttemptCount((count) => count + 1);
+      await recordDailyActivity(userId);
       setStatus(text(
         "Practice attempt saved to your account.",
         "Tentative d’entraînement enregistrée dans ton compte.",
@@ -142,6 +144,7 @@ export default function InterviewStudio() {
 
       if (payload.saved) {
         setAttemptCount((count) => count + 1);
+        if (userId) await recordDailyActivity(userId);
         setStatus(text(
           "AI evaluation saved to your account.",
           "Évaluation IA enregistrée dans ton compte.",
