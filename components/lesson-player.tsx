@@ -159,7 +159,10 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
       answers,
     });
 
-    const conceptKeys = lesson.quiz.map((question) => question.conceptKey);
+    const conceptKeys = [...new Set(
+      lesson.quiz.map((question) => question.conceptKey),
+    )];
+
     const { data: existingRows } = await supabase
       .from("concept_mastery")
       .select("concept_key,mastery_score,attempts")
@@ -169,31 +172,75 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
     const existing = new Map(
       (existingRows ?? []).map((row) => [
         row.concept_key,
-        { mastery_score: Number(row.mastery_score ?? 0), attempts: Number(row.attempts ?? 0) },
+        {
+          mastery_score: Number(row.mastery_score ?? 0),
+          attempts: Number(row.attempts ?? 0),
+        },
       ]),
     );
 
-    const now = new Date();
-    const masteryRows = lesson.quiz.map((question) => {
-      const previous = existing.get(question.conceptKey) ?? { mastery_score: 0, attempts: 0 };
-      const correct = answers[question.id] === question.correctOption;
-      const attempts = previous.attempts + 1;
-      const masteryScore = Math.round(
-        ((previous.mastery_score * previous.attempts) + (correct ? 100 : 0)) / attempts,
-      );
-      const nextReview = new Date(now);
-      nextReview.setDate(nextReview.getDate() + (correct ? 7 : 1));
+    const performanceByConcept = new Map<
+      string,
+      { correct: number; total: number }
+    >();
 
-      return {
-        user_id: userId,
-        concept_key: question.conceptKey,
-        mastery_score: masteryScore,
-        attempts,
-        last_reviewed_at: now.toISOString(),
-        next_review_at: nextReview.toISOString(),
-        updated_at: now.toISOString(),
+    for (const question of lesson.quiz) {
+      const current = performanceByConcept.get(question.conceptKey) ?? {
+        correct: 0,
+        total: 0,
       };
-    });
+      current.total += 1;
+      if (answers[question.id] === question.correctOption) current.correct += 1;
+      performanceByConcept.set(question.conceptKey, current);
+    }
+
+    const now = new Date();
+    const masteryRows = [...performanceByConcept.entries()].map(
+      ([conceptKey, performance]) => {
+        const previous = existing.get(conceptKey) ?? {
+          mastery_score: 0,
+          attempts: 0,
+        };
+
+        const attemptScore = Math.round(
+          (performance.correct / performance.total) * 100,
+        );
+
+        // Recent evidence matters more than an old mistake, while prior
+        // performance still provides stability across repeated reviews.
+        const masteryScore =
+          previous.attempts === 0
+            ? attemptScore
+            : Math.round(
+                previous.mastery_score * 0.6 + attemptScore * 0.4,
+              );
+
+        const attempts = previous.attempts + performance.total;
+        const reviewDays =
+          masteryScore >= 90
+            ? 30
+            : masteryScore >= 80
+              ? 14
+              : masteryScore >= 70
+                ? 7
+                : masteryScore >= 50
+                  ? 2
+                  : 1;
+
+        const nextReview = new Date(now);
+        nextReview.setDate(nextReview.getDate() + reviewDays);
+
+        return {
+          user_id: userId,
+          concept_key: conceptKey,
+          mastery_score: masteryScore,
+          attempts,
+          last_reviewed_at: now.toISOString(),
+          next_review_at: nextReview.toISOString(),
+          updated_at: now.toISOString(),
+        };
+      },
+    );
 
     const { error: masteryError } = await supabase
       .from("concept_mastery")
