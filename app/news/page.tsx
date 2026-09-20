@@ -1,7 +1,8 @@
 "use client";
 
 import SectionLayout from "@/components/section-layout";
-import { useLanguage } from "@/components/language-provider";\nimport LiveNewsFeed from "@/components/live-news-feed";
+import { useLanguage } from "@/components/language-provider";
+import LiveNewsFeed from "@/components/live-news-feed";
 
 type Localized = { en: string; fr: string };
 
@@ -52,6 +53,8 @@ export default function NewsPage() {
       description={{ en: "FinanceStudio is designed to turn major market stories into complete learning objects: facts, causes, mechanisms, cross-asset reaction, linked concepts, next catalysts and clearly labeled scenarios.", fr: "FinanceStudio transforme les grandes actualités de marché en objets d’apprentissage complets : faits, causes, mécanismes, réaction multi-actifs / cross-asset, concepts reliés, prochains catalyseurs et scénarios clairement identifiés." }}
     >
       <div className="workspace-stack">
+        <LiveNewsFeed />
+
         <section className="news-blueprint-panel">
           <div className="panel-heading"><div><span className="mini-label">{text("ARTICLE BLUEPRINT", "STRUCTURE D’ANALYSE")}</span><h2>{text("Every important story follows the same reasoning architecture", "Chaque actualité importante suit la même architecture de raisonnement")}</h2></div><span className="connection-badge"><span className="status-dot" /> {text("reasoning framework", "cadre de raisonnement")}</span></div>
           <div className="news-analysis-grid">{analysisSteps.map((step) => <article className="news-analysis-step" key={step.number}><span>{step.number}</span><div><strong>{local(step.title)}</strong><p>{local(step.body)}</p></div></article>)}</div>
