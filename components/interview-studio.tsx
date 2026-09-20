@@ -8,6 +8,7 @@ import {
   interviewQuestionKey,
   interviewQuestions,
   interviewTracks,
+  isInterviewTrack,
   type Bilingual,
   type Track,
 } from "@/lib/interview-content";
@@ -37,12 +38,24 @@ export default function InterviewStudio() {
       if (!mounted || !user) return;
 
       setUserId(user.id);
-      const { count } = await supabase
-        .from("interview_attempts")
-        .select("id", { count: "exact", head: true })
-        .eq("user_id", user.id);
 
-      if (mounted) setAttemptCount(count ?? 0);
+      const [attemptResult, profileResult] = await Promise.all([
+        supabase
+          .from("interview_attempts")
+          .select("id", { count: "exact", head: true })
+          .eq("user_id", user.id),
+        supabase
+          .from("profiles")
+          .select("target_role")
+          .eq("user_id", user.id)
+          .maybeSingle(),
+      ]);
+
+      if (!mounted) return;
+
+      setAttemptCount(attemptResult.count ?? 0);
+      const savedTarget = profileResult.data?.target_role;
+      if (isInterviewTrack(savedTarget)) setTrack(savedTarget);
     }
 
     void loadUser();
