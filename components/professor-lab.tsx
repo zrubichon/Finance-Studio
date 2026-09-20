@@ -1,72 +1,449 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
+import { curriculumYears, moduleSlug } from "@/lib/curriculum";
 
 type Mode = "Beginner" | "Intermediate" | "Professional";
-type Explanation = { title: string; body: string; example: string; titleFr: string; bodyFr: string; exampleFr: string };
+type TeachingAction =
+  | "explain"
+  | "simplify"
+  | "numbers"
+  | "formula"
+  | "markets"
+  | "interview"
+  | "quiz"
+  | "diagnose";
 
-const explanations: Record<Mode, Explanation> = {
-  Beginner: {
-    title: "Duration measures how sensitive a bond is to interest-rate changes.",
-    body: "Think of duration as a bond's rate sensitivity. A bond with higher duration usually moves more when yields change. The key relationship is inverse: when yields rise, bond prices generally fall; when yields fall, bond prices generally rise.",
-    example: "A rough rule: if modified duration is 6 and yields rise by 1 percentage point, the bond price may fall by about 6%, before convexity adjustments.",
-    titleFr: "La duration mesure la sensibilité d’une obligation / bond aux variations des taux d’intérêt / interest rates.",
-    bodyFr: "Pense à la duration comme à la sensibilité d’une obligation aux taux / rate sensitivity. Une obligation avec une duration plus élevée bouge généralement davantage quand les rendements / yields changent. La relation essentielle est inverse : quand les yields montent, les prix des obligations baissent généralement, et inversement.",
-    exampleFr: "Règle approximative : si la duration modifiée / modified duration vaut 6 et que les yields montent de 1 point de pourcentage, le prix de l’obligation peut baisser d’environ 6 %, avant ajustement de convexité / convexity.",
-  },
-  Intermediate: {
-    title: "Duration links bond price sensitivity to a change in yield.",
-    body: "Modified duration approximates the percentage price change for a small parallel move in yield. Longer maturity, lower coupon and lower starting yield generally increase rate sensitivity, although cash-flow timing matters more precisely than maturity alone.",
-    example: "ΔP/P ≈ -Modified Duration × Δy. With duration 6 and Δy = +0.50%, the first-order estimate is roughly -3.0%.",
-    titleFr: "La duration relie la sensibilité du prix d’une obligation à une variation de rendement / yield.",
-    bodyFr: "La duration modifiée / modified duration approxime la variation en pourcentage du prix pour un petit déplacement parallèle des rendements / yields. Une maturité plus longue, un coupon plus faible et un yield initial plus faible augmentent généralement la sensibilité aux taux, même si le calendrier exact des flux / cash flows est plus important que la seule maturité.",
-    exampleFr: "ΔP/P ≈ -Duration modifiée × Δy. Avec une duration de 6 et Δy = +0,50 %, l’estimation de premier ordre est d’environ -3,0 %.",
-  },
-  Professional: {
-    title: "Duration is a first-order measure of fixed-income price sensitivity to yield changes.",
-    body: "Modified duration captures the local slope of the price-yield relationship and is most useful for relatively small yield moves. Portfolio risk management also requires key-rate duration, curve-shape exposure and convexity because a parallel-shift assumption is often too simplistic.",
-    example: "For a non-parallel selloff, aggregate duration can hide where the exposure sits on the curve; key-rate durations reveal whether the risk is concentrated in the front end, belly or long end.",
-    titleFr: "La duration est une mesure de premier ordre de la sensibilité du prix des obligations / fixed income aux variations de yield.",
-    bodyFr: "La duration modifiée / modified duration capture la pente locale de la relation prix-yield et convient surtout aux petits mouvements de taux. La gestion du risque de portefeuille / portfolio risk management nécessite aussi la key-rate duration, l’exposition à la forme de la courbe / curve-shape exposure et la convexité, car l’hypothèse d’un déplacement parallèle est souvent trop simpliste.",
-    exampleFr: "Lors d’un sell-off non parallèle, la duration agrégée peut masquer l’endroit où se situe le risque sur la courbe. Les key-rate durations montrent si l’exposition est concentrée sur le front end, le belly ou le long end.",
-  },
+type Message = {
+  role: "user" | "assistant";
+  content: string;
 };
 
-const teachingActions = [
-  { en: "Explain more simply", fr: "Expliquer plus simplement" },
-  { en: "Use numbers", fr: "Utiliser des chiffres" },
-  { en: "Show the formula", fr: "Montrer la formule" },
-  { en: "Connect to markets", fr: "Relier aux marchés" },
-  { en: "Interview answer", fr: "Réponse entretien / interview answer" },
-  { en: "Quiz me", fr: "Me faire un quiz" },
+const modes: Mode[] = ["Beginner", "Intermediate", "Professional"];
+
+const teachingActions: Array<{
+  id: TeachingAction;
+  en: string;
+  fr: string;
+  fallbackEn: string;
+  fallbackFr: string;
+}> = [
+  {
+    id: "simplify",
+    en: "Explain more simply",
+    fr: "Expliquer plus simplement",
+    fallbackEn: "Re-explain your previous answer more simply.",
+    fallbackFr: "Réexplique ta réponse précédente plus simplement.",
+  },
+  {
+    id: "numbers",
+    en: "Use numbers",
+    fr: "Utiliser des chiffres",
+    fallbackEn: "Teach the concept again using a concrete numerical example.",
+    fallbackFr: "Réexplique le concept avec un exemple chiffré concret.",
+  },
+  {
+    id: "formula",
+    en: "Show the formula",
+    fr: "Montrer la formule",
+    fallbackEn: "Show the relevant formula, define every variable and work through an example.",
+    fallbackFr: "Montre la formule pertinente, définis chaque variable et fais un exemple.",
+  },
+  {
+    id: "markets",
+    en: "Connect to markets",
+    fr: "Relier aux marchés",
+    fallbackEn: "Connect the concept to markets and explain the transmission chain.",
+    fallbackFr: "Relie le concept aux marchés et explique la chaîne de transmission.",
+  },
+  {
+    id: "interview",
+    en: "Interview answer",
+    fr: "Réponse entretien",
+    fallbackEn: "Turn this into a strong interview-ready answer and explain the structure.",
+    fallbackFr: "Transforme cela en une réponse solide pour entretien et explique la structure.",
+  },
+  {
+    id: "quiz",
+    en: "Quiz me",
+    fr: "Me faire un quiz",
+    fallbackEn: "Quiz me on the selected lesson. Ask one question and wait for my answer.",
+    fallbackFr: "Fais-moi un quiz sur le cours sélectionné. Pose une question et attends ma réponse.",
+  },
+  {
+    id: "diagnose",
+    en: "Diagnose my mistake",
+    fr: "Diagnostiquer mon erreur",
+    fallbackEn: "Diagnose the exact misconception in my latest answer and test me again.",
+    fallbackFr: "Diagnostique précisément l’erreur dans ma dernière réponse et teste-moi à nouveau.",
+  },
 ];
 
 export default function ProfessorLab() {
   const { isFrench, text } = useLanguage();
   const [mode, setMode] = useState<Mode>("Beginner");
-  const active = explanations[mode];
-  const modeLabel = (value: Mode) => !isFrench ? value : value === "Beginner" ? "Débutant" : value === "Intermediate" ? "Intermédiaire" : "Professionnel";
+  const [lessonSlug, setLessonSlug] = useState("year-2-duration-convexity");
+  const [draft, setDraft] = useState("");
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [connection, setConnection] = useState<"ready" | "live" | "error">("ready");
+  const [error, setError] = useState("");
+  const [personalized, setPersonalized] = useState(false);
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem("finance-studio-level");
+    if (stored === "Beginner" || stored === "Intermediate" || stored === "Professional") {
+      setMode(stored);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("finance-studio-level", mode);
+  }, [mode]);
+
+  const modules = useMemo(
+    () =>
+      curriculumYears.flatMap((year) =>
+        year.modules.map((module) => ({
+          slug: moduleSlug(year.year, module.title),
+          year: year.year,
+          yearFr: year.yearFr,
+          title: module.title,
+          titleFr: module.titleFr,
+        })),
+      ),
+    [],
+  );
+
+  const selectedLesson = modules.find((module) => module.slug === lessonSlug);
+
+  const modeLabel = (value: Mode) =>
+    !isFrench
+      ? value
+      : value === "Beginner"
+        ? "Débutant"
+        : value === "Intermediate"
+          ? "Intermédiaire"
+          : "Professionnel";
+
+  async function askProfessor(
+    action: TeachingAction = "explain",
+    fallbackMessage?: string,
+  ) {
+    if (loading) return;
+
+    const message = (draft.trim() || fallbackMessage || "").trim();
+    if (!message) {
+      setError(
+        text(
+          "Write a finance question first.",
+          "Écris d’abord une question de finance.",
+        ),
+      );
+      return;
+    }
+
+    const previousHistory = messages.slice(-8);
+    const userMessage: Message = { role: "user", content: message };
+
+    setMessages((current) => [...current, userMessage]);
+    setDraft("");
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/professor", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message,
+          mode,
+          language: isFrench ? "FR" : "EN",
+          lessonSlug: lessonSlug || null,
+          action,
+          history: previousHistory,
+        }),
+      });
+
+      const payload = (await response.json()) as {
+        answer?: string;
+        error?: string;
+        personalized?: boolean;
+      };
+
+      if (!response.ok || !payload.answer) {
+        throw new Error(
+          payload.error ||
+            text(
+              "The AI Professor could not answer.",
+              "Le Professeur IA n’a pas pu répondre.",
+            ),
+        );
+      }
+
+      setMessages((current) => [
+        ...current,
+        { role: "assistant", content: payload.answer! },
+      ]);
+      setPersonalized(Boolean(payload.personalized));
+      setConnection("live");
+    } catch (cause) {
+      setConnection("error");
+      setError(
+        cause instanceof Error
+          ? cause.message
+          : text(
+              "The AI Professor is temporarily unavailable.",
+              "Le Professeur IA est temporairement indisponible.",
+            ),
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function submitQuestion(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void askProfessor("explain");
+  }
+
+  function runTeachingAction(action: (typeof teachingActions)[number]) {
+    const fallback = isFrench ? action.fallbackFr : action.fallbackEn;
+    void askProfessor(action.id, fallback);
+  }
 
   return (
     <div className="workspace-stack">
       <section className="control-panel professor-control-panel">
-        <div><span className="control-label">{text("EXPLANATION MODE", "MODE D’EXPLICATION")}</span><div className="chip-row">{(["Beginner", "Intermediate", "Professional"] as Mode[]).map((item) => <button className={mode === item ? "chip active" : "chip"} onClick={() => setMode(item)} key={item} type="button">{modeLabel(item)}</button>)}</div></div>
-        <div><span className="control-label">{text("AI CONNECTION", "CONNEXION IA")}</span><span className="connection-badge">{text("Teaching UI ready · model backend not connected yet", "Interface pédagogique prête · modèle IA pas encore connecté")}</span></div>
+        <div>
+          <span className="control-label">
+            {text("EXPLANATION MODE", "MODE D’EXPLICATION")}
+          </span>
+          <div className="chip-row">
+            {modes.map((item) => (
+              <button
+                className={mode === item ? "chip active" : "chip"}
+                onClick={() => setMode(item)}
+                key={item}
+                type="button"
+              >
+                {modeLabel(item)}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <span className="control-label">
+            {text("AI CONNECTION", "CONNEXION IA")}
+          </span>
+          <span className="connection-badge">
+            <span className="status-dot" />
+            {connection === "live"
+              ? text(
+                  personalized
+                    ? "AI Gateway live · personalized"
+                    : "AI Gateway live",
+                  personalized
+                    ? "AI Gateway actif · personnalisé"
+                    : "AI Gateway actif",
+                )
+              : connection === "error"
+                ? text("AI connection unavailable", "Connexion IA indisponible")
+                : text("AI Professor ready", "Professeur IA prêt")}
+          </span>
+        </div>
       </section>
 
       <section className="professor-demo-panel">
-        <div className="professor-demo-question"><span className="mini-label">{text("SAMPLE QUESTION", "QUESTION EXEMPLE")}</span><h2>{text("“I still don't understand duration. Explain it again.”", "« Je ne comprends toujours pas la duration. Explique-la-moi à nouveau. »")}</h2><p>{text("This fixed example proves the teaching-mode behavior without pretending that a live AI model is already connected.", "Cet exemple fixe démontre le fonctionnement des modes pédagogiques sans prétendre qu’un modèle IA en direct est déjà connecté.")}</p></div>
-        <div className="professor-response-card"><span className="mini-label">{modeLabel(mode).toUpperCase()} · {text("RESPONSE", "RÉPONSE")}</span><h3>{isFrench ? active.titleFr : active.title}</h3><p>{isFrench ? active.bodyFr : active.body}</p><div className="professor-example"><strong>{text("Example", "Exemple")}</strong><p>{isFrench ? active.exampleFr : active.example}</p></div></div>
+        <div className="professor-demo-question">
+          <span className="mini-label">
+            {text("COURSE CONTEXT", "CONTEXTE DU COURS")}
+          </span>
+          <h2>
+            {text(
+              "Choose exactly what the professor should teach from.",
+              "Choisis exactement le cours à partir duquel le professeur doit enseigner.",
+            )}
+          </h2>
+
+          <label className="control-label" htmlFor="professor-course">
+            {text("FINANCE UNIVERSITY MODULE", "MODULE FINANCE UNIVERSITY")}
+          </label>
+          <select
+            id="professor-course"
+            value={lessonSlug}
+            onChange={(event) => setLessonSlug(event.target.value)}
+          >
+            <option value="">
+              {text("General finance · no specific lesson", "Finance générale · aucun cours spécifique")}
+            </option>
+            {curriculumYears.map((year) => (
+              <optgroup
+                label={isFrench ? `${year.yearFr} · ${year.nameFr}` : `${year.year} · ${year.name}`}
+                key={year.year}
+              >
+                {year.modules.map((module) => {
+                  const slug = moduleSlug(year.year, module.title);
+                  return (
+                    <option value={slug} key={slug}>
+                      {isFrench ? module.titleFr : module.title}
+                    </option>
+                  );
+                })}
+              </optgroup>
+            ))}
+          </select>
+
+          {selectedLesson ? (
+            <p>
+              {text("Selected:", "Sélectionné :")}{" "}
+              <strong>{isFrench ? selectedLesson.titleFr : selectedLesson.title}</strong>
+            </p>
+          ) : (
+            <p>
+              {text(
+                "General finance mode uses durable finance knowledge without claiming a lesson source.",
+                "Le mode finance générale utilise des connaissances financières durables sans prétendre provenir d’un cours précis.",
+              )}
+            </p>
+          )}
+        </div>
+
+        <div className="professor-response-card">
+          <span className="mini-label">
+            {modeLabel(mode).toUpperCase()} · {text("ASK THE PROFESSOR", "DEMANDER AU PROFESSEUR")}
+          </span>
+
+          <form onSubmit={submitQuestion}>
+            <textarea
+              value={draft}
+              onChange={(event) => setDraft(event.target.value)}
+              placeholder={text(
+                "Example: I understand that bond prices fall when yields rise, but why does duration change the size of the move?",
+                "Exemple : je comprends que le prix des obligations baisse quand les yields montent, mais pourquoi la duration change-t-elle l’ampleur du mouvement ?",
+              )}
+              rows={6}
+              maxLength={5000}
+              disabled={loading}
+            />
+            <button
+              className="full-button"
+              type="submit"
+              disabled={loading || !draft.trim()}
+            >
+              {loading
+                ? text("Professor is thinking…", "Le professeur réfléchit…")
+                : text("Ask FinanceStudio Professor", "Demander au Professeur FinanceStudio")}
+              {!loading ? " →" : ""}
+            </button>
+          </form>
+
+          {error && (
+            <p className="inline-status" role="status">
+              {error}
+            </p>
+          )}
+        </div>
       </section>
 
+      {messages.length > 0 && (
+        <section className="news-blueprint-panel">
+          <div className="panel-heading">
+            <div>
+              <span className="mini-label">
+                {text("TUTORING SESSION", "SESSION DE TUTORAT")}
+              </span>
+              <h2>
+                {text(
+                  "The professor keeps the recent conversation in context.",
+                  "Le professeur conserve la conversation récente en contexte.",
+                )}
+              </h2>
+            </div>
+            <button
+              type="button"
+              className="chip"
+              onClick={() => {
+                setMessages([]);
+                setError("");
+                setPersonalized(false);
+              }}
+              disabled={loading}
+            >
+              {text("New session", "Nouvelle session")}
+            </button>
+          </div>
+
+          <div className="news-analysis-grid">
+            {messages.map((message, index) => (
+              <article
+                className="news-analysis-step"
+                key={`${message.role}-${index}`}
+              >
+                <span>{message.role === "user" ? "YOU" : "AI"}</span>
+                <div>
+                  <strong>
+                    {message.role === "user"
+                      ? text("Your question", "Ta question")
+                      : text("FinanceStudio Professor", "Professeur FinanceStudio")}
+                  </strong>
+                  <p style={{ whiteSpace: "pre-wrap" }}>{message.content}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="teaching-action-grid">
-        {teachingActions.map((action, index) => <article key={action.en}><span>{String(index + 1).padStart(2, "0")}</span><h3>{isFrench ? action.fr : action.en}</h3><p>{text("The connected professor will preserve the same underlying knowledge while changing the teaching method.", "Le professeur connecté conservera exactement le même savoir sous-jacent tout en changeant la méthode d’enseignement.")}</p></article>)}
+        {teachingActions.map((action, index) => (
+          <button
+            type="button"
+            className="analysis-card"
+            key={action.id}
+            onClick={() => runTeachingAction(action)}
+            disabled={loading}
+          >
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{isFrench ? action.fr : action.en}</h3>
+            <p>
+              {text(
+                "The same knowledge is preserved while the teaching method changes.",
+                "Le même savoir est conservé tandis que la méthode pédagogique change.",
+              )}
+            </p>
+          </button>
+        ))}
       </section>
 
       <section className="misconception-panel">
-        <div><span className="mini-label">{text("ERROR-BASED LEARNING", "APPRENTISSAGE PAR L’ERREUR / ERROR-BASED LEARNING")}</span><h2>{text("Do not just correct the answer — diagnose the misconception.", "Ne pas seulement corriger la réponse — diagnostiquer l’erreur de compréhension.")}</h2></div>
-        <div className="misconception-flow"><span>{text("Your answer", "Ta réponse")}</span><b>→</b><span>{text("Find exact error", "Identifier l’erreur précise")}</span><b>→</b><span>{text("Rebuild concept", "Reconstruire le concept")}</span><b>→</b><span>{text("New question", "Nouvelle question")}</span><b>→</b><span>{text("Confirm mastery", "Confirmer la maîtrise / mastery")}</span></div>
+        <div>
+          <span className="mini-label">
+            {text(
+              "ERROR-BASED LEARNING",
+              "APPRENTISSAGE PAR L’ERREUR / ERROR-BASED LEARNING",
+            )}
+          </span>
+          <h2>
+            {text(
+              "Do not just correct the answer — diagnose the misconception.",
+              "Ne pas seulement corriger la réponse — diagnostiquer l’erreur de compréhension.",
+            )}
+          </h2>
+        </div>
+        <div className="misconception-flow">
+          <span>{text("Your answer", "Ta réponse")}</span>
+          <b>→</b>
+          <span>{text("Find exact error", "Identifier l’erreur précise")}</span>
+          <b>→</b>
+          <span>{text("Rebuild concept", "Reconstruire le concept")}</span>
+          <b>→</b>
+          <span>{text("New question", "Nouvelle question")}</span>
+          <b>→</b>
+          <span>{text("Confirm mastery", "Confirmer la maîtrise / mastery")}</span>
+        </div>
       </section>
     </div>
   );
