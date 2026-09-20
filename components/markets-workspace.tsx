@@ -221,6 +221,8 @@ export default function MarketsWorkspace() {
   const visibleQuotes = useMemo(() => {
     const quotes = payload?.quotes ?? [];
     if (region === "My Markets") {
+      if (preferredRegions.includes("Global")) return quotes;
+
       return quotes.filter((quote) => {
         if (preferredRegions.includes(quote.region)) return true;
         return (
