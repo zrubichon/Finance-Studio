@@ -520,13 +520,25 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("FinanceStudio AI Professor generation failed", error);
 
+    const gatewayMessage =
+      error instanceof Error ? error.message.toLowerCase() : "";
+    const billingRequired =
+      gatewayMessage.includes("valid credit card") ||
+      gatewayMessage.includes("add a card") ||
+      gatewayMessage.includes("unlock your free credits");
+
     return NextResponse.json(
       {
-        error:
-          language === "FR"
+        error: billingRequired
+          ? language === "FR"
+            ? "Le Professeur IA est prêt, mais AI Gateway doit encore être activé dans Vercel avec un moyen de paiement valide pour débloquer les crédits IA."
+            : "The AI Professor is ready, but AI Gateway still needs to be activated in Vercel with a valid payment method to unlock AI credits."
+          : language === "FR"
             ? "Le modèle IA n’est pas disponible pour le moment. Le cours et ta progression restent accessibles ; réessaie lorsque la connexion AI Gateway est active."
             : "The AI model is not available right now. Your lesson and progress remain available; retry when the AI Gateway connection is active.",
-        code: "AI_GATEWAY_UNAVAILABLE",
+        code: billingRequired
+          ? "AI_GATEWAY_BILLING_REQUIRED"
+          : "AI_GATEWAY_UNAVAILABLE",
         sessionId,
       },
       { status: 503 },
