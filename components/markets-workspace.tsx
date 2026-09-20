@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
+import { createClient } from "@/lib/supabase/client";
 
 type Region = "Global" | "USA" | "Europe" | "UK" | "Asia" | "China" | "Japan" | "Emerging Markets";
+type RegionFilter = Region | "My Markets";
 type Mode = "Beginner" | "Intermediate" | "Professional";
 
 type MarketQuote = {
@@ -34,7 +36,18 @@ type MarketPayload = {
   providers: ProviderStatus[];
 };
 
-const regions: Region[] = ["Global", "USA", "Europe", "UK", "Asia", "China", "Japan", "Emerging Markets"];
+const regions: RegionFilter[] = ["My Markets", "Global", "USA", "Europe", "UK", "Asia", "China", "Japan", "Emerging Markets"];
+
+const preferenceRegionMap: Record<string, Region> = {
+  global: "Global",
+  usa: "USA",
+  europe: "Europe",
+  uk: "UK",
+  asia: "Asia",
+  china: "China",
+  japan: "Japan",
+  "emerging-markets": "Emerging Markets",
+};
 const modes: Mode[] = ["Beginner", "Intermediate", "Professional"];
 
 const explanation: Record<Mode, { en: string; fr: string }> = {
@@ -72,11 +85,65 @@ function formatMove(quote: MarketQuote) {
 
 export default function MarketsWorkspace() {
   const { isFrench, text } = useLanguage();
-  const [region, setRegion] = useState<Region>("Global");
+  const [region, setRegion] = useState<RegionFilter>("Global");
   const [mode, setMode] = useState<Mode>("Beginner");
+  const [userId, setUserId] = useState<string | null>(null);
+  const [preferredRegions, setPreferredRegions] = useState<Region[]>([
+    "Global",
+    "USA",
+    "Europe",
+  ]);
   const [payload, setPayload] = useState<MarketPayload | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    let active = true;
+
+    async function hydratePreferences() {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!active || !user) return;
+      setUserId(user.id);
+
+      const [profileResult, preferencesResult] = await Promise.all([
+        supabase
+          .from("profiles")
+          .select("explanation_level")
+          .eq("user_id", user.id)
+          .maybeSingle(),
+        supabase
+          .from("user_preferences")
+          .select("market_regions")
+          .eq("user_id", user.id)
+          .maybeSingle(),
+      ]);
+
+      if (!active) return;
+
+      const level = profileResult.data?.explanation_level;
+      if (level === "intermediate") setMode("Intermediate");
+      else if (level === "professional") setMode("Professional");
+      else if (level === "beginner") setMode("Beginner");
+
+      const mapped = (preferencesResult.data?.market_regions ?? [])
+        .map((item: string) => preferenceRegionMap[item.toLowerCase()])
+        .filter((item: Region | undefined): item is Region => Boolean(item));
+
+      if (mapped.length) {
+        setPreferredRegions([...new Set(mapped)]);
+        setRegion("My Markets");
+      }
+    }
+
+    void hydratePreferences();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -106,7 +173,8 @@ export default function MarketsWorkspace() {
     };
   }, [text]);
 
-  const regionLabel = (value: Region) => {
+  const regionLabel = (value: RegionFilter) => {
+    if (value === "My Markets") return text("My Markets", "Mes marchés");
     if (!isFrench) return value;
     if (value === "Global") return "Monde";
     if (value === "UK") return "Royaume-Uni";
@@ -127,6 +195,12 @@ export default function MarketsWorkspace() {
           : "Professionnel";
 
   const regionNote = useMemo(() => {
+    if (region === "My Markets") {
+      return text(
+        `My Markets · ${preferredRegions.map((item) => regionLabel(item)).join(" · ")}`,
+        `Mes marchés · ${preferredRegions.map((item) => regionLabel(item)).join(" · ")}`,
+      );
+    }
     if (region === "Global") {
       return text("Latest connected market observations", "Dernières observations de marché connectées");
     }
@@ -134,16 +208,25 @@ export default function MarketsWorkspace() {
       `${region} focus — global context remains available`,
       `Focus ${regionLabel(region)} — le contexte mondial reste disponible`,
     );
-  }, [region, isFrench, text]);
+  }, [region, isFrench, preferredRegions, text]);
 
   const visibleQuotes = useMemo(() => {
     const quotes = payload?.quotes ?? [];
+    if (region === "My Markets") {
+      return quotes.filter((quote) => {
+        if (preferredRegions.includes(quote.region)) return true;
+        return (
+          preferredRegions.includes("Asia") &&
+          ["China", "Japan"].includes(quote.region)
+        );
+      });
+    }
     if (region === "Global") return quotes;
     if (region === "Asia") {
       return quotes.filter((quote) => ["Asia", "China", "Japan"].includes(quote.region));
     }
     return quotes.filter((quote) => quote.region === region);
-  }, [payload, region]);
+  }, [payload, preferredRegions, region]);
 
   const groups = useMemo(() => {
     const order: MarketQuote["category"][] = ["Equities", "Rates", "FX", "Commodities", "Volatility", "Credit"];
@@ -157,13 +240,29 @@ export default function MarketsWorkspace() {
 
   const liveProviders = payload?.providers.filter((provider) => provider.status === "live").length ?? 0;
 
+  async function chooseMode(nextMode: Mode) {
+    setMode(nextMode);
+    if (!userId) return;
+
+    const supabase = createClient();
+    await supabase
+      .from("profiles")
+      .update({
+        explanation_level: nextMode.toLowerCase(),
+        updated_at: new Date().toISOString(),
+      })
+      .eq("user_id", userId);
+  }
+
   return (
     <div className="workspace-stack">
       <section className="control-panel">
         <div>
           <span className="control-label">{text("REGION", "RÉGION")}</span>
           <div className="chip-row">
-            {regions.map((item) => (
+            {regions
+              .filter((item) => item !== "My Markets" || Boolean(userId))
+              .map((item) => (
               <button
                 className={region === item ? "chip active" : "chip"}
                 onClick={() => setRegion(item)}
@@ -182,7 +281,7 @@ export default function MarketsWorkspace() {
             {modes.map((item) => (
               <button
                 className={mode === item ? "chip active" : "chip"}
-                onClick={() => setMode(item)}
+                onClick={() => void chooseMode(item)}
                 key={item}
                 type="button"
               >
