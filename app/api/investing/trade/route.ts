@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
 
   const { data: portfolio } = await supabase
     .from("paper_portfolios")
-    .select("id")
+    .select("id,base_currency")
     .eq("id", portfolioId)
     .eq("user_id", user.id)
     .maybeSingle();
@@ -107,6 +107,22 @@ export async function POST(request: NextRequest) {
         code: "STALE_PRICE",
         quoteAgeHours: quoteAgeHours(pricing.quote),
         quote: pricing.quote,
+      },
+      { status: 409 },
+    );
+  }
+
+  if (
+    pricing.quote.currency &&
+    pricing.quote.currency !== portfolio.base_currency
+  ) {
+    return NextResponse.json(
+      {
+        error:
+          `This instrument is quoted in ${pricing.quote.currency}, while the paper portfolio cash is in ${portfolio.base_currency}. Cross-currency conversion is not enabled yet, so the simulated order is blocked.`,
+        code: "QUOTE_CURRENCY_MISMATCH",
+        quote: pricing.quote,
+        portfolioCurrency: portfolio.base_currency,
       },
       { status: 409 },
     );
