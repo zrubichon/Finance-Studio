@@ -28,15 +28,66 @@ export type NewsDataResponse = {
   };
 };
 
-const queries: Record<NewsCategory, string> = {
-  markets:
-    '("stock market" OR equities OR bonds OR "credit spreads" OR commodities OR currencies) sourcelang:english',
-  macro:
-    '(inflation OR "jobs report" OR GDP OR growth OR recession OR tariffs) sourcelang:english',
-  "central-banks":
-    '("Federal Reserve" OR ECB OR "Bank of England" OR "Bank of Japan" OR "central bank") sourcelang:english',
-  companies:
-    '(earnings OR merger OR acquisition OR IPO OR "capital markets") sourcelang:english',
+const financeQuery =
+  '("stock market" OR inflation OR "Federal Reserve" OR ECB OR earnings OR merger OR IPO OR bonds OR commodities OR currencies) sourcelang:english';
+
+const categorySignals: Record<NewsCategory, string[]> = {
+  markets: [
+    "market",
+    "stocks",
+    "stock ",
+    "equities",
+    "bond",
+    "yield",
+    "credit",
+    "commodity",
+    "commodities",
+    "oil",
+    "currency",
+    "currencies",
+    "dollar",
+    "euro",
+    "yen",
+    "vix",
+    "volatility",
+  ],
+  macro: [
+    "inflation",
+    "jobs",
+    "employment",
+    "unemployment",
+    "payroll",
+    "gdp",
+    "growth",
+    "recession",
+    "tariff",
+    "consumer",
+    "wage",
+    "economic",
+  ],
+  "central-banks": [
+    "federal reserve",
+    " fed ",
+    "ecb",
+    "bank of england",
+    "bank of japan",
+    "central bank",
+    "monetary policy",
+    "rate decision",
+    "interest rate",
+  ],
+  companies: [
+    "earnings",
+    "revenue",
+    "profit",
+    "merger",
+    "acquisition",
+    "acquire",
+    "ipo",
+    "deal",
+    "takeover",
+    "buyout",
+  ],
 };
 
 const establishedDomains = [
@@ -78,6 +129,13 @@ function normalizeGdeltDate(value: string | undefined) {
   return `${year}-${month}-${day}T${hour}:${minute}:${second}Z`;
 }
 
+function titleMatchesCategory(title: string, category: NewsCategory) {
+  const normalized = ` ${title.toLowerCase()} `;
+  return categorySignals[category].some((signal) =>
+    normalized.includes(signal),
+  );
+}
+
 export function isNewsCategory(value: string | null): value is NewsCategory {
   return (
     value === "markets" ||
@@ -87,13 +145,43 @@ export function isNewsCategory(value: string | null): value is NewsCategory {
   );
 }
 
+async function requestGdelt(endpoint: string) {
+  const request = (cacheMode: RequestCache | undefined) =>
+    fetch(endpoint, {
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "FinanceStudio/1.0 educational-market-intelligence",
+      },
+      ...(cacheMode
+        ? { cache: cacheMode }
+        : { next: { revalidate: 1800 } }),
+    });
+
+  let response = await request(undefined);
+
+  if (response.status === 429) {
+    const retryAfterHeader = Number(response.headers.get("retry-after"));
+    const retrySeconds = Number.isFinite(retryAfterHeader)
+      ? Math.min(Math.max(retryAfterHeader, 1), 3)
+      : 2;
+
+    await new Promise((resolve) =>
+      setTimeout(resolve, retrySeconds * 1000),
+    );
+
+    response = await request("no-store");
+  }
+
+  return response;
+}
+
 export async function getNewsData(
   category: NewsCategory,
 ): Promise<NewsDataResponse> {
   const params = new URLSearchParams({
-    query: queries[category],
+    query: financeQuery,
     mode: "artlist",
-    maxrecords: "40",
+    maxrecords: "50",
     timespan: "24h",
     sort: "datedesc",
     format: "json",
@@ -102,15 +190,14 @@ export async function getNewsData(
   const endpoint = `https://api.gdeltproject.org/api/v2/doc/doc?${params.toString()}`;
 
   try {
-    const response = await fetch(endpoint, {
-      headers: {
-        Accept: "application/json",
-        "User-Agent": "FinanceStudio/1.0 educational-market-intelligence",
-      },
-      next: { revalidate: 600 },
-    });
+    const response = await requestGdelt(endpoint);
 
     if (!response.ok) {
+      if (response.status === 429) {
+        throw new Error(
+          "GDELT is temporarily rate-limited. FinanceStudio will not replace the unavailable feed with synthetic headlines.",
+        );
+      }
       throw new Error(`GDELT request failed: ${response.status}`);
     }
 
@@ -158,15 +245,27 @@ export async function getNewsData(
       });
     }
 
-    const items = [...unique.values()]
-      .sort((a, b) => {
-        if (a.sourceQuality !== b.sourceQuality) {
-          return a.sourceQuality === "established" ? -1 : 1;
-        }
+    const allItems = [...unique.values()].sort((a, b) => {
+      if (a.sourceQuality !== b.sourceQuality) {
+        return a.sourceQuality === "established" ? -1 : 1;
+      }
 
-        return b.publishedAt.localeCompare(a.publishedAt);
-      })
-      .slice(0, 60);
+      return b.publishedAt.localeCompare(a.publishedAt);
+    });
+
+    const categoryItems = allItems.filter((item) =>
+      titleMatchesCategory(item.title, category),
+    );
+
+    const items =
+      category === "markets"
+        ? [
+            ...categoryItems,
+            ...allItems.filter(
+              (item) => !categoryItems.some((match) => match.id === item.id),
+            ),
+          ].slice(0, 50)
+        : categoryItems.slice(0, 50);
 
     return {
       category,
@@ -177,7 +276,7 @@ export async function getNewsData(
         label: "GDELT DOC 2.0",
         status: items.length ? "live" : "empty",
         message: items.length
-          ? `${items.length} recent external articles indexed.`
+          ? `${items.length} recent external articles indexed from one shared cached finance query.`
           : "No matching article was returned for this category.",
       },
     };
