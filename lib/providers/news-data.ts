@@ -166,7 +166,7 @@ export async function getNewsData(
 
         return b.publishedAt.localeCompare(a.publishedAt);
       })
-      .slice(0, 24);
+      .slice(0, 60);
 
     return {
       category,
