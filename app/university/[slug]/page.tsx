@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import LessonPlayer from "@/components/lesson-player";
-import { getLessonBySlug } from "@/lib/lesson-content";
+import { getLessonBySlug } from "@/lib/lesson-registry";
 
 type LessonPageProps = {
   params: Promise<{ slug: string }>;
