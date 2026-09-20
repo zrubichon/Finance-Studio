@@ -19,6 +19,7 @@ type MarketQuote = {
   id: string;
   label: string;
   category: string;
+  region: string;
   value: number;
   changePercent: number | null;
   unit: "" | "%" | "$" | "bps";
@@ -113,6 +114,11 @@ export default function FinanceStudioHomeV2() {
   const [userId, setUserId] = useState<string | null>(null);
   const [completedSlugs, setCompletedSlugs] = useState<string[]>([]);
   const [targetRole, setTargetRole] = useState("");
+  const [preferredMarketRegions, setPreferredMarketRegions] = useState<string[]>([
+    "global",
+    "usa",
+    "europe",
+  ]);
   const [marketData, setMarketData] = useState<MarketPayload | null>(null);
 
   const modules = useMemo(() => allCurriculumModules(), []);
@@ -139,14 +145,35 @@ export default function FinanceStudioHomeV2() {
   const lesson = lessonCopy[level][isFrench ? "fr" : "en"];
 
   const groupedMarkets = useMemo(() => {
+    const regionMap: Record<string, string[]> = {
+      global: ["Global"],
+      usa: ["USA"],
+      europe: ["Europe"],
+      uk: ["UK"],
+      asia: ["Asia", "China", "Japan"],
+      china: ["China"],
+      japan: ["Japan"],
+      "emerging-markets": ["Emerging Markets"],
+    };
+
+    const allowedRegions = new Set(
+      preferredMarketRegions.flatMap(
+        (region) => regionMap[region.toLowerCase()] ?? [],
+      ),
+    );
+
+    const selectedQuotes = (marketData?.quotes ?? []).filter(
+      (quote) => allowedRegions.size === 0 || allowedRegions.has(quote.region),
+    );
+
     const groups = new Map<string, MarketQuote[]>();
-    for (const quote of marketData?.quotes ?? []) {
+    for (const quote of selectedQuotes) {
       const current = groups.get(quote.category) ?? [];
       if (current.length < 4) current.push(quote);
       groups.set(quote.category, current);
     }
     return [...groups.entries()].slice(0, 4);
-  }, [marketData]);
+  }, [marketData, preferredMarketRegions]);
 
   useEffect(() => {
     let mounted = true;
@@ -171,7 +198,7 @@ export default function FinanceStudioHomeV2() {
           .maybeSingle(),
         supabase
           .from("user_preferences")
-          .select("theme")
+          .select("theme,market_regions")
           .eq("user_id", user.id)
           .maybeSingle(),
         supabase
@@ -192,6 +219,15 @@ export default function FinanceStudioHomeV2() {
       if (accountTheme === "classic" || accountTheme === "girl" || accountTheme === "terminal") {
         setTheme(accountTheme);
         window.localStorage.setItem("finance-studio-theme", accountTheme);
+      }
+
+      const accountRegions = preferencesResult.data?.market_regions;
+      if (Array.isArray(accountRegions) && accountRegions.length) {
+        setPreferredMarketRegions(
+          accountRegions
+            .filter((item): item is string => typeof item === "string")
+            .map((item) => item.toLowerCase()),
+        );
       }
 
       setTargetRole(profileResult.data?.target_role ?? "");
@@ -449,7 +485,13 @@ export default function FinanceStudioHomeV2() {
             <div className="card-head markets-head">
               <div>
                 <span className="eyebrow">{text("MARKET MAP", "CARTE DES MARCHÉS / MARKET MAP")}</span>
-                <h2>{text("Connected market snapshot", "Snapshot de marché connecté")}</h2>
+                <h2>{text("Your connected market snapshot", "Ton snapshot de marché connecté")}</h2>
+                <small className="data-note">
+                  {text(
+                    `Account regions: ${preferredMarketRegions.join(" · ")}`,
+                    `Régions du compte : ${preferredMarketRegions.join(" · ")}`,
+                  )}
+                </small>
               </div>
               <div className="feed-status">
                 <span className="status-dot" />
