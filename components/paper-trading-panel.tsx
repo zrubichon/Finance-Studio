@@ -33,11 +33,23 @@ type Position = {
   quote: InstrumentQuote | null;
   current_value: number | null;
   unrealized_pnl: number | null;
+  valuation_status: "priced" | "unpriced" | "currency_mismatch";
   provider: {
     provider: string;
     status: string;
     message: string;
   };
+};
+
+type Attribution = {
+  symbol: string;
+  assetClass: string;
+  realizedPnl: number;
+  unrealizedPnl: number;
+  totalPnl: number;
+  currentValue: number | null;
+  contributionPercent: number | null;
+  valuationStatus: string;
 };
 
 type Transaction = {
@@ -74,6 +86,7 @@ type Snapshot = {
     returnPercent: number | null;
     realizedPnl: number;
   };
+  attribution: Attribution[];
 };
 
 const assetClasses: Array<{ value: AssetClass; en: string; fr: string }> = [
@@ -412,7 +425,7 @@ export default function PaperTradingPanel({
 
           {assetClass === "fx" && (
             <div className="chip-row">
-              {["EUR/USD", "GBP/USD", "USD/JPY"].map((pair) => (
+              {["EUR/USD", "GBP/USD"].map((pair) => (
                 <button
                   type="button"
                   className={symbol === pair ? "chip active" : "chip"}
@@ -493,8 +506,8 @@ export default function PaperTradingPanel({
             <div>
               <span>01</span>
               <strong>{text(
-                "EUR/USD, GBP/USD and USD/JPY via ECB daily reference rates",
-                "EUR/USD, GBP/USD et USD/JPY via les taux de référence quotidiens de la BCE / ECB",
+                "EUR/USD and GBP/USD can execute against ECB daily reference rates in a USD portfolio. USD/JPY can be quoted but is blocked until JPY→USD conversion is supported.",
+                "EUR/USD et GBP/USD peuvent être exécutés avec les taux de référence quotidiens BCE / ECB dans un portefeuille USD. USD/JPY peut être coté mais reste bloqué tant que la conversion JPY→USD n’est pas prise en charge.",
               )}</strong>
             </div>
             <div>
@@ -516,6 +529,67 @@ export default function PaperTradingPanel({
       </div>
 
       {status && <p className="inline-status" role="status">{status}</p>}
+
+      {snapshot?.attribution.length ? (
+        <div className="paper-book-card paper-attribution-card">
+          <div className="panel-heading">
+            <div>
+              <span className="mini-label">{text("PERFORMANCE ATTRIBUTION", "ATTRIBUTION DE PERFORMANCE")}</span>
+              <h3>{text(
+                "See which decisions created or destroyed virtual P&L",
+                "Voir quelles décisions ont créé ou détruit le P&L virtuel",
+              )}</h3>
+            </div>
+            <span className="connection-badge">
+              {text(
+                "Contribution uses starting virtual capital",
+                "La contribution utilise le capital virtuel initial",
+              )}
+            </span>
+          </div>
+
+          <div className="paper-attribution-grid">
+            {snapshot.attribution.map((item) => (
+              <article key={`${item.symbol}-${item.assetClass}`}>
+                <div>
+                  <strong>{item.symbol}</strong>
+                  <span>{item.assetClass}</span>
+                </div>
+                <dl>
+                  <div>
+                    <dt>{text("Realized", "Réalisé")}</dt>
+                    <dd>{signed(item.realizedPnl, currency)}</dd>
+                  </div>
+                  <div>
+                    <dt>{text("Unrealized", "Non réalisé")}</dt>
+                    <dd>
+                      {item.valuationStatus === "priced"
+                        ? signed(item.unrealizedPnl, currency)
+                        : "—"}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>{text("Total contribution", "Contribution totale")}</dt>
+                    <dd>
+                      {item.valuationStatus === "priced" || item.currentValue === null
+                        ? signed(item.totalPnl, currency)
+                        : "—"}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>{text("Portfolio contribution", "Contribution portefeuille")}</dt>
+                    <dd>
+                      {item.contributionPercent === null
+                        ? "—"
+                        : `${item.contributionPercent > 0 ? "+" : ""}${item.contributionPercent.toFixed(2)}%`}
+                    </dd>
+                  </div>
+                </dl>
+              </article>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       <div className="paper-book-grid">
         <div className="paper-book-card">
@@ -549,9 +623,11 @@ export default function PaperTradingPanel({
                       <td>{compact(position.quantity)}</td>
                       <td>{compact(position.average_cost)}</td>
                       <td>
-                        {position.quote
+                        {position.valuation_status === "priced" && position.quote
                           ? compact(position.quote.price)
-                          : text("Unpriced", "Non pricé")}
+                          : position.valuation_status === "currency_mismatch"
+                            ? text("FX conversion needed", "Conversion FX requise")
+                            : text("Unpriced", "Non pricé")}
                       </td>
                       <td>{money(position.current_value, currency)}</td>
                       <td>{signed(position.unrealized_pnl, currency)}</td>
