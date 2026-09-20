@@ -6,6 +6,7 @@ import {
   type InvestableAssetClass,
 } from "@/lib/providers/instrument-data";
 import { createClient } from "@/lib/supabase/server";
+import AccountSettingsForm from "@/components/account-settings-form";
 import { signOut } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -369,6 +370,39 @@ export default async function AccountPage() {
             {t("Open Investing Lab", "Ouvrir le Laboratoire d’Investissement")} →
           </Link>
         </article>
+      </section>
+
+      <section className="account-settings-card">
+        <div className="account-settings-heading">
+          <span className="mini-label">
+            {t("EDIT YOUR PROFILE", "MODIFIER TON PROFIL")}
+          </span>
+          <h2>
+            {t(
+              "Keep FinanceStudio aligned with how you want to learn and what you are preparing for.",
+              "Garde FinanceStudio aligné avec ta façon d’apprendre et le métier que tu prépares.",
+            )}
+          </h2>
+          <p className="account-muted">
+            {t(
+              "These settings personalize Home, Interview Studio, AI Professor and market coverage.",
+              "Ces paramètres personnalisent Accueil, Interview Studio, le Professeur IA et la couverture des marchés.",
+            )}
+          </p>
+        </div>
+
+        <AccountSettingsForm
+          initialDisplayName={profile?.display_name ?? ""}
+          initialLanguage={profile?.preferred_language === "fr" ? "FR" : "EN"}
+          initialLevel={
+            profile?.explanation_level === "intermediate" ||
+            profile?.explanation_level === "professional"
+              ? profile.explanation_level
+              : "beginner"
+          }
+          initialTargetRole={profile?.target_role ?? ""}
+          initialRegions={preferences?.market_regions ?? ["global", "usa", "europe"]}
+        />
       </section>
 
       <section className="account-security-card">
