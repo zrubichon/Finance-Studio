@@ -43,8 +43,6 @@ const sourceLayers: { title: Localized; body: Localized }[] = [
 export default function NewsPage() {
   const { isFrench, text } = useLanguage();
   const local = (value: Localized) => isFrench ? value.fr : value.en;
-  const regions = isFrench ? ["Monde", "USA", "Europe", "Royaume-Uni", "Asie", "Chine", "Japon", "Marchés émergents / emerging markets", "Mes marchés"] : ["Global", "USA", "Europe", "UK", "Asia", "China", "Japan", "Emerging Markets", "My Markets"];
-
   return (
     <SectionLayout
       activeSlug="news"
@@ -62,7 +60,14 @@ export default function NewsPage() {
 
         <section className="news-two-column">
           <article className="coverage-panel"><span className="mini-label">{text("GLOBAL COVERAGE", "COUVERTURE MONDIALE")}</span><h2>{text("USA + Europe priority, with a global lens", "Priorité USA + Europe, avec une vision mondiale")}</h2><div className="coverage-chips">{coverage.map((item) => <span key={item.en}>{local(item)}</span>)}</div></article>
-          <article className="coverage-panel"><span className="mini-label">{text("REGION FILTERS", "FILTRES PAR RÉGION")}</span><h2>{text("Choose what you want to follow", "Choisis ce que tu veux suivre")}</h2><div className="coverage-chips">{regions.map((item) => <span key={item}>{item}</span>)}</div></article>
+          <article className="coverage-panel">
+            <span className="mini-label">{text("REGION FILTER METHOD", "MÉTHODE DU FILTRE RÉGIONAL")}</span>
+            <h2>{text("A real filter, with its limitation stated clearly", "Un vrai filtre, avec sa limite indiquée clairement")}</h2>
+            <p>{text(
+              "The live feed now filters by the publisher country returned by GDELT. My Markets reuses your Account market-region preferences. This is useful for comparing reporting ecosystems, but source country is not the same thing as the geography of the underlying event.",
+              "Le flux en direct filtre désormais selon le pays du média renvoyé par GDELT. Mes marchés réutilise les régions choisies dans ton compte. C’est utile pour comparer les écosystèmes de reporting, mais le pays de la source n’est pas la même chose que la géographie de l’événement sous-jacent.",
+            )}</p>
+          </article>
         </section>
 
         <section className="source-panel"><div><span className="mini-label">{text("SOURCE DISCIPLINE", "DISCIPLINE DES SOURCES")}</span><h2>{text("Facts and analysis must never be blended invisibly.", "Les faits et l’analyse ne doivent jamais être mélangés de façon invisible.")}</h2></div><div className="source-layer-grid">{sourceLayers.map((layer, index) => <article key={layer.title.en}><span>0{index + 1}</span><strong>{local(layer.title)}</strong><p>{local(layer.body)}</p></article>)}</div></section>
