@@ -1,7 +1,7 @@
 "use client";
 
 import SectionLayout from "@/components/section-layout";
-import { useLanguage } from "@/components/language-provider";
+import { useLanguage } from "@/components/language-provider";\nimport LiveNewsFeed from "@/components/live-news-feed";
 
 type Localized = { en: string; fr: string };
 
@@ -53,7 +53,7 @@ export default function NewsPage() {
     >
       <div className="workspace-stack">
         <section className="news-blueprint-panel">
-          <div className="panel-heading"><div><span className="mini-label">{text("ARTICLE BLUEPRINT", "STRUCTURE D’ANALYSE")}</span><h2>{text("Every important story follows the same reasoning architecture", "Chaque actualité importante suit la même architecture de raisonnement")}</h2></div><span className="connection-badge"><span className="status-dot" /> {text("news ingestion pending", "ingestion des actualités en attente")}</span></div>
+          <div className="panel-heading"><div><span className="mini-label">{text("ARTICLE BLUEPRINT", "STRUCTURE D’ANALYSE")}</span><h2>{text("Every important story follows the same reasoning architecture", "Chaque actualité importante suit la même architecture de raisonnement")}</h2></div><span className="connection-badge"><span className="status-dot" /> {text("reasoning framework", "cadre de raisonnement")}</span></div>
           <div className="news-analysis-grid">{analysisSteps.map((step) => <article className="news-analysis-step" key={step.number}><span>{step.number}</span><div><strong>{local(step.title)}</strong><p>{local(step.body)}</p></div></article>)}</div>
         </section>
 
