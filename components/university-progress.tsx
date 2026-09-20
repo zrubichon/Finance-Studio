@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { curriculumYears, domainLabelsFr, moduleSlug } from "@/lib/curriculum";
-import { hasLessonContent } from "@/lib/lesson-content";
+import { hasLessonContent } from "@/lib/lesson-registry";
 import { useLanguage } from "@/components/language-provider";
 
 type ProgressStatus = "not_started" | "in_progress" | "completed";
