@@ -32,16 +32,16 @@ export type InstrumentQuoteResult = {
   provider: InstrumentProviderStatus;
 };
 
-const ecbSymbols: Record<string, { id: string; canonical: string }> = {
-  "EUR/USD": { id: "eur-usd", canonical: "EUR/USD" },
-  EURUSD: { id: "eur-usd", canonical: "EUR/USD" },
-  "EUR-USD": { id: "eur-usd", canonical: "EUR/USD" },
-  "GBP/USD": { id: "gbp-usd", canonical: "GBP/USD" },
-  GBPUSD: { id: "gbp-usd", canonical: "GBP/USD" },
-  "GBP-USD": { id: "gbp-usd", canonical: "GBP/USD" },
-  "USD/JPY": { id: "usd-jpy", canonical: "USD/JPY" },
-  USDJPY: { id: "usd-jpy", canonical: "USD/JPY" },
-  "USD-JPY": { id: "usd-jpy", canonical: "USD/JPY" },
+const ecbSymbols: Record<string, { id: string; canonical: string; quoteCurrency: string }> = {
+  "EUR/USD": { id: "eur-usd", canonical: "EUR/USD", quoteCurrency: "USD" },
+  EURUSD: { id: "eur-usd", canonical: "EUR/USD", quoteCurrency: "USD" },
+  "EUR-USD": { id: "eur-usd", canonical: "EUR/USD", quoteCurrency: "USD" },
+  "GBP/USD": { id: "gbp-usd", canonical: "GBP/USD", quoteCurrency: "USD" },
+  GBPUSD: { id: "gbp-usd", canonical: "GBP/USD", quoteCurrency: "USD" },
+  "GBP-USD": { id: "gbp-usd", canonical: "GBP/USD", quoteCurrency: "USD" },
+  "USD/JPY": { id: "usd-jpy", canonical: "USD/JPY", quoteCurrency: "JPY" },
+  USDJPY: { id: "usd-jpy", canonical: "USD/JPY", quoteCurrency: "JPY" },
+  "USD-JPY": { id: "usd-jpy", canonical: "USD/JPY", quoteCurrency: "JPY" },
 };
 
 function normalizeSymbol(symbol: string) {
@@ -88,7 +88,7 @@ async function getEcbInstrumentQuote(symbol: string): Promise<InstrumentQuoteRes
       assetClass: "fx",
       price: marketQuote.value,
       previousClose: marketQuote.previousValue,
-      currency: "USD",
+      currency: mapped.quoteCurrency,
       asOf: `${marketQuote.asOf}T00:00:00.000Z`,
       source: marketQuote.source,
       sourceUrl: marketQuote.sourceUrl,
