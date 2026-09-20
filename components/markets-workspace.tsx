@@ -129,12 +129,20 @@ export default function MarketsWorkspace() {
       else if (level === "professional") setMode("Professional");
       else if (level === "beginner") setMode("Beginner");
 
-      const mapped = (preferencesResult.data?.market_regions ?? [])
-        .map((item: string) => preferenceRegionMap[item.toLowerCase()])
-        .filter((item: Region | undefined): item is Region => Boolean(item));
+      const rawRegions = Array.isArray(
+        preferencesResult.data?.market_regions,
+      )
+        ? preferencesResult.data.market_regions
+        : [];
+
+      const mapped: Region[] = rawRegions.flatMap((item) => {
+        if (typeof item !== "string") return [];
+        const mappedRegion = preferenceRegionMap[item.toLowerCase()];
+        return mappedRegion ? [mappedRegion] : [];
+      });
 
       if (mapped.length) {
-        setPreferredRegions([...new Set(mapped)]);
+        setPreferredRegions(Array.from(new Set<Region>(mapped)));
         setRegion("My Markets");
       }
     }
