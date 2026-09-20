@@ -629,3 +629,15 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.news-filter-stack {
+  display:grid;
+  gap:14px;
+  margin:16px 0;
+}
+
+.news-filter-stack > div {
+  display:grid;
+  gap:8px;
+}
