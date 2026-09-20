@@ -20,6 +20,16 @@ type Message = {
   content: string;
 };
 
+type ProfessorSession = {
+  id: string;
+  lesson_slug: string | null;
+  mode: Mode;
+  language: "EN" | "FR";
+  title: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 const modes: Mode[] = ["Beginner", "Intermediate", "Professional"];
 
 const teachingActions: Array<{
@@ -90,6 +100,9 @@ export default function ProfessorLab() {
   const [connection, setConnection] = useState<"ready" | "live" | "error">("ready");
   const [error, setError] = useState("");
   const [personalized, setPersonalized] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [sessions, setSessions] = useState<ProfessorSession[]>([]);
+  const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     const stored = window.localStorage.getItem("finance-studio-level");
@@ -101,6 +114,10 @@ export default function ProfessorLab() {
   useEffect(() => {
     window.localStorage.setItem("finance-studio-level", mode);
   }, [mode]);
+
+  useEffect(() => {
+    void refreshSessions();
+  }, []);
 
   const modules = useMemo(
     () =>
@@ -126,6 +143,72 @@ export default function ProfessorLab() {
         : value === "Intermediate"
           ? "Intermédiaire"
           : "Professionnel";
+
+  async function refreshSessions() {
+    try {
+      const response = await fetch("/api/professor", { cache: "no-store" });
+      if (!response.ok) return;
+      const payload = (await response.json()) as {
+        authenticated?: boolean;
+        sessions?: ProfessorSession[];
+      };
+      setAuthenticated(Boolean(payload.authenticated));
+      setSessions(payload.sessions ?? []);
+    } catch {
+      // Session history is optional; the tutor remains usable for guests.
+    }
+  }
+
+  async function loadSession(nextSessionId: string) {
+    if (!nextSessionId || loading) return;
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch(
+        `/api/professor?sessionId=${encodeURIComponent(nextSessionId)}`,
+        { cache: "no-store" },
+      );
+      const payload = (await response.json()) as {
+        session?: ProfessorSession;
+        messages?: Message[];
+        error?: string;
+      };
+
+      if (!response.ok || !payload.session) {
+        throw new Error(
+          payload.error ||
+            text(
+              "This tutoring session could not be loaded.",
+              "Cette session de tutorat n’a pas pu être chargée.",
+            ),
+        );
+      }
+
+      setSessionId(payload.session.id);
+      setLessonSlug(payload.session.lesson_slug ?? "");
+      setMode(payload.session.mode);
+      setMessages(
+        (payload.messages ?? []).map((message) => ({
+          role: message.role,
+          content: message.content,
+        })),
+      );
+      setConnection("live");
+    } catch (cause) {
+      setError(
+        cause instanceof Error
+          ? cause.message
+          : text(
+              "This tutoring session could not be loaded.",
+              "Cette session de tutorat n’a pas pu être chargée.",
+            ),
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function askProfessor(
     action: TeachingAction = "explain",
@@ -163,6 +246,7 @@ export default function ProfessorLab() {
           lessonSlug: lessonSlug || null,
           action,
           history: previousHistory,
+          sessionId,
         }),
       });
 
@@ -170,6 +254,7 @@ export default function ProfessorLab() {
         answer?: string;
         error?: string;
         personalized?: boolean;
+        sessionId?: string | null;
       };
 
       if (!response.ok || !payload.answer) {
@@ -187,7 +272,9 @@ export default function ProfessorLab() {
         { role: "assistant", content: payload.answer! },
       ]);
       setPersonalized(Boolean(payload.personalized));
+      setSessionId(payload.sessionId ?? sessionId);
       setConnection("live");
+      void refreshSessions();
     } catch (cause) {
       setConnection("error");
       setError(
@@ -309,6 +396,39 @@ export default function ProfessorLab() {
               )}
             </p>
           )}
+
+          {authenticated && sessions.length > 0 ? (
+            <>
+              <label className="control-label" htmlFor="professor-session">
+                {text("RECENT TUTORING SESSIONS", "SESSIONS RÉCENTES")}
+              </label>
+              <select
+                id="professor-session"
+                value={sessionId ?? ""}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  if (value) void loadSession(value);
+                }}
+                disabled={loading}
+              >
+                <option value="">
+                  {text("Start a new session", "Commencer une nouvelle session")}
+                </option>
+                {sessions.map((session) => (
+                  <option value={session.id} key={session.id}>
+                    {session.title || text("Untitled session", "Session sans titre")}
+                  </option>
+                ))}
+              </select>
+            </>
+          ) : authenticated ? (
+            <p>
+              {text(
+                "Your future tutoring sessions will be saved here.",
+                "Tes prochaines sessions de tutorat seront sauvegardées ici.",
+              )}
+            </p>
+          ) : null}
         </div>
 
         <div className="professor-response-card">
@@ -367,6 +487,7 @@ export default function ProfessorLab() {
               className="chip"
               onClick={() => {
                 setMessages([]);
+                setSessionId(null);
                 setError("");
                 setPersonalized(false);
               }}
