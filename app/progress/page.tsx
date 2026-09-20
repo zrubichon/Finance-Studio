@@ -33,6 +33,8 @@ export default async function ProgressPage() {
   let conceptsMastered = 0;
   let interviewDrills = 0;
   let streak = 0;
+  let weeklyActions = 0;
+  let activeDays30 = 0;
   let masteryRows: {
     concept_key: string;
     mastery_score: number;
@@ -45,7 +47,7 @@ export default async function ProgressPage() {
       supabase.from("course_progress").select("lesson_slug,status,progress_percent").eq("user_id", user.id),
       supabase.from("concept_mastery").select("concept_key,mastery_score,attempts,next_review_at").eq("user_id", user.id),
       supabase.from("interview_attempts").select("id", { count: "exact", head: true }).eq("user_id", user.id),
-      supabase.from("user_activity_days").select("activity_date").eq("user_id", user.id).order("activity_date", { ascending: false }).limit(60),
+      supabase.from("user_activity_days").select("activity_date,activity_count").eq("user_id", user.id).order("activity_date", { ascending: false }).limit(60),
     ]);
     progressRows = progressResult.data ?? [];
     masteryRows = (masteryResult.data ?? []).map((row) => ({
@@ -56,7 +58,33 @@ export default async function ProgressPage() {
     }));
     conceptsMastered = masteryRows.filter((row) => row.mastery_score >= 70).length;
     interviewDrills = interviewResult.count ?? 0;
-    streak = calculateStreak((activityResult.data ?? []).map((row) => row.activity_date));
+
+    const activityRows = (activityResult.data ?? []).map((row) => ({
+      activity_date: row.activity_date,
+      activity_count: Number(row.activity_count ?? 0),
+    }));
+    streak = calculateStreak(activityRows.map((row) => row.activity_date));
+
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+    const sevenDayStart = new Date(today);
+    sevenDayStart.setUTCDate(sevenDayStart.getUTCDate() - 6);
+    const thirtyDayStart = new Date(today);
+    thirtyDayStart.setUTCDate(thirtyDayStart.getUTCDate() - 29);
+
+    weeklyActions = activityRows
+      .filter(
+        (row) =>
+          new Date(`${row.activity_date}T00:00:00Z`).getTime() >=
+          sevenDayStart.getTime(),
+      )
+      .reduce((sum, row) => sum + row.activity_count, 0);
+
+    activeDays30 = activityRows.filter(
+      (row) =>
+        new Date(`${row.activity_date}T00:00:00Z`).getTime() >=
+        thirtyDayStart.getTime(),
+    ).length;
   }
 
   const completedSlugs = new Set(
@@ -122,6 +150,8 @@ export default async function ProgressPage() {
     { label: t("Concepts mastered", "Concepts maîtrisés"), value: String(conceptsMastered), note: t("Mastery requires a score of 70 or above", "La maîtrise / mastery nécessite un score de 70 ou plus") },
     { label: t("Interview drills", "Entraînements entretien"), value: String(interviewDrills), note: t("Saved interview practice attempts", "Tentatives d’entretien / interview attempts enregistrées") },
     { label: t("Current streak", "Série actuelle / streak"), value: isFrench ? `${streak} jour${streak === 1 ? "" : "s"}` : `${streak} day${streak === 1 ? "" : "s"}`, note: t("Based on recorded learning activity", "Basé sur l’activité d’apprentissage enregistrée") },
+    { label: t("7-day activity", "Activité sur 7 jours"), value: String(weeklyActions), note: t("Saved study, interview, tutoring and investing actions", "Actions enregistrées : cours, entretien, tutorat et investissement") },
+    { label: t("Active days · 30d", "Jours actifs · 30 j"), value: String(activeDays30), note: t("Distinct days with meaningful FinanceStudio activity", "Jours distincts avec une activité FinanceStudio significative") },
   ];
 
   return (
