@@ -1,7 +1,10 @@
 import SectionLayout from "@/components/section-layout";
 import DictionaryExplorer from "@/components/dictionary-explorer";
+import { getDictionaryEntries } from "@/lib/dictionary-content";
 
 export default function DictionaryPage() {
+  const entries = getDictionaryEntries();
+
   return (
     <SectionLayout
       activeSlug="dictionary"
@@ -12,7 +15,7 @@ export default function DictionaryPage() {
         fr: "Chaque définition relie le terme français au terme anglais, aux formules, exemples, concepts associés, à son usage en entretien et à son contexte réel de marché.",
       }}
     >
-      <DictionaryExplorer />
+      <DictionaryExplorer entries={entries} />
     </SectionLayout>
   );
 }
