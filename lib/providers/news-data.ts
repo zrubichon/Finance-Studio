@@ -80,6 +80,13 @@ const categorySignals: Record<NewsCategory, string[]> = {
     "earnings",
     "revenue",
     "profit",
+    "margin",
+    "guidance",
+    "sales",
+    "valuation",
+    "stock",
+    "shares",
+    "share price",
     "merger",
     "acquisition",
     "acquire",
@@ -129,10 +136,24 @@ function normalizeGdeltDate(value: string | undefined) {
   return `${year}-${month}-${day}T${hour}:${minute}:${second}Z`;
 }
 
+function normalizeTitle(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function titleMatchesCategory(title: string, category: NewsCategory) {
   const normalized = ` ${title.toLowerCase()} `;
   return categorySignals[category].some((signal) =>
     normalized.includes(signal),
+  );
+}
+
+function titleMatchesAnyFinanceCategory(title: string) {
+  return (Object.keys(categorySignals) as NewsCategory[]).some((category) =>
+    titleMatchesCategory(title, category),
   );
 }
 
@@ -245,7 +266,7 @@ export async function getNewsData(
       });
     }
 
-    const allItems = [...unique.values()].sort((a, b) => {
+    const sortedItems = [...unique.values()].sort((a, b) => {
       if (a.sourceQuality !== b.sourceQuality) {
         return a.sourceQuality === "established" ? -1 : 1;
       }
@@ -253,19 +274,21 @@ export async function getNewsData(
       return b.publishedAt.localeCompare(a.publishedAt);
     });
 
-    const categoryItems = allItems.filter((item) =>
-      titleMatchesCategory(item.title, category),
-    );
+    const seenTitles = new Set<string>();
+    const allItems = sortedItems.filter((item) => {
+      const key = normalizeTitle(item.title);
+      if (!key || seenTitles.has(key)) return false;
+      seenTitles.add(key);
+      return true;
+    });
 
-    const items =
-      category === "markets"
-        ? [
-            ...categoryItems,
-            ...allItems.filter(
-              (item) => !categoryItems.some((match) => match.id === item.id),
-            ),
-          ].slice(0, 50)
-        : categoryItems.slice(0, 50);
+    const items = allItems
+      .filter((item) =>
+        category === "markets"
+          ? titleMatchesAnyFinanceCategory(item.title)
+          : titleMatchesCategory(item.title, category),
+      )
+      .slice(0, 50);
 
     return {
       category,
