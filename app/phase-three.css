@@ -183,6 +183,61 @@
   flex: 0 0 auto;
 }
 
+
+
+/* New interactive controls added during the product-completion pass. */
+.professor-demo-question select,
+.professor-response-card textarea,
+.thesis-form-panel > label > textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border, rgba(31, 90, 69, 0.18));
+  border-radius: 14px;
+  background: var(--surface, rgba(255, 255, 255, 0.6));
+  color: var(--text, #172019);
+  padding: 12px 13px;
+  font: inherit;
+  outline: none;
+}
+
+.professor-demo-question select {
+  margin: 7px 0 14px;
+}
+
+.professor-response-card form {
+  display: grid;
+  gap: 12px;
+}
+
+.professor-response-card textarea,
+.thesis-form-panel > label > textarea {
+  resize: vertical;
+}
+
+.professor-demo-question select:focus,
+.professor-response-card textarea:focus,
+.thesis-form-panel > label > textarea:focus {
+  border-color: var(--accent, #1f5a45);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent, #1f5a45) 12%, transparent);
+}
+
+.thesis-form-panel > label {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.related-row a {
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--surface);
+  font-size: 8px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
 @media (max-width: 760px) {
   .learning-account-strip,
   .answer-practice-actions,
