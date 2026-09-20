@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/components/language-provider";
+import { recordDailyActivity } from "@/lib/record-activity";
 import PaperTradingPanel from "@/components/paper-trading-panel";
 
 type Portfolio = {
@@ -243,6 +244,7 @@ export default function InvestingLab() {
       setInvalidation("");
       setDownside("");
       setPortfolioRisk("");
+      await recordDailyActivity(userId);
       setStatus(text(
         "Investment thesis saved to your private decision journal.",
         "Thèse d’investissement enregistrée dans ton journal privé de décision.",
@@ -289,6 +291,7 @@ export default function InvestingLab() {
       ]);
       setReviewingId(null);
       setReviewDraft("");
+      await recordDailyActivity(userId);
       setStatus(text(
         "Review saved. Your original thesis remains visible for comparison.",
         "Revue enregistrée. Ta thèse originale reste visible pour comparaison.",
