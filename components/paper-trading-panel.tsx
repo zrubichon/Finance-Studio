@@ -2,6 +2,7 @@
 
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
+import { recordDailyActivity } from "@/lib/record-activity";
 
 type AssetClass =
   | "equity"
@@ -309,6 +310,7 @@ export default function PaperTradingPanel({
         ),
       );
 
+      await recordDailyActivity();
       await loadSnapshot();
     } catch (error) {
       setStatus(
