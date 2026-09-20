@@ -144,6 +144,55 @@ export async function GET(request: NextRequest) {
     0,
   );
 
+  const snapshotDate = new Date().toISOString().slice(0, 10);
+
+  if (
+    fullCoverage &&
+    marketValue !== null &&
+    totalEquity !== null &&
+    totalPnl !== null &&
+    returnPercent !== null
+  ) {
+    await supabase
+      .from("paper_portfolio_snapshots")
+      .upsert(
+        {
+          user_id: user.id,
+          portfolio_id: portfolio.id,
+          snapshot_date: snapshotDate,
+          cash_balance: cashBalance,
+          market_value: marketValue,
+          total_equity: totalEquity,
+          total_pnl: totalPnl,
+          return_percent: returnPercent,
+          priced_positions: pricedPositions.length,
+          total_positions: pricedPositions.length,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "portfolio_id,snapshot_date" },
+      );
+  }
+
+  const { data: historyRows } = await supabase
+    .from("paper_portfolio_snapshots")
+    .select("snapshot_date,cash_balance,market_value,total_equity,total_pnl,return_percent,priced_positions,total_positions")
+    .eq("portfolio_id", portfolio.id)
+    .order("snapshot_date", { ascending: false })
+    .limit(30);
+
+  const history = (historyRows ?? [])
+    .map((row) => ({
+      snapshot_date: row.snapshot_date,
+      cash_balance: Number(row.cash_balance),
+      market_value: Number(row.market_value),
+      total_equity: Number(row.total_equity),
+      total_pnl: Number(row.total_pnl),
+      return_percent: Number(row.return_percent),
+      priced_positions: Number(row.priced_positions ?? 0),
+      total_positions: Number(row.total_positions ?? 0),
+    }))
+    .reverse();
+
   return NextResponse.json({
     portfolio: {
       ...portfolio,
@@ -164,6 +213,7 @@ export async function GET(request: NextRequest) {
       returnPercent,
       realizedPnl,
     },
+    history,
     attribution: (() => {
       const bySymbol = new Map<
         string,
