@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -61,6 +62,11 @@ export default function AuthForm() {
         {mode === "signup" && <label><span>{text("Name", "Nom")}</span><input autoComplete="name" onChange={(event) => setName(event.target.value)} placeholder={text("Your name", "Ton nom")} value={name} /></label>}
         <label><span>Email</span><input autoComplete="email" onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" type="email" value={email} /></label>
         <label><span>{text("Password", "Mot de passe")}</span><input autoComplete={mode === "signup" ? "new-password" : "current-password"} minLength={8} onChange={(event) => setPassword(event.target.value)} placeholder={text("At least 8 characters", "Au moins 8 caractères")} type="password" value={password} /></label>
+        {mode === "signin" && (
+          <Link className="account-inline-link" href="/forgot-password">
+            {text("Forgot password?", "Mot de passe oublié ?")}
+          </Link>
+        )}
         <button className="auth-submit" disabled={busy} type="submit">{busy ? text("Working…", "Traitement…") : mode === "signup" ? text("Create my FinanceStudio account", "Créer mon compte FinanceStudio") : text("Sign in to FinanceStudio", "Se connecter à FinanceStudio")}</button>
       </form>
 
