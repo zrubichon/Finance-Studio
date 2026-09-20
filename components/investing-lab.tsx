@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/components/language-provider";
+import PaperTradingPanel from "@/components/paper-trading-panel";
 
 type Portfolio = {
   id: string;
@@ -400,11 +401,18 @@ export default function InvestingLab() {
 
         <p className="inline-status">
           {text(
-            "These observations are reference data for learning. They are not treated as executable broker prices, so simulated execution remains disabled until suitable instrument-level feeds are connected.",
-            "Ces observations servent de données de référence pédagogiques. Elles ne sont pas considérées comme des prix exécutables de courtier ; l’exécution simulée reste donc désactivée jusqu’à la connexion de flux adaptés à chaque instrument.",
+            "These observations are educational reference data. Paper execution now uses a separate instrument-pricing check and is enabled only when FinanceStudio can verify a sufficiently recent provider price.",
+            "Ces observations sont des données de référence pédagogiques. L’exécution simulée utilise désormais une vérification de prix instrument par instrument et n’est activée que si FinanceStudio peut vérifier un prix fournisseur suffisamment récent.",
           )}
         </p>
       </section>
+
+      {portfolio && (
+        <PaperTradingPanel
+          portfolioId={portfolio.id}
+          onPositionCountChange={setPositionsCount}
+        />
+      )}
 
       <section className="thesis-form-panel">
         <div className="panel-heading">
@@ -647,13 +655,13 @@ export default function InvestingLab() {
         <div>
           <span className="mini-label">{text("NEXT INVESTING LAB LAYER", "PROCHAINE ÉTAPE DU LABORATOIRE")}</span>
           <h2>{text(
-            "Thesis → verified market coverage → paper position → attribution",
-            "Thèse → couverture marché vérifiée → position simulée → attribution",
+            "Thesis → verified price → paper trade → attribution",
+            "Thèse → prix vérifié → ordre simulé → attribution",
           )}</h2>
         </div>
         <p>{text(
-          "Paper execution stays disabled until FinanceStudio has suitable instrument-level prices. The journal and review process can advance now without fabricating performance.",
-          "L’exécution simulée reste désactivée tant que FinanceStudio ne dispose pas de prix adaptés à chaque instrument. Le journal et la revue peuvent avancer dès maintenant sans fabriquer de performance.",
+          "Paper execution is active for instruments with verified provider coverage. EUR/USD, GBP/USD and USD/JPY work from ECB reference rates today; broader assets automatically remain blocked until a configured provider can return a usable price.",
+          "L’exécution simulée est active pour les instruments disposant d’une couverture fournisseur vérifiée. EUR/USD, GBP/USD et USD/JPY fonctionnent aujourd’hui avec les taux de référence BCE / ECB ; les autres actifs restent automatiquement bloqués tant qu’un fournisseur configuré ne renvoie pas de prix exploitable.",
         )}</p>
       </section>
     </div>
