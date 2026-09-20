@@ -66,6 +66,17 @@ type Transaction = {
   created_at: string;
 };
 
+type PerformanceSnapshot = {
+  snapshot_date: string;
+  cash_balance: number;
+  market_value: number;
+  total_equity: number;
+  total_pnl: number;
+  return_percent: number;
+  priced_positions: number;
+  total_positions: number;
+};
+
 type Snapshot = {
   portfolio: {
     id: string;
@@ -86,6 +97,7 @@ type Snapshot = {
     returnPercent: number | null;
     realizedPnl: number;
   };
+  history: PerformanceSnapshot[];
   attribution: Attribution[];
 };
 
@@ -314,6 +326,19 @@ export default function PaperTradingPanel({
 
   const currency = snapshot?.portfolio.base_currency ?? "USD";
 
+  const history = snapshot?.history ?? [];
+  const historyReturns = history.map((item) => item.return_percent);
+  const historyMin = historyReturns.length ? Math.min(...historyReturns) : 0;
+  const historyMax = historyReturns.length ? Math.max(...historyReturns) : 0;
+  const historyRange = Math.max(historyMax - historyMin, 0.01);
+  const historyPolyline = history
+    .map((item, index) => {
+      const x = history.length <= 1 ? 50 : (index / (history.length - 1)) * 100;
+      const y = 50 - ((item.return_percent - historyMin) / historyRange) * 44;
+      return `${x.toFixed(2)},${y.toFixed(2)}`;
+    })
+    .join(" ");
+
   return (
     <section className="paper-trading-panel">
       <div className="panel-heading">
@@ -529,6 +554,70 @@ export default function PaperTradingPanel({
       </div>
 
       {status && <p className="inline-status" role="status">{status}</p>}
+
+      <div className="paper-book-card paper-history-card">
+        <div className="panel-heading">
+          <div>
+            <span className="mini-label">{text("PERFORMANCE HISTORY", "HISTORIQUE DE PERFORMANCE")}</span>
+            <h3>{text(
+              "Daily snapshots are saved only with complete verified price coverage",
+              "Les snapshots quotidiens sont enregistrés uniquement avec une couverture complète de prix vérifiés",
+            )}</h3>
+          </div>
+          <span className="connection-badge">
+            {history.length
+              ? isFrench
+                ? `${history.length} jour${history.length === 1 ? "" : "s"} enregistré${history.length === 1 ? "" : "s"}`
+                : `${history.length} day${history.length === 1 ? "" : "s"} recorded`
+              : text("No complete snapshot yet", "Aucun snapshot complet pour le moment")}
+          </span>
+        </div>
+
+        {history.length ? (
+          <div className="paper-history-layout">
+            <div className="paper-history-chart" aria-label={text("Paper portfolio performance history", "Historique de performance du portefeuille simulé")}>
+              {history.length > 1 ? (
+                <svg viewBox="0 0 100 54" preserveAspectRatio="none" role="img">
+                  <line x1="0" y1="50" x2="100" y2="50" />
+                  <polyline points={historyPolyline} />
+                </svg>
+              ) : (
+                <div className="paper-history-single">
+                  <strong>
+                    {history[0].return_percent > 0 ? "+" : ""}
+                    {history[0].return_percent.toFixed(2)}%
+                  </strong>
+                  <span>{text("First verified snapshot", "Premier snapshot vérifié")}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="paper-history-summary">
+              {history.slice(-3).reverse().map((item) => (
+                <article key={item.snapshot_date}>
+                  <span>
+                    {new Date(`${item.snapshot_date}T00:00:00Z`).toLocaleDateString(
+                      isFrench ? "fr-FR" : "en-US",
+                    )}
+                  </span>
+                  <strong>{money(item.total_equity, currency)}</strong>
+                  <small>
+                    {item.return_percent > 0 ? "+" : ""}
+                    {item.return_percent.toFixed(2)}% · {signed(item.total_pnl, currency)}
+                  </small>
+                </article>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p className="account-muted">
+            {text(
+              "The first snapshot will be created automatically when FinanceStudio can value every open position in the portfolio.",
+              "Le premier snapshot sera créé automatiquement lorsque FinanceStudio pourra valoriser toutes les positions ouvertes du portefeuille.",
+            )}
+          </p>
+        )}
+      </div>
 
       {snapshot?.attribution.length ? (
         <div className="paper-book-card paper-attribution-card">
