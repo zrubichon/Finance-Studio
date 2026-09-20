@@ -4,7 +4,7 @@ import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage, type Language } from "@/components/language-provider";
-import { interviewTracks, type Track } from "@/lib/interview-content";
+import { interviewTracks } from "@/lib/interview-content";
 
 type Level = "beginner" | "intermediate" | "professional";
 
