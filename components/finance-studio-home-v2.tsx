@@ -162,9 +162,12 @@ export default function FinanceStudioHomeV2() {
       ),
     );
 
-    const selectedQuotes = (marketData?.quotes ?? []).filter(
-      (quote) => allowedRegions.size === 0 || allowedRegions.has(quote.region),
-    );
+    const selectedQuotes = preferredMarketRegions.includes("global")
+      ? marketData?.quotes ?? []
+      : (marketData?.quotes ?? []).filter(
+          (quote) =>
+            allowedRegions.size === 0 || allowedRegions.has(quote.region),
+        );
 
     const groups = new Map<string, MarketQuote[]>();
     for (const quote of selectedQuotes) {
