@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
     portfolioQuery = portfolioQuery.eq("id", requestedId);
   }
 
-  const { data: portfolio } = await portfolioQuery
+  let { data: portfolio } = await portfolioQuery
     .order("created_at", { ascending: true })
     .limit(1)
     .maybeSingle();
