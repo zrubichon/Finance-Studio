@@ -42,7 +42,7 @@ export default function LanguageProvider({ children, initialLanguage = "EN" }: {
         if (!active) return;
 
         if (user) {
-          const { data } = await supabase
+          const { data, error } = await supabase
             .from("profiles")
             .select("preferred_language")
             .eq("user_id", user.id)
@@ -50,12 +50,25 @@ export default function LanguageProvider({ children, initialLanguage = "EN" }: {
 
           if (!active) return;
 
-          const accountLanguage: Language =
-            data?.preferred_language === "fr" ? "FR" : "EN";
-          setLanguageState(accountLanguage);
-          storeLanguage(accountLanguage);
+          if (
+            !error &&
+            (data?.preferred_language === "fr" ||
+              data?.preferred_language === "en")
+          ) {
+            const accountLanguage: Language =
+              data.preferred_language === "fr" ? "FR" : "EN";
+            setLanguageState(accountLanguage);
+            storeLanguage(accountLanguage);
 
-          if (accountLanguage !== initialLanguage) router.refresh();
+            if (accountLanguage !== initialLanguage) router.refresh();
+            return;
+          }
+
+          if (saved === "EN" || saved === "FR") {
+            setLanguageState(saved);
+            storeLanguage(saved);
+            if (saved !== initialLanguage) router.refresh();
+          }
           return;
         }
 
