@@ -667,8 +667,8 @@ export default function InvestingLab() {
           )}</h2>
         </div>
         <p>{text(
-          "Paper execution is active for instruments with verified provider coverage. EUR/USD, GBP/USD and USD/JPY work from ECB reference rates today; broader assets automatically remain blocked until a configured provider can return a usable price.",
-          "L’exécution simulée est active pour les instruments disposant d’une couverture fournisseur vérifiée. EUR/USD, GBP/USD et USD/JPY fonctionnent aujourd’hui avec les taux de référence BCE / ECB ; les autres actifs restent automatiquement bloqués tant qu’un fournisseur configuré ne renvoie pas de prix exploitable.",
+          "Paper execution is active only after a fresh server-side provider check. EUR/USD and GBP/USD can execute from ECB reference rates in the USD portfolio; USD/JPY can be quoted but stays blocked until JPY-to-USD conversion is supported. Broader assets remain blocked until Twelve Data is configured for the secure execution service.",
+          "L’exécution simulée n’est active qu’après une vérification serveur d’un prix fournisseur suffisamment récent. EUR/USD et GBP/USD peuvent être exécutés avec les taux de référence BCE / ECB dans le portefeuille en USD ; USD/JPY peut être coté mais reste bloqué tant que la conversion JPY vers USD n’est pas prise en charge. Les autres actifs restent bloqués tant que Twelve Data n’est pas configuré pour le service d’exécution sécurisé.",
         )}</p>
       </section>
     </div>
