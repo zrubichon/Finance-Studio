@@ -112,12 +112,26 @@ Use bullets where useful. SCORE must be an integer 0-100.`;
     return NextResponse.json({ score, feedback: result.text, saved, model: MODEL });
   } catch (error) {
     console.error("Interview evaluation failed", error);
+
+    const gatewayMessage =
+      error instanceof Error ? error.message.toLowerCase() : "";
+    const billingRequired =
+      gatewayMessage.includes("valid credit card") ||
+      gatewayMessage.includes("add a card") ||
+      gatewayMessage.includes("unlock your free credits");
+
     return NextResponse.json(
       {
-        error: language === "FR"
-          ? "L’évaluation IA est prête mais la connexion AI Gateway n’est pas disponible."
-          : "AI evaluation is ready but the AI Gateway connection is not available.",
-        code: "AI_GATEWAY_UNAVAILABLE",
+        error: billingRequired
+          ? language === "FR"
+            ? "Interview Studio est prêt, mais AI Gateway doit encore être activé dans Vercel avec un moyen de paiement valide pour débloquer les crédits IA."
+            : "Interview Studio is ready, but AI Gateway still needs a valid payment method in Vercel to unlock AI credits."
+          : language === "FR"
+            ? "L’évaluation IA n’est pas disponible pour le moment. Ta réponse reste dans l’éditeur et tu peux réessayer lorsque la connexion AI Gateway est active."
+            : "AI evaluation is not available right now. Your answer remains in the editor and you can retry when the AI Gateway connection is active.",
+        code: billingRequired
+          ? "AI_GATEWAY_BILLING_REQUIRED"
+          : "AI_GATEWAY_UNAVAILABLE",
       },
       { status: 503 },
     );
