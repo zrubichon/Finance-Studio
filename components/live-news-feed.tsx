@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { createClient } from "@/lib/supabase/client";
 import { recordDailyActivity } from "@/lib/record-activity";
+import { useSavedItems } from "@/lib/use-saved-items";
 
 type Category = "markets" | "macro" | "central-banks" | "companies";
 type NewsRegion =
@@ -193,6 +194,12 @@ export default function LiveNewsFeed() {
   const [payload, setPayload] = useState<NewsPayload | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const {
+    authenticated: canSaveNews,
+    isSaved: isNewsSaved,
+    savingKey: savingNewsKey,
+    toggleSaved: toggleNewsSaved,
+  } = useSavedItems("news");
 
   useEffect(() => {
     let active = true;
@@ -448,19 +455,50 @@ export default function LiveNewsFeed() {
                       : ""}
                     {item.sourceCountry ? ` · ${item.sourceCountry}` : ""}
                   </p>
-                  <a
-                    href={item.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="module-open-link"
-                    onClick={() => void recordDailyActivity()}
-                  >
-                    {text(
-                      "Open original reporting",
-                      "Ouvrir le reporting original",
-                    )}{" "}
-                    ↗
-                  </a>
+                  <div className="news-item-actions">
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="module-open-link"
+                      onClick={() => void recordDailyActivity()}
+                    >
+                      {text(
+                        "Open original reporting",
+                        "Ouvrir le reporting original",
+                      )}{" "}
+                      ↗
+                    </a>
+                    <button
+                      type="button"
+                      className="save-item-button compact"
+                      aria-pressed={isNewsSaved(item.id)}
+                      disabled={savingNewsKey === item.id}
+                      onClick={() =>
+                        void toggleNewsSaved(item.id, {
+                          title: item.title,
+                          titleEn: item.title,
+                          titleFr: item.title,
+                          subtitleEn: item.domain,
+                          subtitleFr: item.domain,
+                          href: item.url,
+                          source: item.domain || "External reporting",
+                          publishedAt: item.publishedAt,
+                        })
+                      }
+                    >
+                      <span aria-hidden="true">
+                        {isNewsSaved(item.id) ? "★" : "☆"}
+                      </span>
+                      {savingNewsKey === item.id
+                        ? text("Saving…", "Enregistrement…")
+                        : isNewsSaved(item.id)
+                          ? text("Saved", "Enregistré")
+                          : canSaveNews
+                            ? text("Save", "Enregistrer")
+                            : text("Sign in", "Se connecter")}
+                    </button>
+                  </div>
                 </div>
               </article>
             ))}
