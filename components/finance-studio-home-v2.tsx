@@ -113,6 +113,7 @@ export default function FinanceStudioHomeV2() {
   const [today, setToday] = useState("");
   const [userId, setUserId] = useState<string | null>(null);
   const [completedSlugs, setCompletedSlugs] = useState<string[]>([]);
+  const [accountProgressAvailable, setAccountProgressAvailable] = useState(true);
   const [targetRole, setTargetRole] = useState("");
   const [preferredMarketRegions, setPreferredMarketRegions] = useState<string[]>([
     "global",
@@ -233,12 +234,20 @@ export default function FinanceStudioHomeV2() {
         );
       }
 
-      setTargetRole(profileResult.data?.target_role ?? "");
-      setCompletedSlugs(
-        (progressResult.data ?? [])
-          .filter((row) => row.status === "completed")
-          .map((row) => row.lesson_slug),
-      );
+      if (!profileResult.error) {
+        setTargetRole(profileResult.data?.target_role ?? "");
+      }
+
+      if (progressResult.error) {
+        setAccountProgressAvailable(false);
+      } else {
+        setAccountProgressAvailable(true);
+        setCompletedSlugs(
+          (progressResult.data ?? [])
+            .filter((row) => row.status === "completed")
+            .map((row) => row.lesson_slug),
+        );
+      }
     }
 
     void hydrateAccount();
@@ -341,13 +350,20 @@ export default function FinanceStudioHomeV2() {
 
         <div className="sidebar-bottom">
           <div className="progress-ring" aria-label={text("Curriculum progress", "Progression du programme")}>
-            <span>{progressPercent}%</span>
+            <span>{userId && !accountProgressAvailable ? "—" : `${progressPercent}%`}</span>
           </div>
           <div>
             <strong>{text("Finance University", "Université de Finance")}</strong>
             <p>
               {userId
-                ? (isFrench ? `${completedCount}/${modules.length} cours terminés` : `${completedCount}/${modules.length} lessons completed`)
+                ? accountProgressAvailable
+                  ? isFrench
+                    ? `${completedCount}/${modules.length} cours terminés`
+                    : `${completedCount}/${modules.length} lessons completed`
+                  : text(
+                      "Saved progress unavailable",
+                      "Progression enregistrée indisponible",
+                    )
                 : text("Sign in to sync progress", "Connecte-toi pour synchroniser")}
             </p>
           </div>
@@ -554,17 +570,33 @@ export default function FinanceStudioHomeV2() {
               <div>
                 <span className="eyebrow">{text("YOUR FINANCE PATH", "TON PARCOURS FINANCE")}</span>
                 <h2>
-                  {nextModule
-                    ? (isFrench ? `${nextModule.year.replace("Year", "Année")} · ${nextModule.titleFr}` : `${nextModule.year} · ${nextModule.title}`)
-                    : text("48/48 · Curriculum complete", "48/48 · Programme terminé")}
+                  {userId && !accountProgressAvailable
+                    ? text(
+                        "Saved progress temporarily unavailable",
+                        "Progression enregistrée temporairement indisponible",
+                      )
+                    : nextModule
+                      ? (isFrench ? `${nextModule.year.replace("Year", "Année")} · ${nextModule.titleFr}` : `${nextModule.year} · ${nextModule.title}`)
+                      : text("48/48 · Curriculum complete", "48/48 · Programme terminé")}
                 </h2>
               </div>
-              <span className="pill">{progressPercent}%</span>
+              <span className="pill">
+                {userId && !accountProgressAvailable ? "—" : `${progressPercent}%`}
+              </span>
             </div>
 
-            <div className="course-progress"><span style={{ width: `${progressPercent}%` }} /></div>
+            {userId && !accountProgressAvailable ? (
+              <p className="account-muted">
+                {text(
+                  "FinanceStudio cannot read your saved course progress right now, so it is not guessing your next lesson.",
+                  "FinanceStudio ne peut pas lire ta progression enregistrée pour le moment ; il ne devine donc pas ton prochain cours.",
+                )}
+              </p>
+            ) : (
+              <>
+                <div className="course-progress"><span style={{ width: `${progressPercent}%` }} /></div>
 
-            <div className="lesson-list">
+                <div className="lesson-list">
               {learningPreview.map((module, index) => {
                 const complete = completedSet.has(module.slug);
                 return (
@@ -583,7 +615,9 @@ export default function FinanceStudioHomeV2() {
                   </div>
                 );
               })}
-            </div>
+                </div>
+              </>
+            )}
 
             <Link href="/university">{text("View curriculum", "Voir le programme")} →</Link>
           </article>
