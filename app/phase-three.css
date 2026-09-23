@@ -641,3 +641,371 @@
   display:grid;
   gap:8px;
 }
+
+
+.live-journal-panel {
+  overflow:hidden;
+}
+
+.journal-status-row {
+  margin:18px 0;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+
+.journal-status-row > div {
+  padding:13px 14px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:color-mix(in srgb,var(--surface-2) 55%,transparent);
+}
+
+.journal-status-row span,
+.journal-status-row strong {
+  display:block;
+}
+
+.journal-status-row span {
+  color:var(--muted);
+  font-size:8px;
+  font-weight:800;
+}
+
+.journal-status-row strong {
+  margin-top:5px;
+  font:500 22px Georgia,"Times New Roman",serif;
+}
+
+.journal-refresh-note {
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  align-items:center;
+  margin:14px 0 0;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--surface-2);
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.45;
+}
+
+.journal-refresh-note strong {
+  color:var(--ink);
+  font-size:8px;
+}
+
+.decision-watch-panel {
+  margin-top:22px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:color-mix(in srgb,var(--accent) 4%,var(--surface));
+}
+
+.decision-watch-head {
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:flex-start;
+}
+
+.decision-watch-head h3 {
+  margin:6px 0 0;
+  max-width:760px;
+  font:500 20px/1.2 Georgia,"Times New Roman",serif;
+}
+
+.decision-watch-head > span {
+  flex:none;
+  color:var(--muted);
+  font-size:8px;
+  font-weight:800;
+}
+
+.decision-watch-grid {
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+
+.decision-watch-grid article {
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--surface);
+}
+
+.decision-watch-grid article > span {
+  color:var(--accent);
+  font-size:8px;
+  font-weight:900;
+}
+
+.decision-watch-grid strong {
+  display:block;
+  margin:7px 0;
+  font-size:10px;
+  line-height:1.4;
+}
+
+.decision-watch-grid p {
+  margin:0;
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.5;
+}
+
+.news-timeline {
+  margin-top:24px;
+  display:grid;
+  gap:24px;
+}
+
+.news-timeline-day {
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:18px;
+  align-items:start;
+}
+
+.news-day-heading {
+  position:sticky;
+  top:18px;
+  padding:13px 0;
+}
+
+.news-day-heading h3 {
+  margin:7px 0 8px;
+  font:500 20px/1.15 Georgia,"Times New Roman",serif;
+}
+
+.news-day-heading > span {
+  color:var(--muted);
+  font-size:8px;
+  font-weight:800;
+}
+
+.news-intelligence-stack {
+  display:grid;
+  gap:12px;
+}
+
+.news-intelligence-card {
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+}
+
+.news-intelligence-card > h3 {
+  margin:13px 0 6px;
+  max-width:920px;
+  font:500 23px/1.16 Georgia,"Times New Roman",serif;
+  letter-spacing:-.02em;
+}
+
+.news-intelligence-meta {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+}
+
+.news-intelligence-meta > div {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+.news-intelligence-meta strong {
+  font-size:9px;
+}
+
+.breaking-badge,
+.source-quality-badge,
+.news-topic-row span {
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  padding:4px 7px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:7px;
+  font-weight:850;
+}
+
+.breaking-badge {
+  background:var(--ink);
+  color:var(--surface);
+  border-color:var(--ink);
+}
+
+.source-quality-badge {
+  color:var(--muted);
+  background:var(--surface-2);
+}
+
+.source-quality-badge.established {
+  color:var(--accent);
+  border-color:color-mix(in srgb,var(--accent) 35%,var(--line));
+  background:color-mix(in srgb,var(--accent) 7%,var(--surface));
+}
+
+.news-topic-row span {
+  background:var(--surface-2);
+  color:var(--muted);
+}
+
+.news-source-line {
+  margin:0;
+  color:var(--muted);
+  font-size:8px;
+}
+
+.finance-lens-header {
+  margin-top:17px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+}
+
+.finance-lens-header strong {
+  color:var(--accent);
+  font-size:10px;
+}
+
+.news-insight-grid {
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+
+.news-insight-grid > div {
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:color-mix(in srgb,var(--surface-2) 52%,transparent);
+}
+
+.insight-label {
+  display:block;
+  margin-bottom:7px;
+  color:var(--muted);
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.1em;
+}
+
+.news-insight-grid p,
+.news-insight-grid ul {
+  margin:0;
+  color:var(--ink);
+  font-size:9px;
+  line-height:1.55;
+}
+
+.news-insight-grid ul {
+  padding-left:16px;
+}
+
+.news-insight-grid li + li {
+  margin-top:5px;
+}
+
+.asset-watch-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+}
+
+.asset-watch-row span {
+  padding:5px 7px;
+  border-radius:999px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  color:var(--muted);
+  font-size:7px;
+  font-weight:800;
+}
+
+.scenario-discipline {
+  margin-top:8px;
+  padding:12px 13px;
+  border-left:3px solid var(--accent);
+  border-radius:10px;
+  background:color-mix(in srgb,var(--accent) 5%,var(--surface));
+}
+
+.scenario-discipline span {
+  color:var(--accent);
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.1em;
+}
+
+.scenario-discipline p {
+  margin:5px 0 0;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.5;
+}
+
+.headline-analysis-note {
+  margin:9px 0 0;
+  color:var(--muted);
+  font-size:7px;
+  line-height:1.45;
+}
+
+@media (max-width:1100px) {
+  .journal-status-row {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .news-timeline-day {
+    grid-template-columns:120px 1fr;
+  }
+}
+
+@media (max-width:760px) {
+  .journal-status-row,
+  .decision-watch-grid,
+  .news-insight-grid {
+    grid-template-columns:1fr;
+  }
+
+  .journal-refresh-note,
+  .decision-watch-head,
+  .news-intelligence-meta,
+  .finance-lens-header {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .news-timeline-day {
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+
+  .news-day-heading {
+    position:static;
+  }
+
+  .news-intelligence-card {
+    padding:16px;
+  }
+
+  .news-intelligence-card > h3 {
+    font-size:20px;
+  }
+}
