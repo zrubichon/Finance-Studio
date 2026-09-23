@@ -311,7 +311,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
           <h1>{loc(lesson.title)}</h1>
           <p>{loc(lesson.subtitle)}</p>
         </div>
-        <div className="lesson-hero-save">
+        <div className="lesson-hero-meta">
           <SaveItemButton
             itemType="lesson"
             itemKey={lesson.slug}
@@ -324,8 +324,6 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
               source: "Finance University",
             }}
           />
-        </div>
-        <div className="lesson-hero-meta">
           <div><span>{text("Estimated time", "Temps estimé")}</span><strong>{loc(lesson.duration)}</strong></div>
           <div><span>{text("Saved progress", "Progression enregistrée")}</span><strong>{userId ? `${Math.max(savedProgress.progress_percent, savedProgress.status === "completed" ? 100 : 0)}%` : text("Guest", "Invité")}</strong></div>
           <div><span>{text("Completion rule", "Règle de complétion")}</span><strong>{text("70% quiz", "70 % au quiz")}</strong></div>
