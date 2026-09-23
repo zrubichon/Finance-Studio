@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/components/language-provider";
@@ -17,6 +17,28 @@ export default function AuthForm() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    const errorCode = new URLSearchParams(window.location.search).get("error");
+    if (!errorCode) return;
+
+    setMessage(
+      errorCode === "missing_code"
+        ? text(
+            "This sign-in or confirmation link is incomplete. Request a new link or sign in again.",
+            "Ce lien de connexion ou de confirmation est incomplet. Demande un nouveau lien ou reconnecte-toi.",
+          )
+        : errorCode === "auth_configuration"
+          ? text(
+              "Authentication could not be completed because of a temporary configuration issue.",
+              "L’authentification n’a pas pu être terminée à cause d’un problème temporaire de configuration.",
+            )
+          : text(
+              "This authentication link could not be completed. It may be expired; try signing in again or request a new link.",
+              "Ce lien d’authentification n’a pas pu être utilisé. Il est peut-être expiré ; reconnecte-toi ou demande un nouveau lien.",
+            ),
+    );
+  }, [text]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
