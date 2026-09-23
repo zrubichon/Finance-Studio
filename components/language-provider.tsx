@@ -29,32 +29,56 @@ export default function LanguageProvider({ children, initialLanguage = "EN" }: {
     let active = true;
 
     async function hydrateLanguage() {
-      const saved = window.localStorage.getItem("finance-studio-language") as Language | null;
-      if (saved === "EN" || saved === "FR") {
-        if (!active) return;
-        setLanguageState(saved);
-        storeLanguage(saved);
-        if (saved !== initialLanguage) router.refresh();
-        return;
-      }
+      const saved = window.localStorage.getItem(
+        "finance-studio-language",
+      ) as Language | null;
 
       try {
         const supabase = createClient();
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user || !active) return;
-        const { data } = await supabase.from("profiles").select("preferred_language").eq("user_id", user.id).maybeSingle();
-        const accountLanguage: Language = data?.preferred_language === "fr" ? "FR" : "EN";
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
         if (!active) return;
-        setLanguageState(accountLanguage);
-        storeLanguage(accountLanguage);
-        if (accountLanguage !== initialLanguage) router.refresh();
+
+        if (user) {
+          const { data } = await supabase
+            .from("profiles")
+            .select("preferred_language")
+            .eq("user_id", user.id)
+            .maybeSingle();
+
+          if (!active) return;
+
+          const accountLanguage: Language =
+            data?.preferred_language === "fr" ? "FR" : "EN";
+          setLanguageState(accountLanguage);
+          storeLanguage(accountLanguage);
+
+          if (accountLanguage !== initialLanguage) router.refresh();
+          return;
+        }
+
+        if (saved === "EN" || saved === "FR") {
+          setLanguageState(saved);
+          storeLanguage(saved);
+          if (saved !== initialLanguage) router.refresh();
+        }
       } catch {
-        // Keep the server-provided language if account hydration is unavailable.
+        if (!active) return;
+
+        if (saved === "EN" || saved === "FR") {
+          setLanguageState(saved);
+          storeLanguage(saved);
+          if (saved !== initialLanguage) router.refresh();
+        }
       }
     }
 
     void hydrateLanguage();
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, [initialLanguage, router]);
 
   const setLanguage = useCallback((next: Language) => {
