@@ -402,7 +402,12 @@ Deno.serve(async (req: Request) => {
     return response(400, { error: "Invalid JSON request.", code: "INVALID_JSON" });
   }
 
-  const action = body.action === "ensure_portfolio" ? "ensure_portfolio" : "trade";
+  const action =
+    body.action === "ensure_portfolio"
+      ? "ensure_portfolio"
+      : body.action === "refresh_snapshot"
+        ? "refresh_snapshot"
+        : "trade";
 
   try {
     if (action === "ensure_portfolio") {
@@ -414,6 +419,112 @@ Deno.serve(async (req: Request) => {
         });
       }
       return response(200, { portfolio });
+    }
+
+    if (action === "refresh_snapshot") {
+      const requestedPortfolioId =
+        typeof body.portfolioId === "string" ? body.portfolioId.trim() : "";
+      const portfolio = await findPortfolio(
+        user.id,
+        requestedPortfolioId || undefined,
+      );
+
+      if (!portfolio) {
+        return response(404, {
+          error: "Paper portfolio not found.",
+          code: "PORTFOLIO_NOT_FOUND",
+        });
+      }
+
+      const positionsResult = await adminFetch(
+        `/rest/v1/paper_positions?portfolio_id=eq.${encodeURIComponent(String(portfolio.id))}&select=symbol,asset_class,quantity,average_cost`,
+      );
+
+      if (!positionsResult.ok) {
+        throw new Error(
+          `Position lookup failed: ${positionsResult.status}`,
+        );
+      }
+
+      const positions = (await positionsResult.json()) as Array<{
+        symbol: string;
+        asset_class: AssetClass;
+        quantity: string | number;
+        average_cost: string | number | null;
+      }>;
+
+      const baseCurrency = String(portfolio.base_currency ?? "USD");
+      let marketValue = 0;
+      let fullCoverage = true;
+
+      for (const position of positions) {
+        if (!assetClasses.has(position.asset_class)) {
+          fullCoverage = false;
+          break;
+        }
+
+        const pricing = await getQuote(position.symbol, position.asset_class);
+        if (
+          !pricing.quote ||
+          (pricing.quote.currency &&
+            pricing.quote.currency !== baseCurrency)
+        ) {
+          fullCoverage = false;
+          break;
+        }
+
+        marketValue +=
+          Number(position.quantity) * Number(pricing.quote.price);
+      }
+
+      if (!fullCoverage) {
+        return response(200, {
+          snapshotWritten: false,
+          reason: "INCOMPLETE_PRICE_COVERAGE",
+        });
+      }
+
+      const cashBalance = Number(portfolio.cash_balance);
+      const startingCash = Number(portfolio.starting_cash);
+      const totalEquity = cashBalance + marketValue;
+      const totalPnl = totalEquity - startingCash;
+      const returnPercent =
+        startingCash === 0 ? 0 : (totalPnl / startingCash) * 100;
+      const snapshotDate = new Date().toISOString().slice(0, 10);
+
+      const snapshotResult = await adminFetch(
+        "/rest/v1/paper_portfolio_snapshots?on_conflict=portfolio_id,snapshot_date",
+        {
+          method: "POST",
+          headers: {
+            Prefer: "resolution=merge-duplicates,return=minimal",
+          },
+          body: JSON.stringify({
+            user_id: user.id,
+            portfolio_id: portfolio.id,
+            snapshot_date: snapshotDate,
+            cash_balance: cashBalance,
+            market_value: marketValue,
+            total_equity: totalEquity,
+            total_pnl: totalPnl,
+            return_percent: returnPercent,
+            priced_positions: positions.length,
+            total_positions: positions.length,
+            updated_at: new Date().toISOString(),
+          }),
+        },
+      );
+
+      if (!snapshotResult.ok) {
+        throw new Error(
+          `Snapshot write failed: ${snapshotResult.status}`,
+        );
+      }
+
+      return response(200, {
+        snapshotWritten: true,
+        snapshotDate,
+      });
     }
 
     const portfolioId =
