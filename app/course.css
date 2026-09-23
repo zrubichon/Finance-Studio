@@ -1014,3 +1014,8 @@
     flex-direction: column;
   }
 }
+
+
+.lesson-hero-meta > .save-item-button {
+  width:100%;
+}
