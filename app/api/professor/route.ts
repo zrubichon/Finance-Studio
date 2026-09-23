@@ -342,22 +342,6 @@ export async function POST(request: NextRequest) {
         sessionId = existingSession?.id ?? null;
       }
 
-      if (!sessionId) {
-        const { data: createdSession } = await supabase
-          .from("professor_sessions")
-          .insert({
-            user_id: user.id,
-            lesson_slug: lessonSlug,
-            mode,
-            language,
-            title: message.slice(0, 90),
-          })
-          .select("id")
-          .single();
-
-        sessionId = createdSession?.id ?? null;
-      }
-
       if (sessionId) {
         const { data: storedMessages } = await supabase
           .from("professor_messages")
@@ -373,25 +357,6 @@ export async function POST(request: NextRequest) {
             role: row.role === "assistant" ? "assistant" : "user",
             content: cleanText(row.content, 3000),
           }));
-
-        await Promise.all([
-          supabase.from("professor_messages").insert({
-            session_id: sessionId,
-            user_id: user.id,
-            role: "user",
-            content: message,
-          }),
-          supabase
-            .from("professor_sessions")
-            .update({
-              lesson_slug: lessonSlug,
-              mode,
-              language,
-              updated_at: new Date().toISOString(),
-            })
-            .eq("user_id", user.id)
-            .eq("id", sessionId),
-        ]);
       }
 
       const [profileResult, progressResult, masteryResult] = await Promise.all([
@@ -493,21 +458,50 @@ export async function POST(request: NextRequest) {
       providerOptions,
     });
 
-    if (userId && sessionId && supabase) {
-      await Promise.all([
-        supabase.from("professor_messages").insert({
-          session_id: sessionId,
-          user_id: userId,
-          role: "assistant",
-          content: result.text.slice(0, 12000),
-          model: MODEL,
-        }),
-        supabase
+    if (userId && supabase) {
+      if (!sessionId) {
+        const { data: createdSession } = await supabase
           .from("professor_sessions")
-          .update({ updated_at: new Date().toISOString() })
-          .eq("user_id", userId)
-          .eq("id", sessionId),
-      ]);
+          .insert({
+            user_id: userId,
+            lesson_slug: lessonSlug,
+            mode,
+            language,
+            title: message.slice(0, 90),
+          })
+          .select("id")
+          .single();
+
+        sessionId = createdSession?.id ?? null;
+      }
+
+      if (sessionId) {
+        await Promise.all([
+          supabase.from("professor_messages").insert({
+            session_id: sessionId,
+            user_id: userId,
+            role: "user",
+            content: message,
+          }),
+          supabase.from("professor_messages").insert({
+            session_id: sessionId,
+            user_id: userId,
+            role: "assistant",
+            content: result.text.slice(0, 12000),
+            model: MODEL,
+          }),
+          supabase
+            .from("professor_sessions")
+            .update({
+              lesson_slug: lessonSlug,
+              mode,
+              language,
+              updated_at: new Date().toISOString(),
+            })
+            .eq("user_id", userId)
+            .eq("id", sessionId),
+        ]);
+      }
     }
 
     return NextResponse.json({
