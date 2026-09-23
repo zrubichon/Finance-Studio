@@ -35,7 +35,7 @@ export type NewsItem = {
   sourceCountry: string;
   language: string;
   imageUrl: string | null;
-  sourceQuality: "established" | "external";
+  sourceQuality: "primary" | "established" | "external";
   topics: Exclude<NewsCategory, "all">[];
   insight: NewsInsight;
 };
@@ -45,7 +45,7 @@ export type NewsDataResponse = {
   updatedAt: string;
   items: NewsItem[];
   provider: {
-    id: "gdelt";
+    id: "archive" | "gdelt";
     label: string;
     status: "live" | "empty" | "error";
     message: string;
@@ -655,7 +655,7 @@ type ArchivedNewsRow = {
   source_country: string;
   source_language: string;
   image_url: string | null;
-  source_quality: "established" | "external";
+  source_quality: "primary" | "established" | "external";
   topics: string[];
   source_seen_at: string;
   last_seen_at: string;
@@ -745,8 +745,8 @@ async function getArchivedNewsData(category: NewsCategory) {
         updatedAt: latestIngestedAt ?? new Date().toISOString(),
         items,
         provider: {
-          id: "gdelt" as const,
-          label: "GDELT · FinanceStudio hourly archive",
+          id: "archive" as const,
+          label: "FinanceStudio multi-source hourly archive",
           status: items.length ? ("live" as const) : ("empty" as const),
           message: items.length
             ? `${items.length} archived stories loaded from FinanceStudio's persistent hourly journal.`
@@ -905,11 +905,11 @@ export async function getNewsData(
     updatedAt: new Date().toISOString(),
     items: [],
     provider: {
-      id: "gdelt",
-      label: "GDELT · FinanceStudio hourly archive",
+      id: "archive",
+      label: "FinanceStudio multi-source hourly archive",
       status: "error",
       message:
-        "The persistent archive is active but has not completed a successful source ingestion yet. The external provider is currently rate-limited, and FinanceStudio will not generate synthetic headlines.",
+        "The persistent multi-source archive is active but has not completed a successful ingestion yet. FinanceStudio will not generate synthetic headlines when upstream sources are unavailable.",
     },
   };
 }
