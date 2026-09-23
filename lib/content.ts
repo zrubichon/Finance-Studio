@@ -7,6 +7,7 @@ export const navItems = [
   { slug: "investing", label: "Investing Lab", labelFr: "Laboratoire d’Investissement", icon: "△" },
   { slug: "professor", label: "AI Professor", labelFr: "Professeur IA", icon: "✦" },
   { slug: "dictionary", label: "Dictionary", labelFr: "Dictionnaire", icon: "Aa" },
+  { slug: "saved", label: "My Library", labelFr: "Ma Bibliothèque", icon: "★" },
   { slug: "progress", label: "Progress", labelFr: "Progression", icon: "◔" },
   { slug: "themes", label: "Theme Studio", labelFr: "Studio de Thèmes", icon: "◉" },
 ] as const;
