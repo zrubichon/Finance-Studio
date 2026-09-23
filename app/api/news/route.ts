@@ -5,7 +5,7 @@ import {
   type NewsCategory,
 } from "@/lib/providers/news-data";
 
-export const revalidate = 900;
+export const revalidate = 300;
 
 export async function GET(request: NextRequest) {
   const requested = request.nextUrl.searchParams.get("category");
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json(data, {
     headers: {
-      "Cache-Control": "public, s-maxage=900, stale-while-revalidate=1800",
+      "Cache-Control": "public, s-maxage=300, stale-while-revalidate=900",
     },
   });
 }
