@@ -201,8 +201,6 @@ export async function GET(request: NextRequest) {
     0,
   );
 
-  const snapshotDate = new Date().toISOString().slice(0, 10);
-
   if (
     fullCoverage &&
     marketValue !== null &&
@@ -210,24 +208,19 @@ export async function GET(request: NextRequest) {
     totalPnl !== null &&
     returnPercent !== null
   ) {
-    await supabase
-      .from("paper_portfolio_snapshots")
-      .upsert(
-        {
-          user_id: user.id,
-          portfolio_id: portfolio.id,
-          snapshot_date: snapshotDate,
-          cash_balance: cashBalance,
-          market_value: marketValue,
-          total_equity: totalEquity,
-          total_pnl: totalPnl,
-          return_percent: returnPercent,
-          priced_positions: pricedPositions.length,
-          total_positions: pricedPositions.length,
-          updated_at: new Date().toISOString(),
-        },
-        { onConflict: "portfolio_id,snapshot_date" },
-      );
+    await fetch(`${SUPABASE_URL}/functions/v1/paper-trade`, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_PUBLISHABLE_KEY,
+        Authorization: `Bearer ${session.access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        action: "refresh_snapshot",
+        portfolioId: portfolio.id,
+      }),
+      cache: "no-store",
+    }).catch(() => null);
   }
 
   const { data: historyRows } = await supabase
