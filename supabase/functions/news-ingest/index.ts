@@ -141,8 +141,8 @@ async function requestGdelt() {
   const params = new URLSearchParams({
     query: financeQuery,
     mode: "artlist",
-    maxrecords: "100",
-    timespan: "72h",
+    maxrecords: "60",
+    timespan: "12h",
     sort: "datedesc",
     format: "json",
   });
@@ -158,18 +158,7 @@ async function requestGdelt() {
       },
     });
 
-  let result = await request();
-
-  if (result.status === 429) {
-    const retryAfter = Number(result.headers.get("retry-after"));
-    const delaySeconds = Number.isFinite(retryAfter)
-      ? Math.min(Math.max(retryAfter, 1), 4)
-      : 2;
-    await new Promise((resolve) => setTimeout(resolve, delaySeconds * 1000));
-    result = await request();
-  }
-
-  return result;
+  return request();
 }
 
 Deno.serve(async (req: Request) => {
