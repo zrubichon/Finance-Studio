@@ -48,7 +48,7 @@ export default function NewsPage() {
       activeSlug="news"
       eyebrow={{ en: "FINANCE INTELLIGENCE", fr: "INTELLIGENCE FINANCIÈRE" }}
       title={{ en: "Your live financial journal: news, transmission and what comes next.", fr: "Ton journal financier en direct : actualité, transmission et ce qui vient ensuite." }}
-      description={{ en: "A continuously refreshed finance and geopolitics journal that separates reporting from analysis, explains market transmission channels and shows the evidence, assets and catalysts to monitor next.", fr: "Un journal finance et géopolitique actualisé automatiquement, qui sépare le reporting de l’analyse, explique les canaux de transmission vers les marchés et montre les preuves, actifs et catalyseurs à surveiller ensuite." }}
+      description={{ en: "A continuously refreshed finance and geopolitics journal combining official primary sources, established outlets and external reporting. FinanceStudio separates source material from analysis, explains market transmission channels and shows the evidence, assets and catalysts to monitor next.", fr: "Un journal finance et géopolitique actualisé automatiquement, combinant sources primaires officielles, médias établis et reporting externe. FinanceStudio sépare la source de l’analyse, explique les canaux de transmission vers les marchés et montre les preuves, actifs et catalyseurs à surveiller ensuite." }}
     >
       <div className="workspace-stack">
         <LiveFinancialJournal />
