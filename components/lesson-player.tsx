@@ -56,14 +56,33 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
       if (!mounted || !user) return;
 
       setUserId(user.id);
-      const { data } = await supabase
-        .from("course_progress")
-        .select("status,progress_percent")
-        .eq("user_id", user.id)
-        .eq("lesson_slug", lesson.slug)
-        .maybeSingle();
+      const [progressResult, profileResult] = await Promise.all([
+        supabase
+          .from("course_progress")
+          .select("status,progress_percent")
+          .eq("user_id", user.id)
+          .eq("lesson_slug", lesson.slug)
+          .maybeSingle(),
+        supabase
+          .from("profiles")
+          .select("explanation_level")
+          .eq("user_id", user.id)
+          .maybeSingle(),
+      ]);
 
       if (!mounted) return;
+
+      const level = profileResult.data?.explanation_level;
+      const accountMode: TeachingMode =
+        level === "professional"
+          ? "Professional"
+          : level === "intermediate"
+            ? "Intermediate"
+            : "Beginner";
+      setMode(accountMode);
+      window.localStorage.setItem("finance-studio-level", accountMode);
+
+      const data = progressResult.data;
 
       if (data) {
         setSavedProgress({
@@ -91,6 +110,22 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
     void initialize();
     return () => { mounted = false; };
   }, [lesson.slug]);
+
+  async function chooseMode(nextMode: TeachingMode) {
+    setMode(nextMode);
+    window.localStorage.setItem("finance-studio-level", nextMode);
+
+    if (!userId) return;
+
+    const supabase = createClient();
+    await supabase
+      .from("profiles")
+      .update({
+        explanation_level: nextMode.toLowerCase(),
+        updated_at: new Date().toISOString(),
+      })
+      .eq("user_id", userId);
+  }
 
   async function persistReadingProgress(nextSection: number) {
     setActiveSection(nextSection);
@@ -297,7 +332,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
               type="button"
               key={item.id}
               className={mode === item.id ? "active" : ""}
-              onClick={() => setMode(item.id)}
+              onClick={() => void chooseMode(item.id)}
             >
               {isFrench ? item.fr : item.en}
             </button>
