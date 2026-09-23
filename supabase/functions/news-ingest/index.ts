@@ -183,7 +183,8 @@ function decodeXml(value: string) {
 }
 
 function stripTags(value: string) {
-  return decodeXml(value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " "));
+  const decoded = decodeXml(value);
+  return decodeXml(decoded.replace(/<[^>]+>/g, " ").replace(/\s+/g, " "));
 }
 
 function tagValue(block: string, names: string[]) {
@@ -398,7 +399,7 @@ async function collectOfficialFeed(
       const title = tagValue(block, ["title"]);
       const url = linkValue(block);
       const publishedAt = normalizeDate(
-        tagValue(block, ["pubDate", "published", "updated", "dc:date", "date"]),
+        tagValue(block, ["pubDate", "published", "updated", "a10:updated", "dc:date", "date"]),
       );
 
       if (!title || !url || !publishedAt) continue;
