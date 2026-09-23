@@ -111,41 +111,8 @@ export default function InvestingLab() {
 
       setUserId(user.id);
 
-      let { data: portfolioData } = await supabase
-        .from("paper_portfolios")
-        .select("id,name,base_currency,starting_cash")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: true })
-        .limit(1)
-        .maybeSingle();
-
-      if (!portfolioData) {
-        const created = await supabase
-          .from("paper_portfolios")
-          .insert({
-            user_id: user.id,
-            name: "Main Portfolio",
-            base_currency: "USD",
-            starting_cash: 100000,
-          })
-          .select("id,name,base_currency,starting_cash")
-          .single();
-        portfolioData = created.data;
-      }
-
-      if (!mounted || !portfolioData) return;
-
-      const normalizedPortfolio = {
-        ...portfolioData,
-        starting_cash: Number(portfolioData.starting_cash),
-      } as Portfolio;
-      setPortfolio(normalizedPortfolio);
-
-      const [positionsResult, thesesResult] = await Promise.all([
-        supabase
-          .from("paper_positions")
-          .select("id", { count: "exact", head: true })
-          .eq("portfolio_id", normalizedPortfolio.id),
+      const [portfolioResponse, thesesResult] = await Promise.all([
+        fetch("/api/investing/portfolio", { cache: "no-store" }),
         supabase
           .from("investment_theses")
           .select("id,symbol,thesis,valuation_or_macro_assumption,catalyst,time_horizon,invalidation_condition,downside_case,portfolio_risk_note,review_notes,created_at,updated_at")
@@ -155,7 +122,44 @@ export default function InvestingLab() {
       ]);
 
       if (!mounted) return;
-      setPositionsCount(positionsResult.count ?? 0);
+
+      if (!portfolioResponse.ok) {
+        const payload = await portfolioResponse.json().catch(() => null);
+        setStatus(
+          typeof payload?.error === "string"
+            ? payload.error
+            : text(
+                "The virtual portfolio could not be loaded securely.",
+                "Le portefeuille virtuel n’a pas pu être chargé de manière sécurisée.",
+              ),
+        );
+        setTheses((thesesResult.data ?? []) as Thesis[]);
+        return;
+      }
+
+      const portfolioPayload = (await portfolioResponse.json()) as {
+        portfolio?: Portfolio;
+        positions?: Array<{ id: string }>;
+      };
+
+      if (!portfolioPayload.portfolio) {
+        setStatus(
+          text(
+            "The virtual portfolio could not be initialized.",
+            "Le portefeuille virtuel n’a pas pu être initialisé.",
+          ),
+        );
+        setTheses((thesesResult.data ?? []) as Thesis[]);
+        return;
+      }
+
+      const normalizedPortfolio = {
+        ...portfolioPayload.portfolio,
+        starting_cash: Number(portfolioPayload.portfolio.starting_cash),
+      } as Portfolio;
+
+      setPortfolio(normalizedPortfolio);
+      setPositionsCount(portfolioPayload.positions?.length ?? 0);
       setTheses((thesesResult.data ?? []) as Thesis[]);
     }
 
