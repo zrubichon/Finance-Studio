@@ -72,6 +72,11 @@ export default async function AccountPage() {
       .maybeSingle(),
   ]);
 
+  const profileAvailable = !profileResult.error && Boolean(profileResult.data);
+  const preferencesAvailable =
+    !preferencesResult.error && Boolean(preferencesResult.data);
+  const portfolioAvailable = !portfolioResult.error;
+
   const profile = profileResult.data;
   const preferences = preferencesResult.data;
   const portfolio = portfolioResult.data;
@@ -83,21 +88,21 @@ export default async function AccountPage() {
     totalPnl: number | null;
     fullCoverage: boolean;
   } | null = null;
+  let portfolioLoadError = false;
 
   if (portfolio) {
-    const [{ data: positions }, { data: transactions }] = await Promise.all([
-      supabase
-        .from("paper_positions")
-        .select("symbol,asset_class,quantity,average_cost")
-        .eq("portfolio_id", portfolio.id),
-      supabase
-        .from("paper_transactions")
-        .select("realized_pnl")
-        .eq("portfolio_id", portfolio.id),
-    ]);
+    const positionsResult = await supabase
+      .from("paper_positions")
+      .select("symbol,asset_class,quantity,average_cost")
+      .eq("portfolio_id", portfolio.id);
 
-    const priced = await Promise.all(
-      (positions ?? []).map(async (position) => {
+    if (positionsResult.error) {
+      portfolioLoadError = true;
+    } else {
+      const positions = positionsResult.data ?? [];
+
+      const priced = await Promise.all(
+        positions.map(async (position) => {
         const pricing = await getInstrumentQuote(
           position.symbol,
           position.asset_class as InvestableAssetClass,
@@ -125,43 +130,47 @@ export default async function AccountPage() {
     const totalEquity =
       marketValue === null ? null : cashBalance + marketValue;
 
-    // Realized P&L is already embedded in cash. We still query transactions
-    // so the account summary reflects whether a real paper-trading record exists.
-    void transactions;
-
-    portfolioSummary = {
-      positions: positions?.length ?? 0,
-      cashBalance,
-      totalEquity,
-      totalPnl:
-        totalEquity === null ? null : totalEquity - startingCash,
-      fullCoverage,
-    };
+      portfolioSummary = {
+        positions: positions.length,
+        cashBalance,
+        totalEquity,
+        totalPnl:
+          totalEquity === null ? null : totalEquity - startingCash,
+        fullCoverage,
+      };
+    }
   }
 
-  const level = profile?.explanation_level ?? "beginner";
+  const level = profileAvailable
+    ? profile?.explanation_level ?? "beginner"
+    : null;
   const localizedLevel =
-    level === "beginner"
-      ? t("Beginner", "Débutant")
-      : level === "intermediate"
-        ? t("Intermediate", "Intermédiaire")
-        : level === "professional"
-          ? t("Professional", "Professionnel")
-          : level;
+    level === null
+      ? "—"
+      : level === "beginner"
+        ? t("Beginner", "Débutant")
+        : level === "intermediate"
+          ? t("Intermediate", "Intermédiaire")
+          : level === "professional"
+            ? t("Professional", "Professionnel")
+            : level;
 
-  const theme = preferences?.theme ?? "classic";
+  const theme = preferencesAvailable ? preferences?.theme ?? "classic" : null;
   const localizedTheme =
-    theme === "classic"
-      ? t("Classic", "Classique")
-      : theme === "girl"
-        ? "Finance Girl"
-        : theme === "terminal"
-          ? "Wall Street"
-          : theme;
+    theme === null
+      ? "—"
+      : theme === "classic"
+        ? t("Classic", "Classique")
+        : theme === "girl"
+          ? "Finance Girl"
+          : theme === "terminal"
+            ? "Wall Street"
+            : theme;
 
-  const regions =
-    preferences?.market_regions?.join(", ") ??
-    t("Global, USA, Europe", "Monde, USA, Europe");
+  const regions = preferencesAvailable
+    ? preferences?.market_regions?.join(", ") ??
+      t("Global, USA, Europe", "Monde, USA, Europe")
+    : "—";
 
   const portfolioName =
     portfolio?.name === "Main Portfolio"
@@ -221,16 +230,20 @@ export default async function AccountPage() {
             <div>
               <dt>{t("Target role", "Métier cible / target role")}</dt>
               <dd>
-                {profile?.target_role ??
-                  t("Not selected yet", "Pas encore sélectionné")}
+                {profileAvailable
+                  ? profile?.target_role ??
+                    t("Not selected yet", "Pas encore sélectionné")
+                  : "—"}
               </dd>
             </div>
             <div>
               <dt>{t("Onboarding", "Configuration initiale / onboarding")}</dt>
               <dd>
-                {profile?.onboarding_completed
-                  ? t("Complete", "Terminée")
-                  : t("To complete", "À terminer")}
+                {profileAvailable
+                  ? profile?.onboarding_completed
+                    ? t("Complete", "Terminée")
+                    : t("To complete", "À terminer")
+                  : "—"}
               </dd>
             </div>
           </dl>
@@ -243,15 +256,15 @@ export default async function AccountPage() {
           <h2>{t("Your current learning record", "Ton suivi d’apprentissage actuel")}</h2>
           <div className="account-stat-grid">
             <div>
-              <strong>{completedResult.count ?? 0}</strong>
+              <strong>{completedResult.error ? "—" : completedResult.count ?? 0}</strong>
               <span>{t("Lessons completed", "Cours terminés")}</span>
             </div>
             <div>
-              <strong>{masteryResult.count ?? 0}</strong>
+              <strong>{masteryResult.error ? "—" : masteryResult.count ?? 0}</strong>
               <span>{t("Concepts mastered", "Concepts maîtrisés")}</span>
             </div>
             <div>
-              <strong>{interviewResult.count ?? 0}</strong>
+              <strong>{interviewResult.error ? "—" : interviewResult.count ?? 0}</strong>
               <span>
                 {t(
                   "Interview attempts",
@@ -279,7 +292,7 @@ export default async function AccountPage() {
             </div>
             <div>
               <dt>{t("Card radius", "Arrondi des cartes")}</dt>
-              <dd>{preferences?.card_radius ?? 22}px</dd>
+              <dd>{preferencesAvailable ? `${preferences?.card_radius ?? 22}px` : "—"}</dd>
             </div>
             <div>
               <dt>{t("Market regions", "Régions de marché")}</dt>
@@ -300,7 +313,14 @@ export default async function AccountPage() {
               t("Portfolio not initialized", "Portefeuille non initialisé")}
           </h2>
 
-          {portfolio && portfolioSummary ? (
+          {!portfolioAvailable || portfolioLoadError ? (
+            <p className="account-muted">
+              {t(
+                "Portfolio data is temporarily unavailable. FinanceStudio will not replace it with estimated values.",
+                "Les données du portefeuille sont temporairement indisponibles. FinanceStudio ne les remplace pas par des valeurs estimées.",
+              )}
+            </p>
+          ) : portfolio && portfolioSummary ? (
             <>
               <p className="account-portfolio-value">
                 {portfolioSummary.totalEquity !== null
@@ -391,18 +411,29 @@ export default async function AccountPage() {
           </p>
         </div>
 
-        <AccountSettingsForm
-          initialDisplayName={profile?.display_name ?? ""}
-          initialLanguage={profile?.preferred_language === "fr" ? "FR" : "EN"}
-          initialLevel={
-            profile?.explanation_level === "intermediate" ||
-            profile?.explanation_level === "professional"
-              ? profile.explanation_level
-              : "beginner"
-          }
-          initialTargetRole={profile?.target_role ?? ""}
-          initialRegions={preferences?.market_regions ?? ["global", "usa", "europe"]}
-        />
+        {profileAvailable && preferencesAvailable ? (
+          <AccountSettingsForm
+            initialDisplayName={profile?.display_name ?? ""}
+            initialLanguage={profile?.preferred_language === "fr" ? "FR" : "EN"}
+            initialLevel={
+              profile?.explanation_level === "intermediate" ||
+              profile?.explanation_level === "professional"
+                ? profile.explanation_level
+                : "beginner"
+            }
+            initialTargetRole={profile?.target_role ?? ""}
+            initialRegions={
+              preferences?.market_regions ?? ["global", "usa", "europe"]
+            }
+          />
+        ) : (
+          <p className="auth-message" role="status">
+            {t(
+              "Profile settings are temporarily unavailable. Nothing has been replaced with default account values.",
+              "Les paramètres du profil sont temporairement indisponibles. Aucune valeur du compte n’a été remplacée par des valeurs par défaut.",
+            )}
+          </p>
+        )}
       </section>
 
       <section className="account-security-card">
