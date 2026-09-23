@@ -36,6 +36,7 @@ export default function UniversityProgress() {
   const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState<Record<string, ProgressRow>>({});
+  const [progressAvailable, setProgressAvailable] = useState(true);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -60,11 +61,13 @@ export default function UniversityProgress() {
       if (!active) return;
 
       if (error) {
+        setProgressAvailable(false);
         setMessage(text(
           "We could not load your saved progress yet.",
           "Nous n’avons pas pu charger ta progression enregistrée pour le moment.",
         ));
       } else {
+        setProgressAvailable(true);
         const rows = (data ?? []) as ProgressRow[];
         setProgress(Object.fromEntries(rows.map((row) => [row.lesson_slug, row])));
       }
@@ -101,13 +104,26 @@ export default function UniversityProgress() {
           {loading ? (
             <h2>{text("Loading your learning record…", "Chargement de ta progression…")}</h2>
           ) : userId ? (
-            <>
-              <h2>{isFrench ? `${completed} modules terminés sur ${total}` : `${completed} of ${total} curriculum modules completed`}</h2>
-              <p>{text(
-                "Completion now comes from real lessons and mastery checks, not manual checkboxes.",
-                "La complétion vient maintenant des vrais cours et tests de maîtrise, pas de cases cochées manuellement.",
-              )}</p>
-            </>
+            progressAvailable ? (
+              <>
+                <h2>{isFrench ? `${completed} modules terminés sur ${total}` : `${completed} of ${total} curriculum modules completed`}</h2>
+                <p>{text(
+                  "Completion now comes from real lessons and mastery checks, not manual checkboxes.",
+                  "La complétion vient maintenant des vrais cours et tests de maîtrise, pas de cases cochées manuellement.",
+                )}</p>
+              </>
+            ) : (
+              <>
+                <h2>{text(
+                  "Saved progress is temporarily unavailable.",
+                  "La progression enregistrée est temporairement indisponible.",
+                )}</h2>
+                <p>{text(
+                  "You can still open every lesson. FinanceStudio will not replace missing account progress with zero.",
+                  "Tu peux toujours ouvrir tous les cours. FinanceStudio ne remplace pas une progression de compte manquante par zéro.",
+                )}</p>
+              </>
+            )
           ) : (
             <>
               <h2>{text(
@@ -166,11 +182,13 @@ export default function UniversityProgress() {
 
                     {available ? (
                       <Link className="module-status-button module-open-link" href={`/university/${slug}`}>
-                        {status === "completed"
-                          ? text("Review ✓", "Revoir ✓")
-                          : status === "in_progress"
-                            ? text(`Continue · ${percent}%`, `Continuer · ${percent}%`)
-                            : text("Open course", "Ouvrir le cours")}
+                        {!progressAvailable && userId
+                          ? text("Open course", "Ouvrir le cours")
+                          : status === "completed"
+                            ? text("Review ✓", "Revoir ✓")
+                            : status === "in_progress"
+                              ? text(`Continue · ${percent}%`, `Continuer · ${percent}%`)
+                              : text("Open course", "Ouvrir le cours")}
                       </Link>
                     ) : (
                       <span className="module-build-label">{text("In build", "En construction")}</span>
