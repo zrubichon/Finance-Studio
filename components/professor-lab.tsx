@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { recordDailyActivity } from "@/lib/record-activity";
+import { createClient } from "@/lib/supabase/client";
 import { curriculumYears, moduleSlug } from "@/lib/curriculum";
 
 type Mode = "Beginner" | "Intermediate" | "Professional";
@@ -106,10 +107,53 @@ export default function ProfessorLab() {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
+    let active = true;
     const stored = window.localStorage.getItem("finance-studio-level");
-    if (stored === "Beginner" || stored === "Intermediate" || stored === "Professional") {
+
+    if (
+      stored === "Beginner" ||
+      stored === "Intermediate" ||
+      stored === "Professional"
+    ) {
       setMode(stored);
     }
+
+    async function hydrateMode() {
+      try {
+        const supabase = createClient();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (!user || !active) return;
+
+        const { data } = await supabase
+          .from("profiles")
+          .select("explanation_level")
+          .eq("user_id", user.id)
+          .maybeSingle();
+
+        if (!active) return;
+
+        const level = data?.explanation_level;
+        const accountMode: Mode =
+          level === "professional"
+            ? "Professional"
+            : level === "intermediate"
+              ? "Intermediate"
+              : "Beginner";
+
+        setMode(accountMode);
+        window.localStorage.setItem("finance-studio-level", accountMode);
+      } catch {
+        // Keep the device preference if account hydration is unavailable.
+      }
+    }
+
+    void hydrateMode();
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -135,6 +179,30 @@ export default function ProfessorLab() {
   );
 
   const selectedLesson = modules.find((module) => module.slug === lessonSlug);
+
+  async function chooseMode(nextMode: Mode) {
+    setMode(nextMode);
+    window.localStorage.setItem("finance-studio-level", nextMode);
+
+    try {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) return;
+
+      await supabase
+        .from("profiles")
+        .update({
+          explanation_level: nextMode.toLowerCase(),
+          updated_at: new Date().toISOString(),
+        })
+        .eq("user_id", user.id);
+    } catch {
+      // The local preference remains usable if account sync fails.
+    }
+  }
 
   const modeLabel = (value: Mode) =>
     !isFrench
@@ -313,7 +381,7 @@ export default function ProfessorLab() {
             {modes.map((item) => (
               <button
                 className={mode === item ? "chip active" : "chip"}
-                onClick={() => setMode(item)}
+                onClick={() => void chooseMode(item)}
                 key={item}
                 type="button"
               >
