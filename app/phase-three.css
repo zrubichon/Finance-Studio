@@ -1009,3 +1009,11 @@
     font-size:20px;
   }
 }
+
+
+.source-quality-badge.primary {
+  color:var(--ink);
+  border-color:color-mix(in srgb,var(--ink) 35%,var(--line));
+  background:color-mix(in srgb,var(--ink) 7%,var(--surface));
+  font-weight:900;
+}
