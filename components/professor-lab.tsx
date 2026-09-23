@@ -127,15 +127,23 @@ export default function ProfessorLab() {
 
         if (!user || !active) return;
 
-        const { data } = await supabase
+        const { data, error } = await supabase
           .from("profiles")
           .select("explanation_level")
           .eq("user_id", user.id)
           .maybeSingle();
 
-        if (!active) return;
+        if (!active || error) return;
 
         const level = data?.explanation_level;
+        if (
+          level !== "beginner" &&
+          level !== "intermediate" &&
+          level !== "professional"
+        ) {
+          return;
+        }
+
         const accountMode: Mode =
           level === "professional"
             ? "Professional"
