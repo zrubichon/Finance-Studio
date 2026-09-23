@@ -670,7 +670,7 @@ export default function LiveFinancialJournal() {
                           <span
                             className={
                               item.sourceQuality === "primary"
-                                ? "source-quality-badge established"
+                                ? "source-quality-badge primary"
                                 : item.sourceQuality === "established"
                                   ? "source-quality-badge established"
                                   : "source-quality-badge"
