@@ -20,9 +20,14 @@ export default function ForgotPasswordPage() {
 
     try {
       const supabase = createClient();
-      await supabase.auth.resetPasswordForEmail(email.trim(), {
-        redirectTo: `${window.location.origin}/auth/callback?next=/update-password`,
-      });
+      const { error } = await supabase.auth.resetPasswordForEmail(
+        email.trim(),
+        {
+          redirectTo: `${window.location.origin}/auth/callback?next=/update-password`,
+        },
+      );
+
+      if (error) throw error;
 
       setMessage(text(
         "If an account exists for this email, a password-reset link has been sent. Check your inbox and spam folder.",
