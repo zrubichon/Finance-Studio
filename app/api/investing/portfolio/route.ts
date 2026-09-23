@@ -4,16 +4,28 @@ import {
   type InvestableAssetClass,
 } from "@/lib/providers/instrument-data";
 import { createClient } from "@/lib/supabase/server";
+import {
+  SUPABASE_PUBLISHABLE_KEY,
+  SUPABASE_URL,
+} from "@/lib/supabase/config";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const [
+    {
+      data: { user },
+    },
+    {
+      data: { session },
+    },
+  ] = await Promise.all([
+    supabase.auth.getUser(),
+    supabase.auth.getSession(),
+  ]);
 
-  if (!user) {
+  if (!user || !session?.access_token) {
     return NextResponse.json({ error: "Sign in required." }, { status: 401 });
   }
 
@@ -34,10 +46,55 @@ export async function GET(request: NextRequest) {
     .maybeSingle();
 
   if (!portfolio) {
-    return NextResponse.json(
-      { error: "Paper portfolio not found." },
-      { status: 404 },
+    const ensureResponse = await fetch(
+      `${SUPABASE_URL}/functions/v1/paper-trade`,
+      {
+        method: "POST",
+        headers: {
+          apikey: SUPABASE_PUBLISHABLE_KEY,
+          Authorization: `Bearer ${session.access_token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ action: "ensure_portfolio" }),
+        cache: "no-store",
+      },
     );
+
+    if (!ensureResponse.ok) {
+      const ensurePayload = await ensureResponse.json().catch(() => null);
+      return NextResponse.json(
+        {
+          error:
+            ensurePayload?.error ||
+            "Paper portfolio could not be initialized securely.",
+          code:
+            ensurePayload?.code || "PORTFOLIO_INITIALIZATION_FAILED",
+        },
+        { status: ensureResponse.status },
+      );
+    }
+
+    const { data: ensuredPortfolio } = await supabase
+      .from("paper_portfolios")
+      .select(
+        "id,name,base_currency,starting_cash,cash_balance,created_at,updated_at",
+      )
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: true })
+      .limit(1)
+      .maybeSingle();
+
+    if (!ensuredPortfolio) {
+      return NextResponse.json(
+        {
+          error: "Paper portfolio could not be initialized securely.",
+          code: "PORTFOLIO_INITIALIZATION_FAILED",
+        },
+        { status: 500 },
+      );
+    }
+
+    portfolio = ensuredPortfolio;
   }
 
   const [positionsResult, transactionsResult, pnlResult] = await Promise.all([
