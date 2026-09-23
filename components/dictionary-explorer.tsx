@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { useSavedItems } from "@/lib/use-saved-items";
 import type { DictionaryEntry } from "@/lib/dictionary-content";
@@ -9,6 +9,11 @@ import type { DictionaryEntry } from "@/lib/dictionary-content";
 export default function DictionaryExplorer({ entries }: { entries: DictionaryEntry[] }) {
   const { isFrench, text } = useLanguage();
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    const initialQuery = new URLSearchParams(window.location.search).get("q");
+    if (initialQuery) setQuery(initialQuery);
+  }, []);
   const [professional, setProfessional] = useState(false);
   const {
     authenticated,
