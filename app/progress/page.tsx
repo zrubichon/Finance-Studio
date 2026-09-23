@@ -41,6 +41,10 @@ export default async function ProgressPage() {
     attempts: number;
     next_review_at: string | null;
   }[] = [];
+  let progressAvailable = true;
+  let masteryAvailable = true;
+  let interviewAvailable = true;
+  let activityAvailable = true;
 
   if (user) {
     const [progressResult, masteryResult, interviewResult, activityResult] = await Promise.all([
@@ -49,21 +53,34 @@ export default async function ProgressPage() {
       supabase.from("interview_attempts").select("id", { count: "exact", head: true }).eq("user_id", user.id),
       supabase.from("user_activity_days").select("activity_date,activity_count").eq("user_id", user.id).order("activity_date", { ascending: false }).limit(60),
     ]);
-    progressRows = progressResult.data ?? [];
-    masteryRows = (masteryResult.data ?? []).map((row) => ({
-      concept_key: row.concept_key,
-      mastery_score: Number(row.mastery_score ?? 0),
-      attempts: Number(row.attempts ?? 0),
-      next_review_at: row.next_review_at,
-    }));
-    conceptsMastered = masteryRows.filter((row) => row.mastery_score >= 70).length;
-    interviewDrills = interviewResult.count ?? 0;
+    progressAvailable = !progressResult.error;
+    masteryAvailable = !masteryResult.error;
+    interviewAvailable = !interviewResult.error;
+    activityAvailable = !activityResult.error;
 
-    const activityRows = (activityResult.data ?? []).map((row) => ({
-      activity_date: row.activity_date,
-      activity_count: Number(row.activity_count ?? 0),
-    }));
-    streak = calculateStreak(activityRows.map((row) => row.activity_date));
+    progressRows = progressAvailable ? progressResult.data ?? [] : [];
+    masteryRows = masteryAvailable
+      ? (masteryResult.data ?? []).map((row) => ({
+          concept_key: row.concept_key,
+          mastery_score: Number(row.mastery_score ?? 0),
+          attempts: Number(row.attempts ?? 0),
+          next_review_at: row.next_review_at,
+        }))
+      : [];
+    conceptsMastered = masteryAvailable
+      ? masteryRows.filter((row) => row.mastery_score >= 70).length
+      : 0;
+    interviewDrills = interviewAvailable ? interviewResult.count ?? 0 : 0;
+
+    const activityRows = activityAvailable
+      ? (activityResult.data ?? []).map((row) => ({
+          activity_date: row.activity_date,
+          activity_count: Number(row.activity_count ?? 0),
+        }))
+      : [];
+    streak = activityAvailable
+      ? calculateStreak(activityRows.map((row) => row.activity_date))
+      : 0;
 
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
@@ -146,12 +163,59 @@ export default async function ProgressPage() {
     }));
 
   const metrics = [
-    { label: t("Lessons completed", "Cours terminés"), value: String(completedLessons), note: t(`${modules.length} modules in the full curriculum`, `${modules.length} modules dans le programme complet`) },
-    { label: t("Concepts mastered", "Concepts maîtrisés"), value: String(conceptsMastered), note: t("Mastery requires a score of 70 or above", "La maîtrise / mastery nécessite un score de 70 ou plus") },
-    { label: t("Interview drills", "Entraînements entretien"), value: String(interviewDrills), note: t("Saved interview practice attempts", "Tentatives d’entretien / interview attempts enregistrées") },
-    { label: t("Current streak", "Série actuelle / streak"), value: isFrench ? `${streak} jour${streak === 1 ? "" : "s"}` : `${streak} day${streak === 1 ? "" : "s"}`, note: t("Based on recorded learning activity", "Basé sur l’activité d’apprentissage enregistrée") },
-    { label: t("7-day activity", "Activité sur 7 jours"), value: String(weeklyActions), note: t("Saved study, interview, tutoring and investing actions", "Actions enregistrées : cours, entretien, tutorat et investissement") },
-    { label: t("Active days · 30d", "Jours actifs · 30 j"), value: String(activeDays30), note: t("Distinct days with meaningful FinanceStudio activity", "Jours distincts avec une activité FinanceStudio significative") },
+    {
+      label: t("Lessons completed", "Cours terminés"),
+      value: user && !progressAvailable ? "—" : String(completedLessons),
+      note: t(
+        `${modules.length} modules in the full curriculum`,
+        `${modules.length} modules dans le programme complet`,
+      ),
+    },
+    {
+      label: t("Concepts mastered", "Concepts maîtrisés"),
+      value: user && !masteryAvailable ? "—" : String(conceptsMastered),
+      note: t(
+        "Mastery requires a score of 70 or above",
+        "La maîtrise / mastery nécessite un score de 70 ou plus",
+      ),
+    },
+    {
+      label: t("Interview drills", "Entraînements entretien"),
+      value: user && !interviewAvailable ? "—" : String(interviewDrills),
+      note: t(
+        "Saved interview practice attempts",
+        "Tentatives d’entretien / interview attempts enregistrées",
+      ),
+    },
+    {
+      label: t("Current streak", "Série actuelle / streak"),
+      value:
+        user && !activityAvailable
+          ? "—"
+          : isFrench
+            ? `${streak} jour${streak === 1 ? "" : "s"}`
+            : `${streak} day${streak === 1 ? "" : "s"}`,
+      note: t(
+        "Based on recorded learning activity",
+        "Basé sur l’activité d’apprentissage enregistrée",
+      ),
+    },
+    {
+      label: t("7-day activity", "Activité sur 7 jours"),
+      value: user && !activityAvailable ? "—" : String(weeklyActions),
+      note: t(
+        "Saved study, interview, tutoring and investing actions",
+        "Actions enregistrées : cours, entretien, tutorat et investissement",
+      ),
+    },
+    {
+      label: t("Active days · 30d", "Jours actifs · 30 j"),
+      value: user && !activityAvailable ? "—" : String(activeDays30),
+      note: t(
+        "Distinct days with meaningful FinanceStudio activity",
+        "Jours distincts avec une activité FinanceStudio significative",
+      ),
+    },
   ];
 
   return (
@@ -167,8 +231,17 @@ export default async function ProgressPage() {
         <section className="progress-metric-grid">{metrics.map((item) => <article className="progress-metric-card" key={item.label}><span className="control-label">{item.label.toUpperCase()}</span><strong>{item.value}</strong><p>{item.note}</p></article>)}</section>
 
         <section className="knowledge-map-panel">
-          <div className="panel-heading"><div><span className="mini-label">{t("FINANCE KNOWLEDGE MAP", "CARTE DES CONNAISSANCES FINANCIÈRES")}</span><h2>{t("Your mastery by domain", "Ta maîtrise / mastery par domaine")}</h2></div><span className="connection-badge">{user ? t("Live account data", "Données du compte en direct") : t("Sign in to sync", "Connecte-toi pour synchroniser")}</span></div>
-          <div className="knowledge-domain-grid">{domainStats.map((domain, index) => <article className="knowledge-domain-card" key={domain.name}><div className="knowledge-domain-head"><span>{String(index + 1).padStart(2, "0")}</span><strong>{domain.percent}%</strong></div><h3>{domain.name}</h3><p>{domain.detail}</p><div className="empty-progress-bar"><span style={{ width: `${domain.percent}%` }} /></div><small>{isFrench ? `${domain.complete} / ${domain.total} modules terminés` : `${domain.complete} / ${domain.total} modules completed`}</small></article>)}</div>
+          <div className="panel-heading"><div><span className="mini-label">{t("FINANCE KNOWLEDGE MAP", "CARTE DES CONNAISSANCES FINANCIÈRES")}</span><h2>{t("Your mastery by domain", "Ta maîtrise / mastery par domaine")}</h2></div><span className="connection-badge">{user ? progressAvailable ? t("Live account data", "Données du compte en direct") : t("Progress data unavailable", "Progression indisponible") : t("Sign in to sync", "Connecte-toi pour synchroniser")}</span></div>
+          {user && !progressAvailable ? (
+            <p className="account-muted">
+              {t(
+                "Course progress is temporarily unavailable. FinanceStudio is not replacing missing account data with zeroes.",
+                "La progression des cours est temporairement indisponible. FinanceStudio ne remplace pas les données manquantes du compte par des zéros.",
+              )}
+            </p>
+          ) : (
+            <div className="knowledge-domain-grid">{domainStats.map((domain, index) => <article className="knowledge-domain-card" key={domain.name}><div className="knowledge-domain-head"><span>{String(index + 1).padStart(2, "0")}</span><strong>{domain.percent}%</strong></div><h3>{domain.name}</h3><p>{domain.detail}</p><div className="empty-progress-bar"><span style={{ width: `${domain.percent}%` }} /></div><small>{isFrench ? `${domain.complete} / ${domain.total} modules terminés` : `${domain.complete} / ${domain.total} modules completed`}</small></article>)}</div>
+          )}
         </section>
 
         <section className="knowledge-map-panel">
@@ -186,7 +259,14 @@ export default async function ProgressPage() {
             </span>
           </div>
 
-          {user && reviewQueue.length ? (
+          {user && !masteryAvailable ? (
+            <p className="account-muted">
+              {t(
+                "Concept mastery data is temporarily unavailable. Your review queue has not been reset.",
+                "Les données de maîtrise des concepts sont temporairement indisponibles. Ta file de révision n’a pas été réinitialisée.",
+              )}
+            </p>
+          ) : user && reviewQueue.length ? (
             <div className="review-queue-grid">
               {reviewQueue.map((item) => {
                 const readableConcept = item.concept_key
@@ -246,6 +326,10 @@ export default async function ProgressPage() {
         <section className="next-best-panel">
           <div>
             <span className="mini-label">{t("NEXT BEST LESSON", "PROCHAIN MEILLEUR COURS")}</span>
+            {user && !progressAvailable ? (
+              <h2>{t("Progress data temporarily unavailable", "Progression temporairement indisponible")}</h2>
+            ) : null}
+            {!(user && !progressAvailable) && (
             <h2>
               {nextModule
                 ? (isFrench ? `${nextModule.year.replace("Year", "Année")} · ${nextModule.titleFr}` : `${nextModule.year} · ${nextModule.title}`)
@@ -259,10 +343,16 @@ export default async function ProgressPage() {
                       `Prochain cours en construction · ${firstPlannedModule?.titleFr ?? "Université de Finance"}`,
                     )}
             </h2>
+            )}
           </div>
           <p>
-            {nextModule
+            {user && !progressAvailable
               ? t(
+                  "Your recommendation is paused until saved course progress can be read again.",
+                  "Ta recommandation est mise en pause jusqu’à ce que la progression enregistrée puisse de nouveau être lue.",
+                )
+              : nextModule
+                ? t(
                   "This recommendation follows real available course content and curriculum prerequisites.",
                   "Cette recommandation suit les vrais cours disponibles et les prérequis du programme.",
                 )
@@ -276,9 +366,11 @@ export default async function ProgressPage() {
                     "Tu as terminé tous les cours actuellement disponibles. Le prochain module prévu apparaîtra ici lorsqu’il sera publié.",
                   )}
           </p>
-          <Link href={nextModule ? `/university/${nextModule.slug}` : curriculumComplete ? "/interview" : "/university"}>
-            {nextModule
-              ? t("Open lesson", "Ouvrir le cours")
+          <Link href={user && !progressAvailable ? "/university" : nextModule ? `/university/${nextModule.slug}` : curriculumComplete ? "/interview" : "/university"}>
+            {user && !progressAvailable
+              ? t("Open Finance University", "Ouvrir l’Université de Finance")
+              : nextModule
+                ? t("Open lesson", "Ouvrir le cours")
               : curriculumComplete
                 ? t("Practice in Interview Studio", "S’entraîner dans Interview Studio")
                 : t("Open Finance University", "Ouvrir l’Université de Finance")} →
