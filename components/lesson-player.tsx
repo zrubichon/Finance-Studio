@@ -73,14 +73,21 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
       if (!mounted) return;
 
       const level = profileResult.data?.explanation_level;
-      const accountMode: TeachingMode =
-        level === "professional"
-          ? "Professional"
-          : level === "intermediate"
-            ? "Intermediate"
-            : "Beginner";
-      setMode(accountMode);
-      window.localStorage.setItem("finance-studio-level", accountMode);
+      if (
+        !profileResult.error &&
+        (level === "beginner" ||
+          level === "intermediate" ||
+          level === "professional")
+      ) {
+        const accountMode: TeachingMode =
+          level === "professional"
+            ? "Professional"
+            : level === "intermediate"
+              ? "Intermediate"
+              : "Beginner";
+        setMode(accountMode);
+        window.localStorage.setItem("finance-studio-level", accountMode);
+      }
 
       const data = progressResult.data;
 
