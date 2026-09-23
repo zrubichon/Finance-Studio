@@ -49,7 +49,7 @@ type NewsItem = {
   sourceCountry: string;
   language: string;
   imageUrl: string | null;
-  sourceQuality: "established" | "external";
+  sourceQuality: "primary" | "established" | "external";
   topics: Topic[];
   insight: NewsInsight;
 };
@@ -59,7 +59,7 @@ type NewsPayload = {
   updatedAt: string;
   items: NewsItem[];
   provider: {
-    id: "gdelt";
+    id: "archive" | "gdelt";
     label: string;
     status: "live" | "empty" | "error";
     message: string;
@@ -128,6 +128,7 @@ const countryGroups: Record<Exclude<NewsRegion, "global" | "my-markets">, Set<st
     "romania",
     "hungary",
     "greece",
+    "europeanunion",
   ]),
   uk: new Set(["unitedkingdom", "greatbritain", "england", "uk"]),
   asia: new Set([
@@ -423,6 +424,11 @@ export default function LiveFinancialJournal() {
     return Array.from(groups.entries());
   }, [visibleItems]);
 
+  const primaryCount = useMemo(
+    () => visibleItems.filter((item) => item.sourceQuality === "primary").length,
+    [visibleItems],
+  );
+
   const establishedCount = useMemo(
     () => visibleItems.filter((item) => item.sourceQuality === "established").length,
     [visibleItems],
@@ -484,8 +490,8 @@ export default function LiveFinancialJournal() {
 
       <p className="explanation-copy">
         {text(
-          "FinanceStudio separates reporting from interpretation. The headline and source are external reporting; the FinanceStudio lens explains possible financial transmission channels, exposed assets and the next evidence to check. It is an educational framework, not a prediction of what markets will do.",
-          "FinanceStudio sépare le reporting de l’interprétation. Le titre et la source viennent du reporting externe ; l’analyse FinanceStudio explique les canaux financiers possibles, les actifs exposés et les prochains éléments à vérifier. C’est un cadre pédagogique, pas une prévision de ce que les marchés vont faire.",
+          "FinanceStudio separates source material from interpretation. Stories can come from primary institutions, established outlets or external reporting; the FinanceStudio lens explains possible financial transmission channels, exposed assets and the next evidence to check. It is an educational framework, not a prediction of what markets will do.",
+          "FinanceStudio sépare la source de l’interprétation. Les actualités peuvent venir d’institutions primaires, de médias établis ou de reporting externe ; l’analyse FinanceStudio explique les canaux financiers possibles, les actifs exposés et les prochains éléments à vérifier. C’est un cadre pédagogique, pas une prévision de ce que les marchés vont faire.",
         )}
       </p>
 
@@ -495,8 +501,8 @@ export default function LiveFinancialJournal() {
           <strong>{loading ? "—" : visibleItems.length}</strong>
         </div>
         <div>
-          <span>{text("Established sources", "Sources établies")}</span>
-          <strong>{loading ? "—" : establishedCount}</strong>
+          <span>{text("Primary sources", "Sources primaires")}</span>
+          <strong>{loading ? "—" : primaryCount}</strong>
         </div>
         <div>
           <span>{text("Geopolitics", "Géopolitique")}</span>
@@ -661,10 +667,20 @@ export default function LiveFinancialJournal() {
                         <div>
                           <strong>{formatTime(item.publishedAt, isFrench)}</strong>
                           {breaking ? <span className="breaking-badge">{text("NEW", "NOUVEAU")}</span> : null}
-                          <span className={item.sourceQuality === "established" ? "source-quality-badge established" : "source-quality-badge"}>
-                            {item.sourceQuality === "established"
-                              ? text("Established source", "Source établie")
-                              : text("External reporting", "Reporting externe")}
+                          <span
+                            className={
+                              item.sourceQuality === "primary"
+                                ? "source-quality-badge established"
+                                : item.sourceQuality === "established"
+                                  ? "source-quality-badge established"
+                                  : "source-quality-badge"
+                            }
+                          >
+                            {item.sourceQuality === "primary"
+                              ? text("Primary source", "Source primaire")
+                              : item.sourceQuality === "established"
+                                ? text("Established source", "Source établie")
+                                : text("External reporting", "Reporting externe")}
                           </span>
                         </div>
 
@@ -734,7 +750,7 @@ export default function LiveFinancialJournal() {
                           className="module-open-link"
                           onClick={() => void recordDailyActivity()}
                         >
-                          {text("Open original reporting", "Ouvrir le reporting original")} ↗
+                          {text("Open original source", "Ouvrir la source originale")} ↗
                         </a>
 
                         <button
@@ -750,7 +766,7 @@ export default function LiveFinancialJournal() {
                               subtitleEn: item.insight.lens.en,
                               subtitleFr: item.insight.lens.fr,
                               href: item.url,
-                              source: item.domain || "External reporting",
+                              source: item.domain || (item.sourceQuality === "primary" ? "Primary source" : "External reporting"),
                               publishedAt: item.publishedAt,
                             })
                           }
@@ -777,8 +793,8 @@ export default function LiveFinancialJournal() {
       {visibleItems.length ? (
         <p className="inline-status">
           {text(
-            String(establishedCount) + " of " + String(visibleItems.length) + " displayed sources match FinanceStudio’s current established-outlet allowlist. Other sources remain external reporting and should be checked more carefully.",
-            String(establishedCount) + " source" + (establishedCount > 1 ? "s" : "") + " sur " + String(visibleItems.length) + " correspond" + (establishedCount > 1 ? "ent" : "") + " à l’allowlist actuelle de médias établis de FinanceStudio. Les autres restent du reporting externe à vérifier plus attentivement.",
+            String(primaryCount) + " primary source" + (primaryCount === 1 ? "" : "s") + " and " + String(establishedCount) + " established outlet" + (establishedCount === 1 ? "" : "s") + " are displayed. Other items remain external reporting and should be checked more carefully.",
+            String(primaryCount) + " source" + (primaryCount > 1 ? "s" : "") + " primaire" + (primaryCount > 1 ? "s" : "") + " et " + String(establishedCount) + " média" + (establishedCount > 1 ? "s" : "") + " établi" + (establishedCount > 1 ? "s" : "") + " sont affichés. Les autres éléments restent du reporting externe à vérifier plus attentivement.",
           )}
         </p>
       ) : null}
