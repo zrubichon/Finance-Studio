@@ -3,12 +3,19 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
+import { useSavedItems } from "@/lib/use-saved-items";
 import type { DictionaryEntry } from "@/lib/dictionary-content";
 
 export default function DictionaryExplorer({ entries }: { entries: DictionaryEntry[] }) {
   const { isFrench, text } = useLanguage();
   const [query, setQuery] = useState("");
   const [professional, setProfessional] = useState(false);
+  const {
+    authenticated,
+    isSaved,
+    savingKey,
+    toggleSaved,
+  } = useSavedItems("dictionary");
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -90,7 +97,34 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
 
           return (
             <article className="dictionary-card" key={item.en}>
-              <span className="mini-label">{isFrench ? item.en : item.fr}</span>
+              <div className="dictionary-card-head">
+                <span className="mini-label">{isFrench ? item.en : item.fr}</span>
+                <button
+                  type="button"
+                  className="save-item-button compact"
+                  aria-pressed={isSaved(item.en)}
+                  disabled={savingKey === item.en}
+                  onClick={() =>
+                    void toggleSaved(item.en, {
+                      titleEn: item.en,
+                      titleFr: item.fr,
+                      subtitleEn: item.definitionEn,
+                      subtitleFr: item.definitionFr,
+                      href: `/dictionary?q=${encodeURIComponent(item.en)}`,
+                      source: "FinanceStudio Dictionary",
+                    })
+                  }
+                >
+                  <span aria-hidden="true">{isSaved(item.en) ? "★" : "☆"}</span>
+                  {savingKey === item.en
+                    ? text("Saving…", "Enregistrement…")
+                    : isSaved(item.en)
+                      ? text("Saved", "Enregistré")
+                      : authenticated
+                        ? text("Save", "Enregistrer")
+                        : text("Sign in", "Se connecter")}
+                </button>
+              </div>
               <h2>{isFrench ? `${item.fr} / ${item.en}` : `${item.en} / ${item.fr}`}</h2>
               <p><strong>{text("Definition:", "Définition :")}</strong> {definition}</p>
 
