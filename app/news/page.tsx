@@ -2,7 +2,7 @@
 
 import SectionLayout from "@/components/section-layout";
 import { useLanguage } from "@/components/language-provider";
-import LiveNewsFeed from "@/components/live-news-feed";
+import LiveFinancialJournal from "@/components/live-financial-journal";
 
 type Localized = { en: string; fr: string };
 
@@ -47,11 +47,11 @@ export default function NewsPage() {
     <SectionLayout
       activeSlug="news"
       eyebrow={{ en: "FINANCE INTELLIGENCE", fr: "INTELLIGENCE FINANCIÈRE" }}
-      title={{ en: "Do not just read the news. Learn the financial system through it.", fr: "Ne lis pas seulement l’actualité. Apprends le système financier à travers elle." }}
-      description={{ en: "FinanceStudio is designed to turn major market stories into complete learning objects: facts, causes, mechanisms, cross-asset reaction, linked concepts, next catalysts and clearly labeled scenarios.", fr: "FinanceStudio transforme les grandes actualités de marché en objets d’apprentissage complets : faits, causes, mécanismes, réaction multi-actifs / cross-asset, concepts reliés, prochains catalyseurs et scénarios clairement identifiés." }}
+      title={{ en: "Your live financial journal: news, transmission and what comes next.", fr: "Ton journal financier en direct : actualité, transmission et ce qui vient ensuite." }}
+      description={{ en: "A continuously refreshed finance and geopolitics journal that separates reporting from analysis, explains market transmission channels and shows the evidence, assets and catalysts to monitor next.", fr: "Un journal finance et géopolitique actualisé automatiquement, qui sépare le reporting de l’analyse, explique les canaux de transmission vers les marchés et montre les preuves, actifs et catalyseurs à surveiller ensuite." }}
     >
       <div className="workspace-stack">
-        <LiveNewsFeed />
+        <LiveFinancialJournal />
 
         <section className="news-blueprint-panel">
           <div className="panel-heading"><div><span className="mini-label">{text("ARTICLE BLUEPRINT", "STRUCTURE D’ANALYSE")}</span><h2>{text("Every important story follows the same reasoning architecture", "Chaque actualité importante suit la même architecture de raisonnement")}</h2></div><span className="connection-badge"><span className="status-dot" /> {text("reasoning framework", "cadre de raisonnement")}</span></div>
