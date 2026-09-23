@@ -6,8 +6,67 @@ type Topic =
   | "geopolitics"
   | "policy";
 
+type SourceStatus = {
+  source: string;
+  ok: boolean;
+  fetched: number;
+  error?: string;
+};
+
+type FeedConfig = {
+  id: string;
+  label: string;
+  url: string;
+  domain: string;
+  sourceCountry: string;
+  defaultTopics: Topic[];
+};
+
 const financeQuery =
   '(inflation OR stocks OR bonds OR earnings OR "Federal Reserve" OR ECB OR tariffs OR sanctions OR oil OR OPEC OR war OR conflict OR shipping OR currencies OR merger OR regulation OR budget OR "central bank") sourcelang:english';
+
+const officialFeeds: FeedConfig[] = [
+  {
+    id: "federal-reserve",
+    label: "Federal Reserve Board",
+    url: "https://www.federalreserve.gov/feeds/press_all.xml",
+    domain: "federalreserve.gov",
+    sourceCountry: "UnitedStates",
+    defaultTopics: ["central-banks", "policy", "macro", "markets"],
+  },
+  {
+    id: "ecb",
+    label: "European Central Bank",
+    url: "https://www.ecb.europa.eu/rss/press.html",
+    domain: "ecb.europa.eu",
+    sourceCountry: "EuropeanUnion",
+    defaultTopics: ["central-banks", "policy", "macro", "markets"],
+  },
+  {
+    id: "sec",
+    label: "U.S. Securities and Exchange Commission",
+    url: "https://www.sec.gov/news/pressreleases.rss",
+    domain: "sec.gov",
+    sourceCountry: "UnitedStates",
+    defaultTopics: ["policy", "companies", "markets"],
+  },
+  {
+    id: "eu-council",
+    label: "European Council / Council of the EU",
+    url: "https://www.consilium.europa.eu/en/rss/pressreleases.ashx",
+    domain: "consilium.europa.eu",
+    sourceCountry: "EuropeanUnion",
+    defaultTopics: ["geopolitics", "policy", "macro"],
+  },
+  {
+    id: "bank-of-england",
+    label: "Bank of England",
+    url: "https://www.bankofengland.co.uk/rss/news",
+    domain: "bankofengland.co.uk",
+    sourceCountry: "UnitedKingdom",
+    defaultTopics: ["central-banks", "policy", "macro", "markets"],
+  },
+];
 
 const categorySignals: Record<Topic, string[]> = {
   markets: [
@@ -90,10 +149,72 @@ function normalizeGdeltDate(value: string | undefined) {
   return year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + "Z";
 }
 
+function normalizeDate(value: string) {
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? "" : parsed.toISOString();
+}
+
 function topicsForTitle(title: string) {
   const normalized = " " + title.toLowerCase() + " ";
   return (Object.keys(categorySignals) as Topic[]).filter((topic) =>
     categorySignals[topic].some((signal) => normalized.includes(signal)),
+  );
+}
+
+function mergeTopics(primary: Topic[], detected: Topic[]) {
+  return Array.from(new Set([...primary, ...detected]));
+}
+
+function decodeXml(value: string) {
+  return value
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) =>
+      String.fromCodePoint(Number.parseInt(hex, 16)),
+    )
+    .replace(/&#(\d+);/g, (_, dec) =>
+      String.fromCodePoint(Number.parseInt(dec, 10)),
+    )
+    .trim();
+}
+
+function stripTags(value: string) {
+  return decodeXml(value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " "));
+}
+
+function tagValue(block: string, names: string[]) {
+  for (const name of names) {
+    const match = block.match(
+      new RegExp("<" + name + "(?:\\s[^>]*)?>([\\s\\S]*?)<\\/" + name + ">", "i"),
+    );
+    if (match?.[1]) return stripTags(match[1]);
+  }
+  return "";
+}
+
+function linkValue(block: string) {
+  const direct = tagValue(block, ["link"]);
+  if (direct && /^https?:\/\//i.test(direct)) return direct;
+
+  const atom = block.match(/<link\b[^>]*\bhref=["']([^"']+)["'][^>]*>/i);
+  if (atom?.[1]) return decodeXml(atom[1]);
+
+  const guid = tagValue(block, ["guid", "id"]);
+  if (/^https?:\/\//i.test(guid)) return guid;
+
+  return "";
+}
+
+function feedBlocks(xml: string) {
+  const itemMatches = Array.from(xml.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/gi));
+  if (itemMatches.length) return itemMatches.map((match) => match[1]);
+
+  return Array.from(xml.matchAll(/<entry\b[^>]*>([\s\S]*?)<\/entry>/gi)).map(
+    (match) => match[1],
   );
 }
 
@@ -147,18 +268,174 @@ async function requestGdelt() {
     format: "json",
   });
 
-  const endpoint =
-    "https://api.gdeltproject.org/api/v2/doc/doc?" + params.toString();
-
-  const request = () =>
-    fetch(endpoint, {
+  return fetch(
+    "https://api.gdeltproject.org/api/v2/doc/doc?" + params.toString(),
+    {
       headers: {
         Accept: "application/json",
         "User-Agent": "FinanceStudio/1.0 educational-market-intelligence",
       },
+    },
+  );
+}
+
+async function collectGdelt(
+  rows: Map<string, Record<string, unknown>>,
+  now: string,
+): Promise<SourceStatus> {
+  try {
+    const source = await requestGdelt();
+    if (!source.ok) {
+      return {
+        source: "gdelt",
+        ok: false,
+        fetched: 0,
+        error: "HTTP " + source.status,
+      };
+    }
+
+    const contentType = source.headers.get("content-type") ?? "";
+    if (!contentType.includes("json")) {
+      const detail = (await source.text()).slice(0, 160);
+      return {
+        source: "gdelt",
+        ok: false,
+        fetched: 0,
+        error: "Non-JSON response: " + detail,
+      };
+    }
+
+    const payload = (await source.json()) as {
+      articles?: Array<{
+        url?: string;
+        title?: string;
+        seendate?: string;
+        socialimage?: string;
+        domain?: string;
+        language?: string;
+        sourcecountry?: string;
+      }>;
+    };
+
+    const articles = payload.articles ?? [];
+
+    for (const article of articles) {
+      const url = article.url?.trim();
+      const title = article.title?.trim();
+      const sourceSeenAt = normalizeGdeltDate(article.seendate);
+
+      if (!url || !title || !sourceSeenAt) continue;
+      if (!Number.isFinite(new Date(sourceSeenAt).getTime())) continue;
+
+      const topics = topicsForTitle(title);
+      if (!topics.length) continue;
+
+      const domain =
+        article.domain?.trim() ||
+        (() => {
+          try {
+            return new URL(url).hostname;
+          } catch {
+            return "";
+          }
+        })();
+
+      rows.set(url, {
+        url,
+        title,
+        domain: normalizeDomain(domain),
+        source_country: article.sourcecountry?.trim() ?? "",
+        source_language: article.language?.trim() ?? "",
+        image_url: article.socialimage?.trim() || null,
+        source_quality: isEstablishedDomain(domain) ? "established" : "external",
+        topics,
+        provider: "gdelt",
+        source_seen_at: sourceSeenAt,
+        last_seen_at: now,
+        updated_at: now,
+      });
+    }
+
+    return { source: "gdelt", ok: true, fetched: articles.length };
+  } catch (error) {
+    return {
+      source: "gdelt",
+      ok: false,
+      fetched: 0,
+      error: error instanceof Error ? error.message : "Unknown GDELT error",
+    };
+  }
+}
+
+async function collectOfficialFeed(
+  config: FeedConfig,
+  rows: Map<string, Record<string, unknown>>,
+  now: string,
+): Promise<SourceStatus> {
+  try {
+    const result = await fetch(config.url, {
+      headers: {
+        Accept: "application/rss+xml, application/atom+xml, text/xml, application/xml",
+        "User-Agent": "FinanceStudio/1.0 financial-news-reader",
+      },
     });
 
-  return request();
+    if (!result.ok) {
+      return {
+        source: config.id,
+        ok: false,
+        fetched: 0,
+        error: "HTTP " + result.status,
+      };
+    }
+
+    const xml = await result.text();
+    const blocks = feedBlocks(xml);
+    const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
+    let accepted = 0;
+
+    for (const block of blocks) {
+      const title = tagValue(block, ["title"]);
+      const url = linkValue(block);
+      const publishedAt = normalizeDate(
+        tagValue(block, ["pubDate", "published", "updated", "dc:date", "date"]),
+      );
+
+      if (!title || !url || !publishedAt) continue;
+      if (new Date(publishedAt).getTime() < cutoff) continue;
+
+      const topics = mergeTopics(config.defaultTopics, topicsForTitle(title));
+
+      rows.set(url, {
+        url,
+        title,
+        domain: config.domain,
+        source_country: config.sourceCountry,
+        source_language: "English",
+        image_url: null,
+        source_quality: "primary",
+        topics,
+        provider: "official-rss:" + config.id,
+        source_seen_at: publishedAt,
+        last_seen_at: now,
+        updated_at: now,
+      });
+      accepted += 1;
+    }
+
+    return {
+      source: config.id,
+      ok: true,
+      fetched: accepted,
+    };
+  } catch (error) {
+    return {
+      source: config.id,
+      ok: false,
+      fetched: 0,
+      error: error instanceof Error ? error.message : "Unknown RSS error",
+    };
+  }
 }
 
 Deno.serve(async (req: Request) => {
@@ -177,73 +454,23 @@ Deno.serve(async (req: Request) => {
     });
   }
 
-  let fetchedCount = 0;
+  const now = new Date().toISOString();
+  const rows = new Map<string, Record<string, unknown>>();
+
+  const statuses = await Promise.all([
+    collectGdelt(rows, now),
+    ...officialFeeds.map((feed) => collectOfficialFeed(feed, rows, now)),
+  ]);
+
+  const fetchedCount = statuses.reduce((sum, item) => sum + item.fetched, 0);
+  const archivedRows = Array.from(rows.values());
+  const successfulSources = statuses.filter((item) => item.ok).length;
+  const warnings = statuses
+    .filter((item) => !item.ok)
+    .map((item) => item.source + ": " + (item.error ?? "unknown error"));
 
   try {
-    const source = await requestGdelt();
-
-    if (!source.ok) {
-      throw new Error("GDELT request failed: " + source.status);
-    }
-
-    const payload = (await source.json()) as {
-      articles?: Array<{
-        url?: string;
-        title?: string;
-        seendate?: string;
-        socialimage?: string;
-        domain?: string;
-        language?: string;
-        sourcecountry?: string;
-      }>;
-    };
-
-    fetchedCount = payload.articles?.length ?? 0;
-    const now = new Date().toISOString();
-    const unique = new Map<string, Record<string, unknown>>();
-
-    for (const article of payload.articles ?? []) {
-      const url = article.url?.trim();
-      const title = article.title?.trim();
-      const sourceSeenAt = normalizeGdeltDate(article.seendate);
-
-      if (!url || !title || !sourceSeenAt) continue;
-
-      const seenTime = new Date(sourceSeenAt).getTime();
-      if (!Number.isFinite(seenTime)) continue;
-
-      const topics = topicsForTitle(title);
-      if (!topics.length) continue;
-
-      const domain =
-        article.domain?.trim() ||
-        (() => {
-          try {
-            return new URL(url).hostname;
-          } catch {
-            return "";
-          }
-        })();
-
-      unique.set(url, {
-        url,
-        title,
-        domain: normalizeDomain(domain),
-        source_country: article.sourcecountry?.trim() ?? "",
-        source_language: article.language?.trim() ?? "",
-        image_url: article.socialimage?.trim() || null,
-        source_quality: isEstablishedDomain(domain) ? "established" : "external",
-        topics,
-        provider: "gdelt",
-        source_seen_at: sourceSeenAt,
-        last_seen_at: now,
-        updated_at: now,
-      });
-    }
-
-    const rows = Array.from(unique.values());
-
-    if (rows.length) {
+    if (archivedRows.length) {
       const archive = await adminFetch(
         "/rest/v1/news_archive?on_conflict=url",
         {
@@ -251,7 +478,7 @@ Deno.serve(async (req: Request) => {
           headers: {
             Prefer: "resolution=merge-duplicates,return=minimal",
           },
-          body: JSON.stringify(rows),
+          body: JSON.stringify(archivedRows),
         },
       );
 
@@ -263,12 +490,32 @@ Deno.serve(async (req: Request) => {
       }
     }
 
-    await logRun("success", fetchedCount, rows.length);
+    if (successfulSources === 0) {
+      const message = warnings.join(" | ") || "All news sources failed.";
+      await logRun("error", fetchedCount, 0, message);
+      return response(503, {
+        ok: false,
+        error: message,
+        fetchedCount,
+        archivedCount: 0,
+        sources: statuses,
+      });
+    }
+
+    await logRun(
+      "success",
+      fetchedCount,
+      archivedRows.length,
+      warnings.length ? "Partial source warnings: " + warnings.join(" | ") : undefined,
+    );
 
     return response(200, {
       ok: true,
       fetchedCount,
-      archivedCount: rows.length,
+      archivedCount: archivedRows.length,
+      successfulSources,
+      totalSources: statuses.length,
+      sources: statuses,
       completedAt: now,
     });
   } catch (error) {
@@ -280,6 +527,8 @@ Deno.serve(async (req: Request) => {
       ok: false,
       error: message,
       fetchedCount,
+      archivedCount: 0,
+      sources: statuses,
     });
   }
 });
