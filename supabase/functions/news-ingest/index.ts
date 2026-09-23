@@ -7,7 +7,7 @@ type Topic =
   | "policy";
 
 const financeQuery =
-  '("stock market" OR inflation OR "Federal Reserve" OR ECB OR "Bank of England" OR "Bank of Japan" OR earnings OR merger OR IPO OR bonds OR commodities OR currencies OR tariff OR sanctions OR "trade war" OR "export controls" OR oil OR OPEC OR ceasefire OR conflict OR war OR shipping OR "government shutdown" OR budget OR "debt ceiling" OR regulation OR antitrust OR "fiscal policy") sourcelang:english';
+  '(inflation OR stocks OR bonds OR earnings OR "Federal Reserve" OR ECB OR tariffs OR sanctions OR oil OR OPEC OR war OR conflict OR shipping OR currencies OR merger OR regulation OR budget OR "central bank") sourcelang:english';
 
 const categorySignals: Record<Topic, string[]> = {
   markets: [
