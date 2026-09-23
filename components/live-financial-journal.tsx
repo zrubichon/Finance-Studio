@@ -563,8 +563,8 @@ export default function LiveFinancialJournal() {
       <div className="journal-refresh-note">
         <span>
           {text(
-            "Automatic refresh while this page is open · source cache ≈ 15 min",
-            "Actualisation automatique tant que cette page est ouverte · cache source ≈ 15 min",
+            "Screen refresh every 5 min · persistent archive collected hourly in the background",
+            "Rafraîchissement écran toutes les 5 min · archive persistante collectée chaque heure en arrière-plan",
           )}
         </span>
         {payload?.updatedAt ? (
@@ -576,8 +576,8 @@ export default function LiveFinancialJournal() {
 
       <p className="inline-status">
         {text(
-          "Region filtering uses the publisher country returned by GDELT. It helps compare reporting ecosystems, but it is not necessarily the geography of the underlying event.",
-          "Le filtre régional utilise le pays du média renvoyé par GDELT. Il aide à comparer les écosystèmes de reporting, mais ce n’est pas nécessairement la géographie de l’événement sous-jacent.",
+          "Timeline timestamps use GDELT's source-seen/indexing time when the publisher's exact publication time is not available. Region filtering uses the publisher country returned by GDELT; neither field should be treated as the event location or an official event timestamp.",
+          "Les heures de la chronologie utilisent l’heure d’indexation / source-seen de GDELT lorsque l’heure exacte de publication du média n’est pas disponible. Le filtre régional utilise le pays du média renvoyé par GDELT ; aucun de ces champs ne doit être traité comme le lieu de l’événement ou son heure officielle.",
         )}
       </p>
 
