@@ -900,5 +900,16 @@ export async function getNewsData(
     return archived.data;
   }
 
-  return getLiveNewsData(category);
+  return {
+    category,
+    updatedAt: new Date().toISOString(),
+    items: [],
+    provider: {
+      id: "gdelt",
+      label: "GDELT · FinanceStudio hourly archive",
+      status: "error",
+      message:
+        "The persistent archive is active but has not completed a successful source ingestion yet. The external provider is currently rate-limited, and FinanceStudio will not generate synthetic headlines.",
+    },
+  };
 }
