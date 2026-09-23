@@ -1,3 +1,5 @@
+import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from "@/lib/supabase/config";
+
 export type NewsCategory =
   | "all"
   | "markets"
@@ -646,7 +648,118 @@ async function requestGdelt(endpoint: string) {
   return response;
 }
 
-export async function getNewsData(
+type ArchivedNewsRow = {
+  url: string;
+  title: string;
+  domain: string;
+  source_country: string;
+  source_language: string;
+  image_url: string | null;
+  source_quality: "established" | "external";
+  topics: string[];
+  source_seen_at: string;
+  last_seen_at: string;
+};
+
+async function getArchivedNewsData(category: NewsCategory) {
+  const cutoff = new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString();
+  const params = new URLSearchParams({
+    select:
+      "url,title,domain,source_country,source_language,image_url,source_quality,topics,source_seen_at,last_seen_at",
+    source_seen_at: `gte.${cutoff}`,
+    order: "source_seen_at.desc",
+    limit: "300",
+  });
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/news_archive?${params.toString()}`,
+      {
+        headers: {
+          apikey: SUPABASE_PUBLISHABLE_KEY,
+        },
+        next: { revalidate: 300 },
+      },
+    );
+
+    if (!response.ok) {
+      return { available: false, data: null };
+    }
+
+    const rows = (await response.json()) as ArchivedNewsRow[];
+    if (!rows.length) {
+      return { available: false, data: null };
+    }
+
+    const uniqueTitles = new Set<string>();
+    const items = rows
+      .map((row): NewsItem | null => {
+        const topics = (row.topics ?? []).filter(
+          (topic): topic is Exclude<NewsCategory, "all"> =>
+            topic === "markets" ||
+            topic === "macro" ||
+            topic === "central-banks" ||
+            topic === "companies" ||
+            topic === "geopolitics" ||
+            topic === "policy",
+        );
+
+        if (!topics.length) return null;
+
+        return {
+          id: row.url,
+          title: row.title,
+          url: row.url,
+          domain: row.domain,
+          publishedAt: row.source_seen_at,
+          sourceCountry: row.source_country,
+          language: row.source_language,
+          imageUrl: row.image_url,
+          sourceQuality: row.source_quality,
+          topics,
+          insight: buildInsight(row.title, topics),
+        };
+      })
+      .filter((item): item is NewsItem => Boolean(item))
+      .filter((item) => {
+        const key = normalizeTitle(item.title);
+        if (!key || uniqueTitles.has(key)) return false;
+        uniqueTitles.add(key);
+        return true;
+      })
+      .filter((item) =>
+        category === "all" ? true : item.topics.includes(category),
+      )
+      .slice(0, 100);
+
+    const latestIngestedAt = rows
+      .map((row) => row.last_seen_at)
+      .filter(Boolean)
+      .sort()
+      .at(-1);
+
+    return {
+      available: true,
+      data: {
+        category,
+        updatedAt: latestIngestedAt ?? new Date().toISOString(),
+        items,
+        provider: {
+          id: "gdelt" as const,
+          label: "GDELT · FinanceStudio hourly archive",
+          status: items.length ? ("live" as const) : ("empty" as const),
+          message: items.length
+            ? `${items.length} archived stories loaded from FinanceStudio's persistent hourly journal.`
+            : "The archive is active, but no story matches this category in the selected window.",
+        },
+      } satisfies NewsDataResponse,
+    };
+  } catch {
+    return { available: false, data: null };
+  }
+}
+
+async function getLiveNewsData(
   category: NewsCategory,
 ): Promise<NewsDataResponse> {
   const params = new URLSearchParams({
@@ -775,4 +888,17 @@ export async function getNewsData(
       },
     };
   }
+}
+
+
+export async function getNewsData(
+  category: NewsCategory,
+): Promise<NewsDataResponse> {
+  const archived = await getArchivedNewsData(category);
+
+  if (archived.available && archived.data) {
+    return archived.data;
+  }
+
+  return getLiveNewsData(category);
 }
