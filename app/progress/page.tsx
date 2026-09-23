@@ -252,9 +252,11 @@ export default async function ProgressPage() {
             </div>
             <span className="connection-badge">
               {user
-                ? isFrench
-                  ? `${reviewQueue.length} priorité${reviewQueue.length === 1 ? "" : "s"} affichée${reviewQueue.length === 1 ? "" : "s"}`
-                  : `${reviewQueue.length} priorit${reviewQueue.length === 1 ? "y" : "ies"} shown`
+                ? !masteryAvailable
+                  ? t("Review data unavailable", "Données de révision indisponibles")
+                  : isFrench
+                    ? `${reviewQueue.length} priorité${reviewQueue.length === 1 ? "" : "s"} affichée${reviewQueue.length === 1 ? "" : "s"}`
+                    : `${reviewQueue.length} priorit${reviewQueue.length === 1 ? "y" : "ies"} shown`
                 : t("Sign in to build your queue", "Connecte-toi pour créer ta file")}
             </span>
           </div>
