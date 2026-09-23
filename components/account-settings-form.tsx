@@ -93,6 +93,7 @@ export default function AccountSettingsForm({
             preferred_language: language.toLowerCase(),
             explanation_level: level,
             target_role: cleanRole || null,
+            onboarding_completed: true,
             updated_at: now,
           },
           { onConflict: "user_id" },
