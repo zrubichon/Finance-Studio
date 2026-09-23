@@ -25,9 +25,27 @@ function metadataString(
 }
 
 function itemHref(item: SavedItem) {
-  const href = metadataString(item.metadata, "href");
-  if (href) return href;
-  if (item.item_type === "lesson") return `/university/${item.item_key}`;
+  if (item.item_type === "lesson") {
+    return `/university/${encodeURIComponent(item.item_key)}`;
+  }
+
+  if (item.item_type === "dictionary") {
+    return `/dictionary?q=${encodeURIComponent(item.item_key)}`;
+  }
+
+  if (item.item_type === "news") {
+    const href = metadataString(item.metadata, "href");
+
+    try {
+      const url = new URL(href);
+      if (url.protocol === "https:" || url.protocol === "http:") {
+        return url.toString();
+      }
+    } catch {
+      return "#";
+    }
+  }
+
   return "#";
 }
 
