@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { createClient } from "@/lib/supabase/client";
 import { recordDailyActivity } from "@/lib/record-activity";
+import SaveItemButton from "@/components/save-item-button";
 import type { FinanceLesson, TeachingMode } from "@/lib/lesson-content";
 
 type ProgressStatus = "not_started" | "in_progress" | "completed";
@@ -309,6 +310,20 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
           <span className="mini-label">{loc(lesson.year)} · {loc(lesson.domain)}</span>
           <h1>{loc(lesson.title)}</h1>
           <p>{loc(lesson.subtitle)}</p>
+        </div>
+        <div className="lesson-hero-save">
+          <SaveItemButton
+            itemType="lesson"
+            itemKey={lesson.slug}
+            metadata={{
+              titleEn: lesson.title.en,
+              titleFr: lesson.title.fr,
+              subtitleEn: lesson.subtitle.en,
+              subtitleFr: lesson.subtitle.fr,
+              href: `/university/${lesson.slug}`,
+              source: "Finance University",
+            }}
+          />
         </div>
         <div className="lesson-hero-meta">
           <div><span>{text("Estimated time", "Temps estimé")}</span><strong>{loc(lesson.duration)}</strong></div>
