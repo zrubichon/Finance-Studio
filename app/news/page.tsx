@@ -3,6 +3,7 @@
 import SectionLayout from "@/components/section-layout";
 import { useLanguage } from "@/components/language-provider";
 import LiveFinancialJournal from "@/components/live-financial-journal";
+import NewsLearningBridge from "@/components/news-learning-bridge";
 
 type Localized = { en: string; fr: string };
 
@@ -52,6 +53,7 @@ export default function NewsPage() {
     >
       <div className="workspace-stack">
         <LiveFinancialJournal />
+        <NewsLearningBridge />
 
         <section className="news-blueprint-panel">
           <div className="panel-heading"><div><span className="mini-label">{text("ARTICLE BLUEPRINT", "STRUCTURE D’ANALYSE")}</span><h2>{text("Every important story follows the same reasoning architecture", "Chaque actualité importante suit la même architecture de raisonnement")}</h2></div><span className="connection-badge"><span className="status-dot" /> {text("reasoning framework", "cadre de raisonnement")}</span></div>
