@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/components/language-provider";
+import { allCurriculumModules } from "@/lib/curriculum";
 
 type SavedItem = {
   id: string;
@@ -11,9 +12,24 @@ type SavedItem = {
   item_key: string;
   metadata: Record<string, unknown>;
   created_at: string;
+  source?: "saved" | "progress";
+  progress_percent?: number;
+  progress_status?: string;
+};
+
+type ProgressRow = {
+  lesson_slug: string;
+  status: string;
+  progress_percent: number | null;
+  last_opened_at: string | null;
+  updated_at: string | null;
 };
 
 type Filter = "all" | "lesson" | "news" | "dictionary";
+
+const curriculumBySlug = new Map(
+  allCurriculumModules().map((module) => [module.slug, module]),
+);
 
 function metadataString(
   metadata: Record<string, unknown>,
@@ -49,6 +65,35 @@ function itemHref(item: SavedItem) {
   return "#";
 }
 
+function progressItem(row: ProgressRow): SavedItem {
+  const module = curriculumBySlug.get(row.lesson_slug);
+  const progress = Number(row.progress_percent ?? 0);
+  const createdAt =
+    row.last_opened_at ?? row.updated_at ?? new Date(0).toISOString();
+
+  return {
+    id: `progress:${row.lesson_slug}`,
+    item_type: "lesson",
+    item_key: row.lesson_slug,
+    created_at: createdAt,
+    source: "progress",
+    progress_percent: progress,
+    progress_status: row.status,
+    metadata: {
+      titleEn: module?.title ?? row.lesson_slug,
+      titleFr: module?.titleFr ?? module?.title ?? row.lesson_slug,
+      subtitleEn: module
+        ? `${module.year} · ${module.domain}`
+        : "Finance University",
+      subtitleFr: module
+        ? `${module.year} · ${module.domain}`
+        : "Finance University",
+      href: `/university/${row.lesson_slug}`,
+      source: "Finance University",
+    },
+  };
+}
+
 export default function SavedLibrary() {
   const { isFrench, text } = useLanguage();
   const [items, setItems] = useState<SavedItem[]>([]);
@@ -78,23 +123,58 @@ export default function SavedLibrary() {
 
       setAuthenticated(true);
 
-      const { data, error } = await supabase
-        .from("saved_items")
-        .select("id,item_type,item_key,metadata,created_at")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: false });
+      const [savedResult, progressResult] = await Promise.all([
+        supabase
+          .from("saved_items")
+          .select("id,item_type,item_key,metadata,created_at")
+          .eq("user_id", user.id)
+          .order("created_at", { ascending: false }),
+        supabase
+          .from("course_progress")
+          .select("lesson_slug,status,progress_percent,last_opened_at,updated_at")
+          .eq("user_id", user.id)
+          .gt("progress_percent", 0)
+          .order("last_opened_at", { ascending: false }),
+      ]);
 
       if (!active) return;
 
-      if (error) {
+      if (savedResult.error && progressResult.error) {
         setStatus(
           text(
-            "Your saved items could not be loaded.",
-            "Tes éléments enregistrés n’ont pas pu être chargés.",
+            "Your library could not be loaded.",
+            "Ta bibliothèque n’a pas pu être chargée.",
           ),
         );
+        setItems([]);
       } else {
-        setItems((data ?? []) as SavedItem[]);
+        const savedItems = ((savedResult.data ?? []) as SavedItem[]).map(
+          (item) => ({ ...item, source: "saved" as const }),
+        );
+        const savedLessonSlugs = new Set(
+          savedItems
+            .filter((item) => item.item_type === "lesson")
+            .map((item) => item.item_key),
+        );
+        const studiedLessons = ((progressResult.data ?? []) as ProgressRow[])
+          .filter((row) => !savedLessonSlugs.has(row.lesson_slug))
+          .map(progressItem);
+
+        const merged = [...savedItems, ...studiedLessons].sort(
+          (a, b) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+        );
+
+        setItems(merged);
+
+        if (savedResult.error || progressResult.error) {
+          setStatus(
+            text(
+              "Part of your library could not be synchronized, but available items are shown.",
+              "Une partie de ta bibliothèque n’a pas pu être synchronisée, mais les éléments disponibles sont affichés.",
+            ),
+          );
+        }
       }
 
       setLoading(false);
@@ -139,7 +219,7 @@ export default function SavedLibrary() {
   );
 
   async function removeItem(item: SavedItem) {
-    if (removingId) return;
+    if (removingId || item.source === "progress") return;
 
     setRemovingId(item.id);
     setStatus("");
@@ -193,8 +273,8 @@ export default function SavedLibrary() {
         </h2>
         <p>
           {text(
-            "Saved lessons, articles and dictionary terms stay attached to your account.",
-            "Les cours, articles et termes du dictionnaire enregistrés restent liés à ton compte.",
+            "Lessons you study appear automatically. Saved articles and dictionary terms stay attached to your account too.",
+            "Les cours que tu étudies apparaissent automatiquement. Les articles et termes du dictionnaire enregistrés restent aussi liés à ton compte.",
           )}
         </p>
         <Link className="full-button" href="/login">
@@ -267,27 +347,37 @@ export default function SavedLibrary() {
             );
             const source = metadataString(item.metadata, "source");
             const href = itemHref(item);
+            const isStudiedLesson =
+              item.item_type === "lesson" && item.source === "progress";
 
             return (
               <article className="saved-library-card" key={item.id}>
                 <div className="saved-library-card-head">
                   <span className="mini-label">
                     {item.item_type === "lesson"
-                      ? text("LESSON", "COURS")
+                      ? isStudiedLesson
+                        ? text("STUDIED LESSON", "COURS ÉTUDIÉ")
+                        : text("LESSON", "COURS")
                       : item.item_type === "news"
                         ? text("NEWS", "ACTUALITÉ")
                         : text("DICTIONARY", "DICTIONNAIRE")}
                   </span>
-                  <button
-                    type="button"
-                    className="saved-remove-button"
-                    disabled={removingId === item.id}
-                    onClick={() => void removeItem(item)}
-                  >
-                    {removingId === item.id
-                      ? text("Removing…", "Suppression…")
-                      : text("Remove", "Supprimer")}
-                  </button>
+                  {item.source !== "progress" ? (
+                    <button
+                      type="button"
+                      className="saved-remove-button"
+                      disabled={removingId === item.id}
+                      onClick={() => void removeItem(item)}
+                    >
+                      {removingId === item.id
+                        ? text("Removing…", "Suppression…")
+                        : text("Remove", "Supprimer")}
+                    </button>
+                  ) : item.progress_percent !== undefined ? (
+                    <span className="mini-label">
+                      {Math.round(item.progress_percent)}%
+                    </span>
+                  ) : null}
                 </div>
 
                 <h2>{isFrench ? titleFr : titleEn}</h2>
@@ -296,7 +386,15 @@ export default function SavedLibrary() {
                   <p>{isFrench ? subtitleFr : subtitleEn}</p>
                 ) : null}
 
-                {source ? <small>{source}</small> : null}
+                {isStudiedLesson ? (
+                  <small>
+                    {item.progress_status === "completed"
+                      ? text("Completed", "Terminé")
+                      : text("In progress", "En cours")}
+                  </small>
+                ) : source ? (
+                  <small>{source}</small>
+                ) : null}
 
                 {href !== "#" ? (
                   href.startsWith("http") ? (
@@ -327,15 +425,15 @@ export default function SavedLibrary() {
                   "Ta bibliothèque est vide.",
                 )
               : text(
-                  "No saved item matches this filter.",
-                  "Aucun élément enregistré ne correspond à ce filtre.",
+                  "No library item matches this filter.",
+                  "Aucun élément de la bibliothèque ne correspond à ce filtre.",
                 )}
           </strong>
           <p>
             {items.length === 0
               ? text(
-                  "Use the Save button on lessons, news and dictionary terms to build it.",
-                  "Utilise le bouton Enregistrer sur les cours, actualités et termes du dictionnaire pour la remplir.",
+                  "Start a Finance University lesson or save a news story or dictionary term to build it.",
+                  "Commence un cours de Finance University ou enregistre une actualité ou un terme du dictionnaire pour la remplir.",
                 )
               : text(
                   "Try another content type or search term.",
