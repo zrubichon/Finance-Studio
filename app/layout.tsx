@@ -8,6 +8,7 @@ import "./phase-two.css";
 import "./auth.css";
 import "./phase-three.css";
 import "./course.css";
+import "./readability.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
