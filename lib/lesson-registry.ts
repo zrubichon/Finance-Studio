@@ -3,6 +3,8 @@ import { salesTradingLesson } from "./sales-trading-content";
 import { assetManagementLesson } from "./asset-management-content";
 import { wealthManagementLesson } from "./wealth-management-content";
 import { equityResearchLesson } from "./equity-research-content";
+import { year1CompletionLessons } from "./year-1-complete-content";
+import { year2CompletionLessons } from "./year-2-complete-content";
 import { year3CompletionLessons } from "./year-3-complete-content";
 import { year4CompletionLessons } from "./year-4-complete-content";
 import {
@@ -11,6 +13,8 @@ import {
 } from "./lesson-content";
 
 const dedicatedLessons: FinanceLesson[] = [
+  ...year1CompletionLessons,
+  ...year2CompletionLessons,
   salesTradingLesson,
   assetManagementLesson,
   wealthManagementLesson,
