@@ -1,0 +1,1135 @@
+/* FinanceStudio readability and layout pass.
+   Loaded last so existing feature CSS keeps its visual identity while text and spacing remain readable. */
+
+html {
+  font-size: 16px;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+canvas,
+video {
+  max-width: 100%;
+}
+
+p,
+li,
+label,
+td,
+th,
+button,
+input,
+textarea,
+select,
+summary {
+  overflow-wrap: anywhere;
+}
+
+small {
+  font-size: 0.84rem !important;
+  line-height: 1.45 !important;
+}
+
+button,
+input,
+textarea,
+select {
+  font-size: 0.94rem !important;
+}
+
+/* Main application shell */
+.app-shell,
+.section-shell {
+  grid-template-columns: 286px minmax(0, 1fr);
+}
+
+.sidebar,
+.section-sidebar {
+  padding: 30px 20px 24px;
+  overflow-y: auto;
+}
+
+.brand {
+  font-size: 1.18rem !important;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  font-size: 0.82rem !important;
+}
+
+.sidebar-kicker {
+  font-size: 0.72rem !important;
+  margin: 26px 10px 12px;
+}
+
+.primary-nav,
+.section-nav {
+  gap: 6px;
+}
+
+.nav-link,
+.section-nav a {
+  min-width: 0;
+  padding: 11px 12px;
+  gap: 11px;
+  font-size: 0.92rem !important;
+  line-height: 1.25;
+}
+
+.nav-link span,
+.section-nav a span {
+  flex: 0 0 22px;
+  width: 22px;
+  font-size: 0.95rem !important;
+}
+
+.sidebar-bottom {
+  gap: 12px;
+  padding-top: 20px;
+}
+
+.sidebar-bottom strong {
+  font-size: 0.88rem !important;
+}
+
+.sidebar-bottom p,
+.progress-ring span {
+  font-size: 0.76rem !important;
+}
+
+.main-canvas {
+  padding: 36px clamp(24px, 3.2vw, 52px) 64px;
+}
+
+.topbar {
+  gap: 32px;
+}
+
+.topbar > div:first-child {
+  min-width: 0;
+}
+
+.date-line {
+  font-size: 0.76rem !important;
+}
+
+.topbar h1 {
+  font-size: clamp(2.45rem, 3.3vw, 3.65rem) !important;
+  line-height: 1.02;
+}
+
+.hero-subtitle {
+  max-width: 820px;
+  font-size: 1rem !important;
+  line-height: 1.65;
+}
+
+.top-controls {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+}
+
+.segmented button,
+.profile-chip b {
+  font-size: 0.82rem !important;
+}
+
+.profile-chip span {
+  font-size: 0.76rem !important;
+}
+
+.toolbar-card {
+  margin-top: 28px;
+  margin-bottom: 24px;
+  padding: 17px 18px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.toolbar-card > div {
+  min-width: 0;
+}
+
+.toolbar-label,
+.eyebrow,
+.feature-card .mini-label,
+.mini-label,
+.control-label {
+  font-size: 0.76rem !important;
+  line-height: 1.25;
+}
+
+.level-selector,
+.theme-buttons {
+  gap: 8px;
+}
+
+.level-selector button,
+.theme-buttons button {
+  padding: 8px 11px;
+  font-size: 0.82rem !important;
+  min-height: 36px;
+}
+
+.dashboard-grid {
+  gap: 22px;
+}
+
+.card,
+.feature-card,
+.career-principle-card,
+.paper-portfolio-card,
+.risk-rules-card,
+.career-group,
+.career-recruiting-panel,
+.thesis-panel,
+.attribution-panel,
+.professor-review-strip,
+.professor-demo-question,
+.professor-response-card,
+.misconception-panel,
+.dictionary-toolbar,
+.knowledge-map-panel,
+.next-best-panel,
+.theme-control-panel,
+.theme-preview-panel,
+.learning-account-strip,
+.answer-practice-panel,
+.thesis-form-panel,
+.saved-theses-panel {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.card {
+  padding: 26px;
+}
+
+.card-head,
+.markets-head,
+.lesson-quiz-heading,
+.section-top-row,
+.learning-account-strip,
+.saved-theses-grid article > div {
+  flex-wrap: wrap;
+}
+
+.card h2 {
+  font-size: 1.65rem !important;
+  line-height: 1.16;
+}
+
+.pill {
+  padding: 6px 10px;
+  font-size: 0.76rem !important;
+}
+
+.daily-copy,
+.interview-card > p,
+.professor-card > p,
+.feature-card p,
+.career-principle-card p,
+.paper-portfolio-card p,
+.risk-rules-card p,
+.career-recruiting-panel p,
+.role-card p,
+.knowledge-domain-card p,
+.professor-review-strip p,
+.professor-demo-question p,
+.misconception-panel p,
+.next-best-panel p,
+.theme-preview-copy p,
+.learning-account-strip p,
+.saved-theses-grid article p {
+  font-size: 0.96rem !important;
+  line-height: 1.65 !important;
+}
+
+.concept-strip,
+.concept-strip strong {
+  font-size: 0.88rem !important;
+}
+
+.flow-diagram {
+  gap: 12px;
+}
+
+.flow-diagram > div {
+  min-width: 0;
+  padding: 15px 12px;
+}
+
+.flow-diagram small,
+.market-row em,
+.data-note,
+.lesson-list small,
+.news-stack small,
+.feed-status {
+  font-size: 0.78rem !important;
+}
+
+.flow-diagram strong {
+  font-size: 1.3rem !important;
+}
+
+.flow-diagram > span {
+  font-size: 1rem !important;
+}
+
+.card-actions {
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.card-actions a,
+.card-actions button,
+.learning-card > a,
+.news-card > a,
+.full-button,
+.feature-card button {
+  font-size: 0.84rem !important;
+  line-height: 1.3;
+}
+
+.full-button {
+  min-height: 42px;
+  padding: 12px 14px;
+}
+
+.answer-framework {
+  gap: 12px;
+}
+
+.answer-framework > div {
+  min-width: 0;
+}
+
+.answer-framework span {
+  width: 30px;
+  height: 30px;
+  font-size: 0.76rem !important;
+}
+
+.answer-framework p {
+  margin-left: 40px;
+  font-size: 0.86rem !important;
+  line-height: 1.55;
+}
+
+.market-grid {
+  gap: 14px;
+}
+
+.market-group {
+  min-width: 0;
+  padding: 15px;
+}
+
+.market-group h3 {
+  font-size: 0.94rem !important;
+}
+
+.market-row {
+  gap: 10px;
+  padding: 10px 0;
+  font-size: 0.86rem !important;
+  flex-wrap: wrap;
+}
+
+.lesson-list > div,
+.news-stack > div {
+  gap: 12px;
+  padding: 12px 8px;
+}
+
+.lesson-list p,
+.news-stack p {
+  font-size: 0.88rem !important;
+  line-height: 1.45;
+}
+
+.check,
+.lesson-index {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  font-size: 0.76rem !important;
+}
+
+.news-stack span,
+.professor-options span,
+.skill-chip-row span,
+.related-row span,
+.numbered-checklist span,
+.thesis-question span,
+.portfolio-state-row span,
+.module-build-label,
+.module-item-copy small,
+.saved-theses-grid article span,
+.saved-theses-grid article small {
+  font-size: 0.78rem !important;
+}
+
+.professor-options {
+  gap: 8px;
+}
+
+.professor-options span,
+.skill-chip-row span,
+.related-row span {
+  padding: 7px 10px;
+}
+
+.section-main {
+  width: 100%;
+  max-width: 1280px;
+  padding: 60px clamp(28px, 5vw, 72px);
+  min-width: 0;
+}
+
+.back-link {
+  font-size: 0.86rem !important;
+}
+
+.section-main > h1 {
+  max-width: 920px;
+  font-size: clamp(2.7rem, 4.3vw, 4.35rem) !important;
+  line-height: 1.02;
+}
+
+.section-lead {
+  max-width: 860px;
+  font-size: 1.06rem !important;
+}
+
+.section-grid {
+  gap: 22px;
+  margin-top: 42px;
+}
+
+.feature-card {
+  padding: 26px;
+}
+
+.feature-card h2,
+.career-principle-card h2,
+.paper-portfolio-card h2,
+.risk-rules-card h2,
+.career-recruiting-panel h2,
+.thesis-panel h2,
+.attribution-panel h2,
+.professor-review-strip h2,
+.professor-demo-question h2,
+.misconception-panel h2,
+.knowledge-map-panel h2,
+.next-best-panel h2,
+.theme-preview-panel h2 {
+  font-size: 1.55rem !important;
+  line-height: 1.18 !important;
+}
+
+.role-grid,
+.knowledge-domain-grid,
+.career-intro-grid,
+.investing-hero-grid,
+.professor-demo-panel,
+.saved-theses-grid,
+.thesis-form {
+  gap: 16px;
+}
+
+.role-card,
+.knowledge-domain-card {
+  min-width: 0;
+  padding: 18px;
+}
+
+.role-card h3,
+.knowledge-domain-card h3 {
+  font-size: 1.24rem !important;
+}
+
+.numbered-checklist > div,
+.thesis-question {
+  align-items: flex-start;
+  padding: 12px 14px;
+}
+
+.numbered-checklist strong,
+.thesis-question strong,
+.portfolio-state-row strong {
+  font-size: 0.86rem !important;
+  line-height: 1.45;
+}
+
+.module-status-button {
+  font-size: 0.84rem !important;
+  padding: 9px 13px;
+  min-height: 38px;
+}
+
+.thesis-form label {
+  font-size: 0.92rem !important;
+}
+
+/* Course / Finance University */
+.lesson-shell {
+  padding: 32px clamp(20px, 4vw, 64px) 76px;
+}
+
+.lesson-topbar,
+.lesson-hero,
+.lesson-objectives-panel,
+.financial-system-map,
+.lesson-layout,
+.lesson-overview-flow,
+.lesson-progress-track {
+  width: min(1260px, 100%);
+}
+
+.lesson-topbar {
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.lesson-back {
+  font-size: 0.9rem !important;
+}
+
+.lesson-mode-switch {
+  flex-wrap: wrap;
+}
+
+.lesson-mode-switch button {
+  font-size: 0.84rem !important;
+  padding: 9px 13px;
+}
+
+.lesson-hero {
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.55fr);
+  gap: 34px;
+}
+
+.lesson-hero h1 {
+  font-size: clamp(2.6rem, 5vw, 4.45rem) !important;
+  line-height: 1.01;
+}
+
+.lesson-hero > div > p {
+  font-size: 1rem !important;
+  line-height: 1.75;
+}
+
+.lesson-hero-meta {
+  gap: 11px;
+}
+
+.lesson-hero-meta > div {
+  padding: 16px;
+}
+
+.lesson-hero-meta span,
+.lesson-objective-grid span,
+.system-map-node > span,
+.lesson-toc button > span,
+.lesson-explanation-label span,
+.lesson-formula-example > span,
+.lesson-flow-segment article > span,
+.quiz-score span {
+  font-size: 0.76rem !important;
+}
+
+.lesson-hero-meta strong,
+.system-map-node strong,
+.system-map-bridge strong,
+.lesson-flow-segment article > strong {
+  font-size: 0.92rem !important;
+  line-height: 1.4;
+}
+
+.lesson-objectives-panel {
+  gap: 30px;
+  padding: 28px;
+}
+
+.lesson-objectives-panel h2 {
+  font-size: 1.75rem !important;
+}
+
+.lesson-objective-grid {
+  gap: 11px;
+}
+
+.lesson-objective-grid > div {
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 10px;
+  padding: 15px;
+}
+
+.lesson-objective-grid p,
+.system-map-node small,
+.system-map-bridge small,
+.lesson-formula > p,
+.lesson-formula-example p,
+.lesson-flow-segment article > small,
+.lesson-comparison th,
+.lesson-comparison td {
+  font-size: 0.84rem !important;
+  line-height: 1.55 !important;
+}
+
+.financial-system-map {
+  gap: 14px;
+  padding: 20px;
+}
+
+.system-map-node {
+  min-width: 0;
+  padding: 18px;
+}
+
+.system-map-bridge {
+  min-width: 0;
+  gap: 10px;
+  padding: 12px;
+}
+
+.lesson-layout {
+  grid-template-columns: 285px minmax(0, 1fr);
+  gap: 26px;
+  margin-top: 26px;
+}
+
+.lesson-toc {
+  gap: 7px;
+  padding: 18px;
+}
+
+.lesson-toc button {
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 9px;
+  padding: 11px 12px;
+}
+
+.lesson-toc button strong {
+  font-size: 0.82rem !important;
+  line-height: 1.45;
+}
+
+.lesson-section-card,
+.lesson-quiz-panel {
+  min-width: 0;
+  padding: clamp(26px, 4vw, 44px);
+}
+
+.lesson-section-card > h2,
+.lesson-quiz-heading h2 {
+  font-size: clamp(2rem, 3.4vw, 3.15rem) !important;
+  line-height: 1.05;
+}
+
+.lesson-core-facts {
+  gap: 10px;
+  padding: 21px;
+}
+
+.lesson-core-facts p {
+  font-size: 0.94rem !important;
+  line-height: 1.7;
+}
+
+.lesson-explanation {
+  padding: 23px;
+}
+
+.lesson-explanation-label {
+  flex-wrap: wrap;
+}
+
+.lesson-explanation-label small {
+  font-size: 0.78rem !important;
+}
+
+.lesson-explanation > p,
+.lesson-example p,
+.lesson-market-link p {
+  font-size: 0.98rem !important;
+  line-height: 1.78;
+}
+
+.lesson-example,
+.lesson-market-link {
+  padding: 20px;
+}
+
+.lesson-vocab > div {
+  gap: 11px;
+}
+
+.lesson-vocab article {
+  padding: 16px;
+}
+
+.lesson-vocab strong {
+  font-size: 0.9rem !important;
+}
+
+.lesson-vocab p {
+  font-size: 0.84rem !important;
+  line-height: 1.55;
+}
+
+.lesson-section-nav {
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.lesson-section-nav button {
+  min-height: 48px;
+  padding: 10px 12px;
+  font-size: 0.86rem !important;
+}
+
+.lesson-section-nav span {
+  font-size: 0.78rem !important;
+}
+
+.lesson-quiz-heading > div > p {
+  font-size: 0.9rem !important;
+  line-height: 1.65;
+}
+
+.quiz-score {
+  flex-basis: 104px;
+  width: 104px;
+  height: 104px;
+}
+
+.quiz-score strong {
+  font-size: 1.8rem !important;
+}
+
+.lesson-question-list {
+  gap: 16px;
+}
+
+.lesson-question {
+  padding: 21px;
+}
+
+.lesson-question h3 {
+  font-size: 1rem !important;
+  line-height: 1.5;
+}
+
+.lesson-answer-options {
+  gap: 10px;
+}
+
+.lesson-answer-options button {
+  min-height: 54px;
+  padding: 12px 14px;
+  font-size: 0.9rem !important;
+  line-height: 1.5;
+}
+
+.lesson-answer-options button > span {
+  width: 30px;
+  height: 30px;
+  font-size: 0.78rem !important;
+}
+
+.question-feedback {
+  padding: 14px;
+}
+
+.question-feedback strong,
+.question-feedback p,
+.lesson-interview-card summary,
+.lesson-interview-card details p,
+.lesson-interview-card ol {
+  font-size: 0.88rem !important;
+  line-height: 1.6;
+}
+
+.lesson-interview-card {
+  padding: 26px;
+}
+
+.lesson-interview-card h3 {
+  font-size: 1.55rem !important;
+}
+
+.lesson-overview-flow {
+  padding: 22px;
+}
+
+.lesson-flow-heading {
+  flex-wrap: wrap;
+}
+
+.lesson-flow-heading > strong,
+.lesson-formula-head > strong {
+  font-size: 0.9rem !important;
+}
+
+.lesson-flow-steps {
+  gap: 11px;
+}
+
+.lesson-flow-segment,
+.lesson-flow-segment article {
+  min-width: 0;
+}
+
+.lesson-flow-segment article {
+  padding: 17px;
+}
+
+.lesson-formula,
+.lesson-comparison {
+  padding: 21px;
+}
+
+.lesson-formula-head {
+  flex-wrap: wrap;
+}
+
+.lesson-formula > code {
+  font-size: 0.92rem !important;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.lesson-comparison-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lesson-comparison th,
+.lesson-comparison td {
+  padding: 13px 14px;
+}
+
+/* Keep geometric blocks and text from colliding. */
+.dashboard-grid > *,
+.section-grid > *,
+.role-grid > *,
+.knowledge-domain-grid > *,
+.career-intro-grid > *,
+.investing-hero-grid > *,
+.professor-demo-panel > *,
+.saved-theses-grid > *,
+.thesis-form > *,
+.lesson-objective-grid > *,
+.lesson-answer-options > *,
+.lesson-vocab > div > *,
+.market-grid > *,
+.portfolio-state-row > *,
+.lesson-flow-steps > * {
+  min-width: 0;
+}
+
+.card,
+.feature-card,
+.role-card,
+.knowledge-domain-card,
+.lesson-section-card,
+.lesson-quiz-panel,
+.lesson-question,
+.lesson-formula,
+.lesson-comparison,
+.lesson-hero,
+.lesson-objectives-panel,
+.financial-system-map,
+.lesson-overview-flow {
+  overflow: hidden;
+}
+
+/* Responsive safeguards */
+@media (max-width: 1240px) {
+  .app-shell,
+  .section-shell {
+    grid-template-columns: 92px minmax(0, 1fr);
+  }
+
+  .sidebar,
+  .section-sidebar {
+    padding-inline: 14px;
+  }
+
+  .brand > span:last-child,
+  .sidebar-kicker,
+  .sidebar-bottom > div:last-child,
+  .nav-link:not(.active),
+  .section-nav a {
+    font-size: 0 !important;
+  }
+
+  .nav-link,
+  .section-nav a {
+    justify-content: center;
+    padding-inline: 10px;
+  }
+
+  .nav-link span,
+  .section-nav a span {
+    font-size: 1rem !important;
+  }
+
+  .span-7,
+  .span-5 {
+    grid-column: span 12;
+  }
+
+  .span-4 {
+    grid-column: span 6;
+  }
+
+  .market-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .topbar {
+    flex-direction: column;
+  }
+
+  .top-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .lesson-hero,
+  .lesson-objectives-panel,
+  .lesson-layout,
+  .career-recruiting-panel,
+  .attribution-panel,
+  .professor-review-strip,
+  .next-best-panel,
+  .theme-preview-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-toc {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .financial-system-map,
+  .lesson-flow-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .financial-system-map {
+    display: grid;
+  }
+
+  .lesson-flow-steps,
+  .lesson-flow-segment {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .financial-system-map > b,
+  .lesson-flow-segment > b {
+    justify-self: center;
+    align-self: center;
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .app-shell,
+  .section-shell {
+    display: block;
+  }
+
+  .sidebar,
+  .section-sidebar {
+    position: static;
+    height: auto;
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 16px 18px;
+  }
+
+  .sidebar .brand > span:last-child,
+  .section-sidebar .brand > span:last-child {
+    display: inline;
+    font-size: 1rem !important;
+  }
+
+  .primary-nav,
+  .section-nav,
+  .sidebar-kicker,
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .main-canvas {
+    padding: 24px 16px 96px;
+  }
+
+  .toolbar-card,
+  .topbar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .top-controls {
+    justify-content: space-between;
+  }
+
+  .dashboard-grid {
+    display: block;
+  }
+
+  .card {
+    margin-bottom: 16px;
+    padding: 22px;
+  }
+
+  .section-main {
+    padding: 36px 20px;
+  }
+
+  .section-grid,
+  .role-grid,
+  .knowledge-domain-grid,
+  .career-intro-grid,
+  .investing-hero-grid,
+  .professor-demo-panel,
+  .saved-theses-grid,
+  .thesis-form,
+  .lesson-objective-grid,
+  .lesson-answer-options,
+  .lesson-vocab > div,
+  .lesson-toc,
+  .market-grid,
+  .portfolio-state-row {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-diagram {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .flow-diagram > span {
+    display: none;
+  }
+
+  .lesson-shell {
+    padding: 22px 14px 64px;
+  }
+
+  .lesson-topbar,
+  .lesson-quiz-heading,
+  .lesson-quiz-actions,
+  .lesson-explanation-label,
+  .lesson-flow-heading,
+  .lesson-formula-head,
+  .answer-practice-actions,
+  .thesis-submit-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .lesson-mode-switch {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .lesson-mode-switch button {
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  .lesson-hero {
+    padding: 24px 20px;
+  }
+
+  .lesson-section-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-section-nav > span {
+    text-align: center;
+  }
+
+  .quiz-score {
+    align-self: flex-start;
+  }
+
+  .lesson-quiz-actions .full-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .topbar h1,
+  .section-main > h1,
+  .lesson-hero h1 {
+    overflow-wrap: anywhere;
+  }
+
+  .theme-buttons,
+  .level-selector,
+  .segmented {
+    width: 100%;
+  }
+
+  .theme-buttons,
+  .level-selector {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .segmented button {
+    flex: 1;
+  }
+
+  .card-head,
+  .markets-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .card-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .flow-diagram {
+    grid-template-columns: 1fr;
+  }
+}
