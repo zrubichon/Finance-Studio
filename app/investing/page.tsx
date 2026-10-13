@@ -1,4 +1,5 @@
 import SectionLayout from "@/components/section-layout";
+import InvestingContextBridge from "@/components/investing-context-bridge";
 import InvestingLab from "@/components/investing-lab";
 
 export default function InvestingPage() {
@@ -12,6 +13,7 @@ export default function InvestingPage() {
         fr: "Le laboratoire utilise uniquement du capital virtuel. Il enseigne la construction de portefeuille / portfolio construction, l’analyse de titres / security analysis, le risque / risk, l’attribution de performance / performance attribution et une prise de décision disciplinée sans utiliser d’argent réel.",
       }}
     >
+      <InvestingContextBridge />
       <InvestingLab />
     </SectionLayout>
   );
