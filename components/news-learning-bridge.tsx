@@ -63,16 +63,24 @@ export default function NewsLearningBridge() {
     <section className="news-blueprint-panel">
       <div className="panel-heading">
         <div>
-          <span className="mini-label">{text("NEWS → LEARNING", "ACTUALITÉ → APPRENTISSAGE")}</span>
-          <h2>{text("Turn today’s stories into finance knowledge", "Transforme les actualités du jour en connaissances de finance")}</h2>
+          <span className="mini-label">{text("NEWS → LEARNING → INVESTING", "ACTUALITÉ → APPRENTISSAGE → INVESTING")}</span>
+          <h2>{text("Turn today’s stories into knowledge, interview reasoning and testable theses", "Transforme les actualités du jour en connaissances, raisonnement d’entretien et thèses testables")}</h2>
         </div>
-        <span className="connection-badge"><span className="status-dot" /> {text("University + AI Professor connected", "University + Professeur IA connectés")}</span>
+        <span className="connection-badge"><span className="status-dot" /> {text("University + AI Professor + Investing connected", "University + Professeur IA + Investing connectés")}</span>
       </div>
 
       <div className="analysis-grid">
         {cards.map(({ item, lesson }) => {
           const lessonTitle = isFrench ? lesson.titleFr : lesson.titleEn;
           const question = questionFor(item, lessonTitle, isFrench);
+          const investingQuery = new URLSearchParams({
+            source: "news",
+            lesson: lesson.slug,
+            catalyst: item.title,
+            thesis: isFrench
+              ? `Construis une thèse testable à partir de ce catalyst et du cours ${lessonTitle}.`
+              : `Build a testable thesis from this catalyst and the ${lessonTitle} lesson.`,
+          });
           return (
             <article className="analysis-card" key={item.id}>
               <span className="mini-label">{text("LIVE STORY", "ACTUALITÉ LIVE")}</span>
@@ -84,6 +92,9 @@ export default function NewsLearningBridge() {
                 </Link>
                 <Link className="chip" href={professorHref({ lessonSlug: lesson.slug, question, source: "news" })}>
                   {text("Ask AI Professor", "Demander au Professeur IA")}
+                </Link>
+                <Link className="chip" href={`/investing?${investingQuery.toString()}`}>
+                  {text("Build a thesis", "Construire une thèse")}
                 </Link>
               </div>
             </article>
