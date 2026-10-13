@@ -1,6 +1,7 @@
 import { generateText } from "ai";
 import { NextRequest, NextResponse } from "next/server";
 import { interviewQuestionKey, interviewQuestions, isInterviewTrack } from "@/lib/interview-content";
+import { getLessonBySlug } from "@/lib/lesson-registry";
 import { createClient } from "@/lib/supabase/server";
 
 const MODEL = "openai/gpt-5.5";
@@ -20,6 +21,9 @@ export async function POST(request: NextRequest) {
     track?: unknown;
     answer?: unknown;
     language?: unknown;
+    customQuestion?: unknown;
+    lessonSlug?: unknown;
+    source?: unknown;
   } | null;
 
   if (!body || !isInterviewTrack(body.track)) {
@@ -29,6 +33,9 @@ export async function POST(request: NextRequest) {
   const track = body.track;
   const answer = clean(body.answer, 8000);
   const language = body.language === "FR" ? "FR" : "EN";
+  const customQuestion = clean(body.customQuestion, 1800);
+  const lessonSlug = clean(body.lessonSlug, 180);
+  const source = clean(body.source, 80);
 
   if (answer.length < 20) {
     return NextResponse.json(
@@ -39,7 +46,12 @@ export async function POST(request: NextRequest) {
 
   const question = interviewQuestions[track];
   const local = (value: { en: string; fr: string }) => language === "FR" ? value.fr : value.en;
+  const displayQuestion = customQuestion || local(question.question);
   const framework = question.framework.map((step, i) => `${i + 1}. ${local(step)}`).join("\n");
+  const lesson = lessonSlug ? getLessonBySlug(lessonSlug) : null;
+  const lessonContext = lesson
+    ? `RELATED FINANCE UNIVERSITY LESSON: ${lesson.title.en} / ${lesson.title.fr}\nDOMAIN: ${lesson.domain.en}\nINTERVIEW TRANSFER: ${local(lesson.interviewPrompt.question)}`
+    : "";
 
   let userId: string | null = null;
   let supabase: Awaited<ReturnType<typeof createClient>> | null = null;
@@ -50,15 +62,17 @@ export async function POST(request: NextRequest) {
   } catch {}
 
   const system = language === "FR"
-    ? "Tu es un recruteur finance exigeant et pédagogique. Évalue uniquement la réponse fournie. Sois précis sur les erreurs techniques et la structure. N’invente aucun fait actuel."
-    : "You are a demanding but educational finance interviewer. Evaluate only the answer provided. Be precise about technical errors and structure. Do not invent current facts.";
+    ? "Tu es un recruteur finance exigeant et pédagogique. Évalue uniquement la réponse fournie. Pour une question contextuelle liée à une news ou un cours, récompense la séparation faits/interprétation, la chaîne de transmission, ce qui peut déjà être pricé, les risques et les éléments à surveiller. Sois précis sur les erreurs techniques et la structure. N’invente aucun fait actuel."
+    : "You are a demanding but educational finance interviewer. Evaluate only the answer provided. For a contextual question linked to news or a lesson, reward separation of fact from interpretation, transmission logic, what may already be priced, risks and what to watch next. Be precise about technical errors and structure. Do not invent current facts.";
 
   const prompt = `TRACK: ${track}
-QUESTION: ${local(question.question)}
+QUESTION: ${displayQuestion}
+SOURCE: ${source || "Interview Studio"}
+${lessonContext}
 TESTS: ${local(question.tests)}
-IDEAL FRAMEWORK:
+BASE TRACK FRAMEWORK:
 ${framework}
-FOLLOW-UP: ${local(question.followUp)}
+FOLLOW-UP STYLE: ${local(question.followUp)}
 
 CANDIDATE ANSWER:
 ${answer}
@@ -73,7 +87,7 @@ STRONGER ANSWER STRUCTURE:
 FOLLOW-UP:
 MODEL ANSWER DIRECTION:
 
-Use bullets where useful. SCORE must be an integer 0-100.`;
+Use bullets where useful. SCORE must be an integer 0-100. If this is a current-news question, do not claim the headline is verified beyond the context supplied.`;
 
   try {
     const result = await generateText({
@@ -93,17 +107,23 @@ Use bullets where useful. SCORE must be an integer 0-100.`;
     let saved = false;
 
     if (userId && supabase) {
+      const questionKey = customQuestion
+        ? `contextual-${lessonSlug || track.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
+        : interviewQuestionKey(track);
       const { error } = await supabase.from("interview_attempts").insert({
         user_id: userId,
         track,
-        question_key: interviewQuestionKey(track),
+        question_key: questionKey,
         answer_text: answer,
         evaluation: {
           status: "scored",
-          version: 2,
+          version: 3,
           score,
           feedback: result.text.slice(0, 12000),
           model: MODEL,
+          custom_question: customQuestion || null,
+          lesson_slug: lessonSlug || null,
+          source: source || null,
         },
       });
       saved = !error;
