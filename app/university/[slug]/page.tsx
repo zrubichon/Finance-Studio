@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import LessonPlayer from "@/components/lesson-player";
+import LessonProfessorBridge from "@/components/lesson-professor-bridge";
 import { getLessonBySlug } from "@/lib/lesson-registry";
 
 type LessonPageProps = {
@@ -28,5 +29,14 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
   if (!lesson) notFound();
 
-  return <LessonPlayer lesson={lesson} />;
+  return (
+    <>
+      <LessonPlayer lesson={lesson} />
+      <LessonProfessorBridge
+        lessonSlug={lesson.slug}
+        titleEn={lesson.title.en}
+        titleFr={lesson.title.fr}
+      />
+    </>
+  );
 }
