@@ -1,11 +1,17 @@
 import { capstoneInvestmentDealCaseLesson } from "./capstone-content";
+import { salesTradingLesson } from "./sales-trading-content";
 import {
   lessons as coreLessons,
   type FinanceLesson,
 } from "./lesson-content";
 
+const overriddenCoreLessons = coreLessons.filter(
+  (lesson) => lesson.slug !== salesTradingLesson.slug,
+);
+
 export const lessons: FinanceLesson[] = [
-  ...coreLessons,
+  ...overriddenCoreLessons,
+  salesTradingLesson,
   capstoneInvestmentDealCaseLesson,
 ];
 
