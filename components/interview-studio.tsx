@@ -26,19 +26,28 @@ export default function InterviewStudio() {
   const [score, setScore] = useState<number | null>(null);
   const [aiStatus, setAiStatus] = useState<"ready" | "live" | "error">("ready");
   const [status, setStatus] = useState("");
+  const [customQuestion, setCustomQuestion] = useState("");
+  const [lessonSlug, setLessonSlug] = useState("");
+  const [source, setSource] = useState("");
 
   const active = useMemo(() => interviewQuestions[track], [track]);
   const local = (value: Bilingual) => isFrench ? value.fr : value.en;
+  const displayedQuestion = customQuestion || local(active.question);
 
   useEffect(() => {
     let mounted = true;
 
     async function loadUser() {
-      const requestedTrack = typeof window !== "undefined"
-        ? new URLSearchParams(window.location.search).get("track")
-        : null;
+      const params = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+      const requestedTrack = params?.get("track") ?? null;
+      const requestedQuestion = params?.get("question")?.trim() ?? "";
+      const requestedLesson = params?.get("lesson")?.trim() ?? "";
+      const requestedSource = params?.get("source")?.trim() ?? "";
 
       if (isInterviewTrack(requestedTrack)) setTrack(requestedTrack);
+      if (requestedQuestion) setCustomQuestion(requestedQuestion.slice(0, 1800));
+      if (requestedLesson) setLessonSlug(requestedLesson.slice(0, 180));
+      if (requestedSource) setSource(requestedSource.slice(0, 80));
 
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
@@ -83,12 +92,21 @@ export default function InterviewStudio() {
     setStatus("");
 
     const supabase = createClient();
+    const questionKey = customQuestion
+      ? `contextual-${lessonSlug || track.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
+      : interviewQuestionKey(track);
     const { error } = await supabase.from("interview_attempts").insert({
       user_id: userId,
       track,
-      question_key: interviewQuestionKey(track),
+      question_key: questionKey,
       answer_text: answer.trim(),
-      evaluation: { status: "submitted_unscored", version: 1 },
+      evaluation: {
+        status: "submitted_unscored",
+        version: 2,
+        custom_question: customQuestion || null,
+        lesson_slug: lessonSlug || null,
+        source: source || null,
+      },
     });
 
     if (error) {
@@ -114,7 +132,14 @@ export default function InterviewStudio() {
       const response = await fetch("/api/interview/evaluate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ track, answer: answer.trim(), language: isFrench ? "FR" : "EN" }),
+        body: JSON.stringify({
+          track,
+          answer: answer.trim(),
+          language: isFrench ? "FR" : "EN",
+          customQuestion: customQuestion || null,
+          lessonSlug: lessonSlug || null,
+          source: source || null,
+        }),
       });
 
       const payload = (await response.json()) as { score?: number | null; feedback?: string; saved?: boolean; error?: string };
@@ -144,6 +169,17 @@ export default function InterviewStudio() {
 
   return (
     <div className="workspace-stack">
+      {customQuestion ? (
+        <section className="learning-account-strip">
+          <div>
+            <span className="mini-label">{text("CONNECTED PRACTICE", "ENTRAÎNEMENT CONNECTÉ")}</span>
+            <h2>{text("This drill came directly from your FinanceStudio learning loop.", "Cette question vient directement de ton learning loop FinanceStudio.")}</h2>
+            <p>{lessonSlug ? text(`Related lesson: ${lessonSlug}`, `Cours lié : ${lessonSlug}`) : text("Contextual market question", "Question de marché contextuelle")}{source ? ` · ${source}` : ""}</p>
+          </div>
+          {lessonSlug ? <Link className="chip" href={`/university/${lessonSlug}`}>{text("Open lesson", "Ouvrir le cours")}</Link> : null}
+        </section>
+      ) : null}
+
       <section className="control-panel interview-control-panel">
         <div>
           <span className="control-label">{text("CAREER TRACK", "MÉTIER / CAREER TRACK")}</span>
@@ -163,13 +199,13 @@ export default function InterviewStudio() {
 
       <section className="interview-question-panel">
         <div className="question-meta">
-          <span className="mini-label">{text("TECHNICAL / MARKET QUESTION", "QUESTION TECHNIQUE / MARCHÉ")}</span>
+          <span className="mini-label">{customQuestion ? text("CONTEXTUAL / CURRENT-MARKET QUESTION", "QUESTION CONTEXTUELLE / MARCHÉ ACTUEL") : text("TECHNICAL / MARKET QUESTION", "QUESTION TECHNIQUE / MARCHÉ")}</span>
           <span className="pill accent">{isFrench ? interviewTracks.find((item) => item.key === track)?.fr : track}</span>
         </div>
-        <h2>{local(active.question)}</h2>
+        <h2>{displayedQuestion}</h2>
         <div className="interview-two-column">
-          <div><span className="control-label">{text("WHAT THE INTERVIEWER IS TESTING", "CE QUE LE RECRUTEUR ÉVALUE")}</span><p>{local(active.tests)}</p></div>
-          <div><span className="control-label">{text("FOLLOW-UP", "RELANCE / FOLLOW-UP")}</span><p>{local(active.followUp)}</p></div>
+          <div><span className="control-label">{text("WHAT THE INTERVIEWER IS TESTING", "CE QUE LE RECRUTEUR ÉVALUE")}</span><p>{customQuestion ? text("Can you separate facts from interpretation, explain the transmission mechanism, identify what may already be priced in and communicate uncertainty clearly?", "Sais-tu séparer faits et interprétation, expliquer la chaîne de transmission, identifier ce qui peut déjà être pricé et communiquer clairement l’incertitude ?") : local(active.tests)}</p></div>
+          <div><span className="control-label">{text("FOLLOW-UP", "RELANCE / FOLLOW-UP")}</span><p>{customQuestion ? text("What would change your view? Which asset would confirm or contradict your interpretation?", "Qu’est-ce qui changerait ton avis ? Quel actif confirmerait ou contredirait ton interprétation ?") : local(active.followUp)}</p></div>
         </div>
       </section>
 
