@@ -12,7 +12,7 @@ type TopicSpec = {
 
 type AdvancedLessonSpec = {
   slug: string;
-  year: 3 | 4;
+  year: 1 | 2 | 3 | 4;
   domain: string;
   domainFr: string;
   title: string;
@@ -35,19 +35,26 @@ type AdvancedLessonSpec = {
 
 const t = (en: string, fr: string): LocalizedText => ({ en, fr });
 
+const yearLabels: Record<AdvancedLessonSpec["year"], { en: string; fr: string }> = {
+  1: { en: "Year 1 · Foundations", fr: "Année 1 · Fondations / Foundations" },
+  2: { en: "Year 2 · Core Finance", fr: "Année 2 · Finance fondamentale / Core Finance" },
+  3: { en: "Year 3 · Applied Finance", fr: "Année 3 · Finance appliquée / Applied Finance" },
+  4: { en: "Year 4 · Professional Finance", fr: "Année 4 · Finance professionnelle / Professional Finance" },
+};
+
 export function buildAdvancedLesson(spec: AdvancedLessonSpec): FinanceLesson {
-  const yearLabel = spec.year === 3 ? "Year 3 · Applied Finance" : "Year 4 · Professional Finance";
-  const yearLabelFr = spec.year === 3 ? "Année 3 · Finance appliquée / Applied Finance" : "Année 4 · Finance professionnelle / Professional Finance";
+  const yearLabel = yearLabels[spec.year].en;
+  const yearLabelFr = yearLabels[spec.year].fr;
 
   const sections = spec.topics.map((topic, index) => {
     const facts = topic.facts.map((fact, i) => t(fact, topic.factsFr[i] ?? fact));
     const vocab = (topic.vocab ?? []).map(([en, fr, defEn, defFr]) => ({ en, fr, definition: t(defEn, defFr) }));
     const beginner = topic.facts[0] ?? topic.title;
-    const intermediate = `${topic.facts[0] ?? topic.title} ${topic.facts[1] ?? "The analyst should connect the concept to the relevant decision, cash flow, market price or risk exposure."}`;
-    const professional = `${topic.facts.join(" ")} At professional level, the key is to make assumptions explicit, quantify sensitivities and explain which observable evidence would confirm or invalidate the conclusion.`;
+    const intermediate = `${topic.facts[0] ?? topic.title} ${topic.facts[1] ?? "Connect the concept to the relevant cash flow, price, incentive or risk."}`;
+    const professional = `${topic.facts.join(" ")} At professional level, make assumptions explicit, quantify the important relationships and explain which evidence would confirm or invalidate the conclusion.`;
     const beginnerFr = topic.factsFr[0] ?? topic.titleFr;
-    const intermediateFr = `${topic.factsFr[0] ?? topic.titleFr} ${topic.factsFr[1] ?? "L’analyste doit relier le concept à la décision, au cash flow, au prix de marché ou à l’exposition au risque pertinente."}`;
-    const professionalFr = `${topic.factsFr.join(" ")} Au niveau professionnel, l’essentiel est de rendre les hypothèses explicites, quantifier les sensibilités et préciser quelles preuves observables confirmeraient ou invalideraient la conclusion.`;
+    const intermediateFr = `${topic.factsFr[0] ?? topic.titleFr} ${topic.factsFr[1] ?? "Relie le concept au cash flow, au prix, à l’incitation ou au risque pertinent."}`;
+    const professionalFr = `${topic.factsFr.join(" ")} Au niveau professionnel, rends les hypothèses explicites, quantifie les relations importantes et précise quelles preuves confirmeraient ou invalideraient la conclusion.`;
 
     return {
       id: topic.id,
@@ -77,7 +84,7 @@ export function buildAdvancedLesson(spec: AdvancedLessonSpec): FinanceLesson {
     options: [
       { id: "a", label: t(topic.facts[0] ?? topic.title, topic.factsFr[0] ?? topic.titleFr) },
       { id: "b", label: t("It removes uncertainty and guarantees the outcome.", "Cela supprime l’incertitude et garantit le résultat.") },
-      { id: "c", label: t("It can be evaluated without considering cash flows, prices or risk.", "Cela peut être évalué sans considérer cash flows, prix ou risque.") },
+      { id: "c", label: t("It can be evaluated without considering cash flows, prices, incentives or risk.", "Cela peut être évalué sans considérer cash flows, prix, incitations ou risque.") },
       { id: "d", label: t("It matters only for historical reporting and never for decisions.", "Cela ne compte que pour le reporting historique et jamais pour les décisions.") },
     ],
     correctOption: "a",
@@ -90,7 +97,7 @@ export function buildAdvancedLesson(spec: AdvancedLessonSpec): FinanceLesson {
     domain: t(spec.domain, spec.domainFr),
     title: t(spec.title, spec.titleFr),
     subtitle: t(spec.subtitle, spec.subtitleFr),
-    duration: t(spec.duration ?? "180–220 min", spec.duration ?? "180–220 min"),
+    duration: t(spec.duration ?? "150–190 min", spec.duration ?? "150–190 min"),
     prerequisites: spec.prerequisites.map((x, i) => t(x, spec.prerequisitesFr[i] ?? x)),
     objectives: spec.objectives.map((x, i) => t(x, spec.objectivesFr[i] ?? x)),
     overviewFlow: {
