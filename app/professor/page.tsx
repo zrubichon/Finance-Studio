@@ -1,4 +1,5 @@
 import SectionLayout from "@/components/section-layout";
+import ProfessorPersonalizationStrip from "@/components/professor-personalization-strip";
 import ProfessorLab from "@/components/professor-lab";
 
 export default function ProfessorPage() {
@@ -12,6 +13,7 @@ export default function ProfessorPage() {
         fr: "Demande une explication plus simple, une démonstration chiffrée / numerical proof, une intuition visuelle, une formulation entretien / interview framing ou du vocabulaire professionnel à partir de n’importe quel cours.",
       }}
     >
+      <ProfessorPersonalizationStrip />
       <ProfessorLab />
     </SectionLayout>
   );
