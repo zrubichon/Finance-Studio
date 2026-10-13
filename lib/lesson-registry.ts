@@ -1,5 +1,4 @@
 import { capstoneInvestmentDealCaseLesson } from "./capstone-content";
-import { investmentBankingLesson } from "./investment-banking-content";
 import {
   lessons as coreLessons,
   type FinanceLesson,
@@ -7,7 +6,6 @@ import {
 
 export const lessons: FinanceLesson[] = [
   ...coreLessons,
-  investmentBankingLesson,
   capstoneInvestmentDealCaseLesson,
 ];
 
