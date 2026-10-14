@@ -22,6 +22,7 @@ import "./investing-v2.css";
 import "./polish-v3.css";
 import "./notifications.css";
 import "./personalization-v4.css";
+import "./dashboard-upgrades.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
