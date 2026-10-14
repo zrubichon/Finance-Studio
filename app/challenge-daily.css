@@ -1,0 +1,219 @@
+/* Daily Finance Challenge: full-screen guided learning loop. */
+.daily-challenge-page {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--background, #f5f2ea);
+  color: var(--ink);
+  padding: 38px 34px 56px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.daily-challenge-wrap {
+  width: min(1560px, 100%);
+  margin: 0 auto;
+}
+
+.challenge-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 200;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  font-size: 28px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.daily-challenge-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 22px;
+  padding-right: 62px;
+}
+
+.daily-challenge-hero h1 {
+  margin: 8px 0 10px;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(38px, 4vw, 66px);
+  line-height: .98;
+  max-width: 1100px;
+}
+
+.daily-challenge-hero p {
+  max-width: 980px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.daily-concept-chip {
+  flex: none;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.challenge-roadmap {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.challenge-roadmap article {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+
+.challenge-roadmap b {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--accent-2) 65%, var(--surface));
+  font-size: 10px;
+}
+
+.challenge-roadmap span { font-size: 10px; font-weight: 800; }
+
+.challenge-grid-wide {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.challenge-learning-card {
+  padding: 24px 26px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: 0 12px 34px color-mix(in srgb, var(--ink) 7%, transparent);
+}
+
+.challenge-learning-card h2 {
+  margin: 8px 0 12px;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(25px, 2.2vw, 38px);
+  line-height: 1.08;
+}
+
+.challenge-learning-card > p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.72;
+  max-width: 1100px;
+}
+
+.challenge-formula {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--accent-2) 45%, var(--surface));
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.challenge-context-note {
+  margin-top: 14px;
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--accent-2) 26%, transparent);
+  border-radius: 0 10px 10px 0;
+  font-size: 11px;
+}
+
+.challenge-worked-example {
+  margin-bottom: 16px;
+  background: color-mix(in srgb, var(--accent-2) 20%, var(--surface));
+}
+
+.challenge-practice-card {
+  margin-bottom: 16px;
+}
+
+.challenge-practice-card textarea {
+  width: 100%;
+  min-height: 120px;
+  box-sizing: border-box;
+  resize: vertical;
+  margin: 10px 0 12px;
+  padding: 15px 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.5;
+}
+
+.challenge-feedback,
+.challenge-correction {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 13px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface-2) 75%, transparent);
+}
+
+.challenge-correction {
+  background: color-mix(in srgb, var(--accent-2) 32%, var(--surface));
+}
+
+.challenge-feedback p,
+.challenge-correction p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.challenge-finish-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: color-mix(in srgb, var(--ink) 5%, var(--surface));
+}
+
+.challenge-finish-bar div {
+  display: grid;
+  gap: 4px;
+}
+.challenge-finish-bar strong { font-size: 13px; }
+.challenge-finish-bar span { color: var(--muted); font-size: 11px; }
+
+@media (max-width: 900px) {
+  .daily-challenge-page { padding: 26px 16px 42px; }
+  .daily-challenge-hero { display: block; padding-right: 48px; }
+  .daily-concept-chip { display: inline-block; margin-top: 12px; }
+  .challenge-roadmap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .challenge-grid-wide { grid-template-columns: 1fr; }
+  .challenge-finish-bar { align-items: flex-start; flex-direction: column; }
+}
