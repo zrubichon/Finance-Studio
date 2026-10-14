@@ -11,13 +11,27 @@ type SeriesConfig = {
 const series: SeriesConfig[] = [
   { id: "SP500", label: "S&P 500", category: "Equities", region: "USA", unit: "" },
   { id: "NASDAQCOM", label: "Nasdaq Composite", category: "Equities", region: "USA", unit: "" },
+  { id: "DJIA", label: "Dow Jones", category: "Equities", region: "USA", unit: "" },
+
+  { id: "DGS3MO", label: "US 3M", category: "Rates", region: "USA", unit: "%" },
   { id: "DGS2", label: "US 2Y", category: "Rates", region: "USA", unit: "%" },
+  { id: "DGS5", label: "US 5Y", category: "Rates", region: "USA", unit: "%" },
   { id: "DGS10", label: "US 10Y", category: "Rates", region: "USA", unit: "%" },
   { id: "DGS30", label: "US 30Y", category: "Rates", region: "USA", unit: "%" },
+  { id: "DFF", label: "Fed Funds Effective", category: "Rates", region: "USA", unit: "%" },
+  { id: "SOFR", label: "SOFR", category: "Rates", region: "USA", unit: "%" },
+  { id: "T10Y2Y", label: "10Y−2Y Spread", category: "Rates", region: "USA", unit: "%" },
+
   { id: "VIXCLS", label: "VIX", category: "Volatility", region: "USA", unit: "" },
+
   { id: "DCOILWTICO", label: "WTI", category: "Commodities", region: "Global", unit: "$" },
+  { id: "DCOILBRENTEU", label: "Brent", category: "Commodities", region: "Global", unit: "$" },
+  { id: "DHHNGSP", label: "US Natural Gas", category: "Commodities", region: "USA", unit: "$" },
+  { id: "GOLDAMGBD228NLBM", label: "Gold", category: "Commodities", region: "Global", unit: "$" },
+
   { id: "BAMLC0A0CM", label: "US IG OAS", category: "Credit", region: "USA", unit: "%" },
   { id: "BAMLH0A0HYM2", label: "US HY OAS", category: "Credit", region: "USA", unit: "%" },
+  { id: "BAA10Y", label: "BAA−10Y Spread", category: "Credit", region: "USA", unit: "%" },
 ];
 
 function startDate() {
