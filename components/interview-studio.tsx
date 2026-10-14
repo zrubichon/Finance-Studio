@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/components/language-provider";
 import { recordDailyActivity } from "@/lib/record-activity";
+import { interviewFrameworkDetails } from "@/lib/interview-framework-details";
 import {
   interviewQuestionKey,
   interviewQuestions,
@@ -28,6 +29,7 @@ export default function InterviewStudio() {
   const [status, setStatus] = useState("");
 
   const active = useMemo(() => interviewQuestions[track], [track]);
+  const details = useMemo(() => interviewFrameworkDetails[track], [track]);
   const local = (value: Bilingual) => isFrench ? value.fr : value.en;
 
   useEffect(() => {
@@ -319,12 +321,25 @@ export default function InterviewStudio() {
         </div>
 
         <div className="framework-steps-grid">
-          {active.framework.map((step, index) => (
-            <div className="framework-step" key={step.en}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{local(step)}</strong>
-            </div>
-          ))}
+          {active.framework.map((step, index) => {
+            const detail = details[index];
+            return (
+              <div className="framework-step" key={step.en}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div className="framework-step-content">
+                  <strong>{local(step)}</strong>
+                  {detail && (
+                    <div className="framework-model-answer">
+                      <p><b>{text("Simple answer", "Réponse simple")}</b><span>{local(detail.simple)}</span></p>
+                      <p><b>{text("Why", "Pourquoi")}</b><span>{local(detail.why)}</span></p>
+                      <p><b>{text("Example / implication", "Exemple / implication")}</b><span>{local(detail.example)}</span></p>
+                      {detail.next && <p><b>{text("What happens next", "Ce qui se passe ensuite")}</b><span>{local(detail.next)}</span></p>}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
