@@ -11,6 +11,7 @@ import "./phase-three.css";
 import "./course.css";
 import "./dashboard-upgrades.css";
 import "./home-dashboard-v2.css";
+import "./home-dashboard-polish.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
