@@ -7,6 +7,7 @@ import "./globals.css";
 import "./product.css";
 import "./phase-two.css";
 import "./auth.css";
+import "./account-overrides.css";
 import "./phase-three.css";
 import "./course.css";
 import "./dashboard-upgrades.css";
