@@ -10,6 +10,7 @@ import "./auth.css";
 import "./phase-three.css";
 import "./course.css";
 import "./dashboard-upgrades.css";
+import "./home-dashboard-v2.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
