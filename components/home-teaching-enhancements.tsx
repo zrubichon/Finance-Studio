@@ -1,12 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
+import { interviewFrameworkDetails } from "@/lib/interview-framework-details";
+import type { Track } from "@/lib/interview-content";
 
 type GeneratedInterview = {
   question: string;
   badge: string;
   whyItMatters: string;
-  steps: Array<{ title: string; answer: string }>;
+  steps: Array<{
+    title: string;
+    simple: string;
+    why: string;
+    example: string;
+    next?: string;
+  }>;
 };
 
 const HISTORY_KEY = "finance-studio-interview-question-history";
@@ -32,7 +40,22 @@ function getRole(card: HTMLElement) {
   const context = card.querySelector(":scope > p")?.textContent?.trim() || "";
   const match = context.match(/(?:target role|métier cible)(?:\s+enregistré)?\s*:\s*([^\.]+)/i);
   if (match?.[1]) return match[1].trim();
-  return card.querySelector<HTMLElement>(".pill")?.textContent?.trim() || "Finance";
+  const badge = card.querySelector<HTMLElement>(".pill")?.textContent?.trim() || "";
+  const badgeMap: Record<string, Track> = {
+    IB: "Investment Banking",
+    "S&T": "Sales & Trading",
+    AM: "Asset Management",
+    WM: "Wealth Management",
+    PE: "Private Equity",
+    ER: "Equity Research",
+  };
+  return badgeMap[badge] || "Investment Banking";
+}
+
+function getTrack(card: HTMLElement): Track {
+  const role = getRole(card);
+  const tracks: Track[] = ["Investment Banking", "Sales & Trading", "Asset Management", "Wealth Management", "Private Equity", "Equity Research"];
+  return tracks.find((track) => role.toLowerCase().includes(track.toLowerCase())) || "Investment Banking";
 }
 
 async function getMarketSummary() {
@@ -47,6 +70,55 @@ async function getMarketSummary() {
   } catch {
     return "";
   }
+}
+
+function appendLine(container: HTMLElement, label: string, copy: string, className: string) {
+  const row = document.createElement("span");
+  row.className = `interview-answer-part ${className}`;
+  const strong = document.createElement("b");
+  strong.textContent = label;
+  const text = document.createElement("span");
+  text.textContent = copy;
+  row.append(strong, text);
+  container.appendChild(row);
+}
+
+function fillStep(row: HTMLElement, title: string, simple: string, why: string, example: string, next?: string) {
+  const strong = row.querySelector<HTMLElement>("strong");
+  if (strong) strong.textContent = title;
+  const p = row.querySelector<HTMLElement>("p");
+  if (!p) return;
+  let answer = p.querySelector<HTMLElement>(".interview-step-answer");
+  if (!answer) {
+    answer = document.createElement("span");
+    answer.className = "interview-step-answer";
+    p.appendChild(answer);
+  }
+  answer.innerHTML = "";
+  appendLine(answer, "Simple answer", simple, "simple");
+  appendLine(answer, "Why", why, "why");
+  appendLine(answer, "Example / implication", example, "example");
+  if (next) appendLine(answer, "What happens next", next, "next");
+}
+
+function renderFallback(card: HTMLElement) {
+  const track = getTrack(card);
+  const french = document.documentElement.lang === "fr";
+  const details = interviewFrameworkDetails[track];
+  const rows = card.querySelectorAll<HTMLElement>(".answer-framework > div");
+  rows.forEach((row, index) => {
+    const detail = details[index];
+    if (!detail) return;
+    const title = row.querySelector<HTMLElement>("strong")?.textContent?.trim() || "";
+    fillStep(
+      row,
+      title,
+      french ? detail.simple.fr : detail.simple.en,
+      french ? detail.why.fr : detail.why.en,
+      french ? detail.example.fr : detail.example.en,
+      detail.next ? (french ? detail.next.fr : detail.next.en) : undefined,
+    );
+  });
 }
 
 function renderInterview(card: HTMLElement, data: GeneratedInterview) {
@@ -69,21 +141,14 @@ function renderInterview(card: HTMLElement, data: GeneratedInterview) {
   data.steps.slice(0, 3).forEach((step, index) => {
     const row = rows[index];
     if (!row) return;
-    const strong = row.querySelector<HTMLElement>("strong");
-    if (strong) strong.textContent = step.title;
-    let answer = row.querySelector<HTMLElement>(".interview-step-answer");
-    if (!answer) {
-      answer = document.createElement("span");
-      answer.className = "interview-step-answer";
-      row.querySelector("p")?.appendChild(answer);
-    }
-    answer.textContent = step.answer;
+    fillStep(row, step.title, step.simple, step.why, step.example, step.next);
   });
 }
 
 async function generateFreshInterview() {
   const card = document.querySelector<HTMLElement>(".interview-card");
   if (!card) return;
+  renderFallback(card);
 
   const role = getRole(card);
   const language = document.documentElement.lang === "fr" ? "FR" : "EN";
@@ -120,6 +185,8 @@ async function generateFreshInterview() {
 export default function HomeTeachingEnhancements() {
   useEffect(() => {
     let lastHour = new Date().getHours();
+    const card = document.querySelector<HTMLElement>(".interview-card");
+    if (card) renderFallback(card);
     const initial = window.setTimeout(() => void generateFreshInterview(), 350);
     const timer = window.setInterval(() => {
       const hour = new Date().getHours();
