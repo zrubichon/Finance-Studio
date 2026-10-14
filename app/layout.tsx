@@ -13,6 +13,8 @@ import "./course.css";
 import "./dashboard-upgrades.css";
 import "./home-dashboard-v2.css";
 import "./home-dashboard-polish.css";
+import "./home-dashboard-final.css";
+import "./challenge-daily.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
