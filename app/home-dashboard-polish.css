@@ -11,6 +11,7 @@
     display: flex !important;
     flex-direction: column;
     box-sizing: border-box;
+    position: fixed !important;
   }
 
   .app-shell .brand {
@@ -109,29 +110,32 @@
     width: calc(100% - 82px) !important;
     margin-left: 82px !important;
   }
-}
 
-/* Keep the toggle fully visible inside the navigation edge. */
-.sidebar-collapse-toggle {
-  position: fixed !important;
-  top: 14px !important;
-  left: auto !important;
-  right: auto !important;
-  margin: 0 !important;
-  transform: none !important;
-}
-
-@media (min-width: 761px) {
+  /* Toggle stays inside the sidebar, so it can never be clipped offscreen. */
   .app-shell .sidebar .sidebar-collapse-toggle {
-    left: calc(var(--home-sidebar-width, 246px) - 36px) !important;
-    width: 27px;
-    height: 27px;
-    border-width: 1px;
+    position: absolute !important;
+    top: 14px !important;
+    right: 9px !important;
+    left: auto !important;
+    width: 28px !important;
+    height: 28px !important;
+    margin: 0 !important;
+    transform: none !important;
+    z-index: 9999 !important;
+    display: grid !important;
+    place-items: center;
+    border: 1px solid var(--line) !important;
+    border-radius: 999px !important;
+    background: var(--surface) !important;
+    color: var(--ink) !important;
     box-shadow: 0 5px 16px color-mix(in srgb, var(--ink) 12%, transparent);
+    cursor: pointer;
+    font-size: 18px !important;
+    line-height: 1 !important;
   }
 
   .app-shell.sidebar-collapsed .sidebar .sidebar-collapse-toggle {
-    left: 46px !important;
+    right: 9px !important;
   }
 }
 
@@ -179,6 +183,13 @@
   line-height: 1.62;
 }
 
+.applied-context-extra {
+  margin-top: 10px !important;
+  padding-top: 10px;
+  border-top: 1px dashed color-mix(in srgb, var(--accent) 24%, var(--line));
+  color: var(--ink) !important;
+}
+
 .daily-card .card-actions {
   margin-top: 14px;
 }
@@ -199,7 +210,7 @@
 
 /* Short answer under each interview framework step. */
 .interview-step-answer {
-  display: block;
+  display: block !important;
   margin-top: 7px;
   color: var(--muted);
   font-size: 9px;
