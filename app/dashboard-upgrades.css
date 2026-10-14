@@ -1,0 +1,228 @@
+/* Dashboard upgrades: denser spacing, richer Concept Lens, guided challenge and balanced action cards. */
+
+.concept-lens-guide-panel {
+  margin: 0 0 1rem;
+  border-color: color-mix(in srgb, var(--accent) 34%, #e8a8c2 28%, var(--line));
+  background:
+    radial-gradient(circle at 92% 8%, color-mix(in srgb, #f4bfd4 26%, transparent), transparent 34%),
+    linear-gradient(135deg, color-mix(in srgb, #fff0f6 48%, var(--surface)), var(--surface));
+  box-shadow: 0 16px 42px color-mix(in srgb, #b96b8b 11%, transparent);
+}
+
+.concept-lens-guide-label {
+  display: inline-flex;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, #f2bfd3 38%, var(--surface));
+  color: color-mix(in srgb, var(--ink) 78%, #a63c68);
+}
+
+.concept-lens-guide-badge {
+  border-color: color-mix(in srgb, #ce7aa0 36%, var(--line));
+  background: color-mix(in srgb, #fff0f6 60%, var(--surface));
+}
+
+.concept-lens-guide-grid .analysis-card {
+  background: color-mix(in srgb, #fff7fa 54%, var(--surface));
+  border-color: color-mix(in srgb, #d58cab 22%, var(--line));
+}
+
+.concept-lens-guide-rule {
+  margin-top: .85rem !important;
+  border-radius: 16px;
+  background: color-mix(in srgb, #f8d8e5 22%, var(--surface-2));
+}
+
+.daily-dashboard-stack {
+  margin-top: 1rem;
+  margin-bottom: 1.25rem !important;
+}
+
+.smart-daily-panel {
+  padding-bottom: 22px;
+}
+
+.session-next-action {
+  margin: 18px 0 14px;
+  padding: 17px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface-2));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+}
+
+.session-next-action h3 {
+  margin: 5px 0 6px;
+  font: 500 20px/1.15 Georgia, "Times New Roman", serif;
+}
+
+.session-next-action p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.session-next-action small {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.interview-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.interview-card .answer-framework {
+  flex: 1;
+}
+
+.interview-card .full-button {
+  margin-top: auto;
+}
+
+.daily-challenge-panel {
+  align-items: stretch;
+}
+
+.daily-challenge-panel > * {
+  min-height: 100%;
+}
+
+.challenge-open-button {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 14px;
+}
+
+.complete-loop-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.loop-action-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  flex: 1;
+}
+
+.loop-action-grid .loop-action {
+  min-height: 46px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 13px;
+  box-sizing: border-box;
+}
+
+.challenge-check-row {
+  margin-top: 14px;
+  padding: 12px 13px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--surface-2);
+  font-size: 9px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.challenge-check-row input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent);
+}
+
+.challenge-hero {
+  margin-bottom: 8px;
+}
+
+.guided-challenge-stack {
+  max-width: 1050px;
+}
+
+.challenge-step-card {
+  padding: 24px;
+}
+
+.challenge-step-card > h2 {
+  margin: 8px 0 12px;
+  font: 500 27px/1.15 Georgia, "Times New Roman", serif;
+}
+
+.challenge-step-card > p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.challenge-answer-area {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.challenge-answer-area input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 13px 14px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  outline: none;
+}
+
+.challenge-answer-area input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.challenge-feedback,
+.challenge-correction {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface-2));
+}
+
+.challenge-correction p {
+  margin: 8px 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.challenge-correction small {
+  color: var(--muted);
+}
+
+.challenge-finish-card {
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--line));
+}
+
+@media (max-width: 760px) {
+  .session-next-action,
+  .loop-action-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .session-next-action .full-button {
+    width: 100%;
+  }
+
+  .challenge-step-card {
+    padding: 18px;
+  }
+}
