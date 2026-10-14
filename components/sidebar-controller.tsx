@@ -9,23 +9,39 @@ export default function SidebarController() {
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
-    const hasSidebar = Boolean(document.querySelector(".sidebar, .section-sidebar"));
-    setVisible(hasSidebar);
-    const stored = window.localStorage.getItem(KEY) === "1";
-    setCollapsed(stored);
-    document.body.classList.toggle("fs-sidebar-collapsed", stored);
+    try {
+      const hasSidebar = Boolean(document.querySelector(".sidebar, .section-sidebar"));
+      setVisible(hasSidebar);
 
-    const observer = new MutationObserver(() => {
-      setVisible(Boolean(document.querySelector(".sidebar, .section-sidebar")));
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    return () => observer.disconnect();
+      let stored = false;
+      try {
+        stored = window.localStorage.getItem(KEY) === "1";
+      } catch {
+        stored = false;
+      }
+
+      setCollapsed(stored);
+      document.body.classList.toggle("fs-sidebar-collapsed", stored);
+
+      if (typeof MutationObserver === "undefined") return;
+      const observer = new MutationObserver(() => {
+        setVisible(Boolean(document.querySelector(".sidebar, .section-sidebar")));
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+      return () => observer.disconnect();
+    } catch {
+      setVisible(false);
+    }
   }, []);
 
   function toggle() {
     const next = !collapsed;
     setCollapsed(next);
-    window.localStorage.setItem(KEY, next ? "1" : "0");
+    try {
+      window.localStorage.setItem(KEY, next ? "1" : "0");
+    } catch {
+      // Sidebar state remains usable for the current session even without storage.
+    }
     document.body.classList.toggle("fs-sidebar-collapsed", next);
   }
 
