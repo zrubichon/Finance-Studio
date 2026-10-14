@@ -72,6 +72,8 @@ export default function InvestingLabV2() {
   const [saving, setSaving] = useState(false);
   const [resetting, setResetting] = useState(false);
   const [status, setStatus] = useState("");
+  const [exampleLoaded, setExampleLoaded] = useState(false);
+  const [careerStage, setCareerStage] = useState("");
 
   async function reloadPortfolio() {
     const response = await fetch("/api/investing/portfolio", { cache: "no-store" });
@@ -83,6 +85,7 @@ export default function InvestingLabV2() {
     let mounted = true;
     async function load() {
       const stored = window.localStorage.getItem("finance-studio-level");
+      setCareerStage(window.localStorage.getItem("finance-studio-career-stage") ?? "");
       if (stored === "Beginner" || stored === "Intermediate" || stored === "Professional") setLevel(stored);
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
@@ -159,6 +162,37 @@ export default function InvestingLabV2() {
     return () => { window.clearTimeout(timer); controller.abort(); };
   }, [coachSignature, isFrench]);
 
+  function loadWorkedExample() {
+    setAssetClass("equity");
+    setSymbol("AAPL");
+    setThesis(text(
+      "Worked example: Apple has a large installed device base, recurring Services revenue and ongoing share repurchases. The thesis is that moderate revenue growth plus margin resilience and a lower share count can support EPS growth even if iPhone unit growth is modest.",
+      "Exemple guidé : Apple dispose d'une base installée importante, de revenus Services récurrents et de rachats d'actions. La thèse est qu'une croissance modérée du chiffre d'affaires, des marges résilientes et un nombre d'actions en baisse peuvent soutenir la croissance du BPA même si les volumes d'iPhone progressent peu.",
+    ));
+    setAssumption(text(
+      "Illustrative valuation assumption: EPS rises from $6.70 to $7.35 (+9.7%). At 30x forward P/E, implied value = $7.35 × 30 = $220.50. This is a worked assumption, not a live target price; compare it with the verified quote shown above.",
+      "Hypothèse de valorisation illustrative : le BPA passe de 6,70 $ à 7,35 $ (+9,7 %). Avec un P/E forward de 30x, la valeur implicite = 7,35 $ × 30 = 220,50 $. C'est une hypothèse pédagogique, pas un objectif de cours en temps réel ; compare-la au prix vérifié affiché au-dessus.",
+    ));
+    setCatalyst(text(
+      "Two upcoming earnings reports: watch Services growth, gross margin, iPhone demand and the pace of share repurchases.",
+      "Les deux prochaines publications de résultats : surveiller la croissance des Services, la marge brute, la demande d'iPhone et le rythme des rachats d'actions.",
+    ));
+    setHorizon(text("6–12 months: enough time for two earnings cycles to test the thesis.", "6–12 mois : assez de temps pour deux cycles de résultats afin de tester la thèse."));
+    setInvalidation(text(
+      "Invalidate if Services growth weakens materially for several quarters, gross margin compresses significantly, or EPS growth fails to materialize despite buybacks.",
+      "Invalider si la croissance des Services ralentit fortement pendant plusieurs trimestres, si la marge brute se contracte nettement ou si la croissance du BPA ne se matérialise pas malgré les rachats d'actions.",
+    ));
+    setDownside(text(
+      "Illustrative bear case: $6.60 EPS × 25x P/E = $165.00. Against a $210 reference price, that would be about -21%. Replace the reference with the verified market quote when evaluating the live setup.",
+      "Scénario baissier illustratif : BPA de 6,60 $ × P/E de 25x = 165,00 $. Face à un prix de référence de 210 $, cela représente environ -21 %. Remplace le prix de référence par le cours vérifié pour analyser la situation actuelle.",
+    ));
+    setRisk(text(
+      "Keep the position near 5% of a diversified paper portfolio and reduce it if the portfolio already has heavy mega-cap technology exposure. The goal is to avoid one thesis dominating total portfolio risk.",
+      "Limiter la position à environ 5 % d'un portefeuille simulé diversifié et la réduire si le portefeuille est déjà très exposé aux grandes valeurs technologiques. L'objectif est d'éviter qu'une seule thèse domine le risque total.",
+    ));
+    setExampleLoaded(true);
+  }
+
   async function saveThesis(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!userId || !snapshot?.portfolio || !symbol.trim() || !thesis.trim() || saving) return;
@@ -197,7 +231,7 @@ export default function InvestingLabV2() {
       const payload = await response.json() as { error?: string };
       if (!response.ok) throw new Error(payload.error || text("Reset failed.", "Réinitialisation impossible."));
       setTheses([]);
-      setSymbol(""); setQuote(null); setThesis(""); setAssumption(""); setCatalyst(""); setHorizon(""); setInvalidation(""); setDownside(""); setRisk(""); setCoaching(null);
+      setSymbol(""); setQuote(null); setThesis(""); setAssumption(""); setCatalyst(""); setHorizon(""); setInvalidation(""); setDownside(""); setRisk(""); setCoaching(null); setExampleLoaded(false);
       await reloadPortfolio();
       setStatus(text("Simulation reset. You are back to the original virtual starting capital.", "Simulation réinitialisée. Tu repars avec le capital virtuel initial."));
     } catch (error) {
@@ -220,9 +254,15 @@ export default function InvestingLabV2() {
       {markets?.quotes.length ? <div className="investing-market-grid">{markets.quotes.slice(0, 8).map((item) => <article key={item.id}><span>{item.label}</span><strong>{formatMarket(item)}</strong><small>{item.changePercent == null ? "" : `${item.changePercent > 0 ? "+" : ""}${item.changePercent.toFixed(2)}%`} · {item.source}</small></article>)}</div> : <p>{text("No verified broad-market snapshot is available right now. The simulator will still request a verified instrument quote before a paper order.", "Aucun snapshot global vérifié n'est disponible pour le moment. Le simulateur demandera tout de même un prix vérifié avant chaque ordre simulé.")}</p>}
     </section>
 
+    <section className="decision-prereq-panel">
+      <div><span className="mini-label">{careerStage === "intern" ? text("SUMMER ANALYST PREP", "PRÉPARATION SUMMER ANALYST") : text("BEFORE THE DECISION SHEET", "AVANT LA FICHE DE DÉCISION")}</span><h2>{text("Learn the building blocks first", "Maîtrise d'abord les bases")}</h2><p>{text("These courses and terms make the exercise much more useful.", "Ces cours et ces termes rendent l'exercice beaucoup plus utile.")}</p></div>
+      <div className="decision-prereq-columns"><div><strong>{text("Courses first", "Cours à faire d'abord")}</strong><div className="related-row"><Link href="/university">{text("Accounting foundations", "Bases de comptabilité")}</Link><Link href="/university">{text("Valuation & DCF", "Valorisation & DCF")}</Link><Link href="/university">{text("Risk & portfolio construction", "Risque & construction de portefeuille")}</Link></div></div><div><strong>{text("Vocabulary first", "Vocabulaire à voir d'abord")}</strong><div className="related-row">{["EPS", "P/E", "FCF", "WACC", "Catalyst", "Downside case", "Position sizing"].map((term) => <Link key={term} href={`/dictionary?q=${encodeURIComponent(term)}`}>{term}</Link>)}</div></div></div>
+    </section>
+
     <section className="decision-workbench">
       <div className="decision-sheet-panel">
-        <div className="panel-heading"><div><span className="mini-label">{text("DECISION SHEET", "FICHE DE DÉCISION")}</span><h2>{text("Build the investment logic before touching the order ticket.", "Construis le raisonnement avant de toucher au ticket d'ordre.")}</h2></div><div className="chip-row">{(["Beginner", "Intermediate", "Professional"] as Level[]).map((item) => <button key={item} type="button" className={level === item ? "chip active" : "chip"} onClick={() => setLevel(item)}>{item === "Beginner" ? text("Beginner", "Débutant") : item === "Intermediate" ? text("Intermediate", "Intermédiaire") : text("Professional", "Professionnel")}</button>)}</div></div>
+        <div className="panel-heading"><div><span className="mini-label">{text("DECISION SHEET", "FICHE DE DÉCISION")}</span><h2>{text("Build the investment logic before touching the order ticket.", "Construis le raisonnement avant de toucher au ticket d'ordre.")}</h2></div><div className="decision-sheet-head-actions"><div className="chip-row">{(["Beginner", "Intermediate", "Professional"] as Level[]).map((item) => <button key={item} type="button" className={level === item ? "chip active" : "chip"} onClick={() => setLevel(item)}>{item === "Beginner" ? text("Beginner", "Débutant") : item === "Intermediate" ? text("Intermediate", "Intermédiaire") : text("Professional", "Professionnel")}</button>)}</div><button type="button" className="worked-example-button" onClick={loadWorkedExample}>{text("Load worked example", "Charger un exemple")} →</button></div></div>
+        {exampleLoaded ? <div className="decision-example-explainer"><strong>{text("Why this example works", "Pourquoi cet exemple fonctionne")}</strong><p>{text("The fields separate thesis, valuation assumption, catalyst, horizon, invalidation, downside and portfolio risk. The numbers are intentionally labeled as worked assumptions; the live quote above remains the market reference.", "Les champs séparent la thèse, l'hypothèse de valorisation, le catalyseur, l'horizon, l'invalidation, le scénario baissier et le risque portefeuille. Les chiffres sont volontairement indiqués comme hypothèses pédagogiques ; le prix live ci-dessus reste la référence de marché.")}</p></div> : null}
         <form className="decision-sheet-form" onSubmit={saveThesis}>
           <div className="decision-row-two"><label><span>{text("Asset class", "Classe d'actifs")}</span><select value={assetClass} onChange={(event) => setAssetClass(event.target.value as AssetClass)}>{assets.map((item) => <option value={item.value} key={item.value}>{isFrench ? item.fr : item.en}</option>)}</select><small>{text("What kind of instrument are you analyzing?", "Quel type d'instrument analyses-tu ?")}</small></label><label><span>{text("Symbol / ticker", "Symbole / ticker")}</span><input value={symbol} onChange={(event) => setSymbol(event.target.value)} placeholder={assets.find((item) => item.value === assetClass)?.example} /><small>{quoteStatus || text("FinanceStudio checks a provider price automatically.", "FinanceStudio vérifie automatiquement un prix fournisseur.")}</small></label></div>
           {quote ? <div className="verified-quote-card"><div><span>{quote.symbol}</span><strong>{money(quote.price, quote.currency || "USD")}</strong></div><p>{text("Reference observation", "Observation de référence")} · {quote.asOf} · {quote.source}{quote.delayed ? ` · ${text("delayed", "différé")}` : ""}</p><small>{text("A market price tells you where the instrument traded or was quoted; it does not by itself tell you intrinsic value or whether the asset is a good investment.", "Un prix de marché indique où l'instrument a été traité ou coté ; à lui seul, il ne dit ni sa valeur intrinsèque ni si l'investissement est bon.")}</small></div> : null}
