@@ -85,7 +85,7 @@ export default function AiVocabularyMemory() {
     return () => { active = false; };
   }, []);
 
-  const preview = useMemo(() => items.slice(0, 24), [items]);
+  const preview = useMemo(() => items.slice(0, 3), [items]);
 
   if (!loaded || preview.length === 0) return null;
 
@@ -93,15 +93,15 @@ export default function AiVocabularyMemory() {
     <section className="news-blueprint-panel">
       <div className="panel-heading">
         <div>
-          <span className="mini-label">✦ {text("MY AI VOCABULARY", "MON VOCABULAIRE IA")}</span>
-          <h2>{text("Concepts you highlighted and explored", "Concepts que tu as surlignés et explorés")}</h2>
+          <span className="mini-label">✦ {text("RECENT VOCABULARY", "VOCABULAIRE RÉCENT")}</span>
+          <h2>{text("Your three most recent finance concepts", "Tes trois concepts finance les plus récents")}</h2>
         </div>
-        <span className="connection-badge">{items.length} {text("remembered", "mémorisés")}</span>
+        <span className="connection-badge">3 {text("most recent", "plus récents")}</span>
       </div>
 
       <p className="explanation-copy">{text(
-        "Every concept card you open is remembered here automatically. Highlight any word inside these cards to create another Concept Lens card and go deeper.",
-        "Chaque fiche concept que tu ouvres est mémorisée ici automatiquement. Surligne n’importe quel mot dans ces cartes pour créer une nouvelle fiche Concept Lens et aller plus loin.",
+        "FinanceStudio keeps this section deliberately short: only the three most recent concepts you highlighted or explored are shown here.",
+        "FinanceStudio garde volontairement cette section courte : seuls les trois concepts les plus récents que tu as surlignés ou explorés apparaissent ici.",
       )}</p>
 
       <div className="dictionary-grid">
