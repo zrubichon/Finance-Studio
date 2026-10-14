@@ -2,141 +2,103 @@
 
 import { useEffect } from "react";
 
-type Copy = { en: string; fr: string };
-
-const appliedContext: Record<string, Copy> = {
-  "What the yield curve tells you": {
-    en: "What the numbers mean: 2Y = the annual yield investors require to lend to the US government for 2 years; 10Y = the equivalent yield for 10 years. The 2s10s spread is simply 10Y minus 2Y. At 5.20% − 4.80% = +0.40%, the curve is +40 bps. If the 2Y falls to 4.40% while the 10Y stays at 5.20%, the spread becomes +80 bps: the curve steepens because the gap between long and short yields has widened. Why it matters: the 2Y reacts strongly to expected Fed policy, while the 10Y also reflects longer-term inflation, growth, Treasury supply and term premium. A steepening therefore tells you which part of the macro outlook is being repriced.",
-    fr: "Ce que représentent les chiffres : le 2Y est le rendement annuel demandé pour prêter au gouvernement américain pendant 2 ans ; le 10Y est le rendement équivalent sur 10 ans. Le spread 2s10s = 10Y − 2Y. Donc 5,20 % − 4,80 % = +0,40 %, soit +40 bps. Si le 2Y baisse à 4,40 % alors que le 10Y reste à 5,20 %, le spread passe à +80 bps : la courbe se steepen car l’écart entre taux long et taux court augmente. Pourquoi c’est important : le 2Y réagit surtout aux anticipations de Fed, alors que le 10Y intègre aussi inflation de long terme, croissance, offre de Treasuries et term premium. Le steepening montre donc quelle partie du scénario macro est en train d’être repricée.",
-  },
-  "Enterprise value versus equity value": {
-    en: "What the numbers mean: $800m equity value is the market value belonging to shareholders. $300m debt represents financing that must also be supported by the operating business. $100m cash is subtracted because excess cash lowers the net price paid for the operations. EV = 800 + 300 − 100 = $1.0bn. If EBITDA is $100m, EV/EBITDA = 10.0x: investors are valuing the operating business at ten times this operating earnings measure. Why it matters: using EV removes much of the distortion created by different debt levels, so peer comparisons are more meaningful.",
-    fr: "Ce que représentent les chiffres : 800 M$ d’equity value correspondent à la valeur de marché revenant aux actionnaires. Les 300 M$ de dette sont un financement que l’activité doit aussi supporter. Les 100 M$ de cash sont retirés car ce cash réduit le prix net payé pour l’activité. EV = 800 + 300 − 100 = 1,0 Md$. Avec 100 M$ d’EBITDA, EV/EBITDA = 10,0x : le marché valorise l’activité opérationnelle à dix fois cet indicateur de résultat. Pourquoi c’est important : l’EV réduit la distorsion créée par des niveaux de dette différents et permet de mieux comparer les entreprises.",
-  },
-  "Why bond prices move opposite to yields": {
-    en: "What the numbers mean: duration 5 means the bond price is roughly 5% sensitive to a 1 percentage-point move in yield. A +0.40 percentage-point yield move therefore implies about −5 × 0.40% = −2.0% price impact. Why: the bond's coupon has not changed, but new market yields are now higher, so the old bond must become cheaper to offer a competitive return.",
-    fr: "Ce que représentent les chiffres : une duration de 5 signifie qu’une variation de 1 point de pourcentage du yield produit environ 5 % de variation inverse du prix. Une hausse de +0,40 point donne donc environ −5 × 0,40 % = −2,0 %. Pourquoi : le coupon de l’obligation n’a pas changé, mais les nouveaux rendements de marché sont plus élevés ; l’ancienne obligation doit donc devenir moins chère pour redevenir compétitive.",
-  },
-  "How inflation moves markets": {
-    en: "What the numbers mean: if consensus expected CPI at 2.8% and the release is 3.2%, the surprise is +0.4 percentage point. Markets care about this gap because asset prices already reflected the 2.8% expectation. A hotter print can make traders expect fewer Fed cuts or higher rates for longer, which can lift Treasury yields, support the dollar and pressure long-duration equities.",
-    fr: "Ce que représentent les chiffres : si le consensus attendait un CPI à 2,8 % et que la publication sort à 3,2 %, la surprise est de +0,4 point. Le marché regarde surtout cet écart car les prix incorporaient déjà l’attente de 2,8 %. Une inflation plus forte peut faire anticiper moins de baisses de taux ou des taux élevés plus longtemps, ce qui peut faire monter les Treasuries yields, soutenir le dollar et peser sur les actions de longue duration.",
-  },
-  "Revenue, EBITDA and profit are not the same thing": {
-    en: "What the numbers mean: $500m revenue is total sales. A 20% EBITDA margin means $20 of EBITDA for every $100 of sales, so EBITDA = $100m. At a 15% margin, EBITDA falls to $75m even with identical revenue. Why it matters: investors care not only about how much a company sells, but how efficiently those sales become operating profit and eventually cash flow.",
-    fr: "Ce que représentent les chiffres : 500 M$ de revenue correspondent aux ventes totales. Une marge EBITDA de 20 % signifie 20 $ d’EBITDA pour 100 $ de ventes, donc 100 M$ d’EBITDA. À 15 % de marge, l’EBITDA tombe à 75 M$ même avec le même revenue. Pourquoi c’est important : les investisseurs regardent non seulement les ventes, mais aussi l’efficacité avec laquelle elles deviennent profit opérationnel puis cash flow.",
-  },
-  "What a stock price really represents": {
-    en: "What the numbers mean: the $10 is not today's accounting profit; it represents an illustrative amount of future shareholder cash flow. Investors translate expected future cash into a value today using growth assumptions and a required return. Stronger growth can raise value, while a higher required return or discount rate lowers the present value of the same future cash flows.",
-    fr: "Ce que représentent les chiffres : les 10 $ ne sont pas simplement le bénéfice comptable actuel ; ils représentent ici un montant illustratif de cash flows futurs pour l’actionnaire. Le marché transforme ce cash futur en valeur aujourd’hui à l’aide d’hypothèses de croissance et d’un rendement exigé. Une croissance plus forte peut augmenter la valeur, alors qu’un discount rate plus élevé réduit la valeur actuelle des mêmes cash flows.",
-  },
-};
-
 function answerForStep(step: string, french: boolean): string {
   const s = step.toLowerCase();
+
   if (s.includes("cpi") || s.includes("inflation")) {
     return french
-      ? "Réponse simple : compare le chiffre publié au consensus. Si le CPI sort au-dessus des attentes, c’est une surprise inflationniste positive et généralement plus hawkish pour les taux."
-      : "Simple answer: compare the actual CPI print with consensus. If CPI is above expectations, it is a positive inflation surprise and usually more hawkish for rates.";
+      ? "Réponse modèle : commence par comparer le CPI publié au consensus, car le marché réagit surtout à la surprise et non au chiffre isolé. Par exemple, un CPI à 3,2 % contre 2,8 % attendu représente une surprise de +0,4 point. Cela indique une inflation plus persistante que prévu et peut rendre la Fed plus hawkish. Le point clé en entretien est de préciser que si un chiffre élevé était déjà anticipé, la réaction de marché peut être limitée."
+      : "Model answer: start by comparing the actual CPI print with consensus because markets react mainly to the surprise, not the isolated number. For example, 3.2% CPI versus 2.8% expected is a +0.4 percentage-point surprise. That suggests inflation is more persistent than investors expected and can push the Fed in a more hawkish direction. In an interview, add that if a hot print was already priced in, the market reaction can still be limited.";
   }
+
   if (s.includes("fed") || s.includes("policy") || s.includes("central bank")) {
     return french
-      ? "Réponse simple : une inflation plus forte peut pousser le marché à anticiper moins de baisses de taux, ou des taux élevés plus longtemps."
-      : "Simple answer: hotter inflation can make the market price fewer rate cuts, or higher rates for longer.";
+      ? "Réponse modèle : une inflation supérieure aux attentes réduit généralement la probabilité de baisses de taux rapides. Le marché peut donc reporter les cuts, en prévoir moins, ou anticiper un taux directeur plus élevé plus longtemps. Cette révision touche d’abord les maturités courtes comme le 2Y, très sensibles aux anticipations de Fed. Ensuite, regarde ce qui était déjà pricé : c’est le changement d’anticipation qui compte."
+      : "Model answer: hotter-than-expected inflation usually reduces the probability of rapid rate cuts. The market may push cuts further out, price fewer cuts, or expect the policy rate to stay higher for longer. That repricing normally hits short maturities such as the 2-year Treasury first because they are highly sensitive to Fed expectations. Then check what was already priced: the change in expectations is what matters.";
   }
+
   if (s.includes("treasury") || s.includes("yield") || s.includes("rates")) {
     return french
-      ? "Réponse simple : si les taux Fed attendus montent, les yields des Treasuries ont tendance à monter aussi, surtout sur les maturités courtes ; le prix des obligations baisse."
-      : "Simple answer: if expected Fed rates rise, Treasury yields usually rise too, especially at the front end; bond prices fall.";
+      ? "Réponse modèle : si le marché anticipe une Fed plus restrictive, les yields des Treasuries ont tendance à monter et les prix obligataires à baisser. Le 2Y réagit fortement au chemin attendu des Fed Funds ; le 10Y intègre aussi croissance, inflation de long terme, offre de Treasuries et term premium. Compare donc 2Y et 10Y pour savoir si le mouvement est surtout monétaire ou plus largement macro. Une hausse des yields resserre aussi les conditions financières."
+      : "Model answer: if investors expect a more restrictive Fed, Treasury yields usually rise and bond prices fall. The 2-year yield reacts strongly to the expected Fed Funds path, while the 10-year also reflects long-run inflation, growth, Treasury supply and term premium. Compare the 2Y and 10Y moves to judge whether the repricing is mainly monetary-policy driven or broader macro. Higher yields also tighten financial conditions.";
   }
+
   if (s.includes("equity") || s.includes("stock")) {
     return french
-      ? "Réponse simple : des yields plus élevés augmentent le discount rate, donc les actions — surtout les valeurs de croissance — peuvent subir une pression de valorisation."
-      : "Simple answer: higher yields raise the discount rate, so equities — especially growth stocks — can face valuation pressure.";
+      ? "Réponse modèle : des yields plus élevés augmentent le discount rate utilisé pour valoriser les cash flows futurs. Toutes choses égales par ailleurs, cela réduit leur valeur actuelle et peut comprimer les multiples de valorisation. Les actions de croissance et longue duration sont souvent plus sensibles car une plus grande part de leur valeur dépend de cash flows éloignés. Vérifie cependant si de meilleures perspectives de croissance compensent la hausse des taux."
+      : "Model answer: higher yields increase the discount rate used to value future cash flows. All else equal, that lowers present values and can compress valuation multiples. Growth and long-duration equities are often more sensitive because more of their value depends on cash flows far in the future. However, check whether stronger growth expectations are offsetting the rate move.";
   }
+
   if (s.includes("fx") || s.includes("dollar") || s.includes("currency")) {
     return french
-      ? "Réponse simple : si les taux américains deviennent relativement plus attractifs, le dollar peut se renforcer car les capitaux recherchent ce rendement supérieur."
-      : "Simple answer: if US rates become relatively more attractive, the dollar can strengthen as capital seeks the higher yield.";
+      ? "Réponse modèle : si les taux américains montent relativement aux taux étrangers, les actifs en dollars peuvent devenir plus attractifs. Les flux de capitaux peuvent alors soutenir le dollar. Mais le FX dépend d’un différentiel : il faut comparer les anticipations de taux et de croissance des deux économies, pas regarder les États-Unis seuls. Le positionnement et le risk-off peuvent aussi renforcer ou inverser le mouvement."
+      : "Model answer: if US rates rise relative to foreign rates, dollar assets can become more attractive and capital flows may support the dollar. But FX is a relative market, so compare rate and growth expectations in both economies rather than looking at the US alone. Positioning and risk-off demand can also strengthen or reverse the move.";
   }
+
   if (s.includes("credit") || s.includes("spread")) {
     return french
-      ? "Réponse simple : si le choc augmente l’incertitude ou resserre les conditions financières, les credit spreads peuvent s’élargir car les investisseurs demandent plus de rémunération pour le risque."
-      : "Simple answer: if the shock raises uncertainty or tightens financial conditions, credit spreads can widen because investors demand more compensation for risk.";
+      ? "Réponse modèle : un choc inflationniste qui maintient les taux élevés augmente le coût de financement des entreprises et peut réduire leur marge de sécurité. Si le risque macro augmente, les investisseurs demandent davantage de compensation et les credit spreads peuvent s’élargir. Les émetteurs high yield sont généralement plus sensibles que l’investment grade. Surveille aussi défauts, refinancement et liquidité."
+      : "Model answer: an inflation shock that keeps rates high raises corporate funding costs and can reduce financial cushions. If macro risk increases, investors demand more compensation and credit spreads can widen. High-yield issuers are generally more sensitive than investment-grade companies. Also watch defaults, refinancing needs and liquidity.";
   }
+
   if (s.includes("forecast") || s.includes("cash flow")) {
     return french
-      ? "Réponse simple : projette les principaux revenus, marges, impôts, capex et working capital pour arriver au free cash flow opérationnel."
-      : "Simple answer: forecast revenue, margins, taxes, capex and working capital to arrive at operating free cash flow.";
+      ? "Réponse modèle : dans un DCF, commence par projeter le revenue et les marges pour obtenir l’EBIT, puis applique les taxes opérationnelles. Ajoute D&A, retire capex et variation de working capital pour arriver à l’unlevered free cash flow. L’objectif est de mesurer le cash généré par l’activité avant les décisions de financement, afin qu’il soit cohérent avec un discount au WACC."
+      : "Model answer: in a DCF, start by forecasting revenue and margins to derive EBIT, then apply operating taxes. Add back D&A, subtract capex and the change in working capital to reach unlevered free cash flow. The goal is to measure cash generated by operations before financing decisions so it can be discounted consistently using WACC.";
   }
+
   if (s.includes("wacc") || s.includes("discount")) {
     return french
-      ? "Réponse simple : le WACC est le rendement exigé par les apporteurs de capitaux ; il sert à ramener les cash flows futurs à leur valeur d’aujourd’hui."
-      : "Simple answer: WACC is the return required by capital providers; it discounts future cash flows back to today's value.";
+      ? "Réponse modèle : le WACC représente le rendement exigé par l’ensemble des apporteurs de capitaux. Il combine le cost of equity et le cost of debt après impôt, pondérés par leur poids dans la structure de capital. Plus le WACC est élevé, plus les cash flows futurs sont fortement actualisés et plus la valeur d’entreprise baisse. Il doit être cohérent avec le risque et la devise des cash flows."
+      : "Model answer: WACC is the return required by all capital providers. It combines the cost of equity and after-tax cost of debt, weighted by their share of the capital structure. A higher WACC discounts future cash flows more heavily and lowers enterprise value. It should be consistent with the risk and currency of the cash flows being valued.";
   }
+
   if (s.includes("terminal")) {
     return french
-      ? "Réponse simple : la terminal value estime la valeur de l’entreprise après la période de prévision explicite, souvent avec Gordon Growth ou un exit multiple."
-      : "Simple answer: terminal value estimates the company's value after the explicit forecast period, usually with Gordon Growth or an exit multiple.";
+      ? "Réponse modèle : la terminal value représente la valeur de tous les cash flows au-delà de la période de prévision explicite. Tu peux utiliser Gordon Growth, avec un taux de croissance soutenable à long terme, ou un exit multiple basé sur des comparables. Comme elle représente souvent une grande part du DCF, teste toujours la sensibilité au WACC, au growth rate ou au multiple."
+      : "Model answer: terminal value represents all cash flows beyond the explicit forecast period. You can use Gordon Growth with a sustainable long-run growth rate, or an exit multiple based on comparable companies. Because terminal value often represents a large share of DCF value, always test sensitivity to WACC, growth rate or the exit multiple.";
   }
-  return french
-    ? "Réponse simple : explique d’abord le mécanisme principal, puis donne l’impact marché et termine par ce qui pourrait invalider ton scénario."
-    : "Simple answer: explain the main mechanism first, then the market impact, and finish with what could invalidate your view.";
-}
 
-function enhanceAppliedExample() {
-  const card = document.querySelector<HTMLElement>(".daily-card");
-  if (!card) return;
-  const title = card.querySelector("h2")?.textContent?.trim() ?? "";
-  const context = appliedContext[title];
-  if (!context) return;
-  const applied = card.querySelector<HTMLElement>(".deep-lesson-block.applied");
-  if (!applied) return;
-  const french = document.documentElement.lang === "fr";
-  let extra = applied.querySelector<HTMLElement>(".applied-context-extra");
-  if (!extra) {
-    extra = document.createElement("p");
-    extra.className = "applied-context-extra";
-    applied.appendChild(extra);
-  }
-  const next = french ? context.fr : context.en;
-  if (extra.textContent !== next) extra.textContent = next;
+  return french
+    ? "Réponse modèle : commence par définir précisément le mécanisme demandé, puis déroule la chaîne cause → anticipation → prix d’actif. Ajoute un exemple chiffré ou une comparaison quand c’est possible. Termine par le principal risque à ton scénario ou par ce qui pourrait déjà être pricé dans le marché. Cette structure montre que tu comprends le raisonnement plutôt que de réciter une direction de marché."
+    : "Model answer: first define the mechanism precisely, then walk through the chain from cause → expectations → asset prices. Add a number or comparison whenever possible. Finish with the main risk to your view or what may already be priced into the market. This structure shows that you understand the reasoning rather than simply memorizing a market direction.";
 }
 
 function enhanceInterview() {
   const card = document.querySelector<HTMLElement>(".interview-card");
   if (!card) return;
   const french = document.documentElement.lang === "fr";
+
   card.querySelectorAll<HTMLElement>(".answer-framework > div").forEach((row) => {
     const label = row.querySelector("strong")?.textContent?.trim() ?? "";
     if (!label) return;
+
     let answer = row.querySelector<HTMLElement>(".interview-step-answer");
     if (!answer) {
-      answer = document.createElement("small");
+      answer = document.createElement("span");
       answer.className = "interview-step-answer";
       row.querySelector("p")?.appendChild(answer);
     }
+
     const next = answerForStep(label, french);
     if (answer.textContent !== next) answer.textContent = next;
   });
 }
 
-function enhance() {
-  enhanceAppliedExample();
-  enhanceInterview();
-}
-
 export default function HomeTeachingEnhancements() {
   useEffect(() => {
-    enhance();
-    const timer = window.setInterval(enhance, 1500);
-    const onLanguage = () => window.setTimeout(enhance, 0);
+    enhanceInterview();
+    const timer = window.setInterval(enhanceInterview, 1_000);
+    const onLanguage = () => window.setTimeout(enhanceInterview, 0);
     window.addEventListener("finance-studio-language-change", onLanguage);
-    window.addEventListener("focus", enhance);
+    window.addEventListener("focus", enhanceInterview);
+
     return () => {
       window.clearInterval(timer);
       window.removeEventListener("finance-studio-language-change", onLanguage);
-      window.removeEventListener("focus", enhance);
+      window.removeEventListener("focus", enhanceInterview);
     };
   }, []);
+
   return null;
 }
