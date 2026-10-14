@@ -7,6 +7,7 @@ import InvestingInstantCoach from "@/components/investing-instant-coach";
 import SessionKeeper from "@/components/session-keeper";
 import DeploymentSync from "@/components/deployment-sync";
 import NotificationCenter from "@/components/notification-center";
+import ActivityTracker from "@/components/activity-tracker";
 import LanguageProvider, { type Language } from "@/components/language-provider";
 import "./globals.css";
 import "./product.css";
@@ -49,6 +50,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <ThemeBootstrap />
           <SidebarController />
           <InvestingInstantCoach />
+          <ActivityTracker />
           {children}
           <ConceptLens />
         </LanguageProvider>
