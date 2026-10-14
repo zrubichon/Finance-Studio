@@ -1,0 +1,408 @@
+/* FinanceStudio structural polish v3 — loaded last. */
+
+:root {
+  --fs-sidebar-width: 286px;
+  --fs-sidebar-collapsed: 82px;
+}
+
+/* Fixed desktop navigation: only the main content scrolls. */
+.sidebar,
+.section-sidebar {
+  position: fixed !important;
+  inset: 0 auto 0 0;
+  width: var(--fs-sidebar-width) !important;
+  height: 100dvh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  z-index: 80;
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+}
+
+.app-shell,
+.section-shell {
+  display: block !important;
+  min-height: 100vh;
+}
+
+.main-canvas,
+.section-main,
+.product-section-main {
+  width: auto !important;
+  max-width: none !important;
+  margin-left: var(--fs-sidebar-width) !important;
+  min-width: 0;
+  transition: margin-left .22s ease, padding .22s ease;
+}
+
+.product-section-main {
+  padding-left: clamp(32px, 4.5vw, 72px) !important;
+  padding-right: clamp(32px, 4.5vw, 72px) !important;
+}
+
+.fs-sidebar-toggle {
+  position: fixed;
+  top: 18px;
+  left: calc(var(--fs-sidebar-width) - 18px);
+  z-index: 100;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 8px 28px rgba(0,0,0,.10);
+  display: grid;
+  place-items: center;
+  font-size: 1.45rem !important;
+  line-height: 1;
+  cursor: pointer;
+  transition: left .22s ease, transform .15s ease;
+}
+
+.fs-sidebar-toggle:hover { transform: scale(1.04); }
+
+body.fs-sidebar-collapsed .sidebar,
+body.fs-sidebar-collapsed .section-sidebar {
+  width: var(--fs-sidebar-collapsed) !important;
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+}
+
+body.fs-sidebar-collapsed .main-canvas,
+body.fs-sidebar-collapsed .section-main,
+body.fs-sidebar-collapsed .product-section-main {
+  margin-left: var(--fs-sidebar-collapsed) !important;
+}
+
+body.fs-sidebar-collapsed .fs-sidebar-toggle {
+  left: calc(var(--fs-sidebar-collapsed) - 18px);
+}
+
+body.fs-sidebar-collapsed .sidebar .brand > span:last-child,
+body.fs-sidebar-collapsed .section-sidebar .brand > span:last-child,
+body.fs-sidebar-collapsed .sidebar-kicker,
+body.fs-sidebar-collapsed .sidebar-bottom > div:last-child,
+body.fs-sidebar-collapsed .section-sidebar-note,
+body.fs-sidebar-collapsed .primary-nav a:not(.active),
+body.fs-sidebar-collapsed .section-nav a:not(.active) {
+  font-size: 0 !important;
+}
+
+body.fs-sidebar-collapsed .primary-nav a,
+body.fs-sidebar-collapsed .section-nav a {
+  justify-content: center !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+body.fs-sidebar-collapsed .primary-nav a span,
+body.fs-sidebar-collapsed .section-nav a span {
+  margin: 0 !important;
+  font-size: 1.08rem !important;
+  flex: 0 0 auto !important;
+}
+
+body.fs-sidebar-collapsed .sidebar .brand,
+body.fs-sidebar-collapsed .section-sidebar .brand {
+  justify-content: center;
+}
+
+body.fs-sidebar-collapsed .brand-mark {
+  width: 42px;
+  height: 42px;
+}
+
+/* Main content really uses the space gained when the sidebar closes. */
+body.fs-sidebar-collapsed .main-canvas,
+body.fs-sidebar-collapsed .section-main,
+body.fs-sidebar-collapsed .product-section-main {
+  padding-left: clamp(34px, 5vw, 84px) !important;
+  padding-right: clamp(34px, 5vw, 84px) !important;
+}
+
+body.fs-sidebar-collapsed .product-section-hero,
+body.fs-sidebar-collapsed .section-main > h1,
+body.fs-sidebar-collapsed .section-lead,
+body.fs-sidebar-collapsed .explanation-copy {
+  max-width: 1180px !important;
+}
+
+body.fs-sidebar-collapsed .product-section-hero h1,
+body.fs-sidebar-collapsed .topbar h1 {
+  font-size: clamp(3rem, 4.5vw, 4.8rem) !important;
+}
+
+/* Account: no stretched empty cards; denser square-like blocks. */
+.account-grid {
+  align-items: start !important;
+  gap: 22px !important;
+}
+
+.account-card {
+  align-self: start !important;
+  min-height: 0 !important;
+  padding: 30px !important;
+}
+
+.account-card h2,
+.account-security-card h2,
+.account-settings-heading h2 {
+  font-size: clamp(1.8rem, 2.4vw, 2.6rem) !important;
+}
+
+.account-card dl > div {
+  padding: 14px 0 !important;
+}
+
+.account-card dt,
+.account-card dd {
+  font-size: .98rem !important;
+  line-height: 1.45;
+}
+
+.account-stat-grid {
+  gap: 16px !important;
+  margin: 24px 0 26px !important;
+}
+
+.account-stat-grid > div {
+  min-height: 138px;
+  padding: 24px !important;
+  border-radius: 18px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.account-stat-grid strong {
+  font-size: clamp(2.5rem, 4vw, 4.15rem) !important;
+  line-height: .95;
+}
+
+.account-stat-grid span {
+  margin-top: 12px !important;
+  font-size: 1rem !important;
+  line-height: 1.35;
+}
+
+.account-portfolio-value {
+  font-size: clamp(2.6rem, 5vw, 4.4rem) !important;
+  overflow-wrap: anywhere;
+}
+
+/* Global anti-overlap rules. */
+.main-canvas *,
+.section-main *,
+.product-section-main *,
+.account-shell * {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.card,
+.feature-card,
+.control-panel,
+.market-overview-panel,
+.news-blueprint-panel,
+.coverage-panel,
+.source-panel,
+.dictionary-card-v2,
+.investing-command-center,
+.investing-market-strip,
+.decision-sheet-panel,
+.live-mentor-panel,
+.saved-decision-journal {
+  overflow: hidden;
+}
+
+.chip-row,
+.coverage-chips,
+.related-row,
+.level-row,
+.top-controls,
+.theme-buttons,
+.level-selector {
+  flex-wrap: wrap !important;
+}
+
+/* Markets / news: use available width and never clip against the old sidebar footprint. */
+.market-overview-panel,
+.news-blueprint-panel,
+.coverage-panel,
+.source-panel,
+.control-panel,
+.live-news-shell,
+.live-financial-journal,
+.market-workspace,
+.workspace-stack {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.market-universe-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+}
+
+.instrument-list > div,
+.panel-heading,
+.question-meta,
+.saved-theses-grid article > div,
+.verified-quote-card > div {
+  flex-wrap: wrap !important;
+}
+
+.explanation-copy,
+.product-section-hero > p:last-child,
+.section-lead,
+.data-note,
+.feed-status,
+.inline-status {
+  max-width: 100% !important;
+}
+
+/* Investing: money values never leave cards. */
+.investing-command-center {
+  grid-template-columns: minmax(260px, 1fr) minmax(0, 1.2fr) auto !important;
+}
+
+.investing-command-metrics {
+  min-width: 0;
+}
+
+.investing-command-metrics > div {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.investing-command-metrics strong {
+  font-size: clamp(.9rem, 1.4vw, 1.25rem) !important;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.investing-command-center > div:first-child h2 {
+  overflow-wrap: anywhere;
+}
+
+.instant-mentor-card {
+  margin: 18px 0;
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent-2) 38%, transparent);
+  border-radius: 15px;
+  background: color-mix(in srgb, var(--surface) 8%, transparent);
+}
+
+.instant-mentor-card > span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent-2);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.instant-mentor-card strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.instant-mentor-card p,
+.instant-mentor-card small {
+  display: block;
+  color: color-mix(in srgb, var(--surface) 82%, transparent);
+  line-height: 1.55;
+}
+
+/* Dictionary: alphabet and bilingual card clarity. */
+.dictionary-alpha-nav {
+  position: sticky;
+  top: 12px;
+  z-index: 8;
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.dictionary-alpha-nav button {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.dictionary-alpha-nav button.active,
+.dictionary-alpha-nav button:hover {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+.dictionary-term-stack h3 {
+  color: var(--accent) !important;
+  font-size: 1rem !important;
+}
+
+.dictionary-study-toolbar {
+  margin: 22px 0 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dictionary-study-language {
+  display: inline-flex;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+
+.dictionary-study-language button {
+  min-width: 54px;
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 13px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 850;
+}
+
+.dictionary-study-language button.active {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+@media (max-width: 1120px) {
+  .investing-command-center { grid-template-columns: 1fr !important; }
+  .account-grid { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 760px) {
+  :root { --fs-sidebar-width: 0px; --fs-sidebar-collapsed: 0px; }
+  .sidebar,
+  .section-sidebar { display: none !important; }
+  .fs-sidebar-toggle { display: none !important; }
+  .main-canvas,
+  .section-main,
+  .product-section-main,
+  body.fs-sidebar-collapsed .main-canvas,
+  body.fs-sidebar-collapsed .section-main,
+  body.fs-sidebar-collapsed .product-section-main {
+    margin-left: 0 !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+  .account-stat-grid { grid-template-columns: 1fr !important; }
+  .dictionary-alpha-nav { position: static; }
+}
