@@ -145,6 +145,16 @@ body.fs-sidebar-collapsed .topbar h1 {
   padding: 30px !important;
 }
 
+/* Profile simplification: remove the low-value workspace summary and let Main Portfolio use the full row. */
+.account-grid > .account-card:nth-child(3) {
+  display: none !important;
+}
+
+.account-grid > .account-card:nth-child(4) {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+}
+
 .account-card h2,
 .account-security-card h2,
 .account-settings-heading h2 {
@@ -386,6 +396,7 @@ body.fs-sidebar-collapsed .topbar h1 {
 @media (max-width: 1120px) {
   .investing-command-center { grid-template-columns: 1fr !important; }
   .account-grid { grid-template-columns: 1fr !important; }
+  .account-grid > .account-card:nth-child(4) { grid-column: auto !important; }
 }
 
 @media (max-width: 760px) {
