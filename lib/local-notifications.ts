@@ -26,8 +26,12 @@ export function readNotifications(): FinanceStudioNotification[] {
 
 export function writeNotifications(items: FinanceStudioNotification[]) {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(NOTIFICATION_STORAGE_KEY, JSON.stringify(items.slice(0, 30)));
-  window.dispatchEvent(new CustomEvent(NOTIFICATION_EVENT));
+  try {
+    window.localStorage.setItem(NOTIFICATION_STORAGE_KEY, JSON.stringify(items.slice(0, 30)));
+    window.dispatchEvent(new CustomEvent(NOTIFICATION_EVENT));
+  } catch {
+    // Notifications are optional UI state and must never crash the application.
+  }
 }
 
 export function addDeploymentNotification(version: string) {
