@@ -1,0 +1,85 @@
+/* Guided Investing Lab */
+.investing-v2 { width: 100%; }
+.investing-command-center,
+.investing-market-strip,
+.decision-sheet-panel,
+.live-mentor-panel,
+.saved-decision-journal {
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.investing-command-center { padding: clamp(22px,3vw,34px); display: grid; grid-template-columns: minmax(0,1.1fr) minmax(360px,.9fr) auto; gap: 24px; align-items: center; }
+.investing-command-center h2 { margin: 8px 0 6px; font: 500 clamp(2rem,4vw,3.3rem)/1 Georgia,"Times New Roman",serif; }
+.investing-command-center p { margin: 0; color: var(--muted); line-height: 1.6; }
+.investing-command-metrics { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.investing-command-metrics > div { padding: 14px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface-2); display: grid; gap: 5px; }
+.investing-command-metrics span { color: var(--muted); font-size: .78rem; }
+.investing-command-metrics strong { font-size: 1rem; }
+.investing-market-strip { padding: clamp(22px,3vw,32px); }
+.investing-market-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+.investing-market-grid article { min-width: 0; padding: 15px; border: 1px solid var(--line); border-radius: 16px; background: color-mix(in srgb,var(--surface-2) 48%,var(--surface)); display: grid; gap: 7px; }
+.investing-market-grid article > span { color: var(--muted); font-size: .78rem; }
+.investing-market-grid strong { font-size: 1.08rem; }
+.investing-market-grid small { color: var(--muted); }
+.decision-workbench { display: grid; grid-template-columns: minmax(0,1.55fr) minmax(330px,.75fr); gap: 22px; align-items: start; }
+.decision-sheet-panel { padding: clamp(22px,3vw,34px); }
+.decision-sheet-form { margin-top: 26px; display: grid; gap: 18px; }
+.decision-sheet-form label { display: grid; gap: 8px; font-weight: 780; }
+.decision-sheet-form label > span { font-size: .9rem; }
+.decision-sheet-form small { color: var(--muted); font-weight: 500; line-height: 1.5; }
+.decision-sheet-form input,
+.decision-sheet-form textarea,
+.decision-sheet-form select { width: 100%; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); padding: 13px 14px; outline: none; }
+.decision-sheet-form input:focus,
+.decision-sheet-form textarea:focus,
+.decision-sheet-form select:focus { border-color: color-mix(in srgb,var(--accent) 55%,var(--line)); box-shadow: 0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent); }
+.decision-row-two { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.verified-quote-card { padding: 18px; border-radius: 18px; border: 1px solid color-mix(in srgb,var(--accent) 34%,var(--line)); background: color-mix(in srgb,var(--accent-2) 42%,var(--surface)); }
+.verified-quote-card > div { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
+.verified-quote-card > div span { font-weight: 850; }
+.verified-quote-card > div strong { font-size: 1.45rem; }
+.verified-quote-card p { margin: 8px 0; color: var(--muted); }
+.verified-quote-card small { display: block; line-height: 1.55; }
+.live-mentor-panel { position: sticky; top: 20px; padding: 24px; max-height: calc(100vh - 40px); overflow-y: auto; background: color-mix(in srgb,var(--ink) 96%,var(--surface)); color: var(--surface); }
+.live-mentor-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+.live-mentor-head h2 { margin: 8px 0 0; font: 500 1.65rem/1.12 Georgia,"Times New Roman",serif; }
+.live-mentor-panel .mini-label { color: var(--accent-2); }
+.live-mentor-panel > p { color: color-mix(in srgb,var(--surface) 75%,transparent); line-height: 1.65; }
+.mentor-pulse { width: 12px; height: 12px; border-radius: 50%; background: #71d7a2; box-shadow: 0 0 0 6px rgba(113,215,162,.12); flex: 0 0 auto; }
+.mentor-pulse.loading { animation: mentorPulse 1s ease-in-out infinite alternate; }
+@keyframes mentorPulse { from { opacity: .45; transform: scale(.9); } to { opacity: 1; transform: scale(1.15); } }
+.mentor-thinking { margin-top: 18px; padding: 16px; border: 1px dashed color-mix(in srgb,var(--surface) 20%,transparent); border-radius: 14px; color: color-mix(in srgb,var(--surface) 78%,transparent); }
+.mentor-feedback-stack { margin-top: 18px; display: grid; gap: 12px; }
+.mentor-feedback-stack article,
+.mentor-score { padding: 16px; border: 1px solid color-mix(in srgb,var(--surface) 16%,transparent); border-radius: 15px; background: color-mix(in srgb,var(--surface) 6%,transparent); }
+.mentor-feedback-stack article > span,
+.mentor-score > span { display: block; color: color-mix(in srgb,var(--surface) 62%,transparent); font-size: .72rem; font-weight: 900; letter-spacing: .08em; }
+.mentor-feedback-stack h3 { margin: 8px 0; font-size: 1.05rem; }
+.mentor-feedback-stack p,
+.mentor-feedback-stack li { color: color-mix(in srgb,var(--surface) 82%,transparent); line-height: 1.58; font-size: .9rem; }
+.mentor-feedback-stack ul { padding-left: 18px; margin: 10px 0 0; }
+.mentor-score { display: flex; justify-content: space-between; gap: 14px; align-items: center; background: var(--accent); }
+.mentor-score strong { font-size: 1.25rem; }
+.mentor-next { border-color: color-mix(in srgb,var(--accent-2) 35%,transparent) !important; }
+.saved-decision-journal { padding: clamp(22px,3vw,32px); }
+.decision-journal-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.decision-journal-grid article { padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: color-mix(in srgb,var(--surface-2) 38%,var(--surface)); }
+.decision-journal-grid article > div { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }
+.decision-journal-grid h3 { margin: 14px 0; font-size: 1rem; line-height: 1.55; }
+.decision-journal-grid p { color: var(--muted); line-height: 1.55; }
+
+@media (max-width: 1120px) {
+  .investing-command-center { grid-template-columns: 1fr; }
+  .decision-workbench { grid-template-columns: 1fr; }
+  .live-mentor-panel { position: static; max-height: none; }
+  .investing-market-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 720px) {
+  .investing-command-metrics,
+  .investing-market-grid,
+  .decision-row-two,
+  .decision-journal-grid { grid-template-columns: 1fr; }
+  .investing-command-center .secondary-danger-button { width: 100%; }
+}
