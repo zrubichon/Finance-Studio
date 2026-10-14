@@ -41,7 +41,7 @@ async function fetchSeries(config: SeriesConfig): Promise<MarketQuote | null> {
   const endpoint = `https://fred.stlouisfed.org/graph/fredgraph.csv?id=${encodeURIComponent(config.id)}&cosd=${startDate()}`;
   const response = await fetch(endpoint, {
     headers: { Accept: "text/csv" },
-    next: { revalidate: 300 },
+    next: { revalidate: 60 },
   });
   if (!response.ok) throw new Error(`FRED public CSV failed for ${config.id}: ${response.status}`);
 
