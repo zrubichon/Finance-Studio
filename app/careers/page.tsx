@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SectionLayout from "@/components/section-layout";
 import { useLanguage } from "@/components/language-provider";
 import { createClient } from "@/lib/supabase/client";
@@ -10,6 +10,7 @@ type Localized = { en: string; fr: string };
 type CareerRole = { role: Localized; mission: Localized; knowledge: Localized[] };
 type CareerGroup = { group: Localized; roles: CareerRole[] };
 type CareerStage = { key: string; title: Localized; timing: Localized; focus: Localized };
+type Guidance = { courses: Localized[]; vocabulary: Localized[]; interview: Localized; portfolio: Localized };
 
 const careerGroups: CareerGroup[] = [
   {
@@ -48,6 +49,52 @@ const stages: CareerStage[] = [
   { key: "md", title: { en: "Managing Director", fr: "Managing Director / MD" }, timing: { en: "Leadership", fr: "Direction" }, focus: { en: "Own major relationships, franchise strategy, revenue or investment accountability and senior risk decisions.", fr: "Porter les relations majeures, la stratégie, la responsabilité commerciale ou d'investissement et les décisions de risque senior." } },
 ];
 
+const guidanceByRole: Record<string, Guidance> = {
+  "Sales & Trading": {
+    courses: [{ en: "Rates & yield curves", fr: "Taux & courbe des taux" }, { en: "FX & macro transmission", fr: "FX & transmission macro" }, { en: "Derivatives", fr: "Produits dérivés" }, { en: "Market microstructure", fr: "Microstructure de marché" }],
+    vocabulary: [{ en: "bid / ask", fr: "bid / ask" }, { en: "spread", fr: "spread" }, { en: "duration", fr: "duration" }, { en: "yield curve", fr: "courbe des taux" }, { en: "implied volatility", fr: "volatilité implicite" }],
+    interview: { en: "Market view, transmission logic, mental math and risk intuition.", fr: "Vue de marché, chaîne de transmission, calcul mental et intuition du risque." },
+    portfolio: { en: "Build a macro trade with entry level, catalyst, invalidation and risk limit.", fr: "Construis un trade macro avec niveau d'entrée, catalyseur, invalidation et limite de risque." },
+  },
+  "Asset Management": {
+    courses: [{ en: "Portfolio theory", fr: "Théorie de portefeuille" }, { en: "Valuation", fr: "Valorisation" }, { en: "Macro & asset allocation", fr: "Macro & allocation d'actifs" }, { en: "Risk management", fr: "Gestion du risque" }],
+    vocabulary: [{ en: "alpha", fr: "alpha" }, { en: "beta", fr: "bêta" }, { en: "Sharpe ratio", fr: "ratio de Sharpe" }, { en: "drawdown", fr: "drawdown" }, { en: "asset allocation", fr: "allocation d'actifs" }],
+    interview: { en: "Investment process, portfolio construction and one well-defended stock or asset idea.", fr: "Processus d'investissement, construction de portefeuille et une idée d'investissement bien défendue." },
+    portfolio: { en: "Write an investment thesis and explain sizing, diversification and downside.", fr: "Rédige une thèse d'investissement et explique la taille de position, la diversification et le downside." },
+  },
+  "Equity Research": {
+    courses: [{ en: "Accounting", fr: "Comptabilité" }, { en: "Financial statement analysis", fr: "Analyse des états financiers" }, { en: "Valuation & DCF", fr: "Valorisation & DCF" }, { en: "Earnings analysis", fr: "Analyse des résultats" }],
+    vocabulary: [{ en: "EPS", fr: "BPA" }, { en: "EBITDA", fr: "EBITDA" }, { en: "DCF", fr: "DCF" }, { en: "multiple", fr: "multiple" }, { en: "margin expansion", fr: "expansion des marges" }],
+    interview: { en: "Accounting links, valuation, earnings drivers and a concise stock pitch.", fr: "Liens comptables, valorisation, moteurs des résultats et pitch action concis." },
+    portfolio: { en: "Build a stock thesis with earnings assumptions, catalyst and bear case.", fr: "Construis une thèse action avec hypothèses de résultats, catalyseur et scénario baissier." },
+  },
+  "Hedge Funds": {
+    courses: [{ en: "Security analysis", fr: "Analyse de titres" }, { en: "Catalysts", fr: "Catalyseurs" }, { en: "Long / short", fr: "Long / short" }, { en: "Portfolio risk", fr: "Risque portefeuille" }],
+    vocabulary: [{ en: "catalyst", fr: "catalyseur" }, { en: "mispricing", fr: "mauvaise valorisation" }, { en: "downside", fr: "downside" }, { en: "position sizing", fr: "taille de position" }, { en: "risk / reward", fr: "risque / rendement" }],
+    interview: { en: "Variant perception, catalysts, downside and what would make you change your mind.", fr: "Opinion différenciante, catalyseurs, downside et ce qui te ferait changer d'avis." },
+    portfolio: { en: "Build a long or short thesis with explicit invalidation and position sizing.", fr: "Construis une thèse long ou short avec invalidation explicite et taille de position." },
+  },
+  "Investment Banking": {
+    courses: [{ en: "Accounting", fr: "Comptabilité" }, { en: "Valuation", fr: "Valorisation" }, { en: "DCF & comps", fr: "DCF & comparables" }, { en: "M&A fundamentals", fr: "Bases des M&A" }],
+    vocabulary: [{ en: "enterprise value", fr: "valeur d'entreprise" }, { en: "equity value", fr: "valeur des capitaux propres" }, { en: "accretion / dilution", fr: "relution / dilution" }, { en: "WACC", fr: "CMPC / WACC" }, { en: "synergies", fr: "synergies" }],
+    interview: { en: "Accounting, valuation, deal logic and concise behavioral answers.", fr: "Comptabilité, valorisation, logique de transaction et réponses comportementales concises." },
+    portfolio: { en: "Use the decision sheet to practice company analysis before valuation work.", fr: "Utilise la fiche de décision pour pratiquer l'analyse d'entreprise avant la valorisation." },
+  },
+  "Wealth Management": {
+    courses: [{ en: "Asset allocation", fr: "Allocation d'actifs" }, { en: "Risk profiling", fr: "Profil de risque" }, { en: "Bonds & equities", fr: "Obligations & actions" }, { en: "Portfolio construction", fr: "Construction de portefeuille" }],
+    vocabulary: [{ en: "risk tolerance", fr: "tolérance au risque" }, { en: "time horizon", fr: "horizon" }, { en: "diversification", fr: "diversification" }, { en: "yield", fr: "rendement" }, { en: "drawdown", fr: "drawdown" }],
+    interview: { en: "Client communication, market awareness and matching portfolios to goals.", fr: "Communication client, culture marché et adéquation du portefeuille aux objectifs." },
+    portfolio: { en: "Build a diversified client portfolio and justify each allocation.", fr: "Construis un portefeuille client diversifié et justifie chaque allocation." },
+  },
+};
+
+const defaultGuidance: Guidance = {
+  courses: [{ en: "Accounting foundations", fr: "Bases de comptabilité" }, { en: "Valuation", fr: "Valorisation" }, { en: "Markets", fr: "Marchés" }, { en: "Risk", fr: "Risque" }],
+  vocabulary: [{ en: "cash flow", fr: "flux de trésorerie" }, { en: "valuation", fr: "valorisation" }, { en: "risk", fr: "risque" }, { en: "return", fr: "rendement" }],
+  interview: { en: "Fundamentals, motivation and role-specific reasoning.", fr: "Fondamentaux, motivation et raisonnement spécifique au métier." },
+  portfolio: { en: "Apply the role's logic to one concrete finance case.", fr: "Applique la logique du métier à un cas financier concret." },
+};
+
 export default function CareersPage() {
   const { isFrench, text } = useLanguage();
   const local = (value: Localized) => (isFrench ? value.fr : value.en);
@@ -56,33 +103,41 @@ export default function CareersPage() {
   const [targetStage, setTargetStage] = useState("");
   const [savingTarget, setSavingTarget] = useState(false);
   const [targetStatus, setTargetStatus] = useState("");
+  const guidance = useMemo(() => guidanceByRole[targetRole] ?? defaultGuidance, [targetRole]);
 
   useEffect(() => {
     let mounted = true;
     async function loadTarget() {
       const storedStage = window.localStorage.getItem("finance-studio-career-stage") ?? "";
-      if (mounted) setTargetStage(storedStage);
+      const storedRole = window.localStorage.getItem("finance-studio-target-role") ?? "";
+      if (mounted) { setTargetStage(storedStage); setTargetRole(storedRole); }
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
       if (!mounted || !user) return;
       setUserId(user.id);
       const { data } = await supabase.from("profiles").select("target_role").eq("user_id", user.id).maybeSingle();
-      if (mounted) setTargetRole(data?.target_role ?? "");
+      const accountRole = data?.target_role ?? storedRole;
+      if (mounted) setTargetRole(accountRole);
+      if (accountRole) window.localStorage.setItem("finance-studio-target-role", accountRole);
     }
     void loadTarget();
     return () => { mounted = false; };
   }, []);
 
   async function saveTargetRole(role: string) {
-    if (!userId || savingTarget) return;
+    if (savingTarget) return;
     setSavingTarget(true);
     setTargetStatus("");
-    const supabase = createClient();
-    const { error } = await supabase.from("profiles").update({ target_role: role, updated_at: new Date().toISOString() }).eq("user_id", userId);
-    if (error) setTargetStatus(text("Your target role could not be saved.", "Ton métier cible n'a pas pu être enregistré."));
-    else {
-      setTargetRole(role);
-      setTargetStatus(text(`${role} is now your target role.`, `${role} est maintenant ton métier cible.`));
+    setTargetRole(role);
+    window.localStorage.setItem("finance-studio-target-role", role);
+    window.dispatchEvent(new CustomEvent("finance-studio-career-change", { detail: { role, stage: targetStage } }));
+    if (userId) {
+      const supabase = createClient();
+      const { error } = await supabase.from("profiles").update({ target_role: role, updated_at: new Date().toISOString() }).eq("user_id", userId);
+      if (error) setTargetStatus(text("Saved on this device, but your account target could not be updated.", "Enregistré sur cet appareil, mais ton compte n'a pas pu être mis à jour."));
+      else setTargetStatus(text(`${role} is now your target role across FinanceStudio.`, `${role} est maintenant ton métier cible dans FinanceStudio.`));
+    } else {
+      setTargetStatus(text(`${role} is now your local target. Sign in to sync it to your account.`, `${role} est maintenant ton objectif sur cet appareil. Connecte-toi pour le synchroniser.`));
     }
     setSavingTarget(false);
   }
@@ -91,6 +146,7 @@ export default function CareersPage() {
     setTargetStage(stage);
     if (stage) window.localStorage.setItem("finance-studio-career-stage", stage);
     else window.localStorage.removeItem("finance-studio-career-stage");
+    window.dispatchEvent(new CustomEvent("finance-studio-career-change", { detail: { role: targetRole, stage } }));
   }
 
   async function clearEverything() {
@@ -98,23 +154,25 @@ export default function CareersPage() {
     setSavingTarget(true);
     setTargetStatus("");
     window.localStorage.removeItem("finance-studio-career-stage");
+    window.localStorage.removeItem("finance-studio-target-role");
     setTargetStage("");
     if (userId) {
       const supabase = createClient();
       const { error } = await supabase.from("profiles").update({ target_role: null, updated_at: new Date().toISOString() }).eq("user_id", userId);
       if (error) {
-        setTargetStatus(text("The target role could not be cleared.", "Le métier cible n'a pas pu être effacé."));
+        setTargetStatus(text("The target role could not be cleared from your account.", "Le métier cible n'a pas pu être effacé de ton compte."));
         setSavingTarget(false);
         return;
       }
     }
     setTargetRole("");
-    setTargetStatus(text("Career preferences cleared. You now have no selected target.", "Préférences carrière effacées. Tu n'as maintenant aucun métier cible sélectionné."));
+    window.dispatchEvent(new CustomEvent("finance-studio-career-change", { detail: { role: "", stage: "" } }));
+    setTargetStatus(text("Career preferences cleared.", "Préférences carrière effacées."));
     setSavingTarget(false);
   }
 
   return (
-    <SectionLayout activeSlug="careers" eyebrow={{ en: "CAREERS IN FINANCE", fr: "MÉTIERS DE LA FINANCE" }} title={{ en: "Choose a career by understanding the work, not just the job title.", fr: "Choisis un métier en comprenant le travail réel, pas seulement l'intitulé du poste." }} description={{ en: "Compare finance paths, the knowledge each role demands and the seniority stage you are targeting. FinanceStudio can then personalize learning and interview practice around that choice.", fr: "Compare les métiers de la finance, les connaissances exigées et le niveau de séniorité visé. FinanceStudio peut ensuite personnaliser l'apprentissage et les entretiens autour de ce choix." }}>
+    <SectionLayout activeSlug="careers" eyebrow={{ en: "CAREERS IN FINANCE", fr: "MÉTIERS DE LA FINANCE" }} title={{ en: "Choose a career by understanding the work, not just the job title.", fr: "Choisis un métier en comprenant le travail réel, pas seulement l'intitulé du poste." }} description={{ en: "Your choice now changes recommended learning, vocabulary, interview practice and Portfolio Lab guidance across FinanceStudio.", fr: "Ton choix modifie maintenant les cours recommandés, le vocabulaire, les entretiens et les conseils du Portfolio Lab dans FinanceStudio." }}>
       <div className="workspace-stack career-v2">
         <section className="career-selection-summary">
           <div>
@@ -124,10 +182,21 @@ export default function CareersPage() {
             {targetStatus ? <p className="inline-status" role="status">{targetStatus}</p> : null}
           </div>
           <div className="career-summary-actions">
-            {!userId ? <Link className="full-button" href="/login">{text("Sign in to save", "Se connecter pour sauvegarder")} →</Link> : null}
+            {!userId ? <Link className="full-button" href="/login">{text("Sign in to sync", "Se connecter pour synchroniser")} →</Link> : null}
             <button className="secondary-danger-button" type="button" disabled={savingTarget || (!targetRole && !targetStage)} onClick={() => void clearEverything()}>{text("Clear everything", "Tout effacer")}</button>
           </div>
         </section>
+
+        {targetRole ? <section className="career-personalized-path">
+          <div className="panel-heading"><div><span className="mini-label">{targetStage === "intern" ? text("SUMMER ANALYST PATH", "PARCOURS SUMMER ANALYST") : text("PERSONALIZED PATH", "PARCOURS PERSONNALISÉ")}</span><h2>{text(`What FinanceStudio will prioritize for ${targetRole}`, `Ce que FinanceStudio va prioriser pour ${targetRole}`)}</h2></div><span className="connection-badge">{text("Applied across the app", "Appliqué dans toute l'app")}</span></div>
+          {targetStage === "intern" ? <p>{text("Summer Analyst mode keeps the bar high on fundamentals, motivation, structured thinking and commercial awareness while avoiding senior-level expectations.", "Le mode Summer Analyst reste exigeant sur les fondamentaux, la motivation, le raisonnement structuré et la culture marché, sans attendre une expérience de senior.")}</p> : null}
+          <div className="career-path-grid">
+            <article><span className="control-label">{text("COURSES FIRST", "COURS PRIORITAIRES")}</span><h3>{text("Recommended learning order", "Ordre d'apprentissage conseillé")}</h3><ul>{guidance.courses.map((item) => <li key={item.en}>{local(item)}</li>)}</ul><Link href="/university">{text("Open University", "Ouvrir University")} →</Link></article>
+            <article><span className="control-label">{text("VOCABULARY", "VOCABULAIRE")}</span><h3>{text("Terms to master", "Termes à maîtriser")}</h3><ul>{guidance.vocabulary.map((item) => <li key={item.en}><Link href={`/dictionary?q=${encodeURIComponent(item.en)}`}>{local(item)}</Link></li>)}</ul></article>
+            <article><span className="control-label">{text("INTERVIEW", "ENTRETIEN")}</span><h3>{text("What practice will emphasize", "Ce que l'entraînement va privilégier")}</h3><p>{local(guidance.interview)}</p><Link href="/interview">{text("Practice now", "S'entraîner")} →</Link></article>
+            <article><span className="control-label">{text("PORTFOLIO LAB", "PORTFOLIO LAB")}</span><h3>{text("Applied exercise", "Exercice appliqué")}</h3><p>{local(guidance.portfolio)}</p><Link href="/portfolio">{text("Open Portfolio Lab", "Ouvrir Portfolio Lab")} →</Link></article>
+          </div>
+        </section> : null}
 
         <section className="career-stage-panel">
           <div className="panel-heading"><div><span className="mini-label">{text("CAREER STAGE", "NIVEAU DE CARRIÈRE")}</span><h2>{text("Where are you trying to enter the ladder?", "À quel niveau veux-tu entrer dans la hiérarchie ?")}</h2></div><span className="connection-badge">{text("From internship to MD", "Du stage au MD")}</span></div>
@@ -135,6 +204,8 @@ export default function CareersPage() {
             {stages.map((stage) => <button key={stage.key} type="button" className={targetStage === stage.key ? "career-stage-card selected" : "career-stage-card"} onClick={() => chooseStage(targetStage === stage.key ? "" : stage.key)}><span>{local(stage.timing)}</span><strong>{local(stage.title)}</strong><p>{local(stage.focus)}</p></button>)}
           </div>
         </section>
+
+        {targetStage === "intern" ? <section className="career-personalized-path"><span className="mini-label">{text("SUMMER ANALYST TRACKS", "PARCOURS SUMMER ANALYST")}</span><h2>{text("Pick the desk you are recruiting for", "Choisis l'équipe pour laquelle tu candidates")}</h2><div className="related-row">{["Investment Banking", "Sales & Trading", "Asset Management", "Equity Research", "Wealth Management"].map((role) => <button key={role} type="button" className={targetRole === role ? "chip active" : "chip"} onClick={() => void saveTargetRole(role)}>Summer Analyst · {role}</button>)}</div></section> : null}
 
         {careerGroups.map((group) => (
           <section className="career-group" key={group.group.en}>
@@ -145,7 +216,7 @@ export default function CareersPage() {
                 return <article className={selected ? "role-card selected" : "role-card"} key={item.role.en}>
                   <div className="role-card-copy"><span className="mini-label">{selected ? text("CURRENT TARGET", "OBJECTIF ACTUEL") : text("ROLE", "MÉTIER")}</span><h3>{local(item.role)}</h3><p>{local(item.mission)}</p></div>
                   <div className="role-knowledge-block"><span className="control-label">{text("KNOWLEDGE TO MASTER", "CONNAISSANCES À MAÎTRISER")}</span><div className="role-knowledge-chips">{item.knowledge.map((knowledge) => <span key={knowledge.en}>{local(knowledge)}</span>)}</div></div>
-                  <div className="role-card-actions">{userId ? <button className={selected ? "career-target-button selected" : "career-target-button"} type="button" disabled={savingTarget} onClick={() => selected ? void clearEverything() : void saveTargetRole(item.role.en)}>{selected ? text("Remove target role", "Retirer ce métier cible") : text("Set as target role", "Choisir comme métier cible")}</button> : <Link className="career-target-button" href="/login">{text("Sign in to select", "Se connecter pour choisir")}</Link>}</div>
+                  <div className="role-card-actions"><button className={selected ? "career-target-button selected" : "career-target-button"} type="button" disabled={savingTarget} onClick={() => selected ? void clearEverything() : void saveTargetRole(item.role.en)}>{selected ? text("Remove target role", "Retirer ce métier cible") : text("Set as target role", "Choisir comme métier cible")}</button></div>
                 </article>;
               })}
             </div>
