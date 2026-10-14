@@ -5,7 +5,6 @@ import ConceptLens from "@/components/concept-lens";
 import SidebarController from "@/components/sidebar-controller";
 import InvestingInstantCoach from "@/components/investing-instant-coach";
 import SessionKeeper from "@/components/session-keeper";
-import DeploymentSync from "@/components/deployment-sync";
 import NotificationCenter from "@/components/notification-center";
 import ActivityTracker from "@/components/activity-tracker";
 import LanguageProvider, { type Language } from "@/components/language-provider";
@@ -46,7 +45,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body>
         <LanguageProvider initialLanguage={initialLanguage}>
           <SessionKeeper />
-          <DeploymentSync />
           <NotificationCenter />
           <ThemeBootstrap />
           <SidebarController />
