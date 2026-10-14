@@ -16,7 +16,7 @@ const guides = [
     readFr: "Une hausse peut refléter de meilleures attentes de bénéfices, des taux d’actualisation plus faibles ou un meilleur sentiment de risque. Une baisse peut refléter une croissance plus faible, des bénéfices attendus plus faibles, des yields plus élevés ou davantage d’aversion au risque.",
     impactEn: "Higher yields often pressure long-duration growth stocks more than banks, energy or other value sectors. Always look at sector dispersion rather than only the headline index.",
     impactFr: "Des yields plus élevés pénalisent souvent davantage les actions de croissance à longue duration que les banques, l’énergie ou d’autres secteurs value. Regarde toujours la dispersion sectorielle, pas seulement l’indice global.",
-    href: "/university/equity-valuation",
+    href: "/university/year-2-equity-valuation",
   },
   {
     key: "rates",
@@ -30,7 +30,7 @@ const guides = [
     readFr: "Quand les yields montent, le prix des obligations baisse. Un mouvement marqué du 2 ans signifie souvent que le marché a changé sa vision de la trajectoire future des taux directeurs. Une hausse de 20 bps (basis points / points de base) correspond à 0,20 point de pourcentage.",
     impactEn: "Higher yields can tighten financial conditions, support the US dollar and reduce equity valuations by increasing discount rates.",
     impactFr: "Des yields plus élevés peuvent resserrer les conditions financières, soutenir le dollar US et réduire les valorisations actions en augmentant les taux d’actualisation.",
-    href: "/university/fixed-income-yield-curves",
+    href: "/university/year-2-fixed-income-yield-curves",
   },
   {
     key: "curve",
@@ -44,7 +44,7 @@ const guides = [
     readFr: "Un spread plus positif signifie une courbe plus pentue. Un spread négatif signifie une inversion. Un bull steepener signifie généralement que les yields baissent avec des taux courts qui baissent plus vite. Un bear steepener signifie généralement que les yields montent avec des taux longs qui montent plus vite.",
     impactEn: "Curve moves can affect bank margins, duration positioning, recession expectations and relative value across maturities.",
     impactFr: "Les mouvements de courbe peuvent affecter les marges bancaires, le positionnement en duration, les anticipations de récession et la valeur relative entre maturités.",
-    href: "/university/fixed-income-yield-curves",
+    href: "/university/year-2-fixed-income-yield-curves",
   },
   {
     key: "fx",
@@ -58,7 +58,7 @@ const guides = [
     readFr: "Un dollar US plus fort peut venir de rendements US relatifs plus élevés, de meilleures anticipations de croissance américaine ou d’une recherche de sécurité. L’inverse peut affaiblir le dollar.",
     impactEn: "A stronger dollar can tighten global financial conditions, affect multinational earnings, weigh on some commodities and pressure emerging markets with dollar debt.",
     impactFr: "Un dollar plus fort peut resserrer les conditions financières mondiales, affecter les bénéfices des multinationales, peser sur certaines matières premières et mettre sous pression les marchés émergents endettés en dollars.",
-    href: "/university/fx-international-finance",
+    href: "/university/year-2-fx-international-finance",
   },
   {
     key: "volatility",
@@ -72,7 +72,7 @@ const guides = [
     readFr: "Un VIX en hausse signifie généralement que les investisseurs paient davantage pour se protéger ou anticipent de plus grands mouvements. Un VIX en baisse signale généralement un pricing du risque plus calme.",
     impactEn: "Use it with equities, credit and rates. A high VIX alone does not tell you exactly where the market will go next.",
     impactFr: "Utilise-le avec les actions, le crédit et les taux. Un VIX élevé ne dit pas à lui seul exactement où le marché ira ensuite.",
-    href: "/university/options-option-greeks",
+    href: "/university/year-2-options-option-greeks",
   },
   {
     key: "commodities",
@@ -86,7 +86,7 @@ const guides = [
     readFr: "Le pétrole réagit souvent à la croissance et aux chocs d’offre. L’or est sensible aux taux réels, au dollar US et à la demande de refuge. Le gaz naturel est particulièrement sensible à la météo, aux stocks et aux infrastructures régionales.",
     impactEn: "Commodity moves can feed into inflation, company margins, sector earnings and central-bank expectations.",
     impactFr: "Les mouvements des matières premières peuvent se transmettre à l’inflation, aux marges des entreprises, aux bénéfices sectoriels et aux anticipations de banques centrales.",
-    href: "/university/macroeconomics-markets",
+    href: "/university/year-1-macroeconomics-for-markets",
   },
   {
     key: "credit",
@@ -100,7 +100,7 @@ const guides = [
     readFr: "Des spreads plus larges signifient généralement que le marché exige davantage de rémunération pour le risque. Des spreads plus serrés signalent souvent un meilleur appétit pour le risque ou davantage de confiance dans la qualité du crédit des entreprises.",
     impactEn: "Credit spreads affect corporate funding costs, refinancing risk, leveraged finance and equity valuations.",
     impactFr: "Les spreads de crédit affectent le coût de financement des entreprises, le risque de refinancement, la leveraged finance et les valorisations actions.",
-    href: "/university/credit-analysis",
+    href: "/university/year-3-credit-analysis",
   },
 ];
 
