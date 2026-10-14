@@ -90,6 +90,10 @@ function applyDepth() {
     section.className = "hourly-deep-lesson";
     card.querySelector(".hourly-update-note")?.before(section);
   }
+
+  const renderKey = `${title}|${french ? "fr" : "en"}`;
+  if (section.dataset.renderKey === renderKey) return;
+  section.dataset.renderKey = renderKey;
   section.innerHTML = "";
 
   const items = [
@@ -114,7 +118,7 @@ function applyDepth() {
 export default function HomeLearningDepth() {
   useEffect(() => {
     applyDepth();
-    const timer = window.setInterval(applyDepth, 5_000);
+    const timer = window.setInterval(applyDepth, 1_000);
     window.addEventListener("finance-studio-language-change", applyDepth);
     return () => {
       window.clearInterval(timer);
