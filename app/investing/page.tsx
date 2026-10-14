@@ -1,20 +1,20 @@
 import SectionLayout from "@/components/section-layout";
 import InvestingContextBridge from "@/components/investing-context-bridge";
-import InvestingLab from "@/components/investing-lab";
+import InvestingLabV2 from "@/components/investing-lab-v2";
 
 export default function InvestingPage() {
   return (
     <SectionLayout
       activeSlug="investing"
-      eyebrow={{ en: "INVESTING LAB · SIMULATION ONLY", fr: "LABORATOIRE D’INVESTISSEMENT · SIMULATION UNIQUEMENT" }}
-      title={{ en: "Learn investing by making decisions, documenting them and reviewing the outcome.", fr: "Apprends à investir en prenant des décisions, en les documentant puis en analysant le résultat." }}
+      eyebrow={{ en: "INVESTING LAB · PAPER SIMULATION", fr: "LABORATOIRE D'INVESTISSEMENT · SIMULATION" }}
+      title={{ en: "Invest like an analyst: observe, reason, simulate, review.", fr: "Investis comme un analyste : observe, raisonne, simule, puis analyse." }}
       description={{
-        en: "The lab is designed around virtual capital only. It teaches portfolio construction, security analysis, risk, attribution and disciplined decision-making without requiring real-money trading.",
-        fr: "Le laboratoire utilise uniquement du capital virtuel. Il enseigne la construction de portefeuille / portfolio construction, l’analyse de titres / security analysis, le risque / risk, l’attribution de performance / performance attribution et une prise de décision disciplinée sans utiliser d’argent réel.",
+        en: "Use verified provider prices, document the logic before the trade, receive live AI coaching while you build the thesis, execute with virtual capital and review the result without risking real money.",
+        fr: "Utilise des prix vérifiés par les fournisseurs, documente ton raisonnement avant l'ordre, reçois un coaching IA pendant que tu construis ta thèse, exécute avec du capital virtuel puis analyse le résultat sans risquer d'argent réel.",
       }}
     >
       <InvestingContextBridge />
-      <InvestingLab />
+      <InvestingLabV2 />
     </SectionLayout>
   );
 }
