@@ -6,16 +6,16 @@ export default function ConceptLensDashboardGuide() {
   const { text } = useLanguage();
 
   return (
-    <section className="news-blueprint-panel" style={{ marginBottom: "1.5rem" }}>
+    <section className="news-blueprint-panel concept-lens-guide-panel">
       <div className="panel-heading">
         <div>
-          <span className="mini-label">✦ {text("NEW · CONCEPT LENS", "NOUVEAU · CONCEPT LENS")}</span>
+          <span className="mini-label concept-lens-guide-label">✦ {text("NEW · CONCEPT LENS", "NOUVEAU · CONCEPT LENS")}</span>
           <h2>{text("Highlight anything. Turn it into an instant AI study card.", "Surligne n’importe quoi. Transforme-le instantanément en fiche IA.")}</h2>
         </div>
-        <span className="connection-badge"><span className="status-dot" /> {text("Works across FinanceStudio", "Disponible partout dans FinanceStudio")}</span>
+        <span className="connection-badge concept-lens-guide-badge"><span className="status-dot" /> {text("Works across FinanceStudio", "Disponible partout dans FinanceStudio")}</span>
       </div>
 
-      <div className="analysis-grid">
+      <div className="analysis-grid concept-lens-guide-grid">
         <article className="analysis-card">
           <span className="mini-label">01</span>
           <h3>{text("Highlight a word, phrase or concept", "Surligne un mot, une phrase ou un concept")}</h3>
@@ -33,7 +33,7 @@ export default function ConceptLensDashboardGuide() {
         </article>
       </div>
 
-      <div className="professor-review-strip" style={{ marginTop: "1rem" }}>
+      <div className="professor-review-strip concept-lens-guide-rule">
         <div>
           <span className="mini-label">{text("PLAIN-LANGUAGE RULE", "RÈGLE D’EXPLICATION")}</span>
           <h2>{text("No unexplained chart, rate or visual.", "Aucun graphique, taux ou visuel sans explication.")}</h2>
