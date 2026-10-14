@@ -6,77 +6,132 @@
   }
 
   .app-shell .sidebar {
-    overflow-y: hidden !important;
-    padding: 18px 14px 14px !important;
+    overflow: hidden !important;
+    padding: 16px 14px 12px !important;
+    display: flex !important;
+    flex-direction: column;
+    box-sizing: border-box;
   }
 
   .app-shell .brand {
+    flex: 0 0 auto;
     gap: 8px;
-    font-size: 15.5px;
+    padding-right: 34px;
+    font-size: 15px;
   }
 
   .app-shell .brand-mark {
-    width: 31px;
-    height: 31px;
+    width: 30px;
+    height: 30px;
     border-radius: 10px;
-    font-size: 11px;
+    font-size: 10.5px;
   }
 
   .app-shell .sidebar-kicker {
-    margin: 16px 8px 7px;
-    font-size: 7.5px;
+    flex: 0 0 auto;
+    margin: 13px 8px 5px;
+    font-size: 7.2px;
     letter-spacing: .13em;
   }
 
   .app-shell .primary-nav {
-    gap: 1px;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 0;
+    padding-block: 2px;
   }
 
   .app-shell .nav-link {
     min-height: 0;
-    padding: 6px 8px;
+    padding: 5px 8px;
     gap: 8px;
     border-radius: 9px;
-    font-size: 10.5px;
-    line-height: 1.15;
+    font-size: 10px;
+    line-height: 1.08;
   }
 
   .app-shell .nav-link span {
-    width: 16px;
-    font-size: 10.5px;
+    width: 15px;
+    font-size: 10px;
   }
 
   .app-shell .sidebar-bottom {
-    padding: 10px 5px 0;
+    flex: 0 0 auto;
+    margin-top: 4px;
+    padding: 9px 5px 0;
     gap: 7px;
   }
 
   .app-shell .sidebar-bottom strong {
-    font-size: 9px;
+    font-size: 8.7px;
   }
 
   .app-shell .sidebar-bottom p {
     margin-top: 2px;
-    font-size: 7.5px;
-    line-height: 1.25;
+    font-size: 7.2px;
+    line-height: 1.18;
   }
 
   .app-shell .progress-ring {
-    width: 34px;
-    height: 34px;
+    width: 33px;
+    height: 33px;
   }
 
   .app-shell .progress-ring::after {
-    width: 26px;
-    height: 26px;
+    width: 25px;
+    height: 25px;
   }
 
   .app-shell .progress-ring span {
-    font-size: 7px;
+    font-size: 6.8px;
   }
 
   .app-shell.sidebar-collapsed .sidebar {
-    padding: 16px 10px !important;
+    padding: 14px 9px 12px !important;
+  }
+
+  .app-shell.sidebar-collapsed .brand {
+    padding-right: 0;
+  }
+
+  /* Sections rendered after app-shell must follow the same sidebar width. */
+  .home-followup-section {
+    width: calc(100% - 246px) !important;
+    margin-left: 246px !important;
+    box-sizing: border-box;
+    transition: width .24s ease, margin-left .24s ease;
+  }
+
+  body:has(.app-shell.sidebar-collapsed) .home-followup-section {
+    width: calc(100% - 82px) !important;
+    margin-left: 82px !important;
+  }
+}
+
+/* Keep the toggle fully visible inside the navigation edge. */
+.sidebar-collapse-toggle {
+  position: fixed !important;
+  top: 14px !important;
+  left: auto !important;
+  right: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+@media (min-width: 761px) {
+  .app-shell .sidebar .sidebar-collapse-toggle {
+    left: calc(var(--home-sidebar-width, 246px) - 36px) !important;
+    width: 27px;
+    height: 27px;
+    border-width: 1px;
+    box-shadow: 0 5px 16px color-mix(in srgb, var(--ink) 12%, transparent);
+  }
+
+  .app-shell.sidebar-collapsed .sidebar .sidebar-collapse-toggle {
+    left: 46px !important;
   }
 }
 
@@ -142,6 +197,27 @@
   padding-top: 0 !important;
 }
 
+/* Short answer under each interview framework step. */
+.interview-step-answer {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.5;
+  max-width: 680px;
+}
+
+.interview-card .answer-framework > div {
+  align-items: flex-start;
+  min-height: 0 !important;
+  padding-block: 12px !important;
+}
+
+.interview-card .answer-framework > div p {
+  margin: 0;
+}
+
 .market-grid-rich {
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
 }
@@ -158,6 +234,21 @@
   font-size: 10px;
 }
 
+@media (max-height: 760px) and (min-width: 761px) {
+  .app-shell .sidebar {
+    padding-top: 10px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .app-shell .brand { font-size: 13.5px; }
+  .app-shell .brand-mark { width: 27px; height: 27px; }
+  .app-shell .sidebar-kicker { margin-top: 8px; font-size: 6.6px; }
+  .app-shell .nav-link { padding-block: 3px; font-size: 9.2px; }
+  .app-shell .nav-link span { font-size: 9.2px; }
+  .app-shell .sidebar-bottom { padding-top: 6px; }
+  .app-shell .sidebar-bottom p { display: none; }
+}
+
 @media (max-width: 1320px) {
   .market-grid-rich {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
@@ -172,6 +263,11 @@
 }
 
 @media (max-width: 760px) {
+  .home-followup-section {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
   .hourly-deep-lesson,
   .market-grid-rich {
     grid-template-columns: 1fr !important;
