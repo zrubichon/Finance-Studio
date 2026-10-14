@@ -4,6 +4,7 @@ import ThemeBootstrap from "@/components/theme-bootstrap";
 import ConceptLens from "@/components/concept-lens";
 import SidebarController from "@/components/sidebar-controller";
 import InvestingInstantCoach from "@/components/investing-instant-coach";
+import SessionKeeper from "@/components/session-keeper";
 import LanguageProvider, { type Language } from "@/components/language-provider";
 import "./globals.css";
 import "./product.css";
@@ -38,6 +39,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html lang={initialLanguage === "FR" ? "fr" : "en"}>
       <body>
         <LanguageProvider initialLanguage={initialLanguage}>
+          <SessionKeeper />
           <ThemeBootstrap />
           <SidebarController />
           <InvestingInstantCoach />
