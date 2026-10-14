@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
+import { RECENT_ACTIVITY_EVENT, RECENT_ACTIVITY_KEY, type RecentFinanceActivity } from "@/components/activity-tracker";
 import { allCurriculumModules } from "@/lib/curriculum";
 import { recommendLesson, professorHref } from "@/lib/learning-bridge";
 import { createClient } from "@/lib/supabase/client";
@@ -75,6 +76,15 @@ function calculationForSeed(seed: number) {
   return variants[seed % variants.length];
 }
 
+function readRecentActivity() {
+  try {
+    const raw = window.localStorage.getItem(RECENT_ACTIVITY_KEY);
+    return raw ? JSON.parse(raw) as RecentFinanceActivity[] : [];
+  } catch {
+    return [];
+  }
+}
+
 export default function DailyFinanceDashboard() {
   const { isFrench, text } = useLanguage();
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -84,11 +94,23 @@ export default function DailyFinanceDashboard() {
   const [history, setHistory] = useState<string[]>([]);
   const [challengeDone, setChallengeDone] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [recentActivity, setRecentActivity] = useState<RecentFinanceActivity[]>([]);
 
   const modules = useMemo(() => allCurriculumModules(), []);
   const dateKey = localDayKey();
   const daySeed = [...dateKey].reduce((sum, char) => sum + char.charCodeAt(0), 0);
   const calculation = calculationForSeed(daySeed);
+
+  useEffect(() => {
+    const syncActivity = () => setRecentActivity(readRecentActivity());
+    syncActivity();
+    window.addEventListener(RECENT_ACTIVITY_EVENT, syncActivity);
+    window.addEventListener("focus", syncActivity);
+    return () => {
+      window.removeEventListener(RECENT_ACTIVITY_EVENT, syncActivity);
+      window.removeEventListener("focus", syncActivity);
+    };
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -173,6 +195,58 @@ export default function DailyFinanceDashboard() {
       ? `Build a testable investment thesis from this catalyst: ${challengeNews.title}`
       : "Build a testable thesis from today's market driver.",
   }).toString()}`;
+  const challengeHref = `/challenge?${new URLSearchParams({
+    lesson: challengeLesson,
+    role: targetRole,
+    ...(challengeNews ? { headline: challengeNews.title } : {}),
+  }).toString()}`;
+
+  const latestActivity = recentActivity[0];
+  const sessionRecommendation = useMemo(() => {
+    if (!latestActivity) {
+      return {
+        title: text("Start with your next lesson", "Commence par ton prochain cours"),
+        copy: text("FinanceStudio will adapt this card as you study, read news and practise.", "FinanceStudio adaptera cette carte à mesure que tu étudies, lis les news et t’entraînes."),
+        href: nextModule ? `/university/${nextModule.slug}` : "/university",
+        action: text("Start learning", "Commencer"),
+      };
+    }
+
+    if (latestActivity.kind === "news") return {
+      title: text("Turn that headline into a concept", "Transforme cette news en concept"),
+      copy: text("You just explored news. The best next step is to understand the mechanism and then test it in an interview question.", "Tu viens d’explorer l’actualité. Le meilleur prochain pas est de comprendre le mécanisme puis de le tester en entretien."),
+      href: professorHref({ lessonSlug: challengeLesson, question: "Connect the latest finance news I read to the underlying finance concept, then test me with one interview question.", source: "news" }),
+      action: text("Connect news to concept", "Relier news et concept"),
+    };
+
+    if (latestActivity.kind === "lesson") return {
+      title: text("Test what you just learned", "Teste ce que tu viens d’apprendre"),
+      copy: text("You recently opened a lesson. Reinforce it now with an interview-style explanation before moving on.", "Tu viens d’ouvrir un cours. Renforce-le maintenant avec une explication type entretien avant de continuer."),
+      href: interviewHref,
+      action: text("Practice interview answer", "Pratiquer en entretien"),
+    };
+
+    if (latestActivity.kind === "dictionary") return {
+      title: text("Move from vocabulary to application", "Passe du vocabulaire à l’application"),
+      copy: text("You recently reviewed vocabulary. Apply the term in a calculation, market explanation or thesis.", "Tu viens de revoir du vocabulaire. Applique maintenant le terme dans un calcul, une explication de marché ou une thèse."),
+      href: challengeHref,
+      action: text("Open guided challenge", "Ouvrir le challenge guidé"),
+    };
+
+    if (latestActivity.kind === "investing") return {
+      title: text("Stress-test your investing view", "Stress-teste ta thèse d’investissement"),
+      copy: text("After investing work, switch to the interviewer perspective: explain catalysts, risks and what would invalidate the thesis.", "Après le travail d’investissement, passe au point de vue de l’interviewer : catalyseurs, risques et invalidation de la thèse."),
+      href: interviewHref,
+      action: text("Defend the thesis", "Défendre la thèse"),
+    };
+
+    return {
+      title: text("Complete the learning loop", "Complète la boucle d’apprentissage"),
+      copy: text("Your recent activity suggests a mixed review: concept, calculation, interview and investing.", "Ton activité récente suggère une révision mixte : concept, calcul, entretien et investing."),
+      href: challengeHref,
+      action: text("Open today's loop", "Ouvrir la boucle du jour"),
+    };
+  }, [challengeHref, challengeLesson, interviewHref, latestActivity, nextModule, text]);
 
   function completeChallenge() {
     const next = Array.from(new Set([...history, dateKey])).sort();
@@ -182,15 +256,25 @@ export default function DailyFinanceDashboard() {
   }
 
   return (
-    <section className="workspace-stack" style={{ marginBottom: "1.5rem" }}>
-      <section className="news-blueprint-panel">
+    <section className="workspace-stack daily-dashboard-stack">
+      <section className="news-blueprint-panel smart-daily-panel">
         <div className="panel-heading">
           <div>
-            <span className="mini-label">{text("TODAY · SMART DAILY BRIEF", "AUJOURD’HUI · SMART DAILY BRIEF")}</span>
+            <span className="mini-label">{text("SMART DAILY BRIEF · SESSION AWARE", "SMART DAILY BRIEF · ADAPTÉ À TA SESSION")}</span>
             <h2>{text("What should you learn, review and practice today?", "Que dois-tu apprendre, revoir et pratiquer aujourd’hui ?")}</h2>
           </div>
-          <span className="connection-badge"><span className="status-dot" /> {text("Live learning loop", "Learning loop active")}</span>
+          <span className="connection-badge"><span className="status-dot" /> {text("Updates after your actions", "Se met à jour après tes actions")}</span>
         </div>
+
+        <article className="session-next-action">
+          <div>
+            <span className="mini-label">{text("NEXT BEST ACTION", "MEILLEURE PROCHAINE ACTION")}</span>
+            <h3>{sessionRecommendation.title}</h3>
+            <p>{sessionRecommendation.copy}</p>
+            {latestActivity && <small>{text("Last activity:", "Dernière activité :")} {latestActivity.label}</small>}
+          </div>
+          <Link className="full-button" href={sessionRecommendation.href}>{sessionRecommendation.action} →</Link>
+        </article>
 
         <div className="analysis-grid">
           <article className="analysis-card">
@@ -238,7 +322,7 @@ export default function DailyFinanceDashboard() {
         ) : null}
       </section>
 
-      <section className="professor-demo-panel">
+      <section className="professor-demo-panel daily-challenge-panel">
         <div className="professor-demo-question">
           <span className="mini-label">{text("DAILY FINANCE CHALLENGE · 5–10 MIN", "DAILY FINANCE CHALLENGE · 5–10 MIN")}</span>
           <h2>{challengeDone ? text("Completed today ✓", "Terminé aujourd’hui ✓") : text("News → concept → calculation → interview → investing", "News → concept → calcul → entretien → investing")}</h2>
@@ -247,19 +331,23 @@ export default function DailyFinanceDashboard() {
           <p><strong>{text("2 · Concept:", "2 · Concept :")}</strong> {challengeRecommendation ? (isFrench ? challengeRecommendation.titleFr : challengeRecommendation.titleEn) : (isFrench ? nextModule?.titleFr : nextModule?.title)}</p>
           <p><strong>{text("3 · Calculation:", "3 · Calcul :")}</strong> {isFrench ? calculation.fr : calculation.en}</p>
           {showAnswer && <p className="inline-status">{text("Answer", "Réponse")}: {calculation.answer}</p>}
+          <Link className="full-button challenge-open-button" href={challengeHref}>{text("Open guided challenge", "Ouvrir le challenge guidé")} →</Link>
         </div>
 
-        <div className="professor-response-card">
+        <div className="professor-response-card complete-loop-card">
           <span className="mini-label">{text("COMPLETE THE LOOP", "TERMINER LA BOUCLE")}</span>
-          <div className="chip-row">
-            <button type="button" className="chip" onClick={() => setShowAnswer((value) => !value)}>{showAnswer ? text("Hide calculation", "Masquer la réponse") : text("Check calculation", "Vérifier le calcul")}</button>
-            <Link className="chip" href={`/university/${challengeLesson}`}>{text("Open concept", "Ouvrir le cours")}</Link>
-            <Link className="chip" href={interviewHref}>{text("Interview drill", "Question entretien")}</Link>
-            <Link className="chip" href={investingHref}>{text("Build thesis", "Construire une thèse")}</Link>
+          <div className="loop-action-grid">
+            <button type="button" className="chip loop-action" onClick={() => setShowAnswer((value) => !value)}>{showAnswer ? text("Hide calculation", "Masquer la réponse") : text("Check calculation", "Vérifier le calcul")}</button>
+            <Link className="chip loop-action" href={`/university/${challengeLesson}`}>{text("Open concept", "Ouvrir le cours")}</Link>
+            <Link className="chip loop-action" href={interviewHref}>{text("Interview drill", "Question entretien")}</Link>
+            <Link className="chip loop-action" href={investingHref}>{text("Build thesis", "Construire une thèse")}</Link>
+            <Link className="chip loop-action" href={professorHref({ lessonSlug: challengeLesson, question: `Guide me through today's challenge step by step. Do not give the final answer immediately. Calculation: ${isFrench ? calculation.fr : calculation.en}`, source: "lesson" })}>{text("Ask AI for help", "Demander de l’aide à l’IA")}</Link>
+            <Link className="chip loop-action" href={challengeHref}>{text("Full challenge", "Challenge complet")}</Link>
           </div>
-          <button className="full-button" type="button" onClick={completeChallenge} disabled={challengeDone} style={{ marginTop: "1rem" }}>
-            {challengeDone ? text("Challenge completed", "Challenge terminé") : text("Mark today's challenge complete", "Marquer le challenge du jour comme terminé")}
-          </button>
+          <label className="challenge-check-row">
+            <input type="checkbox" checked={challengeDone} onChange={() => { if (!challengeDone) completeChallenge(); }} />
+            <span>{challengeDone ? text("Today's challenge is complete", "Le challenge du jour est terminé") : text("Mark today's challenge complete", "Marquer le challenge du jour comme terminé")}</span>
+          </label>
         </div>
       </section>
     </section>
