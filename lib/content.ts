@@ -10,4 +10,5 @@ export const navItems = [
   { slug: "saved", label: "My Library", labelFr: "Ma Bibliothèque", icon: "★" },
   { slug: "progress", label: "Progress", labelFr: "Progression", icon: "◔" },
   { slug: "themes", label: "Theme Studio", labelFr: "Studio de Thèmes", icon: "◉" },
+  { slug: "account", label: "Profile", labelFr: "Profil", icon: "●" },
 ] as const;
