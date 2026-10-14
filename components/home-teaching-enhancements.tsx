@@ -98,7 +98,8 @@ function enhanceAppliedExample() {
     extra.className = "applied-context-extra";
     applied.appendChild(extra);
   }
-  extra.textContent = french ? context.fr : context.en;
+  const next = french ? context.fr : context.en;
+  if (extra.textContent !== next) extra.textContent = next;
 }
 
 function enhanceInterview() {
@@ -114,7 +115,8 @@ function enhanceInterview() {
       answer.className = "interview-step-answer";
       row.querySelector("p")?.appendChild(answer);
     }
-    answer.textContent = answerForStep(label, french);
+    const next = answerForStep(label, french);
+    if (answer.textContent !== next) answer.textContent = next;
   });
 }
 
@@ -126,12 +128,14 @@ function enhance() {
 export default function HomeTeachingEnhancements() {
   useEffect(() => {
     enhance();
-    const observer = new MutationObserver(enhance);
-    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
-    window.addEventListener("finance-studio-language-change", enhance);
+    const timer = window.setInterval(enhance, 1500);
+    const onLanguage = () => window.setTimeout(enhance, 0);
+    window.addEventListener("finance-studio-language-change", onLanguage);
+    window.addEventListener("focus", enhance);
     return () => {
-      observer.disconnect();
-      window.removeEventListener("finance-studio-language-change", enhance);
+      window.clearInterval(timer);
+      window.removeEventListener("finance-studio-language-change", onLanguage);
+      window.removeEventListener("focus", enhance);
     };
   }, []);
   return null;
