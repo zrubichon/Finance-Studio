@@ -12,6 +12,7 @@ import "./course.css";
 import "./readability.css";
 import "./concept-lens.css";
 import "./polish-v2.css";
+import "./investing-v2.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
