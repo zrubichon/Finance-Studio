@@ -15,9 +15,28 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
+function readStoredLanguage(): Language | null {
+  try {
+    const value = window.localStorage.getItem("finance-studio-language");
+    return value === "EN" || value === "FR" ? value : null;
+  } catch {
+    return null;
+  }
+}
+
 function storeLanguage(language: Language) {
-  window.localStorage.setItem("finance-studio-language", language);
-  document.cookie = `finance-studio-language=${language}; path=/; max-age=31536000; samesite=lax`;
+  try {
+    window.localStorage.setItem("finance-studio-language", language);
+  } catch {
+    // Storage may be unavailable in private/restricted browser contexts.
+  }
+
+  try {
+    document.cookie = `finance-studio-language=${language}; path=/; max-age=31536000; samesite=lax`;
+  } catch {
+    // Cookie persistence is optional for client rendering.
+  }
+
   document.documentElement.lang = language === "FR" ? "fr" : "en";
 }
 
@@ -29,9 +48,7 @@ export default function LanguageProvider({ children, initialLanguage = "EN" }: {
     let active = true;
 
     async function hydrateLanguage() {
-      const saved = window.localStorage.getItem(
-        "finance-studio-language",
-      ) as Language | null;
+      const saved = readStoredLanguage();
 
       try {
         const supabase = createClient();
@@ -52,39 +69,24 @@ export default function LanguageProvider({ children, initialLanguage = "EN" }: {
 
           if (
             !error &&
-            (data?.preferred_language === "fr" ||
-              data?.preferred_language === "en")
+            (data?.preferred_language === "fr" || data?.preferred_language === "en")
           ) {
-            const accountLanguage: Language =
-              data.preferred_language === "fr" ? "FR" : "EN";
+            const accountLanguage: Language = data.preferred_language === "fr" ? "FR" : "EN";
             setLanguageState(accountLanguage);
             storeLanguage(accountLanguage);
-
             if (accountLanguage !== initialLanguage) router.refresh();
             return;
           }
-
-          if (saved === "EN" || saved === "FR") {
-            setLanguageState(saved);
-            storeLanguage(saved);
-            if (saved !== initialLanguage) router.refresh();
-          }
-          return;
-        }
-
-        if (saved === "EN" || saved === "FR") {
-          setLanguageState(saved);
-          storeLanguage(saved);
-          if (saved !== initialLanguage) router.refresh();
         }
       } catch {
-        if (!active) return;
+        // Account sync is optional; continue with browser/cookie language.
+      }
 
-        if (saved === "EN" || saved === "FR") {
-          setLanguageState(saved);
-          storeLanguage(saved);
-          if (saved !== initialLanguage) router.refresh();
-        }
+      if (!active) return;
+      if (saved === "EN" || saved === "FR") {
+        setLanguageState(saved);
+        storeLanguage(saved);
+        if (saved !== initialLanguage) router.refresh();
       }
     }
 
@@ -97,14 +99,22 @@ export default function LanguageProvider({ children, initialLanguage = "EN" }: {
   const setLanguage = useCallback((next: Language) => {
     setLanguageState(next);
     storeLanguage(next);
-    window.dispatchEvent(new CustomEvent("finance-studio-language-change", { detail: next }));
+
+    try {
+      window.dispatchEvent(new CustomEvent("finance-studio-language-change", { detail: next }));
+    } catch {
+      // Non-critical enhancement only.
+    }
 
     void (async () => {
       try {
         const supabase = createClient();
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
-          await supabase.from("profiles").update({ preferred_language: next.toLowerCase(), updated_at: new Date().toISOString() }).eq("user_id", user.id);
+          await supabase
+            .from("profiles")
+            .update({ preferred_language: next.toLowerCase(), updated_at: new Date().toISOString() })
+            .eq("user_id", user.id);
         }
       } catch {
         // Browser and cookie persistence still work if account sync is temporarily unavailable.
