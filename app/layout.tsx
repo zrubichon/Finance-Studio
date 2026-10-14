@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import ThemeBootstrap from "@/components/theme-bootstrap";
 import ConceptLens from "@/components/concept-lens";
+import SidebarController from "@/components/sidebar-controller";
+import InvestingInstantCoach from "@/components/investing-instant-coach";
 import LanguageProvider, { type Language } from "@/components/language-provider";
 import "./globals.css";
 import "./product.css";
@@ -13,6 +15,7 @@ import "./readability.css";
 import "./concept-lens.css";
 import "./polish-v2.css";
 import "./investing-v2.css";
+import "./polish-v3.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
@@ -36,6 +39,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body>
         <LanguageProvider initialLanguage={initialLanguage}>
           <ThemeBootstrap />
+          <SidebarController />
+          <InvestingInstantCoach />
           {children}
           <ConceptLens />
         </LanguageProvider>
