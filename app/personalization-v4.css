@@ -1,0 +1,266 @@
+.career-v2 .role-grid-v2 {
+  gap: 14px;
+}
+
+.career-v2 .role-card {
+  padding: 18px;
+  gap: 14px;
+  min-height: 0;
+}
+
+.career-v2 .role-card-copy,
+.career-v2 .role-knowledge-block,
+.career-v2 .role-card-actions {
+  margin: 0;
+}
+
+.career-v2 .role-card-copy h3 {
+  margin: 5px 0 7px;
+}
+
+.career-v2 .role-card-copy p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.career-v2 .role-knowledge-chips {
+  gap: 6px;
+}
+
+.career-v2 .role-knowledge-chips span {
+  padding: 5px 8px;
+}
+
+.career-personalized-path,
+.summer-analyst-context,
+.decision-prereq-panel,
+.interview-feedback-report,
+.interview-score-band,
+.home-career-guide {
+  border: 1px solid var(--border, rgba(120, 120, 140, .2));
+  border-radius: 18px;
+  background: var(--surface, rgba(255,255,255,.72));
+}
+
+.career-personalized-path {
+  padding: 22px;
+  display: grid;
+  gap: 18px;
+}
+
+.career-path-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.career-path-grid article {
+  padding: 15px;
+  border-radius: 14px;
+  background: var(--surface-soft, rgba(120,120,140,.06));
+}
+
+.career-path-grid h3 {
+  margin: 5px 0 9px;
+  font-size: 1rem;
+}
+
+.career-path-grid ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.6;
+}
+
+.summer-analyst-context {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 20px;
+}
+
+.summer-analyst-context h2 {
+  margin: 4px 0 5px;
+  font-size: 1.15rem;
+}
+
+.summer-analyst-context p {
+  margin: 0;
+  max-width: 850px;
+}
+
+.interview-evaluation-stack {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+}
+
+.interview-score-band {
+  width: 100%;
+  padding: 13px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.interview-score-band > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.interview-score-band strong {
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.interview-score-band p {
+  margin: 0;
+  font-size: .9rem;
+  opacity: .78;
+}
+
+.interview-feedback-report {
+  width: 100%;
+  padding: 24px 26px;
+}
+
+.interview-feedback-report h2 {
+  margin: 6px 0 16px;
+  font-size: 1.35rem;
+}
+
+.interview-feedback-copy {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: none;
+}
+
+.decision-prereq-panel {
+  padding: 22px;
+  display: grid;
+  grid-template-columns: minmax(220px, .7fr) minmax(0, 1.3fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.decision-prereq-panel h2 {
+  margin: 5px 0 7px;
+}
+
+.decision-prereq-panel p {
+  margin: 0;
+}
+
+.decision-prereq-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.decision-prereq-columns > div {
+  display: grid;
+  gap: 10px;
+}
+
+.decision-sheet-head-actions {
+  display: grid;
+  justify-items: end;
+  gap: 9px;
+}
+
+.worked-example-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 13px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--text, #15151a);
+  color: var(--background, #fff);
+}
+
+.decision-example-explainer {
+  margin: 14px 0 18px;
+  padding: 14px 16px;
+  border-radius: 13px;
+  background: var(--surface-soft, rgba(120,120,140,.07));
+}
+
+.decision-example-explainer p {
+  margin: 6px 0 0;
+  line-height: 1.6;
+}
+
+.home-career-guide {
+  margin: 0 0 22px;
+  padding: 22px;
+  display: grid;
+  gap: 17px;
+}
+
+.home-career-guide .panel-heading p {
+  margin: 6px 0 0;
+  max-width: 760px;
+}
+
+.home-career-next-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.home-career-next-grid article {
+  display: grid;
+  gap: 9px;
+  padding: 14px;
+  border-radius: 13px;
+  background: var(--surface-soft, rgba(120,120,140,.06));
+}
+
+.home-career-next-grid span {
+  font-size: .72rem;
+  letter-spacing: .08em;
+  opacity: .65;
+}
+
+.home-career-next-grid strong {
+  line-height: 1.45;
+}
+
+@media (max-width: 980px) {
+  .career-path-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .decision-prereq-panel {
+    grid-template-columns: 1fr;
+  }
+  .home-career-next-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .career-path-grid,
+  .decision-prereq-columns,
+  .home-career-next-grid {
+    grid-template-columns: 1fr;
+  }
+  .summer-analyst-context,
+  .interview-score-band {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .interview-score-band > div {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .interview-feedback-report {
+    padding: 20px;
+  }
+  .decision-sheet-head-actions {
+    justify-items: start;
+  }
+}

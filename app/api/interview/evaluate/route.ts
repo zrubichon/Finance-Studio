@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
     track?: unknown;
     answer?: unknown;
     language?: unknown;
+    careerStage?: unknown;
     customQuestion?: unknown;
     lessonSlug?: unknown;
     source?: unknown;
@@ -33,9 +34,11 @@ export async function POST(request: NextRequest) {
   const track = body.track;
   const answer = clean(body.answer, 8000);
   const language = body.language === "FR" ? "FR" : "EN";
+  const careerStage = clean(body.careerStage, 60);
   const customQuestion = clean(body.customQuestion, 1800);
   const lessonSlug = clean(body.lessonSlug, 180);
   const source = clean(body.source, 80);
+  const isSummerAnalyst = careerStage === "intern";
 
   if (answer.length < 20) {
     return NextResponse.json(
@@ -52,6 +55,11 @@ export async function POST(request: NextRequest) {
   const lessonContext = lesson
     ? `RELATED FINANCE UNIVERSITY LESSON: ${lesson.title.en} / ${lesson.title.fr}\nDOMAIN: ${lesson.domain.en}\nINTERVIEW TRANSFER: ${local(lesson.interviewPrompt.question)}`
     : "";
+  const stageContext = isSummerAnalyst
+    ? language === "FR"
+      ? "NIVEAU CANDIDAT: Summer Analyst / stagiaire. Évalue les bases techniques, la logique, la motivation, la communication et la culture marché. N’exige pas une expérience de deal ou une responsabilité senior qu’un étudiant ne peut raisonnablement pas avoir. En revanche, sois exigeant sur la clarté, les fondamentaux et la capacité à apprendre."
+      : "CANDIDATE LEVEL: Summer Analyst / intern. Evaluate technical foundations, reasoning, motivation, communication and commercial awareness. Do not require senior deal ownership or experience an undergraduate cannot reasonably have. Still be demanding on clarity, fundamentals and learning ability."
+    : `CANDIDATE LEVEL: ${careerStage || "not specified"}.`;
 
   let userId: string | null = null;
   let supabase: Awaited<ReturnType<typeof createClient>> | null = null;
@@ -66,6 +74,7 @@ export async function POST(request: NextRequest) {
     : "You are a demanding but educational finance interviewer. Evaluate only the answer provided. For a contextual question linked to news or a lesson, reward separation of fact from interpretation, transmission logic, what may already be priced, risks and what to watch next. Be precise about technical errors and structure. Do not invent current facts.";
 
   const prompt = `TRACK: ${track}
+${stageContext}
 QUESTION: ${displayQuestion}
 SOURCE: ${source || "Interview Studio"}
 ${lessonContext}
@@ -87,7 +96,7 @@ STRONGER ANSWER STRUCTURE:
 FOLLOW-UP:
 MODEL ANSWER DIRECTION:
 
-Use bullets where useful. SCORE must be an integer 0-100. If this is a current-news question, do not claim the headline is verified beyond the context supplied.`;
+Use bullets where useful. SCORE must be an integer 0-100. If this is a current-news question, do not claim the headline is verified beyond the context supplied. Keep the feedback appropriate to the candidate level stated above.`;
 
   try {
     const result = await generateText({
@@ -117,8 +126,9 @@ Use bullets where useful. SCORE must be an integer 0-100. If this is a current-n
         answer_text: answer,
         evaluation: {
           status: "scored",
-          version: 3,
+          version: 4,
           score,
+          career_stage: careerStage || null,
           feedback: result.text.slice(0, 12000),
           model: MODEL,
           custom_question: customQuestion || null,
@@ -133,12 +143,8 @@ Use bullets where useful. SCORE must be an integer 0-100. If this is a current-n
   } catch (error) {
     console.error("Interview evaluation failed", error);
 
-    const gatewayMessage =
-      error instanceof Error ? error.message.toLowerCase() : "";
-    const billingRequired =
-      gatewayMessage.includes("valid credit card") ||
-      gatewayMessage.includes("add a card") ||
-      gatewayMessage.includes("unlock your free credits");
+    const gatewayMessage = error instanceof Error ? error.message.toLowerCase() : "";
+    const billingRequired = gatewayMessage.includes("valid credit card") || gatewayMessage.includes("add a card") || gatewayMessage.includes("unlock your free credits");
 
     return NextResponse.json(
       {
@@ -149,9 +155,7 @@ Use bullets where useful. SCORE must be an integer 0-100. If this is a current-n
           : language === "FR"
             ? "L’évaluation IA n’est pas disponible pour le moment. Ta réponse reste dans l’éditeur et tu peux réessayer lorsque la connexion AI Gateway est active."
             : "AI evaluation is not available right now. Your answer remains in the editor and you can retry when the AI Gateway connection is active.",
-        code: billingRequired
-          ? "AI_GATEWAY_BILLING_REQUIRED"
-          : "AI_GATEWAY_UNAVAILABLE",
+        code: billingRequired ? "AI_GATEWAY_BILLING_REQUIRED" : "AI_GATEWAY_UNAVAILABLE",
       },
       { status: 503 },
     );

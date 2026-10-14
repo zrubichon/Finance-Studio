@@ -12,7 +12,7 @@ type ConceptCard = {
   categoryEn?: string; categoryFr?: string; oneLineEn?: string; oneLineFr?: string;
   plainEn?: string; plainFr?: string; whyItMattersEn?: string; whyItMattersFr?: string;
   implicationsEn?: string[]; implicationsFr?: string[]; exampleEn?: string; exampleFr?: string;
-  formula?: string; formulaExplainEn?: string; formulaExplainFr?: string;
+  formula?: string; formulaEn?: string; formulaFr?: string; formulaExplainEn?: string; formulaExplainFr?: string;
   visual?: { titleEn?: string; titleFr?: string; stepsEn?: string[]; stepsFr?: string[]; howToReadEn?: string; howToReadFr?: string };
   relatedEn?: string[]; relatedFr?: string[]; commonMistakeEn?: string; commonMistakeFr?: string;
 };
@@ -140,6 +140,7 @@ export default function DictionaryExplorerV2({ entries }: { entries: DictionaryE
   function close() { setSelected(null); setCard(null); setError(""); }
 
   const studyFrench = studyLanguage === "FR";
+  const displayedFormula = card ? (studyFrench ? (card.formulaFr || card.formula) : (card.formulaEn || card.formula)) : "";
 
   return <div className="workspace-stack dictionary-v2">
     <section className="dictionary-toolbar dictionary-toolbar-v2">
@@ -179,9 +180,9 @@ export default function DictionaryExplorerV2({ entries }: { entries: DictionaryE
         {error ? <div className="inline-status">{error}<p>{studyFrench ? selected.definitionFr : selected.definitionEn}</p></div> : null}
         {card ? <div className="dictionary-study-body">
           <section className="study-hero"><span className="mini-label">{studyFrench ? card.categoryFr : card.categoryEn}</span><h3>{studyFrench ? card.oneLineFr : card.oneLineEn}</h3><p>{studyFrench ? card.plainFr : card.plainEn}</p></section>
-          <section className="study-grid-two"><article><span className="control-label">{studyFrench ? "POURQUOI C'EST IMPORTANT" : "WHY IT MATTERS"}</span><p>{studyFrench ? card.whyItMattersFr : card.whyItMattersEn}</p></article><article><span className="control-label">{studyFrench ? "EXEMPLE CONCRET" : "CONCRETE EXAMPLE"}</span><p>{studyFrench ? card.exampleFr : card.exampleEn}</p></article></section>
+          <section className="study-grid-two"><article><span className="control-label">{studyFrench ? "POURQUOI C'EST IMPORTANT" : "WHY IT MATTERS"}</span><p>{studyFrench ? card.whyItMattersFr : card.whyItMattersEn}</p></article><article><span className="control-label">{studyFrench ? "EXEMPLE CHIFFRÉ" : "NUMERIC EXAMPLE"}</span><p>{studyFrench ? card.exampleFr : card.exampleEn}</p></article></section>
           <section className="study-impact-panel"><span className="control-label">{studyFrench ? "IMPACTS / TRANSMISSION" : "IMPLICATIONS / TRANSMISSION"}</span><div className="study-impact-flow">{(studyFrench ? card.implicationsFr : card.implicationsEn)?.map((step, index, all) => <div key={`${step}-${index}`}><span>{index + 1}</span><p>{step}</p>{index < all.length - 1 ? <b>→</b> : null}</div>)}</div></section>
-          {card.formula ? <section className="study-formula"><span className="control-label">{studyFrench ? "FORMULE & INTUITION" : "FORMULA & INTUITION"}</span><code>{card.formula}</code><p>{studyFrench ? card.formulaExplainFr : card.formulaExplainEn}</p></section> : null}
+          {displayedFormula ? <section className="study-formula"><span className="control-label">{studyFrench ? "FORMULE & INTUITION" : "FORMULA & INTUITION"}</span><code>{displayedFormula}</code><p>{studyFrench ? card.formulaExplainFr : card.formulaExplainEn}</p></section> : null}
           {card.visual ? <section className="study-visual"><span className="control-label">{studyFrench ? "VISUEL / COMMENT LE LIRE" : "VISUAL / HOW TO READ IT"}</span><h3>{studyFrench ? card.visual.titleFr : card.visual.titleEn}</h3><div className="study-visual-flow">{(studyFrench ? card.visual.stepsFr : card.visual.stepsEn)?.map((step, index) => <div key={`${step}-${index}`}><span>{index + 1}</span><strong>{step}</strong></div>)}</div><p><strong>{studyFrench ? "Comment le lire :" : "How to read it:"}</strong> {studyFrench ? card.visual.howToReadFr : card.visual.howToReadEn}</p></section> : null}
           <section className="study-grid-two"><article><span className="control-label">{studyFrench ? "ERREUR FRÉQUENTE" : "COMMON MISTAKE"}</span><p>{studyFrench ? card.commonMistakeFr : card.commonMistakeEn}</p></article><article><span className="control-label">{studyFrench ? "CONCEPTS LIÉS" : "RELATED CONCEPTS"}</span><div className="related-row">{(studyFrench ? card.relatedFr : card.relatedEn)?.map((term) => <button className="chip" type="button" key={term} onClick={() => { setQuery(term); close(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>{term}</button>)}</div></article></section>
           <section className="study-source-links"><span className="control-label">{studyFrench ? "L'APPRENDRE DANS LE CURSUS" : "LEARN IT IN THE CURRICULUM"}</span><div className="related-row">{selected.sources.slice(0, 6).map((source) => <Link href={`/university/${source.slug}`} key={source.slug}>{studyFrench ? source.fr : source.en} →</Link>)}</div></section>

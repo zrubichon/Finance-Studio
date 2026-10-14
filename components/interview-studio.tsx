@@ -17,6 +17,7 @@ import {
 export default function InterviewStudio() {
   const { isFrench, text } = useLanguage();
   const [track, setTrack] = useState<Track>("Investment Banking");
+  const [careerStage, setCareerStage] = useState("");
   const [answer, setAnswer] = useState("");
   const [userId, setUserId] = useState<string | null>(null);
   const [attemptCount, setAttemptCount] = useState(0);
@@ -33,6 +34,7 @@ export default function InterviewStudio() {
   const active = useMemo(() => interviewQuestions[track], [track]);
   const local = (value: Bilingual) => isFrench ? value.fr : value.en;
   const displayedQuestion = customQuestion || local(active.question);
+  const isSummerAnalyst = careerStage === "intern";
 
   useEffect(() => {
     let mounted = true;
@@ -43,8 +45,12 @@ export default function InterviewStudio() {
       const requestedQuestion = params?.get("question")?.trim() ?? "";
       const requestedLesson = params?.get("lesson")?.trim() ?? "";
       const requestedSource = params?.get("source")?.trim() ?? "";
+      const savedStage = window.localStorage.getItem("finance-studio-career-stage") ?? "";
+      const savedLocalRole = window.localStorage.getItem("finance-studio-target-role") ?? "";
 
+      if (mounted) setCareerStage(savedStage);
       if (isInterviewTrack(requestedTrack)) setTrack(requestedTrack);
+      else if (isInterviewTrack(savedLocalRole)) setTrack(savedLocalRole);
       if (requestedQuestion) setCustomQuestion(requestedQuestion.slice(0, 1800));
       if (requestedLesson) setLessonSlug(requestedLesson.slice(0, 180));
       if (requestedSource) setSource(requestedSource.slice(0, 80));
@@ -102,7 +108,8 @@ export default function InterviewStudio() {
       answer_text: answer.trim(),
       evaluation: {
         status: "submitted_unscored",
-        version: 2,
+        version: 3,
+        career_stage: careerStage || null,
         custom_question: customQuestion || null,
         lesson_slug: lessonSlug || null,
         source: source || null,
@@ -136,6 +143,7 @@ export default function InterviewStudio() {
           track,
           answer: answer.trim(),
           language: isFrench ? "FR" : "EN",
+          careerStage: careerStage || null,
           customQuestion: customQuestion || null,
           lessonSlug: lessonSlug || null,
           source: source || null,
@@ -169,6 +177,17 @@ export default function InterviewStudio() {
 
   return (
     <div className="workspace-stack">
+      {isSummerAnalyst ? (
+        <section className="summer-analyst-context">
+          <div>
+            <span className="mini-label">{text("SUMMER ANALYST MODE", "MODE SUMMER ANALYST")}</span>
+            <h2>{text("Interview practice is calibrated for an internship candidate.", "L’entraînement est calibré pour une candidature de stage.")}</h2>
+            <p>{text("Expect strong fundamentals, structured thinking, motivation and commercial awareness — not senior-level deal ownership.", "On attend de bonnes bases, un raisonnement structuré, de la motivation et de la culture marché — pas une expérience de senior.")}</p>
+          </div>
+          <Link className="chip" href="/careers">{text("Change career stage", "Changer de niveau")}</Link>
+        </section>
+      ) : null}
+
       {customQuestion ? (
         <section className="learning-account-strip">
           <div>
@@ -200,7 +219,7 @@ export default function InterviewStudio() {
       <section className="interview-question-panel">
         <div className="question-meta">
           <span className="mini-label">{customQuestion ? text("CONTEXTUAL / CURRENT-MARKET QUESTION", "QUESTION CONTEXTUELLE / MARCHÉ ACTUEL") : text("TECHNICAL / MARKET QUESTION", "QUESTION TECHNIQUE / MARCHÉ")}</span>
-          <span className="pill accent">{isFrench ? interviewTracks.find((item) => item.key === track)?.fr : track}</span>
+          <span className="pill accent">{isFrench ? interviewTracks.find((item) => item.key === track)?.fr : track}{isSummerAnalyst ? " · Summer Analyst" : ""}</span>
         </div>
         <h2>{displayedQuestion}</h2>
         <div className="interview-two-column">
@@ -236,13 +255,16 @@ export default function InterviewStudio() {
       </section>
 
       {evaluation && (
-        <section className="professor-demo-panel">
-          <div className="professor-demo-question">
-            <span className="mini-label">{text("AI INTERVIEW SCORE", "SCORE ENTRETIEN IA")}</span>
-            <h2>{score === null ? "— / 100" : `${score} / 100`}</h2>
-            <p>{text("The score is a coaching signal, not an objective hiring prediction. Use the feedback to improve the reasoning and retest.", "Le score est un signal pédagogique, pas une prédiction objective de recrutement. Utilise le feedback pour améliorer le raisonnement puis reteste-toi.")}</p>
+        <section className="interview-evaluation-stack">
+          <div className="interview-score-band">
+            <div><span className="mini-label">{text("AI INTERVIEW SCORE", "SCORE ENTRETIEN IA")}</span><strong>{score === null ? "— / 100" : `${score} / 100`}</strong></div>
+            <p>{text("Coaching signal — use it to improve and retest.", "Signal pédagogique — utilise-le pour progresser puis reteste-toi.")}</p>
           </div>
-          <div className="professor-response-card"><span className="mini-label">{text("DETAILED FEEDBACK", "FEEDBACK DÉTAILLÉ")}</span><p style={{ whiteSpace: "pre-wrap" }}>{evaluation}</p></div>
+          <article className="interview-feedback-report">
+            <span className="mini-label">{text("DETAILED FEEDBACK", "FEEDBACK DÉTAILLÉ")}</span>
+            <h2>{text("Your coaching report", "Ton rapport de coaching")}</h2>
+            <p className="interview-feedback-copy" style={{ whiteSpace: "pre-wrap" }}>{evaluation}</p>
+          </article>
         </section>
       )}
 
