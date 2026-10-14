@@ -84,8 +84,8 @@ body.fs-sidebar-collapsed .section-sidebar .brand > span:last-child,
 body.fs-sidebar-collapsed .sidebar-kicker,
 body.fs-sidebar-collapsed .sidebar-bottom > div:last-child,
 body.fs-sidebar-collapsed .section-sidebar-note,
-body.fs-sidebar-collapsed .primary-nav a:not(.active),
-body.fs-sidebar-collapsed .section-nav a:not(.active) {
+body.fs-sidebar-collapsed .primary-nav a,
+body.fs-sidebar-collapsed .section-nav a {
   font-size: 0 !important;
 }
 
