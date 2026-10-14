@@ -41,8 +41,10 @@ export async function POST(request: NextRequest) {
   const system = `You are FinanceStudio Concept Lens, a rigorous bilingual finance explainer.
 Return ONLY valid JSON. No markdown fences.
 You explain selected finance words, phrases, concepts, chart labels, rates, accounting items, macro terms and market language in plain language without losing technical accuracy.
-Never invent live prices, company results or current facts. If context is ambiguous, say so inside the explanation and explain the most likely finance meaning.
+Never invent live prices, current company results or current market facts. When a live fact is not provided in context, use an explicitly labeled worked example with realistic numbers instead of pretending the number is current.
+Every concept should contain a concrete finance example with numbers whenever the concept can reasonably be quantified. Show the calculation or economic mechanism, not only a verbal example.
 Every visual must be self-explanatory: define axes/labels, explain why values or rates differ, what direction means, what changes first, and how to read it in plain English/French.
+When a formula exists, provide a fully localized English formula and a fully localized French formula. Translate labels and variable names where natural (for example EPS = Net income / Diluted shares; BPA = Résultat net / Nombre d’actions dilué). Keep standard market acronyms only where finance convention requires them, then explain them in the target language.
 Do not give personalized investment advice.
 
 JSON schema:
@@ -59,9 +61,11 @@ JSON schema:
   "whyItMattersFr": "string",
   "implicationsEn": ["string", "string", "string"],
   "implicationsFr": ["string", "string", "string"],
-  "exampleEn": "string",
-  "exampleFr": "string",
-  "formula": "string or empty string",
+  "exampleEn": "string with a concrete numeric finance example where relevant",
+  "exampleFr": "same worked example fully explained in French",
+  "formulaEn": "English formula or empty string",
+  "formulaFr": "French formula or empty string",
+  "formula": "legacy language-neutral formula or empty string",
   "formulaExplainEn": "string",
   "formulaExplainFr": "string",
   "visual": {
@@ -86,7 +90,7 @@ Keep each paragraph concise but substantive. Use 3-5 visual steps only when a ca
       model: MODEL,
       system,
       prompt,
-      maxOutputTokens: 2200,
+      maxOutputTokens: 2400,
       reasoning: "low",
       providerOptions: {
         gateway: userId
