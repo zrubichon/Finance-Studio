@@ -6,6 +6,7 @@ import SidebarController from "@/components/sidebar-controller";
 import InvestingInstantCoach from "@/components/investing-instant-coach";
 import SessionKeeper from "@/components/session-keeper";
 import DeploymentSync from "@/components/deployment-sync";
+import NotificationCenter from "@/components/notification-center";
 import LanguageProvider, { type Language } from "@/components/language-provider";
 import "./globals.css";
 import "./product.css";
@@ -18,6 +19,7 @@ import "./concept-lens.css";
 import "./polish-v2.css";
 import "./investing-v2.css";
 import "./polish-v3.css";
+import "./notifications.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
@@ -42,6 +44,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <LanguageProvider initialLanguage={initialLanguage}>
           <SessionKeeper />
           <DeploymentSync />
+          <NotificationCenter />
           <ThemeBootstrap />
           <SidebarController />
           <InvestingInstantCoach />
