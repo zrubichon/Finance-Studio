@@ -25,20 +25,27 @@ function kindFromPath(path: string): RecentFinanceActivity["kind"] {
 }
 
 function saveActivity(activity: RecentFinanceActivity) {
-  const raw = window.localStorage.getItem(RECENT_ACTIVITY_KEY);
-  let previous: RecentFinanceActivity[] = [];
+  if (typeof window === "undefined") return;
+
   try {
-    previous = raw ? JSON.parse(raw) as RecentFinanceActivity[] : [];
+    const raw = window.localStorage.getItem(RECENT_ACTIVITY_KEY);
+    let previous: RecentFinanceActivity[] = [];
+
+    try {
+      previous = raw ? JSON.parse(raw) as RecentFinanceActivity[] : [];
+    } catch {
+      previous = [];
+    }
+
+    const next = [activity, ...previous]
+      .filter((item, index, array) => index === array.findIndex((candidate) => candidate.path === item.path && candidate.label === item.label))
+      .slice(0, 20);
+
+    window.localStorage.setItem(RECENT_ACTIVITY_KEY, JSON.stringify(next));
+    window.dispatchEvent(new CustomEvent(RECENT_ACTIVITY_EVENT));
   } catch {
-    previous = [];
+    // Analytics/personalization must never prevent the product from loading.
   }
-
-  const next = [activity, ...previous]
-    .filter((item, index, array) => index === array.findIndex((candidate) => candidate.path === item.path && candidate.label === item.label))
-    .slice(0, 20);
-
-  window.localStorage.setItem(RECENT_ACTIVITY_KEY, JSON.stringify(next));
-  window.dispatchEvent(new CustomEvent(RECENT_ACTIVITY_EVENT));
 }
 
 export default function ActivityTracker() {
@@ -56,20 +63,24 @@ export default function ActivityTracker() {
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
-      const target = event.target as HTMLElement | null;
-      const interactive = target?.closest("a,button") as HTMLElement | null;
-      if (!interactive) return;
+      try {
+        const target = event.target instanceof Element ? event.target : null;
+        const interactive = target?.closest("a,button") as HTMLElement | null;
+        if (!interactive) return;
 
-      const href = interactive instanceof HTMLAnchorElement ? interactive.getAttribute("href") : null;
-      const path = href?.startsWith("/") ? href.split("?")[0] : pathname || "/";
-      const label = interactive.textContent?.replace(/\s+/g, " ").trim().slice(0, 120) || path;
+        const href = interactive instanceof HTMLAnchorElement ? interactive.getAttribute("href") : null;
+        const path = href?.startsWith("/") ? href.split("?")[0] : pathname || "/";
+        const label = interactive.textContent?.replace(/\s+/g, " ").trim().slice(0, 120) || path;
 
-      saveActivity({
-        path,
-        label,
-        kind: kindFromPath(path),
-        at: new Date().toISOString(),
-      });
+        saveActivity({
+          path,
+          label,
+          kind: kindFromPath(path),
+          at: new Date().toISOString(),
+        });
+      } catch {
+        // Ignore tracking errors; navigation itself should continue normally.
+      }
     }
 
     document.addEventListener("click", handleClick, true);
