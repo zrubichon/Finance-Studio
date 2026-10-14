@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import ThemeBootstrap from "@/components/theme-bootstrap";
 import LanguageProvider, { type Language } from "@/components/language-provider";
 import ActivityTracker from "@/components/activity-tracker";
+import FinanceNotationStandards from "@/components/finance-notation-standards";
 import "./globals.css";
 import "./product.css";
 import "./phase-two.css";
@@ -39,6 +40,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <LanguageProvider initialLanguage={initialLanguage}>
           <ThemeBootstrap />
           <ActivityTracker />
+          <FinanceNotationStandards />
           {children}
         </LanguageProvider>
       </body>
