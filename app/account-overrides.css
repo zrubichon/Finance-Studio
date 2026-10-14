@@ -1,0 +1,29 @@
+/* Account page refinement: remove the redundant Workspace summary and let Investing Lab use the full row. */
+
+@media (min-width: 861px) {
+  .account-grid > .account-card:nth-child(3) {
+    display: none !important;
+  }
+
+  .account-grid > .account-card:nth-child(4) {
+    grid-column: 1 / -1;
+  }
+
+  .account-grid > .account-card:nth-child(4) .account-stat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .account-grid > .account-card:nth-child(4) .account-stat-grid > div {
+    padding: 18px;
+  }
+
+  .account-grid > .account-card:nth-child(4) .account-stat-grid strong {
+    font-size: 34px;
+  }
+
+  .account-grid > .account-card:nth-child(4) .account-portfolio-value {
+    font-size: 42px;
+    margin-top: 16px;
+  }
+}
