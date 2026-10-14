@@ -1,0 +1,131 @@
+/* FinanceStudio precision pass — loaded last. */
+
+:root {
+  --fs-gap-1: 8px;
+  --fs-gap-2: 12px;
+  --fs-gap-3: 16px;
+  --fs-gap-4: 24px;
+  --fs-gap-5: 32px;
+  --fs-gap-6: 44px;
+}
+
+button, a, input, textarea, select { min-width: 0; }
+button, .chip, .full-button, .career-target-button { line-height: 1.25; }
+.workspace-stack { gap: clamp(24px, 3vw, 40px) !important; }
+.panel-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+.panel-heading > * { min-width: 0; }
+.chip-row { gap: 10px !important; align-items: center; }
+.chip { min-height: 42px; padding: 10px 15px !important; display: inline-flex; align-items: center; justify-content: center; white-space: normal; }
+.full-button { margin-top: 0 !important; min-height: 48px; padding: 12px 18px !important; border: 1px solid transparent; }
+.inline-status { line-height: 1.55; }
+
+/* Careers */
+.career-v2 { width: 100%; }
+.career-selection-summary,
+.career-stage-panel,
+.career-group,
+.career-recruiting-panel {
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+  padding: clamp(22px, 3vw, 34px);
+  box-shadow: var(--shadow);
+}
+.career-selection-summary { display: flex; justify-content: space-between; align-items: center; gap: 28px; flex-wrap: wrap; }
+.career-selection-summary h2 { margin: 8px 0 6px; font: 500 clamp(1.7rem, 3vw, 2.45rem)/1.08 Georgia, "Times New Roman", serif; }
+.career-selection-summary p { margin: 0; color: var(--muted); }
+.career-summary-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: stretch; }
+.secondary-danger-button { min-height: 48px; border-radius: 13px; padding: 12px 18px; border: 1px solid color-mix(in srgb, #a44848 35%, var(--line)); background: color-mix(in srgb, #a44848 7%, var(--surface)); color: color-mix(in srgb, #a44848 72%, var(--ink)); font-weight: 800; }
+.secondary-danger-button:disabled { opacity: .45; cursor: not-allowed; }
+.career-stage-grid { margin-top: 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.career-stage-card { text-align: left; padding: 19px; min-height: 178px; border: 1px solid var(--line); border-radius: 18px; background: color-mix(in srgb, var(--surface-2) 45%, var(--surface)); color: var(--ink); display: flex; flex-direction: column; align-items: flex-start; gap: 9px; }
+.career-stage-card > span { color: var(--accent); font-size: .75rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.career-stage-card > strong { font: 500 1.32rem/1.15 Georgia, "Times New Roman", serif; }
+.career-stage-card p { margin: 0; color: var(--muted); line-height: 1.55; font-size: .9rem; }
+.career-stage-card.selected { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); background: var(--accent-2); }
+.role-grid-v2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px !important; margin-top: 24px; align-items: stretch; }
+.role-grid-v2 .role-card { padding: 26px !important; border-radius: 22px; display: flex; flex-direction: column; gap: 24px; min-height: 390px; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 90%, var(--surface-2)); }
+.role-grid-v2 .role-card.selected { border-color: color-mix(in srgb, var(--accent) 52%, var(--line)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 14%, transparent); }
+.role-card-copy h3 { margin: 8px 0 12px; font: 500 1.7rem/1.08 Georgia, "Times New Roman", serif; }
+.role-card-copy p { margin: 0; min-height: 78px; color: var(--muted); }
+.role-knowledge-block { display: grid; gap: 12px; }
+.role-knowledge-chips { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+.role-knowledge-chips > span { display: inline-flex; min-height: 40px; align-items: center; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-weight: 750; font-size: .88rem; }
+.role-card-actions { margin-top: auto; padding-top: 8px; }
+.career-target-button { width: max-content; max-width: 100%; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface-2); color: var(--ink); font-weight: 850; }
+.career-target-button.selected { background: color-mix(in srgb, #a44848 7%, var(--surface)); border-color: color-mix(in srgb, #a44848 30%, var(--line)); }
+
+/* Interview buttons: same baseline, height and vertical centering. */
+.answer-practice-actions { display: flex !important; align-items: stretch !important; gap: 12px !important; flex-wrap: wrap; margin-top: 18px; }
+.answer-practice-actions > .full-button,
+.answer-practice-actions > .chip,
+.answer-practice-actions > a.chip { margin: 0 !important; min-height: 52px !important; padding: 13px 20px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; border-radius: 14px !important; font-weight: 850; }
+.answer-practice-actions > .full-button { min-width: 240px; }
+.answer-practice-actions > .inline-status { flex-basis: 100%; margin: 4px 0 0; }
+.answer-practice-panel textarea { width: 100%; min-height: 200px; border-radius: 16px; padding: 18px; line-height: 1.65; }
+
+/* Dictionary */
+.dictionary-toolbar-v2 { display: grid !important; grid-template-columns: minmax(0, 1.4fr) minmax(280px, .6fr); gap: 22px !important; align-items: end; }
+.dictionary-toolbar-v2 label { min-width: 0; }
+.dictionary-toolbar-v2 input { min-height: 52px; width: 100%; }
+.dictionary-result-meta { gap: 20px; align-items: flex-start; }
+.dictionary-grid-v2 { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 22px !important; align-items: stretch; }
+.dictionary-card-v2 { min-height: 320px; padding: 24px !important; display: flex; flex-direction: column; gap: 20px; border-radius: 22px !important; overflow: hidden; cursor: pointer; transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease; }
+.dictionary-card-v2:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 28%, var(--line)); box-shadow: 0 18px 42px color-mix(in srgb, var(--ink) 7%, transparent); }
+.dictionary-card-v2 .dictionary-card-head { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: start !important; gap: 16px !important; }
+.dictionary-term-stack { min-width: 0; }
+.dictionary-term-stack h2 { margin: 8px 0 2px !important; font: 500 1.8rem/1.05 Georgia, "Times New Roman", serif !important; overflow-wrap: anywhere; }
+.dictionary-term-stack h3 { margin: 4px 0 0; color: var(--muted); font-size: 1rem; font-weight: 700; line-height: 1.35; }
+.dictionary-expansion { margin: 12px 0 0 !important; padding: 10px 12px; border-radius: 12px; background: var(--surface-2); font-size: .86rem !important; line-height: 1.45 !important; }
+.dictionary-card-v2 .save-item-button { flex: 0 0 auto; margin: 0; }
+.dictionary-definition { margin: 0; color: var(--muted); line-height: 1.65; }
+.dictionary-definition strong { color: var(--ink); }
+.dictionary-card-footer { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; color: var(--accent); font-weight: 850; }
+.dictionary-modal-backdrop { position: fixed; inset: 0; z-index: 1200; padding: clamp(14px, 2.5vw, 34px); background: color-mix(in srgb, #000 38%, transparent); backdrop-filter: blur(8px); display: grid; place-items: center; }
+.dictionary-study-modal { width: min(1180px, 96vw); height: min(900px, 94vh); overflow-y: auto; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 28px; box-shadow: 0 28px 100px rgba(0,0,0,.22); padding: clamp(24px, 4vw, 46px); }
+.dictionary-study-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.dictionary-study-head h2 { margin: 10px 0 3px; font: 500 clamp(2.5rem, 5vw, 4.6rem)/.98 Georgia, "Times New Roman", serif; }
+.dictionary-study-head p { margin: 0; color: var(--muted); font-size: 1.1rem; }
+.dictionary-close-button { position: sticky; top: 0; flex: 0 0 52px; width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); font-size: 2rem !important; line-height: 1; display: grid; place-items: center; z-index: 2; }
+.dictionary-study-levels { display: flex; gap: 10px; flex-wrap: wrap; margin: 24px 0; }
+.dictionary-study-loading { padding: 28px; border: 1px dashed var(--line); border-radius: 18px; }
+.dictionary-study-body { display: grid; gap: 24px; }
+.dictionary-study-body > section,
+.study-grid-two > article { border: 1px solid var(--line); border-radius: 20px; padding: clamp(20px, 3vw, 30px); background: color-mix(in srgb, var(--surface-2) 34%, var(--surface)); }
+.study-hero h3 { margin: 10px 0 12px; font: 500 clamp(1.7rem, 3vw, 2.6rem)/1.08 Georgia, "Times New Roman", serif; }
+.study-hero p, .study-grid-two p, .study-impact-panel p, .study-formula p, .study-visual p { font-size: 1rem; line-height: 1.72; }
+.study-grid-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.study-impact-flow { margin-top: 18px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+.study-impact-flow > div { position: relative; border: 1px solid var(--line); border-radius: 16px; padding: 18px; background: var(--surface); }
+.study-impact-flow > div > span, .study-visual-flow span { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: var(--accent-2); color: var(--accent); font-weight: 900; }
+.study-impact-flow b { position: absolute; right: -13px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 1.1rem; }
+.study-formula code { display: block; margin: 16px 0; padding: 18px; border-radius: 14px; background: var(--ink); color: var(--surface); font-size: 1.05rem; overflow-x: auto; }
+.study-visual-flow { margin: 18px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.study-visual-flow > div { min-height: 118px; border: 1px solid var(--line); border-radius: 16px; padding: 16px; background: var(--surface); display: grid; gap: 12px; align-content: start; }
+.study-source-links { display: grid; gap: 14px; }
+
+/* Generic spacing safeguards */
+.saved-library-grid, .analysis-grid, .framework-steps-grid, .market-universe-grid, .paper-metric-grid { gap: 18px !important; }
+.saved-library-card, .analysis-card, .framework-step, .market-universe-card { min-width: 0; overflow: hidden; }
+input, textarea, select { max-width: 100%; }
+textarea { resize: vertical; }
+
+@media (max-width: 1080px) {
+  .career-stage-grid, .dictionary-grid-v2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .role-grid-v2 { grid-template-columns: 1fr; }
+  .study-impact-flow { grid-template-columns: 1fr; }
+  .study-impact-flow b { display: none; }
+}
+
+@media (max-width: 760px) {
+  .career-stage-grid, .dictionary-grid-v2, .dictionary-toolbar-v2, .study-grid-two { grid-template-columns: 1fr !important; }
+  .career-selection-summary { align-items: stretch; }
+  .career-summary-actions, .career-summary-actions > * { width: 100%; }
+  .role-grid-v2 .role-card { min-height: 0; padding: 20px !important; }
+  .dictionary-card-v2 { min-height: 0; }
+  .dictionary-card-v2 .dictionary-card-head { grid-template-columns: 1fr; }
+  .dictionary-card-v2 .save-item-button { justify-self: start; }
+  .dictionary-study-modal { width: 100%; height: 96vh; border-radius: 22px; padding: 20px; }
+  .dictionary-study-head h2 { font-size: 2.35rem; }
+  .answer-practice-actions > .full-button, .answer-practice-actions > .chip, .answer-practice-actions > a.chip { width: 100%; }
+}
