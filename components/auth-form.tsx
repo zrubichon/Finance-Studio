@@ -19,6 +19,21 @@ export default function AuthForm() {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
+    const supabase = createClient();
+    let active = true;
+
+    void supabase.auth.getSession().then(({ data }) => {
+      if (!active || !data.session) return;
+      router.replace("/account");
+      router.refresh();
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [router]);
+
+  useEffect(() => {
     const errorCode = new URLSearchParams(window.location.search).get("error");
     if (!errorCode) return;
 
@@ -93,7 +108,10 @@ export default function AuthForm() {
       </form>
 
       {message && <p className="auth-message" role="status">{message}</p>}
-      <p className="auth-footnote">{text("Your progress, themes, interview practice and paper portfolio stay tied to your account.", "Ta progression, tes thèmes, tes entraînements d’entretien et ton portefeuille simulé / paper portfolio restent liés à ton compte.")}</p>
+      <p className="auth-footnote">{text(
+        "Your progress, preferences and paper portfolio stay tied to your account. This device keeps your session so you can come back after closing FinanceStudio without signing in again.",
+        "Ta progression, tes préférences et ton portefeuille simulé restent liés à ton compte. Cet appareil conserve ta session pour que tu puisses revenir après avoir fermé FinanceStudio sans te reconnecter.",
+      )}</p>
     </div>
   );
 }
