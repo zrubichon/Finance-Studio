@@ -1,5 +1,5 @@
 import SectionLayout from "@/components/section-layout";
-import DictionaryExplorer from "@/components/dictionary-explorer";
+import DictionaryExplorerV2 from "@/components/dictionary-explorer-v2";
 import AiVocabularyMemory from "@/components/ai-vocabulary-memory";
 import { getDictionaryEntries } from "@/lib/dictionary-content";
 
@@ -12,12 +12,12 @@ export default function DictionaryPage() {
       eyebrow={{ en: "FINANCE DICTIONARY", fr: "DICTIONNAIRE DE FINANCE" }}
       title={{ en: "Build bilingual professional vocabulary.", fr: "Construis un vocabulaire professionnel bilingue." }}
       description={{
-        en: "Definitions connect French and English terms, formulas, examples, related concepts, interview use and real market context. Concepts opened through Concept Lens are remembered automatically below.",
-        fr: "Chaque définition relie le terme français au terme anglais, aux formules, exemples, concepts associés, à son usage en entretien et à son contexte réel de marché. Les concepts ouverts avec Concept Lens sont mémorisés automatiquement ci-dessous.",
+        en: "Every term is presented once in English and once in French, with acronym expansions where relevant. Open any term to turn it into a detailed study sheet with adjustable explanation depth.",
+        fr: "Chaque terme est présenté une fois en anglais et une fois en français, avec le développement des abréviations lorsqu'il est pertinent. Ouvre n'importe quel terme pour en faire une fiche d'étude détaillée avec un niveau d'explication réglable.",
       }}
     >
       <AiVocabularyMemory />
-      <DictionaryExplorer entries={entries} />
+      <DictionaryExplorerV2 entries={entries} />
     </SectionLayout>
   );
 }
