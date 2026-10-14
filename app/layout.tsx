@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import ThemeBootstrap from "@/components/theme-bootstrap";
 import LanguageProvider, { type Language } from "@/components/language-provider";
+import ActivityTracker from "@/components/activity-tracker";
 import "./globals.css";
 import "./product.css";
 import "./phase-two.css";
 import "./auth.css";
 import "./phase-three.css";
 import "./course.css";
+import "./dashboard-upgrades.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
@@ -31,6 +33,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body>
         <LanguageProvider initialLanguage={initialLanguage}>
           <ThemeBootstrap />
+          <ActivityTracker />
           {children}
         </LanguageProvider>
       </body>
