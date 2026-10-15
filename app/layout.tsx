@@ -4,6 +4,7 @@ import ThemeBootstrap from "@/components/theme-bootstrap";
 import LanguageProvider, { type Language } from "@/components/language-provider";
 import ActivityTracker from "@/components/activity-tracker";
 import FinanceNotationStandards from "@/components/finance-notation-standards";
+import ConceptLens from "@/components/concept-lens";
 import "./globals.css";
 import "./product.css";
 import "./phase-two.css";
@@ -16,6 +17,7 @@ import "./home-dashboard-v2.css";
 import "./home-dashboard-polish.css";
 import "./home-dashboard-final.css";
 import "./challenge-daily.css";
+import "./comprehensive-polish.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
@@ -41,6 +43,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <ThemeBootstrap />
           <ActivityTracker />
           <FinanceNotationStandards />
+          <ConceptLens />
           {children}
         </LanguageProvider>
       </body>
