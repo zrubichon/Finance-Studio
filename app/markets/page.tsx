@@ -1,5 +1,6 @@
 import SectionLayout from "@/components/section-layout";
 import MarketsWorkspace from "@/components/markets-workspace";
+import MarketLearningHub from "@/components/market-learning-hub";
 
 export default function MarketsPage() {
   return (
@@ -13,6 +14,7 @@ export default function MarketsPage() {
       }}
     >
       <MarketsWorkspace />
+      <MarketLearningHub />
     </SectionLayout>
   );
 }
