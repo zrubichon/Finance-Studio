@@ -78,7 +78,7 @@ export default function HomeNewsCarousel() {
         <p>{why || text("Open the full News & Analysis page for the causal chain, assets to watch and next catalysts.", "Ouvre News & Analysis pour la chaîne causale, les actifs à surveiller et les prochains catalyseurs.")}</p>
         <small>{story.domain} · {new Date(story.publishedAt).toLocaleString(isFrench ? "fr-FR" : "en-US", { dateStyle: "medium", timeStyle: "short" })}</small>
         <div className="news-story-actions">
-          <Link href={`/news?story=${encodeURIComponent(story.id)}`}>{text("Open full analysis", "Ouvrir l’analyse complète")} →</Link>
+          <Link href={`/news?story=${encodeURIComponent(story.title)}`}>{text("Open full analysis", "Ouvrir l’analyse complète")} →</Link>
           <a href={story.url} target="_blank" rel="noreferrer">{text("Original article", "Article original")} ↗</a>
           <button className="primary" type="button" onClick={() => void explainWithAI(story)}>✦ {text("Detailed AI explanation", "Explication IA détaillée")}</button>
         </div>
