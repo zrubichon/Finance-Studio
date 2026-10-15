@@ -6,11 +6,20 @@ export default function InterviewContextBridge() {
   useEffect(() => {
     if (window.location.pathname !== "/interview") return;
     const params = new URLSearchParams(window.location.search);
-    const rawConcept = params.get("concept")?.trim();
-    if (!rawConcept) return;
-    const concept: string = rawConcept;
-    const french = document.documentElement.lang === "fr";
-    function apply() {
+    const concept = params.get("concept")?.trim() || "";
+    const requestedTrack = params.get("track")?.trim() || "";
+    if (!concept && !requestedTrack) return;
+
+    function alignTrack() {
+      if (!requestedTrack) return;
+      const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>(".interview-control-panel .chip-row button"));
+      const wanted = buttons.find((button) => button.textContent?.trim() === requestedTrack);
+      if (wanted && !wanted.classList.contains("active")) wanted.click();
+    }
+
+    function applyConcept() {
+      if (!concept) return;
+      const french = document.documentElement.lang === "fr";
       const panel = document.querySelector<HTMLElement>(".interview-question-panel");
       if (!panel) return;
       panel.dataset.challengeConcept = concept;
@@ -30,19 +39,32 @@ export default function InterviewContextBridge() {
       if (framework && !framework.querySelector(".concept-interview-guidance")) {
         const note = document.createElement("div");
         note.className = "coverage-panel concept-interview-guidance";
-        const label = document.createElement("span"); label.className = "mini-label"; label.textContent = french ? "STRUCTURE SPÉCIFIQUE AU CONCEPT" : "CONCEPT-SPECIFIC STRUCTURE";
-        const h3 = document.createElement("h3"); h3.textContent = concept;
-        const p = document.createElement("p"); p.textContent = french
-          ? "Utilise les étapes ci-dessous comme cadre métier, mais adapte ta réponse à ce concept : 1) définis-le simplement, 2) explique le mécanisme, 3) montre la formule et chaque variable si elle existe, 4) fais un exemple chiffré, 5) donne l’implication marché/entreprise, 6) termine par une limite ou un risque."
-          : "Use the steps below as a role framework, but adapt the answer to this concept: 1) define it simply, 2) explain the mechanism, 3) show the formula and every variable when relevant, 4) give a numerical example, 5) translate it into a market/company implication, 6) finish with a limitation or risk.";
-        note.append(label,h3,p);
+        const label = document.createElement("span");
+        label.className = "mini-label";
+        label.textContent = french ? "STRUCTURE SPÉCIFIQUE AU CONCEPT" : "CONCEPT-SPECIFIC STRUCTURE";
+        const h3 = document.createElement("h3");
+        h3.textContent = concept;
+        const p = document.createElement("p");
+        p.textContent = french
+          ? "Réponds en six temps : 1) définition simple, 2) mécanisme, 3) formule et variables si elles existent, 4) exemple chiffré, 5) implication pour le métier sélectionné, 6) limite, risque ou élément qui changerait ton analyse. Les étapes métier situées dessous restent un cadre complémentaire, mais ta réponse principale doit rester centrée sur le concept transmis par le challenge."
+          : "Answer in six moves: 1) simple definition, 2) mechanism, 3) formula and variables when relevant, 4) numerical example, 5) implication for the selected role, 6) limitation, risk or evidence that would change your view. The role framework below remains complementary, but your primary answer should stay centered on the concept passed from the challenge.";
+        note.append(label, h3, p);
         framework.prepend(note);
       }
     }
+
+    function apply() {
+      alignTrack();
+      window.setTimeout(applyConcept, 30);
+    }
+
     apply();
-    const timer = window.setInterval(apply, 800);
+    const timer = window.setInterval(apply, 900);
     window.addEventListener("finance-studio-language-change", apply);
-    return () => { window.clearInterval(timer); window.removeEventListener("finance-studio-language-change", apply); };
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener("finance-studio-language-change", apply);
+    };
   }, []);
   return null;
 }
