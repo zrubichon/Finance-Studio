@@ -1,5 +1,6 @@
 import SectionLayout from "@/components/section-layout";
 import InvestingLab from "@/components/investing-lab";
+import InvestingLearningHub from "@/components/investing-learning-hub";
 
 export default function InvestingPage() {
   return (
@@ -13,6 +14,7 @@ export default function InvestingPage() {
       }}
     >
       <InvestingLab />
+      <InvestingLearningHub />
     </SectionLayout>
   );
 }
