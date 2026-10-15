@@ -5,6 +5,11 @@ import LanguageProvider, { type Language } from "@/components/language-provider"
 import ActivityTracker from "@/components/activity-tracker";
 import FinanceNotationStandards from "@/components/finance-notation-standards";
 import ConceptLens from "@/components/concept-lens";
+import MarketVisualEnhancer from "@/components/market-visual-enhancer";
+import ChallengeDepthEnhancer from "@/components/challenge-depth-enhancer";
+import CareerPageEnhancer from "@/components/career-page-enhancer";
+import NewsAIEnhancer from "@/components/news-ai-enhancer";
+import InterviewContextBridge from "@/components/interview-context-bridge";
 import "./globals.css";
 import "./product.css";
 import "./phase-two.css";
@@ -22,7 +27,6 @@ import "./comprehensive-polish.css";
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
   const isFrench = cookieStore.get("finance-studio-language")?.value === "FR";
-
   return {
     title: isFrench ? "FinanceStudio — Apprendre la finance en profondeur" : "FinanceStudio — Learn finance deeply",
     description: isFrench
@@ -35,7 +39,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const cookieStore = await cookies();
   const cookieLanguage = cookieStore.get("finance-studio-language")?.value;
   const initialLanguage: Language = cookieLanguage === "FR" ? "FR" : "EN";
-
   return (
     <html lang={initialLanguage === "FR" ? "fr" : "en"}>
       <body>
@@ -44,6 +47,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <ActivityTracker />
           <FinanceNotationStandards />
           <ConceptLens />
+          <MarketVisualEnhancer />
+          <ChallengeDepthEnhancer />
+          <CareerPageEnhancer />
+          <NewsAIEnhancer />
+          <InterviewContextBridge />
           {children}
         </LanguageProvider>
       </body>
