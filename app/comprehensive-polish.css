@@ -1,0 +1,267 @@
+/* Comprehensive polish: loaded last so it can safely correct legacy collisions without replacing structure. */
+
+/* ---------- Interview cards: never allow nested answer spans to inherit old 24x24 badge rules ---------- */
+.interview-card .answer-framework > div {
+  display: grid !important;
+  grid-template-columns: 46px minmax(0, 1fr) !important;
+  align-items: start !important;
+  gap: 14px !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 20px !important;
+  overflow: visible !important;
+}
+.interview-card .answer-framework > div > span:first-child {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  float: none !important;
+  margin: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 12px !important;
+  background: var(--surface-2) !important;
+  font-size: 12px !important;
+}
+.interview-card .answer-framework > div > p {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  float: none !important;
+  overflow-wrap: anywhere;
+}
+.interview-card .answer-framework p .interview-step-answer,
+.interview-card .answer-framework p .interview-answer-part,
+.interview-card .answer-framework p .interview-answer-part > span {
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  float: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  place-items: initial !important;
+  text-align: left !important;
+}
+.interview-card .answer-framework p .interview-step-answer {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  margin-top: 12px !important;
+  font-size: 13.5px !important;
+  line-height: 1.68 !important;
+}
+.interview-card .answer-framework p .interview-answer-part {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+.interview-card .answer-framework p .interview-answer-part > span { display: block !important; }
+.interview-card .answer-framework p .interview-answer-part b {
+  font-size: 11px !important;
+  line-height: 1.25 !important;
+  letter-spacing: .06em !important;
+}
+.interview-card .answer-framework > div p > strong {
+  font-size: 15px !important;
+  line-height: 1.38 !important;
+}
+.interview-card .full-button { position: relative; z-index: 1; }
+
+/* Full Interview Studio */
+.framework-steps-grid { gap: 18px !important; }
+.framework-step {
+  display: grid !important;
+  grid-template-columns: 46px minmax(0, 1fr) !important;
+  gap: 16px !important;
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+.framework-step > span {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  display: grid !important;
+  place-items: center !important;
+}
+.framework-step-content,
+.framework-model-answer,
+.framework-model-answer p,
+.framework-model-answer p span {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  overflow-wrap: anywhere;
+}
+.framework-step-content > strong { font-size: 16px !important; line-height: 1.42 !important; }
+.framework-model-answer p { font-size: 14px !important; line-height: 1.7 !important; }
+.framework-model-answer p b { font-size: 11px !important; }
+
+/* ---------- Hourly learning brief ---------- */
+.daily-card { height: auto !important; min-height: 0 !important; }
+.hourly-deep-lesson { margin-top: 18px !important; }
+.hourly-deep-lesson .deep-lesson-block { height: auto !important; min-height: 0 !important; }
+.hourly-deep-lesson .deep-lesson-block.lesson,
+.hourly-deep-lesson .deep-lesson-block.applied { grid-column: 1 / -1; }
+.hourly-deep-lesson .deep-lesson-block p,
+.hourly-deep-lesson .deep-lesson-block li {
+  font-size: 14px !important;
+  line-height: 1.75 !important;
+}
+.hourly-deep-lesson .deep-lesson-block ul { margin: 10px 0 0; padding-left: 20px; }
+.hourly-formula-box {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface-2) 68%, transparent);
+}
+.hourly-formula-box code { font-size: 14px; font-weight: 800; }
+.hourly-formula-legend { display: grid; gap: 5px; margin-top: 10px; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+.hourly-topic-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.hourly-topic-links a { padding: 8px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 11px; font-weight: 800; }
+
+/* ---------- Sidebar for every SectionLayout page ---------- */
+.section-shell { grid-template-columns: 246px minmax(0, 1fr) !important; align-items: start; }
+.section-sidebar {
+  position: sticky !important;
+  top: 0 !important;
+  align-self: start !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  background: color-mix(in srgb, var(--surface) 94%, var(--bg)) !important;
+  z-index: 30;
+}
+.section-main { min-width: 0; width: 100%; max-width: none !important; padding: clamp(28px, 4vw, 58px) !important; }
+.section-sidebar-toggle {
+  position: absolute;
+  top: 20px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-weight: 900;
+  z-index: 2;
+}
+.section-shell.section-nav-collapsed { grid-template-columns: 82px minmax(0,1fr) !important; }
+.section-shell.section-nav-collapsed .section-sidebar { padding-left: 12px !important; padding-right: 12px !important; }
+.section-shell.section-nav-collapsed .brand > span:last-child,
+.section-shell.section-nav-collapsed .sidebar-kicker,
+.section-shell.section-nav-collapsed .section-sidebar-note,
+.section-shell.section-nav-collapsed .section-nav a { font-size: 0 !important; }
+.section-shell.section-nav-collapsed .section-nav a { justify-content: center; gap: 0; }
+.section-shell.section-nav-collapsed .section-nav a span { font-size: 14px !important; width: 24px !important; }
+.section-shell.section-nav-collapsed .brand { justify-content: center; }
+.section-shell.section-nav-collapsed .section-sidebar-toggle { right: 8px; top: 64px; }
+
+/* ---------- Market readability and direction ---------- */
+.market-universe-grid { gap: 18px !important; margin-top: 24px !important; }
+.market-universe-card { padding: 20px !important; }
+.market-universe-card h3 { font-size: 16px !important; }
+.instrument-list > div { padding: 12px 0 !important; font-size: 13px !important; line-height: 1.45 !important; }
+.instrument-list > div em { font-size: 11px !important; line-height: 1.35 !important; }
+.market-move-positive, .market-row-positive .market-move-value, .market-row-positive { --move-color: #177447; }
+.market-move-negative, .market-row-negative .market-move-value, .market-row-negative { --move-color: #b24444; }
+.market-row-positive .market-move-value,
+.market-row-negative .market-move-value,
+.market-move-positive,
+.market-move-negative { color: var(--move-color) !important; font-weight: 850 !important; }
+.market-provider-row { margin: 20px 0 26px !important; gap: 10px !important; }
+.market-glossary-strip, .market-course-strip {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in srgb,var(--surface-2) 58%,transparent);
+}
+.market-course-links { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 12px; }
+.market-course-links a { padding: 9px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; font-weight: 800; }
+
+/* ---------- Concept Lens ---------- */
+.concept-lens-guide-panel {
+  background: color-mix(in srgb, var(--accent-2) 58%, var(--surface)) !important;
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line)) !important;
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--accent) 12%, transparent) !important;
+}
+.concept-lens-trigger {
+  position: fixed;
+  z-index: 10001;
+  border: 1px solid color-mix(in srgb,var(--accent) 55%,var(--line));
+  background: var(--ink);
+  color: var(--surface);
+  border-radius: 999px;
+  padding: 9px 13px;
+  font-size: 12px;
+  font-weight: 850;
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+}
+.concept-lens-backdrop { position: fixed; inset: 0; z-index: 10010; background: rgba(20,15,16,.35); display: grid; place-items: center; padding: 28px; }
+.concept-lens-card { width: min(860px, 96vw); max-height: 88vh; overflow: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 26px; box-shadow: 0 30px 80px rgba(0,0,0,.22); }
+.concept-lens-card-head { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; }
+.concept-lens-card h2 { margin:8px 0 4px; font:500 clamp(26px,3vw,38px)/1.12 Georgia,serif; }
+.concept-lens-close { border:1px solid var(--line); background:var(--surface-2); width:36px; height:36px; border-radius:10px; font-size:20px; }
+.concept-lens-answer { margin-top:18px; white-space:pre-wrap; font-size:15px; line-height:1.78; color:var(--ink); }
+.concept-lens-loading { color:var(--muted); }
+
+/* ---------- Daily dashboard ---------- */
+.daily-concept-title { margin: 8px 0 0; font: 500 clamp(24px, 2.5vw, 34px)/1.15 Georgia,serif; }
+.daily-concept-subtitle { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+.loop-action-grid a { min-height: 68px; display:grid; place-items:center; padding:16px !important; }
+
+/* ---------- News ---------- */
+.news-carousel-panel { margin: 24px 0; }
+.news-carousel-card { padding: 24px; border:1px solid var(--line); border-radius:20px; background:var(--surface); box-shadow:var(--shadow); }
+.news-carousel-card h3 { font:500 clamp(24px,2.8vw,38px)/1.12 Georgia,serif; margin:10px 0; }
+.news-carousel-card p { font-size:14px; line-height:1.7; color:var(--muted); }
+.news-carousel-dots { display:flex; gap:7px; margin-top:16px; }
+.news-carousel-dots button { width:9px; height:9px; padding:0; border:0; border-radius:50%; background:var(--line); }
+.news-carousel-dots button.active { background:var(--accent); }
+.news-story-actions { display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
+.news-story-actions a, .news-story-actions button { border:1px solid var(--line); background:var(--surface-2); border-radius:999px; padding:9px 12px; font-size:11px; font-weight:800; }
+.news-story-actions button.primary { background:var(--ink); color:var(--surface); }
+.news-blueprint-panel p, .analysis-card p { font-size: 13px; line-height: 1.7; }
+
+/* ---------- Careers ---------- */
+.career-role-card .chip-row, .career-card .chip-row { margin-bottom: 14px !important; }
+.career-role-card .full-button, .career-card .full-button, .career-role-card button, .career-card button { margin-top: 14px; }
+.career-learning-hub { margin-top: 28px; }
+
+/* ---------- Investing ---------- */
+.investing-learning-hub { margin-top: 26px; }
+
+/* ---------- Dictionary ---------- */
+.dictionary-alphabet { display:flex; flex-wrap:wrap; gap:6px; padding:14px; border:1px solid var(--line); border-radius:16px; background:var(--surface); }
+.dictionary-alphabet button { min-width:34px; height:34px; border:1px solid var(--line); border-radius:9px; background:var(--surface-2); color:var(--ink); font-size:12px; font-weight:850; }
+.dictionary-alphabet button.active { background:var(--ink); color:var(--surface); }
+.dictionary-card { scroll-margin-top: 24px; }
+.dictionary-card > p, .dictionary-card .lesson-explanation p { font-size:13px !important; line-height:1.72 !important; }
+.dictionary-deep-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.dictionary-deep-actions button { border:1px solid var(--line); border-radius:999px; padding:8px 11px; background:var(--ink); color:var(--surface); font-size:11px; font-weight:800; }
+.dictionary-ai-sheet { margin-top:14px; padding:16px; border:1px solid var(--line); border-radius:14px; background:var(--surface-2); white-space:pre-wrap; font-size:13px; line-height:1.72; }
+
+@media (max-width: 900px) {
+  .section-shell { grid-template-columns: 82px minmax(0,1fr) !important; }
+  .section-shell:not(.section-nav-open-mobile) .section-sidebar { padding: 14px 10px !important; }
+  .section-shell:not(.section-nav-open-mobile) .brand > span:last-child,
+  .section-shell:not(.section-nav-open-mobile) .sidebar-kicker,
+  .section-shell:not(.section-nav-open-mobile) .section-sidebar-note,
+  .section-shell:not(.section-nav-open-mobile) .section-nav a { font-size:0 !important; }
+  .section-shell:not(.section-nav-open-mobile) .section-nav a { justify-content:center; }
+  .section-shell:not(.section-nav-open-mobile) .section-nav a span { font-size:14px !important; width:24px !important; }
+  .section-main { padding: 24px 18px !important; }
+  .framework-step { grid-template-columns: 38px minmax(0,1fr) !important; }
+  .interview-card .answer-framework > div { grid-template-columns: 38px minmax(0,1fr) !important; padding:16px !important; }
+}
