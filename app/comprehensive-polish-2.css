@@ -1,0 +1,58 @@
+/* Additional readability layer kept separate from legacy files. */
+
+.news-intelligence-stack { gap: 22px !important; }
+.news-intelligence-card { padding: clamp(22px, 2.4vw, 34px) !important; }
+.news-intelligence-card > h3 { font-size: clamp(22px, 2.25vw, 31px) !important; line-height: 1.2 !important; max-width: 1120px; }
+.news-source-line { font-size: 12px !important; }
+.finance-lens-header { margin-top: 18px !important; padding: 16px 18px !important; }
+.finance-lens-header strong { font-size: 14px !important; line-height: 1.55 !important; }
+.news-insight-grid { gap: 18px !important; margin-top: 18px !important; }
+.news-insight-grid > div { padding: 18px !important; }
+.news-insight-grid p, .news-insight-grid li, .scenario-discipline p { font-size: 13.5px !important; line-height: 1.72 !important; }
+.news-item-actions { display:flex !important; flex-wrap:wrap !important; gap:10px !important; align-items:center !important; }
+.news-ai-deep-button { background: var(--ink) !important; color: var(--surface) !important; border-color: var(--ink) !important; }
+.news-focused-story { outline: 3px solid color-mix(in srgb,var(--accent) 45%,transparent); outline-offset: 5px; }
+.decision-watch-grid article { padding: 17px !important; }
+.decision-watch-grid article strong { font-size: 14px !important; line-height:1.45 !important; }
+
+/* Market and Investing table readability */
+.market-overview-panel > .chip-row { margin-top: 20px !important; margin-bottom: 25px !important; }
+.market-universe-card .instrument-list > div > span { font-size: 13.5px !important; line-height:1.45 !important; }
+.market-universe-card .instrument-list > div > em { font-size: 11.5px !important; }
+.market-universe-card { min-height: 150px; }
+.investing-hero-grid p, .risk-rules-card p, .paper-portfolio-card p, .thesis-form-panel p { font-size:13px !important; line-height:1.65 !important; }
+
+/* Careers spacing and guide links */
+.role-grid article { padding-bottom: 24px !important; }
+.role-grid article .related-row, .role-grid article .chip-row { margin-bottom: 15px !important; }
+.career-deep-guide-link { display:inline-flex !important; width:max-content !important; margin-top:18px !important; clear:both; }
+.career-internship-hub { margin-top: 34px !important; }
+.career-group article button { position:relative; margin-top:16px !important; }
+
+/* Deep career guides */
+.career-learning-hub .analysis-card p { margin:7px 0; }
+.career-learning-hub .related-row { margin-top:14px; }
+
+/* Challenge supplemental depth */
+.challenge-depth-extra { margin-top: 18px; }
+.challenge-depth-extra .challenge-learning-card p { font-size:14px; line-height:1.72; }
+
+/* Home market map: larger than legacy compact mode */
+.markets-card .market-universe-card,
+.markets-card .market-group-card,
+.markets-card .market-data-group { min-height: 0 !important; height:auto !important; }
+.markets-card .instrument-list > div { font-size:12.5px !important; padding:9px 0 !important; }
+.markets-card .market-glossary-strip p { font-size:12.5px !important; line-height:1.65 !important; }
+
+/* Keep page surfaces visually continuous while content scrolls beside sticky sidebar. */
+.product-section-shell, .section-shell { min-height:100vh; background: var(--bg) !important; }
+.section-main { background: var(--bg) !important; }
+
+@media (max-width: 1100px) {
+  .news-insight-grid { grid-template-columns:1fr !important; }
+  .market-universe-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+}
+@media (max-width: 680px) {
+  .market-universe-grid { grid-template-columns:1fr !important; }
+  .news-intelligence-card > h3 { font-size:22px !important; }
+}
