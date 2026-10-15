@@ -1,0 +1,39 @@
+/* Final collision safeguards after all legacy styles. */
+.daily-card,
+.interview-card { align-self: start !important; }
+.dashboard-grid { align-items: start !important; }
+.daily-card.span-7,
+.interview-card.span-5 { height: auto !important; }
+
+/* A nested Concept Lens selection must appear above the open AI card. */
+.concept-lens-trigger { z-index: 10030 !important; }
+
+/* Never let legacy .answer-framework span styles compress generated answer copy. */
+.interview-card .answer-framework .interview-step-answer,
+.interview-card .answer-framework .interview-step-answer *,
+.interview-card .answer-framework .interview-answer-part,
+.interview-card .answer-framework .interview-answer-part * {
+  box-sizing: border-box;
+  max-width: 100% !important;
+  white-space: normal !important;
+  writing-mode: horizontal-tb !important;
+  word-break: normal !important;
+}
+.interview-card .answer-framework .interview-step-answer span,
+.interview-card .answer-framework .interview-answer-part span {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: block !important;
+}
+
+/* Keep the generated question useful: large enough to read, never poster-sized. */
+.interview-card .card-head h2 { font-size: clamp(22px, 2.4vw, 34px) !important; line-height: 1.15 !important; }
+.interview-ai-why { font-size: 13px !important; line-height: 1.6 !important; }
+
+/* Main market terminology should read like teaching content, not footnotes. */
+.market-learning-hub .analysis-card p,
+.market-learning-hub .explanation-copy { font-size: 14px !important; line-height: 1.75 !important; }
+
+/* Responsive sidebar keeps the page surface continuous. */
+.section-sidebar::after { content:""; position:absolute; left:0; right:0; bottom:-100vh; height:100vh; background:inherit; pointer-events:none; }
