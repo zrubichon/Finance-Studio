@@ -6,8 +6,9 @@ export default function InterviewContextBridge() {
   useEffect(() => {
     if (window.location.pathname !== "/interview") return;
     const params = new URLSearchParams(window.location.search);
-    const concept = params.get("concept")?.trim();
-    if (!concept) return;
+    const rawConcept = params.get("concept")?.trim();
+    if (!rawConcept) return;
+    const concept: string = rawConcept;
     const french = document.documentElement.lang === "fr";
     function apply() {
       const panel = document.querySelector<HTMLElement>(".interview-question-panel");
