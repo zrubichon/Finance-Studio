@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { navItems } from "@/lib/content";
 import { useLanguage } from "@/components/language-provider";
 
@@ -21,21 +21,47 @@ function pick(value: string | LocalizedText, french: boolean) {
 
 export default function SectionLayout({ activeSlug, eyebrow, title, description, children }: SectionLayoutProps) {
   const { language, setLanguage, isFrench } = useLanguage();
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    try {
+      setCollapsed(window.localStorage.getItem("finance-studio-section-sidebar-collapsed") === "1");
+    } catch {
+      // Keep the expanded default when storage is unavailable.
+    }
+  }, []);
+
+  function toggleSidebar() {
+    setCollapsed((current) => {
+      const next = !current;
+      try { window.localStorage.setItem("finance-studio-section-sidebar-collapsed", next ? "1" : "0"); } catch { /* optional */ }
+      return next;
+    });
+  }
 
   return (
-    <main className="section-shell product-section-shell">
+    <main className={`section-shell product-section-shell${collapsed ? " section-nav-collapsed" : ""}`}>
       <aside className="section-sidebar">
+        <button
+          type="button"
+          className="section-sidebar-toggle"
+          aria-label={collapsed ? (isFrench ? "Ouvrir la navigation" : "Expand navigation") : (isFrench ? "Réduire la navigation" : "Collapse navigation")}
+          aria-expanded={!collapsed}
+          onClick={toggleSidebar}
+        >
+          {collapsed ? "›" : "‹"}
+        </button>
         <Link className="brand" href="/">
           <span className="brand-mark">FS</span>
           <span>FinanceStudio</span>
         </Link>
         <p className="sidebar-kicker">{isFrench ? "APPRENDRE · MARCHÉS · MÉTIERS" : "LEARN · MARKETS · CAREERS"}</p>
         <nav className="section-nav" aria-label={isFrench ? "Sections FinanceStudio" : "FinanceStudio sections"}>
-          <Link className={activeSlug === "home" ? "active" : ""} href="/">
+          <Link className={activeSlug === "home" ? "active" : ""} href="/" title={isFrench ? "Accueil" : "Home"}>
             <span>⌂</span>{isFrench ? "Accueil" : "Home"}
           </Link>
           {navItems.map((item) => (
-            <Link className={item.slug === activeSlug ? "active" : ""} href={`/${item.slug}`} key={item.slug}>
+            <Link className={item.slug === activeSlug ? "active" : ""} href={`/${item.slug}`} key={item.slug} title={isFrench ? item.labelFr : item.label}>
               <span>{item.icon}</span>{isFrench ? item.labelFr : item.label}
             </Link>
           ))}
@@ -43,8 +69,8 @@ export default function SectionLayout({ activeSlug, eyebrow, title, description,
         <div className="section-sidebar-note">
           <span className="live-dot" />
           <div>
-            <strong>{isFrench ? "Version de fondation" : "Foundation build"}</strong>
-            <p>{isFrench ? "Uniquement des données réelles. Aucun prix de marché inventé." : "Real data only. No fabricated market prices."}</p>
+            <strong>{isFrench ? "Données réelles uniquement" : "Real data only"}</strong>
+            <p>{isFrench ? "Les prix et observations affichés proviennent des sources connectées ; FinanceStudio n’invente pas de données de marché." : "Displayed prices and observations come from connected sources; FinanceStudio does not fabricate market data."}</p>
           </div>
         </div>
       </aside>
