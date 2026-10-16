@@ -115,6 +115,7 @@ function trackBadge(track: Track) {
 
 export default function FinanceStudioHomeV2() {
   const { language, setLanguage, isFrench, text } = useLanguage();
+  const [briefExpanded,setBriefExpanded]=useState(false);
   const [level, setLevel] = useState<Level>("Beginner");
   const {collapsed,toggle}=useSidebarState();
   const [theme, setTheme] = useState<Theme>("classic");
@@ -410,7 +411,7 @@ export default function FinanceStudioHomeV2() {
         </section>
 
         <section className="dashboard-grid">
-          <article className="daily-card card span-7">
+          <article className={`daily-card card span-7${briefExpanded?" brief-expanded":""}`}>
             <div className="card-head">
               <div>
                 <span className="eyebrow">{text("TODAY'S LEARNING BRIEF", "BRIEF D’APPRENTISSAGE DU JOUR")}</span>
@@ -432,6 +433,7 @@ export default function FinanceStudioHomeV2() {
               <div><small>{text("Valuation pressure", "Pression sur la valorisation / valuation")}</small><strong>↑</strong></div>
             </div>
 
+            <button className="learning-expand-button brief-expand-button" type="button" aria-expanded={briefExpanded} aria-controls="hourly-complete-lesson" onClick={()=>setBriefExpanded(v=>!v)}>{briefExpanded?text("Collapse the full lesson ↑","Replier le cours complet ↑"):text("Open the full lesson, examples & explanations ↓","Dérouler le cours complet, les exemples et explications ↓")}</button>
             <div className="card-actions">
               <Link href={nextModule ? `/university/${nextModule.slug}` : "/university"}>
                 {nextModule ? text("Continue your next lesson", "Continuer ton prochain cours") : text("Review Finance University", "Revoir l’Université de Finance")} <span>→</span>

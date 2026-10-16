@@ -9,6 +9,7 @@ import { interviewFrameworkDetails } from "@/lib/interview-framework-details";
 type Drill = { question: string; badge: string; whyItMatters: string; steps: {title: string; simple: string; why: string; example: string; next?: string}[] };
 export default function HomeInterviewDrill({track, targetRole}: {track: Track; targetRole: string}) {
   const {isFrench, text} = useLanguage();
+  const [expanded,setExpanded]=useState(false);
   const [generated, setGenerated] = useState<Drill | null>(null);
   useEffect(() => {
     const controller = new AbortController();
@@ -32,15 +33,16 @@ export default function HomeInterviewDrill({track, targetRole}: {track: Track; t
   const base = interviewQuestions[track];
   const details = interviewFrameworkDetails[track];
   const steps = generated?.steps ?? base.framework.slice(0,3).map((s,i)=>({title:isFrench?s.fr:s.en, simple:isFrench?details[i].simple.fr:details[i].simple.en, why:isFrench?details[i].why.fr:details[i].why.en, example:isFrench?details[i].example.fr:details[i].example.en,next:isFrench?details[i].next?.fr:details[i].next?.en}));
-  return <article className="card span-5 interview-card stable-interview-drill">
+  return <article className={`card span-5 interview-card stable-interview-drill${expanded?" drill-expanded":""}`}>
     <div className="interview-drill-meta"><span className="eyebrow">{text("INTERVIEW DRILL","ENTRAÎNEMENT ENTRETIEN")}</span><span className="pill accent">{track}</span></div>
     <h2 className="interview-drill-question">{generated?.question ?? (isFrench?base.question.fr:base.question.en)}</h2>
     <p>{targetRole?text(`Based on your saved target role: ${targetRole}.`,`Basé sur ton métier cible enregistré : ${targetRole}.`):text("Choose a target role in Careers to personalize this drill.","Choisis un métier cible dans Careers pour personnaliser cet entraînement.")}</p>
     {generated?.whyItMatters && <p className="interview-ai-why">{generated.whyItMatters}</p>}
-    <div className="answer-framework">{steps.map((s,i)=><section className="interview-teaching-step" key={i}>
+    <div className="answer-framework" id="interview-complete-answer">{steps.map((s,i)=><section className="interview-teaching-step" key={i} hidden={!expanded&&i>0}>
       <header className="interview-step-heading"><span className="step-number">{i+1}</span><h3>{s.title}</h3></header>
       <div className="interview-step-answer">{[[text("Simple answer","Réponse simple"),s.simple,"simple"],[text("Why","Pourquoi"),s.why,"why"],[text("Example / implication","Exemple / implication"),s.example,"example"],[text("What happens next","Et ensuite"),s.next,"next"]].filter(([,v])=>v).map(([label,value,cls])=><div key={label} className={`interview-answer-part ${cls}`}><b>{label}</b><p>{value}</p></div>)}</div>
     </section>)}</div>
-    <Link className="full-button" href={`/interview?track=${encodeURIComponent(track)}`}>{text("Start interview practice","Commencer l’entraînement entretien")} →</Link>
+    <button className="learning-expand-button" type="button" aria-expanded={expanded} aria-controls="interview-complete-answer" onClick={()=>setExpanded(v=>!v)}>{expanded?text("Collapse the complete answer ↑","Replier la réponse complète ↑"):text("Show the remaining steps & full answer ↓","Dérouler les autres étapes et la réponse complète ↓")}</button>
+    <Link hidden={!expanded} className="full-button" href={`/interview?track=${encodeURIComponent(track)}`}>{text("Start interview practice","Commencer l’entraînement entretien")} →</Link>
   </article>;
 }

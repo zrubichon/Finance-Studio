@@ -1,6 +1,6 @@
 import SectionLayout from "@/components/section-layout";
 import InvestingLab from "@/components/investing-lab";
-import InvestingLearningHub from "@/components/investing-learning-hub";
+import InvestingLearningHub, {InvestingLearningIntro} from "@/components/investing-learning-hub";
 
 export default function InvestingPage() {
   return (
@@ -13,8 +13,9 @@ export default function InvestingPage() {
         fr: "Le laboratoire utilise uniquement du capital virtuel. Il enseigne la construction de portefeuille / portfolio construction, l’analyse de titres / security analysis, le risque / risk, l’attribution de performance / performance attribution et une prise de décision disciplinée sans utiliser d’argent réel.",
       }}
     >
-      <InvestingLearningHub />
+      <InvestingLearningIntro />
       <div id="investing-simulator"><InvestingLab /></div>
+      <InvestingLearningHub />
     </SectionLayout>
   );
 }

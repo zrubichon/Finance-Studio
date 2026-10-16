@@ -88,6 +88,7 @@ function applyDepth() {
   if (!section) {
     section = document.createElement("section");
     section.className = "hourly-deep-lesson";
+    section.id="hourly-complete-lesson";
     card.querySelector(".hourly-update-note")?.before(section);
   }
 

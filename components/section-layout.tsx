@@ -1,5 +1,6 @@
 "use client";
 
+import SectionReturnLink from "./section-return-link";
 import AppSidebar, {useSidebarState} from "./app-sidebar";
 import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
@@ -31,7 +32,7 @@ export default function SectionLayout({ activeSlug, eyebrow, title, description,
 
       <section className="section-main product-section-main">
         <div className="section-top-row">
-          <Link className="back-link" href="/">← {isFrench ? "Tableau de bord" : "Dashboard"}</Link>
+          <SectionReturnLink/>
           <div className="segmented" aria-label={isFrench ? "Sélecteur de langue" : "Language selector"}>
             {(["EN", "FR"] as const).map((item) => (
               <button className={language === item ? "selected" : ""} onClick={() => setLanguage(item)} key={item} type="button">{item}</button>

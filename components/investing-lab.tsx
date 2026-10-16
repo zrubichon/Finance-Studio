@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/components/language-provider";
 import { recordDailyActivity } from "@/lib/record-activity";
+import InvestingExample from "./investing-example";
 import PaperTradingPanel from "@/components/paper-trading-panel";
 
 type Portfolio = {
@@ -328,6 +329,7 @@ export default function InvestingLab() {
 
   return (
     <div className="workspace-stack">
+      <InvestingExample kind="portfolio"/>
       <section className="investing-hero-grid">
         <article className="paper-portfolio-card">
           <span className="mini-label">{text("VIRTUAL PORTFOLIO", "PORTEFEUILLE VIRTUEL / VIRTUAL PORTFOLIO")}</span>
@@ -416,7 +418,7 @@ export default function InvestingLab() {
 
 
 
-      <section className="thesis-form-panel">
+      <section className="thesis-form-panel" id="investing-thesis-journal">
         <div className="panel-heading">
           <div>
             <span className="mini-label">{text("THESIS JOURNAL", "JOURNAL DE THÈSES / THESIS JOURNAL")}</span>
@@ -428,6 +430,7 @@ export default function InvestingLab() {
           <span className="connection-badge">{text("Private account data", "Données privées du compte")}</span>
         </div>
 
+        <InvestingExample kind="journal"/>
         <form className="thesis-form" onSubmit={submitThesis}>
           <label>
             <span>{text("Symbol / asset", "Symbole / actif")}</span>
@@ -543,6 +546,7 @@ export default function InvestingLab() {
         />
       )}
 
+      <InvestingExample kind="review"/>
       <section className="saved-theses-panel">
         <div className="panel-heading">
           <div>

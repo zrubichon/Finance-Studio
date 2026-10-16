@@ -26,6 +26,15 @@ const series: SeriesConfig[] = [
   { id: "SOFR", label: "SOFR", category: "Rates", region: "USA", unit: "%" },
   { id: "T10Y2Y", label: "10Y−2Y Spread", category: "Rates", region: "USA", unit: "%" },
 
+  { id: "VXNCLS", label: "VXN · Nasdaq-100 volatility", category: "Volatility", region: "USA", unit: "" },
+  { id: "RVXCLS", label: "RVX · Russell 2000 volatility", category: "Volatility", region: "USA", unit: "" },
+  { id: "OVXCLS", label: "OVX · Oil ETF volatility", category: "Volatility", region: "Global", unit: "" },
+  { id: "GVZCLS", label: "GVZ · Gold ETF volatility", category: "Volatility", region: "Global", unit: "" },
+  { id: "VXVCLS", label: "VXV · S&P 500 3M volatility", category: "Volatility", region: "USA", unit: "" },
+  { id: "NASDAQ100", label: "Nasdaq-100", category: "Equities", region: "USA", unit: "" },
+  { id: "DHOILNYH", label: "Heating oil · USD/gallon", category: "Commodities", region: "USA", unit: "$" },
+  { id: "DJFUELUSGULF", label: "Jet fuel · USD/gallon", category: "Commodities", region: "USA", unit: "$" },
+  { id: "BAMLH0A1HYBB", label: "US BB high yield OAS", category: "Credit", region: "USA", unit: "%" },
   { id: "VIXCLS", label: "VIX", category: "Volatility", region: "USA", unit: "" },
 
   { id: "DCOILWTICO", label: "WTI", category: "Commodities", region: "Global", unit: "$" },

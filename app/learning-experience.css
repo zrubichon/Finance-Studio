@@ -339,3 +339,31 @@ html[data-theme="terminal"],.theme-terminal{--learning-strong:#1b4233;--learning
 
 .market-course-priority .market-course-links a,.markets-card .market-course-links a{padding:11px 14px!important;font-size:14px!important;line-height:1.45!important;}
 .panorama-trend figcaption{white-space:normal;}
+
+/* Distinct filter decisions and reversible, compact learning panels. */
+.panorama-filter-block{padding:15px 16px;margin:12px 0;border:1px solid var(--line);border-radius:13px;background:var(--surface-2);}
+.panorama-filter-block+.panorama-filter-block{margin-top:22px;border-top:3px solid var(--accent);background:color-mix(in srgb,var(--accent-2) 50%,var(--surface));}
+.panorama-filter-label{font-size:12px;font-weight:800;letter-spacing:.07em;color:var(--accent);display:block;margin-bottom:9px;}
+.panorama-category-explanation{font-size:13px!important;line-height:1.6!important;margin:10px 0 0!important;color:var(--muted);max-width:100ch;}
+.learning-expand-button{display:block;width:100%;padding:15px 18px;border:2px solid var(--accent);border-radius:12px;background:var(--accent);color:var(--accent-ink);font-family:inherit;font-size:15px;font-weight:800;text-align:left;cursor:pointer;margin:18px 0 0;line-height:1.5;}
+.learning-expand-button:hover{filter:brightness(1.12);}.learning-expand-button:focus-visible,details>summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px;}
+.daily-card:not(.brief-expanded) .hourly-deep-lesson,.daily-card:not(.brief-expanded) .hourly-update-note,.daily-card:not(.brief-expanded) .hourly-topic-links,.daily-card:not(.brief-expanded)>.card-actions{display:none!important;}
+.interview-teaching-step[hidden],.stable-interview-drill>.full-button[hidden]{display:none!important;}
+.stable-interview-drill:not(.drill-expanded)>.learning-expand-button{margin-top:auto;}
+.dashboard-grid:has(.brief-expanded)>.daily-card,.dashboard-grid:has(.brief-expanded)>.stable-interview-drill,.dashboard-grid:has(.drill-expanded)>.daily-card,.dashboard-grid:has(.drill-expanded)>.stable-interview-drill{height:auto!important;align-self:start!important;}
+:root,.theme-classic{--instrument-overlay:rgba(13,35,27,.78);--photo-chart:#a3f4cd;}
+html[data-theme="girl"],.theme-girl{--instrument-overlay:rgba(48,20,34,.77);--photo-chart:#ffb8d0;}
+html[data-theme="terminal"],.theme-terminal{--instrument-overlay:rgba(5,18,13,.78);--photo-chart:#93f4be;}
+.market-photo-instrument{color:#f8fcfa!important;border-color:#ffffff44!important;}
+.market-photo-instrument h4,.market-photo-instrument .instrument-value strong,.market-photo-instrument .instrument-source,.market-photo-instrument a,.market-photo-instrument figcaption{color:#f1f7f4!important;}
+.market-photo-instrument .quote-move.up{color:#88f1b5!important;}.market-photo-instrument .quote-move.down{color:#ffa8ad!important;}
+.market-photo-instrument .quote-history polyline{stroke:var(--photo-chart);}
+.market-photo-instrument .instrument-value,.market-photo-instrument .instrument-lesson-link{border-color:#ffffff44!important;}
+.investing-observations>summary,.investing-method>summary,.paper-order-example>summary,.investing-explained-example>summary,.investing-optional-coach>summary{display:list-item;background:var(--learning-strong);color:var(--learning-text)!important;padding:15px 18px;border:1px solid var(--learning-link);border-radius:11px;font-weight:800;cursor:pointer;line-height:1.5;}
+.investing-explained-example{padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;margin:12px 0;}
+.investing-explained-example>summary span{float:right;}.investing-explained-example[open]>summary span{transform:rotate(45deg);}
+.investing-explained-example p{font-size:15px!important;line-height:1.75!important;margin:16px 5px!important;}
+.investing-explained-example dl{margin:14px 0 0;display:grid;gap:10px;}.investing-explained-example dl>div{padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);}
+.investing-explained-example dt{font-size:14px;font-weight:800;color:var(--accent);margin-bottom:7px;}.investing-explained-example dd{font-size:15px;line-height:1.7;margin:0;}
+.investing-optional-coach[open]>summary{margin-bottom:20px;}.investing-intro-copy{font-size:16px;line-height:1.7;max-width:90ch;}
+.order-example-checklist{padding-left:22px;}.order-example-checklist li{margin:12px 0;font-size:15px;line-height:1.7;}
