@@ -336,3 +336,6 @@ html[data-theme="terminal"],.theme-terminal{--learning-strong:#1b4233;--learning
 .dictionary-card h2,.dictionary-card p{overflow-wrap:anywhere;}
 
 .investing-observations>summary{cursor:pointer;font-weight:750;color:var(--accent);}.investing-observations[open]>.panel-heading{margin-top:20px;}
+
+.market-course-priority .market-course-links a,.markets-card .market-course-links a{padding:11px 14px!important;font-size:14px!important;line-height:1.45!important;}
+.panorama-trend figcaption{white-space:normal;}

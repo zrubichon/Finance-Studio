@@ -7,12 +7,12 @@ export type PanoramaQuote={id:string;label:string;category:string;value:number;u
 const groups=[['Equities','Stock indices','Indices boursiers'],['Rates','Interest rates','Taux d’intérêt'],['FX','Currencies','Devises'],['Commodities','Commodities','Matières premières'],['Crypto','Crypto assets','Crypto-actifs'],['Credit','Credit spreads','Spreads de crédit'],['Volatility','Volatility','Volatilité']];
 const periods:[MarketPeriod,string,string][]=[['year','Past year','Année écoulée'],['month','This month','Ce mois-ci'],['week','This week','Cette semaine'],['last-week','Last week','Semaine dernière'],['yesterday','Yesterday','Hier'],['today','Today','Aujourd’hui']];
 const photos:Record<string,string>={Equities:'trading',Rates:'city',FX:'currency',Commodities:'energy',Crypto:'crypto',Credit:'city',Volatility:'trading'};
-function MiniTrend({points,label,locale}:{points:HistoryPoint[];label:string;locale:string}) {
+function MiniTrend({points,label,locale,annual=false}:{points:HistoryPoint[];label:string;locale:string;annual?:boolean}) {
  const valid=points.filter(p=>Number.isFinite(p.value));if(valid.length<2)return null;
  const values=valid.map(p=>p.value),min=Math.min(...values),max=Math.max(...values),span=max-min||1;
  const first=new Date(valid[0].date).getTime(),last=new Date(valid.at(-1)!.date).getTime();
  const color=values.at(-1)!>values[0]?'#81efbb':values.at(-1)!<values[0]?'#ff999f':'#e1e6ef';
- const dates=new Intl.DateTimeFormat(locale,{day:'numeric',month:'short',timeZone:'UTC'});
+ const dates=new Intl.DateTimeFormat(locale,{day:'numeric',month:'short',...(annual?{year:'numeric' as const}:{}),timeZone:'UTC'});
  return <figure className="panorama-trend"><svg viewBox="0 0 160 30" role="img" aria-label={`${label}: ${valid[0].date} → ${valid.at(-1)!.date}`}><title>{label} · {valid[0].date} → {valid.at(-1)!.date}</title><polyline points={valid.map(p=>`${2+(new Date(p.date).getTime()-first)/(last-first||1)*156},${27-(p.value-min)/span*24}`).join(' ')} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round"/></svg><figcaption>{dates.format(new Date(first))} → {dates.format(new Date(last))}</figcaption></figure>;
 }
 export default function MarketPanorama({quotes,compact=false,loading=false}:{quotes:PanoramaQuote[];compact?:boolean;loading?:boolean}) {
@@ -21,7 +21,7 @@ export default function MarketPanorama({quotes,compact=false,loading=false}:{quo
  const locale=isFrench?'fr-FR':'en-US';const bounds=periodBounds(period,today);
  const rows=useMemo(()=>{const selected=[...quotes,...extra].filter(q=>q.category===group);if(group==='Rates'){const order=['US 10Y','US 2Y','US 5Y','US 30Y','US 3M','US 1Y'];selected.sort((a,b)=>(order.includes(a.label)?order.indexOf(a.label):99)-(order.includes(b.label)?order.indexOf(b.label):99));}return selected;},[quotes,extra,group]);
  const limit=compact?6:8;const pages=Math.ceil(rows.length/limit);const visible=rows.slice(Math.min(page,Math.max(0,pages-1))*limit,(Math.min(page,Math.max(0,pages-1))+1)*limit);
- const date=(value:string)=>new Intl.DateTimeFormat(locale,{day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(value+'T12:00:00Z'));
+ const date=(value:string)=>new Intl.DateTimeFormat(locale,{day:'numeric',month:'short',...(period==='year'?{year:'numeric' as const}:{}),timeZone:'UTC'}).format(new Date(value+'T12:00:00Z'));
  const signed=(value:number)=>new Intl.NumberFormat(locale,{minimumFractionDigits:2,maximumFractionDigits:2,signDisplay:'exceptZero'}).format(Math.abs(value)<0.005?0:value);
  return <section className={`market-panorama${compact?' compact':''}`} aria-label={text('Visual market overview','Panorama visuel des marchés')}>
   <div className="panorama-heading"><div><span className="mini-label">{text('MARKETS AT A GLANCE','LES MARCHÉS EN UN REGARD')}</span><h2>{text('The moves. The period. The context.','Les mouvements. La période. Le contexte.')}</h2></div><Link href="/markets/guide">{text('Learn to read this','Apprendre à lire ces données')} ↗</Link></div>
@@ -30,7 +30,7 @@ export default function MarketPanorama({quotes,compact=false,loading=false}:{quo
   <p className="panorama-range">{date(bounds.start)} – {date(bounds.end)} · {text('Daily observations · past year = trailing 12 months','Observations quotidiennes · année = 12 mois glissants')}</p>
   <div className="panorama-grid">{visible.map((quote,i)=>{const move=periodMove(quote.history||[],period,quote.unit,today);const history=[...(quote.history||[])].filter(p=>p.date<=bounds.end).sort((a,b)=>a.date.localeCompare(b.date));const baseline=history.filter(p=>p.date<bounds.start).at(-1);const trend=[...(baseline?[baseline]:[]),...history.filter(p=>p.date>=bounds.start)];const latest=history.at(-1);const value=move?.value??latest?.value;const asOf=move?.to??latest?.date;return <a key={quote.id} className="panorama-tile" href={quote.sourceUrl||'/markets'} target={quote.sourceUrl?'_blank':undefined} rel="noreferrer" style={{backgroundImage:`linear-gradient(90deg,rgba(9,18,27,.83),rgba(9,18,27,.58)),url('/market-images/${quote.label.toLowerCase().includes("gold")?"gold":photos[group]}.jpg')`,backgroundPosition:`center ${25+i*10}%`}}>
    <div><strong>{quote.label}</strong><small>{value!==undefined?`${new Intl.NumberFormat(locale,{maximumFractionDigits:quote.category==='FX'?4:2}).format(value)}${quote.unit==='%'?' %':quote.unit==='$'?' $':quote.unit==='bps'?' bps':''} · ${asOf?date(asOf):''}`:text('No observation','Pas d’observation')}</small></div>
-   <MiniTrend points={trend} label={quote.label} locale={locale}/>
+   <MiniTrend points={trend} label={quote.label} locale={locale} annual={period==='year'}/>
    <div className="panorama-move"><b className={move?(move.delta>0?'positive':move.delta<0?'negative':'neutral'):'neutral'}>{move?`${signed(move.delta)} ${isFrench&&move.deltaUnit==="bps"?"pb":move.deltaUnit}`:'—'}</b><small>{move?`${date(move.from)} → ${date(move.to)}`:text('Period unavailable','Période indisponible')}</small></div>
   </a>;})}</div>
   {!visible.length&&<p role="status">{(group==='Crypto'?cryptoLoading:loading)?text('Loading observations…','Chargement des observations…'):text('This source is temporarily unavailable. No value has been substituted.','Cette source est temporairement indisponible. Aucune valeur n’a été inventée.')}</p>}
