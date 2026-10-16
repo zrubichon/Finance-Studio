@@ -366,7 +366,7 @@ export default function InvestingLab() {
         </article>
       </section>
 
-      <section className="market-overview-panel investing-market-snapshot">
+      <details className="market-overview-panel investing-market-snapshot investing-observations"><summary>{text("Optional reference · open the connected market snapshot","Référence facultative · ouvrir les observations de marché")} ({marketData?.quotes.length||0})</summary>
         <div className="panel-heading">
           <div>
             <span className="mini-label">{text("CONNECTED MARKET SNAPSHOT", "SNAPSHOT DE MARCHÉ CONNECTÉ")}</span>
@@ -412,14 +412,9 @@ export default function InvestingLab() {
             "Ces observations sont des données de référence pédagogiques. L’exécution simulée utilise désormais une vérification de prix instrument par instrument et n’est activée que si FinanceStudio peut vérifier un prix fournisseur suffisamment récent.",
           )}
         </p>
-      </section>
+      </details>
 
-      {portfolio && (
-        <PaperTradingPanel
-          portfolioId={portfolio.id}
-          onPositionCountChange={setPositionsCount}
-        />
-      )}
+
 
       <section className="thesis-form-panel">
         <div className="panel-heading">
@@ -540,6 +535,13 @@ export default function InvestingLab() {
           </div>
         </form>
       </section>
+
+      {portfolio && (
+        <PaperTradingPanel
+          portfolioId={portfolio.id}
+          onPositionCountChange={setPositionsCount}
+        />
+      )}
 
       <section className="saved-theses-panel">
         <div className="panel-heading">

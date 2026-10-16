@@ -365,7 +365,7 @@ export default function MarketsWorkspace() {
         <div className="market-category-stack">
           {groups.map(group => <section className="market-category" key={group.category}>
             <header><h3>{group.category}</h3><span>{group.quotes.length} {text("instruments", "instruments")}</span></header>
-            <div className="market-instrument-grid">{group.quotes.map(quote => <article className="market-instrument-card" key={quote.id}>
+            <div className="market-instrument-grid">{group.quotes.map(quote => <article className="market-instrument-card market-photo-instrument" key={quote.id} style={{backgroundImage:`linear-gradient(var(--instrument-overlay),var(--instrument-overlay)),url(/market-images/${({Equities:"trading",Rates:"city",FX:"currency",Commodities:quote.label==="Gold"?"gold":"energy",Volatility:"trading",Credit:"city"})[quote.category]}.jpg)`}}>
               <h4>{quote.label}</h4>
               <div className="instrument-value"><strong>{formatValue(quote)}</strong><b className={`quote-move ${quote.change === null ? "" : quote.change >= 0 ? "up" : "down"}`}>{quote.unit === "%" && quote.change !== null ? `${quote.change>=0?"+":""}${(quote.change*100).toFixed(1)} bps` : formatMove(quote)}</b></div>
               {quote.history && <MarketSparkline points={quote.history} label={quote.label} />}

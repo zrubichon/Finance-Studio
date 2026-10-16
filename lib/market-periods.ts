@@ -1,4 +1,4 @@
-export type MarketPeriod = "month" | "week" | "last-week" | "yesterday" | "today";
+export type MarketPeriod = "year" | "month" | "week" | "last-week" | "yesterday" | "today";
 export type HistoryPoint = {date:string;value:number};
 const day = (value:string, offset=0) => new Date(Date.parse(value+"T12:00:00Z")+offset*86400000).toISOString().slice(0,10);
 export function marketDate(now=new Date()) {
@@ -7,6 +7,7 @@ export function marketDate(now=new Date()) {
 }
 export function periodBounds(period:MarketPeriod,today=marketDate()) {
  const date=new Date(today+"T12:00:00Z");
+ if(period==="year"){const prior=new Date(date);prior.setUTCFullYear(prior.getUTCFullYear()-1);if(prior.getUTCMonth()!==date.getUTCMonth())prior.setUTCDate(0);return {start:day(prior.toISOString().slice(0,10),1),end:today};}
  const monday=day(today,-((date.getUTCDay()+6)%7));
  if(period==="month")return {start:today.slice(0,7)+"-01",end:today};
  if(period==="week")return {start:monday,end:today};

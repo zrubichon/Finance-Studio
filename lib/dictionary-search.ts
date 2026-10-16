@@ -11,3 +11,10 @@ export function dictionaryTarget<T extends {en:string;fr:string}>(entries:T[],qu
   ||entries.find(e=>[e.en,e.fr].some(v=>normalizeDictionaryTerm(v).startsWith(wanted+" ")));
 }
 export function dictionaryTermId(term:string){return `term-${normalizeDictionaryTerm(term).replace(/ /g,"-")}`;}
+
+export function dictionaryPrefixMatches<T extends {en:string;fr:string}>(entries:T[],query:string,isFrench:boolean,exact?:T){
+ const q=normalizeDictionaryTerm(query);if(!q)return entries;
+ const primary=entries.filter(item=>normalizeDictionaryTerm(isFrench?item.fr:item.en).startsWith(q));
+ const matched=primary.length?primary:entries.filter(item=>normalizeDictionaryTerm(isFrench?item.en:item.fr).startsWith(q));
+ return exact?[exact,...matched.filter(item=>item!==exact)]:matched;
+}

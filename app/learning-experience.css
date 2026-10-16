@@ -301,3 +301,38 @@
 .news-photo-caption{display:block;font-size:11px;color:#d0dce6;margin:8px 0;}
 @media(min-width:1400px){.market-panorama.compact .panorama-trend{flex-basis:64px;}}
 @media(max-width:420px){.panorama-tile{gap:7px;padding:12px 10px;}.panorama-trend{flex-basis:60px;}.panorama-move b{font-size:19px;}}
+
+/* Theme-aware learning priorities, compact definitions and readable market tiles. */
+:root{--learning-strong:#214b39;--learning-link:#315e4a;--learning-text:#f7fcf8;--instrument-overlay:rgba(255,253,246,.93);}
+html[data-theme="girl"],.theme-girl{--learning-strong:#72354c;--learning-link:#88485f;--learning-text:#fff7fa;--instrument-overlay:rgba(255,248,247,.93);}
+html[data-theme="terminal"],.theme-terminal{--learning-strong:#1b4233;--learning-link:#245440;--learning-text:#edfff5;--instrument-overlay:rgba(18,24,22,.92);}
+.market-course-priority,.markets-card .market-course-strip{background:var(--learning-strong)!important;color:var(--learning-text)!important;border-color:color-mix(in srgb,var(--accent) 65%,var(--line))!important;}
+.market-course-priority .mini-label,.market-course-priority p,.markets-card .market-course-strip .mini-label{color:var(--learning-text)!important;}
+.market-course-priority .market-course-links a,.markets-card .market-course-strip a{background:var(--learning-link)!important;color:var(--learning-text)!important;border:1px solid #ffffff55!important;}
+.market-understand-link,.panorama-heading>a{background:var(--accent)!important;color:var(--accent-ink)!important;padding:11px 16px!important;border-radius:10px!important;font-weight:750!important;font-size:14px!important;white-space:normal!important;}
+.panorama-tile{min-height:106px;padding:18px;gap:14px;}.panorama-tile strong{font-size:18px;}.panorama-tile small{font-size:12px!important;}.panorama-trend{flex-basis:120px;max-width:120px;}.panorama-trend svg{height:36px;}
+@media(min-width:1400px){.market-panorama.compact .panorama-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.market-panorama.compact .panorama-trend{flex-basis:110px;}}
+.market-photo-instrument{background-size:cover;background-position:center;}
+.dictionary-grid{align-items:start!important;}
+.dictionary-card{min-height:0!important;content-visibility:visible;contain-intrinsic-size:none;}
+.dictionary-card p{min-height:0!important;height:auto!important;margin:8px 0 12px!important;}
+.dictionary-card .dictionary-translation{margin:4px 0 10px!important;}
+.dictionary-card .lesson-explanation{margin:12px 0!important;}
+.dictionary-source-note,.indicator-source{font-size:12px!important;color:var(--muted);}
+.live-journal-panel{background:color-mix(in srgb,var(--accent) 10%,var(--surface-2))!important;}
+.news-photo-card{position:relative;isolation:isolate;overflow:hidden;background:var(--surface-2);}
+.news-story-background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;}
+.news-photo-card:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,18,27,.91),rgba(9,18,27,.70));z-index:-1;pointer-events:none;}
+.news-photo-caption{font-size:10px;opacity:.85;}
+.investing-steps{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px;}.investing-steps a{background:var(--accent-2);border:1px solid var(--line);padding:10px 14px;border-radius:10px;font-weight:700;}
+.investing-method,.paper-order-example{padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);margin:14px 0;}
+.investing-method>summary,.paper-order-example>summary{cursor:pointer;color:var(--accent);font-weight:750;}
+.investing-method[open]>section{margin-top:18px;}
+.order-example-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px;background:var(--accent-2);border-radius:10px;font-weight:700;}
+#investing-thesis-coach,#investing-simulator{scroll-margin-top:20px;}
+@media(min-width:1101px){.dashboard-grid>.daily-card,.dashboard-grid>.stable-interview-drill{align-self:stretch!important;height:100%!important;display:flex!important;flex-direction:column;}.stable-interview-drill .interview-drill-question{font-size:21px!important;}.stable-interview-drill .interview-answer-part>p{font-size:16px!important;line-height:1.7!important;}.stable-interview-drill>.full-button,.daily-card>.card-actions{margin-top:auto!important;padding-top:14px;}}
+@media(max-width:650px){.panorama-tile{padding:15px 12px;gap:8px;}.panorama-tile strong{font-size:16px;}.panorama-trend{flex-basis:75px;}.panorama-move b{font-size:20px;}}
+
+.dictionary-card h2,.dictionary-card p{overflow-wrap:anywhere;}
+
+.investing-observations>summary{cursor:pointer;font-weight:750;color:var(--accent);}.investing-observations[open]>.panel-heading{margin-top:20px;}

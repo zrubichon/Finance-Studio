@@ -1,8 +1,10 @@
+import extension from "./dictionary-extension.json";
 import {cleanFrenchLabel,termAliases} from "./dictionary-labels";
 import {challengeDictionary} from "./challenge-dictionary";
 import { lessons } from "./lesson-registry";
 
 export type DictionaryEntry = {
+  indicator?: {code:string;dataset:string;url:string};
   en: string;
   fr: string;
   definitionEn: string;
@@ -82,5 +84,6 @@ export function getDictionaryEntries(): DictionaryEntry[] {
     if(!lesson)continue;
     entries.set(key,{...item,sources:[{slug:lesson.slug,en:lesson.title.en,fr:lesson.title.fr}]});
   }
+  for(const item of extension){const normalized=normalizeTerm(item.en);const key=termAliases[normalized]??normalized;if(!entries.has(key))entries.set(key,item);}
   return [...entries.values()].sort((a, b) => a.en.localeCompare(b.en));
 }

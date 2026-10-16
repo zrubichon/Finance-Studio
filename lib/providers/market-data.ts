@@ -1,3 +1,4 @@
+import {unstable_cache} from "next/cache";
 export type MarketRegion =
   | "Global"
   | "USA"
@@ -134,19 +135,19 @@ function quoteFromPoints(
   };
 }
 
-async function getEcbQuotes(): Promise<{quotes:MarketQuote[];status:ProviderStatus}> {
-  const sourceUrl = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml";
+async function loadEcbQuotes(): Promise<{quotes:MarketQuote[];status:ProviderStatus}> {
+  const sourceUrl = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml";
   try {
-    const response = await fetch(sourceUrl, {next:{revalidate:300},signal:AbortSignal.timeout(12000)});
+    const response = await fetch(sourceUrl, {cache:"no-store",signal:AbortSignal.timeout(20000)});
     if (!response.ok) throw new Error(`ECB reference feed: HTTP ${response.status}`);
     const xml = await response.text();
-    const days = [...xml.matchAll(/<Cube\s+time=['"](\d{4}-\d{2}-\d{2})['"]>([\s\S]*?)<\/Cube>/g)].map(match=>({date:match[1],rates:Object.fromEntries([...match[2].matchAll(/currency=['"]([A-Z]{3})['"]\s+rate=['"]([0-9.]+)['"]/g)].map(m=>[m[1],Number(m[2])]))})).sort((a,b)=>a.date.localeCompare(b.date));
+    const days = [...xml.matchAll(/<Cube\s+time=['"](\d{4}-\d{2}-\d{2})['"]>([\s\S]*?)<\/Cube>/g)].map(match=>({date:match[1],rates:Object.fromEntries([...match[2].matchAll(/currency=['"]([A-Z]{3})['"]\s+rate=['"]([0-9.]+)['"]/g)].map(m=>[m[1],Number(m[2])]))})).filter(day=>day.date>=new Date(Date.now()-390*86400000).toISOString().slice(0,10)).sort((a,b)=>a.date.localeCompare(b.date));
     const currencies: Array<[string,MarketRegion]> = [["USD","Europe"],["GBP","UK"],["JPY","Japan"],["CHF","Europe"],["CAD","Global"],["AUD","Global"],["CNY","China"],["HKD","Asia"],["SGD","Asia"],["INR","Emerging Markets"],["KRW","Asia"],["BRL","Emerging Markets"],["MXN","Emerging Markets"],["ZAR","Emerging Markets"],["SEK","Europe"],["NOK","Europe"],["PLN","Europe"],["NZD","Global"]];
     const quotes:MarketQuote[]=[];
     const add=(base:string,quote:string,region:MarketRegion)=>{
       const points=days.flatMap(day=>{const a=base==="EUR"?1:day.rates[base];const b=quote==="EUR"?1:day.rates[quote];return a>0&&b>0?[{date:day.date,value:b/a}]:[];});
       const row=quoteFromPoints(`${base}-${quote}`.toLowerCase(),`${base}/${quote}`,"FX",region,points,"","European Central Bank",sourceUrl);
-      if(row)quotes.push({...row,history:points.slice(-65)});
+      if(row)quotes.push({...row,history:points.slice(-390)});
     };
     for(const [currency,region] of currencies)add("EUR",currency,region);
     add("GBP","USD","UK");add("USD","JPY","Japan");add("USD","CNY","China");add("USD","CAD","Global");add("AUD","USD","Global");
@@ -155,6 +156,9 @@ async function getEcbQuotes(): Promise<{quotes:MarketQuote[];status:ProviderStat
     return {quotes:[],status:{id:"ecb",label:"European Central Bank",status:"error",message:error instanceof Error?error.message:"ECB reference data unavailable."}};
   }
 }
+
+// Cache only the bounded, parsed result; the full ECB XML exceeds Next’s 2 MB fetch cache.
+const getEcbQuotes=unstable_cache(loadEcbQuotes,["ecb-trailing-year-v1"],{revalidate:300});
 
 type FredSeriesConfig = {
   id: string;
@@ -185,7 +189,7 @@ async function fetchFredSeries(
     api_key: apiKey,
     file_type: "json",
     sort_order: "desc",
-    limit: "65",
+    limit: "390",
   });
 
   const endpoint = `https://api.stlouisfed.org/fred/series/observations?${params.toString()}`;
@@ -210,7 +214,7 @@ async function fetchFredSeries(
     }))
     .filter((point) => point.date && Number.isFinite(point.value))
     .sort((a, b) => a.date.localeCompare(b.date))
-    .slice(-65);
+    .slice(-390);
 
   const quote = quoteFromPoints(
     config.id.toLowerCase(),
