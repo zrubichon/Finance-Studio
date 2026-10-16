@@ -7,7 +7,6 @@ import FinanceNotationStandards from "@/components/finance-notation-standards";
 import ConceptLens from "@/components/concept-lens";
 import MarketVisualEnhancer from "@/components/market-visual-enhancer";
 import ChallengeDepthEnhancer from "@/components/challenge-depth-enhancer";
-import CareerPageEnhancer from "@/components/career-page-enhancer";
 import NewsAIEnhancer from "@/components/news-ai-enhancer";
 import InterviewContextBridge from "@/components/interview-context-bridge";
 import "./globals.css";
@@ -25,6 +24,7 @@ import "./challenge-daily.css";
 import "./comprehensive-polish.css";
 import "./comprehensive-polish-2.css";
 import "./comprehensive-polish-3.css";
+import "./learning-experience.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
@@ -51,7 +51,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <ConceptLens />
           <MarketVisualEnhancer />
           <ChallengeDepthEnhancer />
-          <CareerPageEnhancer />
           <NewsAIEnhancer />
           <InterviewContextBridge />
           {children}

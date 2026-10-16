@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import HomeInterviewDrill from "./home-interview-drill";
 import { useEffect, useMemo, useState } from "react";
 import { navItems } from "@/lib/content";
 import { allCurriculumModules } from "@/lib/curriculum";
@@ -465,40 +466,7 @@ export default function FinanceStudioHomeV2() {
             </div>
           </article>
 
-          <article className="card span-5 interview-card">
-            <div className="card-head">
-              <div>
-                <span className="eyebrow">{text("INTERVIEW DRILL", "ENTRAÎNEMENT ENTRETIEN")}</span>
-                <h2>{isFrench ? interview.question.fr : interview.question.en}</h2>
-              </div>
-              <span className="pill accent">{trackBadge(interviewTrack)}</span>
-            </div>
-
-            <p>
-              {targetRole
-                ? text(
-                    `Based on your saved target role: ${targetRole}.`,
-                    `Basé sur ton métier cible enregistré : ${targetRole}.`,
-                  )
-                : text(
-                    "Choose a target role in Careers to personalize this drill.",
-                    "Choisis un métier cible dans Careers pour personnaliser cet entraînement.",
-                  )}
-            </p>
-
-            <div className="answer-framework">
-              {interview.framework.slice(0, 3).map((step, index) => (
-                <div key={step.en}>
-                  <span>{index + 1}</span>
-                  <p><strong>{isFrench ? step.fr : step.en}</strong></p>
-                </div>
-              ))}
-            </div>
-
-            <Link className="full-button" href="/interview">
-              {text("Start interview practice", "Commencer l’entraînement entretien")} →
-            </Link>
-          </article>
+          <HomeInterviewDrill track={interviewTrack} targetRole={targetRole} />
 
           <article className="card span-12 markets-card">
             <div className="card-head markets-head">

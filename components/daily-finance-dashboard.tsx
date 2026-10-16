@@ -83,9 +83,10 @@ export default function DailyFinanceDashboard() {
       ? { title: text("Connect news to a finance concept", "Relie la news à un concept financier"), copy: text("Explain the transmission mechanism, then test yourself.", "Explique le mécanisme de transmission puis teste-toi."), href: professorHref }
       : { title: text("Complete today's learning loop", "Complète la boucle d’apprentissage du jour"), copy: text("Concept, calculation, interview and investing — in one guided flow.", "Concept, calcul, entretien et investing dans un seul parcours guidé."), href: challengeHref };
 
-  function completeChallenge() {
+  function completeChallenge(checked: boolean) {
     const key = dayKey(); const history = safeReadJson<string[]>("finance-studio-daily-challenge-history", []);
-    safeWrite("finance-studio-daily-challenge-history", Array.from(new Set([...(Array.isArray(history) ? history : []), key]))); setDone(true);
+    const previous = Array.isArray(history) ? history.filter(day => day !== key) : [];
+    safeWrite("finance-studio-daily-challenge-history", checked ? [...previous, key] : previous); setDone(checked);
   }
 
   return (
@@ -116,7 +117,7 @@ export default function DailyFinanceDashboard() {
           <Link href={investingHref}>{text("Build a thesis from this concept", "Construire une thèse avec ce concept")}</Link>
           <Link href={professorHref}>{text("Ask AI for help", "Demander à l’IA")}</Link>
         </div>
-        <label className="challenge-check-row"><input type="checkbox" checked={done} onChange={completeChallenge} /> <span>{text("Mark today's loop complete", "Marquer la boucle du jour comme terminée")}</span></label>
+        <label className="challenge-check-row"><input type="checkbox" checked={done} onChange={(event) => completeChallenge(event.target.checked)} /> <span>{text("Mark today's loop complete", "Marquer la boucle du jour comme terminée")}</span></label>
       </section>
     </section>
   );

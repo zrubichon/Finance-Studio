@@ -22,6 +22,7 @@ type ChatMessage = {
 
 type ProfessorRequest = {
   message?: string;
+  responseStyle?: "study";
   mode?: Mode;
   language?: Language;
   lessonSlug?: string | null;
@@ -29,6 +30,8 @@ type ProfessorRequest = {
   history?: ChatMessage[];
   sessionId?: string | null;
 };
+
+export const maxDuration = 120;
 
 const MODEL = "openai/gpt-5.5";
 const validModes = new Set<Mode>(["Beginner", "Intermediate", "Professional"]);
@@ -283,7 +286,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const message = cleanText(body.message, 5000);
+  const message = cleanText(body.message, body.responseStyle === "study" ? 16000 : 5000);
   const mode = validModes.has(body.mode as Mode)
     ? (body.mode as Mode)
     : "Beginner";
@@ -425,7 +428,9 @@ export async function POST(request: NextRequest) {
     .map((item) => `${item.role.toUpperCase()}: ${item.content}`)
     .join("\n\n");
 
+  const isStudy = body.responseStyle === "study";
   const prompt = [
+    isStudy ? `Create a substantial, carefully edited learning dossier (roughly 1200–1800 words when the topic warrants it). Use Markdown headings, short paragraphs, defined technical terms, worked arithmetic with units, and a concise summary table. Distinguish verified inputs, assumptions, interpretation and conditional scenarios. Start with the direct explanation, then explain causes, mechanism, consequences, worked examples, counterarguments, mistakes and verification questions. Include a diagram using a fenced flow block: one short causal step per line. For numerical comparisons, when genuinely useful, use a fenced chart block containing JSON {"title":"Illustrative example (not live data)","unit":"%","points":[{"label":"Scenario A","value":4}]}. These blocks are rendered as visuals. Never output raw HTML, SVG, Mermaid or invented links. Numerical examples must be explicitly hypothetical and must have correct calculations. News metadata is not the full source article: do not infer details, quotes, dates, consensus or causal certainty that were not supplied. Include what the learner needs to verify in the linked source. Do not fill space with generic boilerplate. Use the requested language for all labels. Use links only to known supplied lessons or /markets/guide, /dictionary and /university.` : "",
     actionInstruction(action, language),
     personalization ? `LEARNER CONTEXT:\n${personalization}` : "",
     `FINANCE UNIVERSITY CONTEXT:\n${lessonContext.text}`,
@@ -453,7 +458,7 @@ export async function POST(request: NextRequest) {
       model: MODEL,
       system: baseSystemPrompt(mode, language),
       prompt,
-      maxOutputTokens: 1800,
+      maxOutputTokens: isStudy ? 6500 : 1800,
       reasoning: mode === "Professional" ? "medium" : "low",
       providerOptions,
     });

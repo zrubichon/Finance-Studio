@@ -1,4 +1,6 @@
 "use client";
+import StudyDialog from "./study-dialog";
+import LearningResponse from "./learning-response";
 
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
@@ -32,7 +34,7 @@ export default function ConceptLens() {
   useEffect(() => {
     function handleSelection(event: MouseEvent) {
       const target = event.target as HTMLElement | null;
-      if (!target || target.closest("input, textarea, button, select, [contenteditable='true']")) return;
+      if (!target || target.closest("input, textarea, button, select, [contenteditable='true'], [role='dialog']")) return;
       const selection = window.getSelection();
       const text = selection?.toString().replace(/\s+/g, " ").trim() || "";
       if (text.length < 2 || text.length > 240 || !selection?.rangeCount) {
@@ -63,7 +65,7 @@ export default function ConceptLens() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          language: isFrench ? "FR" : "EN",
+          responseStyle: "study", language: isFrench ? "FR" : "EN",
           mode: "Beginner",
           action: "explain",
           message: isFrench
@@ -96,26 +98,17 @@ export default function ConceptLens() {
       )}
 
       {openTerm && (
-        <div className="concept-lens-backdrop" role="dialog" aria-modal="true" aria-label={isFrench ? "Fiche Concept Lens" : "Concept Lens study card"}>
-          <article className="concept-lens-card">
-            <div className="concept-lens-card-head">
-              <div>
-                <span className="mini-label">✦ CONCEPT LENS · AI STUDY CARD</span>
-                <h2>{openTerm}</h2>
-              </div>
-              <button className="concept-lens-close" type="button" onClick={() => { setOpenTerm(""); setAnswer(""); setError(""); }}>×</button>
-            </div>
+        <StudyDialog title={openTerm} eyebrow={isFrench ? "✦ CONCEPT LENS · FICHE DE COURS" : "✦ CONCEPT LENS · STUDY CARD"} onClose={() => {setOpenTerm("");setAnswer("");setError("");}}>
             {loading && <p className="concept-lens-loading">{isFrench ? "Création de la fiche détaillée…" : "Building your detailed study card…"}</p>}
             {error && <p className="inline-status">{error}</p>}
-            {answer && <div className="concept-lens-answer">{answer}</div>}
+            {answer && <LearningResponse content={answer} />}
             {answer && (
               <div className="news-story-actions">
                 <button type="button" onClick={() => void explain(openTerm)}>{isFrench ? "Régénérer" : "Regenerate"}</button>
                 <a href={`/dictionary?q=${encodeURIComponent(openTerm)}`}>{isFrench ? "Voir dans le dictionnaire" : "Open in dictionary"} →</a>
               </div>
             )}
-          </article>
-        </div>
+        </StudyDialog>
       )}
     </>
   );

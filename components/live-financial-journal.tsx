@@ -1,5 +1,6 @@
 "use client";
 
+import NewsLearningContext from "./news-learning-context";
 import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { createClient } from "@/lib/supabase/client";
@@ -278,6 +279,8 @@ function formatDay(value: string, isFrench: boolean) {
 
 export default function LiveFinancialJournal() {
   const { isFrench, text } = useLanguage();
+  const [requestedStory, setRequestedStory] = useState("");
+  const [pinnedStory, setPinnedStory] = useState<NewsItem | null>(null);
   const [category, setCategory] = useState<Category>("all");
   const [range, setRange] = useState<Range>("24h");
   const [region, setRegion] = useState<NewsRegion>("global");
@@ -293,6 +296,26 @@ export default function LiveFinancialJournal() {
     savingKey: savingNewsKey,
     toggleSaved: toggleNewsSaved,
   } = useSavedItems("news");
+
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get("story") || "";
+    setRequestedStory(id);
+    if (id) { setRange("72h"); setRegion("global");
+      try { const cached = JSON.parse(sessionStorage.getItem("finance-studio-open-story") || "null") as NewsItem | null;
+        if (cached?.id === id && cached.insight && cached.title) setPinnedStory(cached);
+      } catch {}
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!requestedStory || loading) return;
+    const timer = window.setTimeout(() => {
+      const cards = Array.from(document.querySelectorAll<HTMLElement>(".news-intelligence-card"));
+      const card = cards.find(card => card.dataset.newsId === requestedStory || card.querySelector("h3")?.textContent === requestedStory);
+      if (card) { card.scrollIntoView({behavior:"smooth",block:"start"}); card.classList.add("news-focused-story"); }
+    }, 150);
+    return () => window.clearTimeout(timer);
+  }, [requestedStory, payload, pinnedStory, loading]);
 
   useEffect(() => {
     let active = true;
@@ -403,13 +426,11 @@ export default function LiveFinancialJournal() {
     );
   }, [payload, preferredRegions, region]);
 
-  const visibleItems = useMemo(
-    () =>
-      regionFilteredItems
-        .filter((item) => isWithinHours(item.publishedAt, rangeHours[range]))
-        .slice(0, range === "72h" ? 60 : 36),
-    [range, regionFilteredItems],
-  );
+  const visibleItems = useMemo(() => {
+    const regular = regionFilteredItems.filter(item => isWithinHours(item.publishedAt, rangeHours[range])).slice(0,range === "72h" ? 60 : 36);
+    const target = payload?.items.find(item => item.id === requestedStory || item.title === requestedStory) ?? pinnedStory;
+    return target && requestedStory ? [target, ...regular.filter(item=>item.id !== target.id)] : regular;
+  }, [range, regionFilteredItems, requestedStory, pinnedStory, payload]);
 
   const groupedItems = useMemo(() => {
     const groups = new Map<string, NewsItem[]>();
@@ -587,6 +608,7 @@ export default function LiveFinancialJournal() {
         )}
       </p>
 
+      {requestedStory && !loading && !visibleItems.some(item => item.id === requestedStory || item.title === requestedStory) && <p className="inline-status" role="status">{text("This exact article is no longer in the available news archive. The journal below shows other stories.", "Cet article précis n’est plus dans l’archive disponible. Le journal ci-dessous présente d’autres actualités.")}</p>}
       {error ? <p className="inline-status" role="status">{error}</p> : null}
 
       {!loading && payload?.provider.status === "error" ? (
@@ -662,7 +684,7 @@ export default function LiveFinancialJournal() {
                     : item.insight.transmission.en;
 
                   return (
-                    <article className="news-intelligence-card" key={item.id}>
+                    <article className="news-intelligence-card" key={item.id} id={`news-${item.id}`} data-news-id={item.id}>
                       <div className="news-intelligence-meta">
                         <div>
                           <strong>{formatTime(item.publishedAt, isFrench)}</strong>
@@ -735,6 +757,7 @@ export default function LiveFinancialJournal() {
                         <p>{isFrench ? item.insight.scenario.fr : item.insight.scenario.en}</p>
                       </div>
 
+                      <NewsLearningContext topics={item.topics} />
                       <p className="headline-analysis-note">
                         {text(
                           "Analysis framework is generated from the headline/topic metadata. Check the original report and primary source before treating the event itself as verified.",
@@ -743,6 +766,7 @@ export default function LiveFinancialJournal() {
                       </p>
 
                       <div className="news-item-actions">
+                        <button type="button" className="save-item-button compact news-ai-deep-button" onClick={() => window.dispatchEvent(new CustomEvent("finance-news-ai", {detail:{title:item.title, body:JSON.stringify({source:item.domain,url:item.url,observedAt:item.publishedAt,topics:item.topics,headline:item.title,educationalContext:item.insight})}}))}>✦ {text("Full analytical dossier", "Dossier d’analyse approfondi")}</button>
                         <a
                           href={item.url}
                           target="_blank"

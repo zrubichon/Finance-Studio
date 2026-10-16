@@ -1,4 +1,6 @@
 "use client";
+import StudyDialog from "./study-dialog";
+import LearningResponse from "./learning-response";
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -48,6 +50,7 @@ export default function HomeNewsCarousel() {
     setAiStory(item); setAiAnswer(""); setAiLoading(true);
     const insight = item.insight;
     const existing = [
+      `Source: ${item.domain}; URL: ${item.url}; indexed/published: ${item.publishedAt}; topics: ${item.topics.join(", ")}.`,
       insight?.lens ? (isFrench ? insight.lens.fr : insight.lens.en) : "",
       insight?.whyItMatters ? (isFrench ? insight.whyItMatters.fr : insight.whyItMatters.en) : "",
       insight?.watchNext ? (isFrench ? insight.watchNext.fr : insight.watchNext.en) : "",
@@ -57,14 +60,14 @@ export default function HomeNewsCarousel() {
       const response = await fetch("/api/professor", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          language: isFrench ? "FR" : "EN", mode: "Professional", action: "markets",
+          responseStyle: "study", language: isFrench ? "FR" : "EN", mode: "Professional", action: "markets",
           message: isFrench
             ? `Analyse en profondeur cette actualité financière sans inventer de faits ni de prix : « ${item.title} ». Contexte déjà présent dans FinanceStudio : ${existing}. Explique : ce qui s'est passé, pourquoi cette nouvelle apparaît aujourd'hui, ce dont elle découle, la chaîne causale, les actifs/secteurs touchés, les effets de premier et second ordre, les scénarios futurs, les catalyseurs à surveiller, ce qui pourrait invalider l'interprétation, les termes techniques, et les cours FinanceStudio à étudier pour comprendre le sujet. Distingue faits, interprétations et scénarios.`
             : `Analyze this financial news story in depth without inventing facts or prices: “${item.title}”. Existing FinanceStudio context: ${existing}. Explain what happened, why this story matters today, what caused it, the causal chain, affected assets/sectors, first- and second-order effects, future scenarios, catalysts to watch, what could invalidate the interpretation, technical terms, and which FinanceStudio lessons would help understand it. Clearly separate facts, interpretation and scenarios.`,
         }),
       });
-      const payload = await response.json() as { answer?: string };
-      setAiAnswer(payload.answer || text("AI analysis is temporarily unavailable.", "L’analyse IA est temporairement indisponible."));
+      const payload = await response.json() as { answer?: string; error?: string };
+      setAiAnswer(payload.answer || payload.error || text("AI analysis is temporarily unavailable.", "L’analyse IA est temporairement indisponible."));
     } catch { setAiAnswer(text("AI analysis is temporarily unavailable.", "L’analyse IA est temporairement indisponible.")); }
     finally { setAiLoading(false); }
   }
@@ -78,19 +81,16 @@ export default function HomeNewsCarousel() {
         <p>{why || text("Open the full News & Analysis page for the causal chain, assets to watch and next catalysts.", "Ouvre News & Analysis pour la chaîne causale, les actifs à surveiller et les prochains catalyseurs.")}</p>
         <small>{story.domain} · {new Date(story.publishedAt).toLocaleString(isFrench ? "fr-FR" : "en-US", { dateStyle: "medium", timeStyle: "short" })}</small>
         <div className="news-story-actions">
-          <Link href={`/news?story=${encodeURIComponent(story.title)}`}>{text("Open full analysis", "Ouvrir l’analyse complète")} →</Link>
+          <Link href={`/news?story=${encodeURIComponent(story.id)}#news-${encodeURIComponent(story.id)}`} onClick={() => { try { sessionStorage.setItem("finance-studio-open-story", JSON.stringify(story)); } catch {} }}>{text("Open full analysis", "Ouvrir l’analyse complète")} →</Link>
           <a href={story.url} target="_blank" rel="noreferrer">{text("Original article", "Article original")} ↗</a>
           <button className="primary" type="button" onClick={() => void explainWithAI(story)}>✦ {text("Detailed AI explanation", "Explication IA détaillée")}</button>
         </div>
         <div className="news-carousel-dots" aria-label={text("News carousel", "Carrousel d’actualités")}>{stories.map((_, i) => <button key={i} type="button" className={i === index ? "active" : ""} aria-label={`${i + 1}`} onClick={() => setIndex(i)} />)}</div>
       </article>
       {aiStory && (
-        <div className="concept-lens-backdrop" role="dialog" aria-modal="true">
-          <article className="concept-lens-card">
-            <div className="concept-lens-card-head"><div><span className="mini-label">✦ NEWS INTELLIGENCE</span><h2>{aiStory.title}</h2></div><button className="concept-lens-close" type="button" onClick={() => setAiStory(null)}>×</button></div>
-            {aiLoading ? <p className="concept-lens-loading">{text("Building the detailed causal analysis…", "Construction de l’analyse causale détaillée…")}</p> : <div className="concept-lens-answer">{aiAnswer}</div>}
-          </article>
-        </div>
+        <StudyDialog title={aiStory.title} eyebrow="✦ NEWS INTELLIGENCE" onClose={() => setAiStory(null)}>
+            {aiLoading ? <p className="concept-lens-loading">{text("Building the detailed causal analysis…", "Construction de l’analyse causale détaillée…")}</p> : <LearningResponse content={aiAnswer} />}
+        </StudyDialog>
       )}
     </section>
   );

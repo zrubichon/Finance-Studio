@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import {careerGuides} from "@/lib/career-guides";
+import InternshipHub from "@/components/internship-hub";
 import { useEffect, useState } from "react";
 import SectionLayout from "@/components/section-layout";
 import { useLanguage } from "@/components/language-provider";
@@ -114,6 +116,7 @@ export default function CareersPage() {
       description={{ en: "Each path connects day-to-day responsibilities, technical knowledge, market awareness, recruiting expectations and the exact FinanceStudio modules you should master before interviewing.", fr: "Chaque parcours relie les responsabilités quotidiennes, les connaissances techniques, la culture marché / market awareness, les attentes de recrutement et les modules FinanceStudio à maîtriser avant un entretien." }}
     >
       <div className="workspace-stack">
+        <InternshipHub />
         <section className="career-intro-grid">
           <article className="career-principle-card"><span className="mini-label">{text("ROLE MAP", "CARTE DES MÉTIERS")}</span><h2>{text("Markets, deals, investing, clients and control functions", "Marchés, transactions / deals, investissement, clients et fonctions de contrôle")}</h2><p>{text("FinanceStudio separates careers by the decisions you make, the clients you serve and the risks you own so that similar-sounding roles do not blur together.", "FinanceStudio distingue les métiers selon les décisions prises, les clients servis et les risques gérés afin que des postes aux noms proches ne soient pas confondus.")}</p></article>
           <article className="career-principle-card"><span className="mini-label">{text("LEARNING PATH", "PARCOURS D’APPRENTISSAGE")}</span><h2>{text("Every role links back to the curriculum", "Chaque métier est relié au programme")}</h2><p>{text("Choose a target role below. FinanceStudio will reuse it in the AI Professor and supported Interview Studio tracks.", "Choisis un métier cible ci-dessous. FinanceStudio le réutilisera dans le Professeur IA et les parcours compatibles d’Interview Studio.")}</p></article>
@@ -151,6 +154,7 @@ export default function CareersPage() {
             <div className="role-grid">
               {group.roles.map((item) => {
                 const selected = targetRole === item.role.en;
+                const guide = careerGuides.find(g=>g.name===item.role.en);
                 return (
                   <article className="role-card" key={item.role.en}>
                     <div className="panel-heading">
@@ -162,6 +166,7 @@ export default function CareersPage() {
                     <div className="skill-chip-row">
                       {item.knowledge.map((skill) => <span key={skill.en}>{local(skill)}</span>)}
                     </div>
+                    {guide && <Link className="chip" href={`/careers/${guide.slug}`}>{text("Full career and internship guide","Guide complet du métier et des stages")} →</Link>}
                     {userId ? (
                       <button
                         type="button"

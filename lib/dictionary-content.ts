@@ -1,3 +1,4 @@
+import {cleanFrenchLabel,termAliases} from "./dictionary-labels";
 import { lessons } from "./lesson-registry";
 
 export type DictionaryEntry = {
@@ -28,10 +29,11 @@ export function getDictionaryEntries(): DictionaryEntry[] {
   for (const lesson of lessons) {
     for (const section of lesson.sections) {
       const terms = section.vocabulary ?? [];
-      const relatedLabels = terms.map((term) => `${term.en} / ${term.fr}`);
+      const relatedLabels = terms.map(term => term.en);
 
       for (const term of terms) {
-        const key = normalizeTerm(term.en);
+        const normalized = normalizeTerm(term.en);
+        const key = termAliases[normalized] ?? normalized;
         if (!key) continue;
 
         const source = {
@@ -58,7 +60,7 @@ export function getDictionaryEntries(): DictionaryEntry[] {
 
         entries.set(key, {
           en: term.en,
-          fr: term.fr,
+          fr: cleanFrenchLabel(term.en,term.fr),
           definitionEn: term.definition.en,
           definitionFr: term.definition.fr,
           beginnerContextEn: section.explanation.Beginner.en,

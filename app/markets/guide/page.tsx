@@ -1,5 +1,5 @@
 import SectionLayout from "@/components/section-layout";
-import MarketDataGuide from "@/components/market-data-guide";
+import MarketAcademy from "@/components/market-academy";
 
 export default function MarketGuidePage() {
   return (
@@ -12,7 +12,7 @@ export default function MarketGuidePage() {
         fr: "Apprends ce que signifie chaque indicateur, pourquoi il est important, comment lire un mouvement et ce qu’il peut affecter ensuite.",
       }}
     >
-      <MarketDataGuide />
+      <MarketAcademy />
     </SectionLayout>
   );
 }

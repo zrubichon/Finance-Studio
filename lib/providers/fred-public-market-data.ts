@@ -11,6 +11,10 @@ type SeriesConfig = {
 const series: SeriesConfig[] = [
   { id: "SP500", label: "S&P 500", category: "Equities", region: "USA", unit: "" },
   { id: "NASDAQCOM", label: "Nasdaq Composite", category: "Equities", region: "USA", unit: "" },
+  { id: "NIKKEI225", label: "Nikkei 225", category: "Equities", region: "Japan", unit: "" },
+  { id: "DGS1", label: "US 1Y", category: "Rates", region: "USA", unit: "%" },
+  { id: "DFII10", label: "US 10Y real yield (TIPS)", category: "Rates", region: "USA", unit: "%" },
+  { id: "T10YIE", label: "US 10Y breakeven inflation", category: "Rates", region: "USA", unit: "%" },
   { id: "DJIA", label: "Dow Jones", category: "Equities", region: "USA", unit: "" },
 
   { id: "DGS3MO", label: "US 3M", category: "Rates", region: "USA", unit: "%" },
@@ -46,7 +50,7 @@ function parseCsv(csv: string) {
     .slice(1)
     .map((line) => {
       const [date, raw] = line.split(",");
-      return { date, value: Number(raw) };
+      return { date, value: raw?.trim() && raw.trim() !== "." ? Number(raw) : Number.NaN };
     })
     .filter((point) => point.date && Number.isFinite(point.value));
 }
@@ -55,7 +59,8 @@ async function fetchSeries(config: SeriesConfig): Promise<MarketQuote | null> {
   const endpoint = `https://fred.stlouisfed.org/graph/fredgraph.csv?id=${encodeURIComponent(config.id)}&cosd=${startDate()}`;
   const response = await fetch(endpoint, {
     headers: { Accept: "text/csv" },
-    next: { revalidate: 60 },
+    next: { revalidate: 300 },
+    signal: AbortSignal.timeout(12000),
   });
   if (!response.ok) throw new Error(`FRED public CSV failed for ${config.id}: ${response.status}`);
 
@@ -79,6 +84,7 @@ async function fetchSeries(config: SeriesConfig): Promise<MarketQuote | null> {
     asOf: latest.date,
     source: "Federal Reserve Bank of St. Louis (FRED)",
     sourceUrl: `https://fred.stlouisfed.org/series/${config.id}`,
+    history: points.slice(-30),
   };
 }
 

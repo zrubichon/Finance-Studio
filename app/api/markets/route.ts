@@ -10,22 +10,18 @@ export async function GET() {
     getPublicFredQuotes(),
   ]);
 
-  const existingIds = new Set(data.quotes.map((quote) => quote.id.replace(/^fred-public-/, "")));
-  const fallbackQuotes = publicFred.quotes.filter((quote) => {
-    const normalized = quote.id.replace(/^fred-public-/, "");
-    return !existingIds.has(normalized);
-  });
-
-  const providers = data.providers.map((provider) =>
-    provider.id === "fred" && provider.status === "needs_configuration"
-      ? publicFred.provider
-      : provider,
-  );
+  const unique = new Map(data.quotes.map(quote=>[`${quote.category}:${quote.label}`,quote]));
+  for (const quote of publicFred.quotes) {
+    const key = `${quote.category}:${quote.label}`;
+    const existing = unique.get(key);
+    if (!existing || quote.asOf >= existing.asOf) unique.set(key,quote);
+  }
+  const providers = data.providers.map(provider => provider.id === "fred" && publicFred.quotes.length ? publicFred.provider : provider);
 
   return NextResponse.json({
     ...data,
     updatedAt: new Date().toISOString(),
-    quotes: [...data.quotes, ...fallbackQuotes],
+    quotes: [...unique.values()],
     providers,
   }, {
     headers: {

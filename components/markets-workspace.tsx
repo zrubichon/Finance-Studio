@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import MarketSparkline from "./market-sparkline";
 import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { createClient } from "@/lib/supabase/client";
@@ -21,6 +23,7 @@ type MarketQuote = {
   asOf: string;
   source: string;
   sourceUrl: string;
+  history?: {date:string;value:number}[];
 };
 
 type ProviderStatus = {
@@ -94,6 +97,9 @@ export default function MarketsWorkspace() {
     "Europe",
   ]);
   const [payload, setPayload] = useState<MarketPayload | null>(null);
+  const [source, setSource] = useState("all");
+  const [assetClass,setAssetClass] = useState("all");
+  const [search,setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -219,7 +225,7 @@ export default function MarketsWorkspace() {
   }, [region, isFrench, preferredRegions, text]);
 
   const visibleQuotes = useMemo(() => {
-    const quotes = payload?.quotes ?? [];
+    const quotes = (payload?.quotes ?? []).filter(q => (source === "all" || (source === "fred" ? q.source.includes("FRED") : q.source.includes("European Central Bank"))) && (assetClass === "all" || q.category === assetClass) && q.label.toLowerCase().includes(search.toLowerCase()));
     if (region === "My Markets") {
       if (preferredRegions.includes("Global")) return quotes;
 
@@ -236,7 +242,7 @@ export default function MarketsWorkspace() {
       return quotes.filter((quote) => ["Asia", "China", "Japan"].includes(quote.region));
     }
     return quotes.filter((quote) => quote.region === region);
-  }, [payload, preferredRegions, region]);
+  }, [payload, preferredRegions, region, source, assetClass, search]);
 
   const groups = useMemo(() => {
     const order: MarketQuote["category"][] = ["Equities", "Rates", "FX", "Commodities", "Volatility", "Credit"];
@@ -266,6 +272,7 @@ export default function MarketsWorkspace() {
 
   return (
     <div className="workspace-stack">
+      <section className="market-education-banner"><span className="mini-label">{text("LEARN BEFORE YOU INTERPRET","APPRENDRE AVANT D’INTERPRÉTER")}</span><h2>{text("A complete course behind every number","Un vrai cours derrière chaque chiffre")}</h2><p>{text("FRED and the ECB are data providers, not two markets. Explore six asset classes, currencies across regions, observation histories and a 12-chapter learning module.","FRED et la BCE sont des fournisseurs de données, pas deux marchés. Explore six classes d’actifs, des devises de plusieurs régions, leurs historiques et un module de 12 chapitres.")}</p><Link className="full-button" href="/markets/guide">{text("Learn to read markets · full module","Apprendre à lire les marchés · module complet")} →</Link></section>
       <section className="control-panel">
         <div>
           <span className="control-label">{text("REGION", "RÉGION")}</span>
@@ -322,19 +329,21 @@ export default function MarketsWorkspace() {
         <p className="explanation-copy">{isFrench ? explanation[mode].fr : explanation[mode].en}</p>
 
         {payload?.providers?.length ? (
-          <div className="chip-row">
+          <div className="chip-row provider-filter">
+            <button type="button" className={source === "all" ? "chip active" : "chip"} aria-pressed={source === "all"} onClick={() => setSource("all")}>{text("All sources","Toutes les sources")}</button>
             {payload.providers.map((provider) => (
-              <span
-                className={provider.status === "live" ? "chip active" : "chip"}
+              <button type="button" aria-pressed={source === provider.id} onClick={() => setSource(current => current === provider.id ? "all" : provider.id)}
+                className={source === provider.id ? "chip active" : "chip"}
                 key={provider.id}
                 title={provider.message}
               >
                 {provider.label} · {provider.status.replace("_", " ")}
-              </span>
+              </button>
             ))}
           </div>
         ) : null}
 
+        <div className="news-filter-stack"><label><span className="control-label">{text("FIND AN INSTRUMENT","CHERCHER UN INSTRUMENT")}</span><input aria-label={text("Find an instrument","Chercher un instrument")} value={search} onChange={e=>setSearch(e.target.value)} placeholder="S&P, EUR, 10Y…"/></label><div className="chip-row">{["all","Equities","Rates","FX","Commodities","Volatility","Credit"].map(category=><button key={category} className={assetClass===category?"chip active":"chip"} type="button" onClick={()=>setAssetClass(category)}>{category==="all"?text("All asset classes","Toutes les classes"):category}</button>)}</div><p>{visibleQuotes.length} {text("observations match these filters","observations correspondent aux filtres")}</p></div>
         {error && <p className="inline-status" role="status">{error}</p>}
 
         {!loading && !error && groups.length === 0 ? (
@@ -363,11 +372,11 @@ export default function MarketsWorkspace() {
                       {" · "}
                       {formatValue(quote)}
                       {" · "}
-                      {formatMove(quote)}
+                      <b className={`quote-move ${quote.change === null ? "" : quote.change >= 0 ? "up" : "down"}`}>{quote.unit === "%" && quote.change !== null ? `${quote.change>=0?"+":""}${(quote.change*100).toFixed(1)} bps` : formatMove(quote)}</b>
                     </span>
-                    <em>
-                      {text("As of", "Au")} {quote.asOf} · {quote.source}
-                    </em>
+                    <em>{text("As of", "Au")} {quote.asOf} · <a href={quote.sourceUrl} target="_blank" rel="noreferrer">{quote.source} ↗</a></em>
+                    {quote.history && <MarketSparkline points={quote.history} label={quote.label} />}
+                    <Link href={`/markets/guide/${({Equities:"equities",Rates:"yield-curve",FX:"fx",Commodities:"commodities",Volatility:"volatility",Credit:"credit"})[quote.category]}`}>{text("How to read this","Comment lire ce chiffre")} →</Link>
                   </div>
                 ))}
               </div>

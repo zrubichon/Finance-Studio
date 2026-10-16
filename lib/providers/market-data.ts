@@ -29,6 +29,7 @@ export type MarketQuote = {
   asOf: string;
   source: string;
   sourceUrl: string;
+  history?: {date:string;value:number}[];
 };
 
 export type ProviderStatus = {
@@ -133,139 +134,25 @@ function quoteFromPoints(
   };
 }
 
-async function fetchEcbCurrency(currency: "USD" | "GBP" | "JPY") {
-  const url =
-    `https://data-api.ecb.europa.eu/service/data/EXR/D.${currency}.EUR.SP00.A?lastNObservations=2&detail=dataonly&format=csvdata`;
-  const response = await fetch(url, {
-    headers: { Accept: "text/csv" },
-    next: { revalidate: 300 },
-  });
-
-  if (!response.ok) {
-    throw new Error(`ECB request failed for ${currency}: ${response.status}`);
-  }
-
-  return {
-    points: parseEcbCsv(await response.text()),
-    sourceUrl: url,
-  };
-}
-
-async function getEcbQuotes(): Promise<{
-  quotes: MarketQuote[];
-  status: ProviderStatus;
-}> {
+async function getEcbQuotes(): Promise<{quotes:MarketQuote[];status:ProviderStatus}> {
+  const sourceUrl = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml";
   try {
-    const [usd, gbp, jpy] = await Promise.all([
-      fetchEcbCurrency("USD"),
-      fetchEcbCurrency("GBP"),
-      fetchEcbCurrency("JPY"),
-    ]);
-
-    const eurUsd = quoteFromPoints(
-      "eur-usd",
-      "EUR/USD",
-      "FX",
-      "Europe",
-      usd.points,
-      "",
-      "European Central Bank",
-      usd.sourceUrl,
-    );
-
-    const crossPair = (
-      id: string,
-      label: string,
-      region: MarketRegion,
-      numerator: Point[],
-      denominator: Point[],
-      sourceUrl: string,
-    ) => {
-      const numeratorLatest = numerator.at(-1);
-      const denominatorLatest = denominator.at(-1);
-      if (!numeratorLatest || !denominatorLatest) return null;
-
-      const numeratorPrevious = numerator.at(-2)?.value;
-      const denominatorPrevious = denominator.at(-2)?.value;
-
-      const current = numeratorLatest.value / denominatorLatest.value;
-      const previous =
-        numeratorPrevious === undefined || denominatorPrevious === undefined
-          ? null
-          : numeratorPrevious / denominatorPrevious;
-
-      const points: Point[] = [
-        ...(previous === null
-          ? []
-          : [{ date: denominator.at(-2)?.date ?? numerator.at(-2)?.date ?? "", value: previous }]),
-        {
-          date:
-            denominatorLatest.date > numeratorLatest.date
-              ? denominatorLatest.date
-              : numeratorLatest.date,
-          value: current,
-        },
-      ];
-
-      return quoteFromPoints(
-        id,
-        label,
-        "FX",
-        region,
-        points,
-        "",
-        "European Central Bank",
-        sourceUrl,
-      );
+    const response = await fetch(sourceUrl, {next:{revalidate:300},signal:AbortSignal.timeout(12000)});
+    if (!response.ok) throw new Error(`ECB reference feed: HTTP ${response.status}`);
+    const xml = await response.text();
+    const days = [...xml.matchAll(/<Cube\s+time=['"](\d{4}-\d{2}-\d{2})['"]>([\s\S]*?)<\/Cube>/g)].map(match=>({date:match[1],rates:Object.fromEntries([...match[2].matchAll(/currency=['"]([A-Z]{3})['"]\s+rate=['"]([0-9.]+)['"]/g)].map(m=>[m[1],Number(m[2])]))})).sort((a,b)=>a.date.localeCompare(b.date));
+    const currencies: Array<[string,MarketRegion]> = [["USD","Europe"],["GBP","UK"],["JPY","Japan"],["CHF","Europe"],["CAD","Global"],["AUD","Global"],["CNY","China"],["HKD","Asia"],["SGD","Asia"],["INR","Emerging Markets"],["KRW","Asia"],["BRL","Emerging Markets"],["MXN","Emerging Markets"],["ZAR","Emerging Markets"],["SEK","Europe"],["NOK","Europe"],["PLN","Europe"],["NZD","Global"]];
+    const quotes:MarketQuote[]=[];
+    const add=(base:string,quote:string,region:MarketRegion)=>{
+      const points=days.flatMap(day=>{const a=base==="EUR"?1:day.rates[base];const b=quote==="EUR"?1:day.rates[quote];return a>0&&b>0?[{date:day.date,value:b/a}]:[];});
+      const row=quoteFromPoints(`${base}-${quote}`.toLowerCase(),`${base}/${quote}`,"FX",region,points,"","European Central Bank",sourceUrl);
+      if(row)quotes.push({...row,history:points.slice(-30)});
     };
-
-    const gbpUsd = crossPair(
-      "gbp-usd",
-      "GBP/USD",
-      "UK",
-      usd.points,
-      gbp.points,
-      gbp.sourceUrl,
-    );
-
-    const usdJpy = crossPair(
-      "usd-jpy",
-      "USD/JPY",
-      "Japan",
-      jpy.points,
-      usd.points,
-      jpy.sourceUrl,
-    );
-
-    const quotes = [eurUsd, gbpUsd, usdJpy].filter(
-      (value): value is MarketQuote => Boolean(value),
-    );
-
-    return {
-      quotes,
-      status: {
-        id: "ecb",
-        label: "European Central Bank",
-        status: quotes.length === 3 ? "live" : "partial",
-        message:
-          quotes.length === 3
-            ? "FX reference rates connected."
-            : "ECB is connected, but part of the FX set is temporarily unavailable.",
-      },
-    };
-  } catch (error) {
-    return {
-      quotes: [],
-      status: {
-        id: "ecb",
-        label: "European Central Bank",
-        status: "error",
-        message:
-          error instanceof Error
-            ? error.message
-            : "ECB data could not be loaded.",
-      },
-    };
+    for(const [currency,region] of currencies)add("EUR",currency,region);
+    add("GBP","USD","UK");add("USD","JPY","Japan");add("USD","CNY","China");add("USD","CAD","Global");add("AUD","USD","Global");
+    return {quotes,status:{id:"ecb",label:"European Central Bank",status:quotes.length?"live":"error",message:`${quotes.length} daily reference currency pairs. Informational rates, not executable prices.`}};
+  } catch(error) {
+    return {quotes:[],status:{id:"ecb",label:"European Central Bank",status:"error",message:error instanceof Error?error.message:"ECB reference data unavailable."}};
   }
 }
 
