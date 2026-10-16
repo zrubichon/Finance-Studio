@@ -1,6 +1,6 @@
 import SectionLayout from "@/components/section-layout";
 import MarketsWorkspace from "@/components/markets-workspace";
-import MarketLearningHub from "@/components/market-learning-hub";
+import MarketLearningHub, {MarketCourseStrip} from "@/components/market-learning-hub";
 
 export default function MarketsPage() {
   return (
@@ -13,6 +13,7 @@ export default function MarketsPage() {
         fr: "Suis les actions / equities, les taux / rates, les devises / FX, les matières premières / commodities, la volatilité / volatility et le crédit / credit avec une couche pédagogique qui explique pourquoi chaque mouvement compte.",
       }}
     >
+      <MarketCourseStrip />
       <MarketsWorkspace />
       <MarketLearningHub />
     </SectionLayout>

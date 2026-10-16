@@ -15,6 +15,19 @@ const lessons = [
   ["Credit analysis", "Analyse crédit", "/university/year-3-credit-analysis"],
 ];
 
+export function MarketCourseStrip() {
+ const {isFrench,text}=useLanguage();
+ return (
+      <section className="market-course-strip market-course-priority">
+        <span className="mini-label">{text("COURSES TO TAKE BEFORE GOING DEEPER", "COURS À FAIRE AVANT D’ALLER PLUS LOIN")}</span>
+        <p>{text("You do not need to finish all of them before using Markets. Use these links as a learning map whenever a number or relationship is unclear.", "Tu n’as pas besoin de tous les terminer avant d’utiliser Markets. Utilise-les comme carte d’apprentissage dès qu’un chiffre ou une relation n’est pas clair.")}</p>
+        <div className="market-course-links">
+          {lessons.map(([en, fr, href]) => <Link key={href} href={href}>{isFrench ? fr : en} →</Link>)}
+        </div>
+      </section>
+ );
+}
+
 export default function MarketLearningHub() {
   const { isFrench, text } = useLanguage();
   return (
@@ -51,13 +64,7 @@ export default function MarketLearningHub() {
         </div>
       </section>
 
-      <section className="market-course-strip">
-        <span className="mini-label">{text("COURSES TO TAKE BEFORE GOING DEEPER", "COURS À FAIRE AVANT D’ALLER PLUS LOIN")}</span>
-        <p>{text("You do not need to finish all of them before using Markets. Use these links as a learning map whenever a number or relationship is unclear.", "Tu n’as pas besoin de tous les terminer avant d’utiliser Markets. Utilise-les comme carte d’apprentissage dès qu’un chiffre ou une relation n’est pas clair.")}</p>
-        <div className="market-course-links">
-          {lessons.map(([en, fr, href]) => <Link key={href} href={href}>{isFrench ? fr : en} →</Link>)}
-        </div>
-      </section>
+
     </section>
   );
 }

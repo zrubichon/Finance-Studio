@@ -58,12 +58,15 @@ export default function HomeNewsCarousel() {
   }
 
   if (!story) return null;
+  const subject=[story.title,...story.topics].join(' ').toLowerCase();
+  const photo=/oil|energy|gas|pétrole|énergie/.test(subject)?'energy':/gold|bullion/.test(subject)?'gold':/crypto|bitcoin|ethereum/.test(subject)?'crypto':/currency|forex|dollar|euro|devis/.test(subject)?'currency':/bank|fed|rate|taux|central/.test(subject)?'city':'trading';
   return (
     <section className="news-carousel-panel">
-      <article className="news-carousel-card">
+      <article className="news-carousel-card news-photo-card" style={{backgroundImage:`linear-gradient(90deg,rgba(9,18,27,.94),rgba(9,18,27,.76)),url('/market-images/${photo}.jpg')`}}>
         <div className="panel-heading"><div><span className="mini-label">{text("LATEST NEWS · 4-STORY ROTATION", "DERNIÈRES NEWS · ROTATION DE 4 ARTICLES")}</span><h2>{text("Learn the market through today's stories", "Comprendre le marché avec les actualités du jour")}</h2></div><span className="connection-badge">{index + 1}/{stories.length}</span></div>
         <h3>{story.title}</h3>
         <p>{why || text("Open the full News & Analysis page for the causal chain, assets to watch and next catalysts.", "Ouvre News & Analysis pour la chaîne causale, les actifs à surveiller et les prochains catalyseurs.")}</p>
+        <span className="news-photo-caption">{text("Illustrative photo · Unsplash","Photo d’illustration · Unsplash")}</span>
         <small>{story.domain} · {new Date(story.publishedAt).toLocaleString(isFrench ? "fr-FR" : "en-US", { dateStyle: "medium", timeStyle: "short" })}</small>
         <div className="news-story-actions">
           <Link href={`/news?story=${encodeURIComponent(story.id)}#news-${encodeURIComponent(story.id)}`} onClick={() => { try { sessionStorage.setItem("finance-studio-open-story", JSON.stringify(story)); } catch {} }}>{text("Open full analysis", "Ouvrir l’analyse complète")} →</Link>
