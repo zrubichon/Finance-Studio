@@ -129,6 +129,7 @@ export default function FinanceStudioHomeV2() {
     "europe",
   ]);
   const [marketData, setMarketData] = useState<MarketPayload | null>(null);
+  const [marketLoading,setMarketLoading]=useState(true);
 
   const modules = useMemo(() => allCurriculumModules(), []);
   const moduleSlugs = useMemo(() => new Set(modules.map((module) => module.slug)), [modules]);
@@ -274,7 +275,7 @@ export default function FinanceStudioHomeV2() {
         if (mounted) setMarketData(data);
       } catch {
         // Home keeps a transparent empty state when providers are unreachable.
-      }
+      } finally {if(mounted)setMarketLoading(false);}
     }
 
     void loadMarkets();
@@ -465,7 +466,7 @@ export default function FinanceStudioHomeV2() {
             </div>
 
             {marketData?.quotes.length ? <HomeMarketSummary quotes={marketData.quotes} updatedAt={marketData.updatedAt}/> : null}
-            <MarketPanorama quotes={marketData?.quotes || []} compact/>
+            <MarketPanorama quotes={marketData?.quotes || []} compact loading={marketLoading}/>
 
             <p className="data-note">
               {marketData?.quotes.length
