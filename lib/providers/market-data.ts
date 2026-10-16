@@ -192,6 +192,7 @@ async function fetchFredSeries(
   const response = await fetch(endpoint, {
     headers: { Accept: "application/json" },
     next: { revalidate: 300 },
+    signal: AbortSignal.timeout(12000),
   });
 
   if (!response.ok) {
@@ -205,7 +206,7 @@ async function fetchFredSeries(
   const points = (payload.observations ?? [])
     .map((observation) => ({
       date: observation.date ?? "",
-      value: Number(observation.value),
+      value: typeof observation.value === "string" && observation.value.trim() ? Number(observation.value) : NaN,
     }))
     .filter((point) => point.date && Number.isFinite(point.value))
     .sort((a, b) => a.date.localeCompare(b.date))
