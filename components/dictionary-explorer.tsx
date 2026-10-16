@@ -1,4 +1,5 @@
 "use client";
+import { requestStudyCard } from "@/lib/study-request";
 import { saveVocabularyCard, useVocabularyCards } from "@/lib/vocabulary-store";
 import StudyNotebook from "./study-notebook";
 
@@ -81,20 +82,14 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
     setAiKey(item.en); setAiAnswer(""); setAiLoading(true);
     try {
       const sources = item.sources.slice(0, 6).map((source) => isFrench ? source.fr : source.en).join(", ");
-      const response = await fetch("/api/professor", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const answer = await requestStudyCard({
           responseStyle: "study", language: isFrench ? "FR" : "EN", mode: professional ? "Professional" : "Beginner", action: "explain",
           lessonSlug: item.sources[0]?.slug || null,
           message: isFrench
             ? `Explique-moi « ${item.fr} / ${item.en} » comme un professeur. Définition : ${item.definitionFr}. Contexte : ${item.beginnerContextFr}. Concepts liés : ${item.related.join(", ")}. Cours : ${sources}. Je veux une explication vivante, des schémas, des exemples chiffrés et des nuances, pas des listes de conseils ni ta démarche.`
             : `Teach me “${item.en} / ${item.fr}” as a professor. Definition: ${item.definitionEn}. Context: ${item.beginnerContextEn}. Connected concepts: ${item.related.join(", ")}. Lessons: ${sources}. Give a vivid explanation, diagrams, worked numerical examples and nuances, not advice checklists or commentary about your process.`,
-        }),
-      });
-      const payload = await response.json() as { answer?: string; error?: string };
-      if (!response.ok || !payload.answer) throw new Error(payload.error || "Unavailable");
-      setAiAnswer(payload.answer);
-      const status = await saveVocabularyCard({term:item.en,language,answer:payload.answer,at:Date.now()});
+        }, setAiAnswer);
+      const status = await saveVocabularyCard({term:item.en,language,answer,at:Date.now()});
       setSaveStatus(status === "account" ? text("Saved to your account vocabulary.","Enregistré dans le vocabulaire de ton compte.") : status === "browser" ? text("Saved in this browser.","Enregistré dans ce navigateur.") : text("Storage unavailable. Keep this card open and try again.","Enregistrement indisponible. Garde la fiche ouverte et réessaie."));
     } catch { setAiAnswer(text("AI study sheet unavailable right now.", "La fiche IA est temporairement indisponible.")); }
     finally { setAiLoading(false); }
@@ -117,7 +112,7 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
         <p>{text("The alphabet automatically follows the active language, so English and French terms are indexed by their own first letter. Each card connects definition, intuition, examples, related concepts and the actual Finance University lessons where the term is taught.", "L’alphabet suit automatiquement la langue active : les termes français et anglais sont donc classés selon leur propre première lettre. Chaque fiche relie définition, intuition, exemples, notions liées et vrais cours de Finance University.")}</p>
       </section>
 
-      {aiKey && !allEntries.some(item => item.en === aiKey) && <section className="dictionary-card"><h2>{aiKey}</h2>{aiLoading ? text("Creating your study card…","Création de ta fiche…") : <StudyNotebook content={aiAnswer}/>}</section>}
+      {aiKey && !allEntries.some(item => item.en === aiKey) && <section className="dictionary-card"><h2>{aiKey}</h2>{aiLoading && <p role="status">{text("Writing your study card…","Rédaction de ta fiche…")}</p>}{aiAnswer && <StudyNotebook content={aiAnswer}/>}</section>}
       {saveStatus && <p role="status">{saveStatus}</p>}
       <section className="dictionary-grid">
         {filtered.map((item) => {
@@ -138,7 +133,7 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
               </>}
               {custom && personal && aiKey !== item.en && <p>{text("Your personal vocabulary term. Open its saved study card below.","Ton terme de vocabulaire personnel. Ouvre sa fiche enregistrée ci-dessous.")}</p>}
               <div className="dictionary-deep-actions"><button type="button" disabled={aiLoading} onClick={() => void createStudySheet(item)}>✦ {personal?.answer ? text("Open saved study card", "Ouvrir la fiche enregistrée") : text("Create detailed AI study sheet", "Créer une fiche IA détaillée")}</button></div>
-              {aiKey === item.en && <div className="dictionary-ai-sheet">{aiLoading ? text("Building the full study sheet…", "Création du cours détaillé…") : <StudyNotebook content={aiAnswer} />}</div>}
+              {aiKey === item.en && <div className="dictionary-ai-sheet">{aiLoading && <p role="status">{text("Writing your study card…", "Rédaction de ta fiche…")}</p>}{aiAnswer && <StudyNotebook content={aiAnswer} />}</div>}
             </article>
           );
         })}

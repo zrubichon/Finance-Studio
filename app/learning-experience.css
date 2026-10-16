@@ -208,3 +208,25 @@
 .market-overview-panel .news-filter-stack > .chip-row {display:flex!important;flex-wrap:wrap;gap:8px!important;margin:8px 0!important;}
 .market-overview-panel .chip {font-size:13px;line-height:1.4;min-height:38px;}
 .market-overview-panel .news-filter-stack input {width:100%;box-sizing:border-box;max-width:520px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;background:var(--surface);color:var(--ink);}
+
+/* Keep each interview step only as tall as its actual answer. */
+.stable-interview-drill .answer-framework {grid-template-rows:none!important;grid-auto-rows:max-content!important;gap:8px!important;margin:12px 0!important;}
+.stable-interview-drill .interview-teaching-step {padding:13px!important;margin:0!important;}
+.stable-interview-drill .interview-step-heading {margin-bottom:9px!important;gap:10px;}
+.stable-interview-drill .interview-step-answer {gap:8px!important;}
+.stable-interview-drill .interview-answer-part.next {padding-top:8px;}
+
+/* These three cards share a grid row; stretch their edges and anchor the links. */
+.dashboard-grid > .learning-card,.dashboard-grid > .news-card,.dashboard-grid > .professor-card {align-self:stretch!important;height:auto!important;display:flex!important;flex-direction:column;}
+.dashboard-grid > .learning-card > a:last-child,.dashboard-grid > .news-card > a:last-child,.dashboard-grid > .professor-card > a:last-child {margin-top:auto!important;}
+.dashboard-grid > .learning-card .lesson-list,.dashboard-grid > .news-card .news-stack {margin-bottom:20px;}
+
+/* Employer portals are compact directory links. */
+.internship-portal-grid {grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;}
+.internship-portal-grid a {gap:3px;padding:10px 12px;align-content:center;border-radius:10px;}
+.internship-portal-grid strong {font-size:14px;line-height:1.4;overflow-wrap:anywhere;}
+.internship-portal-grid span {font-size:12px;line-height:1.4;}
+.internship-role-links {gap:8px;}
+.internship-role-links a {padding:12px;font-size:14px;line-height:1.4;}
+.internship-role-links small {margin-top:4px;font-size:11px;}
+@media(max-width:520px){.internship-portal-grid {grid-template-columns:1fr;}}

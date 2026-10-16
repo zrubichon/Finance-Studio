@@ -1,5 +1,5 @@
 import { publicNewsContext } from "@/lib/news-source-context";
-import { generateText } from "ai";
+import { generateText, streamText } from "ai";
 import { NextRequest, NextResponse } from "next/server";
 import { getLessonBySlug } from "@/lib/lesson-registry";
 import { createClient } from "@/lib/supabase/server";
@@ -24,6 +24,7 @@ type ChatMessage = {
 type ProfessorRequest = {
   message?: string;
   responseStyle?: "study";
+  stream?: boolean;
   newsUrl?: string;
   mode?: Mode;
   language?: Language;
@@ -444,29 +445,7 @@ export async function POST(request: NextRequest) {
     .filter(Boolean)
     .join("\n\n");
 
-  try {
-    const providerOptions = userId
-      ? {
-          gateway: {
-            user: userId,
-            tags: ["feature:ai-professor", `level:${mode.toLowerCase()}`],
-          },
-        }
-      : {
-          gateway: {
-            tags: ["feature:ai-professor", "user:guest"],
-          },
-        };
-
-    const result = await generateText({
-      model: MODEL,
-      system: baseSystemPrompt(mode, language),
-      prompt,
-      maxOutputTokens: isStudy ? 6500 : 1800,
-      reasoning: mode === "Professional" ? "medium" : "low",
-      providerOptions,
-    });
-
+  async function persistAnswer(answer: string) {
     if (userId && supabase) {
       if (!sessionId) {
         const { data: createdSession } = await supabase
@@ -496,7 +475,7 @@ export async function POST(request: NextRequest) {
             session_id: sessionId,
             user_id: userId,
             role: "assistant",
-            content: result.text.slice(0, 12000),
+            content: answer.slice(0, 12000),
             model: MODEL,
           }),
           supabase
@@ -512,6 +491,62 @@ export async function POST(request: NextRequest) {
         ]);
       }
     }
+
+  }
+
+  try {
+    const providerOptions = userId
+      ? {
+          gateway: {
+            user: userId,
+            tags: ["feature:ai-professor", `level:${mode.toLowerCase()}`],
+          },
+        }
+      : {
+          gateway: {
+            tags: ["feature:ai-professor", "user:guest"],
+          },
+        };
+
+    if (isStudy && body.stream === true) {
+      const result = streamText({
+        model: MODEL, system: baseSystemPrompt(mode, language), prompt,
+        maxOutputTokens: 6500, reasoning: "none", providerOptions,
+        onError: ({error}) => console.error("Study card stream failed", error),
+      });
+      const encoder = new TextEncoder();
+      const stream = new ReadableStream<Uint8Array>({
+        async start(controller) {
+          const send = (event: object) => controller.enqueue(encoder.encode(JSON.stringify(event) + "\n"));
+          let answer = "";
+          try {
+            for await (const part of result.fullStream) {
+              if (part.type === "text-delta") { answer += part.text; send({type:"delta", text:part.text}); }
+              if (part.type === "error" || part.type === "abort") throw new Error("Study card interrupted");
+            }
+            const finish = await result.finishReason;
+            if (!answer.trim() || finish === "error" || finish === "length" || finish === "content-filter") throw new Error("Study card incomplete");
+            try { await persistAnswer(answer); } catch (error) { console.error("Professor history save failed", error); }
+            send({type:"done"});
+          } catch (error) {
+            console.error("Study card generation failed", error);
+            send({type:"error", error:language === "FR" ? "La génération a été interrompue. Réessaie pour obtenir une fiche complète." : "Generation was interrupted. Please retry for a complete card."});
+          } finally { controller.close(); }
+        },
+      });
+      return new Response(stream, {headers:{"Content-Type":"application/x-ndjson; charset=utf-8", "Cache-Control":"private, no-store", "X-Content-Type-Options":"nosniff"}});
+    }
+
+    const result = await generateText({
+      model: MODEL,
+      system: baseSystemPrompt(mode, language),
+      prompt,
+      maxOutputTokens: isStudy ? 6500 : 1800,
+      reasoning: isStudy ? "none" : mode === "Professional" ? "medium" : "low",
+      providerOptions,
+    });
+
+    await persistAnswer(result.text);
 
     return NextResponse.json({
       answer: result.text,

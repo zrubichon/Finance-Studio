@@ -1,5 +1,7 @@
 "use client";
-import { saveVocabularyCard } from "@/lib/vocabulary-store";
+import { requestStudyCard } from "@/lib/study-request";
+import { normalizeDictionaryTerm } from "@/lib/dictionary-search";
+import { saveVocabularyCard, useVocabularyCards } from "@/lib/vocabulary-store";
 import StudyDialog from "./study-dialog";
 import StudyNotebook from "./study-notebook";
 
@@ -10,6 +12,7 @@ type Trigger = { text: string; x: number; y: number } | null;
 
 export default function ConceptLens() {
   const { isFrench } = useLanguage();
+  const vocabulary = useVocabularyCards();
   const requestVersion=useRef(0);
   const [trigger, setTrigger] = useState<Trigger>(null);
   const [openTerm, setOpenTerm] = useState("");
@@ -38,7 +41,7 @@ export default function ConceptLens() {
     return () => document.removeEventListener("mouseup", handleSelection);
   }, []);
 
-  async function explain(term: string) {
+  async function explain(term: string, regenerate = false) {
     const clean = term.replace(/\s+/g, " ").trim().slice(0, 240);
     if (!clean || loading) return;
     const version=++requestVersion.current;
@@ -47,25 +50,20 @@ export default function ConceptLens() {
     setAnswer("");
     setError("");
     setSavedStatus("");
+    const cached = !regenerate && vocabulary.find(card => card.answer && card.language === (isFrench ? "FR" : "EN") && normalizeDictionaryTerm(card.term) === normalizeDictionaryTerm(clean));
+    if (cached) {setAnswer(cached.answer);setLoading(false);return;}
     setLoading(true);
 
     try {
-      const response = await fetch("/api/professor", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const answer = await requestStudyCard({
           responseStyle: "study", language: isFrench ? "FR" : "EN",
           mode: "Beginner",
           action: "explain",
           message: isFrench
             ? `Explique-moi vraiment ce terme ou passage comme un professeur : « ${clean} ». Je veux comprendre ce que cela signifie, comment cela fonctionne, le voir en schéma et avec des exemples concrets, puis comprendre les nuances en finance. Évite les listes de conseils et les commentaires sur ta démarche.`
             : `Explain this term or passage as a professor would: “${clean}”. Teach what it means, how it works, show a diagram and concrete examples, then explain the finance nuances. Avoid advice checklists and commentary about your own process.`,
-        }),
-      });
-      const payload = await response.json() as { answer?: string; error?: string };
-      if (!response.ok || !payload.answer) throw new Error(payload.error || "AI explanation unavailable.");
-      if(version===requestVersion.current)setAnswer(payload.answer);
-      const saved = await saveVocabularyCard({term: clean, language: isFrench ? "FR" : "EN", answer: payload.answer, at: Date.now()});
+        }, partial => {if(version===requestVersion.current)setAnswer(partial);});
+      const saved = await saveVocabularyCard({term: clean, language: isFrench ? "FR" : "EN", answer, at: Date.now()});
       if(version===requestVersion.current)setSavedStatus(saved === "account" ? (isFrench ? "Ajouté au vocabulaire de ton compte." : "Added to your account vocabulary.") : saved === "browser" ? (isFrench ? "Ajouté au vocabulaire dans ce navigateur." : "Added to your vocabulary in this browser.") : (isFrench ? "La fiche n’a pas pu être enregistrée. Réessaie." : "This card could not be saved. Please try again."));
     } catch (cause) {
       if(version===requestVersion.current)setError(cause instanceof Error ? cause.message : (isFrench ? "La fiche IA est temporairement indisponible." : "The AI study card is temporarily unavailable."));
@@ -96,7 +94,7 @@ export default function ConceptLens() {
             {savedStatus && <p role="status">{savedStatus}</p>}
             {answer && (
               <div className="news-story-actions">
-                <button type="button" onClick={() => void explain(openTerm)}>{isFrench ? "Régénérer" : "Regenerate"}</button>
+                <button type="button" onClick={() => void explain(openTerm, true)}>{isFrench ? "Régénérer" : "Regenerate"}</button>
                 <a href={`/dictionary?q=${encodeURIComponent(openTerm)}`}>{isFrench ? "Voir dans le dictionnaire" : "Open in dictionary"} →</a>
               </div>
             )}
