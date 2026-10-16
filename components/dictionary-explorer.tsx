@@ -76,7 +76,7 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
   async function createStudySheet(item: DictionaryEntry) {
     if (aiLoading) return;
     setSaveStatus("");
-    const saved = vocabulary.find(card => normalizeDictionaryTerm(card.term) === normalizeDictionaryTerm(item.en) && card.language === language);
+    const saved = vocabulary.find(card => [item.en,item.fr].some(label => normalizeDictionaryTerm(card.term) === normalizeDictionaryTerm(label)) && card.language === language);
     if (saved?.answer) {setAiKey(item.en);setAiAnswer(saved.answer);return;}
     setAiKey(item.en); setAiAnswer(""); setAiLoading(true);
     try {
@@ -103,7 +103,7 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
   return (
     <div className="workspace-stack">
       <section className="dictionary-toolbar">
-        <form onSubmit={event => {event.preventDefault(); if(query.trim().length < 2 || aiLoading)return; void createStudySheet(exact || {en:query.trim().slice(0,240),fr:query.trim().slice(0,240),definitionEn:"",definitionFr:"",beginnerContextEn:"",beginnerContextFr:"",professionalContextEn:"",professionalContextFr:"",related:[],sources:[]});}}><label><span className="control-label">{text("SEARCH ENGLISH OR FRENCH", "RECHERCHER EN FRANÇAIS OU EN ANGLAIS")}</span><input value={query} onChange={(event) => { setQuery(event.target.value); setLetter(""); }} maxLength={240} placeholder={text("Try: duration, yield, WACC, leverage…", "Essaie : duration, rendement, WACC, leverage…")} /></label><button className="chip" type="submit" disabled={aiLoading || query.trim().length < 2}>{exact ? text("Open study card","Ouvrir la fiche") : text("Create and save this term","Créer et enregistrer ce terme")}</button></form>
+        <form onSubmit={event => {event.preventDefault(); if(query.trim().length < 2 || aiLoading)return; void createStudySheet(exact || {en:query.trim().slice(0,240),fr:query.trim().slice(0,240),definitionEn:"",definitionFr:"",beginnerContextEn:"",beginnerContextFr:"",professionalContextEn:"",professionalContextFr:"",related:[],sources:[]});}}><label><span className="control-label">{text("SEARCH ENGLISH OR FRENCH", "RECHERCHER EN FRANÇAIS OU EN ANGLAIS")}</span><input value={query} onChange={(event) => { setQuery(event.target.value); setLetter(""); setSaveStatus(""); }} maxLength={240} placeholder={text("Try: duration, yield, WACC, leverage…", "Essaie : duration, rendement, WACC, leverage…")} /></label><button className="chip" type="submit" disabled={aiLoading || query.trim().length < 2}>{exact ? text("Open study card","Ouvrir la fiche") : text("Create and save this term","Créer et enregistrer ce terme")}</button></form>
         <div><span className="control-label">{text("TEACHING CONTEXT", "CONTEXTE PÉDAGOGIQUE")}</span><div className="chip-row"><button className={!professional ? "chip active" : "chip"} onClick={() => setProfessional(false)} type="button">{text("Beginner", "Débutant")}</button><button className={professional ? "chip active" : "chip"} onClick={() => setProfessional(true)} type="button">{text("Professional", "Professionnel")}</button></div></div>
       </section>
 
@@ -121,7 +121,7 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
       {saveStatus && <p role="status">{saveStatus}</p>}
       <section className="dictionary-grid">
         {filtered.map((item) => {
-          const personal = vocabulary.find(card => normalizeDictionaryTerm(card.term) === normalizeDictionaryTerm(item.en) && card.language === language) || vocabulary.find(card => normalizeDictionaryTerm(card.term) === normalizeDictionaryTerm(item.en));
+          const personal = vocabulary.find(card => [item.en,item.fr].some(label => normalizeDictionaryTerm(card.term) === normalizeDictionaryTerm(label)) && card.language === language) || vocabulary.find(card => [item.en,item.fr].some(label => normalizeDictionaryTerm(card.term) === normalizeDictionaryTerm(label)));
           const custom = !entries.some(entry => entry.en === item.en);
           const definition = isFrench ? item.definitionFr : item.definitionEn;
           const context = professional ? (isFrench ? item.professionalContextFr : item.professionalContextEn) : (isFrench ? item.beginnerContextFr : item.beginnerContextEn);
@@ -144,7 +144,7 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
         })}
       </section>
 
-      {filtered.length === 0 && <div className="empty-state"><strong>{text("No matching curriculum term.", "Aucun terme du programme ne correspond.")}</strong><p>{text("Press Enter or choose Create and save this term to add its study card to your vocabulary.", "Appuie sur Entrée ou sur Créer et enregistrer ce terme pour ajouter sa fiche à ton vocabulaire.")}</p></div>}
+      {filtered.length === 0 && !aiLoading && aiKey !== query.trim() && <div className="empty-state"><strong>{text("No matching curriculum term.", "Aucun terme du programme ne correspond.")}</strong><p>{text("Press Enter or choose Create and save this term to add its study card to your vocabulary.", "Appuie sur Entrée ou sur Créer et enregistrer ce terme pour ajouter sa fiche à ton vocabulaire.")}</p></div>}
     </div>
   );
 }

@@ -16,6 +16,7 @@ export default function ConceptLens() {
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [savedStatus,setSavedStatus] = useState("");
 
   useEffect(() => {
     function handleSelection(event: MouseEvent) {
@@ -45,6 +46,7 @@ export default function ConceptLens() {
     setTrigger(null);
     setAnswer("");
     setError("");
+    setSavedStatus("");
     setLoading(true);
 
     try {
@@ -63,7 +65,8 @@ export default function ConceptLens() {
       const payload = await response.json() as { answer?: string; error?: string };
       if (!response.ok || !payload.answer) throw new Error(payload.error || "AI explanation unavailable.");
       if(version===requestVersion.current)setAnswer(payload.answer);
-      await saveVocabularyCard({term: clean, language: isFrench ? "FR" : "EN", answer: payload.answer, at: Date.now()});
+      const saved = await saveVocabularyCard({term: clean, language: isFrench ? "FR" : "EN", answer: payload.answer, at: Date.now()});
+      if(version===requestVersion.current)setSavedStatus(saved === "account" ? (isFrench ? "Ajouté au vocabulaire de ton compte." : "Added to your account vocabulary.") : saved === "browser" ? (isFrench ? "Ajouté au vocabulaire dans ce navigateur." : "Added to your vocabulary in this browser.") : (isFrench ? "La fiche n’a pas pu être enregistrée. Réessaie." : "This card could not be saved. Please try again."));
     } catch (cause) {
       if(version===requestVersion.current)setError(cause instanceof Error ? cause.message : (isFrench ? "La fiche IA est temporairement indisponible." : "The AI study card is temporarily unavailable."));
     } finally {
@@ -90,6 +93,7 @@ export default function ConceptLens() {
             {loading && <p className="concept-lens-loading">{isFrench ? "Création de la fiche détaillée…" : "Building your detailed study card…"}</p>}
             {error && <p className="inline-status">{error}</p>}
             {answer && <StudyNotebook content={answer} />}
+            {savedStatus && <p role="status">{savedStatus}</p>}
             {answer && (
               <div className="news-story-actions">
                 <button type="button" onClick={() => void explain(openTerm)}>{isFrench ? "Régénérer" : "Regenerate"}</button>
