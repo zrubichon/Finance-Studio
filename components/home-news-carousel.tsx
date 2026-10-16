@@ -1,6 +1,7 @@
 "use client";
 import StudyDialog from "./study-dialog";
-import LearningResponse from "./learning-response";
+import {CommentaryContent,requestNewsAnalysis} from "./news-commentary";
+import type {NewsAnalysis} from "@/lib/news-analysis";
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -22,7 +23,8 @@ export default function HomeNewsCarousel() {
   const [stories, setStories] = useState<Story[]>([]);
   const [index, setIndex] = useState(0);
   const [aiStory, setAiStory] = useState<Story | null>(null);
-  const [aiAnswer, setAiAnswer] = useState("");
+  const [aiAnswer, setAiAnswer] = useState<NewsAnalysis|null>(null);
+  const [aiError,setAiError]=useState("");
   const [aiLoading, setAiLoading] = useState(false);
 
   useEffect(() => {
@@ -47,29 +49,10 @@ export default function HomeNewsCarousel() {
   }, [story, isFrench]);
 
   async function explainWithAI(item: Story) {
-    setAiStory(item); setAiAnswer(""); setAiLoading(true);
-    const insight = item.insight;
-    const existing = [
-      `Source: ${item.domain}; URL: ${item.url}; indexed/published: ${item.publishedAt}; topics: ${item.topics.join(", ")}.`,
-      insight?.lens ? (isFrench ? insight.lens.fr : insight.lens.en) : "",
-      insight?.whyItMatters ? (isFrench ? insight.whyItMatters.fr : insight.whyItMatters.en) : "",
-      insight?.watchNext ? (isFrench ? insight.watchNext.fr : insight.watchNext.en) : "",
-      insight?.scenario ? (isFrench ? insight.scenario.fr : insight.scenario.en) : "",
-    ].filter(Boolean).join("\n");
-    try {
-      const response = await fetch("/api/professor", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          newsUrl: item.url, responseStyle: "study", language: isFrench ? "FR" : "EN", mode: "Professional", action: "markets",
-          message: isFrench
-            ? `Analyse en profondeur cette actualité financière sans inventer de faits ni de prix : « ${item.title} ». Contexte déjà présent dans FinanceStudio : ${existing}. Explique : ce qui s'est passé, pourquoi cette nouvelle apparaît aujourd'hui, ce dont elle découle, la chaîne causale, les actifs/secteurs touchés, les effets de premier et second ordre, les scénarios futurs, les catalyseurs à surveiller, ce qui pourrait invalider l'interprétation, les termes techniques, et les cours FinanceStudio à étudier pour comprendre le sujet. Distingue faits, interprétations et scénarios.`
-            : `Analyze this financial news story in depth without inventing facts or prices: “${item.title}”. Existing FinanceStudio context: ${existing}. Explain what happened, why this story matters today, what caused it, the causal chain, affected assets/sectors, first- and second-order effects, future scenarios, catalysts to watch, what could invalidate the interpretation, technical terms, and which FinanceStudio lessons would help understand it. Clearly separate facts, interpretation and scenarios.`,
-        }),
-      });
-      const payload = await response.json() as { answer?: string; error?: string };
-      setAiAnswer(payload.answer || payload.error || text("AI analysis is temporarily unavailable.", "L’analyse IA est temporairement indisponible."));
-    } catch { setAiAnswer(text("AI analysis is temporarily unavailable.", "L’analyse IA est temporairement indisponible.")); }
-    finally { setAiLoading(false); }
+    setAiStory(item);setAiAnswer(null);setAiError("");setAiLoading(true);
+    try {setAiAnswer(await requestNewsAnalysis(item.url,item.title,isFrench?"FR":"EN"));}
+    catch(e){setAiError(e instanceof Error?e.message:text("Analysis unavailable","Analyse indisponible"));}
+    finally{setAiLoading(false);}
   }
 
   if (!story) return null;
@@ -89,7 +72,7 @@ export default function HomeNewsCarousel() {
       </article>
       {aiStory && (
         <StudyDialog title={aiStory.title} eyebrow="✦ NEWS INTELLIGENCE" onClose={() => setAiStory(null)}>
-            {aiLoading ? <p className="concept-lens-loading">{text("Building the detailed causal analysis…", "Construction de l’analyse causale détaillée…")}</p> : <LearningResponse content={aiAnswer} />}
+            {aiLoading ? <p className="concept-lens-loading">{text("Building the detailed causal analysis…", "Construction de l’analyse causale détaillée…")}</p> : aiAnswer ? <CommentaryContent analysis={aiAnswer} /> : <p role="alert">{aiError}</p>}
         </StudyDialog>
       )}
     </section>

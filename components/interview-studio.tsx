@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { challengeInterview, challengeQuestionKey } from "@/lib/challenge-interview";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/components/language-provider";
@@ -17,6 +19,10 @@ import {
 
 export default function InterviewStudio() {
   const { isFrench, text } = useLanguage();
+  const params=useSearchParams();
+  const concept=(params.get("concept") || params.get("question") || "").slice(0,240);
+  const requestedTrack=params.get("track");
+  const conceptExercise=challengeInterview(concept);
   const [track, setTrack] = useState<Track>("Investment Banking");
   const [answer, setAnswer] = useState("");
   const [userId, setUserId] = useState<string | null>(null);
@@ -28,9 +34,11 @@ export default function InterviewStudio() {
   const [aiStatus, setAiStatus] = useState<"ready" | "live" | "error">("ready");
   const [status, setStatus] = useState("");
 
-  const active = useMemo(() => interviewQuestions[track], [track]);
+  const active = conceptExercise || interviewQuestions[track];
   const details = useMemo(() => interviewFrameworkDetails[track], [track]);
   const local = (value: Bilingual) => isFrench ? value.fr : value.en;
+
+  useEffect(()=>{if(isInterviewTrack(requestedTrack))setTrack(requestedTrack);},[requestedTrack]);
 
   useEffect(() => {
     let mounted = true;
@@ -58,19 +66,19 @@ export default function InterviewStudio() {
 
       setAttemptCount(attemptResult.count ?? 0);
       const savedTarget = profileResult.data?.target_role;
-      if (isInterviewTrack(savedTarget)) setTrack(savedTarget);
+      if (!requestedTrack && isInterviewTrack(savedTarget)) setTrack(savedTarget);
     }
 
     void loadUser();
     return () => { mounted = false; };
-  }, []);
+  }, [requestedTrack]);
 
   useEffect(() => {
     setAnswer("");
     setStatus("");
     setEvaluation("");
     setScore(null);
-  }, [track]);
+  }, [track,concept]);
 
   async function saveAttempt() {
     if (!userId || !answer.trim() || saving) return;
@@ -82,7 +90,7 @@ export default function InterviewStudio() {
     const { error } = await supabase.from("interview_attempts").insert({
       user_id: userId,
       track,
-      question_key: interviewQuestionKey(track),
+      question_key: concept ? challengeQuestionKey(track,concept) : interviewQuestionKey(track),
       answer_text: answer.trim(),
       evaluation: { status: "submitted_unscored", version: 1 },
     });
@@ -118,6 +126,7 @@ export default function InterviewStudio() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           track,
+          concept,
           answer: answer.trim(),
           language: isFrench ? "FR" : "EN",
         }),
@@ -320,9 +329,10 @@ export default function InterviewStudio() {
           </span>
         </div>
 
+        {conceptExercise && <div className="concept-model-answer"><span className="mini-label">{text("WORKED ANSWER · THIS CONCEPT", "RÉPONSE CORRIGÉE · CETTE NOTION")}</span><p>{local(conceptExercise.modelAnswer)}</p></div>}
         <div className="framework-steps-grid">
           {active.framework.map((step, index) => {
-            const detail = details[index];
+            const detail = conceptExercise ? undefined : details[index];
             return (
               <div className="framework-step" key={step.en}>
                 <span>{String(index + 1).padStart(2, "0")}</span>

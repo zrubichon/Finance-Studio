@@ -1,4 +1,5 @@
 "use client";
+import PositionRiskCalculator from "./position-risk-calculator";
 
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
@@ -524,35 +525,7 @@ export default function PaperTradingPanel({
           </p>
         </form>
 
-        <div className="paper-provider-card">
-          <span className="control-label">
-            {text("CURRENT PRICE COVERAGE", "COUVERTURE PRIX ACTUELLE")}
-          </span>
-          <h3>{text("What can be simulated now", "Ce qui peut être simulé maintenant")}</h3>
-          <div className="numbered-checklist">
-            <div>
-              <span>01</span>
-              <strong>{text(
-                "EUR/USD and GBP/USD can execute against ECB daily reference rates in a USD portfolio. USD/JPY can be quoted but is blocked until JPY→USD conversion is supported.",
-                "EUR/USD et GBP/USD peuvent être exécutés avec les taux de référence quotidiens BCE / ECB dans un portefeuille USD. USD/JPY peut être coté mais reste bloqué tant que la conversion JPY→USD n’est pas prise en charge.",
-              )}</strong>
-            </div>
-            <div>
-              <span>02</span>
-              <strong>{text(
-                "Stocks, ETFs, commodities and crypto are wired to Twelve Data but require TWELVE_DATA_API_KEY",
-                "Actions, ETF, matières premières et crypto sont branchés sur Twelve Data mais nécessitent TWELVE_DATA_API_KEY",
-              )}</strong>
-            </div>
-            <div>
-              <span>03</span>
-              <strong>{text(
-                "If a price is missing or stale, execution is blocked",
-                "Si un prix manque ou est trop ancien, l’exécution est bloquée",
-              )}</strong>
-            </div>
-          </div>
-        </div>
+        <PositionRiskCalculator />
       </div>
 
       {status && <p className="inline-status" role="status">{status}</p>}

@@ -1,4 +1,5 @@
 import {cleanFrenchLabel,termAliases} from "./dictionary-labels";
+import {challengeDictionary} from "./challenge-dictionary";
 import { lessons } from "./lesson-registry";
 
 export type DictionaryEntry = {
@@ -74,5 +75,12 @@ export function getDictionaryEntries(): DictionaryEntry[] {
     }
   }
 
+  for(const item of challengeDictionary){
+    const key=normalizeTerm(item.en);
+    if(entries.has(key))continue;
+    const lesson=lessons.find(l=>l.slug===item.lesson);
+    if(!lesson)continue;
+    entries.set(key,{...item,sources:[{slug:lesson.slug,en:lesson.title.en,fr:lesson.title.fr}]});
+  }
   return [...entries.values()].sort((a, b) => a.en.localeCompare(b.en));
 }

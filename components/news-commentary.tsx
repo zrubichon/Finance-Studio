@@ -1,0 +1,21 @@
+"use client";
+import {useState,useEffect,useRef} from "react";
+import StudyNotebook from "./study-notebook";
+import {useLanguage} from "./language-provider";
+import type {NewsAnalysis} from "@/lib/news-analysis";
+const requests=new Map<string,{at:number;promise:Promise<NewsAnalysis>}>();
+export function requestNewsAnalysis(url:string,title:string,language:string){
+ const key=`${language}:${url}`;const cached=requests.get(key);let pending=cached && Date.now()-cached.at<900000 ? cached.promise : undefined;
+ if(!pending){pending=fetch("/api/news/analysis",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url,title,language})}).then(async r=>{const p=await r.json();if(!r.ok||!p.answer)throw new Error(p.error||"Analysis unavailable");return p as NewsAnalysis;}).catch(e=>{requests.delete(key);throw e;});if(requests.size>=64)requests.delete(requests.keys().next().value!);requests.set(key,{at:Date.now(),promise:pending});}
+ return pending;
+}
+export function CommentaryContent({analysis}:{analysis:NewsAnalysis}){
+ const {text,isFrench}=useLanguage();
+ return <div className="news-commentary-content"><StudyNotebook key={analysis.answer.slice(0,100)} content={analysis.answer}/><aside className="commentary-sources"><h4>{text("Sources behind this commentary","Sources de ce commentaire")}</h4><p>{text("Prepared","Préparé le")} {new Date(analysis.researchedAt).toLocaleString(isFrench?"fr-FR":"en-US")}. {analysis.coverage==="multiple"?text("Several source excerpts are available; they may cover different aspects of the event.","Plusieurs extraits de sources sont disponibles ; ils peuvent couvrir différents aspects de l’événement."):analysis.coverage==="single"?text("Only one source was readable; independent corroboration is limited.","Une seule source était lisible ; le recoupement indépendant est limité."):text("No source text was retrieved. This is a conditional explanation of the headline, not verified reporting.","Aucun texte source n’a été récupéré. Il s’agit d’une explication conditionnelle du titre, pas d’un reporting vérifié.")}</p><ol>{analysis.sources.map((s,i)=><li key={s.url}><a href={s.url} target="_blank" rel="noreferrer">[{i+1}] {s.title} ↗</a><small>{s.date||""} · {s.kind==="article-excerpt"?text("Public article excerpt","Extrait public d’article"):text("Search excerpt only","Extrait de recherche seulement")}</small></li>)}</ol></aside></div>;
+}
+export default function NewsCommentary({url,title,autoOpen=false}:{url:string;title:string;autoOpen?:boolean}){
+ const {text,language}=useLanguage();const [analysis,setAnalysis]=useState<NewsAnalysis|null>(null),[loading,setLoading]=useState(false),[error,setError]=useState("");
+ const [open,setOpen]=useState(autoOpen);const version=useRef(0);
+ useEffect(()=>{const current=++version.current;setAnalysis(null);setError("");if(!open)return;setLoading(true);void requestNewsAnalysis(url,title,language).then(p=>{if(current===version.current)setAnalysis(p);}).catch(e=>{if(current===version.current)setError(e.message);}).finally(()=>{if(current===version.current)setLoading(false);});return()=>{version.current++;};},[url,title,language,open]);
+ return <section className="news-commentary"><button type="button" className="commentary-open" aria-expanded={open} onClick={()=>setOpen(v=>!v)}>{open?text("Close commentary","Fermer le commentaire"):text("Read the financial commentary","Lire le commentaire financier")} {open?"−":"+"}</button>{!open&&<p>{text("An explained article: the event, its origins, market consequences, favorable effects and risks — with source excerpts.","Un article expliqué : l’événement, ses origines, ses conséquences sur les marchés, les effets favorables et les risques — avec les extraits de sources.")}</p>}{open&&(loading?<p role="status">{text("Reading source excerpts and preparing the commentary…","Lecture des extraits de sources et préparation du commentaire…")}</p>:error?<p role="alert">{error} <button type="button" onClick={()=>{setOpen(false);}}>{text("Close and retry","Fermer puis réessayer")}</button></p>:analysis?<CommentaryContent analysis={analysis}/>:null)}</section>;
+}

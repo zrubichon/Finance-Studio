@@ -8,7 +8,6 @@ import ConceptLens from "@/components/concept-lens";
 import MarketVisualEnhancer from "@/components/market-visual-enhancer";
 import ChallengeDepthEnhancer from "@/components/challenge-depth-enhancer";
 import NewsAIEnhancer from "@/components/news-ai-enhancer";
-import InterviewContextBridge from "@/components/interview-context-bridge";
 import "./globals.css";
 import "./product.css";
 import "./phase-two.css";
@@ -53,7 +52,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <MarketVisualEnhancer />
           <ChallengeDepthEnhancer />
           <NewsAIEnhancer />
-          <InterviewContextBridge />
           {children}
         </LanguageProvider>
       </body>

@@ -366,7 +366,7 @@ export default function InvestingLab() {
         </article>
       </section>
 
-      <section className="market-overview-panel">
+      <section className="market-overview-panel investing-market-snapshot">
         <div className="panel-heading">
           <div>
             <span className="mini-label">{text("CONNECTED MARKET SNAPSHOT", "SNAPSHOT DE MARCHÉ CONNECTÉ")}</span>

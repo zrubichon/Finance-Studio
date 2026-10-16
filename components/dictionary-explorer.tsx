@@ -1,7 +1,9 @@
 "use client";
-import LearningResponse from "./learning-response";
+import StudyNotebook from "./study-notebook";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import {dictionaryTarget, dictionaryTermId} from "@/lib/dictionary-search";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { useSavedItems } from "@/lib/use-saved-items";
@@ -13,6 +15,9 @@ function initialLetter(value: string) {
 
 export default function DictionaryExplorer({ entries }: { entries: DictionaryEntry[] }) {
   const { isFrench, text } = useLanguage();
+  const params=useSearchParams();
+  const requestedTerm=params.get("term") || params.get("q") || "";
+  const target=dictionaryTarget(entries,requestedTerm);
   const [query, setQuery] = useState("");
   const [letter, setLetter] = useState("");
   const [professional, setProfessional] = useState(false);
@@ -23,13 +28,17 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
   const { authenticated, isSaved, savingKey, toggleSaved } = useSavedItems("dictionary");
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const initial = params.get("term") || params.get("q");
-    if (initial) {
-      setQuery(initial);
-      window.setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 150);
-    }
-  }, []);
+    setQuery(target?.en || requestedTerm);setLetter("");
+  }, [requestedTerm, target?.en]);
+
+  useEffect(() => {
+    if(!requestedTerm)return;
+    const frame=requestAnimationFrame(()=>{
+      const card=target?document.getElementById(dictionaryTermId(target.en)):resultsRef.current;
+      card?.scrollIntoView({behavior:"smooth",block:"start"});
+    });
+    return ()=>cancelAnimationFrame(frame);
+  },[requestedTerm,target?.en,query]);
 
   useEffect(() => {setLetter("");}, [isFrench]);
 
@@ -40,13 +49,15 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return entries.filter((item) => {
+    const found = entries.filter((item) => {
       const primary = isFrench ? item.fr : item.en;
       if (letter && initialLetter(primary) !== letter) return false;
       if (!q) return true;
       return [item.en, item.fr, item.definitionEn, item.definitionFr, ...item.related, ...item.sources.flatMap((source) => [source.en, source.fr])].join(" ").toLowerCase().includes(q);
     }).sort((a,b) => (isFrench?a.fr:a.en).localeCompare(isFrench?b.fr:b.en,isFrench?"fr":"en"));
-  }, [entries, query, letter, isFrench]);
+    if(target && query===target.en) return [target,...found.filter(item=>item.en!==target.en)];
+    return found;
+  }, [entries, query, letter, isFrench, target]);
 
   async function createStudySheet(item: DictionaryEntry) {
     setAiKey(item.en); setAiAnswer(""); setAiLoading(true);
@@ -58,8 +69,8 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
           responseStyle: "study", language: isFrench ? "FR" : "EN", mode: professional ? "Professional" : "Beginner", action: "explain",
           lessonSlug: item.sources[0]?.slug || null,
           message: isFrench
-            ? `Crée un vrai mini-cours très complet sur « ${item.fr} / ${item.en} ». Définition actuelle : ${item.definitionFr}. Contexte : ${item.beginnerContextFr}. Concepts liés : ${item.related.join(", ")}. Cours liés : ${sources}. Explique l'intuition, le mécanisme étape par étape, les formules avec légende, un exemple facile, un exemple chiffré plus difficile, les cas d'utilisation, les impacts marchés/entreprise/valorisation, l'angle entretien, l'angle investing, les erreurs fréquentes, et termine par trois questions de vérification.`
-            : `Create a complete mini-course on “${item.en} / ${item.fr}”. Current definition: ${item.definitionEn}. Context: ${item.beginnerContextEn}. Connected concepts: ${item.related.join(", ")}. Related lessons: ${sources}. Explain intuition, step-by-step mechanism, formulas with variable legends, one easy example, one harder numerical example, use cases, market/company/valuation impacts, interview angle, investing angle, common mistakes, then finish with three check questions.`,
+            ? `Explique-moi « ${item.fr} / ${item.en} » comme un professeur. Définition : ${item.definitionFr}. Contexte : ${item.beginnerContextFr}. Concepts liés : ${item.related.join(", ")}. Cours : ${sources}. Je veux une explication vivante, des schémas, des exemples chiffrés et des nuances, pas des listes de conseils ni ta démarche.`
+            : `Teach me “${item.en} / ${item.fr}” as a professor. Definition: ${item.definitionEn}. Context: ${item.beginnerContextEn}. Connected concepts: ${item.related.join(", ")}. Lessons: ${sources}. Give a vivid explanation, diagrams, worked numerical examples and nuances, not advice checklists or commentary about your process.`,
         }),
       });
       const payload = await response.json() as { answer?: string; error?: string };
@@ -90,7 +101,7 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
           const definition = isFrench ? item.definitionFr : item.definitionEn;
           const context = professional ? (isFrench ? item.professionalContextFr : item.professionalContextEn) : (isFrench ? item.beginnerContextFr : item.beginnerContextEn);
           return (
-            <article className="dictionary-card" id={`term-${encodeURIComponent(item.en.toLowerCase().replace(/\s+/g,"-"))}`} key={item.en}>
+            <article className={`dictionary-card${target?.en===item.en ? " dictionary-target" : ""}`} id={dictionaryTermId(item.en)} key={item.en}>
               <div className="dictionary-card-head"><span className="mini-label">{text("FINANCE DICTIONARY","DICTIONNAIRE FINANCIER")}</span><button type="button" className="save-item-button compact" aria-pressed={isSaved(item.en)} disabled={savingKey === item.en} onClick={() => void toggleSaved(item.en, { titleEn: item.en, titleFr: item.fr, subtitleEn: item.definitionEn, subtitleFr: item.definitionFr, href: `/dictionary?term=${encodeURIComponent(item.en)}`, source: "FinanceStudio Dictionary" })}><span aria-hidden="true">{isSaved(item.en) ? "★" : "☆"}</span>{savingKey === item.en ? text("Saving…", "Enregistrement…") : isSaved(item.en) ? text("Saved", "Enregistré") : authenticated ? text("Save", "Enregistrer") : text("Sign in", "Se connecter")}</button></div>
               <h2>{isFrench ? item.fr : item.en}</h2>{item.fr.toLocaleLowerCase() !== item.en.toLocaleLowerCase() && <p className="dictionary-translation">{isFrench ? "EN" : "FR"} · {isFrench ? item.en : item.fr}</p>}
               <p><strong>{text("Definition:", "Définition :")}</strong> {definition}</p>
@@ -100,7 +111,7 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
               <span className="control-label">{text("RELATED LESSONS", "COURS LIÉS")}</span>
               <div className="related-row">{item.sources.slice(0, 6).map((source) => <Link href={`/university/${source.slug}`} key={source.slug}>{isFrench ? source.fr : source.en} →</Link>)}{item.sources.length > 6 && <span>+{item.sources.length - 6} {text("lessons", "cours")}</span>}</div>
               <div className="dictionary-deep-actions"><button type="button" onClick={() => void createStudySheet(item)}>✦ {text("Create detailed AI study sheet", "Créer une fiche IA détaillée")}</button></div>
-              {aiKey === item.en && <div className="dictionary-ai-sheet">{aiLoading ? text("Building the full study sheet…", "Création du cours détaillé…") : <LearningResponse content={aiAnswer} />}</div>}
+              {aiKey === item.en && <div className="dictionary-ai-sheet">{aiLoading ? text("Building the full study sheet…", "Création du cours détaillé…") : <StudyNotebook content={aiAnswer} />}</div>}
             </article>
           );
         })}

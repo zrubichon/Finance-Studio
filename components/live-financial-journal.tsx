@@ -1,6 +1,6 @@
 "use client";
 
-import NewsLearningContext from "./news-learning-context";
+import NewsCommentary from "./news-commentary";
 import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { createClient } from "@/lib/supabase/client";
@@ -679,9 +679,6 @@ export default function LiveFinancialJournal() {
               <div className="news-intelligence-stack">
                 {items.map((item) => {
                   const breaking = ageHours(item.publishedAt) <= 2;
-                  const transmission = isFrench
-                    ? item.insight.transmission.fr
-                    : item.insight.transmission.en;
 
                   return (
                     <article className="news-intelligence-card" key={item.id} id={`news-${item.id}`} data-news-id={item.id}>
@@ -721,49 +718,7 @@ export default function LiveFinancialJournal() {
                         {item.sourceCountry ? " · " + item.sourceCountry : ""}
                       </p>
 
-                      <div className="finance-lens-header">
-                        <span className="mini-label">{text("FINANCESTUDIO LENS", "LECTURE FINANCESTUDIO")}</span>
-                        <strong>{isFrench ? item.insight.lens.fr : item.insight.lens.en}</strong>
-                      </div>
-
-                      <div className="news-insight-grid">
-                        <div>
-                          <span className="insight-label">{text("WHY IT MATTERS", "POURQUOI C’EST IMPORTANT")}</span>
-                          <p>{isFrench ? item.insight.whyItMatters.fr : item.insight.whyItMatters.en}</p>
-                        </div>
-
-                        <div>
-                          <span className="insight-label">{text("POTENTIAL TRANSMISSION", "TRANSMISSION POTENTIELLE")}</span>
-                          <ul>
-                            {transmission.map((channel) => <li key={channel}>{channel}</li>)}
-                          </ul>
-                        </div>
-
-                        <div>
-                          <span className="insight-label">{text("ASSETS TO WATCH", "ACTIFS À SURVEILLER")}</span>
-                          <div className="asset-watch-row">
-                            {item.insight.assets.map((asset) => <span key={asset}>{asset}</span>)}
-                          </div>
-                        </div>
-
-                        <div>
-                          <span className="insight-label">{text("WHAT TO WATCH NEXT", "QUE SURVEILLER ENSUITE")}</span>
-                          <p>{isFrench ? item.insight.watchNext.fr : item.insight.watchNext.en}</p>
-                        </div>
-                      </div>
-
-                      <div className="scenario-discipline">
-                        <span>{text("SCENARIO DISCIPLINE", "DISCIPLINE DE SCÉNARIO")}</span>
-                        <p>{isFrench ? item.insight.scenario.fr : item.insight.scenario.en}</p>
-                      </div>
-
-                      <NewsLearningContext topics={item.topics} />
-                      <p className="headline-analysis-note">
-                        {text(
-                          "Analysis framework is generated from the headline/topic metadata. Check the original report and primary source before treating the event itself as verified.",
-                          "Le cadre d’analyse est généré à partir du titre et des métadonnées du thème. Vérifie le reporting original et la source primaire avant de considérer l’événement lui-même comme vérifié.",
-                        )}
-                      </p>
+                      <NewsCommentary url={item.url} title={item.title} autoOpen={requestedStory===item.id || requestedStory===item.title}/>
 
                       <div className="news-item-actions">
                         <button type="button" className="save-item-button compact news-ai-deep-button" onClick={() => window.dispatchEvent(new CustomEvent("finance-news-ai", {detail:{title:item.title, url:item.url, body:JSON.stringify({source:item.domain,url:item.url,observedAt:item.publishedAt,topics:item.topics,headline:item.title,educationalContext:item.insight})}}))}>✦ {text("Full analytical dossier", "Dossier d’analyse approfondi")}</button>

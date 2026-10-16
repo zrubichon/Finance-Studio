@@ -286,8 +286,8 @@ export default function ChallengePage() {
 
   const concept = useMemo(() => {
     const seed = [...localDayKey()].reduce((sum, char) => sum + char.charCodeAt(0), 0);
-    return concepts[seed % concepts.length];
-  }, []);
+    return concepts.find(item => item.titleEn === params.get("concept") || item.titleFr === params.get("concept")) || concepts.find(item => item.lesson === params.get("lesson")) || concepts[seed % concepts.length];
+  }, [params]);
 
   const professorLink = professorHref({
     lessonSlug: concept.lesson,
@@ -368,14 +368,14 @@ export default function ChallengePage() {
             <h2>{text("Explain the concept in 60 seconds", "Explique le concept en 60 secondes")}</h2>
             <p>{isFrench ? concept.interviewFr : concept.interviewEn}</p>
             <p>{text(`Target role: ${role}. Define the concept, explain the mechanism, use today's numerical example, then finish with one limitation or caveat.`, `Métier cible : ${role}. Définis le concept, explique le mécanisme, utilise l’exemple chiffré du jour puis termine avec une limite ou un caveat.`)}</p>
-            <Link className="full-button" href={`/interview?${new URLSearchParams({ track: role, lesson: concept.lesson, source: "daily-challenge", question: `Explain ${concept.titleEn} in an interview-ready way with a numerical example and one caveat.` }).toString()}`}>{text("Practice this interview answer", "Pratiquer cette réponse")} →</Link>
+            <Link className="full-button" href={`/interview?${new URLSearchParams({ track: role, concept: concept.titleEn, lesson: concept.lesson, source: "daily-challenge", question: `Explain ${concept.titleEn} in an interview-ready way with a numerical example and one caveat.` }).toString()}`}>{text("Practice this interview answer", "Pratiquer cette réponse")} →</Link>
           </article>
           <article className="challenge-learning-card">
             <span className="mini-label">06 · {text("INVESTING ANGLE", "ANGLE INVESTING")}</span>
             <h2>{text("Turn knowledge into a testable view", "Transforme la connaissance en vue testable")}</h2>
             <p>{isFrench ? concept.investingFr : concept.investingEn}</p>
             <p>{text("Ask: what variable changes, which asset or company reacts, what is the expected direction, and what data point would invalidate the thesis?", "Demande-toi : quelle variable change, quel actif ou quelle entreprise réagit, quelle direction est attendue et quelle donnée invaliderait la thèse ?")}</p>
-            <Link className="full-button inverse" href={`/investing?${new URLSearchParams({ source: "daily-challenge", lesson: concept.lesson, catalyst: concept.titleEn, thesis: `Build a testable investment thesis from today's concept: ${concept.titleEn}.` }).toString()}`}>{text("Build a thesis", "Construire une thèse")} →</Link>
+            <Link className="full-button inverse" href={`/investing?${new URLSearchParams({ source: "daily-challenge", concept: concept.titleEn, lesson: concept.lesson, catalyst: concept.titleEn, thesis: `Build a testable investment thesis from today's concept: ${concept.titleEn}.` }).toString()}`}>{text("Build a thesis", "Construire une thèse")} →</Link>
           </article>
         </section>
 

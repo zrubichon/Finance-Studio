@@ -1,6 +1,6 @@
 "use client";
 import StudyDialog from "./study-dialog";
-import LearningResponse from "./learning-response";
+import StudyNotebook from "./study-notebook";
 
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
@@ -69,8 +69,8 @@ export default function ConceptLens() {
           mode: "Beginner",
           action: "explain",
           message: isFrench
-            ? `Crée une fiche de cours FinanceStudio extrêmement pédagogique sur ce terme ou passage sélectionné : « ${clean} ». Structure obligatoirement la réponse avec : 1) définition simple, 2) intuition, 3) pourquoi c'est important en finance, 4) mécanisme étape par étape, 5) formule pertinente et légende de chaque variable si nécessaire, 6) exemple numérique facile, 7) exemple plus avancé, 8) impacts marchés/entreprise/valorisation, 9) angle entretien, 10) angle investing, 11) erreurs fréquentes, 12) concepts liés et ce qu'il faut étudier ensuite. Définis toute abréviation à sa première apparition.`
-            : `Create a very clear FinanceStudio study card for this selected finance term or passage: “${clean}”. Structure it with: 1) simple definition, 2) intuition, 3) why it matters in finance, 4) step-by-step mechanism, 5) relevant formula plus a legend for every variable when useful, 6) easy numerical example, 7) harder example, 8) market/company/valuation impacts, 9) interview angle, 10) investing angle, 11) common mistakes, 12) connected concepts and what to study next. Expand every abbreviation on first use.`,
+            ? `Explique-moi vraiment ce terme ou passage comme un professeur : « ${clean} ». Je veux comprendre ce que cela signifie, comment cela fonctionne, le voir en schéma et avec des exemples concrets, puis comprendre les nuances en finance. Évite les listes de conseils et les commentaires sur ta démarche.`
+            : `Explain this term or passage as a professor would: “${clean}”. Teach what it means, how it works, show a diagram and concrete examples, then explain the finance nuances. Avoid advice checklists and commentary about your own process.`,
         }),
       });
       const payload = await response.json() as { answer?: string; error?: string };
@@ -101,7 +101,7 @@ export default function ConceptLens() {
         <StudyDialog title={openTerm} eyebrow={isFrench ? "✦ CONCEPT LENS · FICHE DE COURS" : "✦ CONCEPT LENS · STUDY CARD"} onClose={() => {setOpenTerm("");setAnswer("");setError("");}}>
             {loading && <p className="concept-lens-loading">{isFrench ? "Création de la fiche détaillée…" : "Building your detailed study card…"}</p>}
             {error && <p className="inline-status">{error}</p>}
-            {answer && <LearningResponse content={answer} />}
+            {answer && <StudyNotebook content={answer} />}
             {answer && (
               <div className="news-story-actions">
                 <button type="button" onClick={() => void explain(openTerm)}>{isFrench ? "Régénérer" : "Regenerate"}</button>

@@ -114,3 +114,85 @@
 .dictionary-card{content-visibility:auto;contain-intrinsic-size:auto 650px;}
 
 .finance-math-block{display:block;overflow-x:auto;max-width:100%;padding:16px 0;margin:12px 0;font-size:1em;}.finance-math-inline{font-size:1em;}.teaching-bars .signed-chart{position:relative;overflow:visible;}.teaching-bars .signed-chart::after{content:"";position:absolute;left:50%;top:-4px;bottom:-4px;width:1px;background:var(--ink);}.teaching-bars .signed-chart i{position:absolute;top:0;}
+
+/* A collapsed rail has room for icons only. */
+.section-shell.section-nav-collapsed .section-sidebar-note,
+.section-sidebar-note[hidden] {display:none!important;}
+.section-shell.section-nav-collapsed .section-sidebar {overflow:hidden;}
+.app-shell .main-canvas {padding-bottom:12px!important;}
+.product-section-main.home-followup-section {margin-top:16px!important;}
+.home-followup-section .home-news-carousel {margin-top:0!important;}
+@media(min-width:1101px){
+ .dashboard-grid > .daily-card,.dashboard-grid > .stable-interview-drill {align-self:stretch!important;height:100%!important;box-sizing:border-box;display:flex!important;flex-direction:column;}
+ .daily-card .hourly-deep-lesson {flex:1;align-content:space-evenly;gap:18px!important;}
+ .daily-card .hourly-deep-lesson .deep-lesson-block p,.daily-card .hourly-deep-lesson .deep-lesson-block li {font-size:18px!important;line-height:1.95!important;}
+ .daily-card .daily-copy {font-size:19px!important;line-height:1.85!important;}
+ .daily-card .card-actions,.stable-interview-drill > .full-button {margin-top:auto!important;padding-top:18px;}
+}
+.market-category-stack {display:grid;gap:28px;margin-top:24px;}
+.market-category {border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));background:var(--surface-2);border-radius:18px;padding:18px;min-width:0;}
+.market-category > header {display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:2px solid var(--line);padding:0 0 14px;margin-bottom:16px;}
+.market-category > header h3 {font-size:21px;margin:0;}
+.market-category > header span {font-size:13px;color:var(--muted);}
+.market-instrument-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch;}
+.market-instrument-card {min-width:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:13px;padding:16px;background:var(--surface);box-shadow:0 2px 7px #00000004;}
+.market-instrument-card h4 {font-size:16px;line-height:1.4;margin:0 0 10px;}
+.instrument-value {display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;font-size:15px;}
+.instrument-value > strong {font-size:21px;}
+.market-instrument-card .quote-history {margin:10px 0;padding-top:5px;}
+.market-instrument-card .quote-history svg {height:54px;}
+.market-instrument-card .instrument-source {font-size:12px!important;line-height:1.5!important;margin:8px 0 14px;min-height:0;}
+.instrument-source a {text-decoration:underline;text-underline-offset:3px;}
+.instrument-lesson-link {font-size:13px;font-weight:700;margin-top:auto;border-top:1px solid var(--line);padding-top:10px;}
+.investing-market-snapshot {padding:22px!important;}
+.investing-market-snapshot .market-universe-grid {grid-template-columns:repeat(auto-fit,minmax(180px,1fr))!important;gap:12px!important;}
+.investing-market-snapshot .market-universe-card {padding:14px!important;}
+.investing-market-snapshot .market-universe-card h3 {font-size:16px!important;margin:0 0 8px!important;}
+.investing-market-snapshot .instrument-list > div {padding:6px 0!important;gap:5px!important;}
+.investing-market-snapshot .instrument-list em {font-size:11px!important;}
+.investing-market-snapshot .panel-heading h2 {font-size:23px!important;}
+.study-notebook {white-space:normal;}
+.study-notebook-intro {border-left:4px solid var(--accent);padding:0 18px;margin-bottom:24px;}
+.study-notebook-layout {display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;align-items:start;}
+.study-section-menu {display:grid;gap:8px;position:sticky;top:0;}
+.study-section-menu button {text-align:left;display:flex;gap:10px;align-items:baseline;padding:13px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:14px;line-height:1.5;font-weight:600;cursor:pointer;overflow-wrap:anywhere;}
+.study-section-menu button > span {font-size:11px;color:var(--accent);}
+.study-section-menu button[aria-pressed="true"] {background:var(--surface-2);border-color:var(--accent);box-shadow:inset 3px 0 var(--accent);}
+.study-section-menu button:focus-visible {outline:2px solid var(--accent);outline-offset:2px;}
+.study-notebook-page {min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;}
+.study-notebook-page > h3 {font-size:23px;line-height:1.35;margin:0 0 18px;}
+.study-page-actions {display:flex;gap:12px;justify-content:flex-end;align-items:center;border-top:1px solid var(--line);padding-top:18px;margin-top:24px;font-size:13px;flex-wrap:wrap;}
+.study-page-actions > span {margin-right:auto;color:var(--muted);}
+.study-page-actions button {background:var(--surface-2);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:9px;cursor:pointer;}
+.learning-response .teaching-flow {grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;}
+.learning-response .teaching-flow li {font-size:15px!important;}
+.learning-response .teaching-flow li > b {left:auto;right:-19px;top:50%;bottom:auto;transform:translateY(-50%) rotate(-90deg);}
+.learning-response .teaching-flow li:nth-child(2n) > b {display:none;}
+.position-risk-calculator p {font-size:14px!important;line-height:1.7!important;min-height:0!important;}
+.risk-calculator-fields {display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.risk-calculator-fields label {display:grid;gap:7px;font-size:13px;}
+.risk-calculator-fields input {min-width:0;width:100%;box-sizing:border-box;padding:10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;color:var(--ink);}
+.position-risk-calculator output {display:block;font-weight:750;font-size:20px;padding:14px 0;}
+.risk-calculator-note {border-top:1px solid var(--line);padding-top:12px;}
+.dictionary-card.dictionary-target {border:2px solid var(--accent);scroll-margin-top:25px;}
+@media(max-width:1050px){.market-instrument-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:760px){.market-instrument-grid{grid-template-columns:1fr;}.study-notebook-layout{grid-template-columns:1fr;gap:16px;}.study-section-menu{position:static;grid-template-columns:repeat(2,minmax(0,1fr));}.study-notebook-page{padding:18px;}.learning-response .teaching-flow{grid-template-columns:1fr;}.learning-response .teaching-flow li > b{display:block!important;right:auto;left:50%;top:auto;bottom:-26px;transform:none;}}
+.news-commentary {margin:20px 0;border-top:1px solid var(--line);padding-top:18px;}
+.commentary-open {border:1px solid var(--accent);background:var(--surface-2);color:var(--ink);padding:13px 18px;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer;}
+.news-commentary > p {font-size:17px;line-height:1.75;color:var(--muted);}
+.news-commentary-content {margin-top:20px;}
+.commentary-sources {margin-top:24px;border-top:1px solid var(--line);padding-top:18px;}
+.commentary-sources h4 {font-size:17px;margin:0;}
+.commentary-sources p,.commentary-sources li {font-size:13px!important;line-height:1.7!important;}
+.commentary-sources li {margin:12px 0;}
+.commentary-sources small {display:block;color:var(--muted);}
+.commentary-sources a {text-decoration:underline;text-underline-offset:3px;}
+.concept-model-answer {padding:22px;border:1px solid var(--accent);background:var(--surface-2);border-radius:14px;margin:20px 0;}
+.concept-model-answer p {font-size:17px!important;line-height:1.8!important;}
+.internship-portal-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+.internship-portal-grid a {display:grid;gap:9px;padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface);min-width:0;}
+.internship-portal-grid a:hover {border-color:var(--accent);}
+.internship-portal-grid strong {font-size:16px;}
+.internship-portal-grid span,.internship-portal-grid small {font-size:13px;color:var(--muted);line-height:1.5;}
+@media(max-width:900px){.internship-portal-grid {grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:520px){.internship-portal-grid {grid-template-columns:1fr;}}

@@ -66,7 +66,7 @@ export default function SectionLayout({ activeSlug, eyebrow, title, description,
             </Link>
           ))}
         </nav>
-        <div className="section-sidebar-note">
+        <div className="section-sidebar-note" hidden={collapsed}>
           <span className="live-dot" />
           <div>
             <strong>{isFrench ? "Données réelles uniquement" : "Real data only"}</strong>
