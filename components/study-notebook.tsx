@@ -11,7 +11,7 @@ export function splitStudySections(content:string) {
  for(const line of lines){
   if(line.trim().startsWith("```"))fenced=!fenced;
   const heading=!fenced&&line.match(exact?/^##\s+(.+)/:/^#{1,3}\s+(.+)/);
-  if(heading)sections.push({title:heading[1].replace(/\*\*/g,"").replace(/^\d+(?:[.)·:]\s*|\s+)/,""),content:""});
+  if(heading)sections.push({title:heading[1].replace(/\[(?:M?\d+)\](?:\([^\s)]+\))?|【[^】]*\d+[^】]*】/g, "").replace(/\*\*/g,"").replace(/^\d+(?:[.)·:]\s*|\s+)/,""),content:""});
   else if(sections.length)sections[sections.length-1].content+=line+"\n";
   else intro.push(line);
  }

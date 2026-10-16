@@ -505,7 +505,7 @@ export default function FinanceStudioHomeV2() {
                         <span><strong>{quote.label}</strong><small>{quote.region} · {quote.asOf}</small></span>
                         <em>
                           {formatMarketValue(quote)}
-                          {quote.unit === "%" && quote.change != null ? ` · ${quote.change>=0?"+":""}${(quote.change*100).toFixed(1)} bps` : quote.changePercent !== null ? ` · ${quote.changePercent > 0 ? "+" : ""}${quote.changePercent.toFixed(2)}%` : ""}
+                          {(quote.unit === "%" ? quote.change : quote.changePercent) != null && <span className={`quote-move ${(quote.unit === "%" ? quote.change! : quote.changePercent!) > 0 ? "up" : (quote.unit === "%" ? quote.change! : quote.changePercent!) < 0 ? "down" : ""}`}>{quote.unit === "%" ? ` · ${quote.change! > 0 ? "+" : ""}${(quote.change!*100).toFixed(1)} bps` : ` · ${quote.changePercent! > 0 ? "+" : ""}${quote.changePercent!.toFixed(2)}%`}</span>}
                         </em>
                       </div>
                     ))}

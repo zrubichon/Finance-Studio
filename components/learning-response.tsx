@@ -2,14 +2,18 @@
 import FinanceMath from "./finance-math";
 import { Fragment, type ReactNode } from "react";
 
+function removeReferences(value: string) {
+  return value.replace(/\[(?:M?\d+)\](?:\([^\s)]+\))?|【[^】]*\d+[^】]*】/g, "");
+}
 function inline(value:string):ReactNode {
   return value.split(/(\\\([^]+?\\\)|\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^\s)]+\))/g).map((part,i)=>{
     if(part.startsWith("\\("))return <FinanceMath key={i} expression={part.slice(2,-2)}/>;
-    if(part.startsWith("**"))return <strong key={i}>{part.slice(2,-2)}</strong>;
+    if(part.startsWith("**"))return <strong key={i}>{removeReferences(part.slice(2,-2))}</strong>;
     if(part.startsWith("`"))return <code key={i}>{part.slice(1,-1)}</code>;
     const link=part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if(link && /^M?\d+$/.test(link[1]))return null;
     if(link && /^(https:\/\/|\/(?!\/))/.test(link[2]))return <a key={i} href={link[2]} rel="noreferrer">{link[1]}</a>;
-    return <Fragment key={i}>{part}</Fragment>;
+    return <Fragment key={i}>{removeReferences(part)}</Fragment>;
   });
 }
 export function CausalFlow({steps}:{steps:string[]}) {

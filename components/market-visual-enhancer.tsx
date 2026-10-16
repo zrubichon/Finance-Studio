@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 function classify(node: HTMLElement) {
+  if (node.querySelector(".quote-move")) return;
   const text = node.textContent || "";
   const matches = [...text.matchAll(/([+−-])\s*(\d+(?:\.\d+)?)%/g)];
   const match = matches[matches.length - 1];

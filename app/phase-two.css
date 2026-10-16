@@ -712,3 +712,6 @@ html[data-theme="terminal"] {
     align-items:flex-start;
   }
 }
+
+.dictionary-toolbar form {display:grid;gap:10px;min-width:0;}
+.dictionary-toolbar form .chip {justify-self:start;}

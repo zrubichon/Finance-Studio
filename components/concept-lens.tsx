@@ -1,4 +1,5 @@
 "use client";
+import { saveVocabularyCard } from "@/lib/vocabulary-store";
 import StudyDialog from "./study-dialog";
 import StudyNotebook from "./study-notebook";
 
@@ -6,22 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 
 type Trigger = { text: string; x: number; y: number } | null;
-
-function saveConcept(term: string, language: "EN" | "FR") {
-  try {
-    const key = "finance-studio-concept-vocabulary";
-    const current = JSON.parse(window.localStorage.getItem(key) || "[]");
-    const rows = Array.isArray(current) ? current : [];
-    const normalized = term.trim().toLowerCase();
-    const next = [
-      { term: term.trim(), language, at: Date.now() },
-      ...rows.filter((row: { term?: unknown }) => typeof row?.term !== "string" || row.term.trim().toLowerCase() !== normalized),
-    ].slice(0, 120);
-    window.localStorage.setItem(key, JSON.stringify(next));
-  } catch {
-    // Concept Lens remains usable if local storage is unavailable.
-  }
-}
 
 export default function ConceptLens() {
   const { isFrench } = useLanguage();
@@ -61,7 +46,7 @@ export default function ConceptLens() {
     setAnswer("");
     setError("");
     setLoading(true);
-    saveConcept(clean, isFrench ? "FR" : "EN");
+
     try {
       const response = await fetch("/api/professor", {
         method: "POST",
@@ -78,6 +63,7 @@ export default function ConceptLens() {
       const payload = await response.json() as { answer?: string; error?: string };
       if (!response.ok || !payload.answer) throw new Error(payload.error || "AI explanation unavailable.");
       if(version===requestVersion.current)setAnswer(payload.answer);
+      await saveVocabularyCard({term: clean, language: isFrench ? "FR" : "EN", answer: payload.answer, at: Date.now()});
     } catch (cause) {
       if(version===requestVersion.current)setError(cause instanceof Error ? cause.message : (isFrench ? "La fiche IA est temporairement indisponible." : "The AI study card is temporarily unavailable."));
     } finally {
