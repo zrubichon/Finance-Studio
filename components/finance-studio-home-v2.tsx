@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import MarketPanorama from "./market-panorama";
+import AppSidebar, {useSidebarState} from "./app-sidebar";
 import HomeMarketSummary from "./home-market-summary";
 import HomeInterviewDrill from "./home-interview-drill";
 import { useEffect, useMemo, useState } from "react";
@@ -28,6 +30,8 @@ type MarketQuote = {
   unit: "" | "%" | "$" | "bps";
   asOf: string;
   source: string;
+  sourceUrl?:string;
+  history?:{date:string;value:number}[];
 };
 
 type MarketPayload = {
@@ -112,6 +116,7 @@ function trackBadge(track: Track) {
 export default function FinanceStudioHomeV2() {
   const { language, setLanguage, isFrench, text } = useLanguage();
   const [level, setLevel] = useState<Level>("Beginner");
+  const {collapsed,toggle}=useSidebarState();
   const [theme, setTheme] = useState<Theme>("classic");
   const [today, setToday] = useState("");
   const [userId, setUserId] = useState<string | null>(null);
@@ -335,44 +340,9 @@ export default function FinanceStudioHomeV2() {
   const liveProviders = marketData?.providers.filter((provider) => provider.status === "live") ?? [];
 
   return (
-    <main className={`app-shell theme-${theme}`}>
-      <aside className="sidebar">
-        <Link className="brand" href="/">
-          <span className="brand-mark">FS</span>
-          <span>FinanceStudio</span>
-        </Link>
-        <p className="sidebar-kicker">{text("LEARN · MARKETS · CAREERS", "APPRENDRE · MARCHÉS · MÉTIERS")}</p>
+    <main className={`app-shell theme-${theme}${collapsed?" sidebar-collapsed":""}`}>
+      <AppSidebar activeSlug="home" collapsed={collapsed} onToggle={toggle} progress={{percent:progressPercent,completed:completedCount,total:modules.length,authenticated:Boolean(userId),available:!userId||accountProgressAvailable}}/>
 
-        <nav className="primary-nav" aria-label={text("FinanceStudio navigation", "Navigation FinanceStudio")}>
-          <Link className="nav-link active" href="/"><span>⌂</span>{text("Home", "Accueil")}</Link>
-          {navItems.map((item) => (
-            <Link className="nav-link" href={`/${item.slug}`} key={item.slug}>
-              <span>{item.icon}</span>{isFrench ? item.labelFr : item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="sidebar-bottom">
-          <div className="progress-ring" aria-label={text("Curriculum progress", "Progression du programme")}>
-            <span>{userId && !accountProgressAvailable ? "—" : `${progressPercent}%`}</span>
-          </div>
-          <div>
-            <strong>{text("Finance University", "Université de Finance")}</strong>
-            <p>
-              {userId
-                ? accountProgressAvailable
-                  ? isFrench
-                    ? `${completedCount}/${modules.length} cours terminés`
-                    : `${completedCount}/${modules.length} lessons completed`
-                  : text(
-                      "Saved progress unavailable",
-                      "Progression enregistrée indisponible",
-                    )
-                : text("Sign in to sync progress", "Connecte-toi pour synchroniser")}
-            </p>
-          </div>
-        </div>
-      </aside>
 
       <section className="main-canvas">
         <header className="topbar">
@@ -495,31 +465,7 @@ export default function FinanceStudioHomeV2() {
             </div>
 
             {marketData?.quotes.length ? <HomeMarketSummary quotes={marketData.quotes} updatedAt={marketData.updatedAt}/> : null}
-            {groupedMarkets.length ? (
-              <div className="market-grid market-grid-rich">
-                {groupedMarkets.map(([category, quotes]) => (
-                  <div className="market-group market-group-rich" key={category}>
-                    <div className="market-group-heading"><h3>{category}</h3><span>{marketData?.quotes.filter(q=>q.category===category).length} {text("series","séries")}</span></div>
-                    {quotes.map((quote) => (
-                      <div className="market-row market-row-rich" key={quote.id}>
-                        <span><strong>{quote.label}</strong><small>{quote.region} · {quote.asOf}</small></span>
-                        <em>
-                          {formatMarketValue(quote)}
-                          {(quote.unit === "%" ? quote.change : quote.changePercent) != null && <span className={`quote-move ${(quote.unit === "%" ? quote.change! : quote.changePercent!) > 0 ? "up" : (quote.unit === "%" ? quote.change! : quote.changePercent!) < 0 ? "down" : ""}`}>{quote.unit === "%" ? ` · ${quote.change! > 0 ? "+" : ""}${(quote.change!*100).toFixed(1)} bps` : ` · ${quote.changePercent! > 0 ? "+" : ""}${quote.changePercent!.toFixed(2)}%`}</span>}
-                        </em>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="data-note">
-                {text(
-                  "No connected market observation is available right now. FinanceStudio does not substitute invented values.",
-                  "Aucune observation de marché connectée n’est disponible pour le moment. FinanceStudio ne la remplace pas par des valeurs inventées.",
-                )}
-              </p>
-            )}
+            <MarketPanorama quotes={marketData?.quotes || []} compact/>
 
             <p className="data-note">
               {marketData?.quotes.length

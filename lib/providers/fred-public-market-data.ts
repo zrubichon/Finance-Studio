@@ -40,7 +40,7 @@ const series: SeriesConfig[] = [
 
 function startDate() {
   const date = new Date();
-  date.setUTCDate(date.getUTCDate() - 21);
+  date.setUTCDate(date.getUTCDate() - 75);
   return date.toISOString().slice(0, 10);
 }
 
@@ -84,7 +84,7 @@ async function fetchSeries(config: SeriesConfig): Promise<MarketQuote | null> {
     asOf: latest.date,
     source: "Federal Reserve Bank of St. Louis (FRED)",
     sourceUrl: `https://fred.stlouisfed.org/series/${config.id}`,
-    history: points.slice(-30),
+    history: points.slice(-65),
   };
 }
 

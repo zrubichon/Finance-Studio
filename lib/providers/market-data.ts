@@ -146,7 +146,7 @@ async function getEcbQuotes(): Promise<{quotes:MarketQuote[];status:ProviderStat
     const add=(base:string,quote:string,region:MarketRegion)=>{
       const points=days.flatMap(day=>{const a=base==="EUR"?1:day.rates[base];const b=quote==="EUR"?1:day.rates[quote];return a>0&&b>0?[{date:day.date,value:b/a}]:[];});
       const row=quoteFromPoints(`${base}-${quote}`.toLowerCase(),`${base}/${quote}`,"FX",region,points,"","European Central Bank",sourceUrl);
-      if(row)quotes.push({...row,history:points.slice(-30)});
+      if(row)quotes.push({...row,history:points.slice(-65)});
     };
     for(const [currency,region] of currencies)add("EUR",currency,region);
     add("GBP","USD","UK");add("USD","JPY","Japan");add("USD","CNY","China");add("USD","CAD","Global");add("AUD","USD","Global");
@@ -185,7 +185,7 @@ async function fetchFredSeries(
     api_key: apiKey,
     file_type: "json",
     sort_order: "desc",
-    limit: "10",
+    limit: "65",
   });
 
   const endpoint = `https://api.stlouisfed.org/fred/series/observations?${params.toString()}`;
@@ -210,9 +210,9 @@ async function fetchFredSeries(
     }))
     .filter((point) => point.date && Number.isFinite(point.value))
     .sort((a, b) => a.date.localeCompare(b.date))
-    .slice(-2);
+    .slice(-65);
 
-  return quoteFromPoints(
+  const quote = quoteFromPoints(
     config.id.toLowerCase(),
     config.label,
     config.category,
@@ -222,6 +222,7 @@ async function fetchFredSeries(
     "Federal Reserve Bank of St. Louis (FRED)",
     `https://fred.stlouisfed.org/series/${config.id}`,
   );
+  return quote ? {...quote,history:points} : null;
 }
 
 async function getFredQuotes(): Promise<{

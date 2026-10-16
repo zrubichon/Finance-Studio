@@ -228,31 +228,6 @@ export default function HomeDashboardController() {
   useEffect(() => {
     let briefTimer: ReturnType<typeof setInterval> | null = null;
 
-    const app = document.querySelector<HTMLElement>(".app-shell");
-    const sidebar = app?.querySelector<HTMLElement>(".sidebar");
-
-    function setCollapsed(collapsed: boolean) {
-      if (!app) return;
-      app.classList.toggle("sidebar-collapsed", collapsed);
-      safeSet("finance-studio-sidebar-collapsed", collapsed ? "1" : "0");
-      const button = sidebar?.querySelector<HTMLButtonElement>(".sidebar-collapse-toggle");
-      if (button) {
-        button.setAttribute("aria-expanded", collapsed ? "false" : "true");
-        button.title = collapsed ? "Open sidebar" : "Close sidebar";
-        button.textContent = collapsed ? "›" : "‹";
-      }
-    }
-
-    if (sidebar && !sidebar.querySelector(".sidebar-collapse-toggle")) {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "sidebar-collapse-toggle";
-      button.setAttribute("aria-label", "Open or close navigation");
-      button.addEventListener("click", () => setCollapsed(!app?.classList.contains("sidebar-collapsed")));
-      sidebar.appendChild(button);
-    }
-    setCollapsed(safeGet("finance-studio-sidebar-collapsed") === "1");
-
     function applyBrief() {
       const card = document.querySelector<HTMLElement>(".daily-card");
       if (!card) return;

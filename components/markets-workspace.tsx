@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import MarketPanorama from "./market-panorama";
 import MarketSparkline from "./market-sparkline";
 import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
@@ -272,6 +273,7 @@ export default function MarketsWorkspace() {
 
   return (
     <div className="workspace-stack">
+      <MarketPanorama quotes={payload?.quotes || []}/>
       <section className="market-education-banner"><span className="mini-label">{text("LEARN BEFORE YOU INTERPRET","APPRENDRE AVANT D’INTERPRÉTER")}</span><h2>{text("A complete course behind every number","Un vrai cours derrière chaque chiffre")}</h2><p>{text("FRED and the ECB are data providers, not two markets. Explore six asset classes, currencies across regions, observation histories and a 12-chapter learning module.","FRED et la BCE sont des fournisseurs de données, pas deux marchés. Explore six classes d’actifs, des devises de plusieurs régions, leurs historiques et un module de 12 chapitres.")}</p><Link className="full-button" href="/markets/guide">{text("Learn to read markets · full module","Apprendre à lire les marchés · module complet")} →</Link></section>
       <section className="control-panel">
         <div>

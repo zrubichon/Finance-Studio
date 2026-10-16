@@ -1,0 +1,1198 @@
+[
+  {
+    "slug": "bloomberg-market-concepts",
+    "name": "BMC · Bloomberg Market Concepts",
+    "provider": "Bloomberg",
+    "category": "markets",
+    "level": "beginner",
+    "url": "https://professional.bloomberg.com/products/bloomberg-terminal/education/certificate-courses/",
+    "summary": {
+      "en": "An introduction to markets and Bloomberg workflows. Useful before a markets internship and for connecting economic releases to asset prices.",
+      "fr": "Une introduction aux marchés et aux usages de Bloomberg. Utile avant un stage en marchés et pour relier les publications économiques aux prix des actifs."
+    },
+    "prerequisites": {
+      "en": "Basic percentages and financial vocabulary; ask your university whether Bloomberg access is included.",
+      "fr": "Pourcentages et vocabulaire financier de base ; demande à ton université si un accès Bloomberg est inclus."
+    },
+    "topics": [
+      {
+        "en": "Economic indicators and currencies",
+        "fr": "Indicateurs économiques et devises"
+      },
+      {
+        "en": "Fixed income, equities and commodities",
+        "fr": "Obligations, actions et matières premières"
+      },
+      {
+        "en": "Terminal basics, options and portfolios",
+        "fr": "Bases du Terminal, options et portefeuilles"
+      }
+    ],
+    "format": {
+      "en": "Self-paced online course and assessments. Check educational or Terminal access before purchasing.",
+      "fr": "Cours en ligne à ton rythme avec évaluations. Vérifie les accès universitaires ou Terminal avant d’acheter."
+    },
+    "limits": {
+      "en": "A course certificate, not a regulatory license or proof that you have mastered every Terminal function.",
+      "fr": "Une attestation de formation, pas une habilitation réglementaire ni la preuve de maîtriser toutes les fonctions du Terminal."
+    },
+    "task": {
+      "en": "Explain how an unexpected inflation release could affect two yields, one currency pair and one equity index.",
+      "fr": "Explique comment une surprise d’inflation peut affecter deux taux, une paire de devises et un indice boursier."
+    },
+    "books": "markets",
+    "practice": "https://professional.bloomberg.com/products/bloomberg-terminal/education/certificate-courses/",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "bloomberg-finance-fundamentals",
+    "name": "BFF · Bloomberg Finance Fundamentals",
+    "provider": "Bloomberg",
+    "category": "foundations",
+    "level": "beginner",
+    "url": "https://professional.bloomberg.com/products/bloomberg-terminal/education/certificate-courses/",
+    "summary": {
+      "en": "A first introduction to investing, risk and the roles of financial institutions. A gentler starting point before BMC.",
+      "fr": "Une première introduction à l’investissement, au risque et au rôle des institutions financières. Un point d’entrée plus accessible avant BMC."
+    },
+    "prerequisites": {
+      "en": "No advanced finance background needed.",
+      "fr": "Aucun bagage avancé en finance nécessaire."
+    },
+    "topics": [
+      {
+        "en": "Purpose and types of investing",
+        "fr": "Objectifs et types d’investissement"
+      },
+      {
+        "en": "Risk and reward",
+        "fr": "Risque et rendement"
+      },
+      {
+        "en": "Portfolio management",
+        "fr": "Gestion de portefeuille"
+      }
+    ],
+    "format": {
+      "en": "Online, self-paced learning; current access conditions are on Bloomberg’s course page.",
+      "fr": "Formation en ligne à ton rythme ; conditions d’accès actuelles sur la page Bloomberg."
+    },
+    "limits": {
+      "en": "Foundational learning, not a professional qualification or a substitute for hands-on market analysis.",
+      "fr": "Une initiation, pas une qualification professionnelle ni un substitut à l’analyse pratique des marchés."
+    },
+    "task": {
+      "en": "Compare a deposit, a bond and an equity fund for a student with short-term and long-term goals.",
+      "fr": "Compare un dépôt, une obligation et un fonds actions pour des objectifs étudiants à court et long terme."
+    },
+    "books": "general",
+    "practice": "https://professional.bloomberg.com/products/bloomberg-terminal/education/certificate-courses/",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "cfa-program",
+    "name": "CFA Program",
+    "provider": "CFA Institute",
+    "category": "investment",
+    "level": "advanced",
+    "url": "https://www.cfainstitute.org/programs/cfa-program",
+    "summary": {
+      "en": "A broad investment-analysis pathway for research and portfolio careers. It links financial statements, asset valuation and portfolio decisions.",
+      "fr": "Un parcours approfondi d’analyse d’investissement pour la recherche et la gestion. Il relie comptes financiers, valorisation et décisions de portefeuille."
+    },
+    "prerequisites": {
+      "en": "Check current entry eligibility. Build accounting, statistics, time-value-of-money and English reading skills first.",
+      "fr": "Vérifie les conditions d’inscription actuelles. Consolide d’abord comptabilité, statistiques, actualisation et lecture en anglais."
+    },
+    "topics": [
+      {
+        "en": "Ethics, economics and quantitative methods",
+        "fr": "Éthique, économie et méthodes quantitatives"
+      },
+      {
+        "en": "Financial statements and asset valuation",
+        "fr": "États financiers et valorisation des actifs"
+      },
+      {
+        "en": "Portfolio management and practical skills",
+        "fr": "Gestion de portefeuille et compétences pratiques"
+      }
+    ],
+    "format": {
+      "en": "Three exam levels and Practical Skills Modules. Registration fees and preparation materials vary by level and window.",
+      "fr": "Trois niveaux d’examens et des modules pratiques. Frais d’inscription et supports variables selon le niveau et la session."
+    },
+    "limits": {
+      "en": "Passing Level I does not make you a CFA charterholder. The charter also requires qualifying experience and membership.",
+      "fr": "Réussir le niveau I ne donne pas le titre CFA. L’obtention du titre exige aussi une expérience admissible et l’adhésion."
+    },
+    "task": {
+      "en": "Build a company investment note: business model, statement adjustments, valuation range and the strongest reason your thesis could fail.",
+      "fr": "Rédige une note d’investissement : modèle économique, retraitements comptables, fourchette de valorisation et principale raison d’échec de la thèse."
+    },
+    "books": "investment",
+    "practice": "https://www.cfainstitute.org/programs/cfa-program/charter",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "investment-foundations",
+    "name": "Investment Foundations Certificate",
+    "provider": "CFA Institute",
+    "category": "foundations",
+    "level": "beginner",
+    "url": "https://www.cfainstitute.org/programs/investment-foundations-certificate",
+    "summary": {
+      "en": "A structured foundation in the investment industry and its language. Useful before a demanding designation or a first finance internship.",
+      "fr": "Un socle structuré sur l’industrie de l’investissement et son vocabulaire. Utile avant une certification exigeante ou un premier stage en finance."
+    },
+    "prerequisites": {
+      "en": "A beginner-friendly route; financial curiosity and regular study are more useful than advanced mathematics.",
+      "fr": "Un parcours accessible aux débutants ; curiosité financière et régularité comptent davantage que des mathématiques avancées."
+    },
+    "topics": [
+      {
+        "en": "Investment institutions and market structure",
+        "fr": "Institutions et structure des marchés"
+      },
+      {
+        "en": "Instruments and analytical inputs",
+        "fr": "Instruments et outils d’analyse"
+      },
+      {
+        "en": "Client needs and professional ethics",
+        "fr": "Besoins clients et déontologie"
+      }
+    ],
+    "format": {
+      "en": "Self-paced online modules and a final assessment. Check student offers and the current access period.",
+      "fr": "Modules en ligne à ton rythme et évaluation finale. Vérifie les offres étudiantes et la durée d’accès actuelle."
+    },
+    "limits": {
+      "en": "This certificate is separate from the CFA Program and does not confer the CFA designation.",
+      "fr": "Ce certificat est distinct du CFA Program et ne confère pas le titre CFA."
+    },
+    "task": {
+      "en": "Describe how an investor’s savings reach a company through a fund, a broker and a primary or secondary market.",
+      "fr": "Décris comment l’épargne d’un investisseur rejoint une entreprise via un fonds, un courtier et le marché primaire ou secondaire."
+    },
+    "books": "general",
+    "practice": "https://www.cfainstitute.org/programs/investment-foundations-certificate",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "cipm",
+    "name": "CIPM · Investment Performance Measurement",
+    "provider": "CFA Institute",
+    "category": "investment",
+    "level": "intermediate",
+    "url": "https://www.cfainstitute.org/programs/cipm/exam",
+    "summary": {
+      "en": "A specialist route for measuring returns, evaluating managers and explaining performance to clients.",
+      "fr": "Un parcours spécialisé pour mesurer les rendements, évaluer les gérants et expliquer la performance aux clients."
+    },
+    "prerequisites": {
+      "en": "Comfort with portfolio returns and statistics. Read the official registration policies and English-language requirements.",
+      "fr": "Aisance avec les rendements de portefeuille et les statistiques. Consulte les conditions d’inscription et les exigences linguistiques."
+    },
+    "topics": [
+      {
+        "en": "Return measurement and attribution",
+        "fr": "Mesure et attribution de performance"
+      },
+      {
+        "en": "Risk-adjusted appraisal and manager selection",
+        "fr": "Évaluation ajustée du risque et sélection de gérants"
+      },
+      {
+        "en": "GIPS reporting and ethics",
+        "fr": "Présentation GIPS et éthique"
+      }
+    ],
+    "format": {
+      "en": "Two exam levels with official learning resources. Check current exam windows and fees.",
+      "fr": "Deux niveaux d’examens avec ressources officielles. Vérifie les sessions et frais actuels."
+    },
+    "limits": {
+      "en": "Performance measurement expertise is different from investment advice authorization.",
+      "fr": "L’expertise en mesure de performance est distincte de l’autorisation de conseiller des investissements."
+    },
+    "task": {
+      "en": "Reconcile a portfolio’s return with its benchmark, then separate allocation and security-selection effects.",
+      "fr": "Rapproche le rendement d’un portefeuille de son indice, puis distingue allocation et sélection de titres."
+    },
+    "books": "investment",
+    "practice": "https://www.cfainstitute.org/programs/cipm/exam",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "sustainable-investing",
+    "name": "Sustainable Investing Certificate",
+    "provider": "CFA Institute",
+    "category": "sustainable",
+    "level": "beginner",
+    "url": "https://www.cfainstitute.org/programs/sustainable-investing-certificate",
+    "summary": {
+      "en": "Learn how environmental, social and governance factors can enter investment analysis rather than treating ESG as a marketing label.",
+      "fr": "Apprends comment les facteurs environnementaux, sociaux et de gouvernance entrent dans l’analyse d’investissement, au-delà d’une étiquette marketing."
+    },
+    "prerequisites": {
+      "en": "Financial-market basics help. Be ready to distinguish an investment objective from a sustainability preference.",
+      "fr": "Les bases des marchés sont utiles. Savoir distinguer objectif financier et préférence de durabilité."
+    },
+    "topics": [
+      {
+        "en": "Environmental, social and governance factors",
+        "fr": "Facteurs environnementaux, sociaux et de gouvernance"
+      },
+      {
+        "en": "Research integration and stewardship",
+        "fr": "Intégration à l’analyse et engagement actionnarial"
+      },
+      {
+        "en": "Portfolio implications and reporting",
+        "fr": "Conséquences pour le portefeuille et la communication"
+      }
+    ],
+    "format": {
+      "en": "Foundational online certificate with an exam. Check the current syllabus, fee and access window.",
+      "fr": "Certificat introductif en ligne avec examen. Vérifie programme, tarif et durée d’accès actuels."
+    },
+    "limits": {
+      "en": "An ESG label does not guarantee lower risk, superior returns or a particular real-world impact.",
+      "fr": "Une étiquette ESG ne garantit ni risque inférieur, ni surperformance, ni impact réel particulier."
+    },
+    "task": {
+      "en": "Compare two firms with similar profits but different climate exposures and governance quality. Explain which valuation assumptions may change.",
+      "fr": "Compare deux entreprises aux profits proches mais aux expositions climatiques et gouvernances différentes. Explique quelles hypothèses de valorisation peuvent changer."
+    },
+    "books": "investment",
+    "practice": "https://www.cfainstitute.org/programs/sustainable-investing-certificate",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "private-markets",
+    "name": "Private Markets and Alternative Investments Certificate",
+    "provider": "CFA Institute",
+    "category": "investment",
+    "level": "intermediate",
+    "url": "https://www.cfainstitute.org/programs/private-markets-alternative-investments-certificate",
+    "summary": {
+      "en": "Understand private assets, fund structures and the mechanics behind reported returns. Relevant to alternatives, private wealth and manager research.",
+      "fr": "Comprendre les actifs privés, les structures de fonds et les mécanismes des rendements publiés. Pertinent en actifs alternatifs, gestion privée et sélection de gérants."
+    },
+    "prerequisites": {
+      "en": "Know basic valuation and portfolio risk before comparing illiquid funds.",
+      "fr": "Connaître les bases de la valorisation et du risque de portefeuille avant de comparer des fonds illiquides."
+    },
+    "topics": [
+      {
+        "en": "Private equity and private credit",
+        "fr": "Capital-investissement et dette privée"
+      },
+      {
+        "en": "Real assets and alternative strategies",
+        "fr": "Actifs réels et stratégies alternatives"
+      },
+      {
+        "en": "Fees, capital calls and fund performance",
+        "fr": "Frais, appels de fonds et performance"
+      }
+    ],
+    "format": {
+      "en": "Online certificate with course assessments; registration includes an access period specified by the provider.",
+      "fr": "Certificat en ligne avec évaluations ; l’inscription inclut une durée d’accès précisée par l’organisme."
+    },
+    "limits": {
+      "en": "A learning certificate does not provide access to restricted funds or remove liquidity risk.",
+      "fr": "Un certificat pédagogique ne donne pas accès aux fonds restreints et n’élimine pas le risque de liquidité."
+    },
+    "task": {
+      "en": "Draw a fund’s cash-flow timeline and show why IRR and a money multiple can tell different stories.",
+      "fr": "Dessine la chronologie des flux d’un fonds et montre pourquoi TRI et multiple du capital racontent parfois des histoires différentes."
+    },
+    "books": "modeling",
+    "practice": "https://www.cfainstitute.org/programs/private-markets-alternative-investments-certificate",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "frm",
+    "name": "FRM · Financial Risk Manager",
+    "provider": "GARP",
+    "category": "risk",
+    "level": "advanced",
+    "url": "https://www.garp.org/frm",
+    "summary": {
+      "en": "A risk-management qualification for understanding losses across market, credit, operational and liquidity risk.",
+      "fr": "Une qualification de gestion des risques pour comprendre les pertes liées aux marchés, au crédit, aux opérations et à la liquidité."
+    },
+    "prerequisites": {
+      "en": "Probability, statistics, bond mathematics and financial products are important foundations.",
+      "fr": "Probabilités, statistiques, mathématiques obligataires et produits financiers sont des bases importantes."
+    },
+    "topics": [
+      {
+        "en": "Quantitative tools and valuation",
+        "fr": "Outils quantitatifs et valorisation"
+      },
+      {
+        "en": "Market and credit risk",
+        "fr": "Risques de marché et de crédit"
+      },
+      {
+        "en": "Liquidity, operations and stress scenarios",
+        "fr": "Liquidité, opérations et scénarios de crise"
+      }
+    ],
+    "format": {
+      "en": "Two exams; the full certification also requires relevant work experience. Check GARP’s current fees and study resources.",
+      "fr": "Deux examens ; la certification complète exige aussi une expérience professionnelle pertinente. Consulte tarifs et ressources GARP."
+    },
+    "limits": {
+      "en": "Passing the exams alone is not the full FRM certification. Risk models remain dependent on assumptions and data quality.",
+      "fr": "Réussir les examens ne suffit pas à obtenir la certification complète. Les modèles restent dépendants des hypothèses et des données."
+    },
+    "task": {
+      "en": "Compare historical VaR with a stress scenario and explain how a loss can exceed the VaR estimate.",
+      "fr": "Compare une VaR historique à un scénario de crise et explique comment une perte peut dépasser l’estimation de VaR."
+    },
+    "books": "derivatives",
+    "practice": "https://www.garp.org/frm",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "scr",
+    "name": "SCR · Sustainability and Climate Risk",
+    "provider": "GARP",
+    "category": "sustainable",
+    "level": "intermediate",
+    "url": "https://www.garp.org/scr",
+    "summary": {
+      "en": "A focused certificate on how climate and sustainability risks affect institutions and financial decisions.",
+      "fr": "Un certificat ciblé sur la manière dont les risques climatiques et de durabilité affectent les institutions et décisions financières."
+    },
+    "prerequisites": {
+      "en": "Basic risk vocabulary and an interest in climate economics.",
+      "fr": "Vocabulaire du risque de base et intérêt pour l’économie du climat."
+    },
+    "topics": [
+      {
+        "en": "Physical and transition risks",
+        "fr": "Risques physiques et de transition"
+      },
+      {
+        "en": "Climate scenarios and financial exposure",
+        "fr": "Scénarios climatiques et exposition financière"
+      },
+      {
+        "en": "Governance and transition planning",
+        "fr": "Gouvernance et plans de transition"
+      }
+    ],
+    "format": {
+      "en": "Exam-based certificate. The official curriculum and current registration conditions are on GARP’s site.",
+      "fr": "Certificat avec examen. Programme officiel et conditions d’inscription sur le site GARP."
+    },
+    "limits": {
+      "en": "Climate scenarios describe conditional futures; they are not precise forecasts or guarantees.",
+      "fr": "Les scénarios climatiques décrivent des futurs conditionnels, pas des prévisions exactes ni des garanties."
+    },
+    "task": {
+      "en": "Map how a flood and a carbon-price change affect different borrowers through collateral, operating costs and refinancing.",
+      "fr": "Relie une inondation et une hausse du prix du carbone aux garanties, coûts et besoins de refinancement de différents emprunteurs."
+    },
+    "books": "risk",
+    "practice": "https://www.garp.org/scr",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "caia",
+    "name": "CAIA Charter",
+    "provider": "CAIA Association",
+    "category": "investment",
+    "level": "advanced",
+    "url": "https://caia.org/caia-charter/",
+    "summary": {
+      "en": "A specialist investment pathway centered on alternatives and their role in diversified portfolios.",
+      "fr": "Un parcours spécialisé sur les investissements alternatifs et leur place dans les portefeuilles diversifiés."
+    },
+    "prerequisites": {
+      "en": "Corporate finance, statistics and English reading skills are useful starting points. Verify charter and membership requirements.",
+      "fr": "Finance d’entreprise, statistiques et lecture en anglais sont utiles. Vérifie les exigences du titre et de l’adhésion."
+    },
+    "topics": [
+      {
+        "en": "Private markets and real assets",
+        "fr": "Marchés privés et actifs réels"
+      },
+      {
+        "en": "Hedge funds and complex strategies",
+        "fr": "Fonds alternatifs et stratégies complexes"
+      },
+      {
+        "en": "Due diligence and portfolio construction",
+        "fr": "Audit d’investissement et construction de portefeuille"
+      }
+    ],
+    "format": {
+      "en": "Two levels of study and exams; review the full charter conditions before enrollment.",
+      "fr": "Deux niveaux d’étude et d’examens ; consulte toutes les conditions du titre avant l’inscription."
+    },
+    "limits": {
+      "en": "Alternative assets are not automatically diversifiers: leverage, valuation lags and shared exposures matter.",
+      "fr": "Les actifs alternatifs ne diversifient pas automatiquement : levier, décalage des valorisations et expositions communes comptent."
+    },
+    "task": {
+      "en": "Compare a private credit fund and a listed bond fund using liquidity, fees, leverage and default exposure.",
+      "fr": "Compare un fonds de dette privée à un fonds obligataire coté : liquidité, frais, levier et exposition au défaut."
+    },
+    "books": "investment",
+    "practice": "https://caia.org/caia-charter/",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "cqf",
+    "name": "CQF · Certificate in Quantitative Finance",
+    "provider": "CQF Institute / Fitch Learning",
+    "category": "quant",
+    "level": "advanced",
+    "url": "https://www.cqf.com/about-cqf/program-structure/what-is-cqf",
+    "summary": {
+      "en": "An intensive professional program in quantitative finance and machine learning for technically oriented roles.",
+      "fr": "Un programme professionnel intensif en finance quantitative et apprentissage automatique pour les métiers techniques."
+    },
+    "prerequisites": {
+      "en": "Prepare mathematics, probability and programming. Use the provider’s primers to assess readiness rather than buying on the name alone.",
+      "fr": "Prépare mathématiques, probabilités et programmation. Utilise les modules préparatoires pour évaluer ton niveau avant d’acheter."
+    },
+    "topics": [
+      {
+        "en": "Quantitative modeling and derivatives",
+        "fr": "Modélisation quantitative et dérivés"
+      },
+      {
+        "en": "Numerical methods and implementation",
+        "fr": "Méthodes numériques et implémentation"
+      },
+      {
+        "en": "Machine learning in finance",
+        "fr": "Apprentissage automatique en finance"
+      }
+    ],
+    "format": {
+      "en": "Part-time online program over six months, with preparation and further-learning resources. Obtain the current regional fee from the provider.",
+      "fr": "Programme en ligne à temps partiel sur six mois, avec préparation et ressources complémentaires. Demande le tarif régional actuel."
+    },
+    "limits": {
+      "en": "A professional qualification described as master’s-level is not automatically an academic master’s degree.",
+      "fr": "Une qualification professionnelle de niveau annoncé master n’est pas automatiquement un diplôme universitaire de master."
+    },
+    "task": {
+      "en": "Price a simple option numerically and test the effect of volatility, sample size and model assumptions.",
+      "fr": "Valorise numériquement une option simple puis teste l’effet de la volatilité, de la taille d’échantillon et des hypothèses."
+    },
+    "books": "derivatives",
+    "practice": "https://www.cqf.com/about-cqf/program-structure/what-is-cqf",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "amf",
+    "name": "Examen AMF",
+    "provider": "AMF · organismes certifiés",
+    "category": "regulation",
+    "level": "beginner",
+    "url": "https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/certification-professionnelle",
+    "summary": {
+      "en": "French financial knowledge verification relevant to specified regulated functions. It covers the rules and professional conduct behind market activities.",
+      "fr": "Une vérification des connaissances financières en France pour certaines fonctions réglementées. Elle porte notamment sur les règles et la déontologie des activités financières."
+    },
+    "prerequisites": {
+      "en": "Open to students and professionals. Confirm whether your intended function requires an external exam or an employer’s internal verification.",
+      "fr": "Accessible aux étudiants et professionnels. Vérifie si ta fonction visée relève de l’examen externe ou d’une vérification interne de l’employeur."
+    },
+    "topics": [
+      {
+        "en": "Regulatory framework and professional conduct",
+        "fr": "Cadre réglementaire et déontologie"
+      },
+      {
+        "en": "Financial instruments and market organization",
+        "fr": "Instruments financiers et organisation des marchés"
+      },
+      {
+        "en": "Client information and investor protection",
+        "fr": "Information client et protection de l’investisseur"
+      }
+    ],
+    "format": {
+      "en": "Exam delivered by an AMF-certified organization. Choose a provider from the official list and compare preparation, exam access and retake terms.",
+      "fr": "Examen organisé par un organisme certifié AMF. Compare préparation, inscription et conditions de repassage depuis la liste officielle."
+    },
+    "limits": {
+      "en": "Not mandatory for every finance job. An external exam and an employer’s internal verification are distinct routes.",
+      "fr": "Pas obligatoire pour tous les métiers financiers. Examen externe et vérification interne de l’employeur sont des voies distinctes."
+    },
+    "task": {
+      "en": "Identify a client-information failure in a fictional investment sale and explain what should have been verified.",
+      "fr": "Identifie un défaut d’information dans une vente fictive d’investissement et explique les vérifications nécessaires."
+    },
+    "books": "regulation",
+    "practice": "https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/certification-professionnelle",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "amf-finance-durable",
+    "name": "Examen AMF Finance durable",
+    "provider": "AMF · organismes certifiés",
+    "category": "sustainable",
+    "level": "intermediate",
+    "url": "https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/certification-professionnelle",
+    "summary": {
+      "en": "A complementary French exam focused on sustainable finance knowledge. Useful alongside a client-facing or investment role.",
+      "fr": "Un examen français complémentaire sur les connaissances en finance durable. Utile pour le conseil client et les métiers de l’investissement."
+    },
+    "prerequisites": {
+      "en": "Build general market and regulatory knowledge first.",
+      "fr": "Acquiers d’abord les bases des marchés et de la réglementation."
+    },
+    "topics": [
+      {
+        "en": "Sustainable-finance concepts",
+        "fr": "Notions de finance durable"
+      },
+      {
+        "en": "ESG information and investment approaches",
+        "fr": "Informations ESG et approches d’investissement"
+      },
+      {
+        "en": "Sustainability preferences and communication",
+        "fr": "Préférences de durabilité et communication"
+      }
+    ],
+    "format": {
+      "en": "Choose an officially certified examination provider; current syllabuses and fees vary by organization.",
+      "fr": "Choisis un organisme d’examen officiellement certifié ; programme et tarifs sont à vérifier auprès de l’organisme."
+    },
+    "limits": {
+      "en": "This complementary exam does not replace the general AMF knowledge requirements applicable to a regulated function.",
+      "fr": "Cet examen complémentaire ne remplace pas les exigences généralistes applicables à une fonction réglementée."
+    },
+    "task": {
+      "en": "Explain the difference between an ESG product description and evidence of measurable environmental outcomes.",
+      "fr": "Distingue description ESG d’un produit et preuves d’effets environnementaux mesurables."
+    },
+    "books": "regulation",
+    "practice": "https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/certification-professionnelle",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "sie",
+    "name": "SIE · Securities Industry Essentials",
+    "provider": "FINRA",
+    "category": "regulation",
+    "level": "beginner",
+    "url": "https://www.finra.org/registration-exams-ce/qualification-exams/securities-industry-essentials-exam",
+    "summary": {
+      "en": "A US securities-industry entry exam that students can take before joining a financial firm. Relevant when exploring brokerage and wealth careers.",
+      "fr": "Un examen d’entrée dans l’industrie des titres aux États-Unis, accessible avant de rejoindre une entreprise. Pertinent pour découvrir courtage et gestion de patrimoine."
+    },
+    "prerequisites": {
+      "en": "Age 18 or older; no firm sponsorship required.",
+      "fr": "À partir de 18 ans ; pas de parrainage d’entreprise requis."
+    },
+    "topics": [
+      {
+        "en": "Capital markets and financial products",
+        "fr": "Marchés de capitaux et produits financiers"
+      },
+      {
+        "en": "Product risks and customer accounts",
+        "fr": "Risques des produits et comptes clients"
+      },
+      {
+        "en": "Prohibited practices and regulation",
+        "fr": "Pratiques interdites et réglementation"
+      }
+    ],
+    "format": {
+      "en": "75 scored questions, 1 hour 45 minutes; published exam fee: US$100, checked October 16, 2026. Preparation is extra.",
+      "fr": "75 questions notées, 1 h 45 ; frais publiés : 100 dollars US, vérifiés le 16 octobre 2026. La préparation est en supplément."
+    },
+    "limits": {
+      "en": "Passing the SIE is not a license to sell securities. Further registration and job-specific exams may be necessary.",
+      "fr": "Réussir le SIE n’autorise pas à vendre des titres. Une inscription et des examens liés au métier peuvent être nécessaires."
+    },
+    "task": {
+      "en": "Explain why a bond’s yield and price move in opposite directions, then identify a prohibited sales practice.",
+      "fr": "Explique la relation inverse entre prix et rendement d’une obligation, puis identifie une pratique de vente interdite."
+    },
+    "books": "sie",
+    "practice": "https://www.finra.org/registration-exams-ce/qualification-exams/securities-industry-essentials-exam/practice-test",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "series-7",
+    "name": "Series 7 · General Securities Representative",
+    "provider": "FINRA",
+    "category": "regulation",
+    "level": "intermediate",
+    "url": "https://www.finra.org/registration-exams-ce/qualification-exams/series7",
+    "summary": {
+      "en": "A role-specific US qualification exam for general securities representatives. Usually planned with an employing firm rather than taken independently as a student.",
+      "fr": "Un examen américain lié au métier de représentant général en titres. Il se prépare habituellement avec l’employeur plutôt qu’indépendamment comme étudiant."
+    },
+    "prerequisites": {
+      "en": "Firm association and sponsorship are required; the SIE is a corequisite.",
+      "fr": "Affiliation et parrainage d’une entreprise requis ; le SIE est un examen complémentaire obligatoire."
+    },
+    "topics": [
+      {
+        "en": "Customer profiles and account procedures",
+        "fr": "Profils clients et procédures de comptes"
+      },
+      {
+        "en": "Securities, options and recommendations",
+        "fr": "Titres, options et recommandations"
+      },
+      {
+        "en": "Trade handling and professional obligations",
+        "fr": "Traitement des transactions et obligations professionnelles"
+      }
+    ],
+    "format": {
+      "en": "Qualification exam with an official content outline. Check fees and enrollment with the sponsoring firm.",
+      "fr": "Examen de qualification avec programme officiel. Vérifie frais et inscription avec l’entreprise qui te parraine."
+    },
+    "limits": {
+      "en": "Not an independent course certificate; passing an exam is part of a wider registration and supervision process.",
+      "fr": "Ce n’est pas une simple attestation de cours ; l’examen s’inscrit dans une procédure plus large d’enregistrement et de supervision."
+    },
+    "task": {
+      "en": "Compare two products for a fictional client, documenting suitability, liquidity needs and downside exposure.",
+      "fr": "Compare deux produits pour un client fictif en justifiant adéquation, liquidité et risque de perte."
+    },
+    "books": "sie",
+    "practice": "https://www.kaplanfinancial.com/securities/series-exams",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "series-65",
+    "name": "Series 65 · Investment Adviser Law",
+    "provider": "NASAA / FINRA administration",
+    "category": "wealth",
+    "level": "intermediate",
+    "url": "https://www.nasaa.org/exams/general-exam-information/",
+    "summary": {
+      "en": "A US investment-adviser qualification exam covering investment knowledge and advisory responsibilities. Relevant to adviser-representative pathways.",
+      "fr": "Un examen américain portant sur les connaissances d’investissement et les responsabilités du conseil. Pertinent pour les parcours de représentant d’un conseiller en investissement."
+    },
+    "prerequisites": {
+      "en": "Check the rules of the state where you intend to register, including exemptions and any additional requirements.",
+      "fr": "Vérifie les règles de l’État où tu souhaites t’enregistrer, notamment dispenses et exigences complémentaires."
+    },
+    "topics": [
+      {
+        "en": "Economic factors and investment vehicles",
+        "fr": "Facteurs économiques et supports d’investissement"
+      },
+      {
+        "en": "Client recommendations and planning",
+        "fr": "Recommandations clients et planification"
+      },
+      {
+        "en": "Advisory law, duties and ethics",
+        "fr": "Droit du conseil, obligations et éthique"
+      }
+    ],
+    "format": {
+      "en": "Exam preparation and regulatory registration are separate costs. Confirm the current outline and enrollment process with NASAA.",
+      "fr": "Préparation et enregistrement réglementaire sont des coûts distincts. Vérifie programme et inscription auprès de NASAA."
+    },
+    "limits": {
+      "en": "Passing does not automatically register you, authorize every activity or provide work authorization.",
+      "fr": "La réussite ne t’enregistre pas automatiquement, n’autorise pas toutes les activités et ne confère pas d’autorisation de travail."
+    },
+    "task": {
+      "en": "Write an investment-policy statement for a fictional household and explain conflicts of interest in the proposed fee arrangement.",
+      "fr": "Rédige une politique d’investissement pour un foyer fictif et explique les conflits d’intérêts de la rémunération proposée."
+    },
+    "books": "sie",
+    "practice": "https://www.kaplanfinancial.com/securities/series-65",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "fmva",
+    "name": "FMVA · Financial Modeling & Valuation Analyst",
+    "provider": "Corporate Finance Institute",
+    "category": "modeling",
+    "level": "intermediate",
+    "url": "https://corporatefinanceinstitute.com/certifications/financial-modeling-valuation-analyst-fmva-program/",
+    "summary": {
+      "en": "Build financial models and value businesses for transaction and corporate-finance work.",
+      "fr": "Construire des modèles financiers et valoriser des entreprises pour les transactions et la finance d’entreprise."
+    },
+    "prerequisites": {
+      "en": "Accounting and spreadsheet fluency.",
+      "fr": "Bases comptables et aisance sur tableur."
+    },
+    "topics": [
+      {
+        "en": "Three-statement forecasts",
+        "fr": "Prévisions des trois états financiers"
+      },
+      {
+        "en": "DCF and comparable valuation",
+        "fr": "DCF et valorisation par comparables"
+      },
+      {
+        "en": "Scenarios and presentation",
+        "fr": "Scénarios et présentation"
+      }
+    ],
+    "format": {
+      "en": "Self-paced provider certificate; a paid subscription is required for certification. Verify the current program and subscription coverage.",
+      "fr": "Certificat de formation à ton rythme ; un abonnement payant est nécessaire pour la certification. Vérifie le programme et les services inclus."
+    },
+    "limits": {
+      "en": "A skills certificate, not a regulatory license. Demonstrate the skills with a project as well as the badge.",
+      "fr": "Un certificat de compétences, pas une habilitation réglementaire. Démontre tes compétences avec un projet en plus du badge."
+    },
+    "task": {
+      "en": "Build a linked forecast and explain the valuation sensitivity to margins and discount rates.",
+      "fr": "Construis des prévisions liées et explique la sensibilité de la valorisation aux marges et au taux d’actualisation."
+    },
+    "books": "modeling",
+    "practice": "https://corporatefinanceinstitute.com/certifications/financial-modeling-valuation-analyst-fmva-program/",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "cbca",
+    "name": "CBCA · Commercial Banking & Credit Analyst",
+    "provider": "Corporate Finance Institute",
+    "category": "risk",
+    "level": "intermediate",
+    "url": "https://corporatefinanceinstitute.com/certifications/commercial-banking-credit-analyst-certification-cbca/",
+    "summary": {
+      "en": "Develop practical borrower-analysis and lending skills.",
+      "fr": "Développer l’analyse pratique des emprunteurs et des crédits."
+    },
+    "prerequisites": {
+      "en": "Financial statements and cash-flow basics.",
+      "fr": "Bases des états financiers et flux de trésorerie."
+    },
+    "topics": [
+      {
+        "en": "Borrower analysis",
+        "fr": "Analyse des emprunteurs"
+      },
+      {
+        "en": "Lending structures",
+        "fr": "Structures de financement"
+      },
+      {
+        "en": "Credit risk",
+        "fr": "Risque de crédit"
+      }
+    ],
+    "format": {
+      "en": "Self-paced provider certificate; a paid subscription is required for certification. Verify the current program and subscription coverage.",
+      "fr": "Certificat de formation à ton rythme ; un abonnement payant est nécessaire pour la certification. Vérifie le programme et les services inclus."
+    },
+    "limits": {
+      "en": "A skills certificate, not a regulatory license. Demonstrate the skills with a project as well as the badge.",
+      "fr": "Un certificat de compétences, pas une habilitation réglementaire. Démontre tes compétences avec un projet en plus du badge."
+    },
+    "task": {
+      "en": "Write a credit memo connecting debt capacity, cash generation and covenant protection.",
+      "fr": "Rédige une note de crédit reliant capacité d’endettement, trésorerie et protection par covenants."
+    },
+    "books": "risk",
+    "practice": "https://corporatefinanceinstitute.com/certifications/commercial-banking-credit-analyst-certification-cbca/",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "cmsa",
+    "name": "CMSA · Capital Markets & Securities Analyst",
+    "provider": "Corporate Finance Institute",
+    "category": "markets",
+    "level": "intermediate",
+    "url": "https://corporatefinanceinstitute.com/certifications/capital-markets-securities-analyst-cmsa/",
+    "summary": {
+      "en": "Apply capital-market concepts to products and trading discussions.",
+      "fr": "Appliquer les notions de marchés aux produits et discussions de trading."
+    },
+    "prerequisites": {
+      "en": "Basic market vocabulary and arithmetic.",
+      "fr": "Vocabulaire des marchés et calculs de base."
+    },
+    "topics": [
+      {
+        "en": "Market instruments",
+        "fr": "Instruments de marché"
+      },
+      {
+        "en": "Trading and valuation",
+        "fr": "Trading et valorisation"
+      },
+      {
+        "en": "Risk applications",
+        "fr": "Applications du risque"
+      }
+    ],
+    "format": {
+      "en": "Self-paced provider certificate; a paid subscription is required for certification. Verify the current program and subscription coverage.",
+      "fr": "Certificat de formation à ton rythme ; un abonnement payant est nécessaire pour la certification. Vérifie le programme et les services inclus."
+    },
+    "limits": {
+      "en": "A skills certificate, not a regulatory license. Demonstrate the skills with a project as well as the badge.",
+      "fr": "Un certificat de compétences, pas une habilitation réglementaire. Démontre tes compétences avec un projet en plus du badge."
+    },
+    "task": {
+      "en": "Compare two instruments exposed to the same macroeconomic surprise.",
+      "fr": "Compare deux instruments exposés à la même surprise macroéconomique."
+    },
+    "books": "general",
+    "practice": "https://corporatefinanceinstitute.com/certifications/capital-markets-securities-analyst-cmsa/",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "bida",
+    "name": "BIDA · Business Intelligence & Data Analyst",
+    "provider": "Corporate Finance Institute",
+    "category": "quant",
+    "level": "intermediate",
+    "url": "https://corporatefinanceinstitute.com/certifications/business-intelligence-data-analyst-bida/",
+    "summary": {
+      "en": "Turn raw business data into useful analysis and dashboards.",
+      "fr": "Transformer les données brutes en analyses et tableaux de bord utiles."
+    },
+    "prerequisites": {
+      "en": "Spreadsheet basics and willingness to learn analytical tools.",
+      "fr": "Bases du tableur et envie d’apprendre des outils analytiques."
+    },
+    "topics": [
+      {
+        "en": "Data cleaning",
+        "fr": "Nettoyage des données"
+      },
+      {
+        "en": "Data modeling and visualization",
+        "fr": "Modélisation et visualisation des données"
+      },
+      {
+        "en": "Analysis and automation",
+        "fr": "Analyse et automatisation"
+      }
+    ],
+    "format": {
+      "en": "Self-paced provider certificate; a paid subscription is required for certification. Verify the current program and subscription coverage.",
+      "fr": "Certificat de formation à ton rythme ; un abonnement payant est nécessaire pour la certification. Vérifie le programme et les services inclus."
+    },
+    "limits": {
+      "en": "A skills certificate, not a regulatory license. Demonstrate the skills with a project as well as the badge.",
+      "fr": "Un certificat de compétences, pas une habilitation réglementaire. Démontre tes compétences avec un projet en plus du badge."
+    },
+    "task": {
+      "en": "Clean a financial dataset and document the source, transformations and missing observations.",
+      "fr": "Nettoie un jeu de données financières et documente sources, transformations et observations manquantes."
+    },
+    "books": "general",
+    "practice": "https://corporatefinanceinstitute.com/certifications/business-intelligence-data-analyst-bida/",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "fpap",
+    "name": "FPAP · Financial Planning & Analysis Professional",
+    "provider": "Corporate Finance Institute",
+    "category": "modeling",
+    "level": "intermediate",
+    "url": "https://corporatefinanceinstitute.com/certifications/",
+    "summary": {
+      "en": "Develop budgeting, forecasting and management-analysis skills.",
+      "fr": "Développer les compétences de budget, prévision et analyse de gestion."
+    },
+    "prerequisites": {
+      "en": "Accounting and spreadsheet fundamentals.",
+      "fr": "Fondamentaux comptables et tableur."
+    },
+    "topics": [
+      {
+        "en": "Budgeting",
+        "fr": "Budgétisation"
+      },
+      {
+        "en": "Forecasting",
+        "fr": "Prévisions"
+      },
+      {
+        "en": "Performance analysis",
+        "fr": "Analyse de performance"
+      }
+    ],
+    "format": {
+      "en": "Self-paced provider certificate; a paid subscription is required for certification. Verify the current program and subscription coverage.",
+      "fr": "Certificat de formation à ton rythme ; un abonnement payant est nécessaire pour la certification. Vérifie le programme et les services inclus."
+    },
+    "limits": {
+      "en": "A skills certificate, not a regulatory license. Demonstrate the skills with a project as well as the badge.",
+      "fr": "Un certificat de compétences, pas une habilitation réglementaire. Démontre tes compétences avec un projet en plus du badge."
+    },
+    "task": {
+      "en": "Reconcile an actual-versus-budget gap into price, volume and cost effects.",
+      "fr": "Décompose un écart réel-budget en effets prix, volume et coûts."
+    },
+    "books": "modeling",
+    "practice": "https://corporatefinanceinstitute.com/certifications/",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "wall-street-prep",
+    "name": "Financial & Valuation Modeling · Premium Package",
+    "provider": "Wall Street Prep",
+    "category": "modeling",
+    "level": "intermediate",
+    "url": "https://www.wallstreetprep.com/self-study-programs/premium-package/",
+    "summary": {
+      "en": "A practical Excel-modeling program built around company and deal analysis. Relevant to banking, private equity and corporate finance.",
+      "fr": "Un programme pratique de modélisation Excel centré sur les entreprises et les transactions. Pertinent en banque d’investissement, capital-investissement et finance d’entreprise."
+    },
+    "prerequisites": {
+      "en": "Basic accounting and Excel; consider introductory modules first if statement links are unfamiliar.",
+      "fr": "Bases comptables et Excel ; commence par une initiation si les liens entre états financiers ne sont pas acquis."
+    },
+    "topics": [
+      {
+        "en": "Financial statement modeling and DCF",
+        "fr": "Modélisation des comptes et DCF"
+      },
+      {
+        "en": "Trading and transaction comparables",
+        "fr": "Comparables boursiers et de transactions"
+      },
+      {
+        "en": "M&A and LBO analysis",
+        "fr": "Analyse de fusions-acquisitions et LBO"
+      }
+    ],
+    "format": {
+      "en": "Paid self-paced package with course examinations. Check current package contents, access and pricing before buying.",
+      "fr": "Ensemble de cours payants à ton rythme avec examens. Vérifie contenu, accès et tarif actuels avant l’achat."
+    },
+    "limits": {
+      "en": "A provider’s training certificate is not a guaranteed recruiting advantage or a professional license.",
+      "fr": "Une attestation d’organisme ne garantit ni avantage au recrutement ni habilitation professionnelle."
+    },
+    "task": {
+      "en": "Rebuild a model without the template, then explain the bridge from enterprise value to equity value.",
+      "fr": "Reconstruis un modèle sans son modèle prérempli puis explique le passage de la valeur d’entreprise à la valeur des capitaux propres."
+    },
+    "books": "modeling",
+    "practice": "https://www.wallstreetprep.com/self-study-programs/premium-package/",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "biws",
+    "name": "Excel & Financial Modeling",
+    "provider": "Breaking Into Wall Street",
+    "category": "modeling",
+    "level": "intermediate",
+    "url": "https://breakingintowallstreet.com/excel-and-financial-modeling/",
+    "summary": {
+      "en": "Case-based Excel and financial-modeling training with an interview and modeling-test orientation.",
+      "fr": "Une formation Excel et modélisation par études de cas, orientée entretiens et tests techniques."
+    },
+    "prerequisites": {
+      "en": "Prepare financial-statement basics and spreadsheet shortcuts; course depth varies by package.",
+      "fr": "Prépare les bases des comptes et les raccourcis du tableur ; la profondeur varie selon l’offre."
+    },
+    "topics": [
+      {
+        "en": "Excel and accounting links",
+        "fr": "Excel et liens comptables"
+      },
+      {
+        "en": "Valuation and company models",
+        "fr": "Valorisation et modèles d’entreprise"
+      },
+      {
+        "en": "Modeling tests and real-company cases",
+        "fr": "Tests de modélisation et cas d’entreprises"
+      }
+    ],
+    "format": {
+      "en": "Paid online training; compare the selected bundle, access conditions and included cases.",
+      "fr": "Formation payante en ligne ; compare offre choisie, conditions d’accès et cas inclus."
+    },
+    "limits": {
+      "en": "Interview preparation complements experience and communication; it does not replace them.",
+      "fr": "La préparation technique complète expérience et communication ; elle ne les remplace pas."
+    },
+    "task": {
+      "en": "Complete a timed model, check that the balance sheet balances, and present the three assumptions that matter most.",
+      "fr": "Termine un modèle chronométré, vérifie l’équilibre du bilan et présente les trois hypothèses déterminantes."
+    },
+    "books": "modeling",
+    "practice": "https://breakingintowallstreet.com/excel-and-financial-modeling/",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "cfp-us",
+    "name": "CFP · Certified Financial Planner (US)",
+    "provider": "CFP Board",
+    "category": "wealth",
+    "level": "advanced",
+    "url": "https://www.cfp.net/certification-process",
+    "summary": {
+      "en": "A US financial-planning certification for comprehensive household advice, from investing to retirement and estate considerations.",
+      "fr": "Une certification américaine de planification financière couvrant les besoins des foyers, de l’investissement à la retraite et à la transmission."
+    },
+    "prerequisites": {
+      "en": "Approved planning coursework and degree requirements apply. Review the full education and experience route before committing.",
+      "fr": "Des exigences de formation reconnue et de diplôme s’appliquent. Étudie le parcours complet avant de t’engager."
+    },
+    "topics": [
+      {
+        "en": "Client planning and risk protection",
+        "fr": "Planification client et protection des risques"
+      },
+      {
+        "en": "Retirement, tax and estate considerations",
+        "fr": "Retraite, fiscalité et transmission"
+      },
+      {
+        "en": "Ethics and integrated recommendations",
+        "fr": "Éthique et recommandations intégrées"
+      }
+    ],
+    "format": {
+      "en": "Education, examination, experience and ethics requirements. Coursework, exam and ongoing fees can be separate.",
+      "fr": "Exigences de formation, examen, expérience et éthique. Cours, examen et frais récurrents peuvent être distincts."
+    },
+    "limits": {
+      "en": "This page describes the US CFP Board pathway. Other countries have their own arrangements; passing an exam alone is not the full certification.",
+      "fr": "Cette fiche décrit le parcours américain CFP Board. D’autres pays ont leurs propres dispositifs ; réussir l’examen ne suffit pas."
+    },
+    "task": {
+      "en": "Prepare a household planning case linking emergency savings, protection, retirement goals and investment capacity.",
+      "fr": "Prépare un cas de foyer reliant épargne de précaution, protection, objectifs de retraite et capacité d’investissement."
+    },
+    "books": "wealth",
+    "practice": "https://www.cfp.net/certification-process",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "yale-financial-markets",
+    "name": "Financial Markets · Yale / Robert Shiller",
+    "provider": "Yale University · Coursera",
+    "category": "foundations",
+    "level": "beginner",
+    "url": "https://www.coursera.org/learn/financial-markets-global/",
+    "summary": {
+      "en": "An academic introduction to financial institutions, risk and behavioral finance. Useful for understanding the purpose of markets before specializing.",
+      "fr": "Une introduction académique aux institutions financières, au risque et à la finance comportementale. Utile pour comprendre les marchés avant de se spécialiser."
+    },
+    "prerequisites": {
+      "en": "Beginner level; comfort reading or listening in the available course languages.",
+      "fr": "Niveau débutant ; aisance dans une des langues proposées pour le cours."
+    },
+    "topics": [
+      {
+        "en": "Risk and diversification",
+        "fr": "Risque et diversification"
+      },
+      {
+        "en": "Securities, banking and insurance",
+        "fr": "Titres, banque et assurance"
+      },
+      {
+        "en": "Behavioral finance and institutions",
+        "fr": "Finance comportementale et institutions"
+      }
+    ],
+    "format": {
+      "en": "Online videos and assessments. Access options and any certificate fees depend on the current Coursera offer; enrollment wording does not guarantee a free certificate.",
+      "fr": "Vidéos et évaluations en ligne. Accès et frais de certificat dépendent de l’offre Coursera actuelle ; inscription ne signifie pas certificat gratuit."
+    },
+    "limits": {
+      "en": "A course certificate is not a Yale degree, regulatory authorization or professional designation.",
+      "fr": "Une attestation de cours n’est ni un diplôme de Yale, ni une autorisation réglementaire, ni un titre professionnel."
+    },
+    "task": {
+      "en": "Explain how diversification reduces some risks while leaving market-wide risk.",
+      "fr": "Explique comment la diversification réduit certains risques tout en laissant subsister le risque de marché."
+    },
+    "books": "general",
+    "practice": "https://www.coursera.org/learn/financial-markets-global/",
+    "free": false,
+    "verified": "2026-10-16"
+  },
+  {
+    "slug": "damodaran-valuation",
+    "name": "Valuation · Aswath Damodaran",
+    "provider": "NYU Stern · open teaching resources",
+    "category": "modeling",
+    "level": "intermediate",
+    "url": "https://pages.stern.nyu.edu/adamodar/New_Home_Page/equity.html",
+    "summary": {
+      "en": "Open valuation lectures, spreadsheets and problem sets from Aswath Damodaran. A useful way to build skills before buying a commercial modeling package.",
+      "fr": "Cours ouverts, tableurs et exercices de valorisation d’Aswath Damodaran. Une façon utile de progresser avant d’acheter une formation commerciale."
+    },
+    "prerequisites": {
+      "en": "Accounting, discounting and basic spreadsheet formulas.",
+      "fr": "Comptabilité, actualisation et formules de tableur de base."
+    },
+    "topics": [
+      {
+        "en": "Cash flows and discount rates",
+        "fr": "Flux de trésorerie et taux d’actualisation"
+      },
+      {
+        "en": "Intrinsic and relative valuation",
+        "fr": "Valorisation intrinsèque et relative"
+      },
+      {
+        "en": "Company-specific assumptions",
+        "fr": "Hypothèses propres à chaque entreprise"
+      }
+    ],
+    "format": {
+      "en": "Freely accessible class resources; books are optional purchases. No enrollment in a NYU degree is implied.",
+      "fr": "Ressources pédagogiques librement accessibles ; les livres sont des achats facultatifs. Cela ne constitue pas une inscription à un diplôme de NYU."
+    },
+    "limits": {
+      "en": "Open study materials are not an accredited NYU qualification.",
+      "fr": "Des supports ouverts ne constituent pas un diplôme accrédité de NYU."
+    },
+    "task": {
+      "en": "Value one public company using both a DCF and a peer comparison; explain why the answers differ.",
+      "fr": "Valorise une entreprise cotée par DCF et comparables puis explique pourquoi les résultats diffèrent."
+    },
+    "books": "valuation",
+    "practice": "https://pages.stern.nyu.edu/adamodar/New_Home_Page/equity.html",
+    "free": true,
+    "verified": "2026-10-16"
+  }
+]

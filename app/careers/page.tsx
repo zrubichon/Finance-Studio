@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {careerGuides} from "@/lib/career-guides";
+import CareerTabs from "@/components/career-tabs";
 import InternshipHub from "@/components/internship-hub";
 import { useEffect, useState } from "react";
 import SectionLayout from "@/components/section-layout";
@@ -115,6 +116,7 @@ export default function CareersPage() {
       title={{ en: "Choose a career by understanding the work, not just the job title.", fr: "Choisis un métier en comprenant le travail réel, pas seulement l’intitulé du poste." }}
       description={{ en: "Each path connects day-to-day responsibilities, technical knowledge, market awareness, recruiting expectations and the exact FinanceStudio modules you should master before interviewing.", fr: "Chaque parcours relie les responsabilités quotidiennes, les connaissances techniques, la culture marché / market awareness, les attentes de recrutement et les modules FinanceStudio à maîtriser avant un entretien." }}
     >
+      <CareerTabs/>
       <div className="workspace-stack">
         <InternshipHub />
         <section className="career-intro-grid">

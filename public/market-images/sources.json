@@ -1,0 +1,36 @@
+{
+  "license": "https://unsplash.com/license",
+  "retrieved": "2026-10-16",
+  "images": [
+    [
+      "trading",
+      31008,
+      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=640&q=65"
+    ],
+    [
+      "city",
+      65021,
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=640&q=65"
+    ],
+    [
+      "currency",
+      70202,
+      "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=640&q=65"
+    ],
+    [
+      "gold",
+      72446,
+      "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=640&q=65"
+    ],
+    [
+      "crypto",
+      41312,
+      "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=640&q=65"
+    ],
+    [
+      "energy",
+      58736,
+      "https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=640&q=65"
+    ]
+  ]
+}

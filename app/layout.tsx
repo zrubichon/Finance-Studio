@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
+import {SidebarProvider} from "@/components/app-sidebar";
 import ThemeBootstrap from "@/components/theme-bootstrap";
 import LanguageProvider, { type Language } from "@/components/language-provider";
 import ActivityTracker from "@/components/activity-tracker";
@@ -45,6 +46,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html lang={initialLanguage === "FR" ? "fr" : "en"}>
       <body>
         <LanguageProvider initialLanguage={initialLanguage}>
+          <SidebarProvider>
           <ThemeBootstrap />
           <ActivityTracker />
           <FinanceNotationStandards />
@@ -53,6 +55,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <ChallengeDepthEnhancer />
           <NewsAIEnhancer />
           {children}
+          </SidebarProvider>
         </LanguageProvider>
       </body>
     </html>
