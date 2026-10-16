@@ -1,13 +1,18 @@
 /* Stable teaching surfaces: keep generated text out of global display typography. */
-.stable-interview-drill .card-head {display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;}
-.stable-interview-drill .card-head > div {flex:1 1 280px;min-width:0;}
-.stable-interview-drill .card-head h2 {font-size:clamp(21px,1.8vw,27px)!important;line-height:1.35!important;letter-spacing:-.025em!important;overflow-wrap:anywhere;}
-.stable-interview-drill .card-head .pill {font-size:12px!important;white-space:normal;max-width:100%;}
-.stable-interview-drill .answer-framework p {margin:0!important;min-width:0;}
-.stable-interview-drill .answer-framework > div > p > strong {font-size:18px!important;line-height:1.4!important;}
-.stable-interview-drill .interview-answer-part > span {font-size:15px!important;line-height:1.75!important;font-weight:450!important;}
-.stable-interview-drill .interview-answer-part > b {font-size:12px!important;letter-spacing:.07em;}
-.stable-interview-drill .interview-ai-why {font-size:15px!important;line-height:1.65!important;}
+.stable-interview-drill .interview-drill-meta {display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.stable-interview-drill .interview-drill-question {font-family:inherit!important;font-size:19px!important;font-weight:650!important;line-height:1.45!important;letter-spacing:-.015em!important;margin:12px 0!important;overflow-wrap:anywhere;}
+.stable-interview-drill .interview-drill-meta .pill {font-size:12px!important;white-space:normal;max-width:100%;}
+.stable-interview-drill .answer-framework {display:grid!important;grid-auto-rows:auto!important;align-items:start!important;align-content:start!important;gap:12px!important;flex:none;}
+.stable-interview-drill .interview-teaching-step {padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);height:auto!important;min-height:0!important;align-self:start;}
+.stable-interview-drill .interview-step-heading {display:flex;align-items:flex-start;gap:12px;margin:0 0 14px;}
+.stable-interview-drill .interview-step-heading .step-number {display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;min-width:30px;border-radius:10px;background:var(--accent-2);color:var(--accent);font-size:14px;font-weight:800;}
+.stable-interview-drill .interview-step-heading h3 {font-family:inherit;font-size:17px;line-height:1.45;font-weight:700;margin:0;flex:1;min-width:0;}
+.stable-interview-drill .interview-step-answer {display:grid!important;gap:12px!important;margin:0!important;width:100%;min-width:0;}
+.stable-interview-drill .interview-answer-part {display:block!important;margin:0!important;padding:0;min-height:0;height:auto;}
+.stable-interview-drill .interview-answer-part > p {font-size:15px!important;line-height:1.65!important;font-weight:450!important;margin:4px 0 0!important;min-height:0!important;}
+.stable-interview-drill .interview-answer-part > b {display:block;font-size:11px!important;line-height:1.4;letter-spacing:.07em;text-transform:uppercase;}
+.stable-interview-drill .interview-answer-part.next {padding-top:10px;border-top:1px solid var(--line);}
+.stable-interview-drill .interview-ai-why {font-size:14px!important;line-height:1.6!important;}
 .market-glossary-strip dl {margin:14px 0 0;display:grid;gap:0;}
 .market-glossary-strip dt {font-size:15px;font-weight:750;margin-top:14px;}
 .market-glossary-strip dd {font-size:15px;line-height:1.65;margin:4px 0 0;color:var(--muted);}
@@ -105,7 +110,7 @@
 .internship-role-links a {border:1px solid var(--line);border-radius:12px;padding:16px;font-weight:700;background:var(--surface);font-size:16px;}
 .dictionary-card > h2 {font-size:25px!important;line-height:1.3!important;}
 .dictionary-translation {font-size:15px;color:var(--muted);margin:6px 0 20px;}
-@media(max-width:760px){.academy-curriculum,.academy-two-columns,.news-insight-grid {grid-template-columns:1fr!important;}.internship-role-links {grid-template-columns:repeat(2,minmax(0,1fr));}.stable-interview-drill .answer-framework > div {grid-template-columns:28px minmax(0,1fr)!important;gap:12px!important;padding:18px!important;}.stable-interview-drill .answer-framework > div > span:first-child{width:28px!important;height:28px!important;font-size:14px!important;}.stable-interview-drill .card-head h2{font-size:22px!important;}.teaching-bars > div{grid-template-columns:1fr;gap:6px;}.learning-response p,.learning-response li,.market-academy p,.market-academy dd {font-size:16px!important;}.academy-credit > div {display:grid;grid-template-columns:1fr 1fr;}.academy-credit b,.academy-credit i{min-width:0;}.concept-lens-backdrop{padding:8px!important;}}
+@media(max-width:760px){.academy-curriculum,.academy-two-columns,.news-insight-grid {grid-template-columns:1fr!important;}.internship-role-links {grid-template-columns:repeat(2,minmax(0,1fr));}.stable-interview-drill .interview-teaching-step {padding:14px;}.stable-interview-drill .interview-drill-question{font-size:18px!important;}.teaching-bars > div{grid-template-columns:1fr;gap:6px;}.learning-response p,.learning-response li,.market-academy p,.market-academy dd {font-size:16px!important;}.academy-credit > div {display:grid;grid-template-columns:1fr 1fr;}.academy-credit b,.academy-credit i{min-width:0;}.concept-lens-backdrop{padding:8px!important;}}
 
 .quote-history{width:100%;margin:12px 0;border-top:1px solid var(--line);padding-top:8px;}.quote-history svg{display:block;width:100%;height:72px;}.quote-history figcaption{font-size:11px;color:var(--muted);line-height:1.5;}.news-learning-context details{margin:18px 0;}.news-learning-context summary{font-size:16px;font-weight:700;cursor:pointer;}
 
@@ -123,11 +128,11 @@
 .product-section-main.home-followup-section {margin-top:16px!important;}
 .home-followup-section .news-carousel-panel {margin-top:0!important;}
 @media(min-width:1101px){
- .dashboard-grid > .daily-card,.dashboard-grid > .stable-interview-drill {align-self:stretch!important;height:100%!important;box-sizing:border-box;display:flex!important;flex-direction:column;}
- .daily-card .hourly-deep-lesson {flex:1;align-content:space-evenly;gap:18px!important;}
- .daily-card .hourly-deep-lesson .deep-lesson-block p,.daily-card .hourly-deep-lesson .deep-lesson-block li {font-size:18px!important;line-height:1.95!important;}
+ .dashboard-grid > .daily-card,.dashboard-grid > .stable-interview-drill {align-self:start!important;height:auto!important;min-height:0!important;box-sizing:border-box;}
+ .daily-card .hourly-deep-lesson {align-content:start;grid-auto-rows:auto;gap:14px!important;}
+ .daily-card .hourly-deep-lesson .deep-lesson-block p,.daily-card .hourly-deep-lesson .deep-lesson-block li {font-size:17px!important;line-height:1.8!important;}
  .daily-card .daily-copy {font-size:19px!important;line-height:1.85!important;}
- .daily-card .card-actions,.stable-interview-drill > .full-button {margin-top:auto!important;padding-top:18px;}
+ .daily-card .card-actions,.stable-interview-drill > .full-button {margin-top:14px!important;}
 }
 .market-category-stack {display:grid;gap:28px;margin-top:24px;}
 .market-category {border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));background:var(--surface-2);border-radius:18px;padding:18px;min-width:0;}
@@ -199,3 +204,7 @@
 .learning-response blockquote {border-left:3px solid var(--accent);padding:12px 18px;margin:18px 0;background:var(--surface-2);border-radius:0 10px 10px 0;font-size:17px;line-height:1.75;}
 .market-row-rich > span > strong {display:block;font-size:13px;}
 .market-row-rich > span > small {display:block;font-size:10px;color:var(--muted);margin-top:5px;}
+
+.market-overview-panel .news-filter-stack > .chip-row {display:flex!important;flex-wrap:wrap;gap:8px!important;margin:8px 0!important;}
+.market-overview-panel .chip {font-size:13px;line-height:1.4;min-height:38px;}
+.market-overview-panel .news-filter-stack input {width:100%;box-sizing:border-box;max-width:520px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;background:var(--surface);color:var(--ink);}

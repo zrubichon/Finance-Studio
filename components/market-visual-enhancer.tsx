@@ -33,7 +33,7 @@ function apply() {
   ];
   document.querySelectorAll<HTMLElement>(selectors.join(",")).forEach(classify);
 
-  document.querySelectorAll<HTMLElement>(".market-overview-panel .chip-row").forEach((row) => {
+  document.querySelectorAll<HTMLElement>(".market-overview-panel .provider-filter").forEach((row) => {
     if (row.querySelector(".chip")) row.classList.add("market-provider-row");
   });
 }

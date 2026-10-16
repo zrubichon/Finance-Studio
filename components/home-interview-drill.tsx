@@ -33,10 +33,14 @@ export default function HomeInterviewDrill({track, targetRole}: {track: Track; t
   const details = interviewFrameworkDetails[track];
   const steps = generated?.steps ?? base.framework.slice(0,3).map((s,i)=>({title:isFrench?s.fr:s.en, simple:isFrench?details[i].simple.fr:details[i].simple.en, why:isFrench?details[i].why.fr:details[i].why.en, example:isFrench?details[i].example.fr:details[i].example.en,next:isFrench?details[i].next?.fr:details[i].next?.en}));
   return <article className="card span-5 interview-card stable-interview-drill">
-    <div className="card-head"><div><span className="eyebrow">{text("INTERVIEW DRILL","ENTRAÎNEMENT ENTRETIEN")}</span><h2>{generated?.question ?? (isFrench?base.question.fr:base.question.en)}</h2></div><span className="pill accent">{track}</span></div>
+    <div className="interview-drill-meta"><span className="eyebrow">{text("INTERVIEW DRILL","ENTRAÎNEMENT ENTRETIEN")}</span><span className="pill accent">{track}</span></div>
+    <h2 className="interview-drill-question">{generated?.question ?? (isFrench?base.question.fr:base.question.en)}</h2>
     <p>{targetRole?text(`Based on your saved target role: ${targetRole}.`,`Basé sur ton métier cible enregistré : ${targetRole}.`):text("Choose a target role in Careers to personalize this drill.","Choisis un métier cible dans Careers pour personnaliser cet entraînement.")}</p>
     {generated?.whyItMatters && <p className="interview-ai-why">{generated.whyItMatters}</p>}
-    <div className="answer-framework">{steps.map((s,i)=><div key={i}><span>{i+1}</span><p><strong>{s.title}</strong><span className="interview-step-answer">{[[text("Simple answer","Réponse simple"),s.simple,"simple"],[text("Why","Pourquoi"),s.why,"why"],[text("Example / implication","Exemple / implication"),s.example,"example"],[text("What happens next","Et ensuite"),s.next,"next"]].filter(([,v])=>v).map(([label,value,cls])=><span key={label} className={`interview-answer-part ${cls}`}><b>{label}</b><span>{value}</span></span>)}</span></p></div>)}</div>
+    <div className="answer-framework">{steps.map((s,i)=><section className="interview-teaching-step" key={i}>
+      <header className="interview-step-heading"><span className="step-number">{i+1}</span><h3>{s.title}</h3></header>
+      <div className="interview-step-answer">{[[text("Simple answer","Réponse simple"),s.simple,"simple"],[text("Why","Pourquoi"),s.why,"why"],[text("Example / implication","Exemple / implication"),s.example,"example"],[text("What happens next","Et ensuite"),s.next,"next"]].filter(([,v])=>v).map(([label,value,cls])=><div key={label} className={`interview-answer-part ${cls}`}><b>{label}</b><p>{value}</p></div>)}</div>
+    </section>)}</div>
     <Link className="full-button" href={`/interview?track=${encodeURIComponent(track)}`}>{text("Start interview practice","Commencer l’entraînement entretien")} →</Link>
   </article>;
 }
