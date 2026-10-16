@@ -50,6 +50,21 @@ const validActions = new Set<TeachingAction>([
   "diagnose",
 ]);
 
+function generationFailure(error: unknown, language: Language) {
+  const message = error instanceof Error ? error.message.toLowerCase() : String(error).toLowerCase();
+  const billingRequired = ["valid credit card", "add a card", "unlock your free credits", "positive credit balance", "insufficient_funds", "insufficient funds"].some(value => message.includes(value));
+  return {
+    error: billingRequired
+      ? language === "FR"
+        ? "Les crédits IA de Vercel sont épuisés ou doivent être activés. Les fiches enregistrées restent disponibles. Recharge les crédits AI Gateway dans Vercel pour créer une nouvelle fiche."
+        : "Vercel AI credits are exhausted or need activation. Saved cards remain available. Add AI Gateway credits in Vercel to create a new card."
+      : language === "FR"
+        ? "La génération a été interrompue. Réessaie pour obtenir une fiche complète."
+        : "Generation was interrupted. Please retry for a complete card.",
+    code: billingRequired ? "AI_GATEWAY_BILLING_REQUIRED" : "AI_GATEWAY_UNAVAILABLE",
+  };
+}
+
 function cleanText(value: unknown, maxLength: number) {
   if (typeof value !== "string") return "";
   return value.replace(/\u0000/g, "").trim().slice(0, maxLength);
@@ -522,7 +537,8 @@ export async function POST(request: NextRequest) {
           try {
             for await (const part of result.fullStream) {
               if (part.type === "text-delta") { answer += part.text; send({type:"delta", text:part.text}); }
-              if (part.type === "error" || part.type === "abort") throw new Error("Study card interrupted");
+              if (part.type === "error") throw part.error;
+              if (part.type === "abort") throw new Error("Study card interrupted");
             }
             const finish = await result.finishReason;
             if (!answer.trim() || finish === "error" || finish === "length" || finish === "content-filter") throw new Error("Study card incomplete");
@@ -530,7 +546,7 @@ export async function POST(request: NextRequest) {
             send({type:"done"});
           } catch (error) {
             console.error("Study card generation failed", error);
-            send({type:"error", error:language === "FR" ? "La génération a été interrompue. Réessaie pour obtenir une fiche complète." : "Generation was interrupted. Please retry for a complete card."});
+            send({type:"error", ...generationFailure(error, language)});
           } finally { controller.close(); }
         },
       });
@@ -558,28 +574,6 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("FinanceStudio AI Professor generation failed", error);
 
-    const gatewayMessage =
-      error instanceof Error ? error.message.toLowerCase() : "";
-    const billingRequired =
-      gatewayMessage.includes("valid credit card") ||
-      gatewayMessage.includes("add a card") ||
-      gatewayMessage.includes("unlock your free credits");
-
-    return NextResponse.json(
-      {
-        error: billingRequired
-          ? language === "FR"
-            ? "Le Professeur IA est prêt, mais AI Gateway doit encore être activé dans Vercel avec un moyen de paiement valide pour débloquer les crédits IA."
-            : "The AI Professor is ready, but AI Gateway still needs to be activated in Vercel with a valid payment method to unlock AI credits."
-          : language === "FR"
-            ? "Le modèle IA n’est pas disponible pour le moment. Le cours et ta progression restent accessibles ; réessaie lorsque la connexion AI Gateway est active."
-            : "The AI model is not available right now. Your lesson and progress remain available; retry when the AI Gateway connection is active.",
-        code: billingRequired
-          ? "AI_GATEWAY_BILLING_REQUIRED"
-          : "AI_GATEWAY_UNAVAILABLE",
-        sessionId,
-      },
-      { status: 503 },
-    );
+    return NextResponse.json({...generationFailure(error, language), sessionId}, { status: 503 });
   }
 }
