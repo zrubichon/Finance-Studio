@@ -362,7 +362,8 @@ export default function HomeDashboardController() {
             const value = document.createElement("b");
             const move = document.createElement("span");
             value.textContent = formatValue(quote);
-            if (quote.changePercent === null) move.textContent = "—";
+            if(quote.unit === "%" && typeof quote.change === "number") move.textContent = `${quote.change >= 0 ? "+" : ""}${(quote.change*100).toFixed(1)} bps`;
+            else if (quote.changePercent === null) move.textContent = "—";
             else move.textContent = `${quote.changePercent > 0 ? "+" : ""}${quote.changePercent.toFixed(2)}%`;
             move.className = quote.changePercent === null ? "flat" : quote.changePercent > 0 ? "up" : quote.changePercent < 0 ? "down" : "flat";
             right.append(value, move);
@@ -372,7 +373,7 @@ export default function HomeDashboardController() {
           grid.appendChild(group);
         }
 
-        const movers = quotes.filter(q => q.changePercent !== null).sort((a, b) => Math.abs(b.changePercent ?? 0) - Math.abs(a.changePercent ?? 0));
+        const movers = quotes.filter(q => q.changePercent !== null && q.unit !== "%" && q.category !== "Volatility").sort((a, b) => Math.abs(b.changePercent ?? 0) - Math.abs(a.changePercent ?? 0));
         const biggest = movers[0];
         const y2 = quotes.find(q => q.label === "US 2Y");
         const y10 = quotes.find(q => q.label === "US 10Y");

@@ -352,6 +352,6 @@ export function cleanFrenchLabel(en:string,fr:string){
   const parts=fr.split(/\s+\/\s+/).map(p=>p.trim()).filter(Boolean);
   const englishParts=en.split(/\s+\/\s+/).map(p=>p.toLowerCase());
   const kept=parts.filter(p=>!englishParts.includes(p.toLowerCase()));
-  if(kept.length)return [...new Set(kept)].join(" / ");
+  if(kept.length){const label=[...new Set(kept)].join(" / ");return label.charAt(0).toLocaleUpperCase("fr")+label.slice(1);}
   return fr.trim(); // International notation (alpha, delta, etc.) remains valid in both languages.
 }

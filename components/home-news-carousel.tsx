@@ -60,7 +60,7 @@ export default function HomeNewsCarousel() {
       const response = await fetch("/api/professor", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          responseStyle: "study", language: isFrench ? "FR" : "EN", mode: "Professional", action: "markets",
+          newsUrl: item.url, responseStyle: "study", language: isFrench ? "FR" : "EN", mode: "Professional", action: "markets",
           message: isFrench
             ? `Analyse en profondeur cette actualité financière sans inventer de faits ni de prix : « ${item.title} ». Contexte déjà présent dans FinanceStudio : ${existing}. Explique : ce qui s'est passé, pourquoi cette nouvelle apparaît aujourd'hui, ce dont elle découle, la chaîne causale, les actifs/secteurs touchés, les effets de premier et second ordre, les scénarios futurs, les catalyseurs à surveiller, ce qui pourrait invalider l'interprétation, les termes techniques, et les cours FinanceStudio à étudier pour comprendre le sujet. Distingue faits, interprétations et scénarios.`
             : `Analyze this financial news story in depth without inventing facts or prices: “${item.title}”. Existing FinanceStudio context: ${existing}. Explain what happened, why this story matters today, what caused it, the causal chain, affected assets/sectors, first- and second-order effects, future scenarios, catalysts to watch, what could invalidate the interpretation, technical terms, and which FinanceStudio lessons would help understand it. Clearly separate facts, interpretation and scenarios.`,

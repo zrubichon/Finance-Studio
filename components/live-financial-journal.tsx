@@ -766,7 +766,7 @@ export default function LiveFinancialJournal() {
                       </p>
 
                       <div className="news-item-actions">
-                        <button type="button" className="save-item-button compact news-ai-deep-button" onClick={() => window.dispatchEvent(new CustomEvent("finance-news-ai", {detail:{title:item.title, body:JSON.stringify({source:item.domain,url:item.url,observedAt:item.publishedAt,topics:item.topics,headline:item.title,educationalContext:item.insight})}}))}>✦ {text("Full analytical dossier", "Dossier d’analyse approfondi")}</button>
+                        <button type="button" className="save-item-button compact news-ai-deep-button" onClick={() => window.dispatchEvent(new CustomEvent("finance-news-ai", {detail:{title:item.title, url:item.url, body:JSON.stringify({source:item.domain,url:item.url,observedAt:item.publishedAt,topics:item.topics,headline:item.title,educationalContext:item.insight})}}))}>✦ {text("Full analytical dossier", "Dossier d’analyse approfondi")}</button>
                         <a
                           href={item.url}
                           target="_blank"

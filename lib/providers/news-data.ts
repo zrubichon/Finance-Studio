@@ -144,6 +144,8 @@ const categorySignals: Record<Exclude<NewsCategory, "all">, string[]> = {
   ],
   policy: [
     "tariff",
+    "european council",
+    "financial framework",
     "regulation",
     "regulator",
     "antitrust",
@@ -215,7 +217,7 @@ function titleMatchesCategory(
 ) {
   const normalized = ` ${title.toLowerCase()} `;
   return categorySignals[category].some((signal) =>
-    normalized.includes(signal),
+    new RegExp(`\\b${signal.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}${signal === "geopolit" ? "[a-z]*" : "(?:s|es)?"}\\b`, "i").test(normalized),
   );
 }
 
@@ -249,7 +251,7 @@ function buildInsight(
   const normalized = title.toLowerCase();
 
   if (
-    /(war|conflict|ceasefire|missile|attack|invasion|embargo|red sea|strait|shipping)/.test(
+    /\b(?:war|wars|conflict|ceasefire|missile|attack|invasion|embargo|red sea|strait|shipping)\b/.test(
       normalized,
     )
   ) {
@@ -281,7 +283,7 @@ function buildInsight(
     );
   }
 
-  if (/(tariff|sanction|trade war|export control|import duty)/.test(normalized)) {
+  if (/\b(?:tariff|sanction|trade war|export control|import duty)\b/.test(normalized)) {
     return insight(
       { en: "Trade, sanctions & supply chains", fr: "Commerce, sanctions & chaînes d’approvisionnement" },
       {
@@ -343,7 +345,7 @@ function buildInsight(
     );
   }
 
-  if (/(inflation|cpi|pce|prices|price index)/.test(normalized)) {
+  if (/\b(?:inflation|cpi|pce|consumer prices|producer prices|price index)\b/.test(normalized)) {
     return insight(
       { en: "Inflation → rates → valuation", fr: "Inflation → taux → valorisation" },
       {
@@ -372,7 +374,7 @@ function buildInsight(
     );
   }
 
-  if (/(jobs|employment|unemployment|payroll|gdp|growth|recession|pmi|retail sales)/.test(normalized)) {
+  if (/\b(?:jobs|employment|unemployment|payroll|gdp|growth|recession|pmi|retail sales)\b/.test(normalized)) {
     return insight(
       { en: "Growth & labor transmission", fr: "Transmission croissance & emploi" },
       {
@@ -401,7 +403,7 @@ function buildInsight(
     );
   }
 
-  if (/(oil|crude|natural gas|opec|energy|refinery)/.test(normalized)) {
+  if (/\b(?:oil|crude|natural gas|opec|energy|refinery)\b/.test(normalized)) {
     return insight(
       { en: "Energy → inflation & margins", fr: "Énergie → inflation & marges" },
       {
@@ -430,7 +432,7 @@ function buildInsight(
     );
   }
 
-  if (/(budget|debt ceiling|government shutdown|deficit|fiscal|bond auction|treasury issuance)/.test(normalized)) {
+  if (/\b(?:budget|debt ceiling|government shutdown|deficit|fiscal|bond auction|treasury issuance)\b/.test(normalized)) {
     return insight(
       { en: "Fiscal policy & sovereign funding", fr: "Politique budgétaire & financement souverain" },
       {
@@ -459,7 +461,7 @@ function buildInsight(
     );
   }
 
-  if (/(earnings|revenue|profit|margin|guidance|sales)/.test(normalized)) {
+  if (/\b(?:earnings|revenue|profit|margin|guidance|sales)\b/.test(normalized)) {
     return insight(
       { en: "Earnings & cash-flow expectations", fr: "Résultats & attentes de cash-flow" },
       {
@@ -488,7 +490,7 @@ function buildInsight(
     );
   }
 
-  if (/(merger|acquisition|acquire|buyout|takeover|deal|ipo)/.test(normalized)) {
+  if (/\b(?:merger|acquisition|acquire|buyout|takeover|deal|ipo)\b/.test(normalized)) {
     return insight(
       { en: "Deal economics & capital markets", fr: "Économie du deal & marchés de capitaux" },
       {
@@ -517,7 +519,7 @@ function buildInsight(
     );
   }
 
-  if (/(regulation|regulator|antitrust|sec |doj|legislation|law|bill|vote|election)/.test(normalized)) {
+  if (/\b(?:regulation|regulator|antitrust|sec |doj|legislation|law|bill|vote|election)\b/.test(normalized)) {
     return insight(
       { en: "Policy & regulation transmission", fr: "Transmission politique publique & réglementation" },
       {
@@ -546,7 +548,7 @@ function buildInsight(
     );
   }
 
-  if (/(dollar|euro|yen|currency|currencies|fx)/.test(normalized)) {
+  if (/\b(?:dollar|euro|yen|currency|currencies|fx)\b/.test(normalized)) {
     return insight(
       { en: "FX & relative-rate transmission", fr: "FX & transmission par taux relatifs" },
       {
@@ -694,15 +696,7 @@ async function getArchivedNewsData(category: NewsCategory) {
     const uniqueTitles = new Set<string>();
     const items = rows
       .map((row): NewsItem | null => {
-        const topics = (row.topics ?? []).filter(
-          (topic): topic is Exclude<NewsCategory, "all"> =>
-            topic === "markets" ||
-            topic === "macro" ||
-            topic === "central-banks" ||
-            topic === "companies" ||
-            topic === "geopolitics" ||
-            topic === "policy",
-        );
+        const topics = topicsForTitle(row.title);
 
         if (!topics.length) return null;
 

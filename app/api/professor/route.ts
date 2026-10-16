@@ -1,3 +1,4 @@
+import { publicNewsContext } from "@/lib/news-source-context";
 import { generateText } from "ai";
 import { NextRequest, NextResponse } from "next/server";
 import { getLessonBySlug } from "@/lib/lesson-registry";
@@ -23,6 +24,7 @@ type ChatMessage = {
 type ProfessorRequest = {
   message?: string;
   responseStyle?: "study";
+  newsUrl?: string;
   mode?: Mode;
   language?: Language;
   lessonSlug?: string | null;
@@ -429,8 +431,10 @@ export async function POST(request: NextRequest) {
     .join("\n\n");
 
   const isStudy = body.responseStyle === "study";
+  const sourceContext = isStudy && body.newsUrl ? await publicNewsContext(body.newsUrl) : "";
   const prompt = [
-    isStudy ? `Create a substantial, carefully edited learning dossier (roughly 1200–1800 words when the topic warrants it). Use Markdown headings, short paragraphs, defined technical terms, worked arithmetic with units, and a concise summary table. Distinguish verified inputs, assumptions, interpretation and conditional scenarios. Start with the direct explanation, then explain causes, mechanism, consequences, worked examples, counterarguments, mistakes and verification questions. Include a diagram using a fenced flow block: one short causal step per line. For numerical comparisons, when genuinely useful, use a fenced chart block containing JSON {"title":"Illustrative example (not live data)","unit":"%","points":[{"label":"Scenario A","value":4}]}. These blocks are rendered as visuals. Never output raw HTML, SVG, Mermaid or invented links. Numerical examples must be explicitly hypothetical and must have correct calculations. News metadata is not the full source article: do not infer details, quotes, dates, consensus or causal certainty that were not supplied. Include what the learner needs to verify in the linked source. Do not fill space with generic boilerplate. Use the requested language for all labels. Use links only to known supplied lessons or /markets/guide, /dictionary and /university.` : "",
+    sourceContext,
+    isStudy ? `Create a substantial, carefully edited learning dossier (roughly 1200–1800 words when the topic warrants it). Use Markdown headings, short paragraphs, defined technical terms, worked arithmetic with units, and a concise summary table. Distinguish verified inputs, assumptions, interpretation and conditional scenarios. Start with the direct explanation, then explain causes, mechanism, consequences, worked examples, counterarguments, mistakes and verification questions. Include a diagram using a fenced flow block: one short causal step per line. For numerical comparisons, when genuinely useful, use a fenced chart block containing JSON {"title":"Illustrative example (not live data)","unit":"%","points":[{"label":"Scenario A","value":4}]}. These blocks are rendered as visuals. Never output raw HTML, SVG, Mermaid or invented links. Numerical examples must be explicitly hypothetical and must have correct calculations. Automatically generated educationalContext/topic labels can be incorrect: choose relevant mechanisms from the actual headline and source excerpt rather than repeating them uncritically. News metadata is not the full source article: do not infer details, quotes, dates, consensus or causal certainty that were not supplied. Include what the learner needs to verify in the linked source. Do not fill space with generic boilerplate. Use the requested language for all labels. Use links only to known supplied lessons or /markets/guide, /dictionary and /university.` : "",
     actionInstruction(action, language),
     personalization ? `LEARNER CONTEXT:\n${personalization}` : "",
     `FINANCE UNIVERSITY CONTEXT:\n${lessonContext.text}`,

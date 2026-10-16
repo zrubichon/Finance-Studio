@@ -112,3 +112,5 @@
 .internship-role-links small{display:block;font-size:12px;line-height:1.5;color:var(--muted);margin-top:8px;}.internship-feature summary{cursor:pointer;font-size:17px;font-weight:700;}.internship-feature li{font-size:17px;line-height:1.8;margin:12px 0;}.investing-start label{display:grid;gap:8px;font-size:16px;font-weight:650;}.investing-start textarea{font:inherit;line-height:1.6;min-height:90px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:14px;resize:vertical;max-width:100%;}.investing-start button{width:fit-content;}
 
 .dictionary-card{content-visibility:auto;contain-intrinsic-size:auto 650px;}
+
+.finance-math-block{display:block;overflow-x:auto;max-width:100%;padding:16px 0;margin:12px 0;font-size:1em;}.finance-math-inline{font-size:1em;}.teaching-bars .signed-chart{position:relative;overflow:visible;}.teaching-bars .signed-chart::after{content:"";position:absolute;left:50%;top:-4px;bottom:-4px;width:1px;background:var(--ink);}.teaching-bars .signed-chart i{position:absolute;top:0;}
