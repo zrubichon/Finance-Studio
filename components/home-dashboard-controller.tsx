@@ -226,8 +226,6 @@ function marketInterpretation(quote: Quote, french: boolean) {
 
 export default function HomeDashboardController() {
   useEffect(() => {
-    let stopped = false;
-    let marketTimer: ReturnType<typeof setInterval> | null = null;
     let briefTimer: ReturnType<typeof setInterval> | null = null;
 
     const app = document.querySelector<HTMLElement>(".app-shell");
@@ -315,122 +313,12 @@ export default function HomeDashboardController() {
         : `Current topic until ${String((new Date().getHours() + 1) % 24).padStart(2, "0")}:00 · ${level} depth`;
     }
 
-    async function refreshMarkets() {
-      try {
-        const response = await fetch(`/api/markets?t=${Date.now()}`, { cache: "no-store" });
-        if (!response.ok) return;
-        const payload = await response.json() as MarketPayload;
-        if (stopped) return;
-        const card = document.querySelector<HTMLElement>(".markets-card");
-        if (!card) return;
-        const french = document.documentElement.lang === "fr";
-        const quotes = payload.quotes ?? [];
-        const byCategory = new Map<string, Quote[]>();
-        for (const quote of quotes) {
-          const list = byCategory.get(quote.category) ?? [];
-          list.push(quote);
-          byCategory.set(quote.category, list);
-        }
-
-        const grid = card.querySelector<HTMLElement>(".market-grid") ?? document.createElement("div");
-        grid.className = "market-grid market-grid-rich";
-        grid.innerHTML = "";
-        if (!grid.parentElement) card.querySelector(".markets-head")?.after(grid);
-
-        for (const [category, categoryQuotes] of byCategory) {
-          const group = document.createElement("div");
-          group.className = "market-group market-group-rich";
-          const heading = document.createElement("div");
-          heading.className = "market-group-heading";
-          const h3 = document.createElement("h3");
-          h3.textContent = category;
-          const count = document.createElement("span");
-          count.textContent = `${categoryQuotes.length} ${french ? "séries" : "series"}`;
-          heading.append(h3, count);
-          group.appendChild(heading);
-
-          for (const quote of categoryQuotes.slice(0, 5)) {
-            const row = document.createElement("div");
-            row.className = "market-row market-row-rich";
-            const left = document.createElement("div");
-            const label = document.createElement("strong");
-            const meta = document.createElement("small");
-            label.textContent = quote.label;
-            meta.textContent = `${quote.region} · ${ageLabel(quote.asOf, french)}`;
-            left.append(label, meta);
-            const right = document.createElement("div");
-            const value = document.createElement("b");
-            const move = document.createElement("span");
-            value.textContent = formatValue(quote);
-            if(quote.unit === "%" && typeof quote.change === "number") move.textContent = `${quote.change >= 0 ? "+" : ""}${(quote.change*100).toFixed(1)} bps`;
-            else if (quote.changePercent === null) move.textContent = "—";
-            else move.textContent = `${quote.changePercent > 0 ? "+" : ""}${quote.changePercent.toFixed(2)}%`;
-            move.className = quote.changePercent === null ? "flat" : quote.changePercent > 0 ? "up" : quote.changePercent < 0 ? "down" : "flat";
-            right.append(value, move);
-            row.append(left, right);
-            group.appendChild(row);
-          }
-          grid.appendChild(group);
-        }
-
-        const movers = quotes.filter(q => q.changePercent !== null && q.unit !== "%" && q.category !== "Volatility").sort((a, b) => Math.abs(b.changePercent ?? 0) - Math.abs(a.changePercent ?? 0));
-        const biggest = movers[0];
-        const y2 = quotes.find(q => q.label === "US 2Y");
-        const y10 = quotes.find(q => q.label === "US 10Y");
-        const vix = quotes.find(q => q.label === "VIX");
-        const spx = quotes.find(q => q.label === "S&P 500");
-        const curve = y2 && y10 ? (y10.value - y2.value) * 100 : null;
-
-        let summary = card.querySelector<HTMLElement>(".market-intelligence-strip");
-        if (!summary) {
-          summary = document.createElement("div");
-          summary.className = "market-intelligence-strip";
-          grid.before(summary);
-        }
-        summary.innerHTML = "";
-        const cards: Array<[string, string, string]> = [
-          [french ? "PLUS GROS MOUVEMENT" : "BIGGEST MOVE", biggest ? `${biggest.label} ${biggest.changePercent && biggest.changePercent > 0 ? "+" : ""}${biggest?.changePercent?.toFixed(2) ?? "—"}%` : "—", biggest ? marketInterpretation(biggest, french) : ""],
-          [french ? "COURBE US 2Y/10Y" : "US 2Y/10Y CURVE", curve === null ? "—" : `${curve >= 0 ? "+" : ""}${curve.toFixed(0)} bps`, curve === null ? "" : (french ? (curve > 0 ? "Courbe positive entre 2 et 10 ans." : "Courbe inversée entre 2 et 10 ans.") : (curve > 0 ? "Positive slope between 2Y and 10Y." : "Inverted between 2Y and 10Y."))],
-          [french ? "RISK TONE" : "RISK TONE", `${spx ? `S&P ${spx.changePercent && spx.changePercent > 0 ? "+" : ""}${spx?.changePercent?.toFixed(2) ?? "—"}%` : "S&P —"} · ${vix ? `VIX ${vix.value.toFixed(1)}` : "VIX —"}`, french ? "Combine actions + volatilité pour lire le sentiment, pas un seul chiffre." : "Read equities and volatility together rather than relying on one number."],
-          [french ? "ACTUALISATION" : "REFRESH", new Date(payload.updatedAt).toLocaleTimeString(french ? "fr-FR" : "en-US", { hour: "2-digit", minute: "2-digit" }), french ? "Données rechargées automatiquement toutes les minutes ; chaque série conserve sa vraie date d'observation." : "Data reloads automatically every minute; each series keeps its real observation date."],
-        ];
-        for (const [label, value, copy] of cards) {
-          const block = document.createElement("article");
-          const mini = document.createElement("span");
-          const strong = document.createElement("strong");
-          const p = document.createElement("p");
-          mini.textContent = label;
-          strong.textContent = value;
-          p.textContent = copy;
-          block.append(mini, strong, p);
-          summary.appendChild(block);
-        }
-
-        const status = card.querySelector<HTMLElement>(".feed-status");
-        if (status) {
-          const live = payload.providers.filter(p => p.status === "live").length;
-          status.innerHTML = `<span class="status-dot"></span>${live} ${french ? "sources actives" : "live providers"}`;
-        }
-
-        const note = card.querySelector<HTMLElement>(".data-note:last-of-type");
-        if (note) note.textContent = french
-          ? "Valeurs = dernières observations publiées par chaque fournisseur. Certaines séries macro/obligataires ne sont pas intraday ; leur date exacte est affichée ligne par ligne."
-          : "Values are the latest observations published by each provider. Some macro/rates series are not intraday; each row shows its exact observation date.";
-      } catch {
-        // Existing server-rendered snapshot remains visible if refresh fails.
-      }
-    }
-
     applyBrief();
-    void refreshMarkets();
     briefTimer = setInterval(applyBrief, 30_000);
-    marketTimer = setInterval(() => void refreshMarkets(), 60_000);
     window.addEventListener("finance-studio-language-change", applyBrief);
 
     return () => {
-      stopped = true;
       if (briefTimer) clearInterval(briefTimer);
-      if (marketTimer) clearInterval(marketTimer);
       window.removeEventListener("finance-studio-language-change", applyBrief);
     };
   }, []);

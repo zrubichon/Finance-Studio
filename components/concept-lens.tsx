@@ -2,7 +2,7 @@
 import StudyDialog from "./study-dialog";
 import StudyNotebook from "./study-notebook";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 
 type Trigger = { text: string; x: number; y: number } | null;
@@ -25,6 +25,7 @@ function saveConcept(term: string, language: "EN" | "FR") {
 
 export default function ConceptLens() {
   const { isFrench } = useLanguage();
+  const requestVersion=useRef(0);
   const [trigger, setTrigger] = useState<Trigger>(null);
   const [openTerm, setOpenTerm] = useState("");
   const [answer, setAnswer] = useState("");
@@ -54,6 +55,7 @@ export default function ConceptLens() {
   async function explain(term: string) {
     const clean = term.replace(/\s+/g, " ").trim().slice(0, 240);
     if (!clean || loading) return;
+    const version=++requestVersion.current;
     setOpenTerm(clean);
     setTrigger(null);
     setAnswer("");
@@ -75,11 +77,11 @@ export default function ConceptLens() {
       });
       const payload = await response.json() as { answer?: string; error?: string };
       if (!response.ok || !payload.answer) throw new Error(payload.error || "AI explanation unavailable.");
-      setAnswer(payload.answer);
+      if(version===requestVersion.current)setAnswer(payload.answer);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : (isFrench ? "La fiche IA est temporairement indisponible." : "The AI study card is temporarily unavailable."));
+      if(version===requestVersion.current)setError(cause instanceof Error ? cause.message : (isFrench ? "La fiche IA est temporairement indisponible." : "The AI study card is temporarily unavailable."));
     } finally {
-      setLoading(false);
+      if(version===requestVersion.current)setLoading(false);
     }
   }
 
@@ -98,7 +100,7 @@ export default function ConceptLens() {
       )}
 
       {openTerm && (
-        <StudyDialog title={openTerm} eyebrow={isFrench ? "✦ CONCEPT LENS · FICHE DE COURS" : "✦ CONCEPT LENS · STUDY CARD"} onClose={() => {setOpenTerm("");setAnswer("");setError("");}}>
+        <StudyDialog title={openTerm} eyebrow={isFrench ? "✦ CONCEPT LENS · FICHE DE COURS" : "✦ CONCEPT LENS · STUDY CARD"} onClose={() => {requestVersion.current++;setLoading(false);setOpenTerm("");setAnswer("");setError("");}}>
             {loading && <p className="concept-lens-loading">{isFrench ? "Création de la fiche détaillée…" : "Building your detailed study card…"}</p>}
             {error && <p className="inline-status">{error}</p>}
             {answer && <StudyNotebook content={answer} />}

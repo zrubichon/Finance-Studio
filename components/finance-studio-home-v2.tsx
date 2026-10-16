@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import HomeMarketSummary from "./home-market-summary";
 import HomeInterviewDrill from "./home-interview-drill";
 import { useEffect, useMemo, useState } from "react";
 import { navItems } from "@/lib/content";
@@ -23,6 +24,7 @@ type MarketQuote = {
   region: string;
   value: number;
   changePercent: number | null;
+  change?:number|null;
   unit: "" | "%" | "$" | "bps";
   asOf: string;
   source: string;
@@ -177,7 +179,7 @@ export default function FinanceStudioHomeV2() {
       if (current.length < 4) current.push(quote);
       groups.set(quote.category, current);
     }
-    return [...groups.entries()].slice(0, 4);
+    return [...groups.entries()];
   }, [marketData, preferredMarketRegions]);
 
   useEffect(() => {
@@ -271,7 +273,8 @@ export default function FinanceStudioHomeV2() {
     }
 
     void loadMarkets();
-    return () => { mounted = false; };
+    const timer=window.setInterval(()=>void loadMarkets(),60000);
+    return () => { mounted = false; window.clearInterval(timer); };
   }, []);
 
   useEffect(() => {
@@ -491,19 +494,18 @@ export default function FinanceStudioHomeV2() {
               </div>
             </div>
 
+            {marketData?.quotes.length ? <HomeMarketSummary quotes={marketData.quotes} updatedAt={marketData.updatedAt}/> : null}
             {groupedMarkets.length ? (
-              <div className="market-grid">
+              <div className="market-grid market-grid-rich">
                 {groupedMarkets.map(([category, quotes]) => (
-                  <div className="market-group" key={category}>
-                    <h3>{category}</h3>
+                  <div className="market-group market-group-rich" key={category}>
+                    <div className="market-group-heading"><h3>{category}</h3><span>{marketData?.quotes.filter(q=>q.category===category).length} {text("series","séries")}</span></div>
                     {quotes.map((quote) => (
-                      <div className="market-row" key={quote.id}>
-                        <span>{quote.label}</span>
+                      <div className="market-row market-row-rich" key={quote.id}>
+                        <span><strong>{quote.label}</strong><small>{quote.region} · {quote.asOf}</small></span>
                         <em>
                           {formatMarketValue(quote)}
-                          {quote.changePercent !== null
-                            ? ` · ${quote.changePercent > 0 ? "+" : ""}${quote.changePercent.toFixed(2)}%`
-                            : ""}
+                          {quote.unit === "%" && quote.change != null ? ` · ${quote.change>=0?"+":""}${(quote.change*100).toFixed(1)} bps` : quote.changePercent !== null ? ` · ${quote.changePercent > 0 ? "+" : ""}${quote.changePercent.toFixed(2)}%` : ""}
                         </em>
                       </div>
                     ))}

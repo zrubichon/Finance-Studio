@@ -4,7 +4,7 @@ import {CommentaryContent,requestNewsAnalysis} from "./news-commentary";
 import type {NewsAnalysis} from "@/lib/news-analysis";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 
 type Localized = { en: string; fr: string };
@@ -20,6 +20,7 @@ type Story = {
 
 export default function HomeNewsCarousel() {
   const { isFrench, text } = useLanguage();
+  const requestVersion=useRef(0);
   const [stories, setStories] = useState<Story[]>([]);
   const [index, setIndex] = useState(0);
   const [aiStory, setAiStory] = useState<Story | null>(null);
@@ -49,10 +50,11 @@ export default function HomeNewsCarousel() {
   }, [story, isFrench]);
 
   async function explainWithAI(item: Story) {
+    const version=++requestVersion.current;
     setAiStory(item);setAiAnswer(null);setAiError("");setAiLoading(true);
-    try {setAiAnswer(await requestNewsAnalysis(item.url,item.title,isFrench?"FR":"EN"));}
-    catch(e){setAiError(e instanceof Error?e.message:text("Analysis unavailable","Analyse indisponible"));}
-    finally{setAiLoading(false);}
+    try {const result=await requestNewsAnalysis(item.url,item.title,isFrench?"FR":"EN");if(version===requestVersion.current)setAiAnswer(result);}
+    catch(e){if(version===requestVersion.current)setAiError(e instanceof Error?e.message:text("Analysis unavailable","Analyse indisponible"));}
+    finally{if(version===requestVersion.current)setAiLoading(false);}
   }
 
   if (!story) return null;

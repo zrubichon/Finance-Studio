@@ -121,7 +121,7 @@
 .section-shell.section-nav-collapsed .section-sidebar {overflow:hidden;}
 .app-shell .main-canvas {padding-bottom:12px!important;}
 .product-section-main.home-followup-section {margin-top:16px!important;}
-.home-followup-section .home-news-carousel {margin-top:0!important;}
+.home-followup-section .news-carousel-panel {margin-top:0!important;}
 @media(min-width:1101px){
  .dashboard-grid > .daily-card,.dashboard-grid > .stable-interview-drill {align-self:stretch!important;height:100%!important;box-sizing:border-box;display:flex!important;flex-direction:column;}
  .daily-card .hourly-deep-lesson {flex:1;align-content:space-evenly;gap:18px!important;}
@@ -196,3 +196,6 @@
 .internship-portal-grid span,.internship-portal-grid small {font-size:13px;color:var(--muted);line-height:1.5;}
 @media(max-width:900px){.internship-portal-grid {grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:520px){.internship-portal-grid {grid-template-columns:1fr;}}
+.learning-response blockquote {border-left:3px solid var(--accent);padding:12px 18px;margin:18px 0;background:var(--surface-2);border-radius:0 10px 10px 0;font-size:17px;line-height:1.75;}
+.market-row-rich > span > strong {display:block;font-size:13px;}
+.market-row-rich > span > small {display:block;font-size:10px;color:var(--muted);margin-top:5px;}

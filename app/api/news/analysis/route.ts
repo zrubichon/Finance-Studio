@@ -1,6 +1,6 @@
 import {NextRequest,NextResponse} from "next/server";
 import {newsAnalysis,safeNewsURL} from "@/lib/news-analysis";
-export const maxDuration=120;
+export const maxDuration=180;
 export async function POST(request:NextRequest){
  const body=await request.json().catch(()=>null);
  const url=safeNewsURL(body?.url),title=typeof body?.title==="string"?body.title.trim().slice(0,400):"";
