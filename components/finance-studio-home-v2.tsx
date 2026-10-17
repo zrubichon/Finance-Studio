@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import LearningHub from "./learning-hub";
 import MarketPanorama from "./market-panorama";
 import AppSidebar, {useSidebarState} from "./app-sidebar";
 import HomeMarketSummary from "./home-market-summary";
@@ -152,6 +153,8 @@ export default function FinanceStudioHomeV2() {
     ? targetRole
     : "Investment Banking";
   const interview = interviewQuestions[interviewTrack];
+  useEffect(()=>{const apply=(event:Event)=>{const s=(event as CustomEvent).detail;if(isInterviewTrack(s?.target_role))setTargetRole(s.target_role);const l=profileLevel(s?.explanation_level);if(l)setLevel(l);};window.addEventListener('finance-learning-preferences',apply);return()=>window.removeEventListener('finance-learning-preferences',apply);},[]);
+
 
   const lesson = lessonCopy[level][isFrench ? "fr" : "en"];
 
@@ -349,7 +352,7 @@ export default function FinanceStudioHomeV2() {
       <section className="main-canvas">
         <header className="topbar">
           <div>
-            <p className="date-line">{today}</p>
+            <p className="date-line">{today} · <Link href="/discover">{text("Discover FinanceStudio","Découvrir FinanceStudio")} ↗</Link></p>
             <h1>{text("Your finance command center", "Ton centre de commande finance")}</h1>
             <p className="hero-subtitle">{text(
               "Learn the market, understand the why, and train for finance interviews — from zero to professional depth.",
@@ -411,6 +414,7 @@ export default function FinanceStudioHomeV2() {
         </section>
 
         <section className="dashboard-grid">
+          <LearningHub compact/>
           <HourlyLearningBrief level={level} />
 
           <HomeInterviewDrill track={interviewTrack} targetRole={targetRole} />

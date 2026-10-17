@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SectionLayout from "@/components/section-layout";
 import InterviewStudio from "@/components/interview-studio";
 
@@ -12,7 +13,7 @@ export default function InterviewPage() {
         fr: "Entraîne-toi aux questions techniques, marchés, comportementales / behavioral, calcul mental et études de cas / cases selon le métier visé. Chaque question précise ce qui est testé, la structure de raisonnement idéale et des relances / follow-ups conçues pour révéler une compréhension superficielle.",
       }}
     >
-      <InterviewStudio />
+      <section className="learner-panel"><Link className="full-button" href="/interview/mock">Mock interview · Entretien blanc · 15–20 min →</Link></section><InterviewStudio />
     </SectionLayout>
   );
 }

@@ -1,4 +1,5 @@
 export const navItems = [
+  { slug: "learn", label: "My learning", labelFr: "Mon apprentissage", icon: "◇" },
   { slug: "markets", label: "Markets", labelFr: "Marchés", icon: "↗" },
   { slug: "news", label: "News & Analysis", labelFr: "Actualités & Analyses", icon: "◎" },
   { slug: "university", label: "Finance University", labelFr: "Université de Finance", icon: "◫" },

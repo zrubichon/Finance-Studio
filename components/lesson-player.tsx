@@ -12,6 +12,7 @@ import { useLanguage } from "@/components/language-provider";
 import { createClient } from "@/lib/supabase/client";
 import { recordDailyActivity } from "@/lib/record-activity";
 import SaveItemButton from "@/components/save-item-button";
+import {recordPractice} from "@/lib/learning-client";
 import type { FinanceLesson, TeachingMode } from "@/lib/lesson-content";
 
 type ProgressStatus = "not_started" | "in_progress" | "completed";
@@ -196,6 +197,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
     const passed = score / lesson.quiz.length >= 0.7;
 
     if (!userId) {
+      await Promise.all(lesson.quiz.map(q=>recordPractice(q.conceptKey,answers[q.id]===q.correctOption)));
       setStatusMessage(
         passed
           ? text("You passed. Sign in to save completion.", "Quiz réussi. Connecte-toi pour enregistrer la complétion.")

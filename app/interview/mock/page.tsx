@@ -1,0 +1,3 @@
+import SectionLayout from '@/components/section-layout';
+import MockInterview from '@/components/mock-interview';
+export default function Page(){return <SectionLayout activeSlug="interview" eyebrow={{en:'MOCK INTERVIEW',fr:'ENTRETIEN BLANC'}} title={{en:'Train for the conversation, not just the question.',fr:'Entraîne-toi à l’échange, pas seulement à la question.'}} description={{en:'A complete, timed practice session with tailored follow-ups and evidence-based feedback.',fr:'Une session complète et chronométrée avec relances adaptées et retour fondé sur tes réponses.'}}><MockInterview/></SectionLayout>;}

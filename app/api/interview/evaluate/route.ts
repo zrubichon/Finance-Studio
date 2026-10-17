@@ -117,6 +117,7 @@ Use bullets where useful. SCORE must be an integer 0-100.`;
         },
       });
       saved = !error;
+      if(saved&&selected&&score!==null)await supabase.rpc("record_learning_result",{p_concept_key:"section:"+selected.id.slice(5).replace(":section:",":"),p_correct:score>=70});
     }
 
     return NextResponse.json({ score, feedback: result.text, saved, model: MODEL });

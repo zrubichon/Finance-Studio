@@ -26,6 +26,7 @@ import "./comprehensive-polish.css";
 import "./comprehensive-polish-2.css";
 import "./comprehensive-polish-3.css";
 import "./learning-experience.css";
+import "./learning-studio.css";
 import "katex/dist/katex.min.css";
 
 export async function generateMetadata(): Promise<Metadata> {

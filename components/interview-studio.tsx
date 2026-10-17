@@ -1,5 +1,6 @@
 "use client";
 
+import {recordPractice} from "@/lib/learning-client";
 import LearningResponse from "./learning-response";
 import type {InterviewBankExercise} from "@/lib/interview-question-bank";
 import Link from "next/link";
@@ -161,6 +162,7 @@ export default function InterviewStudio() {
       setEvaluation(payload.feedback);
       setScore(typeof payload.score === "number" ? payload.score : null);
       setAiStatus("live");
+      if(!userId&&rotation&&typeof payload.score==="number")await recordPractice("section:"+rotation.id.slice(5).replace(":section:",":"),payload.score>=70);
 
       if (payload.saved) {
         setAttemptCount((count) => count + 1);
