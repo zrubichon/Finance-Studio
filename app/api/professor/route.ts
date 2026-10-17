@@ -1,3 +1,5 @@
+import {shareableSubject} from "@/lib/shared-ai-cache";
+import {sharedStudyResponse} from "@/lib/shared-study-response";
 import { publicNewsContext } from "@/lib/news-source-context";
 import { generateText, streamText } from "ai";
 import { NextRequest, NextResponse } from "next/server";
@@ -23,6 +25,7 @@ type ChatMessage = {
 
 type ProfessorRequest = {
   message?: string;
+  sharedSubject?: string;
   responseStyle?: "study";
   stream?: boolean;
   newsUrl?: string;
@@ -34,7 +37,7 @@ type ProfessorRequest = {
   sessionId?: string | null;
 };
 
-export const maxDuration = 120;
+export const maxDuration = 180;
 
 const MODEL = "openai/gpt-5.5";
 const validModes = new Set<Mode>(["Beginner", "Intermediate", "Professional"]);
@@ -322,6 +325,12 @@ export async function POST(request: NextRequest) {
       { error: "A question or answer is required." },
       { status: 400 },
     );
+  }
+
+  const sharedSubject=shareableSubject(body.sharedSubject);
+  if(body.responseStyle==='study'&&sharedSubject&&action==='explain'&&!body.newsUrl&&!requestedSessionId&&!body.history?.length){
+    try{return await sharedStudyResponse({subject:sharedSubject,language,mode,lessonSlug,context:buildLessonContext(lessonSlug,mode).text,system:baseSystemPrompt(mode,language),stream:body.stream===true});}
+    catch{return NextResponse.json({error:language==='FR'?'Cette fiche est en préparation ou la bibliothèque est temporairement indisponible. Réessaie dans un instant.':'This card is being prepared or the shared library is temporarily unavailable. Please retry shortly.'},{status:503});}
   }
 
   const clientHistory = Array.isArray(body.history)

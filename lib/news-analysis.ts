@@ -1,3 +1,4 @@
+import {withSharedCard,sharedCardKey,normalizeSharedSubject} from "./shared-ai-cache";
 import {gateway,generateText} from "ai";
 import {unstable_cache} from "next/cache";
 import {getMarketData} from "./providers/market-data";
@@ -55,5 +56,7 @@ function localizeNewsSections(answer:string,language:"EN"|"FR"){return language=
 export function newsAnalysis(url:string,title:string,language:"EN"|"FR"){
  const canonical=safeNewsURL(url);if(!canonical)throw new Error("Invalid public source URL");url=canonical;
  const key=`${language}:${url}:${title}`;const previous=pending.get(key);if(previous)return previous;
- const task=cachedAnalysis(url,title,language).then(r=>({...r,answer:localizeNewsSections(r.answer,language)})).finally(()=>{pending.delete(key);});pending.set(key,task);return task;
+ const identityURL=new URL(url);identityURL.hash="";for(const key of [...identityURL.searchParams.keys()])if(/^utm_|^(fbclid|gclid|msclkid)$/i.test(key))identityURL.searchParams.delete(key);identityURL.searchParams.sort();url=identityURL.href;
+ const durableKey=sharedCardKey("news",{url,title:normalizeSharedSubject(title),language,editorialVersion:3});
+ const task=withSharedCard(durableKey,"news",()=>cachedAnalysis(url,title,language)).then(r=>({...r,answer:localizeNewsSections(r.answer,language)})).finally(()=>{pending.delete(key);});pending.set(key,task);return task;
 }

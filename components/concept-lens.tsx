@@ -56,6 +56,7 @@ export default function ConceptLens() {
 
     try {
       const answer = await requestStudyCard({
+          sharedSubject: clean,
           responseStyle: "study", language: isFrench ? "FR" : "EN",
           mode: "Beginner",
           action: "explain",
@@ -94,7 +95,7 @@ export default function ConceptLens() {
             {savedStatus && <p role="status">{savedStatus}</p>}
             {answer && (
               <div className="news-story-actions">
-                <button type="button" onClick={() => void explain(openTerm, true)}>{isFrench ? "Régénérer" : "Regenerate"}</button>
+                <button type="button" onClick={() => void explain(openTerm, true)}>{isFrench ? "Recharger la fiche" : "Reload saved card"}</button>
                 <a href={`/dictionary?q=${encodeURIComponent(openTerm)}`}>{isFrench ? "Voir dans le dictionnaire" : "Open in dictionary"} →</a>
               </div>
             )}

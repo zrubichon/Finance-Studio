@@ -88,6 +88,7 @@ export default function DictionaryExplorer({ entries }: { entries: DictionaryEnt
     try {
       const sources = item.sources.slice(0, 6).map((source) => isFrench ? source.fr : source.en).join(", ");
       const answer = await requestStudyCard({
+          sharedSubject: item.en,
           responseStyle: "study", language: isFrench ? "FR" : "EN", mode: professional ? "Professional" : "Beginner", action: "explain",
           lessonSlug: item.sources[0]?.slug || null,
           message: isFrench
