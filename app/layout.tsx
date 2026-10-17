@@ -1,3 +1,4 @@
+import {NavigationHistoryProvider} from "@/components/navigation-history";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import {SidebarProvider} from "@/components/app-sidebar";
@@ -46,7 +47,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html lang={initialLanguage === "FR" ? "fr" : "en"}>
       <body>
         <LanguageProvider initialLanguage={initialLanguage}>
-          <SidebarProvider>
+          <SidebarProvider><NavigationHistoryProvider>
           <ThemeBootstrap />
           <ActivityTracker />
           <FinanceNotationStandards />
@@ -55,7 +56,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <ChallengeDepthEnhancer />
           <NewsAIEnhancer />
           {children}
-          </SidebarProvider>
+          </NavigationHistoryProvider></SidebarProvider>
         </LanguageProvider>
       </body>
     </html>

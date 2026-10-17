@@ -3,7 +3,8 @@ export const revalidate=900;
 export async function GET() {
  const today=new Date().toISOString().slice(0,10);
 
- const results=await Promise.allSettled([['BTC','Bitcoin'],['ETH','Ethereum'],['SOL','Solana'],['XRP','XRP']].map(async([symbol,label])=>{
+ const results=await Promise.allSettled([['BTC','Bitcoin'],['ETH','Ethereum'],['SOL','Solana'],['XRP','XRP'],['ADA','Cardano'],['DOGE','Dogecoin'],['LINK','Chainlink'],['LTC','Litecoin']].map(async([symbol,label],index)=>{
+  await new Promise(resolve=>setTimeout(resolve,index*700));
   const pair=symbol+'-USD';
   // Coinbase limits each request to 300 candles: two bounded windows cover a year.
   const windows=[[390,195],[195,0]];
@@ -16,7 +17,7 @@ export async function GET() {
   // Completed UTC daily candles only. The current day is not a closing price.
   const history=[...new Map(raw.filter(row=>Array.isArray(row)&&Number.isFinite(row[0])&&Number.isFinite(row[4])).map(row=>({date:new Date(row[0]*1000).toISOString().slice(0,10),value:Number(row[4])})).filter(p=>p.date<today&&p.value>0).map(p=>[p.date,p] as const)).values()].sort((a,b)=>a.date.localeCompare(b.date));
   const last=history.at(-1);if(!last)throw new Error('No observations');
-  return {id:pair,label,category:'Crypto',region:'Global',unit:'$',value:last.value,asOf:last.date,history,source:'Coinbase Exchange · daily UTC close',sourceUrl:`https://www.coinbase.com/price/${({BTC:'bitcoin',ETH:'ethereum',SOL:'solana',XRP:'xrp'})[symbol as 'BTC'|'ETH'|'SOL'|'XRP']}`};
+  return {id:pair,label,category:'Crypto',region:'Global',unit:'$',value:last.value,asOf:last.date,history,source:'Coinbase Exchange · daily UTC close',sourceUrl:`https://www.coinbase.com/price/${({BTC:'bitcoin',ETH:'ethereum',SOL:'solana',XRP:'xrp',ADA:'cardano',DOGE:'dogecoin',LINK:'chainlink',LTC:'litecoin'})[symbol as 'BTC'|'ETH'|'SOL'|'XRP'|'ADA'|'DOGE'|'LINK'|'LTC']}`};
  }));
  return NextResponse.json({quotes:results.flatMap(r=>r.status==='fulfilled'?[r.value]:[])},{headers:{'Cache-Control':'public, s-maxage=900, stale-while-revalidate=1800'}});
 }

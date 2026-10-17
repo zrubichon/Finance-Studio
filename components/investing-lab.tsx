@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/components/language-provider";
 import { recordDailyActivity } from "@/lib/record-activity";
+import MarketCategoryGuide from "./market-category-guide";
 import InvestingExample from "./investing-example";
 import PaperTradingPanel from "@/components/paper-trading-panel";
 
@@ -381,15 +382,14 @@ export default function InvestingLab() {
         </div>
 
         {marketData?.quotes.length ? (
-          <div className="market-universe-grid">
-            {marketData.quotes.map((quote) => (
+          <div className="market-category-stack">{[...new Set(marketData.quotes.map(q=>q.category))].map(category=><section key={category} className="market-category"><MarketCategoryGuide category={category}/><div className="market-universe-grid">{marketData.quotes.filter(q=>q.category===category).map(quote=>(
               <article className="market-universe-card" key={quote.id}>
                 <h3>{quote.label}</h3>
                 <div className="instrument-list">
                   <div>
                     <span>
                       <strong>{formatQuote(quote)}</strong>
-                      {quote.changePercent !== null
+                      {quote.unit==="%"&&quote.previousValue!==null?` · ${quote.value>=quote.previousValue?"+":""}${((quote.value-quote.previousValue)*100).toFixed(1)} ${isFrench?"pb":"bps"}`:quote.changePercent !== null
                         ? ` · ${quote.changePercent > 0 ? "+" : ""}${quote.changePercent.toFixed(2)}%`
                         : ""}
                     </span>
@@ -397,8 +397,7 @@ export default function InvestingLab() {
                   </div>
                 </div>
               </article>
-            ))}
-          </div>
+            ))}</div></section>)}</div>
         ) : (
           <p className="account-muted">
             {text(

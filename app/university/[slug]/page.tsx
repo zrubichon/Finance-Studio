@@ -28,5 +28,5 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
   if (!lesson) notFound();
 
-  return <LessonPlayer lesson={lesson} />;
+  return <LessonPlayer key={lesson.slug} lesson={lesson} />;
 }

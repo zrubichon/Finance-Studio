@@ -1,0 +1,1747 @@
+{
+ "year-1-financial-system-market-structure": {
+  "scenario": {
+   "en": "A dealer quotes bid $100 and ask $100.20. You immediately buy 50 shares then sell the same 50 at the unchanged bid. Ignore fees.",
+   "fr": "Un intermédiaire cote un bid à 100 $ et un ask à 100,20 $. Tu achètes 50 actions puis revends immédiatement les 50 au bid inchangé, sans frais."
+  },
+  "model": "execution",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Cash paid to buy",
+     "fr": "Somme payée pour acheter"
+    },
+    "expected": 5010,
+    "unit": "USD",
+    "explanation": {
+     "en": "Buy at the ask: 50 × 100.20 = 5,010. The bid is the price at which the dealer buys from you.",
+     "fr": "Achat à l’ask : 50 × 100,20 = 5 010. Le bid est le prix auquel l’intermédiaire t’achète les titres."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Round-trip loss, entered as a positive cost",
+     "fr": "Perte aller-retour, saisie comme coût positif"
+    },
+    "expected": 10,
+    "unit": "USD",
+    "explanation": {
+     "en": "Sale proceeds are 50 × 100 = 5,000; the spread costs 10. Unchanged mid-price does not mean zero execution cost.",
+     "fr": "La vente rapporte 50 × 100 = 5 000 ; le spread coûte 10. Un prix médian inchangé n’implique pas un coût d’exécution nul."
+    }
+   }
+  ]
+ },
+ "year-1-stocks-bonds-etfs-funds": {
+  "scenario": {
+   "en": "A share costs $80, pays a $2 dividend and ends the year at $86. Separately, a $100-face-value bond has a 4% annual coupon.",
+   "fr": "Une action coûte 80 $, verse 2 $ de dividende et termine l’année à 86 $. Séparément, une obligation de nominal 100 $ verse un coupon annuel de 4 %."
+  },
+  "model": "valuation",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Stock total return",
+     "fr": "Rendement total de l’action"
+    },
+    "expected": 10,
+    "unit": "%",
+    "explanation": {
+     "en": "(86 − 80 + 2) / 80 = 10%. Price return alone is 7.5%.",
+     "fr": "(86 − 80 + 2) / 80 = 10 %. Le rendement de prix seul est 7,5 %."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Bond annual cash coupon",
+     "fr": "Coupon annuel en espèces"
+    },
+    "expected": 4,
+    "unit": "USD",
+    "explanation": {
+     "en": "Coupon cash = face value × coupon rate = 100 × 4%. It is not the bond’s market yield.",
+     "fr": "Coupon en espèces = nominal × taux du coupon = 100 × 4 %. Ce n’est pas le rendement de marché."
+    }
+   }
+  ]
+ },
+ "year-1-money-banking-central-banks": {
+  "scenario": {
+   "en": "A simplified bank has assets of 1,000, deposits of 900 and equity of 100. It grants a new loan of 100 and credits a matching deposit. No repayment, withdrawal or loss occurs.",
+   "fr": "Une banque simplifiée possède 1 000 d’actifs, 900 de dépôts et 100 de capitaux propres. Elle accorde un prêt de 100 en créditant un dépôt de même montant. Aucun retrait, remboursement ou perte."
+  },
+  "model": "accounting",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Total assets after the new loan",
+     "fr": "Total des actifs après le prêt"
+    },
+    "expected": 1100,
+    "unit": "units",
+    "explanation": {
+     "en": "The loan adds a 100 asset; it does not consume equity on origination in this simplified case.",
+     "fr": "Le prêt ajoute un actif de 100 ; à l’octroi, il ne consomme pas les capitaux propres dans ce cas simplifié."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Equity as a percentage of total assets",
+     "fr": "Capitaux propres en pourcentage de l’actif"
+    },
+    "expected": 9.090909090909092,
+    "unit": "%",
+    "explanation": {
+     "en": "100 / 1,100 = 9.09%. Deposits are now 1,000; equity stays 100. This is a simple leverage ratio, not a risk-weighted regulatory ratio.",
+     "fr": "100 / 1 100 = 9,09 %. Les dépôts passent à 1 000 et les capitaux propres restent 100. Ratio de levier simple, pas un ratio prudentiel pondéré."
+    }
+   }
+  ]
+ },
+ "year-1-time-value-of-money": {
+  "scenario": {
+   "en": "Invest 1,000 for two years at 10% annually. Also value a separate payment of 1,100 due in one year at a 10% discount rate.",
+   "fr": "Place 1 000 pendant deux ans à 10 % par an. Évalue aussi un paiement distinct de 1 100 dans un an, actualisé à 10 %."
+  },
+  "model": "discount",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Future value after two years",
+     "fr": "Valeur future après deux ans"
+    },
+    "expected": 1210,
+    "unit": "units",
+    "explanation": {
+     "en": "1,000 × 1.10² = 1,210. The second year earns interest on the first year’s interest too.",
+     "fr": "1 000 × 1,10² = 1 210. La deuxième année produit aussi des intérêts sur les intérêts."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Present value of the separate payment",
+     "fr": "Valeur actuelle du paiement distinct"
+    },
+    "expected": 1000,
+    "unit": "units",
+    "explanation": {
+     "en": "1,100 / 1.10 = 1,000. Future cash is divided by the accumulation factor.",
+     "fr": "1 100 / 1,10 = 1 000. On divise le flux futur par le facteur d’accumulation."
+    }
+   }
+  ]
+ },
+ "year-1-risk-return-diversification": {
+  "scenario": {
+   "en": "A portfolio holds 60% of asset A and 40% of B. Expected returns are 10% and 5%; volatilities are 20% and 10%; correlation is zero.",
+   "fr": "Un portefeuille détient 60 % de A et 40 % de B. Rendements espérés 10 % et 5 %, volatilités 20 % et 10 %, corrélation nulle."
+  },
+  "model": "portfolio",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Expected portfolio return",
+     "fr": "Rendement espéré du portefeuille"
+    },
+    "expected": 8,
+    "unit": "%",
+    "explanation": {
+     "en": "0.6 × 10% + 0.4 × 5% = 8%; an expectation is not a promised return.",
+     "fr": "0,6 × 10 % + 0,4 × 5 % = 8 % ; une espérance n’est pas une promesse."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Portfolio volatility",
+     "fr": "Volatilité du portefeuille"
+    },
+    "expected": 12.64911064067352,
+    "unit": "%",
+    "explanation": {
+     "en": "Square root of 0.6²×0.2² + 0.4²×0.1² = 12.65%. The covariance term is zero, not the individual risks.",
+     "fr": "Racine de 0,6²×0,2² + 0,4²×0,1² = 12,65 %. Le terme de covariance est nul, pas les risques individuels."
+    }
+   }
+  ]
+ },
+ "year-1-microeconomics-for-finance": {
+  "scenario": {
+   "en": "A product price rises from 10 to 11 and quantity falls from 100 to 95. Use initial-value percentage changes, not the midpoint convention. Variable cost is 6 per unit; ignore fixed costs.",
+   "fr": "Le prix passe de 10 à 11 et la quantité de 100 à 95. Utilise les variations rapportées aux valeurs initiales, pas la méthode du point milieu. Coût variable : 6 par unité ; coûts fixes ignorés."
+  },
+  "model": "margin",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Price elasticity of demand",
+     "fr": "Élasticité-prix de la demande"
+    },
+    "expected": -0.5,
+    "unit": "ratio",
+    "explanation": {
+     "en": "Quantity falls 5% while price rises 10%: −5%/10% = −0.5. State the percentage convention.",
+     "fr": "La quantité baisse de 5 % et le prix monte de 10 % : −5 % / 10 % = −0,5. Précise la convention."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "New contribution before fixed costs",
+     "fr": "Nouvelle contribution avant coûts fixes"
+    },
+    "expected": 475,
+    "unit": "units",
+    "explanation": {
+     "en": "(11 − 6) × 95 = 475, versus 400 initially. Contribution is not net income.",
+     "fr": "(11 − 6) × 95 = 475, contre 400 initialement. La contribution n’est pas le bénéfice net."
+    }
+   }
+  ]
+ },
+ "year-1-macroeconomics-for-markets": {
+  "scenario": {
+   "en": "Nominal GDP rises from 1,000 to 1,080 while the GDP deflator rises from 100 to 104. Separately, inflation is reported at 3.3% versus a 3.0% consensus.",
+   "fr": "Le PIB nominal passe de 1 000 à 1 080 et le déflateur de 100 à 104. Séparément, l’inflation publiée est 3,3 % contre 3,0 % attendus."
+  },
+  "model": "macro",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Real GDP growth",
+     "fr": "Croissance réelle du PIB"
+    },
+    "expected": 3.8461538461538547,
+    "unit": "%",
+    "explanation": {
+     "en": "Real growth = 1.08 / 1.04 − 1 = 3.85%. Subtracting 4% from 8% is only an approximation.",
+     "fr": "Croissance réelle = 1,08 / 1,04 − 1 = 3,85 %. Soustraire 4 % à 8 % n’est qu’une approximation."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Inflation surprise",
+     "fr": "Surprise d’inflation"
+    },
+    "expected": 30,
+    "unit": "bps",
+    "explanation": {
+     "en": "3.3% − 3.0% = 0.3 percentage point = 30 bps. The surprise is not the inflation level.",
+     "fr": "3,3 % − 3,0 % = 0,3 point = 30 pb. La surprise n’est pas le niveau de l’inflation."
+    }
+   }
+  ]
+ },
+ "year-1-financial-accounting-i": {
+  "scenario": {
+   "en": "Start with cash 100 and equity 100. Borrow 60; buy equipment for cash 80; earn and collect service revenue 50; pay wages 20; record depreciation 10. No taxes, dividends or other transactions.",
+   "fr": "Départ : trésorerie 100 et capitaux propres 100. Emprunt 60 ; achat d’équipement comptant 80 ; prestations encaissées 50 ; salaires payés 20 ; amortissement 10. Aucun impôt, dividende ni autre opération."
+  },
+  "model": "accounting",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Ending cash — balance sheet asset",
+     "fr": "Trésorerie finale — actif du bilan"
+    },
+    "expected": 110,
+    "unit": "units",
+    "explanation": {
+     "en": "100 + 60 − 80 + 50 − 20 = 110. Depreciation is not a cash payment.",
+     "fr": "100 + 60 − 80 + 50 − 20 = 110. L’amortissement n’est pas un décaissement."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Net equipment — balance sheet asset",
+     "fr": "Équipement net — actif du bilan"
+    },
+    "expected": 70,
+    "unit": "units",
+    "explanation": {
+     "en": "80 gross equipment − 10 accumulated depreciation = 70.",
+     "fr": "80 d’équipement brut − 10 d’amortissement cumulé = 70."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Debt — balance sheet liability",
+     "fr": "Dette — passif du bilan"
+    },
+    "expected": 60,
+    "unit": "units",
+    "explanation": {
+     "en": "The borrowing increases cash and debt by 60; it is not revenue.",
+     "fr": "L’emprunt augmente trésorerie et dette de 60 ; ce n’est pas un produit."
+    }
+   },
+   {
+    "id": "3",
+    "label": {
+     "en": "Net income — income statement",
+     "fr": "Bénéfice net — compte de résultat"
+    },
+    "expected": 20,
+    "unit": "units",
+    "explanation": {
+     "en": "50 revenue − 20 wages − 10 depreciation = 20. Buying equipment is investing, not an immediate 80 expense.",
+     "fr": "50 de produits − 20 de salaires − 10 d’amortissement = 20. Acheter l’équipement n’est pas une charge immédiate de 80."
+    }
+   },
+   {
+    "id": "4",
+    "label": {
+     "en": "Ending equity — balance sheet",
+     "fr": "Capitaux propres finaux — bilan"
+    },
+    "expected": 120,
+    "unit": "units",
+    "explanation": {
+     "en": "Initial equity 100 + retained profit 20 = 120. Assets 110 + 70 = liabilities 60 + equity 120.",
+     "fr": "Capitaux propres initiaux 100 + bénéfice conservé 20 = 120. Actifs 110 + 70 = dette 60 + capitaux propres 120."
+    }
+   },
+   {
+    "id": "5",
+    "label": {
+     "en": "Operating cash flow",
+     "fr": "Flux de trésorerie opérationnel"
+    },
+    "expected": 30,
+    "unit": "units",
+    "explanation": {
+     "en": "Net income 20 + noncash depreciation 10 = 30, also 50 receipts − 20 wages. Investing is −80 and financing +60.",
+     "fr": "Bénéfice 20 + amortissement non décaissé 10 = 30, soit encaissements 50 − salaires 20. Investissement : −80 ; financement : +60."
+    }
+   }
+  ]
+ },
+ "year-1-statistics-probability": {
+  "scenario": {
+   "en": "Consider returns of −2%, 1%, 3%, 6%. Treat these four observations as the full population for variance.",
+   "fr": "Observe les rendements −2 %, 1 %, 3 %, 6 %. Traite ces quatre observations comme la population complète pour la variance."
+  },
+  "model": "statistics",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Arithmetic mean return",
+     "fr": "Rendement moyen arithmétique"
+    },
+    "expected": 2,
+    "unit": "%",
+    "explanation": {
+     "en": "(−2 + 1 + 3 + 6)/4 = 2%. It differs from a compounded annual growth rate.",
+     "fr": "(−2 + 1 + 3 + 6)/4 = 2 %. Cela diffère d’un taux de croissance composé."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Population standard deviation",
+     "fr": "Écart-type de population"
+    },
+    "expected": 2.9154759474226504,
+    "unit": "percentage points",
+    "explanation": {
+     "en": "Squared deviations from 2 are 16, 1, 1, 16; average 8.5; square root 2.915. A sample estimate would divide by 3 instead.",
+     "fr": "Écarts au carré par rapport à 2 : 16, 1, 1, 16 ; moyenne 8,5 ; racine 2,915. Pour un estimateur d’échantillon, on diviserait par 3."
+    }
+   }
+  ]
+ },
+ "year-1-excel-foundations-for-finance": {
+  "scenario": {
+   "en": "A model has revenue 200 in B5 and a tax-rate assumption of 25% in B2. Copy =B5*$B$2 one column to the right, where C5 contains 240.",
+   "fr": "Un modèle contient un chiffre d’affaires de 200 en B5 et un taux d’impôt de 25 % en B2. Copie =B5*$B$2 une colonne à droite ; C5 contient 240."
+  },
+  "model": "margin",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Original formula result",
+     "fr": "Résultat de la formule initiale"
+    },
+    "expected": 50,
+    "unit": "units",
+    "explanation": {
+     "en": "B5*$B$2 = 200 × 25% = 50. This is a formula exercise, not a complete taxable-income calculation.",
+     "fr": "B5*$B$2 = 200 × 25 % = 50. Exercice de formule, pas calcul fiscal complet."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Copied formula result",
+     "fr": "Résultat après copie"
+    },
+    "expected": 60,
+    "unit": "units",
+    "explanation": {
+     "en": "The formula becomes =C5*$B$2, so 240 × 25% = 60. The rate reference stays fixed.",
+     "fr": "La formule devient =C5*$B$2 : 240 × 25 % = 60. La référence au taux reste fixe."
+    }
+   }
+  ]
+ },
+ "year-1-financial-vocabulary-fr-en": {
+  "scenario": {
+   "en": "A company reports revenue 500, net income 40, equity value 300, debt 100 and excess cash 30.",
+   "fr": "Une société affiche 500 de chiffre d’affaires, 40 de résultat net, une valeur des capitaux propres de 300, une dette de 100 et une trésorerie excédentaire de 30."
+  },
+  "model": "valuation",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Net margin",
+     "fr": "Marge nette"
+    },
+    "expected": 8,
+    "unit": "%",
+    "explanation": {
+     "en": "40/500 = 8%. Revenue translates as chiffre d’affaires, not bénéfice.",
+     "fr": "40/500 = 8 %. Revenue signifie chiffre d’affaires, pas bénéfice."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Enterprise value",
+     "fr": "Valeur d’entreprise"
+    },
+    "expected": 370,
+    "unit": "units",
+    "explanation": {
+     "en": "300 + 100 − 30 = 370. Equity value and enterprise value refer to different claims.",
+     "fr": "300 + 100 − 30 = 370. Valeur des capitaux propres et valeur d’entreprise désignent des droits différents."
+    }
+   }
+  ]
+ },
+ "year-1-reading-financial-news": {
+  "scenario": {
+   "en": "An earnings release reports EPS 2.10 versus consensus 2.00, but next-year EPS guidance 8.50 versus prior consensus 9.00.",
+   "fr": "Une publication annonce un BPA de 2,10 contre 2,00 attendus, mais une prévision de BPA annuel de 8,50 contre un consensus antérieur de 9,00."
+  },
+  "model": "surprise",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Reported EPS surprise",
+     "fr": "Surprise sur le BPA publié"
+    },
+    "expected": 5,
+    "unit": "%",
+    "explanation": {
+     "en": "2.10/2.00 − 1 = 5%. That beat does not erase weaker guidance.",
+     "fr": "2,10/2,00 − 1 = 5 %. Cette surprise positive n’efface pas une prévision plus faible."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Guidance gap versus prior consensus",
+     "fr": "Écart des prévisions au consensus antérieur"
+    },
+    "expected": -5.555555555555558,
+    "unit": "%",
+    "explanation": {
+     "en": "8.50/9.00 − 1 = −5.56%. Market reaction depends on expectations, quality and valuation, not just the headline beat.",
+     "fr": "8,50/9,00 − 1 = −5,56 %. La réaction dépend des attentes, de la qualité et de la valorisation, pas seulement du dépassement annoncé."
+    }
+   }
+  ]
+ },
+ "year-2-corporate-finance": {
+  "scenario": {
+   "en": "A project costs 100 now and produces 60 in one year and 60 in two years. Discount at 10%; no terminal cash flow.",
+   "fr": "Un projet coûte 100 aujourd’hui et rapporte 60 dans un an puis 60 dans deux ans. Actualisation à 10 %, sans flux terminal."
+  },
+  "model": "discount",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "NPV",
+     "fr": "VAN"
+    },
+    "expected": 4.132231404958674,
+    "unit": "units",
+    "explanation": {
+     "en": "−100 + 60/1.1 + 60/1.1² = 4.13. Positive NPV means value above the assumed cost of capital.",
+     "fr": "−100 + 60/1,1 + 60/1,1² = 4,13. VAN positive : valeur supérieure au coût du capital supposé."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Undiscounted payback",
+     "fr": "Délai de récupération non actualisé"
+    },
+    "expected": 1.6666666666666667,
+    "unit": "years",
+    "explanation": {
+     "en": "100/60 = 1.667 years if cash accrues evenly within year 2. Payback ignores later cash and discounting.",
+     "fr": "100/60 = 1,667 an si les flux arrivent uniformément pendant la deuxième année. Le payback ignore les flux ultérieurs et l’actualisation."
+    }
+   }
+  ]
+ },
+ "year-2-financial-statement-analysis": {
+  "scenario": {
+   "en": "Revenue is 1,000; net income 80; average assets 800; average equity 400; operating cash flow 60.",
+   "fr": "Chiffre d’affaires 1 000 ; résultat net 80 ; actif moyen 800 ; capitaux propres moyens 400 ; flux opérationnel 60."
+  },
+  "model": "margin",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Return on equity",
+     "fr": "Rentabilité des capitaux propres"
+    },
+    "expected": 20,
+    "unit": "%",
+    "explanation": {
+     "en": "80/400 = 20%. Use average equity when relating a period’s profit to a capital stock.",
+     "fr": "80/400 = 20 %. Utilise des capitaux propres moyens pour rapprocher résultat de période et stock de capital."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Operating cash flow / net income",
+     "fr": "Flux opérationnel / résultat net"
+    },
+    "expected": 0.75,
+    "unit": "ratio",
+    "explanation": {
+     "en": "60/80 = 0.75. A low value can reflect working-capital investment or earnings quality; it is not proof of fraud.",
+     "fr": "60/80 = 0,75. Ce niveau peut refléter le BFR ou la qualité des bénéfices ; ce n’est pas une preuve de fraude."
+    }
+   }
+  ]
+ },
+ "year-2-equity-valuation": {
+  "scenario": {
+   "en": "Next-year dividend is 3, required equity return 9% and perpetual dividend growth 3%. Current market price is 60.",
+   "fr": "Dividende prévu l’an prochain : 3 ; rendement exigé 9 % ; croissance perpétuelle 3 %. Cours actuel 60."
+  },
+  "model": "discount",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Gordon model equity value per share",
+     "fr": "Valeur par action selon Gordon"
+    },
+    "expected": 50,
+    "unit": "units",
+    "explanation": {
+     "en": "3/(0.09−0.03) = 50, assuming stable growth forever and r > g.",
+     "fr": "3/(0,09−0,03) = 50, sous croissance stable perpétuelle et r > g."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Model-implied upside to price 60",
+     "fr": "Potentiel de hausse selon le modèle au cours de 60"
+    },
+    "expected": -16.666666666666664,
+    "unit": "%",
+    "explanation": {
+     "en": "50/60 − 1 = −16.67%. This is a model estimate, not a guaranteed loss or recommendation.",
+     "fr": "50/60 − 1 = −16,67 %. Estimation de modèle, pas perte garantie ni recommandation."
+    }
+   }
+  ]
+ },
+ "year-2-dcf-relative-valuation": {
+  "scenario": {
+   "en": "A firm generates perpetual unlevered free cash flow 12 starting next year, growing 2%, discounted at 8%. Debt is 50, excess cash 10 and shares 10.",
+   "fr": "Une société génère un flux non endetté de 12 l’an prochain, croissant de 2 % perpétuellement et actualisé à 8 %. Dette 50, trésorerie excédentaire 10, actions 10."
+  },
+  "model": "valuation",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Enterprise value",
+     "fr": "Valeur d’entreprise"
+    },
+    "expected": 200,
+    "unit": "units",
+    "explanation": {
+     "en": "12/(0.08−0.02) = 200. Unlevered cash flow is discounted at WACC, not cost of equity.",
+     "fr": "12/(0,08−0,02) = 200. Le flux non endetté s’actualise au WACC, pas au coût des capitaux propres."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Equity value per share",
+     "fr": "Valeur des capitaux propres par action"
+    },
+    "expected": 16,
+    "unit": "units",
+    "explanation": {
+     "en": "(200−50+10)/10 = 16. Debt is subtracted when moving from enterprise to equity value.",
+     "fr": "(200−50+10)/10 = 16. On retire la dette pour passer de la valeur d’entreprise à celle des capitaux propres."
+    }
+   }
+  ]
+ },
+ "year-2-fixed-income-yield-curves": {
+  "scenario": {
+   "en": "A one-year zero-coupon bond pays 100. Its required yield is 5%. Two-year Treasury yield is 4.5% and ten-year yield is 4.1%.",
+   "fr": "Un zéro-coupon à un an verse 100 ; rendement exigé 5 %. Taux Treasury deux ans 4,5 %, dix ans 4,1 %."
+  },
+  "model": "bond",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Zero-coupon bond price",
+     "fr": "Prix du zéro-coupon"
+    },
+    "expected": 95.23809523809524,
+    "unit": "units",
+    "explanation": {
+     "en": "100/1.05 = 95.24. The discount reflects one year until payment.",
+     "fr": "100/1,05 = 95,24. L’actualisation reflète une année avant paiement."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "10Y minus 2Y slope",
+     "fr": "Pente 10 ans moins 2 ans"
+    },
+    "expected": -40,
+    "unit": "bps",
+    "explanation": {
+     "en": "4.1% − 4.5% = −0.4 percentage point = −40 bps, an inversion for these two maturities.",
+     "fr": "4,1 % − 4,5 % = −0,4 point = −40 pb : inversion entre ces deux échéances."
+    }
+   }
+  ]
+ },
+ "year-2-duration-convexity": {
+  "scenario": {
+   "en": "Modified duration is 5 and convexity 40. Yield rises by 100 bps. Use ΔP/P ≈ −DΔy + 0.5C(Δy)².",
+   "fr": "Duration modifiée 5, convexité 40, hausse de taux de 100 pb. Utilise ΔP/P ≈ −DΔy + 0,5C(Δy)²."
+  },
+  "model": "bond",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Duration-only price change",
+     "fr": "Variation de prix avec duration seule"
+    },
+    "expected": -5,
+    "unit": "%",
+    "explanation": {
+     "en": "−5 × 0.01 = −0.05, or −5%. Use decimal yield changes.",
+     "fr": "−5 × 0,01 = −0,05, soit −5 %. Utilise une variation de taux en décimal."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Duration plus convexity price change",
+     "fr": "Variation avec duration et convexité"
+    },
+    "expected": -4.8,
+    "unit": "%",
+    "explanation": {
+     "en": "−0.05 + 0.5 × 40 × 0.01² = −0.048. Convexity adds 0.2 percentage point.",
+     "fr": "−0,05 + 0,5 × 40 × 0,01² = −0,048. La convexité ajoute 0,2 point."
+    }
+   }
+  ]
+ },
+ "year-2-portfolio-theory-capm": {
+  "scenario": {
+   "en": "Risk-free rate is 3%, market expected return 8% and equity beta 1.2. A portfolio allocates 70% to this equity and 30% to the risk-free asset.",
+   "fr": "Taux sans risque 3 %, rendement espéré du marché 8 %, bêta de l’action 1,2. Portefeuille : 70 % de cette action et 30 % de l’actif sans risque."
+  },
+  "model": "portfolio",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "CAPM expected equity return",
+     "fr": "Rendement espéré de l’action selon le CAPM"
+    },
+    "expected": 9,
+    "unit": "%",
+    "explanation": {
+     "en": "3% + 1.2 × (8%−3%) = 9%. Beta measures market sensitivity, not total standalone risk.",
+     "fr": "3 % + 1,2 × (8 %−3 %) = 9 %. Le bêta mesure la sensibilité au marché, pas le risque total isolé."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Portfolio beta",
+     "fr": "Bêta du portefeuille"
+    },
+    "expected": 0.84,
+    "unit": "ratio",
+    "explanation": {
+     "en": "0.7 × 1.2 + 0.3 × 0 = 0.84. The risk-free asset has zero market beta in this model.",
+     "fr": "0,7 × 1,2 + 0,3 × 0 = 0,84. L’actif sans risque a un bêta de marché nul dans ce modèle."
+    }
+   }
+  ]
+ },
+ "year-2-derivatives-foundations": {
+  "scenario": {
+   "en": "A long forward purchases 100 units at a delivery price of 50. At maturity spot is 56. A separate long put has strike 50, premium 3 and final spot 44.",
+   "fr": "Un contrat à terme acheteur porte sur 100 unités au prix de livraison de 50. À échéance, le comptant est 56. Un put acheté distinct a un strike 50, une prime 3 et un comptant final 44."
+  },
+  "model": "derivative",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Forward payoff",
+     "fr": "Résultat du contrat à terme"
+    },
+    "expected": 600,
+    "unit": "units",
+    "explanation": {
+     "en": "100 × (56−50) = 600. A long forward benefits from a higher final spot.",
+     "fr": "100 × (56−50) = 600. Le terme acheteur bénéficie d’un comptant final plus élevé."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Put net profit per unit",
+     "fr": "Profit net du put par unité"
+    },
+    "expected": 3,
+    "unit": "units",
+    "explanation": {
+     "en": "max(50−44,0)−3 = 3. Payoff is 6; profit subtracts the premium, ignoring its funding cost.",
+     "fr": "max(50−44,0)−3 = 3. Le paiement vaut 6 ; le profit retire la prime, hors coût de financement."
+    }
+   }
+  ]
+ },
+ "year-2-options-option-greeks": {
+  "scenario": {
+   "en": "An option has delta 0.6, gamma 0.04 and vega 0.12 per one volatility percentage point. Underlying rises by 2; implied volatility separately rises by 3 points.",
+   "fr": "Une option a un delta 0,6, un gamma 0,04 et un vega 0,12 par point de volatilité. Le sous-jacent monte de 2 ; séparément, la volatilité implicite monte de 3 points."
+  },
+  "model": "derivative",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Delta-gamma price approximation",
+     "fr": "Approximation de prix delta-gamma"
+    },
+    "expected": 1.28,
+    "unit": "units",
+    "explanation": {
+     "en": "0.6×2 + 0.5×0.04×2² = 1.28, holding other inputs fixed.",
+     "fr": "0,6×2 + 0,5×0,04×2² = 1,28, autres paramètres constants."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Separate vega effect",
+     "fr": "Effet vega distinct"
+    },
+    "expected": 0.36,
+    "unit": "units",
+    "explanation": {
+     "en": "0.12 × 3 = 0.36. Vega is stated per percentage point here, not per decimal volatility unit.",
+     "fr": "0,12 × 3 = 0,36. Ici le vega est par point de pourcentage, pas par unité décimale de volatilité."
+    }
+   }
+  ]
+ },
+ "year-2-fx-international-finance": {
+  "scenario": {
+   "en": "EUR/USD spot is 1.10 USD per EUR. One-year USD rate is 5% and EUR rate 3%; assume annual simple rates and no basis.",
+   "fr": "EUR/USD comptant : 1,10 dollar par euro. Taux USD à un an 5 %, EUR 3 % ; taux simples annuels, sans base."
+  },
+  "model": "fx",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "One-year forward USD per EUR",
+     "fr": "Terme à un an en dollars par euro"
+    },
+    "expected": 1.121359223300971,
+    "unit": "USD/EUR",
+    "explanation": {
+     "en": "F = S × (1+rUSD)/(1+rEUR) = 1.12136. Match interest rates to the quotation convention.",
+     "fr": "F = S × (1+rUSD)/(1+rEUR) = 1,12136. Les taux doivent respecter la convention de cotation."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "USD value of EUR 2,000 at spot",
+     "fr": "Valeur en dollars de 2 000 euros au comptant"
+    },
+    "expected": 2200,
+    "unit": "USD",
+    "explanation": {
+     "en": "2,000 × 1.10 = 2,200. The forward is a no-arbitrage price under assumptions, not an expected future spot.",
+     "fr": "2 000 × 1,10 = 2 200. Le terme est un prix de non-arbitrage sous hypothèses, pas un comptant futur prévu."
+    }
+   }
+  ]
+ },
+ "year-2-econometrics-foundations": {
+  "scenario": {
+   "en": "Estimated return model: y = 1 + 0.8x, with y and x in percentage points. At x = 5, observed y is 6. Estimate standard error for beta is 0.2; test beta = 0.",
+   "fr": "Modèle estimé : y = 1 + 0,8x, y et x en points de pourcentage. Pour x = 5, y observé vaut 6. Erreur-type du bêta 0,2 ; teste bêta = 0."
+  },
+  "model": "statistics",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Residual at x = 5",
+     "fr": "Résidu pour x = 5"
+    },
+    "expected": 1,
+    "unit": "percentage points",
+    "explanation": {
+     "en": "Predicted y = 1 + 0.8×5 = 5; residual = observed 6 − predicted 5 = 1.",
+     "fr": "Prévision y = 1 + 0,8×5 = 5 ; résidu = observation 6 − prévision 5 = 1."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "t-statistic for beta = 0",
+     "fr": "Statistique t pour bêta = 0"
+    },
+    "expected": 4,
+    "unit": "ratio",
+    "explanation": {
+     "en": "(0.8−0)/0.2 = 4. Statistical significance alone does not establish causality.",
+     "fr": "(0,8−0)/0,2 = 4. La significativité seule ne démontre pas la causalité."
+    }
+   }
+  ]
+ },
+ "year-2-financial-modeling-i": {
+  "scenario": {
+   "en": "Revenue is 200, cash operating costs 120, depreciation 10, tax rate 25%, capital expenditure 20 and increase in operating working capital 5. Ignore interest.",
+   "fr": "Chiffre d’affaires 200, coûts opérationnels décaissés 120, amortissement 10, impôt 25 %, investissements 20 et hausse du BFR opérationnel 5. Intérêts ignorés."
+  },
+  "model": "accounting",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "EBIT",
+     "fr": "Résultat opérationnel EBIT"
+    },
+    "expected": 70,
+    "unit": "units",
+    "explanation": {
+     "en": "200−120−10 = 70. EBITDA would be 80.",
+     "fr": "200−120−10 = 70. L’EBITDA serait 80."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Unlevered free cash flow",
+     "fr": "Flux de trésorerie disponible non endetté"
+    },
+    "expected": 37.5,
+    "unit": "units",
+    "explanation": {
+     "en": "70×(1−25%) +10−20−5 = 37.5. Add back depreciation and subtract cash reinvestment.",
+     "fr": "70×(1−25 %) +10−20−5 = 37,5. Réintègre l’amortissement et retire les réinvestissements décaissés."
+    }
+   }
+  ]
+ },
+ "year-3-investment-banking": {
+  "scenario": {
+   "en": "Enterprise value is agreed at 500. Debt at closing is 120, cash 30, target working capital 40 and delivered working capital 35. Assume the shortfall reduces equity proceeds dollar for dollar.",
+   "fr": "Valeur d’entreprise convenue 500. Dette au closing 120, cash 30, BFR cible 40 et livré 35. Le déficit réduit le produit des actionnaires unité pour unité."
+  },
+  "model": "valuation",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Equity value before working-capital adjustment",
+     "fr": "Valeur des capitaux propres avant ajustement du BFR"
+    },
+    "expected": 410,
+    "unit": "units",
+    "explanation": {
+     "en": "500−120+30 = 410. A debt-free/cash-free enterprise quote is not the seller’s final cash proceeds.",
+     "fr": "500−120+30 = 410. La valeur d’entreprise hors dette et trésorerie n’est pas le produit final du vendeur."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Adjusted seller equity proceeds",
+     "fr": "Produit ajusté des actionnaires vendeurs"
+    },
+    "expected": 405,
+    "unit": "units",
+    "explanation": {
+     "en": "410 + (35−40) = 405. Purchase-price mechanics must be defined in the contract.",
+     "fr": "410 + (35−40) = 405. La mécanique d’ajustement doit être définie au contrat."
+    }
+   }
+  ]
+ },
+ "year-3-sales-trading": {
+  "scenario": {
+   "en": "A dealer buys 200 units at 99.80 and sells 150 at 100.20. Mark remaining inventory at 100.00, ignoring fees and hedges.",
+   "fr": "Un teneur de marché achète 200 unités à 99,80 puis en vend 150 à 100,20. Le stock restant est valorisé à 100, sans frais ni couverture."
+  },
+  "model": "execution",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Realized trading profit",
+     "fr": "Résultat réalisé"
+    },
+    "expected": 60,
+    "unit": "units",
+    "explanation": {
+     "en": "150×(100.20−99.80) = 60. Only the sold units generate realized P&L.",
+     "fr": "150×(100,20−99,80) = 60. Seules les unités vendues produisent un résultat réalisé."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Unrealized inventory profit",
+     "fr": "Résultat latent sur stock"
+    },
+    "expected": 10,
+    "unit": "units",
+    "explanation": {
+     "en": "50 remaining × (100.00−99.80) = 10. Total marked P&L is 70.",
+     "fr": "50 restantes × (100−99,80) = 10. Le résultat total valorisé est 70."
+    }
+   }
+  ]
+ },
+ "year-3-asset-management": {
+  "scenario": {
+   "en": "Beginning assets are 100, ending assets 112 and a 5 contribution arrives exactly at year-end after returns are earned. Benchmark return is 6%.",
+   "fr": "Actifs initiaux 100, finaux 112 ; un apport de 5 arrive exactement en fin d’année après la performance. Rendement du benchmark : 6 %."
+  },
+  "model": "portfolio",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Investment return excluding year-end contribution",
+     "fr": "Rendement hors apport de fin d’année"
+    },
+    "expected": 7,
+    "unit": "%",
+    "explanation": {
+     "en": "(112−5−100)/100 = 7%. The 5 flow must not be counted as investment performance.",
+     "fr": "(112−5−100)/100 = 7 %. L’apport de 5 n’est pas une performance d’investissement."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Active return",
+     "fr": "Rendement actif"
+    },
+    "expected": 1,
+    "unit": "percentage points",
+    "explanation": {
+     "en": "7%−6% = 1 percentage point. Active return is not automatically risk-adjusted alpha.",
+     "fr": "7 %−6 % = 1 point. Le rendement actif n’est pas automatiquement un alpha ajusté du risque."
+    }
+   }
+  ]
+ },
+ "year-3-wealth-management": {
+  "scenario": {
+   "en": "A household has liquid assets 500, a home worth 400 and debt 250. It plans annual withdrawals of 20 from the liquid portfolio.",
+   "fr": "Un ménage dispose de 500 d’actifs liquides, d’un logement de 400 et d’une dette de 250. Retrait annuel prévu sur le portefeuille liquide : 20."
+  },
+  "model": "portfolio",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Net worth",
+     "fr": "Patrimoine net"
+    },
+    "expected": 650,
+    "unit": "units",
+    "explanation": {
+     "en": "500+400−250 = 650. Net worth includes illiquid property; spending liquidity is a different question.",
+     "fr": "500+400−250 = 650. Le patrimoine comprend l’immobilier illiquide ; la liquidité pour dépenser est une autre question."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Initial withdrawal rate on liquid assets",
+     "fr": "Taux de retrait initial sur les actifs liquides"
+    },
+    "expected": 4,
+    "unit": "%",
+    "explanation": {
+     "en": "20/500 = 4%. This arithmetic does not establish a sustainable withdrawal rate; horizon, taxes and sequence risk matter.",
+     "fr": "20/500 = 4 %. Ce calcul ne prouve pas la soutenabilité : horizon, impôts et ordre des rendements comptent."
+    }
+   }
+  ]
+ },
+ "year-3-equity-research": {
+  "scenario": {
+   "en": "Revenue is 1,000 and net margin 10%; shares are 50. Next year revenue grows 8%, margin falls to 9%, shares remain 50 and the P/E multiple is 18.",
+   "fr": "Chiffre d’affaires 1 000 et marge nette 10 % ; 50 actions. L’an prochain, ventes +8 %, marge 9 %, actions inchangées ; multiple P/E de 18."
+  },
+  "model": "valuation",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Next-year EPS",
+     "fr": "BPA prévu l’an prochain"
+    },
+    "expected": 1.944,
+    "unit": "units/share",
+    "explanation": {
+     "en": "1,000×1.08×9%/50 = 1.944, below initial EPS of 2 despite revenue growth.",
+     "fr": "1 000×1,08×9 %/50 = 1,944, inférieur au BPA initial de 2 malgré la croissance des ventes."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Price implied by 18× EPS",
+     "fr": "Prix implicite à 18 fois le BPA"
+    },
+    "expected": 34.992,
+    "unit": "units/share",
+    "explanation": {
+     "en": "18×1.944 = 34.992. Both earnings and the assumed multiple drive the output.",
+     "fr": "18×1,944 = 34,992. Le résultat dépend du bénéfice et du multiple supposé."
+    }
+   }
+  ]
+ },
+ "year-3-credit-analysis": {
+  "scenario": {
+   "en": "A loan exposure is 1,000, annual default probability 2%, recovery 40%; EBITDA is 100, debt 400 and cash 50.",
+   "fr": "Exposition de prêt 1 000, probabilité annuelle de défaut 2 %, recouvrement 40 % ; EBITDA 100, dette 400, trésorerie 50."
+  },
+  "model": "credit",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Expected credit loss, simplified",
+     "fr": "Perte de crédit attendue simplifiée"
+    },
+    "expected": 12,
+    "unit": "units",
+    "explanation": {
+     "en": "PD×LGD×EAD = 2%×60%×1,000 = 12. LGD is one minus recovery.",
+     "fr": "PD×LGD×EAD = 2 %×60 %×1 000 = 12. La perte en cas de défaut vaut un moins le recouvrement."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Net debt / EBITDA",
+     "fr": "Dette nette / EBITDA"
+    },
+    "expected": 3.5,
+    "unit": "times",
+    "explanation": {
+     "en": "(400−50)/100 = 3.5×. Leverage is not itself a probability of default.",
+     "fr": "(400−50)/100 = 3,5×. Le levier n’est pas en soi une probabilité de défaut."
+    }
+   }
+  ]
+ },
+ "year-3-private-equity": {
+  "scenario": {
+   "en": "Acquire enterprise value 600 using debt 360 and equity 240. After five years, exit enterprise value is 750 and debt 250. No interim distributions or fees.",
+   "fr": "Acquisition : valeur d’entreprise 600, dette 360 et capitaux propres 240. Après cinq ans, valeur d’entreprise de sortie 750 et dette 250. Aucune distribution intermédiaire ni frais."
+  },
+  "model": "valuation",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Exit equity value",
+     "fr": "Valeur des capitaux propres de sortie"
+    },
+    "expected": 500,
+    "unit": "units",
+    "explanation": {
+     "en": "750−250 = 500, assuming no excess cash or other adjustments.",
+     "fr": "750−250 = 500, sans trésorerie excédentaire ni autre ajustement."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Annual equity IRR",
+     "fr": "TRI annuel des capitaux propres"
+    },
+    "expected": 15.811517561929445,
+    "unit": "%",
+    "explanation": {
+     "en": "(500/240)^(1/5)−1 ≈ 15.81%. Debt repayment and enterprise growth both contribute.",
+     "fr": "(500/240)^(1/5)−1 ≈ 15,81 %. Remboursement de dette et croissance de valeur contribuent tous deux."
+    }
+   }
+  ]
+ },
+ "year-3-venture-capital": {
+  "scenario": {
+   "en": "A startup raises 5 at a pre-money equity valuation of 15. Before any later financing, founders held 100%. Ignore options and preferences.",
+   "fr": "Une startup lève 5 sur une valorisation des capitaux propres pré-money de 15. Avant l’opération, les fondateurs détenaient 100 %. Options et préférences ignorées."
+  },
+  "model": "valuation",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Post-money valuation",
+     "fr": "Valorisation post-money"
+    },
+    "expected": 20,
+    "unit": "units",
+    "explanation": {
+     "en": "15+5 = 20. New capital enters the company in this primary financing.",
+     "fr": "15+5 = 20. Le capital neuf entre dans la société dans cette émission primaire."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "New investor ownership",
+     "fr": "Participation du nouvel investisseur"
+    },
+    "expected": 25,
+    "unit": "%",
+    "explanation": {
+     "en": "5/20 = 25%; founders retain 75%. Use post-money, not pre-money, in the ownership denominator.",
+     "fr": "5/20 = 25 % ; les fondateurs gardent 75 %. Le dénominateur est la valeur post-money, pas pré-money."
+    }
+   }
+  ]
+ },
+ "year-3-risk-management": {
+  "scenario": {
+   "en": "Portfolio value is 1,000,000 and daily return volatility 1%. Assume normal zero-mean returns and use z = 1.645 for one-sided 95% VaR. Separately stress a −4% day.",
+   "fr": "Valeur du portefeuille 1 000 000, volatilité quotidienne 1 %. Suppose des rendements normaux de moyenne nulle et z = 1,645 pour la VaR unilatérale à 95 %. Stress distinct : journée à −4 %."
+  },
+  "model": "risk",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "One-day 95% VaR as a positive loss amount",
+     "fr": "VaR un jour à 95 %, montant de perte positif"
+    },
+    "expected": 16450,
+    "unit": "units",
+    "explanation": {
+     "en": "1,000,000×1%×1.645 = 16,450. VaR is a quantile, not the maximum possible loss.",
+     "fr": "1 000 000×1 %×1,645 = 16 450. La VaR est un quantile, pas la perte maximale possible."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Stress loss",
+     "fr": "Perte du scénario de stress"
+    },
+    "expected": 40000,
+    "unit": "units",
+    "explanation": {
+     "en": "1,000,000×4% = 40,000. A stress scenario need not correspond to the assumed normal quantile.",
+     "fr": "1 000 000×4 % = 40 000. Un stress n’est pas nécessairement un quantile de la loi normale supposée."
+    }
+   }
+  ]
+ },
+ "year-3-ma-analysis": {
+  "scenario": {
+   "en": "Acquirer net income 100 and shares 50. Target net income 20. Pay 200 entirely by issuing shares at 20 each. Ignore synergies, financing effects, taxes and purchase accounting.",
+   "fr": "Acquéreur : bénéfice net 100, 50 actions. Cible : bénéfice 20. Prix 200 payé entièrement en actions émises à 20. Synergies, financement, impôts et allocation du prix ignorés."
+  },
+  "model": "valuation",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "New shares issued",
+     "fr": "Nouvelles actions émises"
+    },
+    "expected": 10,
+    "unit": "shares",
+    "explanation": {
+     "en": "200/20 = 10. Pro forma shares are 60.",
+     "fr": "200/20 = 10. Nombre d’actions pro forma : 60."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Pro forma EPS",
+     "fr": "BPA pro forma"
+    },
+    "expected": 2,
+    "unit": "units/share",
+    "explanation": {
+     "en": "(100+20)/(50+10) = 2, equal to standalone EPS. EPS neutrality does not establish fair value.",
+     "fr": "(100+20)/(50+10) = 2, égal au BPA autonome. La neutralité du BPA ne prouve pas la juste valeur."
+    }
+   }
+  ]
+ },
+ "year-3-financial-modeling-ii": {
+  "scenario": {
+   "en": "Opening revolver debt is 80. Cash available before financing is −30, minimum cash is 10 and revolver capacity is 150. Ignore interest and other funding.",
+   "fr": "Dette revolving initiale 80. Trésorerie avant financement −30, minimum requis 10, capacité du revolver 150. Intérêts et autres financements ignorés."
+  },
+  "model": "accounting",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Required additional revolver draw",
+     "fr": "Tirage additionnel nécessaire"
+    },
+    "expected": 40,
+    "unit": "units",
+    "explanation": {
+     "en": "Minimum cash 10 minus pre-financing cash −30 = 40. Do not confuse a negative cash balance with negative debt.",
+     "fr": "Minimum 10 moins trésorerie avant financement −30 = 40. Une trésorerie négative n’est pas une dette négative."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Remaining undrawn capacity",
+     "fr": "Capacité non tirée restante"
+    },
+    "expected": 30,
+    "unit": "units",
+    "explanation": {
+     "en": "Closing revolver = 80+40 = 120; remaining capacity = 150−120 = 30.",
+     "fr": "Revolver final = 80+40 = 120 ; capacité restante = 150−120 = 30."
+    }
+   }
+  ]
+ },
+ "year-3-real-company-case-studies": {
+  "scenario": {
+   "en": "Use a fictional company to avoid stale real-company facts: revenue rises 800 to 880; EBIT falls 120 to 110; net debt rises 200 to 250.",
+   "fr": "Utilise une société fictive pour éviter des données réelles périmées : chiffre d’affaires de 800 à 880 ; EBIT de 120 à 110 ; dette nette de 200 à 250."
+  },
+  "model": "margin",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Revenue growth",
+     "fr": "Croissance du chiffre d’affaires"
+    },
+    "expected": 10,
+    "unit": "%",
+    "explanation": {
+     "en": "880/800−1 = 10%. Revenue growth alone does not establish improving economics.",
+     "fr": "880/800−1 = 10 %. La croissance des ventes seule ne prouve pas une amélioration économique."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "New EBIT margin",
+     "fr": "Nouvelle marge EBIT"
+    },
+    "expected": 12.5,
+    "unit": "%",
+    "explanation": {
+     "en": "110/880 = 12.5%, versus 15% initially. Explain the 2.5 percentage-point compression before making a valuation claim.",
+     "fr": "110/880 = 12,5 %, contre 15 % au départ. Explique la compression de 2,5 points avant de conclure sur la valeur."
+    }
+   }
+  ]
+ },
+ "year-3-advanced-valuation": {
+  "scenario": {
+   "en": "Operating enterprise value is 500; an unconsolidated investment is worth 40; debt is 120; cash 30; minority interests 20; shares 25.",
+   "fr": "Valeur opérationnelle 500 ; participation non consolidée 40 ; dette 120 ; trésorerie 30 ; intérêts minoritaires 20 ; actions 25."
+  },
+  "model": "valuation",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Parent common equity value",
+     "fr": "Valeur des capitaux propres ordinaires du groupe"
+    },
+    "expected": 430,
+    "unit": "units",
+    "explanation": {
+     "en": "500+40−120+30−20 = 430. Include each non-operating asset and financing claim once.",
+     "fr": "500+40−120+30−20 = 430. Chaque actif non opérationnel et droit financier ne doit être compté qu’une fois."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Value per share",
+     "fr": "Valeur par action"
+    },
+    "expected": 17.2,
+    "unit": "units/share",
+    "explanation": {
+     "en": "430/25 = 17.2. The numerator must match the share count and ownership basis.",
+     "fr": "430/25 = 17,2. Le numérateur doit correspondre au nombre d’actions et au périmètre de détention."
+    }
+   }
+  ]
+ },
+ "year-3-leveraged-finance": {
+  "scenario": {
+   "en": "Debt is 600; EBITDA 120; annual cash interest 48; free cash flow available for debt paydown is 60. Assume all 60 repays debt.",
+   "fr": "Dette 600 ; EBITDA 120 ; intérêts décaissés annuels 48 ; cash disponible pour remboursement 60. Les 60 remboursent intégralement la dette."
+  },
+  "model": "credit",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "EBITDA / cash interest",
+     "fr": "EBITDA / intérêts décaissés"
+    },
+    "expected": 2.5,
+    "unit": "times",
+    "explanation": {
+     "en": "120/48 = 2.5×. This coverage measure is not debt-service coverage because principal repayments are excluded.",
+     "fr": "120/48 = 2,5×. Ce ratio n’est pas une couverture du service total de dette : le principal est exclu."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Ending gross leverage at unchanged EBITDA",
+     "fr": "Levier brut final à EBITDA inchangé"
+    },
+    "expected": 4.5,
+    "unit": "times",
+    "explanation": {
+     "en": "(600−60)/120 = 4.5× versus 5× at entry.",
+     "fr": "(600−60)/120 = 4,5× contre 5× au départ."
+    }
+   }
+  ]
+ },
+ "year-3-advanced-fixed-income": {
+  "scenario": {
+   "en": "A portfolio has key-rate durations 1, 2 and 3 at 2Y, 5Y and 10Y. Respective yield shocks are +10, −20 and +30 bps. Ignore convexity and other risks.",
+   "fr": "Un portefeuille a des durations par point clé de 1, 2 et 3 aux échéances 2, 5 et 10 ans. Chocs respectifs : +10, −20 et +30 pb. Convexité et autres risques ignorés."
+  },
+  "model": "bond",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Approximate total price change",
+     "fr": "Variation totale approximative de prix"
+    },
+    "expected": -0.6,
+    "unit": "%",
+    "explanation": {
+     "en": "−[1×0.001 + 2×(−0.002) + 3×0.003] = −0.006. Nonparallel shocks require maturity-specific sensitivity.",
+     "fr": "−[1×0,001 + 2×(−0,002) + 3×0,003] = −0,006. Un choc non parallèle requiert des sensibilités par échéance."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Parallel +10 bp change using summed duration",
+     "fr": "Variation sous hausse parallèle de 10 pb"
+    },
+    "expected": -0.6,
+    "unit": "%",
+    "explanation": {
+     "en": "Sum of durations = 6; −6×0.001 = −0.6%. The equal result in this example is coincidental.",
+     "fr": "Somme des durations = 6 ; −6×0,001 = −0,6 %. L’égalité des résultats de cet exemple est fortuite."
+    }
+   }
+  ]
+ },
+ "year-3-advanced-derivatives": {
+  "scenario": {
+   "en": "A delta-hedged option has gamma 0.05, underlying move 4 and theta −0.30 per day. Over one day, ignore volatility changes, funding and higher-order effects.",
+   "fr": "Une option couverte en delta a un gamma 0,05, un mouvement du sous-jacent de 4 et un thêta de −0,30 par jour. Sur un jour, ignore variation de volatilité, financement et termes supérieurs."
+  },
+  "model": "derivative",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Gamma approximation to hedged gain",
+     "fr": "Gain couvert approximé par le gamma"
+    },
+    "expected": 0.4,
+    "unit": "units",
+    "explanation": {
+     "en": "0.5×0.05×4² = 0.40. Delta neutrality removes first-order directional exposure only locally.",
+     "fr": "0,5×0,05×4² = 0,40. La neutralité delta retire seulement l’exposition directionnelle locale du premier ordre."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Approximate gamma plus theta P&L",
+     "fr": "Résultat approximatif gamma plus thêta"
+    },
+    "expected": 0.1,
+    "unit": "units",
+    "explanation": {
+     "en": "0.40−0.30 = 0.10. Real hedging costs and changing Greeks can materially alter this approximation.",
+     "fr": "0,40−0,30 = 0,10. Coûts de couverture et Greeks variables peuvent modifier sensiblement cette approximation."
+    }
+   }
+  ]
+ },
+ "year-3-macro-trading-frameworks": {
+  "scenario": {
+   "en": "A rates view expects a 30 bp yield decline on a bond portfolio with modified duration 7 and market value 2,000,000. Ignore carry, convexity, spreads and costs.",
+   "fr": "Une vue de taux anticipe une baisse de rendement de 30 pb sur un portefeuille de valeur 2 000 000 et de duration modifiée 7. Portage, convexité, spreads et frais ignorés."
+  },
+  "model": "bond",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Approximate price return",
+     "fr": "Rendement de prix approximatif"
+    },
+    "expected": 2.1,
+    "unit": "%",
+    "explanation": {
+     "en": "−7×(−0.003) = +2.1%. The sign of the yield shock is essential.",
+     "fr": "−7×(−0,003) = +2,1 %. Le signe du choc de taux est essentiel."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Approximate monetary P&L",
+     "fr": "Résultat monétaire approximatif"
+    },
+    "expected": 42000,
+    "unit": "units",
+    "explanation": {
+     "en": "2,000,000×2.1% = 42,000. This conditional scenario is not an observed market result.",
+     "fr": "2 000 000×2,1 % = 42 000. Scénario conditionnel, pas résultat de marché observé."
+    }
+   }
+  ]
+ },
+ "year-3-hedge-funds-alternatives": {
+  "scenario": {
+   "en": "A long/short fund has long exposure 120 and short exposure 40, with NAV 100. The long book gains 5% and the shorted securities rise 3%. Ignore costs.",
+   "fr": "Un fonds long/short a une exposition acheteuse 120, vendeuse 40 et une valeur liquidative 100. Le portefeuille long gagne 5 % et les titres vendus à découvert montent de 3 %, hors frais."
+  },
+  "model": "portfolio",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Gross exposure / NAV",
+     "fr": "Exposition brute / valeur liquidative"
+    },
+    "expected": 160,
+    "unit": "%",
+    "explanation": {
+     "en": "(120+40)/100 = 160%; net exposure is 80%. Neither is a complete risk measure.",
+     "fr": "(120+40)/100 = 160 % ; exposition nette 80 %. Aucune n’est une mesure complète du risque."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Portfolio return",
+     "fr": "Rendement du portefeuille"
+    },
+    "expected": 4.8,
+    "unit": "%",
+    "explanation": {
+     "en": "Long gain 120×5%=6; short loss 40×3%=1.2; net 4.8 on NAV 100.",
+     "fr": "Gain long 120×5 %=6 ; perte short 40×3 %=1,2 ; résultat 4,8 sur une valeur liquidative de 100."
+    }
+   }
+  ]
+ },
+ "year-3-portfolio-construction": {
+  "scenario": {
+   "en": "Initial weights are 60% equities and 40% bonds. Equities gain 10%, bonds lose 5%. No flows, costs or rebalancing during the period.",
+   "fr": "Poids initiaux : 60 % actions, 40 % obligations. Actions +10 %, obligations −5 %. Aucun flux, frais ou rééquilibrage en période."
+  },
+  "model": "portfolio",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Portfolio return",
+     "fr": "Rendement du portefeuille"
+    },
+    "expected": 4,
+    "unit": "%",
+    "explanation": {
+     "en": "0.6×10% + 0.4×(−5%) = 4%. Contributions are +6 and −2 percentage points.",
+     "fr": "0,6×10 % + 0,4×(−5 %) = 4 %. Contributions : +6 et −2 points."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Ending equity weight",
+     "fr": "Poids final des actions"
+    },
+    "expected": 63.46153846153846,
+    "unit": "%",
+    "explanation": {
+     "en": "Starting from 100, equities become 66 and bonds 38; 66/104 = 63.46%. Initial weights do not remain constant automatically.",
+     "fr": "Sur une base 100, actions 66 et obligations 38 ; 66/104 = 63,46 %. Les poids initiaux ne restent pas automatiquement constants."
+    }
+   }
+  ]
+ },
+ "year-3-behavioral-finance": {
+  "scenario": {
+   "en": "An investor buys at 100. The price falls to 80, then rises 20%. An unrelated scenario has 60% probability of +10 and 40% probability of −8.",
+   "fr": "Un investisseur achète à 100 ; le prix baisse à 80, puis remonte de 20 %. Un scénario distinct a 60 % de probabilité de gain 10 et 40 % de perte 8."
+  },
+  "model": "surprise",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Price after the 20% recovery",
+     "fr": "Prix après la reprise de 20 %"
+    },
+    "expected": 96,
+    "unit": "units",
+    "explanation": {
+     "en": "80×1.20 = 96. Anchoring on the purchase price can obscure the asymmetric recovery required after a loss.",
+     "fr": "80×1,20 = 96. L’ancrage au prix d’achat peut masquer l’asymétrie de récupération après une perte."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Expected payoff of the unrelated scenario",
+     "fr": "Espérance du scénario distinct"
+    },
+    "expected": 2.8,
+    "unit": "units",
+    "explanation": {
+     "en": "0.6×10 + 0.4×(−8) = 2.8. Positive expected payoff does not remove downside risk or determine suitability.",
+     "fr": "0,6×10 + 0,4×(−8) = 2,8. Une espérance positive ne supprime ni risque de baisse ni question d’adéquation."
+    }
+   }
+  ]
+ },
+ "year-3-structured-products": {
+  "scenario": {
+   "en": "At maturity a hypothetical principal-protected note repays principal 1,000 plus 50% participation in a positive index return, capped at a 10% note gain. Ignore issuer default and fees only for the payoff calculation.",
+   "fr": "À échéance, un produit fictif à capital protégé rembourse 1 000 plus 50 % de participation à la hausse de l’indice, avec un gain du produit plafonné à 10 %. Défaut émetteur et frais ignorés uniquement pour le calcul."
+  },
+  "model": "derivative",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Redemption if the index rises 30%",
+     "fr": "Remboursement si l’indice monte de 30 %"
+    },
+    "expected": 1100,
+    "unit": "units",
+    "explanation": {
+     "en": "Participation gives 15% but the note gain is capped at 10%; redemption = 1,100.",
+     "fr": "La participation donne 15 %, mais le gain du produit est plafonné à 10 % ; remboursement 1 100."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Redemption if the index falls 20% under the stated payoff",
+     "fr": "Remboursement si l’indice baisse de 20 % selon la formule annoncée"
+    },
+    "expected": 1000,
+    "unit": "units",
+    "explanation": {
+     "en": "The simplified maturity payoff floors at principal 1,000. Protection remains subject to issuer credit and does not guarantee pre-maturity resale value.",
+     "fr": "La formule simplifiée à échéance prévoit un plancher de 1 000. La protection dépend du crédit de l’émetteur et ne garantit pas la revente avant échéance."
+    }
+   }
+  ]
+ },
+ "year-3-regulation-ethics": {
+  "scenario": {
+   "en": "An analyst has material nonpublic takeover information. Code 0 means do not trade or tip; code 1 means trade. Separately, a client orders 100 units and a broker fills only 60.",
+   "fr": "Un analyste détient une information importante non publique sur une acquisition. Code 0 : ne pas négocier ni divulguer ; code 1 : négocier. Séparément, un client ordonne 100 unités et l’intermédiaire n’en exécute que 60."
+  },
+  "model": "ethics",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Appropriate trading decision code",
+     "fr": "Code de décision appropriée"
+    },
+    "expected": 0,
+    "unit": "code 0/1",
+    "explanation": {
+     "en": "Do not trade or tip. Follow restricted-list and compliance procedures; a favorable expected return does not justify misuse of confidential information.",
+     "fr": "Ne négocie pas et ne transmets pas l’information. Suis les procédures de conformité ; un gain attendu ne justifie pas l’utilisation d’information confidentielle."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Unfilled quantity to disclose",
+     "fr": "Quantité non exécutée à communiquer"
+    },
+    "expected": 40,
+    "unit": "units",
+    "explanation": {
+     "en": "100−60 = 40. Accurate execution reporting must distinguish requested, filled and outstanding quantities.",
+     "fr": "100−60 = 40. Le compte rendu doit distinguer quantité demandée, exécutée et restante."
+    }
+   }
+  ]
+ },
+ "year-3-professional-market-communication": {
+  "scenario": {
+   "en": "An illustrative three-case valuation uses bear 80 with probability 25%, base 110 with 50%, bull 140 with 25%. Current price is 100.",
+   "fr": "Une valorisation à trois scénarios utilise baissier 80 à 25 %, central 110 à 50 %, haussier 140 à 25 %. Cours actuel 100."
+  },
+  "model": "surprise",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Probability-weighted value",
+     "fr": "Valeur pondérée par probabilités"
+    },
+    "expected": 110,
+    "unit": "units",
+    "explanation": {
+     "en": "0.25×80 + 0.50×110 + 0.25×140 = 110. Probabilities sum to 100%.",
+     "fr": "0,25×80 + 0,50×110 + 0,25×140 = 110. Les probabilités totalisent 100 %."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Implied expected upside, before costs",
+     "fr": "Potentiel espéré avant frais"
+    },
+    "expected": 10,
+    "unit": "%",
+    "explanation": {
+     "en": "110/100−1 = 10%. Communicate assumptions, downside and uncertainty; do not present 110 as a guaranteed future price.",
+     "fr": "110/100−1 = 10 %. Présente hypothèses, risque baissier et incertitude ; 110 n’est pas un prix futur garanti."
+    }
+   }
+  ]
+ },
+ "year-4-capstone-investment-deal-case": {
+  "scenario": {
+   "en": "A target has EBITDA 80 and enterprise value of 8× EBITDA. Acquisition debt is 360; no excess cash. After five years EBITDA is 100, exit multiple 7× and debt 250. Ignore fees and interim distributions.",
+   "fr": "Une cible a un EBITDA de 80 et une valeur d’entreprise à 8× l’EBITDA. Dette d’acquisition 360, pas de cash excédentaire. À cinq ans : EBITDA 100, multiple de sortie 7×, dette 250. Frais et distributions intermédiaires ignorés."
+  },
+  "model": "valuation",
+  "questions": [
+   {
+    "id": "0",
+    "label": {
+     "en": "Initial equity investment",
+     "fr": "Investissement initial en capitaux propres"
+    },
+    "expected": 280,
+    "unit": "units",
+    "explanation": {
+     "en": "Entry EV = 80×8 = 640; initial equity = 640−360 = 280.",
+     "fr": "Valeur d’entrée = 80×8 = 640 ; capitaux propres initiaux = 640−360 = 280."
+    }
+   },
+   {
+    "id": "1",
+    "label": {
+     "en": "Exit equity value",
+     "fr": "Valeur des capitaux propres de sortie"
+    },
+    "expected": 450,
+    "unit": "units",
+    "explanation": {
+     "en": "Exit EV = 100×7 = 700; equity = 700−250 = 450. EBITDA grew but the exit multiple compressed.",
+     "fr": "Valeur de sortie = 100×7 = 700 ; capitaux propres = 700−250 = 450. L’EBITDA augmente mais le multiple se comprime."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Five-year equity IRR",
+     "fr": "TRI des capitaux propres sur cinq ans"
+    },
+    "expected": 9.953965407958165,
+    "unit": "%",
+    "explanation": {
+     "en": "(450/280)^(1/5)−1 ≈ 9.96%. This is a scenario result before fees, not an investment promise.",
+     "fr": "(450/280)^(1/5)−1 ≈ 9,96 %. Résultat de scénario avant frais, pas promesse d’investissement."
+    }
+   }
+  ]
+ }
+}

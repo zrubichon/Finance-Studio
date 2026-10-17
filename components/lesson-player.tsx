@@ -1,5 +1,11 @@
 "use client";
 
+import CourseBooks from "./course-books";
+import CourseSimulation from "./course-simulation";
+import CourseDepthPanel from "./course-depth-panel";
+import CourseSectionPractice from "./course-section-practice";
+import CourseWorkbook from "./course-workbook";
+import {getCourseWorkbook} from "@/lib/course-practice";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
@@ -24,6 +30,8 @@ function percentForSection(index: number, total: number) {
 
 export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
   const { isFrench, text } = useLanguage();
+  const [checkpoints,setCheckpoints]=useState<Record<string,boolean>>({});
+  const [casePassed,setCasePassed]=useState(false);
   const [mode, setMode] = useState<TeachingMode>("Beginner");
   const [activeSection, setActiveSection] = useState(0);
   const [userId, setUserId] = useState<string | null>(null);
@@ -35,6 +43,12 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
   const [statusMessage, setStatusMessage] = useState("");
 
   const section = lesson.sections[activeSection];
+  const allPracticeDone=lesson.sections.every(s=>checkpoints[s.id]);
+  const workbook=getCourseWorkbook(lesson.slug);
+  const practiceStorageKey=`finance-studio-practice-v2:${userId||'guest'}:${lesson.slug}`;
+  useEffect(()=>{try{const data=JSON.parse(localStorage.getItem(practiceStorageKey)||'{}');setCheckpoints(Object.fromEntries(lesson.sections.map(s=>[s.id,data[s.id]===true])));}catch{setCheckpoints({});}},[practiceStorageKey,lesson.sections]);
+  function completePractice(){const next={...checkpoints,[section.id]:true};setCheckpoints(next);try{localStorage.setItem(practiceStorageKey,JSON.stringify(next));}catch{}}
+
   const visibleProgress = Math.max(savedProgress.progress_percent, percentForSection(activeSection, lesson.sections.length));
   const scorePercent = lesson.quiz.length ? Math.round((quizScore / lesson.quiz.length) * 100) : 0;
 
@@ -169,7 +183,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
   }, [answers, lesson.quiz, quizSubmitted]);
 
   async function submitQuiz() {
-    if (Object.keys(answers).length !== lesson.quiz.length || saving) return;
+    if (Object.keys(answers).length !== lesson.quiz.length || saving || !allPracticeDone || (workbook&&!casePassed)) return;
 
     const score = lesson.quiz.reduce(
       (sum, question) => sum + (answers[question.id] === question.correctOption ? 1 : 0),
@@ -388,6 +402,9 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
         </div>
       </section>
 
+      <CourseBooks slug={lesson.slug}/>
+      {workbook&&<CourseSimulation key={lesson.slug} model={workbook.model}/>}
+      <p className="course-practice-progress">{text("Practice checkpoints are saved in this browser; account course completion still syncs when signed in.","Les validations d’étape sont conservées dans ce navigateur ; la complétion du cours reste synchronisée au compte connecté.")} {Object.values(checkpoints).filter(Boolean).length}/{lesson.sections.length}</p>
       {lesson.overviewFlow && (
         <section className="lesson-overview-flow" aria-label={loc(lesson.overviewFlow.title)}>
           <div className="lesson-flow-heading">
@@ -417,6 +434,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
               type="button"
               key={item.id}
               className={activeSection === index ? "active" : ""}
+              disabled={index>0&&!lesson.sections.slice(0,index).every(s=>checkpoints[s.id])}
               onClick={() => void persistReadingProgress(index)}
             >
               <span>{String(index + 1).padStart(2, "0")}</span>
@@ -426,6 +444,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
           <button
             type="button"
             className={activeSection === lesson.sections.length ? "active quiz-link" : "quiz-link"}
+            disabled={!allPracticeDone}
             onClick={() => setActiveSection(lesson.sections.length)}
           >
             <span>Q</span><strong>Quiz</strong>
@@ -525,6 +544,8 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
                 ) : null}
               </article>
 
+              <CourseDepthPanel section={section}/>
+              <CourseSectionPractice key={section.id} lesson={lesson} section={section} index={activeSection} done={Boolean(checkpoints[section.id])} onComplete={completePractice}/>
               <nav className="lesson-section-nav">
                 <button
                   type="button"
@@ -536,6 +557,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
                 <span>{activeSection + 1} / {lesson.sections.length}</span>
                 <button
                   type="button"
+                  disabled={!checkpoints[section.id]}
                   onClick={() => {
                     if (activeSection === lesson.sections.length - 1) setActiveSection(lesson.sections.length);
                     else void persistReadingProgress(activeSection + 1);
@@ -552,8 +574,8 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
                   <span className="eyebrow">{text("MASTERY CHECK", "TEST DE MAÎTRISE")}</span>
                   <h2>{text("Prove that you can apply the concepts.", "Vérifie que tu sais appliquer les concepts.")}</h2>
                   <p>{text(
-                    "A score of 70% or more completes the lesson. Every answer updates concept mastery for signed-in users.",
-                    "Un score d’au moins 70 % termine le cours. Chaque réponse met à jour la maîtrise des concepts pour les utilisateurs connectés.",
+                    "Complete the step exercises and the practical case, then score at least 70% on the quiz. Each quiz answer updates concept mastery for signed-in users.",
+                    "Termine les exercices d’étape et le cas pratique, puis obtiens au moins 70 % au quiz. Chaque réponse au quiz met à jour la maîtrise des concepts du compte connecté.",
                   )}</p>
                 </div>
                 {quizSubmitted && (
@@ -564,6 +586,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
                 )}
               </div>
 
+              <CourseWorkbook slug={lesson.slug} onPass={setCasePassed}/>
               <div className="lesson-question-list">
                 {lesson.quiz.map((question, index) => {
                   const result = quizResults.find((item) => item.id === question.id);
@@ -593,6 +616,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
                         <div className={result?.correct ? "question-feedback correct" : "question-feedback"}>
                           <strong>{result?.correct ? text("Correct", "Correct") : text("Review this concept", "Revois ce concept")}</strong>
                           <p>{loc(question.explanation)}</p>
+                          {!result?.correct&&<p>{text("Your selection: ","Ton choix : ")}{loc(question.options.find(o=>o.id===answers[question.id])!.label)}. {text("Correct answer: ","Bonne réponse : ")}{loc(question.options.find(o=>o.id===question.correctOption)!.label)}</p>}
                         </div>
                       )}
                     </article>
@@ -605,7 +629,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
                   <button
                     type="button"
                     className="full-button"
-                    disabled={Object.keys(answers).length !== lesson.quiz.length || saving}
+                    disabled={Object.keys(answers).length !== lesson.quiz.length || saving || !allPracticeDone || Boolean(workbook&&!casePassed)}
                     onClick={() => void submitQuiz()}
                   >
                     {saving ? text("Saving…", "Enregistrement…") : text("Submit quiz", "Valider le quiz")}
