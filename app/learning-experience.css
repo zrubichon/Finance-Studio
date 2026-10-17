@@ -350,7 +350,7 @@ html[data-theme="terminal"],.theme-terminal{--learning-strong:#1b4233;--learning
 .daily-card:not(.brief-expanded) .hourly-deep-lesson,.daily-card:not(.brief-expanded) .hourly-update-note,.daily-card:not(.brief-expanded) .hourly-topic-links,.daily-card:not(.brief-expanded)>.card-actions{display:none!important;}
 .interview-teaching-step[hidden],.stable-interview-drill>.full-button[hidden]{display:none!important;}
 .stable-interview-drill:not(.drill-expanded)>.learning-expand-button{margin-top:auto;}
-.dashboard-grid:has(.brief-expanded)>.daily-card,.dashboard-grid:has(.brief-expanded)>.stable-interview-drill,.dashboard-grid:has(.drill-expanded)>.daily-card,.dashboard-grid:has(.drill-expanded)>.stable-interview-drill{height:auto!important;align-self:start!important;}
+
 :root,.theme-classic{--instrument-overlay:rgba(13,35,27,.78);--photo-chart:#a3f4cd;}
 html[data-theme="girl"],.theme-girl{--instrument-overlay:rgba(48,20,34,.77);--photo-chart:#ffb8d0;}
 html[data-theme="terminal"],.theme-terminal{--instrument-overlay:rgba(5,18,13,.78);--photo-chart:#93f4be;}
@@ -385,6 +385,9 @@ html[data-theme="terminal"],.theme-terminal{--instrument-overlay:rgba(5,18,13,.7
 @media(max-width:600px){.workbook-input-grid{grid-template-columns:1fr;}.practice-table-wrap th,.practice-table-wrap td{padding:8px;}.course-simulation svg{min-width:310px;}.course-simulation figure{overflow-x:auto;}}
 /* Dashboard panels own their height, even when the other panel is expanded. */
 .dashboard-grid > .hourly-react-brief,.dashboard-grid > .stable-interview-drill {align-self:start!important;height:auto!important;min-height:0!important;display:block!important;}
+@media(min-width:1101px){
+ .dashboard-grid > .hourly-react-brief,.dashboard-grid > .stable-interview-drill {align-self:stretch!important;height:auto!important;display:flex!important;flex-direction:column;}
+}
 .hourly-react-brief [hidden],.stable-interview-drill [hidden]{display:none!important;}
 .hourly-react-brief .learning-detail-grid{margin:16px 0;gap:12px;}
 .hourly-react-brief .daily-copy{font-size:18px;line-height:1.75;}
