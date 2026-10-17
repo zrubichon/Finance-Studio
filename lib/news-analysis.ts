@@ -6,8 +6,8 @@ import {publicNewsContext} from "./news-source-context";
 export type NewsEvidence={title:string;url:string;date?:string;kind:"article-excerpt"|"search-excerpt"};
 export type MarketObservation={label:string;value:number;unit:string;asOf:string;sourceUrl:string;change:number|null;changePercent:number|null};
 export type NewsAnalysis={marketObservations:MarketObservation[];answer:string;sources:NewsEvidence[];researchedAt:string;coverage:"multiple"|"single"|"limited";searchAvailable:boolean};
-const hosts=["reuters.com","apnews.com","cnbc.com","bbc.com","ft.com","bloomberg.com","federalreserve.gov","ecb.europa.eu","consilium.europa.eu","sec.gov","bls.gov","bea.gov","treasury.gov","bankofengland.co.uk","imf.org","worldbank.org","rttnews.com","marketbeat.com","finance.yahoo.com","nasdaq.com","marketwatch.com"];
-export function safeNewsURL(value:unknown){try{const u=new URL(String(value));return u.protocol==="https:"&&!u.username&&!u.password&&!u.port?u.href:null;}catch{return null;}}
+const hosts=["reuters.com","apnews.com","cnbc.com","bbc.com","ft.com","bloomberg.com","federalreserve.gov","ecb.europa.eu","consilium.europa.eu","sec.gov","bls.gov","bea.gov","treasury.gov","bankofengland.co.uk","imf.org","worldbank.org","rttnews.com","tickerreport.com","marketbeat.com","finance.yahoo.com","nasdaq.com","marketwatch.com"];
+export function safeNewsURL(value:unknown){try{const u=new URL(String(value));if(u.protocol==="http:"&&!u.port)u.protocol="https:";return u.protocol==="https:"&&!u.username&&!u.password&&!u.port?u.href:null;}catch{return null;}}
 function approved(url:string){const u=new URL(url);return hosts.some(h=>u.hostname===h||u.hostname.endsWith(`.${h}`));}
 async function buildAnalysis(url:string,title:string,language:"EN"|"FR"):Promise<NewsAnalysis>{
  const sources:NewsEvidence[]=[];const evidence:string[]=[];let searchAvailable=false;
@@ -50,6 +50,7 @@ async function buildAnalysis(url:string,title:string,language:"EN"|"FR"):Promise
 const cachedAnalysis=unstable_cache(buildAnalysis,["news-commentary-editorial-v3"],{revalidate:21600});
 const pending=new Map<string,Promise<NewsAnalysis>>();
 export function newsAnalysis(url:string,title:string,language:"EN"|"FR"){
+ const canonical=safeNewsURL(url);if(!canonical)throw new Error("Invalid public source URL");url=canonical;
  const key=`${language}:${url}:${title}`;const previous=pending.get(key);if(previous)return previous;
  const task=cachedAnalysis(url,title,language).finally(()=>{pending.delete(key);});pending.set(key,task);return task;
 }

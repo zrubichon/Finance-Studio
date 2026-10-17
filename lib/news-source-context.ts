@@ -1,6 +1,6 @@
 // Only retrieve public reporting from explicitly recognized institutions and publishers.
 // No credentials, private hosts, arbitrary redirects, or paywall bypasses.
-const sourceHosts = ["federalreserve.gov","ecb.europa.eu","consilium.europa.eu","sec.gov","bls.gov","bea.gov","treasury.gov","bankofengland.co.uk","imf.org","worldbank.org","reuters.com","apnews.com","cnbc.com","bbc.com","ft.com","bloomberg.com","rttnews.com","marketbeat.com","finance.yahoo.com","nasdaq.com","marketwatch.com"];
+const sourceHosts = ["federalreserve.gov","ecb.europa.eu","consilium.europa.eu","sec.gov","bls.gov","bea.gov","treasury.gov","bankofengland.co.uk","imf.org","worldbank.org","reuters.com","apnews.com","cnbc.com","bbc.com","ft.com","bloomberg.com","rttnews.com","tickerreport.com","marketbeat.com","finance.yahoo.com","nasdaq.com","marketwatch.com"];
 function allowed(value:string){try{const u=new URL(value);return u.protocol==="https:"&&!u.username&&!u.password&&(!u.port||u.port==="443")&&sourceHosts.some(host=>u.hostname===host||u.hostname.endsWith(`.${host}`));}catch{return false;}}
 export async function publicNewsContext(value:unknown):Promise<string>{
  if(typeof value!=="string"||value.length>2000||!allowed(value))return "Original article text was not retrieved. Base analysis on supplied headline/metadata only, and explicitly identify missing evidence.";
