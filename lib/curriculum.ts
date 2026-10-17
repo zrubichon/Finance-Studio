@@ -1,3 +1,4 @@
+import {lessonStorageSlug} from "./lesson-aliases";
 export type CurriculumDomain =
   | "Markets & Instruments"
   | "Accounting & Statements"
@@ -159,6 +160,6 @@ export function moduleSlug(year: string, title: string) {
 
 export function allCurriculumModules() {
   return curriculumYears.flatMap((year) =>
-    year.modules.map((module) => ({ ...module, year: year.year, yearName: year.name, slug: moduleSlug(year.year, module.title) }))
+    year.modules.map((module) => ({ ...module, year: year.year, yearName: year.name, slug: lessonStorageSlug(moduleSlug(year.year, module.title)) }))
   );
 }

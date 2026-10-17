@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { curriculumYears, domainLabelsFr, moduleSlug } from "@/lib/curriculum";
-import { hasLessonContent } from "@/lib/lesson-registry";
+import {getLessonBySlug, hasLessonContent } from "@/lib/lesson-registry";
 import { useLanguage } from "@/components/language-provider";
 
 type ProgressStatus = "not_started" | "in_progress" | "completed";
@@ -159,8 +159,9 @@ export default function UniversityProgress() {
             <div className="module-grid">
               {item.modules.map((module, index) => {
                 const slug = moduleSlug(item.year, module.title);
-                const status = progress[slug]?.status ?? "not_started";
-                const percent = progress[slug]?.progress_percent ?? 0;
+                const progressSlug=getLessonBySlug(slug)?.slug||slug;
+                const status = progress[progressSlug]?.status ?? "not_started";
+                const percent = progress[progressSlug]?.progress_percent ?? 0;
                 const available = hasLessonContent(slug);
 
                 return (

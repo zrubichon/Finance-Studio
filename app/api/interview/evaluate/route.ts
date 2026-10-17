@@ -1,3 +1,4 @@
+import {getInterviewExercise} from "@/lib/interview-question-bank";
 import {challengeInterview,challengeQuestionKey} from "@/lib/challenge-interview";
 import { generateText } from "ai";
 import { NextRequest, NextResponse } from "next/server";
@@ -19,6 +20,7 @@ function scoreFrom(text: string) {
 export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => null) as {
     track?: unknown;
+    questionId?: unknown;
     concept?: unknown;
     answer?: unknown;
     language?: unknown;
@@ -40,7 +42,10 @@ export async function POST(request: NextRequest) {
   }
 
   const concept=clean(body.concept,240);
-  const exercise=challengeInterview(concept);
+  const questionId=clean(body.questionId,180);
+  const selected=questionId?getInterviewExercise(track,questionId):null;
+  if(questionId&&!selected)return NextResponse.json({error:'Unknown interview question'},{status:400});
+  const exercise=selected||challengeInterview(concept);
   const question = exercise || interviewQuestions[track];
   const local = (value: { en: string; fr: string }) => language === "FR" ? value.fr : value.en;
   const framework = question.framework.map((step, i) => `${i + 1}. ${local(step)}`).join("\n");
@@ -101,7 +106,7 @@ Use bullets where useful. SCORE must be an integer 0-100.`;
       const { error } = await supabase.from("interview_attempts").insert({
         user_id: userId,
         track,
-        question_key: concept ? challengeQuestionKey(track,concept) : interviewQuestionKey(track),
+        question_key: selected ? `${track}:${selected.id}` : concept ? challengeQuestionKey(track,concept) : interviewQuestionKey(track),
         answer_text: answer,
         evaluation: {
           status: "scored",

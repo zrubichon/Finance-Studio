@@ -1,3 +1,5 @@
+import {completeFourthYear} from "./year-four-depth";
+import {lessonStorageSlug} from "./lesson-aliases";
 import { capstoneInvestmentDealCaseLesson } from "./capstone-content";
 import {
   lessons as coreLessons,
@@ -7,12 +9,12 @@ import {
 export const lessons: FinanceLesson[] = [
   ...coreLessons,
   capstoneInvestmentDealCaseLesson,
-];
+].map(completeFourthYear);
 
 export function getLessonBySlug(slug: string) {
-  return lessons.find((lesson) => lesson.slug === slug);
+  return lessons.find((lesson) => lesson.slug === lessonStorageSlug(slug));
 }
 
 export function hasLessonContent(slug: string) {
-  return lessons.some((lesson) => lesson.slug === slug);
+  return Boolean(getLessonBySlug(slug));
 }

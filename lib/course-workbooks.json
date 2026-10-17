@@ -1313,433 +1313,589 @@
  },
  "year-3-advanced-valuation": {
   "scenario": {
-   "en": "Operating enterprise value is 500; an unconsolidated investment is worth 40; debt is 120; cash 30; minority interests 20; shares 25.",
-   "fr": "Valeur opérationnelle 500 ; participation non consolidée 40 ; dette 120 ; trésorerie 30 ; intérêts minoritaires 20 ; actions 25."
+   "en": "All figures are in millions. An unlevered business is worth 200; discounted tax shields are 20 and expected distress costs are 10. APV = 210. Separately, a scenario model gives enterprise values of 180, 240 and 300 with probabilities 25%, 50% and 25%: expected EV is 240. With net debt 40 and 10 million shares, the scenario-weighted equity value is 20 per share. The two approaches above are separate models, not values to add together. Reconcile their assumptions before comparing them. In a downside case, test both weaker operating cash flow and a higher probability of distress; holding the financing benefit constant can conceal the real cost of leverage. Probability weights describe the model, not a guarantee of outcomes.",
+   "fr": "Tous les montants sont en millions. Une activité sans dette vaut 200 ; les économies fiscales actualisées valent 20 et les coûts attendus de détresse 10. APV = 210. Indépendamment, un modèle par scénarios donne des valeurs d’entreprise de 180, 240 et 300 avec des probabilités de 25 %, 50 % et 25 % : l’EV espérée vaut 240. Avec 40 de dette nette et 10 millions d’actions, la valeur des fonds propres pondérée vaut 20 par action. Les deux approches ci-dessus sont des modèles distincts, pas des valeurs à additionner. Rapproche leurs hypothèses avant de les comparer. En scénario dégradé, teste des flux opérationnels plus faibles et une probabilité de détresse plus élevée ; figer l’avantage du financement peut masquer le coût réel du levier. Les probabilités décrivent le modèle, pas une garantie de résultat."
   },
   "model": "valuation",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "Parent common equity value",
-     "fr": "Valeur des capitaux propres ordinaires du groupe"
+     "en": "Adjusted present value",
+     "fr": "Valeur actuelle ajustée"
     },
-    "expected": 430,
-    "unit": "units",
+    "expected": 210,
+    "unit": "million",
     "explanation": {
-     "en": "500+40−120+30−20 = 430. Include each non-operating asset and financing claim once.",
-     "fr": "500+40−120+30−20 = 430. Chaque actif non opérationnel et droit financier ne doit être compté qu’une fois."
+     "en": "200 + 20 − 10 = 210.",
+     "fr": "200 + 20 − 10 = 210."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Value per share",
-     "fr": "Valeur par action"
+     "en": "Scenario-weighted enterprise value",
+     "fr": "Valeur d’entreprise pondérée"
     },
-    "expected": 17.2,
-    "unit": "units/share",
+    "expected": 240,
+    "unit": "million",
     "explanation": {
-     "en": "430/25 = 17.2. The numerator must match the share count and ownership basis.",
-     "fr": "430/25 = 17,2. Le numérateur doit correspondre au nombre d’actions et au périmètre de détention."
+     "en": "0.25×180 + 0.50×240 + 0.25×300 = 240.",
+     "fr": "0,25×180 + 0,50×240 + 0,25×300 = 240."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Scenario-weighted equity value per share",
+     "fr": "Valeur pondérée par action"
+    },
+    "expected": 20,
+    "unit": "currency/share",
+    "explanation": {
+     "en": "(240 − 40) / 10 = 20.",
+     "fr": "(240 − 40) / 10 = 20."
     }
    }
   ]
  },
  "year-3-leveraged-finance": {
   "scenario": {
-   "en": "Debt is 600; EBITDA 120; annual cash interest 48; free cash flow available for debt paydown is 60. Assume all 60 repays debt.",
-   "fr": "Dette 600 ; EBITDA 120 ; intérêts décaissés annuels 48 ; cash disponible pour remboursement 60. Les 60 remboursent intégralement la dette."
+   "en": "Opening debt is 300 million. EBITDA is 100, interest 30, cash taxes 10 and capex 20; working capital is unchanged. Cash available is 40 and all of it repays debt, leaving 260. End debt / EBITDA is 2.6x; EBITDA / interest is 3.33x. No acquisition, dividend or new borrowing occurs. Under stress, EBITDA falls to 70, interest rises to 35, taxes fall to 5 and capex stays 20. Only 10 can repay debt, leaving 290; leverage reaches 4.14x and coverage falls to 2x. Repaying some debt therefore does not imply improving credit quality. Contract definitions, permitted adjustments, testing dates and liquidity matter alongside these simplified ratios.",
+   "fr": "La dette initiale vaut 300 millions. EBITDA : 100 ; intérêts : 30 ; impôts décaissés : 10 ; capex : 20 ; BFR inchangé. Le solde de 40 rembourse intégralement la dette, ramenée à 260. Dette finale / EBITDA = 2,6× ; EBITDA / intérêts = 3,33×. Il n’y a ni acquisition, ni dividende, ni nouvelle dette. En stress, l’EBITDA baisse à 70, les intérêts montent à 35, les impôts tombent à 5 et le capex reste à 20. Seuls 10 remboursent la dette, ramenée à 290 ; le levier atteint 4,14× et la couverture tombe à 2×. Rembourser un peu ne signifie donc pas améliorer le crédit. Définitions contractuelles, ajustements autorisés, dates de test et liquidité complètent ces ratios simplifiés."
   },
   "model": "credit",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "EBITDA / cash interest",
-     "fr": "EBITDA / intérêts décaissés"
+     "en": "Base-case debt repayment",
+     "fr": "Remboursement en scénario central"
     },
-    "expected": 2.5,
-    "unit": "times",
+    "expected": 40,
+    "unit": "million",
     "explanation": {
-     "en": "120/48 = 2.5×. This coverage measure is not debt-service coverage because principal repayments are excluded.",
-     "fr": "120/48 = 2,5×. Ce ratio n’est pas une couverture du service total de dette : le principal est exclu."
+     "en": "100 − 30 − 10 − 20 = 40.",
+     "fr": "100 − 30 − 10 − 20 = 40."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Ending gross leverage at unchanged EBITDA",
-     "fr": "Levier brut final à EBITDA inchangé"
+     "en": "Base-case closing debt",
+     "fr": "Dette finale centrale"
     },
-    "expected": 4.5,
-    "unit": "times",
+    "expected": 260,
+    "unit": "million",
     "explanation": {
-     "en": "(600−60)/120 = 4.5× versus 5× at entry.",
-     "fr": "(600−60)/120 = 4,5× contre 5× au départ."
+     "en": "300 − 40 = 260.",
+     "fr": "300 − 40 = 260."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Stress-case closing debt",
+     "fr": "Dette finale en stress"
+    },
+    "expected": 290,
+    "unit": "million",
+    "explanation": {
+     "en": "300 − (70 − 35 − 5 − 20) = 290.",
+     "fr": "300 − (70 − 35 − 5 − 20) = 290."
     }
    }
   ]
  },
  "year-3-advanced-fixed-income": {
   "scenario": {
-   "en": "A portfolio has key-rate durations 1, 2 and 3 at 2Y, 5Y and 10Y. Respective yield shocks are +10, −20 and +30 bps. Ignore convexity and other risks.",
-   "fr": "Un portefeuille a des durations par point clé de 1, 2 et 3 aux échéances 2, 5 et 10 ans. Chocs respectifs : +10, −20 et +30 pb. Convexité et autres risques ignorés."
+   "en": "A long portfolio has DV01 $60,000 per basis point. One futures contract has effective DV01 $80 per basis point. Short 750 contracts to offset a parallel rate rise. A +10 bp move would otherwise cost approximately $600,000. Separately, a credit bond with spread duration 4 loses approximately 2% if its spread widens 50 bp, with rates unchanged. A 2-year/10-year steepening can leave a portfolio losing money even with total DV01 near zero. Break exposure into key-rate buckets, then attribute P&L to rates, spreads, carry, roll-down and residual. Re-estimate hedge ratios as prices, delivery options and duration change. The 2% spread estimate is first-order, not a precise repricing.",
+   "fr": "Un portefeuille long a une DV01 de 60 000 $ par point de base. Un future présente une DV01 effective de 80 $. Il faut vendre 750 contrats pour compenser une hausse parallèle. Sans couverture, +10 pb coûterait environ 600 000 $. Séparément, une obligation de duration de spread 4 perd environ 2 % si son spread s’écarte de 50 pb, à taux sans risque inchangés. Une pentification 2 ans / 10 ans peut faire perdre de l’argent malgré une DV01 totale proche de zéro. Répartis l’exposition par maturité clé puis attribue le résultat aux taux, spreads, portage, glissement de courbe et résidu. Recalcule les ratios quand prix, options de livraison et duration évoluent. Les 2 % de perte de spread restent une approximation de premier ordre."
   },
   "model": "bond",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "Approximate total price change",
-     "fr": "Variation totale approximative de prix"
+     "en": "Number of futures contracts to sell",
+     "fr": "Nombre de futures à vendre"
     },
-    "expected": -0.6,
-    "unit": "%",
+    "expected": 750,
+    "unit": "contracts",
     "explanation": {
-     "en": "−[1×0.001 + 2×(−0.002) + 3×0.003] = −0.006. Nonparallel shocks require maturity-specific sensitivity.",
-     "fr": "−[1×0,001 + 2×(−0,002) + 3×0,003] = −0,006. Un choc non parallèle requiert des sensibilités par échéance."
+     "en": "60,000 / 80 = 750; short offsets a long portfolio.",
+     "fr": "60 000 / 80 = 750 ; la vente compense le portefeuille long."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Parallel +10 bp change using summed duration",
-     "fr": "Variation sous hausse parallèle de 10 pb"
+     "en": "Unhedged loss magnitude for +10 bp",
+     "fr": "Perte non couverte pour +10 pb"
     },
-    "expected": -0.6,
+    "expected": 600000,
+    "unit": "USD",
+    "explanation": {
+     "en": "60,000 × 10 = 600,000, approximately.",
+     "fr": "60 000 × 10 = 600 000, approximativement."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Spread-only loss magnitude",
+     "fr": "Perte due au spread uniquement"
+    },
+    "expected": 2,
     "unit": "%",
     "explanation": {
-     "en": "Sum of durations = 6; −6×0.001 = −0.6%. The equal result in this example is coincidental.",
-     "fr": "Somme des durations = 6 ; −6×0,001 = −0,6 %. L’égalité des résultats de cet exemple est fortuite."
+     "en": "4 × 0.005 = 0.02 = 2%.",
+     "fr": "4 × 0,005 = 0,02 = 2 %."
     }
    }
   ]
  },
  "year-3-advanced-derivatives": {
   "scenario": {
-   "en": "A delta-hedged option has gamma 0.05, underlying move 4 and theta −0.30 per day. Over one day, ignore volatility changes, funding and higher-order effects.",
-   "fr": "Une option couverte en delta a un gamma 0,05, un mouvement du sous-jacent de 4 et un thêta de −0,30 par jour. Sur un jour, ignore variation de volatilité, financement et termes supérieurs."
+   "en": "The option book has delta +2,000 share equivalents and gamma +300 share equivalents per $1 move. Short 2,000 shares initially. If the stock rises $2, gamma is assumed constant and no other input changes: option delta rises to 2,600. Sell 600 additional shares to restore delta neutrality. With book vega $5,000 per volatility point, a +3-point volatility move adds approximately $15,000 independently. Do not add delta-only P&L to a full option repricing: that double counts the same move. For large moves use a pricing model with updated inputs, not constant Greeks. Frequent rebalancing creates transaction costs and liquidity needs. A short-gamma book typically buys after rises and sells after falls; collected premium must compensate this risk and other costs.",
+   "fr": "Le portefeuille a un delta de +2 000 équivalents actions et un gamma de +300 équivalents actions par mouvement de 1 $. Vends d’abord 2 000 actions. Si le titre gagne 2 $, à gamma supposé constant et autres facteurs inchangés, le delta des options passe à 2 600. Vends 600 actions supplémentaires pour le neutraliser. Avec un vega de 5 000 $ par point de volatilité, +3 points ajoutent séparément environ 15 000 $. Ne rajoute pas un résultat calculé au delta à une revalorisation complète : le même mouvement serait compté deux fois. Pour les grands mouvements, revalorise avec des paramètres actualisés plutôt qu’avec des grecs constants. Des rééquilibrages fréquents coûtent de l’argent et mobilisent de la liquidité. Un portefeuille short gamma achète généralement après une hausse et vend après une baisse ; la prime reçue doit compenser ce risque et les coûts."
   },
   "model": "derivative",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "Gamma approximation to hedged gain",
-     "fr": "Gain couvert approximé par le gamma"
+     "en": "Initial shares to sell",
+     "fr": "Actions à vendre initialement"
     },
-    "expected": 0.4,
-    "unit": "units",
+    "expected": 2000,
+    "unit": "shares",
     "explanation": {
-     "en": "0.5×0.05×4² = 0.40. Delta neutrality removes first-order directional exposure only locally.",
-     "fr": "0,5×0,05×4² = 0,40. La neutralité delta retire seulement l’exposition directionnelle locale du premier ordre."
+     "en": "Offset +2,000 option delta with −2,000 shares.",
+     "fr": "Compenser le delta options de +2 000 par −2 000 actions."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Approximate gamma plus theta P&L",
-     "fr": "Résultat approximatif gamma plus thêta"
+     "en": "Additional shares to sell after the rise",
+     "fr": "Actions supplémentaires à vendre"
     },
-    "expected": 0.1,
-    "unit": "units",
+    "expected": 600,
+    "unit": "shares",
     "explanation": {
-     "en": "0.40−0.30 = 0.10. Real hedging costs and changing Greeks can materially alter this approximation.",
-     "fr": "0,40−0,30 = 0,10. Coûts de couverture et Greeks variables peuvent modifier sensiblement cette approximation."
+     "en": "300 × 2 = 600 additional delta.",
+     "fr": "300 × 2 = 600 de delta supplémentaire."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Approximate vega gain",
+     "fr": "Gain approximatif lié au vega"
+    },
+    "expected": 15000,
+    "unit": "USD",
+    "explanation": {
+     "en": "5,000 × 3 volatility points = 15,000.",
+     "fr": "5 000 × 3 points de volatilité = 15 000."
     }
    }
   ]
  },
  "year-3-macro-trading-frameworks": {
   "scenario": {
-   "en": "A rates view expects a 30 bp yield decline on a bond portfolio with modified duration 7 and market value 2,000,000. Ignore carry, convexity, spreads and costs.",
-   "fr": "Une vue de taux anticipe une baisse de rendement de 30 pb sur un portefeuille de valeur 2 000 000 et de duration modifiée 7. Portage, convexité, spreads et frais ignorés."
+   "en": "The market expects a 25 bp rate cut; the central bank cuts 50 bp. Using signed changes, the surprise is −50 − (−25) = −25 bp. Suppose the traded bond yield actually falls only 10 bp and portfolio DV01 is $8,000/bp. Approximate P&L is +$80,000. Policy rates and the traded bond yield are distinct variables. An unexpectedly large cut can support bonds but also signal deteriorating growth, widening credit spreads. A currency response depends on the other country’s policy expectations and risk appetite. Build a scenario tree: policy surprise → observed curve move → measured portfolio exposure → competing channels. State what observation would invalidate the trade thesis rather than declaring a universal directional rule.",
+   "fr": "Le marché attend une baisse de taux de 25 pb ; la banque centrale baisse de 50 pb. Avec des variations signées, la surprise vaut −50 − (−25) = −25 pb. Supposons que le rendement obligataire effectivement traité baisse seulement de 10 pb et que la DV01 soit de 8 000 $/pb. Le gain approximatif vaut 80 000 $. Taux directeur et rendement obligataire traité sont deux variables distinctes. Une baisse plus forte qu’attendu peut soutenir les obligations mais signaler une croissance dégradée, avec élargissement des spreads. La devise dépend aussi des anticipations de l’autre pays et de l’appétit pour le risque. Construis un arbre : surprise monétaire → mouvement de courbe observé → exposition mesurée → canaux concurrents. Indique quelle observation invaliderait la thèse au lieu d’annoncer une règle directionnelle universelle."
   },
   "model": "bond",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "Approximate price return",
-     "fr": "Rendement de prix approximatif"
+     "en": "Signed policy surprise",
+     "fr": "Surprise monétaire signée"
     },
-    "expected": 2.1,
-    "unit": "%",
+    "expected": -25,
+    "unit": "bp",
     "explanation": {
-     "en": "−7×(−0.003) = +2.1%. The sign of the yield shock is essential.",
-     "fr": "−7×(−0,003) = +2,1 %. Le signe du choc de taux est essentiel."
+     "en": "−50 − (−25) = −25.",
+     "fr": "−50 − (−25) = −25."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Approximate monetary P&L",
-     "fr": "Résultat monétaire approximatif"
+     "en": "Bond portfolio gain",
+     "fr": "Gain du portefeuille obligataire"
     },
-    "expected": 42000,
-    "unit": "units",
+    "expected": 80000,
+    "unit": "USD",
     "explanation": {
-     "en": "2,000,000×2.1% = 42,000. This conditional scenario is not an observed market result.",
-     "fr": "2 000 000×2,1 % = 42 000. Scénario conditionnel, pas résultat de marché observé."
+     "en": "−8,000 × (−10) = +80,000.",
+     "fr": "−8 000 × (−10) = +80 000."
     }
    }
   ]
  },
  "year-3-hedge-funds-alternatives": {
   "scenario": {
-   "en": "A long/short fund has long exposure 120 and short exposure 40, with NAV 100. The long book gains 5% and the shorted securities rise 3%. Ignore costs.",
-   "fr": "Un fonds long/short a une exposition acheteuse 120, vendeuse 40 et une valeur liquidative 100. Le portefeuille long gagne 5 % et les titres vendus à découvert montent de 3 %, hors frais."
+   "en": "Opening NAV is 100 and gross return is 10%. Before fees, NAV is 110. Management fees are 2, leaving 108. With a high-water mark of 100, eligible profit is 8; performance fee is 1.6 and ending NAV 106.4. Net return is 6.4%. If the applicable high-water mark were 110 instead, no performance fee would be due in this simplified case; ending NAV would be 108. A profitable fund can still face a liquidity shortfall. For redemptions of 25, cash of 10 and feasible unencumbered asset sales of 8 before the payment date, the gap is 7. Report dates, notice periods, gates and financing availability; do not assume accounting NAV is immediately cashable. Forced selling may alter both performance and remaining investors’ risk.",
+   "fr": "La valeur liquidative initiale est 100 et le rendement brut 10 %. Avant frais, elle atteint 110. Les frais de gestion de 2 la ramènent à 108. Avec un plus-haut historique de 100, le profit éligible vaut 8 ; les frais de performance valent 1,6 et la valeur finale 106,4. Le rendement net est 6,4 %. Si le seuil applicable était 110, il n’y aurait aucun frais de performance dans ce cas simplifié ; la valeur finale serait 108. Un fonds rentable peut manquer de liquidité. Pour 25 de rachats, 10 de trésorerie et 8 de ventes réalisables d’actifs libres avant paiement, le manque vaut 7. Précise dates, préavis, restrictions de rachat et financements disponibles ; la valeur liquidative comptable n’est pas intégralement encaissable immédiatement. Les ventes forcées modifient performance et risque des investisseurs restants."
   },
   "model": "portfolio",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "Gross exposure / NAV",
-     "fr": "Exposition brute / valeur liquidative"
+     "en": "Performance fee with high-water mark 100",
+     "fr": "Frais de performance avec seuil 100"
     },
-    "expected": 160,
-    "unit": "%",
+    "expected": 1.6,
+    "unit": "NAV units",
     "explanation": {
-     "en": "(120+40)/100 = 160%; net exposure is 80%. Neither is a complete risk measure.",
-     "fr": "(120+40)/100 = 160 % ; exposition nette 80 %. Aucune n’est une mesure complète du risque."
+     "en": "20% × (108 − 100) = 1.6.",
+     "fr": "20 % × (108 − 100) = 1,6."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Portfolio return",
-     "fr": "Rendement du portefeuille"
+     "en": "Net return",
+     "fr": "Rendement net"
     },
-    "expected": 4.8,
+    "expected": 6.4,
     "unit": "%",
     "explanation": {
-     "en": "Long gain 120×5%=6; short loss 40×3%=1.2; net 4.8 on NAV 100.",
-     "fr": "Gain long 120×5 %=6 ; perte short 40×3 %=1,2 ; résultat 4,8 sur une valeur liquidative de 100."
+     "en": "(106.4 / 100 − 1) × 100 = 6.4%.",
+     "fr": "(106,4 / 100 − 1) × 100 = 6,4 %."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Liquidity shortfall",
+     "fr": "Manque de liquidité"
+    },
+    "expected": 7,
+    "unit": "NAV units",
+    "explanation": {
+     "en": "25 − 10 − 8 = 7.",
+     "fr": "25 − 10 − 8 = 7."
     }
    }
   ]
  },
  "year-3-portfolio-construction": {
   "scenario": {
-   "en": "Initial weights are 60% equities and 40% bonds. Equities gain 10%, bonds lose 5%. No flows, costs or rebalancing during the period.",
-   "fr": "Poids initiaux : 60 % actions, 40 % obligations. Actions +10 %, obligations −5 %. Aucun flux, frais ou rééquilibrage en période."
+   "en": "Equities weigh 60% with annual volatility 20%; bonds weigh 40% with volatility 10%; correlation is 0.2. Variance is 0.6²×0.2² + 0.4²×0.1² + 2×0.6×0.4×0.2×0.1×0.2 = 0.01792. Annual portfolio volatility is approximately 13.39%. The weighted average volatility of 16% ignores diversification. If correlation rises to 0.8 with all else fixed, variance becomes 0.02368 and volatility approximately 15.39%. In a separate realized stress, equities lose 20% and bonds 5%: a static unrebalanced 60/40 portfolio loses 14%, before fees. A volatility estimate is not a loss limit. Rebalance rules, leverage, liquidity and estimation uncertainty belong in the mandate.",
+   "fr": "Les actions pèsent 60 % avec une volatilité annuelle de 20 % ; les obligations 40 % avec une volatilité de 10 % ; la corrélation vaut 0,2. La variance vaut 0,6²×0,2² + 0,4²×0,1² + 2×0,6×0,4×0,2×0,1×0,2 = 0,01792. La volatilité annuelle du portefeuille vaut environ 13,39 %. La moyenne pondérée de 16 % ignore la diversification. Si la corrélation monte à 0,8, toutes choses égales par ailleurs, la variance atteint 0,02368 et la volatilité environ 15,39 %. Dans un stress réalisé distinct, actions −20 % et obligations −5 % donnent −14 % pour un portefeuille 60/40 statique non rééquilibré, avant frais. Une estimation de volatilité n’est pas une limite de perte. Règles de rééquilibrage, levier, liquidité et incertitude doivent figurer dans le mandat."
   },
   "model": "portfolio",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "Portfolio return",
-     "fr": "Rendement du portefeuille"
+     "en": "Portfolio volatility with correlation 0.2",
+     "fr": "Volatilité avec corrélation 0,2"
     },
-    "expected": 4,
+    "expected": 13.386560424545207,
     "unit": "%",
     "explanation": {
-     "en": "0.6×10% + 0.4×(−5%) = 4%. Contributions are +6 and −2 percentage points.",
-     "fr": "0,6×10 % + 0,4×(−5 %) = 4 %. Contributions : +6 et −2 points."
+     "en": "Square root of variance 0.01792, then multiply by 100: approximately 13.3866%.",
+     "fr": "Racine de la variance 0.01792, puis multiplication par 100 : environ 13.3866 %."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Ending equity weight",
-     "fr": "Poids final des actions"
+     "en": "Portfolio volatility with correlation 0.8",
+     "fr": "Volatilité avec corrélation 0,8"
     },
-    "expected": 63.46153846153846,
+    "expected": 15.388307249337076,
     "unit": "%",
     "explanation": {
-     "en": "Starting from 100, equities become 66 and bonds 38; 66/104 = 63.46%. Initial weights do not remain constant automatically.",
-     "fr": "Sur une base 100, actions 66 et obligations 38 ; 66/104 = 63,46 %. Les poids initiaux ne restent pas automatiquement constants."
+     "en": "Square root of variance 0.02368, then multiply by 100: approximately 15.3883%.",
+     "fr": "Racine de la variance 0.02368, puis multiplication par 100 : environ 15.3883 %."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Signed stress return",
+     "fr": "Rendement signé en stress"
+    },
+    "expected": -14,
+    "unit": "%",
+    "explanation": {
+     "en": "0.6×(−20) + 0.4×(−5) = −14%.",
+     "fr": "0,6×(−20) + 0,4×(−5) = −14 %."
     }
    }
   ]
  },
  "year-3-behavioral-finance": {
   "scenario": {
-   "en": "An investor buys at 100. The price falls to 80, then rises 20%. An unrelated scenario has 60% probability of +10 and 40% probability of −8.",
-   "fr": "Un investisseur achète à 100 ; le prix baisse à 80, puis remonte de 20 %. Un scénario distinct a 60 % de probabilité de gain 10 et 40 % de perte 8."
+   "en": "Among 1,000 companies, 10% will experience the event. A signal catches 80% of these and falsely flags 20% of the others. True positives: 80 out of 100. False positives: 180 out of 900. Of 260 signals, only 80 are true: posterior probability 30.77%, not 80%. Draw the population split before calculating. In a separate investment decision, a 40% chance of gaining 30 and 60% chance of losing 10 gives expected payoff 6 before costs. Positive expectation does not guarantee a profit or suitability: position sizing, loss tolerance and dependence on other positions matter. Record the prior, alternative explanation, disconfirming evidence and a review date; judge the reasoning as well as the outcome.",
+   "fr": "Sur 1 000 entreprises, 10 % connaîtront l’événement. Un signal détecte 80 % de ces cas et signale à tort 20 % des autres. Vrais positifs : 80 sur 100. Faux positifs : 180 sur 900. Sur 260 signaux, seuls 80 sont vrais : probabilité après signal de 30,77 %, et non 80 %. Dessine la répartition de la population avant de calculer. Dans une décision distincte, 40 % de chances de gagner 30 et 60 % de perdre 10 donnent un gain espéré de 6 avant coûts. Une espérance positive ne garantit ni profit ni adéquation : taille de position, tolérance aux pertes et dépendance avec les autres positions comptent. Consigne probabilité initiale, explication alternative, preuves contraires et date de réexamen ; évalue le raisonnement autant que le résultat."
   },
   "model": "surprise",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "Price after the 20% recovery",
-     "fr": "Prix après la reprise de 20 %"
+     "en": "Number of true positive signals",
+     "fr": "Nombre de vrais positifs"
     },
-    "expected": 96,
-    "unit": "units",
+    "expected": 80,
+    "unit": "companies",
     "explanation": {
-     "en": "80×1.20 = 96. Anchoring on the purchase price can obscure the asymmetric recovery required after a loss.",
-     "fr": "80×1,20 = 96. L’ancrage au prix d’achat peut masquer l’asymétrie de récupération après une perte."
+     "en": "1,000 × 10% × 80% = 80.",
+     "fr": "1 000 × 10 % × 80 % = 80."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Expected payoff of the unrelated scenario",
-     "fr": "Espérance du scénario distinct"
+     "en": "Number of false positive signals",
+     "fr": "Nombre de faux positifs"
     },
-    "expected": 2.8,
-    "unit": "units",
+    "expected": 180,
+    "unit": "companies",
     "explanation": {
-     "en": "0.6×10 + 0.4×(−8) = 2.8. Positive expected payoff does not remove downside risk or determine suitability.",
-     "fr": "0,6×10 + 0,4×(−8) = 2,8. Une espérance positive ne supprime ni risque de baisse ni question d’adéquation."
+     "en": "1,000 × 90% × 20% = 180.",
+     "fr": "1 000 × 90 % × 20 % = 180."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Expected payoff of the separate investment",
+     "fr": "Gain espéré de l’investissement distinct"
+    },
+    "expected": 6,
+    "unit": "currency",
+    "explanation": {
+     "en": "0.4×30 + 0.6×(−10) = 6.",
+     "fr": "0,4×30 + 0,6×(−10) = 6."
     }
    }
   ]
  },
  "year-3-structured-products": {
   "scenario": {
-   "en": "At maturity a hypothetical principal-protected note repays principal 1,000 plus 50% participation in a positive index return, capped at a 10% note gain. Ignore issuer default and fees only for the payoff calculation.",
-   "fr": "À échéance, un produit fictif à capital protégé rembourse 1 000 plus 50 % de participation à la hausse de l’indice, avec un gain du produit plafonné à 10 %. Défaut émetteur et frais ignorés uniquement pour le calcul."
+   "en": "In a fictional issue priced at 100, the funding component costs 90 and options 5. The residual 5 represents the simplified gross structuring/distribution margin, not a guaranteed investor gain. In a separate barrier note, assume principal 100, no coupons or early redemption, a 60% terminal barrier and proportional loss below it. If the underlying ends at 50% of its initial value, redemption is 50. For this precise terminal-barrier convention, an ending level of 70% repays 100; 50% repays 50. A continuously observed barrier, memory coupon or autocall would require different logic. Draw the payoff under the actual term sheet rather than copying a similar-looking product. Selling before maturity introduces market-value risk even when contractual maturity principal is protected.",
+   "fr": "Dans une émission fictive au prix de 100, le financement coûte 90 et les options 5. Le solde de 5 représente une marge brute simplifiée de structuration/distribution, pas un gain garanti pour l’investisseur. Dans une note à barrière distincte, suppose capital 100, aucun coupon ni remboursement anticipé, barrière terminale à 60 % et perte proportionnelle sous celle-ci. Si le sous-jacent finit à 50 % de son niveau initial, le remboursement vaut 50. Pour cette convention précise de barrière observée à l’échéance, un niveau final de 70 % rembourse 100 ; 50 % rembourse 50. Une barrière continue, un coupon mémoire ou un autocall demanderaient une autre logique. Dessine le remboursement selon le contrat réel plutôt qu’en copiant un produit ressemblant. Revendre avant l’échéance expose à la valeur de marché, même quand le nominal final est contractuellement protégé."
   },
   "model": "derivative",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "Redemption if the index rises 30%",
-     "fr": "Remboursement si l’indice monte de 30 %"
+     "en": "Gross structuring/distribution margin",
+     "fr": "Marge brute de structuration/distribution"
     },
-    "expected": 1100,
-    "unit": "units",
+    "expected": 5,
+    "unit": "currency",
     "explanation": {
-     "en": "Participation gives 15% but the note gain is capped at 10%; redemption = 1,100.",
-     "fr": "La participation donne 15 %, mais le gain du produit est plafonné à 10 % ; remboursement 1 100."
+     "en": "100 − 90 − 5 = 5.",
+     "fr": "100 − 90 − 5 = 5."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Redemption if the index falls 20% under the stated payoff",
-     "fr": "Remboursement si l’indice baisse de 20 % selon la formule annoncée"
+     "en": "Barrier-note redemption at terminal level 50%",
+     "fr": "Remboursement de la note à niveau final 50 %"
     },
-    "expected": 1000,
-    "unit": "units",
+    "expected": 50,
+    "unit": "currency",
     "explanation": {
-     "en": "The simplified maturity payoff floors at principal 1,000. Protection remains subject to issuer credit and does not guarantee pre-maturity resale value.",
-     "fr": "La formule simplifiée à échéance prévoit un plancher de 1 000. La protection dépend du crédit de l’émetteur et ne garantit pas la revente avant échéance."
+     "en": "Below the stated terminal barrier, 100 × 50% = 50.",
+     "fr": "Sous la barrière terminale définie, 100 × 50 % = 50."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Barrier-note redemption at terminal level 70%",
+     "fr": "Remboursement de la note à niveau final 70 %"
+    },
+    "expected": 100,
+    "unit": "currency",
+    "explanation": {
+     "en": "70% is above the 60% terminal barrier in this fictional contract.",
+     "fr": "70 % dépasse la barrière terminale de 60 % du contrat fictif."
     }
    }
   ]
  },
  "year-3-regulation-ethics": {
   "scenario": {
-   "en": "An analyst has material nonpublic takeover information. Code 0 means do not trade or tip; code 1 means trade. Separately, a client orders 100 units and a broker fills only 60.",
-   "fr": "Un analyste détient une information importante non publique sur une acquisition. Code 0 : ne pas négocier ni divulguer ; code 1 : négocier. Séparément, un client ordonne 100 unités et l’intermédiaire n’en exécute que 60."
+   "en": "For a purchase of 1,000 shares, venue A quotes 100.10 and charges 0.02 per share: all-in 100.12. Venue B quotes 100.08 and charges 0.08: all-in 100.16. Assume immediate full fills, no other charges and identical settlement. A saves 0.04 per share, or 40 in total. If potentially material non-public information arrives, pause trading and sharing, preserve the record and contact the authorized compliance channel under the applicable policy. Do not decide that information is public simply because a colleague mentioned it. Document facts, timing, source and restrictions without circulating the sensitive content unnecessarily. This is a training workflow; exact obligations depend on jurisdiction and role.",
+   "fr": "Pour acheter 1 000 actions, la place A cote 100,10 avec 0,02 de frais par action : total 100,12. La place B cote 100,08 avec 0,08 de frais : total 100,16. Suppose une exécution immédiate intégrale, aucun autre frais et un règlement identique. A économise 0,04 par action, soit 40 au total. Si une information potentiellement importante et non publique arrive, suspends transactions et partage, conserve la trace et contacte la conformité selon la procédure applicable. Une information n’est pas publique parce qu’un collègue l’a évoquée. Documente faits, heure, source et restrictions sans diffuser inutilement le contenu sensible. C’est un parcours pédagogique ; les obligations exactes dépendent du pays et du rôle."
   },
   "model": "ethics",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "Appropriate trading decision code",
-     "fr": "Code de décision appropriée"
+     "en": "Total purchase cost on A",
+     "fr": "Coût total sur A"
     },
-    "expected": 0,
-    "unit": "code 0/1",
+    "expected": 100120,
+    "unit": "currency",
     "explanation": {
-     "en": "Do not trade or tip. Follow restricted-list and compliance procedures; a favorable expected return does not justify misuse of confidential information.",
-     "fr": "Ne négocie pas et ne transmets pas l’information. Suis les procédures de conformité ; un gain attendu ne justifie pas l’utilisation d’information confidentielle."
+     "en": "1,000 × (100.10 + 0.02) = 100,120.",
+     "fr": "1 000 × (100,10 + 0,02) = 100 120."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Unfilled quantity to disclose",
-     "fr": "Quantité non exécutée à communiquer"
+     "en": "Total purchase cost on B",
+     "fr": "Coût total sur B"
+    },
+    "expected": 100160,
+    "unit": "currency",
+    "explanation": {
+     "en": "1,000 × (100.08 + 0.08) = 100,160.",
+     "fr": "1 000 × (100,08 + 0,08) = 100 160."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Saving from selecting A",
+     "fr": "Économie en choisissant A"
     },
     "expected": 40,
-    "unit": "units",
+    "unit": "currency",
     "explanation": {
-     "en": "100−60 = 40. Accurate execution reporting must distinguish requested, filled and outstanding quantities.",
-     "fr": "100−60 = 40. Le compte rendu doit distinguer quantité demandée, exécutée et restante."
+     "en": "100,160 − 100,120 = 40.",
+     "fr": "100 160 − 100 120 = 40."
     }
    }
   ]
  },
  "year-3-professional-market-communication": {
   "scenario": {
-   "en": "An illustrative three-case valuation uses bear 80 with probability 25%, base 110 with 50%, bull 140 with 25%. Current price is 100.",
-   "fr": "Une valorisation à trois scénarios utilise baissier 80 à 25 %, central 110 à 50 %, haussier 140 à 25 %. Cours actuel 100."
+   "en": "A release is 110 versus consensus 100 and prior 90. Surprise is +10%; growth versus prior is +22.22%. A yield moves from 4.00% to 4.15%: +15 bp, not +15%. A margin rises from 10% to 12%: +2 percentage points or +200 bp. State the unit and comparison period every time. Write: “The release exceeded consensus by 10%. The 10-year yield rose 15 bp over the stated window. This is consistent with revised rate expectations, although other news may have contributed.” Then separate upside, downside and the next confirming observation. Avoid claiming sole causality from simultaneous moves, mixing revised and unrevised series, or presenting a scenario as a forecast certainty.",
+   "fr": "Une donnée vaut 110 contre un consensus de 100 et un précédent de 90. La surprise vaut +10 % ; la croissance par rapport au précédent +22,22 %. Un rendement passe de 4,00 % à 4,15 % : +15 pb, pas +15 %. Une marge passe de 10 % à 12 % : +2 points de pourcentage ou +200 pb. Précise systématiquement unité et période de comparaison. Écris : « La publication dépasse le consensus de 10 %. Le rendement à 10 ans a gagné 15 pb sur la fenêtre indiquée. Cela est compatible avec une révision des anticipations de taux, même si d’autres nouvelles ont pu contribuer. » Sépare ensuite scénario favorable, risque défavorable et prochaine observation de confirmation. Évite causalité unique déduite de la simultanéité, mélange de séries révisées et non révisées, ou scénario présenté comme certain."
   },
   "model": "surprise",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "Probability-weighted value",
-     "fr": "Valeur pondérée par probabilités"
+     "en": "Surprise relative to consensus",
+     "fr": "Surprise par rapport au consensus"
     },
-    "expected": 110,
-    "unit": "units",
+    "expected": 10,
+    "unit": "%",
     "explanation": {
-     "en": "0.25×80 + 0.50×110 + 0.25×140 = 110. Probabilities sum to 100%.",
-     "fr": "0,25×80 + 0,50×110 + 0,25×140 = 110. Les probabilités totalisent 100 %."
+     "en": "(110 / 100 − 1) × 100 = 10%.",
+     "fr": "(110 / 100 − 1) × 100 = 10 %."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Implied expected upside, before costs",
-     "fr": "Potentiel espéré avant frais"
+     "en": "Yield rise",
+     "fr": "Hausse du rendement"
     },
-    "expected": 10,
-    "unit": "%",
+    "expected": 15,
+    "unit": "bp",
     "explanation": {
-     "en": "110/100−1 = 10%. Communicate assumptions, downside and uncertainty; do not present 110 as a guaranteed future price.",
-     "fr": "110/100−1 = 10 %. Présente hypothèses, risque baissier et incertitude ; 110 n’est pas un prix futur garanti."
+     "en": "(4.15 − 4.00) × 100 = 15 bp.",
+     "fr": "(4,15 − 4,00) × 100 = 15 pb."
+    }
+   },
+   {
+    "id": "2",
+    "label": {
+     "en": "Margin increase",
+     "fr": "Hausse de la marge"
+    },
+    "expected": 200,
+    "unit": "bp",
+    "explanation": {
+     "en": "(12 − 10) × 100 = 200 bp.",
+     "fr": "(12 − 10) × 100 = 200 pb."
     }
    }
   ]
  },
  "year-4-capstone-investment-deal-case": {
   "scenario": {
-   "en": "A target has EBITDA 80 and enterprise value of 8× EBITDA. Acquisition debt is 360; no excess cash. After five years EBITDA is 100, exit multiple 7× and debt 250. Ignore fees and interim distributions.",
-   "fr": "Une cible a un EBITDA de 80 et une valeur d’entreprise à 8× l’EBITDA. Dette d’acquisition 360, pas de cash excédentaire. À cinq ans : EBITDA 100, multiple de sortie 7×, dette 250. Frais et distributions intermédiaires ignorés."
+   "en": "Asterion has 100 million shares at 28, net debt 360 million, EBITDA 240 million and annual free cash flow 150 million. Current equity value is 2,800 million and EV 3,160 million. An offer of 35 per share implies equity 3,500 million, enterprise purchase value 3,860 million and a 25% equity premium. Assume no other debt-like adjustments, cash changes or transaction fees. Assume after-tax synergies of 30 million every year forever, starting in one year, with no growth and an 8% discount rate. Their PV is 375 million. Treat current EV of 3,160 as the standalone valuation assumption: buyer value is 3,535 versus cost 3,860, giving NPV −325 million before fees. The offer therefore fails this buyer-value test despite attractive headline synergies. Required perpetual synergies to break even are 56 million per year; delays, integration costs and risk would increase the hurdle.",
+   "fr": "Asterion compte 100 millions d’actions à 28, une dette nette de 360 millions, un EBITDA de 240 millions et un flux de trésorerie disponible annuel de 150 millions. Les fonds propres valent 2 800 millions et l’EV 3 160 millions. Une offre à 35 par action implique 3 500 millions de fonds propres, une valeur d’acquisition de 3 860 millions et une prime de 25 %. Aucun autre ajustement de dette, mouvement de trésorerie ni frais de transaction n’est supposé. Suppose des synergies après impôts de 30 millions par an à perpétuité, dès l’année prochaine, sans croissance, actualisées à 8 %. Leur valeur actuelle est 375 millions. En retenant l’EV actuelle de 3 160 comme hypothèse de valeur autonome, la valeur pour l’acquéreur est 3 535 contre un coût de 3 860, soit une VAN de −325 millions avant frais. L’offre échoue donc à ce test malgré des synergies séduisantes. Il faudrait 56 millions annuels à perpétuité pour atteindre l’équilibre ; délais, coûts d’intégration et risque relèveraient ce seuil."
   },
   "model": "valuation",
   "questions": [
    {
     "id": "0",
     "label": {
-     "en": "Initial equity investment",
-     "fr": "Investissement initial en capitaux propres"
+     "en": "Enterprise value at the offer",
+     "fr": "Valeur d’entreprise de l’offre"
     },
-    "expected": 280,
-    "unit": "units",
+    "expected": 3860,
+    "unit": "million",
     "explanation": {
-     "en": "Entry EV = 80×8 = 640; initial equity = 640−360 = 280.",
-     "fr": "Valeur d’entrée = 80×8 = 640 ; capitaux propres initiaux = 640−360 = 280."
+     "en": "35 × 100 + 360 = 3,860.",
+     "fr": "35 × 100 + 360 = 3 860."
     }
    },
    {
     "id": "1",
     "label": {
-     "en": "Exit equity value",
-     "fr": "Valeur des capitaux propres de sortie"
+     "en": "Equity premium",
+     "fr": "Prime sur les fonds propres"
     },
-    "expected": 450,
-    "unit": "units",
+    "expected": 25,
+    "unit": "%",
     "explanation": {
-     "en": "Exit EV = 100×7 = 700; equity = 700−250 = 450. EBITDA grew but the exit multiple compressed.",
-     "fr": "Valeur de sortie = 100×7 = 700 ; capitaux propres = 700−250 = 450. L’EBITDA augmente mais le multiple se comprime."
+     "en": "(35 / 28 − 1) × 100 = 25%.",
+     "fr": "(35 / 28 − 1) × 100 = 25 %."
     }
    },
    {
     "id": "2",
     "label": {
-     "en": "Five-year equity IRR",
-     "fr": "TRI des capitaux propres sur cinq ans"
+     "en": "Present value of synergies",
+     "fr": "Valeur actuelle des synergies"
     },
-    "expected": 9.953965407958165,
-    "unit": "%",
+    "expected": 375,
+    "unit": "million",
     "explanation": {
-     "en": "(450/280)^(1/5)−1 ≈ 9.96%. This is a scenario result before fees, not an investment promise.",
-     "fr": "(450/280)^(1/5)−1 ≈ 9,96 %. Résultat de scénario avant frais, pas promesse d’investissement."
+     "en": "30 / 0.08 = 375.",
+     "fr": "30 / 0,08 = 375."
+    }
+   },
+   {
+    "id": "3",
+    "label": {
+     "en": "Signed buyer NPV before fees",
+     "fr": "VAN acquéreur signée avant frais"
+    },
+    "expected": -325,
+    "unit": "million",
+    "explanation": {
+     "en": "3,160 + 375 − 3,860 = −325.",
+     "fr": "3 160 + 375 − 3 860 = −325."
+    }
+   },
+   {
+    "id": "4",
+    "label": {
+     "en": "Annual synergies required to break even",
+     "fr": "Synergies annuelles nécessaires à l’équilibre"
+    },
+    "expected": 56,
+    "unit": "million/year",
+    "explanation": {
+     "en": "(3,860 − 3,160) × 0.08 = 56.",
+     "fr": "(3 860 − 3 160) × 0,08 = 56."
     }
    }
   ]

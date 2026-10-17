@@ -1,5 +1,7 @@
 "use client";
 
+import LearningResponse from "./learning-response";
+import type {InterviewBankExercise} from "@/lib/interview-question-bank";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { challengeInterview, challengeQuestionKey } from "@/lib/challenge-interview";
@@ -23,7 +25,7 @@ export default function InterviewStudio() {
   const concept=(params.get("concept") || params.get("question") || "").slice(0,240);
   const requestedTrack=params.get("track");
   const conceptExercise=challengeInterview(concept);
-  const [track, setTrack] = useState<Track>("Investment Banking");
+  const [track, setTrack] = useState<Track>(isInterviewTrack(requestedTrack)?requestedTrack:"Investment Banking");
   const [answer, setAnswer] = useState("");
   const [userId, setUserId] = useState<string | null>(null);
   const [attemptCount, setAttemptCount] = useState(0);
@@ -34,7 +36,13 @@ export default function InterviewStudio() {
   const [aiStatus, setAiStatus] = useState<"ready" | "live" | "error">("ready");
   const [status, setStatus] = useState("");
 
-  const active = conceptExercise || interviewQuestions[track];
+  const [rotation,setRotation]=useState<InterviewBankExercise|null>(null);
+  const [nextLoading,setNextLoading]=useState(false);
+  const active = rotation || conceptExercise || interviewQuestions[track];
+  async function newQuestion(id?:string){if(nextLoading||evaluating||saving)return;setNextLoading(true);setStatus('');try{const p=new URLSearchParams({track,...(id?{id}:rotation?{after:rotation.id}:{})});const r=await fetch(`/api/interview/question?${p}`,{cache:'no-store'});if(!r.ok)throw Error();const q=await r.json() as InterviewBankExercise;setRotation(q);setAnswer('');setEvaluation('');setScore(null);}catch{setStatus(text('The next question could not be loaded. Please retry.','La question suivante n’a pas pu être chargée. Réessaie.'));}finally{setNextLoading(false);}}
+  useEffect(()=>{setRotation(null);},[track,concept]);
+  const questionParam=params.get('questionId');
+  useEffect(()=>{if(questionParam&&(!requestedTrack||track===requestedTrack))void newQuestion(questionParam);},[questionParam,track]);
   const details = useMemo(() => interviewFrameworkDetails[track], [track]);
   const local = (value: Bilingual) => isFrench ? value.fr : value.en;
 
@@ -81,7 +89,7 @@ export default function InterviewStudio() {
   }, [track,concept]);
 
   async function saveAttempt() {
-    if (!userId || !answer.trim() || saving) return;
+    if (!userId || !answer.trim() || saving || evaluating || nextLoading) return;
 
     setSaving(true);
     setStatus("");
@@ -90,7 +98,7 @@ export default function InterviewStudio() {
     const { error } = await supabase.from("interview_attempts").insert({
       user_id: userId,
       track,
-      question_key: concept ? challengeQuestionKey(track,concept) : interviewQuestionKey(track),
+      question_key: rotation ? `${track}:${rotation.id}` : concept ? challengeQuestionKey(track,concept) : interviewQuestionKey(track),
       answer_text: answer.trim(),
       evaluation: { status: "submitted_unscored", version: 1 },
     });
@@ -113,7 +121,7 @@ export default function InterviewStudio() {
   }
 
   async function evaluateAnswer() {
-    if (!answer.trim() || evaluating) return;
+    if (!answer.trim() || evaluating || saving || nextLoading) return;
 
     setEvaluating(true);
     setStatus("");
@@ -126,7 +134,8 @@ export default function InterviewStudio() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           track,
-          concept,
+          concept: rotation ? undefined : concept,
+          questionId: rotation?.id,
           answer: answer.trim(),
           language: isFrench ? "FR" : "EN",
         }),
@@ -193,7 +202,7 @@ export default function InterviewStudio() {
                 onClick={() => setTrack(item.key)}
                 key={item.key}
                 type="button"
-                disabled={evaluating}
+                disabled={evaluating||saving||nextLoading}
               >
                 {isFrench ? item.fr : item.key}
               </button>
@@ -217,7 +226,8 @@ export default function InterviewStudio() {
           </span>
         </div>
 
-        <h2>{local(active.question)}</h2>
+        <h2 aria-live="polite">{local(active.question)}</h2>
+        <button className="new-interview-question learning-expand-button" type="button" disabled={nextLoading||evaluating||saving} onClick={()=>void newQuestion()}>{nextLoading?text('Loading…','Chargement…'):text('New one →','Nouvelle question →')}</button>
 
         <div className="interview-two-column">
           <div>
@@ -260,14 +270,14 @@ export default function InterviewStudio() {
           )}
           rows={8}
           maxLength={8000}
-          disabled={evaluating}
+          disabled={evaluating||saving||nextLoading}
         />
 
         <div className="answer-practice-actions">
           <button
             className="full-button"
             type="button"
-            disabled={answer.trim().length < 20 || evaluating}
+            disabled={answer.trim().length < 20 || evaluating || saving || nextLoading}
             onClick={() => void evaluateAnswer()}
           >
             {evaluating
@@ -280,7 +290,7 @@ export default function InterviewStudio() {
             <button
               className="chip"
               type="button"
-              disabled={!answer.trim() || saving || evaluating}
+              disabled={!answer.trim() || saving || evaluating || nextLoading}
               onClick={() => void saveAttempt()}
             >
               {saving
@@ -329,10 +339,10 @@ export default function InterviewStudio() {
           </span>
         </div>
 
-        {conceptExercise && <div className="concept-model-answer"><span className="mini-label">{text("WORKED ANSWER · THIS CONCEPT", "RÉPONSE CORRIGÉE · CETTE NOTION")}</span><p>{local(conceptExercise.modelAnswer)}</p></div>}
+        {(rotation||conceptExercise) && <details className="concept-model-answer"><summary>{text("Open / close the complete model answer","Ouvrir / fermer la réponse corrigée complète")}</summary><div><span className="mini-label">{text("WORKED ANSWER · THIS CONCEPT", "RÉPONSE CORRIGÉE · CETTE NOTION")}</span><LearningResponse content={local((rotation||conceptExercise)!.modelAnswer)}/></div></details>}
         <div className="framework-steps-grid">
           {active.framework.map((step, index) => {
-            const detail = conceptExercise ? undefined : details[index];
+            const detail = rotation?.details[index] || (conceptExercise ? undefined : details[index]);
             return (
               <div className="framework-step" key={step.en}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
@@ -351,6 +361,7 @@ export default function InterviewStudio() {
             );
           })}
         </div>
+        <button className="learning-expand-button" type="button" disabled={nextLoading||evaluating||saving} onClick={()=>void newQuestion()}>{nextLoading?text('Loading…','Chargement…'):text('Finished studying? New one →','Réponse étudiée ? Nouvelle question →')}</button>
       </section>
 
       <section className="analysis-grid">
