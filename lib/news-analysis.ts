@@ -49,8 +49,11 @@ async function buildAnalysis(url:string,title:string,language:"EN"|"FR"):Promise
 }
 const cachedAnalysis=unstable_cache(buildAnalysis,["news-commentary-editorial-v3"],{revalidate:21600});
 const pending=new Map<string,Promise<NewsAnalysis>>();
+const frenchHeadings:Record<string,string>={"The story and why it matters":"L’événement et son importance","The background":"Le contexte et les origines","The financial consequences":"Les conséquences financières","What could change next, and why":"Ce qui pourrait changer, et pourquoi","The concepts explained":"Les notions expliquées"};
+function localizeNewsSections(answer:string,language:"EN"|"FR"){return language==="FR"?answer.replace(/^## (.+)$/gm,(line,title:string)=>frenchHeadings[title.trim()]?`## ${frenchHeadings[title.trim()]}`:line):answer;}
+
 export function newsAnalysis(url:string,title:string,language:"EN"|"FR"){
  const canonical=safeNewsURL(url);if(!canonical)throw new Error("Invalid public source URL");url=canonical;
  const key=`${language}:${url}:${title}`;const previous=pending.get(key);if(previous)return previous;
- const task=cachedAnalysis(url,title,language).finally(()=>{pending.delete(key);});pending.set(key,task);return task;
+ const task=cachedAnalysis(url,title,language).then(r=>({...r,answer:localizeNewsSections(r.answer,language)})).finally(()=>{pending.delete(key);});pending.set(key,task);return task;
 }
