@@ -5,7 +5,7 @@ import {useLanguage} from "./language-provider";
 import type {NewsAnalysis} from "@/lib/news-analysis";
 const requests=new Map<string,{at:number;promise:Promise<NewsAnalysis>}>();
 export function requestNewsAnalysis(url:string,title:string,language:string){
- const key=`${language}:${url}`;const cached=requests.get(key);let pending=cached && Date.now()-cached.at<900000 ? cached.promise : undefined;
+ const key=`${language}:${url}`;const cached=requests.get(key);let pending=cached && Date.now()-cached.at<21600000 ? cached.promise : undefined;
  if(!pending){pending=fetch("/api/news/analysis",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url,title,language})}).then(async r=>{const p=await r.json();if(!r.ok||!p.answer)throw new Error(p.error||"Analysis unavailable");return p as NewsAnalysis;}).catch(e=>{requests.delete(key);throw e;});if(requests.size>=64)requests.delete(requests.keys().next().value!);requests.set(key,{at:Date.now(),promise:pending});}
  return pending;
 }

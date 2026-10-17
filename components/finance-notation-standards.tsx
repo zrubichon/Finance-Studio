@@ -25,7 +25,7 @@ function isFormulaNode(node: Text) {
   const parent = node.parentElement;
   if (!parent) return true;
   if (["SCRIPT", "STYLE", "TEXTAREA", "INPUT", "CODE", "PRE"].includes(parent.tagName)) return true;
-  return Boolean(parent.closest(".challenge-formula, .formula, .formula-box, [data-formula], .stable-interview-drill, .market-academy, .learning-response, .dictionary-card, .market-panorama, .training-grid, .training-detail-layout, .training-comparison, .unified-sidebar"));
+  return Boolean(parent.closest(".challenge-formula, .formula, .formula-box, [data-formula], .stable-interview-drill, .hourly-react-brief, .market-academy, .learning-response, .dictionary-card, .market-panorama, .training-grid, .training-detail-layout, .training-comparison, .unified-sidebar"));
 }
 
 function textNodes(root: HTMLElement) {

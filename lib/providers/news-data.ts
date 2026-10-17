@@ -222,6 +222,9 @@ function titleMatchesCategory(
 }
 
 function topicsForTitle(title: string) {
+  // Team names and the verb "attack" can otherwise look like conflict news.
+  if (/\b(nfl|nba|nhl|mlb|quarterback|touchdown|super bowl|premier league|ravens|browns)\b/i.test(title) && !/\b(earnings|revenue|valuation|acquisition|ipo|billion|million|sponsor|broadcast rights|investment)\b/i.test(title)) return [];
+
   return (Object.keys(categorySignals) as Exclude<NewsCategory, "all">[])
     .filter((category) => titleMatchesCategory(title, category));
 }

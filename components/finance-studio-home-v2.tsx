@@ -4,6 +4,7 @@ import Link from "next/link";
 import MarketPanorama from "./market-panorama";
 import AppSidebar, {useSidebarState} from "./app-sidebar";
 import HomeMarketSummary from "./home-market-summary";
+import HourlyLearningBrief from "./hourly-learning-brief";
 import HomeInterviewDrill from "./home-interview-drill";
 import { useEffect, useMemo, useState } from "react";
 import { navItems } from "@/lib/content";
@@ -115,7 +116,6 @@ function trackBadge(track: Track) {
 
 export default function FinanceStudioHomeV2() {
   const { language, setLanguage, isFrench, text } = useLanguage();
-  const [briefExpanded,setBriefExpanded]=useState(false);
   const [level, setLevel] = useState<Level>("Beginner");
   const {collapsed,toggle}=useSidebarState();
   const [theme, setTheme] = useState<Theme>("classic");
@@ -411,36 +411,7 @@ export default function FinanceStudioHomeV2() {
         </section>
 
         <section className="dashboard-grid">
-          <article className={`daily-card card span-7${briefExpanded?" brief-expanded":""}`}>
-            <div className="card-head">
-              <div>
-                <span className="eyebrow">{text("TODAY'S LEARNING BRIEF", "BRIEF D’APPRENTISSAGE DU JOUR")}</span>
-                <h2>{lesson.title}</h2>
-              </div>
-              <span className="pill">{levelLabel(level)}</span>
-            </div>
-
-            <p className="daily-copy">{lesson.body}</p>
-            <div className="concept-strip">
-              <span>{text("Key term", "Terme clé")}</span>
-              <strong>{lesson.term}</strong>
-            </div>
-
-            <div className="flow-diagram" aria-label={text("Simplified finance transmission chain", "Chaîne simplifiée de transmission financière")}>
-              <div><small>{text("Policy rate", "Taux directeur / policy rate")}</small><strong>↑</strong></div><span>→</span>
-              <div><small>{text("Borrowing cost", "Coût d’emprunt / borrowing cost")}</small><strong>↑</strong></div><span>→</span>
-              <div><small>{text("Discount rate", "Taux d’actualisation / discount rate")}</small><strong>↑</strong></div><span>→</span>
-              <div><small>{text("Valuation pressure", "Pression sur la valorisation / valuation")}</small><strong>↑</strong></div>
-            </div>
-
-            <button className="learning-expand-button brief-expand-button" type="button" aria-expanded={briefExpanded} aria-controls="hourly-complete-lesson" onClick={()=>setBriefExpanded(v=>!v)}>{briefExpanded?text("Collapse the full lesson ↑","Replier le cours complet ↑"):text("Open the full lesson, examples & explanations ↓","Dérouler le cours complet, les exemples et explications ↓")}</button>
-            <div className="card-actions">
-              <Link href={nextModule ? `/university/${nextModule.slug}` : "/university"}>
-                {nextModule ? text("Continue your next lesson", "Continuer ton prochain cours") : text("Review Finance University", "Revoir l’Université de Finance")} <span>→</span>
-              </Link>
-              <Link href="/dictionary">{text("Open dictionary", "Ouvrir le dictionnaire")}</Link>
-            </div>
-          </article>
+          <HourlyLearningBrief level={level} />
 
           <HomeInterviewDrill track={interviewTrack} targetRole={targetRole} />
 
