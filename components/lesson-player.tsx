@@ -1,5 +1,6 @@
 "use client";
 
+import MobileFold from "./mobile-fold";
 import CourseBooks from "./course-books";
 import CourseSimulation from "./course-simulation";
 import CourseDepthPanel from "./course-depth-panel";
@@ -429,7 +430,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
       )}
 
       <div className="lesson-layout">
-        <aside className="lesson-toc">
+        <MobileFold title={text("Course map · open / close","Plan du cours · ouvrir / fermer")}><aside className="lesson-toc">
           <span className="control-label">{text("COURSE MAP", "PLAN DU COURS")}</span>
           {lesson.sections.map((item, index) => (
             <button
@@ -451,7 +452,7 @@ export default function LessonPlayer({ lesson }: { lesson: FinanceLesson }) {
           >
             <span>Q</span><strong>Quiz</strong>
           </button>
-        </aside>
+        </aside></MobileFold>
 
         <div className="lesson-content">
           {activeSection < lesson.sections.length ? (

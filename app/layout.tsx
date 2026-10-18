@@ -1,3 +1,4 @@
+import ProblemReport from "@/components/problem-report";
 import {NavigationHistoryProvider} from "@/components/navigation-history";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
@@ -27,6 +28,7 @@ import "./comprehensive-polish-2.css";
 import "./comprehensive-polish-3.css";
 import "./learning-experience.css";
 import "./learning-studio.css";
+import "./mobile.css";
 import "katex/dist/katex.min.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -57,6 +59,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <ChallengeDepthEnhancer />
           <NewsAIEnhancer />
           {children}
+          <ProblemReport/>
           </NavigationHistoryProvider></SidebarProvider>
         </LanguageProvider>
       </body>

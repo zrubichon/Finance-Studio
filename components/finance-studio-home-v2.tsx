@@ -1,5 +1,6 @@
 "use client";
 
+import ResponsiveDashboard from "./responsive-dashboard";
 import Link from "next/link";
 import LearningHub from "./learning-hub";
 import MarketPanorama from "./market-panorama";
@@ -413,7 +414,7 @@ export default function FinanceStudioHomeV2() {
           </div>
         </section>
 
-        <section className="dashboard-grid">
+        <ResponsiveDashboard>
           <LearningHub compact/>
           <HourlyLearningBrief level={level} />
 
@@ -552,7 +553,7 @@ export default function FinanceStudioHomeV2() {
               {text("Open AI Professor", "Ouvrir le Professeur IA")} →
             </Link>
           </article>
-        </section>
+        </ResponsiveDashboard>
       </section>
     </main>
   );
