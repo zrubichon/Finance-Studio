@@ -1,4 +1,5 @@
 import type { MarketQuote } from "@/lib/providers/market-data";
+import { parseFredCsv } from "@/lib/providers/fred-csv";
 
 type SeriesConfig = {
   id: string;
@@ -74,17 +75,6 @@ function startDate() {
   return date.toISOString().slice(0, 10);
 }
 
-function parseCsv(csv: string) {
-  const lines = csv.trim().split(/\r?\n/).filter(Boolean);
-  return lines
-    .slice(1)
-    .map((line) => {
-      const [date, raw] = line.split(",");
-      return { date, value: raw?.trim() && raw.trim() !== "." ? Number(raw) : Number.NaN };
-    })
-    .filter((point) => point.date && Number.isFinite(point.value));
-}
-
 async function fetchSeries(config: SeriesConfig): Promise<MarketQuote | null> {
   const endpoint = `https://fred.stlouisfed.org/graph/fredgraph.csv?id=${encodeURIComponent(config.id)}&cosd=${startDate()}`;
   const response = await fetch(endpoint, {
@@ -94,7 +84,7 @@ async function fetchSeries(config: SeriesConfig): Promise<MarketQuote | null> {
   });
   if (!response.ok) throw new Error(`FRED public CSV failed for ${config.id}: ${response.status}`);
 
-  const points = parseCsv(await response.text());
+  const points = parseFredCsv(await response.text(), config.id);
   const latest = points.at(-1);
   if (!latest) return null;
   const previous = points.at(-2)?.value ?? null;

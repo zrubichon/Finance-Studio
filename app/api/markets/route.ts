@@ -16,7 +16,9 @@ export async function GET() {
     const existing = unique.get(key);
     if (!existing || quote.asOf >= existing.asOf) unique.set(key,quote);
   }
-  const providers = data.providers.map(provider => provider.id === "fred" && publicFred.quotes.length ? publicFred.provider : provider);
+  const providers = data.providers.map(provider => provider.id === "fred" &&
+    (publicFred.quotes.length || (provider.status !== "live" && provider.status !== "partial"))
+    ? publicFred.provider : provider);
 
   return NextResponse.json({
     ...data,
