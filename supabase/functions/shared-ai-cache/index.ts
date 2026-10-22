@@ -1,5 +1,5 @@
 // Only the FinanceStudio backend knows the dedicated cache token. The service
-// credential stays in Supabase's runtime; this endpoint cannot access user tables.
+// credential stays in Supabase's runtime. Narrow actions only; no arbitrary queries.
 const base=Deno.env.get('SUPABASE_URL')!;
 const secret=(()=>{try{return JSON.parse(Deno.env.get('SUPABASE_SECRET_KEYS')||'{}').default||Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;}catch{return Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;}})();
 async function db(path:string,method='GET',body?:unknown){const r=await fetch(`${base}/rest/v1/${path}`,{method,headers:{apikey:secret,...(secret.startsWith('sb_secret_')?{}:{Authorization:`Bearer ${secret}`}),'Content-Type':'application/json',Prefer:'return=representation'},...(body===undefined?{}:{body:JSON.stringify(body)})});if(!r.ok)throw Error(`Cache database ${r.status}`);return r.status===204?null:r.json();}
@@ -12,6 +12,10 @@ Deno.serve(async req=>{
  const config=await db('shared_ai_backend_config?select=token_sha256&id=eq.true');
  const expected=config?.[0]?.token_sha256||'';let mismatch=hash.length^expected.length;for(let i=0;i<hash.length;i++)mismatch|=hash.charCodeAt(i)^(expected.charCodeAt(i)||0);if(mismatch)return json({error:'Unauthorized'},401);
  const raw=await req.text();if(raw.length>180000)return json({error:'Too large'},413);const body=JSON.parse(raw);
+ if(body.action==='credit-snapshot'){
+  if(!Number.isFinite(body.balance)||!Number.isFinite(body.totalUsed)||body.totalUsed<0)return json({error:'Invalid credits'},400);
+  return json(await db('rpc/finance_record_ai_snapshot','POST',{p_balance:body.balance,p_total_used:body.totalUsed}));
+ }
  if(!/^[a-f0-9]{64}$/.test(body.key)||!['study','news'].includes(body.scope))return json({error:'Invalid cache identity'},400);
  if(body.action==='claim')return json(await db('rpc/claim_shared_ai_card','POST',{p_key:body.key,p_scope:body.scope}));
  if(!/^[a-f0-9-]{36}$/.test(body.lease||''))return json({error:'Invalid lease'},400);
